@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">shekou</string>
+    <string name="app_name">EAM采购管理</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -10,10 +10,15 @@
     <string name="login">登录</string>
     <string name="login_loging">登录中...</string>
 
-    <!-- 记住密码 -->
+    <!-- 登录界面 key-->
     <string name="logined_member_username">logined_member_username</string>
     <string name="logined_member_password">logined_member_password</string>
     <string name="logined_member_ischeck">logined_member_ischeck</string>
     <string name="login_error_empty_user">用户名不能为空</string>
     <string name="login_error_empty_passwd">密码不能为空</string>
+
+
+    <!--界面Activity-->
+    <string name="title_activity_load">loading界面</string>
+    <string name="title_activity_login">登录界面</string>
 </resources>
