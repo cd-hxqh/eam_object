@@ -5,4 +5,5 @@
     <item android:drawable="@color/nomal_button_color" android:state_focused="false" android:state_pressed="false"/>
     <item android:drawable="@color/press_button_color"  android:state_focused="true"/>
     <item android:drawable="@color/nomal_button_color" android:state_focused="false"/>
+
 </selector>

@@ -27,6 +27,10 @@ public class BaseApplication extends Application {
         OrderResult = orderResult;
     }
 
+    public static BaseApplication getInstance(){
+        return mContext;
+    }
+
 //    public AndroidClientService getWsService() {
 //        return new AndroidClientService(Constants.getWsUrl(this));
 //    }
@@ -37,5 +41,6 @@ public class BaseApplication extends Application {
 
         mContext = this;
     }
+
 
 }

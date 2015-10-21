@@ -1,40 +1,49 @@
 package cdhxqh.shekou.ui.activity;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v4.widget.DrawerLayout;
+import android.widget.ListView;
 
 import cdhxqh.shekou.R;
 
+/**
+ * Created by think on 2015/10/20.
+ */
+public class MainActivity extends BaseActivity {
 
-public class MainActivity extends ActionBarActivity {
-
+    public static final String TAG = "Activity_MainHome";
+    private ListView mLvLeftMenu;
+    private DrawerLayout mDrawerLayout;
+    private FragmentTransaction fragmentTransaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_mainhome);
+
+        findViewById();
+        initView();
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    protected void findViewById() {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.id_drawer_layout);
+        mLvLeftMenu = (ListView) findViewById(R.id.left_menu);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    protected void initView() {
+        setUpDrawer();
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    private void setUpDrawer() {
+//        LayoutInflater inflater = LayoutInflater.from(this);
+//        View view = inflater.inflate(R.layout.header_username, mLvLeftMenu, false);
+//        nameview = (TextView) view.findViewById(R.id.id_link);
+//        nameview.setText(Constants.UserName);
+//        dateview = (TextView) view.findViewById(R.id.id_date);
+//        dateview.setText(new SimpleDateFormat("yyyy.MM.dd").format(new Date()));
+//        mLvLeftMenu.addHeaderView(view);
+//        mLvLeftMenu.setAdapter(new MenuItemAdapter(this));
     }
 }
