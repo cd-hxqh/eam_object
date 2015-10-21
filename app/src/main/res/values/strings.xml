@@ -21,4 +21,22 @@
     <!--界面Activity-->
     <string name="title_activity_load">loading界面</string>
     <string name="title_activity_login">登录界面</string>
+    <string name="title_activity_main">主界面</string>
+
+    <!--网络信息提示-->
+    <string name="error_title">错误</string>
+    <string name="error_obtain_once">无法获取ONCE</string>
+    <string name="error_network_exception">网络通信异常，请稍后重试</string>
+    <string name="error_network_disconnect">网络不可达,请开启Wifi或者移动数据网络</string>
+    <string name="error_reply">提交失败</string>
+    <string name="error_create_topic">无法创建新话题</string>
+    <string name="error_login">无法登录</string>
+    <string name="error_fav_nodes">收藏节点错误</string>
+    <string name="error_fav_topic">收藏话题错误</string>
+    <string name="error_get_profile">无法获取用户个人资料</string>
+    <string name="error_unknown">未知错误</string>
+
+
+    <!--登录信息提示-->
+    <string name="login_successful_hint">登陆成功</string>
 </resources>

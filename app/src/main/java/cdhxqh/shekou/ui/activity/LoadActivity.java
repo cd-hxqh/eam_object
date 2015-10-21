@@ -46,11 +46,11 @@ public class LoadActivity extends BaseActivity {
 
 
     /**
-     * Ìø×ªÖÁµÇÂ¼½çÃæ*
+     * ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½*
      */
     private void jumpLoginActivity() {
         Intent intent = new Intent();
-        intent.setClass(this, Activity_Login.class);
+        intent.setClass(this, LoginActivity.class);
         startActivity(intent);
     }
 
