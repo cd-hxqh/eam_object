@@ -8,4 +8,5 @@ public class Constants {
     public static final String NAME_KEY = "name_key";
     public static final String PASS_KEY = "pass_key";
     public static final String ISREMENBER = "isRemenber";
+    public static final String USERNAME = "ÓÃ»§Ãû";
 }

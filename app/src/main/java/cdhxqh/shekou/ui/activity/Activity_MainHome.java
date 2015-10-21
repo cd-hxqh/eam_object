@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.config.Constants;
 
 /**
  * Created by think on 2015/10/20.
@@ -21,6 +22,8 @@ public class Activity_MainHome extends BaseActivity {
     public static final String TAG = "Activity_MainHome";
     private ListView mLvLeftMenu;
     private DrawerLayout mDrawerLayout;
+    private TextView username;
+    private TextView password_change;
     private FragmentTransaction fragmentTransaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,13 +46,13 @@ public class Activity_MainHome extends BaseActivity {
     }
 
     private void setUpDrawer() {
-//        LayoutInflater inflater = LayoutInflater.from(this);
-//        View view = inflater.inflate(R.layout.header_username, mLvLeftMenu, false);
-//        nameview = (TextView) view.findViewById(R.id.id_link);
-//        nameview.setText(Constants.UserName);
-//        dateview = (TextView) view.findViewById(R.id.id_date);
-//        dateview.setText(new SimpleDateFormat("yyyy.MM.dd").format(new Date()));
-//        mLvLeftMenu.addHeaderView(view);
-//        mLvLeftMenu.setAdapter(new MenuItemAdapter(this));
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.header_userinfo, mLvLeftMenu, false);
+        username = (TextView) view.findViewById(R.id.username);
+        username.setText(Constants.USERNAME);
+        password_change = (TextView) view.findViewById(R.id.password_change);
+        password_change.setText(new SimpleDateFormat("yyyy.MM.dd").format(new Date()));
+        mLvLeftMenu.addHeaderView(view);
+        mLvLeftMenu.setAdapter(new MenuItemAdapter(this));
     }
 }
