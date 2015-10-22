@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import cdhxqh.shekou.R;
@@ -15,6 +16,7 @@ import cdhxqh.shekou.R;
  */
 public class DrawerAdapter extends BaseAdapter {
 
+    private LayoutInflater mInflater;//得到一个LayoutInfalter对象用来导入布局
     private Context mContext;
     private String[] mTitles;
     private final int mIcons[] = new int[]{
@@ -27,6 +29,7 @@ public class DrawerAdapter extends BaseAdapter {
 
     public DrawerAdapter(Context context) {
         mContext = context;
+        this.mInflater = LayoutInflater.from(context);
         mTitles = context.getResources().getStringArray(R.array.drawer_tab_titles);
     }
 
@@ -51,12 +54,30 @@ public class DrawerAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        TextView item = (TextView) convertView;
-        if (item == null) {
-            item = (TextView) LayoutInflater.from(mContext).inflate(R.layout.view_drawer_item, null);
+        ViewHolder viewHolder = null;
+        if (convertView == null) {
+            convertView = mInflater.inflate(R.layout.view_drawer_item, null);
+            viewHolder = new ViewHolder();
+            viewHolder.iconImage = (ImageView) convertView.findViewById(R.id.drawer_title_id);
+            viewHolder.textView = (TextView) convertView.findViewById(R.id.drawer_textview_id);
+            convertView.setTag(viewHolder);//绑定ViewHolder对象
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();//取出ViewHolder对象
         }
-        item.setText(getItem(position));
-        item.setCompoundDrawablesWithIntrinsicBounds(getIconId(position), 0, 0, 0);
-        return item;
+        viewHolder.iconImage.setImageResource(mIcons[position]);
+        viewHolder.textView.setText(mTitles[position]);
+        return convertView;
+    }
+
+
+    static class ViewHolder {
+        /**
+         * 图标*
+         */
+        private ImageView iconImage;
+        /**
+         * 文字*
+         */
+        private TextView textView;
     }
 }

@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -59,7 +60,7 @@ public class NavigationDrawerFragment extends BaseFragment {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerListView;
     private View mFragmentContainerView;
-    private RelativeLayout mProfileLayout;
+    private LinearLayout mProfileLayout;
     private ImageView mUserImgView;
     private TextView mUserTextView;
 
@@ -100,7 +101,7 @@ public class NavigationDrawerFragment extends BaseFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_drawer, container, false);
 
-        mProfileLayout = (RelativeLayout) rootView.findViewById(R.id.profile_layout);
+        mProfileLayout = (LinearLayout) rootView.findViewById(R.id.profile_layout);
         mUserImgView = (ImageView) rootView.findViewById(R.id.img_member);
         mUserTextView = (TextView) rootView.findViewById(R.id.txt_member);
         mDrawerListView = (ListView) rootView.findViewById(R.id.listView);
