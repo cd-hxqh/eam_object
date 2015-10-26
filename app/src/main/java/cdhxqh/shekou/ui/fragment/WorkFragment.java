@@ -12,6 +12,8 @@ import cdhxqh.shekou.R;
  */
 public class WorkFragment extends BaseFragment {
 
+
+
     public WorkFragment() {
     }
 
