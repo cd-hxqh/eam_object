@@ -2,13 +2,14 @@ package cdhxqh.shekou.ui.fragment;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -36,6 +37,7 @@ import cdhxqh.shekou.ui.adapter.DrawerAdapter;
  */
 public class NavigationDrawerFragment extends BaseFragment {
     private static final String TAG="NavigationDrawerFragment";
+
     /**
      * Remember the position of the selected item.
      */
@@ -114,47 +116,9 @@ public class NavigationDrawerFragment extends BaseFragment {
         mDrawerListView.setAdapter(new DrawerAdapter(getActivity()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 
-        //如果已经登录,设置用户头像和信息
-//        if (mIsLogin) {
-//            mUserTextView.setText(mLoginProfile.username);
-//            ImageLoader.getInstance().displayImage(mLoginProfile.avatar, mUserImgView);
-//        }
-
-//        //设置点击事件
-//        mProfileLayout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!mIsLogin) {
-//                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-//                    startActivity(intent);
-//                } else {
-//                    Intent intent = new Intent(getActivity(), UserActivity.class);
-//                    intent.putExtra("model", (Parcelable) mLoginProfile);
-//                    startActivity(intent);
-//                }
-//            }
-//        });
         return rootView;
     }
 
-//    @Override
-//    public void onLogin(MemberModel profile) {
-//        super.onLogin(profile);
-//
-//        //更新头像和昵称
-//        mUserTextView.setText(profile.username);
-//        ImageLoader.getInstance().displayImage(profile.avatar, mUserImgView);
-//
-//        //更新用户资料
-//        ((MainActivity) getActivity()).initAccount();
-//    }
-
-//    @Override
-//    public void onLogout() {
-//        super.onLogout();
-//        mUserTextView.setText(R.string.login_please_login);
-//        mUserImgView.setImageResource(R.drawable.ic_avatar);
-//    }
 
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
@@ -182,11 +146,13 @@ public class NavigationDrawerFragment extends BaseFragment {
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
         // set up the drawer's list view with items and click listener
 
-
+        android.support.v7.app.ActionBar actionBar = getActionBarActivity().getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
-
         mDrawerToggle = new ActionBarDrawerToggle(
                 getActivity(),                    /* host Activity */
                 mDrawerLayout,                    /* DrawerLayout object */
@@ -206,6 +172,7 @@ public class NavigationDrawerFragment extends BaseFragment {
 
             @Override
             public void onDrawerOpened(View drawerView) {
+                Log.i(TAG,"鎵撳紑");
                 super.onDrawerOpened(drawerView);
                 if (!isAdded()) {
                     return;
@@ -238,7 +205,7 @@ public class NavigationDrawerFragment extends BaseFragment {
             }
         });
 
-//        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
     public int getCurrentSelectedPosition() {
@@ -311,6 +278,7 @@ public class NavigationDrawerFragment extends BaseFragment {
      * 'context', rather than just what's in the current screen.
      */
     private void showGlobalContextActionBar() {
+        Log.i(TAG,"22333444");
         android.support.v7.app.ActionBar actionBar = getActionBarActivity().getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayShowCustomEnabled(false);
@@ -326,5 +294,3 @@ public class NavigationDrawerFragment extends BaseFragment {
         void onNavigationDrawerItemSelected(int position);
     }
 }
-
-
