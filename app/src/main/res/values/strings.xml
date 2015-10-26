@@ -50,4 +50,14 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="exit_text">再按一次退出程序</string>
+
+
+
+    <!--工单管理-->
+    <string name="work_fault_text">故障工单</string>
+    <string name="work_prevent_id">预防性维护工单</string>
+    <string name="work_status_text">状态维修工单</string>
+    <string name="work_service_text">可维护备件工单</string>
+    <string name="work_accident_text">事故工单</string>
+    <string name="work_repair_text">抢修工单</string>
 </resources>

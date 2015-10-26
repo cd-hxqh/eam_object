@@ -8,10 +8,9 @@ import android.view.ViewGroup;
 import cdhxqh.shekou.R;
 
 /**
- * 工单的fragment
+ * 工单的fragment1
  */
 public class WorkFragment extends BaseFragment {
-
 
     public WorkFragment() {
     }

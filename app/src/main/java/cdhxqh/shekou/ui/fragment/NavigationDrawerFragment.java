@@ -182,10 +182,7 @@ public class NavigationDrawerFragment extends BaseFragment {
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, Gravity.START);
         // set up the drawer's list view with items and click listener
 
-        ActionBar actionBar = getActionBarActivity().getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
+
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
