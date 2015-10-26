@@ -40,7 +40,14 @@
     <!--登录信息提示-->
     <string name="login_successful_hint">登陆成功</string>
 
-    <!-- 首页 -->
-    <string name="username">用户名</string>
-    <string name="password_change">密码修改</string>
+
+    <!--主界面-->
+    <string name="login_please_login">尚未登录</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="exit_text">再按一次退出程序</string>
 </resources>

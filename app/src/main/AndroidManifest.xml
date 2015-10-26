@@ -46,7 +46,8 @@
         </activity>
         <activity
             android:name=".ui.activity.MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:theme="@style/shekou.ActivityTheme">
         </activity>
     </application>
 

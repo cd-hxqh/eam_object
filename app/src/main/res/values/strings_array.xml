@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="drawer_tab_titles">
+        <item>待办任务</item>
+        <item>工单管理</item>
+        <item>库存查询</item>
+        <item>领料管理</item>
+    </string-array>
+
+
+</resources>
