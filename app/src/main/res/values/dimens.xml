@@ -11,6 +11,10 @@
 
     <dimen name="global_dialog_padding">15.0dip</dimen>
     <dimen name="dimens_10">10dip</dimen>
-
+    <dimen name="dimen_20">20dp</dimen>
     <dimen name="actionbar_dimen">56dp</dimen>
+
+    <dimen name="dimen_40dp">40dip</dimen>
+    <dimen name="dimen_5">5dp</dimen>
+    <dimen name="dimen_20sp">20sp</dimen>
 </resources>

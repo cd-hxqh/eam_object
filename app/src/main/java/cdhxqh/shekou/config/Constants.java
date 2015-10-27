@@ -20,6 +20,16 @@ public class Constants {
     /**通用接口查询**/
     public static final String BASE_URL = HTTP_API_URL + "common/api";
 
+    /**------------------数据库表名配置－－开始**/
+    //待办事项的appid
+    public static final String WFASSIGNMENT_APPID="INBOX";
+
+    //待办事项的表名
+    public static final String WFASSIGNMENT_NAME="WFASSIGNMENT";
+
+
+
+
 
     public static final String USER_INFO = "userinfo";
     public static final String NAME_KEY = "name_key";

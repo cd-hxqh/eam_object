@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.ui.fragment.NavigationDrawerFragment;
+import cdhxqh.shekou.ui.fragment.WfassigFragment;
 import cdhxqh.shekou.ui.fragment.WorkFragment;
 
 
@@ -27,11 +28,10 @@ public class MainActivity extends BaseActivity
     private ViewGroup mDrawerLayout;
     private View mActionbarCustom;
 
-    private WorkFragment mNewestTopicsFragment;
-//    private TopicsFragment mHotTopicsFragment;
-//    private AllNodesFragment mAllNodesFragment;
-//    private FavNodesFragment mFavNodesFragment;
-//    private NotificationFragment mNotificationFragment;
+    /**待办事项**/
+    private WfassigFragment mNewWfassigFragment;
+    /**工单管理**/
+    private WorkFragment mNewWorkFragment;
 
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -84,25 +84,25 @@ public class MainActivity extends BaseActivity
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         switch (position) {
-            case 0:
-                if (mNewestTopicsFragment == null) {
-                    mNewestTopicsFragment = new WorkFragment();
+            case 0: //待办任务
+                if (mNewWfassigFragment == null) {
+                    mNewWfassigFragment = new WfassigFragment();
                     Bundle bundle = new Bundle();
-                    mNewestTopicsFragment.setArguments(bundle);
+                    mNewWfassigFragment.setArguments(bundle);
                 }
-                fragmentTransaction.replace(R.id.container, mNewestTopicsFragment).commit();
+                fragmentTransaction.replace(R.id.container, mNewWfassigFragment).commit();
                 break;
-            case 1:
+            case 1: //工单管理
+                if (mNewWorkFragment == null) {
+                    mNewWorkFragment = new WorkFragment();
+                    Bundle bundle = new Bundle();
+                    mNewWorkFragment.setArguments(bundle);
+                }
+                fragmentTransaction.replace(R.id.container, mNewWorkFragment).commit();
                 break;
-            case 2:
+            case 2://库存查询
                 break;
-            case 3:
-                break;
-            case 4:
-                break;
-            case 5:
-                break;
-            case 6:
+            case 3://领料管理
                 break;
         }
 
@@ -110,7 +110,6 @@ public class MainActivity extends BaseActivity
 
 
     public void restoreActionBar() {
-        Log.i(TAG,"这是什么情况");
         ActionBar actionBar = getSupportActionBar();
             mTitle = mMainTitles[mSelectPos];
             actionBar.setDisplayShowCustomEnabled(false);
