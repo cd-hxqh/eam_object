@@ -60,4 +60,21 @@
     <string name="work_service_text">可维护备件工单</string>
     <string name="work_accident_text">事故工单</string>
     <string name="work_repair_text">抢修工单</string>
+
+    <!--获取信息提示-->
+    <string name="get_data_info_fail">获取信息失败</string>
+    <string name="have_not_data_txt">暂无相关数据</string>
+    <!--待办事项-->
+    <string name="item_num_title">编号:</string>
+    <string name="item_desc_title">描述:</string>
+
+    <!-- hint -->
+    <string name="hint_item_num_title">暂无编号</string>
+    <string name="hint_item_desc_title">暂无描述</string>
+
+    <string name="have_not_data">暂无数据</string>
+    <!---->
+    <string name="title_activity_wfassig__details">Wfassig_DetailsActivity</string>
+    <string name="wfasssig_detail_text">待办任务详情</string>
+    <string name="wfassig_desction_text">描述:</string>
 </resources>

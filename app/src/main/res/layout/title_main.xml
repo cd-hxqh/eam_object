@@ -3,18 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_heiht_size"
     android:background="@color/gray">
-<RelativeLayout
-    android:id="@+id/title_back"
-    android:layout_width="@dimen/title_heiht_size"
-    android:layout_height="@dimen/title_heiht_size"
-    android:layout_alignParentLeft="true">
-    <ImageView
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/back" />
-</RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/title_back"
+        android:layout_width="@dimen/title_heiht_size"
+        android:layout_height="@dimen/title_heiht_size"
+        android:layout_alignParentLeft="true">
+
+        <ImageView
+            android:id="@+id/title_back_id"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/back" />
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/title_name"
         android:layout_width="wrap_content"
@@ -23,17 +27,19 @@
         android:layout_centerVertical="true"
         android:textColor="@color/white"
         android:textSize="18sp" />
+
     <RelativeLayout
         android:id="@+id/title_add"
         android:layout_width="@dimen/title_heiht_size"
         android:layout_height="@dimen/title_heiht_size"
         android:layout_alignParentRight="true">
-    <ImageView
-        android:layout_width="26dp"
-        android:layout_height="26dp"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/add"
-        android:visibility="gone"/>
+
+        <ImageView
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/add"
+            android:visibility="gone" />
     </RelativeLayout>
 </RelativeLayout>

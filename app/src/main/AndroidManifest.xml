@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cdhxqh.shekou" >
 
-
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
@@ -20,9 +19,6 @@
 
     <!-- Permission for Unit Test -->
     <uses-permission android:name="android.permission.GET_TASKS" />
-
-
-
 
     <application
         android:name=".application.BaseApplication"
@@ -47,7 +43,11 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/shekou.ActivityTheme">
+            android:theme="@style/shekou.ActivityTheme" >
+        </activity>
+        <activity
+            android:name=".ui.activity.Wfassig_DetailsActivity"
+            android:label="@string/title_activity_wfassig__details" >
         </activity>
     </application>
 
