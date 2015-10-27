@@ -10,7 +10,7 @@ import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Wfassignment;
 
 /**
- * 待办任务详情*
+ * 待办任务详情 *
  */
 public class Wfassig_DetailsActivity extends BaseActivity {
     private static String TAG = "Wfassig_DetailsActivity";
