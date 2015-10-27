@@ -14,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.ui.fragment.InventoryFragment;
 import cdhxqh.shekou.ui.fragment.NavigationDrawerFragment;
 import cdhxqh.shekou.ui.fragment.WfassigFragment;
 import cdhxqh.shekou.ui.fragment.WorkFragment;
@@ -32,7 +33,8 @@ public class MainActivity extends BaseActivity
     private WfassigFragment mNewWfassigFragment;
     /**工单管理**/
     private WorkFragment mNewWorkFragment;
-
+    /**库存查询**/
+    private InventoryFragment mNewInventoryFragment;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -101,6 +103,12 @@ public class MainActivity extends BaseActivity
                 fragmentTransaction.replace(R.id.container, mNewWorkFragment).commit();
                 break;
             case 2://库存查询
+                if (mNewInventoryFragment == null) {
+                    mNewInventoryFragment = new InventoryFragment();
+                    Bundle bundle = new Bundle();
+                    mNewInventoryFragment.setArguments(bundle);
+                }
+                fragmentTransaction.replace(R.id.container, mNewInventoryFragment).commit();
                 break;
             case 3://领料管理
                 break;

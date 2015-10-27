@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context="cdhxqh.shekou.ui.activity.Wfassig_DetailsActivity">
 
     <include layout="@layout/title_main"></include>
@@ -10,10 +11,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="@dimen/dimens_10">
 
         <LinearLayout
-            android:id="@+id/num_linearlayout_id"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_40dp"
             android:layout_marginLeft="@dimen/dimen_5"
@@ -21,26 +22,155 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/item_num_title"
+                android:id="@+id/wfassig_desc_title"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:text="@string/wfassig_desction_text"
-                android:textColor="@color/light_black" />
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
 
             <TextView
-                android:id="@+id/item_num_text_id"
+                android:id="@+id/wfassig_desc_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:layout_toRightOf="@+id/item_num_title"
                 android:hint="@string/have_not_data"
-                android:textColor="@color/light_black" />
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
         </LinearLayout>
+
+        <View
+            android:id="@+id/view_1_id"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/num_linearlayout_id"
+            android:background="@drawable/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/wfassig_processname_title"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/wfassig_processname_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/wfassig_processname_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:layout_toRightOf="@+id/item_num_title"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/wfassig_assigncodedesc_title"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/wfassig_assigncodedesc_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/wfassig_assigncodedesc_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:layout_toRightOf="@+id/item_num_title"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/wfassig_assignstatus_title"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/wfassig_assignstatus_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/wfassig_assignstatus_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:layout_toRightOf="@+id/item_num_title"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/wfassig_startdate_title"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/wfassig_startdate_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/wfassig_startdate_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:layout_toRightOf="@+id/item_num_title"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text" />
+
 </LinearLayout>

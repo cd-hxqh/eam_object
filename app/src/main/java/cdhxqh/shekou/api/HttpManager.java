@@ -30,6 +30,15 @@ public class HttpManager {
     public static String getwfassignmentUrl(int curpage, int showcount) {
         return "{'appid':'" + Constants.WFASSIGNMENT_APPID + "','objectname':'" + Constants.WFASSIGNMENT_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
     }
+
+    /**
+     * 设置库存查询的接口
+     */
+    public static String getInventorurl(int curpage, int showcount) {
+        return "{'appid':'" + Constants.INVENTOR_APPID + "','objectname':'" + Constants.INVENTORY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    }
+
+
     /**
      * 使用用户名密码登录
      *
