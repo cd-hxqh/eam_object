@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/title_heiht_size"
-    android:background="@color/gray">
+    android:background="@color/light_gray">
 
     <RelativeLayout
         android:id="@+id/title_back"
@@ -25,7 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:textColor="@color/white"
         android:textSize="18sp" />
 
     <RelativeLayout

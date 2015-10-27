@@ -17,7 +17,7 @@ public class Wfassignment extends Entity implements Parcelable {
     public int wfassignmentid; //wfassignmentid
     public String app; //应用程序
     public String assigncode; //已分配任务的人员代码
-    public String assigncodedesc; //描述
+    public String assigncodedesc; //任务分配人描述
     public String assignstatus; //任务分配状态
     public String description; //描述
     public String ownerid; //所有者标识
@@ -67,7 +67,6 @@ public class Wfassignment extends Entity implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(wfassignmentid);
         dest.writeString(app);
-        dest.writeString(description);
         dest.writeString(assigncode);
         dest.writeString(assigncodedesc);
         dest.writeString(assignstatus);

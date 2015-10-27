@@ -1,8 +1,6 @@
 package cdhxqh.shekou.ui.fragment;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,15 +19,17 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
+import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.model.Wfassignment;
+import cdhxqh.shekou.ui.adapter.InventoryAdapter;
 import cdhxqh.shekou.ui.adapter.WfassigAdapter;
 
 
 /**
- * 待办事项列表*
+ * 库存查询列表*
  */
-public class WfassigFragment extends Fragment {
-    private static final String TAG = "WfassigFragment";
+public class InventoryFragment extends Fragment {
+    private static final String TAG = "InventoryFragment";
     private static final int RESULT_ADD_TOPIC = 100;
     /**
      * RecyclerView*
@@ -46,7 +46,7 @@ public class WfassigFragment extends Fragment {
      */
     LinearLayout notLinearLayout;
 
-    WfassigAdapter wfassigAdapter;
+    InventoryAdapter inventoryAdapter;
 
 
     @Override
@@ -73,8 +73,8 @@ public class WfassigFragment extends Fragment {
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list_topics);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        wfassigAdapter = new WfassigAdapter(getActivity());
-        mRecyclerView.setAdapter(wfassigAdapter);
+        inventoryAdapter = new InventoryAdapter(getActivity());
+        mRecyclerView.setAdapter(inventoryAdapter);
         mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -103,13 +103,13 @@ public class WfassigFragment extends Fragment {
 
 
     /**
-     * 获取待办事项信息*
+     * 获取库存查询信息*
      * --分页
      *
      */
 
     private void getItemList() {
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwfassignmentUrl(1, 20), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getInventorurl(1, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -117,12 +117,12 @@ public class WfassigFragment extends Fragment {
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Wfassignment> items = JsonUtils.parsingWfassignment(getActivity(), results.getResultlist());
+                ArrayList<Inventory> items = JsonUtils.parsingInventory(getActivity(), results.getResultlist());
                 mSwipeLayout.setRefreshing(false);
                 if (items == null || items.isEmpty()) {
                     notLinearLayout.setVisibility(View.VISIBLE);
                 } else {
-                    wfassigAdapter.update(items, true);
+                    inventoryAdapter.update(items, true);
                 }
             }
 

@@ -1,8 +1,6 @@
 package cdhxqh.shekou.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,19 +12,19 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.model.Wfassignment;
-import cdhxqh.shekou.ui.activity.Wfassig_DetailsActivity;
 
 /**
  * Created by apple on 15/10/26
  */
-public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHolder> {
+public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.ViewHolder> {
 
-    private static final String TAG = "WfassigAdapter";
+    private static final String TAG = "InventoryAdapter";
     Context mContext;
-    ArrayList<Wfassignment> mItems = new ArrayList<Wfassignment>();
+    ArrayList<Inventory> mItems = new ArrayList<Inventory>();
 
-    public WfassigAdapter(Context context) {
+    public InventoryAdapter(Context context) {
         mContext = context;
     }
 
@@ -38,20 +36,21 @@ public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        final Wfassignment item = mItems.get(i);
+        final Inventory item = mItems.get(i);
 
-        Log.i(TAG, "item.itemnum=" + item.wfassignmentid+",description="+item.description);
-        viewHolder.itemNum.setText(item.wfassignmentid+"");
-        viewHolder.itemDesc.setText(item.description);
+        viewHolder.itemNumTitle.setText(mContext.getString(R.string.inventory_itemnum_text));
+        viewHolder.itemDescTitle.setText(mContext.getString(R.string.inventory_location_text));
+        viewHolder.itemNum.setText(item.itemnum);
+        viewHolder.itemDesc.setText(item.location);
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, Wfassig_DetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("wfassignment", item);
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
+//                Intent intent = new Intent(mContext, Wfassig_DetailsActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("wfassignment", item);
+//                intent.putExtras(bundle);
+//                mContext.startActivity(intent);
             }
         });
 
@@ -63,14 +62,14 @@ public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHold
         return mItems.size();
     }
 
-    public void update(ArrayList<Wfassignment> data, boolean merge) {
+    public void update(ArrayList<Inventory> data, boolean merge) {
         if (merge && mItems.size() > 0) {
             for (int i = 0; i < mItems.size(); i++) {
-                Log.i(TAG, "mItems=" + mItems.get(i).wfassignmentid);
-                Wfassignment obj = mItems.get(i);
+                Log.i(TAG, "mItems=" + mItems.get(i).itemnum);
+                Inventory obj = mItems.get(i);
                 boolean exist = false;
                 for (int j = 0; j < data.size(); j++) {
-                    if (data.get(j).wfassignmentid == obj.wfassignmentid) {
+                    if (data.get(j).itemnum == obj.itemnum) {
                         exist = true;
                         break;
                     }
@@ -97,7 +96,14 @@ public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHold
          * CardView*
          */
         public CardView cardView;
-
+        /**
+         * ±àºÅ*
+         */
+        public TextView itemNumTitle;
+        /**
+         * ÃèÊö*
+         */
+        public TextView itemDescTitle;
         /**
          * ±àºÅ*
          */
@@ -110,6 +116,11 @@ public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHold
         public ViewHolder(View view) {
             super(view);
             cardView = (CardView) view.findViewById(R.id.card_container);
+
+            itemNumTitle=(TextView) view.findViewById(R.id.item_num_title);
+            itemDescTitle=(TextView) view.findViewById(R.id.item_desc_title);
+
+
             itemNum = (TextView) view.findViewById(R.id.item_num_text);
             itemDesc = (TextView) view.findViewById(R.id.item_desc_text);
         }

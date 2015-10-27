@@ -28,7 +28,10 @@ public class Constants {
     public static final String WFASSIGNMENT_NAME="WFASSIGNMENT";
 
 
-
+    /**库存查询的appid**/
+    public static final String INVENTOR_APPID="UDINVENTOR";
+    //库存的表名
+    public static final String INVENTORY_NAME="INVENTORY";
 
 
     public static final String USER_INFO = "userinfo";
