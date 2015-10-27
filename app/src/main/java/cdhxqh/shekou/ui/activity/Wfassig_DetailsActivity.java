@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import cdhxqh.shekou.R;
-
+/**待办任务详情**/
 public class Wfassig_DetailsActivity extends BaseActivity {
     private static String TAG="Wfassig_DetailsActivity";
 
