@@ -14,6 +14,7 @@ import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Invcost;
 import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.model.Wfassignment;
+import cdhxqh.shekou.model.WorkOrder;
 
 /**
  * Json数据解析类
@@ -143,7 +144,56 @@ public class JsonUtils {
         }
 
     }
+    /**
+     * 解析工单信息
+     */
+    public static ArrayList<WorkOrder> parsingWorkOrder(Context ctx, String data,String type) {
+        Log.i(TAG, "WorkOrder data=" + data);
+        ArrayList<WorkOrder> list = null;
+        WorkOrder workOrder = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<WorkOrder>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                workOrder = new WorkOrder();
+                jsonObject = jsonArray.getJSONObject(i);
+                workOrder.wonum = jsonObject.getString("WONUM"); //工单号
+                workOrder.status = jsonObject.getString("STATUS");//状态
+                workOrder.statusdate = jsonObject.getString("STATUSDATE");//状态日期
+                workOrder.worktype = type;//工单类型
+                workOrder.description = jsonObject.getString("DESCRIPTION");//工单描述
+                workOrder.assetnum = jsonObject.getString("ASSETNUM");//设备
+                workOrder.assetdescription = jsonObject.getString("ASSETDESCRIPTION");//设备描述
+                workOrder.udisaq = jsonObject.getString("UDISAQ");//是否安全
+                workOrder.udisbx = jsonObject.getString("UDISBX");//是否保修
+                workOrder.udiscb = jsonObject.getString("UDISCB");//是否抄表
+                workOrder.udisjf = jsonObject.getString("UDISJF");//是否按项目计费
+                workOrder.udisjj = jsonObject.getString("UDISJJ");//是否紧急维修
+                workOrder.udisplayname = jsonObject.getString("UDISPLAYNAME");//
+                workOrder.udremark = jsonObject.getString("UDREMARK");//备注
+                workOrder.udtjsj = jsonObject.getString("UDTJSJ");//停机时间
+                workOrder.actstart = jsonObject.getString("ACTSTART");//实际开始时间
+                workOrder.actfinish = jsonObject.getString("ACTFINISH");//实际完成时间
+                workOrder.glbz = jsonObject.getString("GLBZ");//设备管理班组编号
+                workOrder.gls = jsonObject.getString("GLS");//设备管理室编号
+                workOrder.glz = jsonObject.getString("GLZ");//设备管理组编号
+                workOrder.jpnum = jsonObject.getString("JPNUM");//作业计划
+                workOrder.ldispayname = jsonObject.getString("LDISPAYNAME");//
+                workOrder.reportdate = jsonObject.getString("REPORTDATE");//汇报日期
+                workOrder.reportedby = jsonObject.getString("REPORTEDBY");//报告人
+                workOrder.sdisplayname = jsonObject.getString("SDISPLAYNAME");//
+                workOrder.targstartdate = jsonObject.getString("TARGSTARTDATE");//计划开始时间
+                workOrder.targcompdate = jsonObject.getString("TARGCOMPDATE");//计划完成时间
+                list.add(workOrder);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
 
+    }
 
     /**
      * 解析库存信息

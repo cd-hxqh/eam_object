@@ -8,22 +8,22 @@ import org.json.JSONObject;
 
 /**
  * Created by apple on 15/10/26.
- * ´ı°ìÈÎÎñ±í
+ * å¾…åŠä»»åŠ¡è¡¨
  */
 public class Wfassignment extends Entity implements Parcelable {
     private static final String TAG = "Wfassignment";
     private static final long serialVersionUID = 2015050105L;
 
     public int wfassignmentid; //wfassignmentid
-    public String app; //Ó¦ÓÃ³ÌĞò
-    public String assigncode; //ÒÑ·ÖÅäÈÎÎñµÄÈËÔ±´úÂë
-    public String assigncodedesc; //ÈÎÎñ·ÖÅäÈËÃèÊö
-    public String assignstatus; //ÈÎÎñ·ÖÅä×´Ì¬
-    public String description; //ÃèÊö
-    public String ownerid; //ËùÓĞÕß±êÊ¶
-    public String ownertable; //ËùÓĞÕß±í
-    public String processname; //¹ı³Ì
-    public String startdate; //¿ªÊ¼ÈÕÆÚ
+    public String app; //åº”ç”¨ç¨‹åº
+    public String assigncode; //å·²åˆ†é…ä»»åŠ¡çš„äººå‘˜ä»£ç 
+    public String assigncodedesc; //ä»»åŠ¡åˆ†é…äººæè¿°
+    public String assignstatus; //ä»»åŠ¡åˆ†é…çŠ¶æ€
+    public String description; //æè¿°
+    public String ownerid; //æ‰€æœ‰è€…æ ‡è¯†
+    public String ownertable; //æ‰€æœ‰è€…è¡¨
+    public String processname; //è¿‡ç¨‹
+    public String startdate; //å¼€å§‹æ—¥æœŸ
 
 
 

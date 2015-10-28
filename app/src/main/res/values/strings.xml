@@ -22,6 +22,7 @@
     <string name="title_activity_load">loading界面</string>
     <string name="title_activity_login">登录界面</string>
     <string name="title_activity_main">主界面</string>
+    <string name="title_activity_worklist">工单列表界面</string>
 
     <!--网络信息提示-->
     <string name="error_title">错误</string>
@@ -97,4 +98,9 @@
     <string name="inventory_outbound_text">出库</string>
     <string name="invcost_avgcost_text">平均成本:</string>
     <string name="invcost_lastcost_text">上次接收成本:</string>
+
+    <!--工单列表界面-->
+    <string name="work_list_title">工单列表</string>
+    <string name="work_number">工单号</string>
+    <string name="work_describe">描述</string>
 </resources>

@@ -8,19 +8,19 @@ import org.json.JSONObject;
 
 /**
  * Created by apple on 15/10/26.
- * 库存成本
+ *
  */
 public class Invcost extends Entity implements Parcelable {
     private static final String TAG = "Invcost";
     private static final long serialVersionUID = 2015050105L;
 
-    public String avgcost; //平均项目成本
-    public String itemnum; //项目编号
-    public String lastcost; //最近成本
-    public String location; //库房
-    public String orgid; //组织标识
-    public String siteid; //站点
-    public String stdcost; //项目成本
+    public String avgcost; //
+    public String itemnum; //
+    public String lastcost; //
+    public String location; //
+    public String orgid; //
+    public String siteid; //
+    public String stdcost; //
 
 
 

@@ -6,37 +6,43 @@ package cdhxqh.shekou.config;
 public class Constants {
 
     /**
-     * »ù´¡½Ó¿Ú*
+     * åŸºç¡€æ¥å£*
      */
     public static final String HTTP_API_URL = "http://121.35.242.172:7001/maximo/mobile/";
 
     /**
-     * µÇÂ½URL*
+     * ç™»é™†URL*
      */
 
     public static final String SIGN_IN_URL = HTTP_API_URL + "system/login";
 
 
-    /**Í¨ÓÃ½Ó¿Ú²éÑ¯**/
+    /**é€šç”¨æ¥å£æŸ¥è¯¢**/
     public static final String BASE_URL = HTTP_API_URL + "common/api";
 
-    /**------------------Êı¾İ¿â±íÃûÅäÖÃ£­£­¿ªÊ¼**/
-    //´ı°ìÊÂÏîµÄappid
+    /**------------------æ•°æ®åº“è¡¨åé…ç½®ï¼ï¼å¼€å§‹**/
+    //å¾…åŠäº‹é¡¹çš„appid
     public static final String WFASSIGNMENT_APPID="INBOX";
 
-    //´ı°ìÊÂÏîµÄ±íÃû
+    //å¾…åŠäº‹é¡¹çš„è¡¨å
     public static final String WFASSIGNMENT_NAME="WFASSIGNMENT";
 
 
-    /**¿â´æ²éÑ¯µÄappid**/
+    /**åº“å­˜æŸ¥è¯¢çš„appid**/
     public static final String INVENTOR_APPID="UDINVENTOR";
-    //¿â´æµÄ±íÃû
+    //åº“å­˜çš„è¡¨å
     public static final String INVENTORY_NAME="INVENTORY";
 
-    //¿â´æ³É±¾µÄappid
+    //æ•…éšœå·¥å•æŸ¥è¯¢çš„appid
+    public static final String UDWOCM_APPID="UDWOCM";
+    //æ•…éšœå·¥å•è¡¨å
+    public static final String WORKORDER_NAME = "WORKORDER";
+    //ï¿½ï¿½ï¿½É±ï¿½ï¿½ï¿½appid
     public static final String INVCOST_APPID="UDINVENTOR";
-    //¿â´æ³É±¾µÄ±íÃû
+    //ï¿½ï¿½ï¿½É±ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
     public static final String INVCOST_NAME="INVCOST";
+
+
 
 
 
@@ -47,15 +53,24 @@ public class Constants {
 
 
     /**
-     * ÓÃ»§µÇÂ¼±íÊ¶--¿ªÊ¼*
+     * ç”¨æˆ·ç™»å½•è¡¨è¯†--å¼€å§‹*
      */
-    public static final String LOGINSUCCESS = "USER-S-101"; //µÇÂ¼³É¹¦
+    public static final String LOGINSUCCESS = "USER-S-101"; //ç™»å½•æˆåŠŸ
 
-    public static final String CHANGEIMEI = "USER-S-104"; //µÇÂ¼³É¹¦,¼ì²âµ½ÓÃ»§¸ü»»ÊÖ»úµÇÂ¼
+    public static final String CHANGEIMEI = "USER-S-104"; //ç™»å½•æˆåŠŸ,æ£€æµ‹åˆ°ç”¨æˆ·æ›´æ¢æ‰‹æœºç™»å½•
 
-    public static final String USERNAMEERROR = "USER-E-100";//ÓÃ»§ÃûÃÜÂë´íÎó
+    public static final String USERNAMEERROR = "USER-E-100";//ç”¨æˆ·åå¯†ç é”™è¯¯
 
-    public static final String GETDATASUCCESS = "GLOBAL-S-0";//»ñÈ¡Êı¾İ³É¹¦
+    public static final String GETDATASUCCESS = "GLOBAL-S-0";//è·å–æ•°æ®æˆåŠŸ
 
-
+    /**
+     * å·¥å•è·³è½¬ç±»å‹æ ‡è¯†
+     */
+    public static final String FAULT = "CM";//æ•…éšœå·¥å•
+    public static final String PREVENT = "PM";//é¢„é˜²æ€§ç»´æŠ¤å·¥å•
+    public static final String STATUS = "SR";//çŠ¶æ€ç»´ä¿®å·¥å•
+    public static final String PROJECT = "PJ";//é¡¹ç›®å·¥å•
+    public static final String SERVICE = "RS";//å¯ç»´æŠ¤å¤‡ä»¶å·¥å•
+    public static final String ACCIDENT = "EV";//äº‹æ•…å·¥å•
+    public static final String REPAIR = "EM";//æŠ¢ä¿®å·¥å•
 }

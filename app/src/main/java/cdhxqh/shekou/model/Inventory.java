@@ -8,21 +8,21 @@ import org.json.JSONObject;
 
 /**
  * Created by apple on 15/10/26.
- * ¿â´æ±í
+ * åº“å­˜è¡¨
  */
 public class Inventory extends Entity implements Parcelable {
     private static final String TAG = "Inventory";
     private static final long serialVersionUID = 2015050105L;
 
-    public String avgcost; //Æ½¾ùÏîÄ¿³É±¾
-    public String curbal; //µ±Ç°ÓàÁ¿
-    public String issueunit; //·¢·Åµ¥Î»
-    public String itemnum; //ÏîÄ¿±àºÅ
-    public String lastcost; //ÏîÄ¿³É±¾
-    public String location; //¿â·¿
-    public String orgid; //×éÖ¯±êÊ¶
-    public String siteid; //Õ¾µã
-    public String stdcost; //ÏîÄ¿³É±¾
+    public String avgcost; //å¹³å‡é¡¹ç›®æˆæœ¬
+    public String curbal; //å½“å‰ä½™é‡
+    public String issueunit; //å‘æ”¾å•ä½
+    public String itemnum; //é¡¹ç›®ç¼–å·
+    public String lastcost; //é¡¹ç›®æˆæœ¬
+    public String location; //åº“æˆ¿
+    public String orgid; //ç»„ç»‡æ ‡è¯†
+    public String siteid; //ç«™ç‚¹
+    public String stdcost; //é¡¹ç›®æˆæœ¬
 
 
 

@@ -49,6 +49,10 @@
             android:name=".ui.activity.Wfassig_DetailsActivity"
             android:label="@string/title_activity_wfassig__details" >
         </activity>
+        <activity
+            android:name=".ui.activity.Work_ListActivity"
+            android:label="@string/title_activity_worklist" >
+        </activity>
 
         <activity
             android:name=".ui.activity.InventoryActivity"

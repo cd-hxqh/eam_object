@@ -32,6 +32,13 @@ public class HttpManager {
     }
 
     /**
+     * 设置工单接口*
+     */
+    public static String getworkorderUrl(String type,int curpage, int showcount) {
+        return "{'appid':'" + "UDWO"+type + "','objectname':'" + Constants.WORKORDER_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    }
+
+    /**
      * 设置库存查询的接口
      */
     public static String getInventorurl(int curpage, int showcount) {

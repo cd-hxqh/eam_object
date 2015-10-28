@@ -16,7 +16,7 @@ import cdhxqh.shekou.R;
  */
 public class DrawerAdapter extends BaseAdapter {
 
-    private LayoutInflater mInflater;//得到一个LayoutInfalter对象用来导入布局
+    private LayoutInflater mInflater;//寰楀埌涓�涓狶ayoutInfalter瀵硅薄鐢ㄦ潵瀵煎叆甯冨眬
     private Context mContext;
     private String[] mTitles;
     private final int mIcons[] = new int[]{
@@ -60,9 +60,9 @@ public class DrawerAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             viewHolder.iconImage = (ImageView) convertView.findViewById(R.id.drawer_title_id);
             viewHolder.textView = (TextView) convertView.findViewById(R.id.drawer_textview_id);
-            convertView.setTag(viewHolder);//绑定ViewHolder对象
+            convertView.setTag(viewHolder);//缁戝畾ViewHolder瀵硅薄
         } else {
-            viewHolder = (ViewHolder) convertView.getTag();//取出ViewHolder对象
+            viewHolder = (ViewHolder) convertView.getTag();//鍙栧嚭ViewHolder瀵硅薄
         }
         viewHolder.iconImage.setImageResource(mIcons[position]);
         viewHolder.textView.setText(mTitles[position]);
@@ -72,11 +72,11 @@ public class DrawerAdapter extends BaseAdapter {
 
     static class ViewHolder {
         /**
-         * 图标*
+         * 鍥炬爣*
          */
         private ImageView iconImage;
         /**
-         * 文字*
+         * 鏂囧瓧*
          */
         private TextView textView;
     }
