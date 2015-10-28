@@ -33,6 +33,12 @@ public class Constants {
     //库存的表名
     public static final String INVENTORY_NAME="INVENTORY";
 
+    //库存成本的appid
+    public static final String INVCOST_APPID="UDINVENTOR";
+    //库存成本的表名
+    public static final String INVCOST_NAME="INVCOST";
+
+
 
     public static final String USER_INFO = "userinfo";
     public static final String NAME_KEY = "name_key";

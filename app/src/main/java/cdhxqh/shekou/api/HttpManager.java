@@ -40,6 +40,14 @@ public class HttpManager {
 
 
     /**
+     * 设置库存成本的接口
+     * 根据Itemnum
+     */
+    public static String getInvcosturl(int curpage, int showcount,String itemnum) {
+        return "{'appid':'" + Constants.INVCOST_APPID + "','objectname':'" + Constants.INVCOST_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'"+itemnum+"'}}";
+    }
+
+    /**
      * 使用用户名密码登录
      *
      * @param cxt
@@ -120,7 +128,7 @@ public class HttpManager {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
-                Log.i(TAG, "statusCode");
+                Log.i(TAG, "statusCode"+"responseString="+responseString);
                 Results result = JsonUtils.parsingResults(cxt, responseString);
 
                 SafeHandler.onSuccess(handler, result, result.getCurpage(), result.getShowcount());

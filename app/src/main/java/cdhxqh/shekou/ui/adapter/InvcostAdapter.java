@@ -1,8 +1,6 @@
 package cdhxqh.shekou.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,47 +12,35 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cdhxqh.shekou.R;
-import cdhxqh.shekou.model.Inventory;
-import cdhxqh.shekou.ui.activity.InventoryActivity;
+import cdhxqh.shekou.model.Invcost;
 
 /**
  * Created by apple on 15/10/26
+ * 库存成本
  */
-public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.ViewHolder> {
+public class InvcostAdapter extends RecyclerView.Adapter<InvcostAdapter.ViewHolder> {
 
-    private static final String TAG = "InventoryAdapter";
+    private static final String TAG = "InvcostAdapter";
     Context mContext;
-    ArrayList<Inventory> mItems = new ArrayList<Inventory>();
+    ArrayList<Invcost> mItems = new ArrayList<Invcost>();
 
-    public InventoryAdapter(Context context) {
+    public InvcostAdapter(Context context) {
         mContext = context;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item, viewGroup, false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.invcost_list_item, viewGroup, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        final Inventory item = mItems.get(i);
+        final Invcost item = mItems.get(i);
 
-        viewHolder.itemNumTitle.setText(mContext.getString(R.string.inventory_itemnum_text));
-        viewHolder.itemDescTitle.setText(mContext.getString(R.string.inventory_location_text));
         viewHolder.itemNum.setText(item.itemnum);
-        viewHolder.itemDesc.setText(item.location);
-
-        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mContext, InventoryActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("inventory", item);
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
-            }
-        });
+        viewHolder.avgcostText.setText(item.avgcost);
+        viewHolder.lastcostText.setText(item.lastcost);
 
 
     }
@@ -64,11 +50,11 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
         return mItems.size();
     }
 
-    public void update(ArrayList<Inventory> data, boolean merge) {
+    public void update(ArrayList<Invcost> data, boolean merge) {
         if (merge && mItems.size() > 0) {
             for (int i = 0; i < mItems.size(); i++) {
                 Log.i(TAG, "mItems=" + mItems.get(i).itemnum);
-                Inventory obj = mItems.get(i);
+                Invcost obj = mItems.get(i);
                 boolean exist = false;
                 for (int j = 0; j < data.size(); j++) {
                     if (data.get(j).itemnum == obj.itemnum) {
@@ -98,33 +84,29 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
          * CardView*
          */
         public CardView cardView;
-        /**
-         * 编号*
-         */
-        public TextView itemNumTitle;
-        /**
-         * 描述*
-         */
-        public TextView itemDescTitle;
+
         /**
          * 编号*
          */
         public TextView itemNum;
         /**
-         * 描述*
+         * 平均成本
          */
-        public TextView itemDesc;
+        public TextView avgcostText;
+        /**
+         * 上次接收成本*
+         */
+        public TextView lastcostText;
 
         public ViewHolder(View view) {
             super(view);
             cardView = (CardView) view.findViewById(R.id.card_container);
 
-            itemNumTitle=(TextView) view.findViewById(R.id.item_num_title);
-            itemDescTitle=(TextView) view.findViewById(R.id.item_desc_title);
+            itemNum = (TextView) view.findViewById(R.id.invcost_num_text);
+            avgcostText = (TextView) view.findViewById(R.id.invcost_avgcost_text_id);
 
 
-            itemNum = (TextView) view.findViewById(R.id.item_num_text);
-            itemDesc = (TextView) view.findViewById(R.id.item_desc_text);
+            lastcostText = (TextView) view.findViewById(R.id.invcost_lastcost_id);
         }
     }
 }
