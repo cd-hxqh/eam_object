@@ -49,6 +49,15 @@
             android:name=".ui.activity.Wfassig_DetailsActivity"
             android:label="@string/title_activity_wfassig__details" >
         </activity>
+
+        <activity
+            android:name=".ui.activity.InventoryActivity"
+            android:label="@string/inventoryActivity" >
+        </activity>
+        <activity
+            android:name=".ui.activity.InvCostActivity"
+            android:label="InvCostActivity" >
+        </activity>
     </application>
 
 </manifest>

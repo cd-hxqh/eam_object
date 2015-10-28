@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.model.Invcost;
 import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.model.Wfassignment;
 
@@ -178,5 +179,44 @@ public class JsonUtils {
         }
 
     }
+
+
+    /**
+     * 解析库存成本
+     */
+    public static ArrayList<Invcost> parsingInvcost(Context ctx, String data) {
+        Log.i(TAG, "Invcost data=" + data);
+        ArrayList<Invcost> list = null;
+        Invcost invcost = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Invcost>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                invcost = new Invcost();
+                jsonObject = jsonArray.getJSONObject(i);
+                invcost.avgcost = jsonObject.getString("AVGCOST"); //平均项目成本
+                invcost.itemnum = jsonObject.getString("ITEMNUM"); //项目编号
+                invcost.lastcost = jsonObject.getString("LASTCOST"); //项目成本
+                invcost.location = jsonObject.getString("LOCATION"); //库房
+                invcost.orgid = jsonObject.getString("ORGID"); //组织标识
+                invcost.siteid = jsonObject.getString("SITEID"); //站点
+                invcost.stdcost = jsonObject.getString("STDCOST"); //项目成本
+
+                list.add(invcost);
+            }
+
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
+
+
+
 
 }

@@ -81,6 +81,20 @@
     <string name="wfassig_assigncodedesc_text">任务分配人:</string>
     <string name="wfassig_startdate_text">开始时间:</string>
     <string name="wfassig_assignstatus_text">分配状态:</string>
+    <!--库存备件-->
     <string name="inventory_itemnum_text">库存备件:</string>
     <string name="inventory_location_text">库房:</string>
+    <string name="inventory_desc_name_text">备件名称:</string>
+    <string name="inventory_location_name_text">库房名称:</string>
+    <string name="inventory_issueunit_text">发放单位:</string>
+    <string name="inventory_siteid_text">地点:</string>
+    <string name="inventory_curbaltotal_text">当前余量:</string>
+    <string name="inventory_detail_text">库存详情</string>
+    <string name="inventoryActivity">InventoryActivity</string>
+    <string name="inventory_cost_text">库存成本</string>
+    <string name="inventory_levels_text">库存余量</string>
+    <string name="inventory_storage_text">入库</string>
+    <string name="inventory_outbound_text">出库</string>
+    <string name="invcost_avgcost_text">平均成本:</string>
+    <string name="invcost_lastcost_text">上次接收成本:</string>
 </resources>

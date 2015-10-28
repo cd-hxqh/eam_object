@@ -1,7 +1,6 @@
 package cdhxqh.shekou.ui.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,7 +54,7 @@ public class Wfassig_DetailsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wfassig__details);
+        setContentView(R.layout.activity_wfassig_details);
         geiIntentData();
         findViewById();
         initView();
@@ -81,7 +80,6 @@ public class Wfassig_DetailsActivity extends BaseActivity {
         startdateText = (TextView) findViewById(R.id.wfassig_startdate_text_id);
 
         if (wfassignment != null) {
-            Log.i(TAG, "description=" + wfassignment.description + ",processname=" + wfassignment.processname + ",assigncodedesc=" + wfassignment.assigncodedesc + ",assignstatus=" + wfassignment.assignstatus + ",startdate=" + wfassignment.startdate);
             descriptionText.setText(wfassignment.description);
             processnameText.setText(wfassignment.processname);
             assigncodedescText.setText(wfassignment.assigncodedesc);
