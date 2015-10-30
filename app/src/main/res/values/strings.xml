@@ -23,6 +23,7 @@
     <string name="title_activity_login">登录界面</string>
     <string name="title_activity_main">主界面</string>
     <string name="title_activity_worklist">工单列表界面</string>
+    <string name="title_activity_workdetails">工单详情界面</string>
 
     <!--网络信息提示-->
     <string name="error_title">错误</string>
@@ -101,6 +102,18 @@
 
     <!--工单列表界面-->
     <string name="work_list_title">工单列表</string>
+    <string name="work_list_search">搜索</string>
     <string name="work_number">工单号</string>
     <string name="work_describe">描述</string>
+
+    <!--工单列表界面-->
+    <string name="work_details">工单详情</string>
+    <string name="work_num">工单号</string>
+    <string name="work_description">工单描述</string>
+    <string name="work_description_hint">请输入相关描述</string>
+    <string name="work_glz">管理组</string>
+    <string name="work_gls">管理室</string>
+    <string name="work_glbz">管理班组</string>
+    <string name="work_status">状态</string>
+    <string name="work_statusdate">状态日期</string>
 </resources>

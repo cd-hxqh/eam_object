@@ -9,40 +9,40 @@ import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Wfassignment;
 
 /**
- * ´ı°ìÈÎÎñÏêÇé *
+ * å¾…åŠä»»åŠ¡è¯¦æƒ… *
  */
 public class Wfassig_DetailsActivity extends BaseActivity {
     private static String TAG = "Wfassig_DetailsActivity";
 
     /**
-     * ·µ»Ø°´Å¥*
+     * è¿”å›æŒ‰é’®*
      */
     private ImageView backImageView;
     /**
-     * ±êÌâ*
+     * æ ‡é¢˜*
      */
     private TextView titleTextView;
 
 
-    /**½çÃæÊôĞÔ**/
+    /**ç•Œé¢å±æ€§**/
     /**
-     * ÃèÊö*
+     * æè¿°*
      */
     private TextView descriptionText;
     /**
-     * ¹ı³Ì*
+     * è¿‡ç¨‹*
      */
     private TextView processnameText;
     /**
-     * ÈÎÎñ·ÖÅäÈË*
+     * ä»»åŠ¡åˆ†é…äºº*
      */
     private TextView assigncodedescText;
     /**
-     * ·ÖÅä×´Ì¬*
+     * åˆ†é…çŠ¶æ€*
      */
     private TextView assignstatusText;
     /**
-     * ¿ªÊ¼ÈÕÆÚ*
+     * å¼€å§‹æ—¥æœŸ*
      */
     private TextView startdateText;
 
@@ -61,7 +61,7 @@ public class Wfassig_DetailsActivity extends BaseActivity {
     }
 
     /**
-     * »ñÈ¡Êı¾İ*
+     * è·å–æ•°æ®*
      */
     private void geiIntentData() {
         wfassignment = (Wfassignment) getIntent().getParcelableExtra("wfassignment");

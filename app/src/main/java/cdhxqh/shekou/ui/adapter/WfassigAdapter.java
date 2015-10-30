@@ -99,11 +99,11 @@ public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHold
         public CardView cardView;
 
         /**
-         * ±àºÅ*
+         * ç¼–å·*
          */
         public TextView itemNum;
         /**
-         * ÃèÊö*
+         * æè¿°*
          */
         public TextView itemDesc;
 

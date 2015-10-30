@@ -306,7 +306,7 @@ public class SwipeRefreshLayout extends ViewGroup {
      * @deprecated Use {@link #setColorSchemeResources(int, int, int, int)}
      */
     @Deprecated
-    private void setColorScheme(int colorRes1, int colorRes2, int colorRes3, int colorRes4) {
+    public void setColorScheme(int colorRes1, int colorRes2, int colorRes3, int colorRes4) {
         setColorSchemeResources(colorRes1, colorRes2, colorRes3, colorRes4);
     }
 

@@ -16,54 +16,54 @@ import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.utils.MessageUtils;
 
 /**
- * ¿â´æÏêÇéÏêÇé *
+ * åº“å­˜è¯¦æƒ…è¯¦æƒ… *
  */
 public class InventoryActivity extends BaseActivity {
     private static String TAG = "InventoryActivity";
 
     /**
-     * ·µ»Ø°´Å¥*
+     * è¿”å›æŒ‰é’®*
      */
     private ImageView backImageView;
     /**
-     * ±êÌâ*
+     * æ ‡é¢˜*
      */
     private TextView titleTextView;
 
     /**
-     * ²Ëµ¥°´Å¥*
+     * èœå•æŒ‰é’®*
      */
     private ImageView menuImageView;
 
 
-    /**½çÃæÊôĞÔ**/
+    /**ç•Œé¢å±æ€§**/
     /**
-     * ¿â´æ±¸¼ş
+     * åº“å­˜å¤‡ä»¶
      */
     private TextView itemnumText;
     /**
-     * ±¸¼şÃû³Æ
+     * å¤‡ä»¶åç§°
      */
     private TextView descText;
 
     /**
-     * ¿â·¿
+     * åº“æˆ¿
      */
     private TextView locationText;
     /**
-     * ¿â·¿Ãû³Æ
+     * åº“æˆ¿åç§°
      */
     private TextView locationDescText;
     /**
-     * ·¢·Åµ¥Î»
+     * å‘æ”¾å•ä½
      */
     private TextView issueunitText;
     /**
-     * µØµã
+     * åœ°ç‚¹
      */
     private TextView siteidText;
     /**
-     * ¿â´æÓàÁ¿
+     * åº“å­˜ä½™é‡
      */
     private TextView curbaltotalText;
 
@@ -75,19 +75,19 @@ public class InventoryActivity extends BaseActivity {
     private PopupWindow popupWindow;
 
     /**
-     * ¿â´æ³É±¾*
+     * åº“å­˜æˆæœ¬*
      */
     private LinearLayout costLinearlayout;
     /**
-     * ¿â´æÓàÁ¿*
+     * åº“å­˜ä½™é‡*
      */
     private LinearLayout levelsLinearLayout;
     /**
-     * Èë¿â*
+     * å…¥åº“*
      */
     private LinearLayout storageLinearLayout;
     /**
-     * ³ö¿â*
+     * å‡ºåº“*
      */
     private LinearLayout outboundLinearLayout;
 
@@ -101,7 +101,7 @@ public class InventoryActivity extends BaseActivity {
     }
 
     /**
-     * »ñÈ¡Êı¾İ*
+     * è·å–æ•°æ®*
      */
     private void geiIntentData() {
         inventory = (Inventory) getIntent().getParcelableExtra("inventory");
@@ -156,11 +156,11 @@ public class InventoryActivity extends BaseActivity {
 
 
     /**
-     * ³õÊ¼»¯showPopupWindow*
+     * åˆå§‹åŒ–showPopupWindow*
      */
     private void showPopupWindow(View view) {
 
-        // Ò»¸ö×Ô¶¨ÒåµÄ²¼¾Ö£¬×÷ÎªÏÔÊ¾µÄÄÚÈİ
+        // ä¸€ä¸ªè‡ªå®šä¹‰çš„å¸ƒå±€ï¼Œä½œä¸ºæ˜¾ç¤ºçš„å†…å®¹
         View contentView = LayoutInflater.from(InventoryActivity.this).inflate(
                 R.layout.popup_window, null);
 
@@ -176,17 +176,17 @@ public class InventoryActivity extends BaseActivity {
 
 
                 return false;
-                // ÕâÀïÈç¹û·µ»ØtrueµÄ»°£¬touchÊÂ¼ş½«±»À¹½Ø
-                // À¹½Øºó PopupWindowµÄonTouchEvent²»±»µ÷ÓÃ£¬ÕâÑùµã»÷Íâ²¿ÇøÓòÎŞ·¨dismiss
+                // è¿™é‡Œå¦‚æœè¿”å›trueçš„è¯ï¼Œtouchäº‹ä»¶å°†è¢«æ‹¦æˆª
+                // æ‹¦æˆªå PopupWindowçš„onTouchEventä¸è¢«è°ƒç”¨ï¼Œè¿™æ ·ç‚¹å‡»å¤–éƒ¨åŒºåŸŸæ— æ³•dismiss
             }
         });
 
-        // Èç¹û²»ÉèÖÃPopupWindowµÄ±³¾°£¬ÎŞÂÛÊÇµã»÷Íâ²¿ÇøÓò»¹ÊÇBack¼ü¶¼ÎŞ·¨dismissµ¯¿ò
-        // ÎÒ¾õµÃÕâÀïÊÇAPIµÄÒ»¸öbug
+        // å¦‚æœä¸è®¾ç½®PopupWindowçš„èƒŒæ™¯ï¼Œæ— è®ºæ˜¯ç‚¹å‡»å¤–éƒ¨åŒºåŸŸè¿˜æ˜¯Backé”®éƒ½æ— æ³•dismisså¼¹æ¡†
+        // æˆ‘è§‰å¾—è¿™é‡Œæ˜¯APIçš„ä¸€ä¸ªbug
         popupWindow.setBackgroundDrawable(getResources().getDrawable(
                 R.drawable.popup_background_mtrl_mult));
 
-        // ÉèÖÃºÃ²ÎÊıÖ®ºóÔÙshow
+        // è®¾ç½®å¥½å‚æ•°ä¹‹åå†show
         popupWindow.showAsDropDown(view);
 
         costLinearlayout = (LinearLayout) contentView.findViewById(R.id.inventory_cost_id);
@@ -201,7 +201,7 @@ public class InventoryActivity extends BaseActivity {
     }
 
     /**
-     * ¿â´æ³É±¾*
+     * åº“å­˜æˆæœ¬*
      */
     private View.OnClickListener costOnClickListener = new View.OnClickListener() {
         @Override

@@ -29,11 +29,11 @@ public class MainActivity extends BaseActivity
     private ViewGroup mDrawerLayout;
     private View mActionbarCustom;
 
-    /**待办事项**/
+    /**寰呭姙浜嬮」**/
     private WfassigFragment mNewWfassigFragment;
-    /**工单管理**/
+    /**宸ュ崟绠＄悊**/
     private WorkFragment mNewWorkFragment;
-    /**库存查询**/
+    /**搴撳瓨鏌ヨ**/
     private InventoryFragment mNewInventoryFragment;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -86,7 +86,7 @@ public class MainActivity extends BaseActivity
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         switch (position) {
-            case 0: //待办任务
+            case 0: //寰呭姙浠诲姟
                 if (mNewWfassigFragment == null) {
                     mNewWfassigFragment = new WfassigFragment();
                     Bundle bundle = new Bundle();
@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity
                 }
                 fragmentTransaction.replace(R.id.container, mNewWfassigFragment).commit();
                 break;
-            case 1: //工单管理
+            case 1: //宸ュ崟绠＄悊
                 if (mNewWorkFragment == null) {
                     mNewWorkFragment = new WorkFragment();
                     Bundle bundle = new Bundle();
@@ -102,7 +102,7 @@ public class MainActivity extends BaseActivity
                 }
                 fragmentTransaction.replace(R.id.container, mNewWorkFragment).commit();
                 break;
-            case 2://库存查询
+            case 2://搴撳瓨鏌ヨ
                 if (mNewInventoryFragment == null) {
                     mNewInventoryFragment = new InventoryFragment();
                     Bundle bundle = new Bundle();
@@ -110,7 +110,7 @@ public class MainActivity extends BaseActivity
                 }
                 fragmentTransaction.replace(R.id.container, mNewInventoryFragment).commit();
                 break;
-            case 3://领料管理
+            case 3://棰嗘枡绠＄悊
                 break;
         }
 

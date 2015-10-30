@@ -2,6 +2,7 @@ package cdhxqh.shekou.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import java.util.List;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.WorkOrder;
+import cdhxqh.shekou.ui.activity.Work_detailsActivity;
 
 
 /**
@@ -38,11 +40,21 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        WorkOrder workOrder = workOrderList.get(position);
+        final WorkOrder workOrder = workOrderList.get(position);
         holder.itemNumTitle.setText(mContext.getString(R.string.work_number));
         holder.itemDescTitle.setText(mContext.getString(R.string.work_describe));
         holder.itemNum.setText(workOrder.wonum);
         holder.itemDesc.setText(workOrder.description);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, Work_detailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("workOrder", workOrder);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

@@ -53,7 +53,10 @@
             android:name=".ui.activity.Work_ListActivity"
             android:label="@string/title_activity_worklist" >
         </activity>
-
+        <activity
+            android:name=".ui.activity.Work_detailsActivity"
+            android:label="@string/title_activity_workdetails" >
+        </activity>
         <activity
             android:name=".ui.activity.InventoryActivity"
             android:label="@string/inventoryActivity" >

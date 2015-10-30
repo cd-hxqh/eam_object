@@ -29,18 +29,18 @@ import cdhxqh.shekou.ui.adapter.InventoryAdapter;
 import cdhxqh.shekou.utils.MessageUtils;
 
 /**
- * ¿â´æ³É±¾ *
+ * åº“å­˜æˆæœ¬ *
  */
 public class InvCostActivity extends BaseActivity {
     private static final String TAG = "InvCostActivity";
     private static final int RESULT_ADD_TOPIC = 100;
 
     /**
-     * ·µ»Ø°´Å¥*
+     * è¿”å›æŒ‰é’®*
      */
     private ImageView backImageView;
     /**
-     * ±êÌâ*
+     * æ ‡é¢˜*
      */
     private TextView titleTextView;
 
@@ -55,7 +55,7 @@ public class InvCostActivity extends BaseActivity {
 
 
     /**
-     * ÔİÎŞÊı¾İ*
+     * æš‚æ— æ•°æ®*
      */
     LinearLayout notLinearLayout;
 
@@ -71,7 +71,7 @@ public class InvCostActivity extends BaseActivity {
         initView();
     }
 
-    /**»ñÈ¡ÉÏ¸ö½çÃæµÄ½çÃæĞÅÏ¢**/
+    /**è·å–ä¸Šä¸ªç•Œé¢çš„ç•Œé¢ä¿¡æ¯**/
     private void getInitData() {
         itemnum=getIntent().getExtras().getString("itemnum");
         Log.i(TAG,"itemnum="+itemnum);
@@ -126,8 +126,8 @@ public class InvCostActivity extends BaseActivity {
     };
 
     /**
-     * »ñÈ¡¿â´æ²éÑ¯ĞÅÏ¢*
-     * --·ÖÒ³
+     * è·å–åº“å­˜æŸ¥è¯¢ä¿¡æ¯*
+     * --åˆ†é¡µ
      *
      */
 

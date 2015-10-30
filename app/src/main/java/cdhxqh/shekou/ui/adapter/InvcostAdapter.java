@@ -16,7 +16,7 @@ import cdhxqh.shekou.model.Invcost;
 
 /**
  * Created by apple on 15/10/26
- * 库存成本
+ * 搴撳瓨鎴愭湰
  */
 public class InvcostAdapter extends RecyclerView.Adapter<InvcostAdapter.ViewHolder> {
 
@@ -86,15 +86,15 @@ public class InvcostAdapter extends RecyclerView.Adapter<InvcostAdapter.ViewHold
         public CardView cardView;
 
         /**
-         * 编号*
+         * 缂栧彿*
          */
         public TextView itemNum;
         /**
-         * 平均成本
+         * 骞冲潎鎴愭湰
          */
         public TextView avgcostText;
         /**
-         * 上次接收成本*
+         * 涓婃鎺ユ敹鎴愭湰*
          */
         public TextView lastcostText;
 

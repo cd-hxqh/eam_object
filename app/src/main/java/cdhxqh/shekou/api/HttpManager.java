@@ -34,8 +34,14 @@ public class HttpManager {
     /**
      * 设置工单接口*
      */
-    public static String getworkorderUrl(String type,int curpage, int showcount) {
-        return "{'appid':'" + "UDWO"+type + "','objectname':'" + Constants.WORKORDER_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    public static String getworkorderUrl(String type,String search,int curpage, int showcount) {
+        if(search.equals("")) {
+            return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+        }else {
+            return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'%"+search+"%'}}";
+        }
     }
 
     /**

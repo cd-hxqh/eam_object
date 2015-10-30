@@ -8,5 +8,26 @@
     tools:context="cdhxqh.shekou.ui.activity.Work_ListActivity">
 
     <include layout="@layout/title_main"></include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+    <EditText
+        android:id="@+id/search_edit"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:imeOptions="actionSearch"
+        android:maxLines="1"
+        android:singleLine="true"
+        android:background="@color/white"/>
+    </RelativeLayout>
     <include layout="@layout/work_list"></include>
+
 </LinearLayout>

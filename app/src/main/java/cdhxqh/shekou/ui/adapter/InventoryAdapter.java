@@ -99,19 +99,19 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
          */
         public CardView cardView;
         /**
-         * ±àºÅ*
+         * ç¼–å·*
          */
         public TextView itemNumTitle;
         /**
-         * ÃèÊö*
+         * æè¿°*
          */
         public TextView itemDescTitle;
         /**
-         * ±àºÅ*
+         * ç¼–å·*
          */
         public TextView itemNum;
         /**
-         * ÃèÊö*
+         * æè¿°*
          */
         public TextView itemDesc;
 
