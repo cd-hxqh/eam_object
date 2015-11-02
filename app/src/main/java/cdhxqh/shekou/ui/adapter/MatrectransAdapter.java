@@ -14,19 +14,20 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cdhxqh.shekou.R;
-import cdhxqh.shekou.model.Wfassignment;
-import cdhxqh.shekou.ui.activity.Wfassig_DetailsActivity;
+import cdhxqh.shekou.model.Matrectrans;
+import cdhxqh.shekou.ui.activity.MatrectransDetailsActivity;
 
 /**
  * Created by apple on 15/10/26
+ * 库存余量
  */
-public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHolder> {
+public class MatrectransAdapter extends RecyclerView.Adapter<MatrectransAdapter.ViewHolder> {
 
-    private static final String TAG = "WfassigAdapter";
+    private static final String TAG = "MatrectransAdapter";
     Context mContext;
-    ArrayList<Wfassignment> mItems = new ArrayList<Wfassignment>();
+    ArrayList<Matrectrans> mItems = new ArrayList<Matrectrans>();
 
-    public WfassigAdapter(Context context) {
+    public MatrectransAdapter(Context context) {
         mContext = context;
     }
 
@@ -38,18 +39,19 @@ public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        final Wfassignment item = mItems.get(i);
+        final Matrectrans item = mItems.get(i);
 
-        Log.i(TAG, "item.itemnum=" + item.wfassignmentid+",description="+item.description);
-        viewHolder.itemNum.setText(item.wfassignmentid+"");
-        viewHolder.itemDesc.setText(item.description);
+        viewHolder.itemNumTitle.setText(mContext.getString(R.string.matrectrans_issuetype_text));
+        viewHolder.itemDescTitle.setText(mContext.getString(R.string.matrectrans_actualdate_text));
+        viewHolder.itemNum.setText(item.issuetype);
+        viewHolder.itemDesc.setText(item.actualdate);
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, Wfassig_DetailsActivity.class);
+                Intent intent = new Intent(mContext, MatrectransDetailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("wfassignment", item);
+                bundle.putParcelable("matrectrans", item);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
@@ -63,14 +65,14 @@ public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHold
         return mItems.size();
     }
 
-    public void update(ArrayList<Wfassignment> data, boolean merge) {
+    public void update(ArrayList<Matrectrans> data, boolean merge) {
         if (merge && mItems.size() > 0) {
             for (int i = 0; i < mItems.size(); i++) {
-                Log.i(TAG, "mItems=" + mItems.get(i).wfassignmentid);
-                Wfassignment obj = mItems.get(i);
+                Log.i(TAG, "mItems=" + mItems.get(i).itemnum);
+                Matrectrans obj = mItems.get(i);
                 boolean exist = false;
                 for (int j = 0; j < data.size(); j++) {
-                    if (data.get(j).wfassignmentid == obj.wfassignmentid) {
+                    if (data.get(j).itemnum == obj.itemnum) {
                         exist = true;
                         break;
                     }
@@ -97,18 +99,31 @@ public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHold
          * CardView*
          */
         public CardView cardView;
-
         /**
+         * 交易类型
+         */
+        public TextView itemNumTitle;
+        /**
+         * 实际日期
+         */
+        public TextView itemDescTitle;
+        /**
+         * 货柜
          */
         public TextView itemNum;
         /**
-         *
+         * 当前余量
          */
         public TextView itemDesc;
 
         public ViewHolder(View view) {
             super(view);
             cardView = (CardView) view.findViewById(R.id.card_container);
+
+            itemNumTitle = (TextView) view.findViewById(R.id.item_num_title);
+            itemDescTitle = (TextView) view.findViewById(R.id.item_desc_title);
+
+
             itemNum = (TextView) view.findViewById(R.id.item_num_text);
             itemDesc = (TextView) view.findViewById(R.id.item_desc_text);
         }

@@ -106,6 +106,37 @@
     <string name="work_number">工单号</string>
     <string name="work_describe">描述</string>
 
+
+    <!--库存余量-->
+    <string name="invbalances_binnum_text">货柜:</string>
+    <string name="invbalances_curbal_text">当前余量:</string>
+    <string name="invbalances_title">库存余量</string>
+    <string name="invbalances_stagedcurbal_text">暂存余量:</string>
+    <string name="invbalances_physcnt_text">实际库存量:</string>
+    <string name="invbalance_unitcost_text">单位成本:</string>
+    <string name="invbalances_physcntdate_text">实际盘点日期:</string>
+    <string name="invbalances_detail_title">库存余量详情</string>
+
+    <!--入库-->
+
+    <string name="matrectrans_issuetype_text">交易类型:</string>
+    <string name="matrectrans_actualdate_text">实际日期:</string>
+    <string name="matrectrans_title">入库</string>
+    <string name="matusetrans_transdate_text">交易日期:</string>
+    <string name="matusetrans_quantity_text">数量:</string>
+    <string name="matusetrans_linecost_text">行成本:</string>
+    <string name="matusetrans_fromsiteid_text">原地点:</string>
+    <string name="matusetrans_fromstoreloc_text">原位置:</string>
+    <string name="matusetrans_tostoreloc_text">目标位置:</string>
+    <string name="matrectrans_detail_title">入库详情</string>
+    <string name="matusetrans_detail_title">出库详情</string>
+    <string name="matusetrans_refwo_text">工单:</string>
+    <string name="matusetrans_location_text">位置:</string>
+    <string name="matusetrans_assetnum_text">资产:</string>
+    <string name="matusetrans_enterby_text">输入人:</string>
+
+
+
     <!--工单列表界面-->
     <string name="work_details">工单详情</string>
     <string name="work_num">工单号</string>

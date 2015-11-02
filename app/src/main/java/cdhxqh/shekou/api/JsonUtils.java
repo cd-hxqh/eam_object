@@ -11,8 +11,11 @@ import java.util.ArrayList;
 
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.model.Invbalances;
 import cdhxqh.shekou.model.Invcost;
 import cdhxqh.shekou.model.Inventory;
+import cdhxqh.shekou.model.Matrectrans;
+import cdhxqh.shekou.model.Matusetrans;
 import cdhxqh.shekou.model.Wfassignment;
 import cdhxqh.shekou.model.WorkOrder;
 
@@ -265,7 +268,122 @@ public class JsonUtils {
 
     }
 
+    /**
+     * 解析库存余量
+     */
+    public static ArrayList<Invbalances> parsingInvbalances(Context ctx, String data) {
+        Log.i(TAG, "Invbalances data=" + data);
+        ArrayList<Invbalances> list = null;
+        Invbalances invbalances = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Invbalances>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                invbalances = new Invbalances();
+                jsonObject = jsonArray.getJSONObject(i);
+                invbalances.binnum = jsonObject.getString("BINNUM"); //货柜编号
+                invbalances.curbal = jsonObject.getString("CURBAL"); //当前余量
+                invbalances.itemnum = jsonObject.getString("ITEMNUM"); //项目编号
+                invbalances.location = jsonObject.getString("LOCATION"); //库房
+                invbalances.orgid = jsonObject.getString("ORGID"); //组织标识
+                invbalances.physcnt = jsonObject.getString("PHYSCNT"); //实际库存量
+                invbalances.physcntdate = jsonObject.getString("PHYSCNTDATE"); //盘点日期
+                invbalances.siteid = jsonObject.getString("SITEID"); //位置
+                invbalances.stagedcurbal = jsonObject.getString("STAGEDCURBAL"); //暂存余量
 
+                list.add(invbalances);
+            }
+
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    /**
+     * 解析入库
+     */
+    public static ArrayList<Matusetrans> parsingMatusetrans(Context ctx, String data) {
+        Log.i(TAG, "Matusetrans data=" + data);
+        ArrayList<Matusetrans> list = null;
+        Matusetrans matusetrans = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Matusetrans>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                matusetrans = new Matusetrans();
+                jsonObject = jsonArray.getJSONObject(i);
+                matusetrans.actualcost = jsonObject.getString("ACTUALCOST"); //实际成本
+                matusetrans.actualdate = jsonObject.getString("ACTUALDATE"); //实际日期
+                matusetrans.assetnum = jsonObject.getString("ASSETNUM"); //资产编号
+                matusetrans.curbal = jsonObject.getString("CURBAL"); //当前余量
+                matusetrans.enterby = jsonObject.getString("ENTERBY"); //输入人
+                matusetrans.issuetype = jsonObject.getString("ISSUETYPE"); //交易类型
+                matusetrans.itemnum = jsonObject.getString("ITEMNUM"); //资产
+                matusetrans.linecost = jsonObject.getString("LINECOST"); //行成本
+                matusetrans.location = jsonObject.getString("LOCATION"); //位置
+                matusetrans.matusetransid = jsonObject.getString("MATUSETRANSID"); //唯一id
+                matusetrans.orgid = jsonObject.getString("ORGID"); //组织标识
+                matusetrans.physcnt = jsonObject.getString("PHYSCNT"); //实际盘点
+                matusetrans.quantity = jsonObject.getString("QUANTITY"); //数量
+                matusetrans.refwo = jsonObject.getString("REFWO"); //工单
+                matusetrans.siteid = jsonObject.getString("SITEID"); //站点
+                matusetrans.storeloc = jsonObject.getString("STORELOC"); //位置
+                matusetrans.transdate = jsonObject.getString("TRANSDATE"); //交易日期
+                matusetrans.unitcost = jsonObject.getString("UNITCOST"); //单位成本
+
+                list.add(matusetrans);
+            }
+
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    /**
+     * 解析出库
+     */
+    public static ArrayList<Matrectrans> parsingMatrectrans(Context ctx, String data) {
+        Log.i(TAG, "Matrectrans data=" + data);
+        ArrayList<Matrectrans> list = null;
+        Matrectrans matrectrans = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Matrectrans>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                matrectrans = new Matrectrans();
+                jsonObject = jsonArray.getJSONObject(i);
+                matrectrans.actualcost = jsonObject.getString("ACTUALCOST"); //实际成本
+                matrectrans.actualdate = jsonObject.getString("ACTUALDATE"); //实际日期
+                matrectrans.fromsiteid = jsonObject.getString("FROMSITEID"); //原地点
+                matrectrans.fromstoreloc = jsonObject.getString("FROMSTORELOC"); //原位置
+                matrectrans.issuetype = jsonObject.getString("ISSUETYPE"); //交易类型
+                matrectrans.itemnum = jsonObject.getString("ITEMNUM"); //项目编号
+                matrectrans.linecost = jsonObject.getString("LINECOST"); //行成本
+                matrectrans.loadedcost = jsonObject.getString("LOADEDCOST"); //记入成本
+                matrectrans.quantity = jsonObject.getString("QUANTITY"); //数量
+                matrectrans.tostoreloc = jsonObject.getString("TOSTORELOC"); //目标位置
+                matrectrans.transdate = jsonObject.getString("TRANSDATE"); //交易日期
+                matrectrans.unitcost = jsonObject.getString("UNITCOST"); //单位成本
+
+                list.add(matrectrans);
+            }
+
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
 
 

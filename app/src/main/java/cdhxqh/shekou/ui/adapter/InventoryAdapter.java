@@ -99,19 +99,23 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.View
          */
         public CardView cardView;
         /**
+         *
          * 编号*
          */
         public TextView itemNumTitle;
         /**
+         *
          * 描述*
          */
         public TextView itemDescTitle;
         /**
+         *
          * 编号*
          */
         public TextView itemNum;
         /**
          * 描述*
+         *
          */
         public TextView itemDesc;
 

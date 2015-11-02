@@ -14,19 +14,20 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cdhxqh.shekou.R;
-import cdhxqh.shekou.model.Wfassignment;
-import cdhxqh.shekou.ui.activity.Wfassig_DetailsActivity;
+import cdhxqh.shekou.model.Invbalances;
+import cdhxqh.shekou.ui.activity.InvbalancesDetailsActivity;
 
 /**
  * Created by apple on 15/10/26
+ * 库存余量
  */
-public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHolder> {
+public class InvbalancesAdapter extends RecyclerView.Adapter<InvbalancesAdapter.ViewHolder> {
 
-    private static final String TAG = "WfassigAdapter";
+    private static final String TAG = "InvbalancesAdapter";
     Context mContext;
-    ArrayList<Wfassignment> mItems = new ArrayList<Wfassignment>();
+    ArrayList<Invbalances> mItems = new ArrayList<Invbalances>();
 
-    public WfassigAdapter(Context context) {
+    public InvbalancesAdapter(Context context) {
         mContext = context;
     }
 
@@ -38,18 +39,19 @@ public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        final Wfassignment item = mItems.get(i);
+        final Invbalances item = mItems.get(i);
 
-        Log.i(TAG, "item.itemnum=" + item.wfassignmentid+",description="+item.description);
-        viewHolder.itemNum.setText(item.wfassignmentid+"");
-        viewHolder.itemDesc.setText(item.description);
+        viewHolder.itemNumTitle.setText(mContext.getString(R.string.invbalances_binnum_text));
+        viewHolder.itemDescTitle.setText(mContext.getString(R.string.invbalances_curbal_text));
+        viewHolder.itemNum.setText(item.binnum);
+        viewHolder.itemDesc.setText(item.curbal);
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, Wfassig_DetailsActivity.class);
+                Intent intent = new Intent(mContext, InvbalancesDetailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("wfassignment", item);
+                bundle.putParcelable("invbalances", item);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
@@ -63,14 +65,14 @@ public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHold
         return mItems.size();
     }
 
-    public void update(ArrayList<Wfassignment> data, boolean merge) {
+    public void update(ArrayList<Invbalances> data, boolean merge) {
         if (merge && mItems.size() > 0) {
             for (int i = 0; i < mItems.size(); i++) {
-                Log.i(TAG, "mItems=" + mItems.get(i).wfassignmentid);
-                Wfassignment obj = mItems.get(i);
+                Log.i(TAG, "mItems=" + mItems.get(i).binnum);
+                Invbalances obj = mItems.get(i);
                 boolean exist = false;
                 for (int j = 0; j < data.size(); j++) {
-                    if (data.get(j).wfassignmentid == obj.wfassignmentid) {
+                    if (data.get(j).binnum == obj.binnum) {
                         exist = true;
                         break;
                     }
@@ -97,18 +99,31 @@ public class WfassigAdapter extends RecyclerView.Adapter<WfassigAdapter.ViewHold
          * CardView*
          */
         public CardView cardView;
-
         /**
+         * 货柜标题
+         */
+        public TextView itemNumTitle;
+        /**
+         * 当前余量
+         */
+        public TextView itemDescTitle;
+        /**
+         * 货柜
          */
         public TextView itemNum;
         /**
-         *
+         * 当前余量
          */
         public TextView itemDesc;
 
         public ViewHolder(View view) {
             super(view);
             cardView = (CardView) view.findViewById(R.id.card_container);
+
+            itemNumTitle = (TextView) view.findViewById(R.id.item_num_title);
+            itemDescTitle = (TextView) view.findViewById(R.id.item_desc_title);
+
+
             itemNum = (TextView) view.findViewById(R.id.item_num_text);
             itemDesc = (TextView) view.findViewById(R.id.item_desc_text);
         }

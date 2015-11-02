@@ -6,13 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,18 +18,16 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
-import cdhxqh.shekou.model.Invcost;
-import cdhxqh.shekou.model.Inventory;
-import cdhxqh.shekou.ui.adapter.InvcostAdapter;
-import cdhxqh.shekou.ui.adapter.InventoryAdapter;
-import cdhxqh.shekou.utils.MessageUtils;
+import cdhxqh.shekou.model.Matrectrans;
+import cdhxqh.shekou.model.Matusetrans;
+import cdhxqh.shekou.ui.adapter.MatrectransAdapter;
+import cdhxqh.shekou.ui.adapter.MatusetransAdapter;
 
 /**
- * 库存成本
+ * 出库
  */
-public class InvCostActivity extends BaseActivity {
-    private static final String TAG = "InvCostActivity";
-    private static final int RESULT_ADD_TOPIC = 100;
+public class MatusetransActivity extends BaseActivity {
+    private static final String TAG = "MatusetransActivity";
 
     /**
      * 返回按钮
@@ -55,11 +49,11 @@ public class InvCostActivity extends BaseActivity {
 
 
     /**
-     * �������*
+     *暂无数据*
      */
     LinearLayout notLinearLayout;
 
-    InvcostAdapter invcostAdapter;
+    MatusetransAdapter matusetransAdapter;
 
     private String itemnum;
     @Override
@@ -85,10 +79,10 @@ public class InvCostActivity extends BaseActivity {
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list_topics);
-        mLayoutManager = new LinearLayoutManager(InvCostActivity.this);
+        mLayoutManager = new LinearLayoutManager(MatusetransActivity.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        invcostAdapter = new InvcostAdapter(InvCostActivity.this);
-        mRecyclerView.setAdapter(invcostAdapter);
+        matusetransAdapter = new MatusetransAdapter(MatusetransActivity.this);
+        mRecyclerView.setAdapter(matusetransAdapter);
         mSwipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -110,7 +104,7 @@ public class InvCostActivity extends BaseActivity {
     @Override
     protected void initView() {
         backImageView.setOnClickListener(backImageViewOnClickListener);
-        titleTextView.setText(getString(R.string.inventory_cost_text));
+        titleTextView.setText(getResources().getText(R.string.inventory_outbound_text));
 
         mSwipeLayout.setRefreshing(true);
         getItemList(itemnum);
@@ -126,13 +120,13 @@ public class InvCostActivity extends BaseActivity {
     };
 
     /**
-     * 获取库存成本
+     * 获取出库出库
      * --分页
      *
      */
 
     private void getItemList(String itemnum) {
-        HttpManager.getDataPagingInfo(InvCostActivity.this, HttpManager.getInvcosturl(1, 20, itemnum), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(MatusetransActivity.this, HttpManager.getMatusetransurl(1, 20, itemnum), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -140,12 +134,12 @@ public class InvCostActivity extends BaseActivity {
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Invcost> items = JsonUtils.parsingInvcost(InvCostActivity.this, results.getResultlist());
+                ArrayList<Matusetrans> items = JsonUtils.parsingMatusetrans(MatusetransActivity.this, results.getResultlist());
                 mSwipeLayout.setRefreshing(false);
                 if (items == null || items.isEmpty()) {
                     notLinearLayout.setVisibility(View.VISIBLE);
                 } else {
-                    invcostAdapter.update(items, true);
+                    matusetransAdapter.update(items, true);
                 }
             }
 

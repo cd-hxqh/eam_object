@@ -16,27 +16,27 @@ import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.utils.MessageUtils;
 
 /**
- * 库存详情详情 *
+ * 库存详情
  */
 public class InventoryActivity extends BaseActivity {
     private static String TAG = "InventoryActivity";
 
     /**
-     * 返回按钮*
+     * 返回按钮
      */
     private ImageView backImageView;
     /**
-     * 标题*
+     * 标题
      */
     private TextView titleTextView;
 
     /**
-     * 菜单按钮*
+     * 菜单
      */
     private ImageView menuImageView;
 
 
-    /**界面属性**/
+    /**界面信息**/
     /**
      * 库存备件
      */
@@ -59,11 +59,11 @@ public class InventoryActivity extends BaseActivity {
      */
     private TextView issueunitText;
     /**
-     * 地点
+     * 位置
      */
     private TextView siteidText;
     /**
-     * 库存余量
+     * 当前余量
      */
     private TextView curbaltotalText;
 
@@ -75,19 +75,19 @@ public class InventoryActivity extends BaseActivity {
     private PopupWindow popupWindow;
 
     /**
-     * 库存成本*
+     * 库存成本
      */
     private LinearLayout costLinearlayout;
     /**
-     * 库存余量*
+     * 库存余量
      */
     private LinearLayout levelsLinearLayout;
     /**
-     * 入库*
+     * 入库
      */
     private LinearLayout storageLinearLayout;
     /**
-     * 出库*
+     * 出库
      */
     private LinearLayout outboundLinearLayout;
 
@@ -100,9 +100,6 @@ public class InventoryActivity extends BaseActivity {
         initView();
     }
 
-    /**
-     * 获取数据*
-     */
     private void geiIntentData() {
         inventory = (Inventory) getIntent().getParcelableExtra("inventory");
     }
@@ -155,12 +152,8 @@ public class InventoryActivity extends BaseActivity {
     };
 
 
-    /**
-     * 初始化showPopupWindow*
-     */
     private void showPopupWindow(View view) {
 
-        // 一个自定义的布局，作为显示的内容
         View contentView = LayoutInflater.from(InventoryActivity.this).inflate(
                 R.layout.popup_window, null);
 
@@ -176,17 +169,12 @@ public class InventoryActivity extends BaseActivity {
 
 
                 return false;
-                // 这里如果返回true的话，touch事件将被拦截
-                // 拦截后 PopupWindow的onTouchEvent不被调用，这样点击外部区域无法dismiss
             }
         });
 
-        // 如果不设置PopupWindow的背景，无论是点击外部区域还是Back键都无法dismiss弹框
-        // 我觉得这里是API的一个bug
         popupWindow.setBackgroundDrawable(getResources().getDrawable(
                 R.drawable.popup_background_mtrl_mult));
 
-        // 设置好参数之后再show
         popupWindow.showAsDropDown(view);
 
         costLinearlayout = (LinearLayout) contentView.findViewById(R.id.inventory_cost_id);
@@ -200,9 +188,6 @@ public class InventoryActivity extends BaseActivity {
 
     }
 
-    /**
-     * 库存成本*
-     */
     private View.OnClickListener costOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -214,19 +199,25 @@ public class InventoryActivity extends BaseActivity {
     private View.OnClickListener levelsOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            MessageUtils.showErrorMessage(InventoryActivity.this, "2");
+            Intent intent = new Intent(InventoryActivity.this, InvbalancesActivity.class);
+            intent.putExtra("itemnum", inventory.itemnum);
+            startActivityForResult(intent, 0);
         }
     };
     private View.OnClickListener storageOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            MessageUtils.showErrorMessage(InventoryActivity.this, "3");
+            Intent intent = new Intent(InventoryActivity.this, MatrectransActivity.class);
+            intent.putExtra("itemnum", inventory.itemnum);
+            startActivityForResult(intent, 0);
         }
     };
     private View.OnClickListener outboundOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            MessageUtils.showErrorMessage(InventoryActivity.this, "4");
+            Intent intent = new Intent(InventoryActivity.this, MatusetransActivity.class);
+            intent.putExtra("itemnum", inventory.itemnum);
+            startActivityForResult(intent, 0);
         }
     };
 

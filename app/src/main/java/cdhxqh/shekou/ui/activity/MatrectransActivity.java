@@ -6,13 +6,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,18 +18,16 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
-import cdhxqh.shekou.model.Invcost;
-import cdhxqh.shekou.model.Inventory;
-import cdhxqh.shekou.ui.adapter.InvcostAdapter;
-import cdhxqh.shekou.ui.adapter.InventoryAdapter;
-import cdhxqh.shekou.utils.MessageUtils;
+import cdhxqh.shekou.model.Invbalances;
+import cdhxqh.shekou.model.Matrectrans;
+import cdhxqh.shekou.ui.adapter.InvbalancesAdapter;
+import cdhxqh.shekou.ui.adapter.MatrectransAdapter;
 
 /**
- * 库存成本
+ * 入库
  */
-public class InvCostActivity extends BaseActivity {
-    private static final String TAG = "InvCostActivity";
-    private static final int RESULT_ADD_TOPIC = 100;
+public class MatrectransActivity extends BaseActivity {
+    private static final String TAG = "MatrectransActivity";
 
     /**
      * 返回按钮
@@ -55,11 +49,11 @@ public class InvCostActivity extends BaseActivity {
 
 
     /**
-     * �������*
+     *暂无数据*
      */
     LinearLayout notLinearLayout;
 
-    InvcostAdapter invcostAdapter;
+    MatrectransAdapter matrectransAdapter;
 
     private String itemnum;
     @Override
@@ -85,10 +79,10 @@ public class InvCostActivity extends BaseActivity {
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list_topics);
-        mLayoutManager = new LinearLayoutManager(InvCostActivity.this);
+        mLayoutManager = new LinearLayoutManager(MatrectransActivity.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        invcostAdapter = new InvcostAdapter(InvCostActivity.this);
-        mRecyclerView.setAdapter(invcostAdapter);
+        matrectransAdapter = new MatrectransAdapter(MatrectransActivity.this);
+        mRecyclerView.setAdapter(matrectransAdapter);
         mSwipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
         mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -110,7 +104,7 @@ public class InvCostActivity extends BaseActivity {
     @Override
     protected void initView() {
         backImageView.setOnClickListener(backImageViewOnClickListener);
-        titleTextView.setText(getString(R.string.inventory_cost_text));
+        titleTextView.setText(getString(R.string.matrectrans_title));
 
         mSwipeLayout.setRefreshing(true);
         getItemList(itemnum);
@@ -132,7 +126,7 @@ public class InvCostActivity extends BaseActivity {
      */
 
     private void getItemList(String itemnum) {
-        HttpManager.getDataPagingInfo(InvCostActivity.this, HttpManager.getInvcosturl(1, 20, itemnum), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(MatrectransActivity.this, HttpManager.getMatrectransurl(1, 20, itemnum), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -140,12 +134,12 @@ public class InvCostActivity extends BaseActivity {
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Invcost> items = JsonUtils.parsingInvcost(InvCostActivity.this, results.getResultlist());
+                ArrayList<Matrectrans> items = JsonUtils.parsingMatrectrans(MatrectransActivity.this, results.getResultlist());
                 mSwipeLayout.setRefreshing(false);
                 if (items == null || items.isEmpty()) {
                     notLinearLayout.setVisibility(View.VISIBLE);
                 } else {
-                    invcostAdapter.update(items, true);
+                    matrectransAdapter.update(items, true);
                 }
             }
 

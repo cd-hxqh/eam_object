@@ -61,6 +61,31 @@ public class HttpManager {
     }
 
     /**
+     * 设置库存余量的接口
+     * 根据Itemnum
+     */
+    public static String getInvbalancesurl(int curpage, int showcount,String itemnum) {
+        return "{'appid':'" + Constants.INVBALANCES_APPID + "','objectname':'" + Constants.INVBALANCES_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'"+itemnum+"'}}";
+    }
+
+
+    /**
+     * 设置入库的接口
+     * 根据Itemnum
+     */
+    public static String getMatrectransurl(int curpage, int showcount,String itemnum) {
+        return "{'appid':'" + Constants.MATRECTRANS_APPID + "','objectname':'" + Constants.MATRECTRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'"+itemnum+"'}}";
+    }
+
+    /**
+     * 设置出库的接口
+     * 根据Itemnum
+     */
+    public static String getMatusetransurl(int curpage, int showcount,String itemnum) {
+        return "{'appid':'" + Constants.MATUSETRANS_APPID + "','objectname':'" + Constants.MATUSETRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'"+itemnum+"'}}";
+    }
+
+    /**
      * 使用用户名密码登录
      *
      * @param cxt

@@ -9,41 +9,26 @@ import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Wfassignment;
 
 /**
- * 待办任务详情 *
+ * ����������� *
  */
 public class Wfassig_DetailsActivity extends BaseActivity {
     private static String TAG = "Wfassig_DetailsActivity";
 
-    /**
-     * 返回按钮*
-     */
+
     private ImageView backImageView;
-    /**
-     * 标题*
-     */
+
     private TextView titleTextView;
 
 
-    /**界面属性**/
-    /**
-     * 描述*
-     */
+
     private TextView descriptionText;
-    /**
-     * 过程*
-     */
+
     private TextView processnameText;
-    /**
-     * 任务分配人*
-     */
+
     private TextView assigncodedescText;
-    /**
-     * 分配状态*
-     */
+
     private TextView assignstatusText;
-    /**
-     * 开始日期*
-     */
+
     private TextView startdateText;
 
     /**
@@ -60,9 +45,7 @@ public class Wfassig_DetailsActivity extends BaseActivity {
         initView();
     }
 
-    /**
-     * 获取数据*
-     */
+
     private void geiIntentData() {
         wfassignment = (Wfassignment) getIntent().getParcelableExtra("wfassignment");
     }

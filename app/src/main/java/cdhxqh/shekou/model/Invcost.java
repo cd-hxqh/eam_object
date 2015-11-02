@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 /**
  * Created by apple on 15/10/26.
- *
+ *  库存成本
  */
 public class Invcost extends Entity implements Parcelable {
     private static final String TAG = "Invcost";

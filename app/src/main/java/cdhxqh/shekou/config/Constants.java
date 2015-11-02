@@ -26,21 +26,41 @@ public class Constants {
 
     //待办事项的表名
     public static final String WFASSIGNMENT_NAME="WFASSIGNMENT";
-
-
-    /**库存查询的appid**/
-    public static final String INVENTOR_APPID="UDINVENTOR";
-    //库存的表名
-    public static final String INVENTORY_NAME="INVENTORY";
-
+    /**工单管理**/
     //故障工单查询的appid
     public static final String UDWOCM_APPID="UDWOCM";
     //故障工单表名
     public static final String WORKORDER_NAME = "WORKORDER";
-    //���ɱ���appid
+
+    /**库存查询**/
+    //库存的appid
+    public static final String INVENTOR_APPID="UDINVENTOR";
+    //库存的表名
+    public static final String INVENTORY_NAME="INVENTORY";
+
+    //库存成本appid
     public static final String INVCOST_APPID="UDINVENTOR";
-    //���ɱ��ı���
+    //库存成本表名
     public static final String INVCOST_NAME="INVCOST";
+
+
+    //库存余量appid
+    public static final String INVBALANCES_APPID="UDINVENTOR";
+    //库存余量表名
+    public static final String INVBALANCES_NAME="INVBALANCES";
+
+
+    //入库appid
+    public static final String MATRECTRANS_APPID="UDINVENTOR";
+    //入库表名
+    public static final String MATRECTRANS_NAME="MATRECTRANS";
+
+    //出库appid
+    public static final String MATUSETRANS_APPID="UDINVENTOR";
+    //出库表名
+    public static final String MATUSETRANS_NAME="MATUSETRANS";
+
+
 
 
 
