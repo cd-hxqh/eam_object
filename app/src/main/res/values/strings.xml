@@ -24,6 +24,8 @@
     <string name="title_activity_main">主界面</string>
     <string name="title_activity_worklist">工单列表界面</string>
     <string name="title_activity_workdetails">工单详情界面</string>
+    <string name="title_activity_workaddnew">新建工单</string>
+    <string name="title_activity_workplan">工单计划</string>
 
     <!--网络信息提示-->
     <string name="error_title">错误</string>
@@ -136,9 +138,9 @@
     <string name="matusetrans_enterby_text">输入人:</string>
 
 
-
-    <!--工单列表界面-->
+    <!--工单详情界面-->
     <string name="work_details">工单详情</string>
+    <string name="work_new">新建工单</string>
     <string name="work_num">工单号</string>
     <string name="work_description">工单描述</string>
     <string name="work_description_hint">请输入相关描述</string>
@@ -147,4 +149,36 @@
     <string name="work_glbz">管理班组</string>
     <string name="work_status">状态</string>
     <string name="work_statusdate">状态日期</string>
+    <string name="work_plan_details">作业计划详情</string>
+    <string name="work_jpnum">作业计划</string>
+    <string name="work_isjf">是否按项目计费</string>
+    <string name="work_yfwh">预防性维护</string>
+    <string name="work_reportedby">报告人</string>
+    <string name="work_reportdate">报告日期</string>
+    <string name="work_udisjj">是否紧急维修</string>
+    <string name="work_udisaq">是否安全</string>
+    <string name="work_udisbx">是否保修</string>
+    <string name="work_udiscb">是否抄表</string>
+    <string name="work_plan_info">计划信息</string>
+    <string name="work_sdisplayname">工作执行人</string>
+    <string name="work_udisplayname">承包商负责人</string>
+    <string name="work_targstartdate">计划开始时间</string>
+    <string name="work_targcompdate">计划完成时间</string>
+    <string name="work_real_info">实际信息</string>
+    <string name="work_actstart">实际开始时间</string>
+    <string name="work_actfinish">实际完成时间</string>
+    <string name="work_udtjsj">停机时间</string>
+    <string name="work_udtjsj_hint">请输入时间</string>
+    <string name="work_udremark">备注</string>
+    <string name="work_delete">删除</string>
+    <string name="work_revise">修改</string>
+    <string name="work_work_flow">工作流</string>
+    <string name="work_plan">工单计划</string>
+    <string name="work_task">任务分配</string>
+    <string name="work_report">工单汇报</string>
+
+    <!--工单计划界面-->
+    <string name="work_plan_worker">员工</string>
+    <string name="work_plan_task">任务</string>
+    <string name="work_plan_meterial">物料</string>
 </resources>

@@ -58,6 +58,14 @@
             android:label="@string/title_activity_workdetails" >
         </activity>
         <activity
+            android:name=".ui.activity.Work_AddNewActivity"
+            android:label="@string/title_activity_workaddnew" >
+        </activity>
+        <activity
+            android:name=".ui.activity.Work_PlanActivity"
+            android:label="@string/title_activity_workplan" >
+        </activity>
+        <activity
             android:name=".ui.activity.InventoryActivity"
             android:label="@string/inventoryActivity" >
         </activity>

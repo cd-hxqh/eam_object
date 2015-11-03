@@ -30,7 +30,7 @@
 
             <include layout="@layout/work_udremark"></include>
 
-            <include layout="@layout/work_buttom"></include>
+            <include layout="@layout/work_buttom2"></include>
         </LinearLayout>
     </ScrollView>
 

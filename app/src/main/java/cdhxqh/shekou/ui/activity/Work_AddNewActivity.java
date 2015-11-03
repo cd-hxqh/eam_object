@@ -19,12 +19,14 @@ import cdhxqh.shekou.model.WorkOrder;
 
 /**
  * Created by think on 2015/10/29.
+ * 新建工单
  */
-public class Work_detailsActivity extends BaseActivity {
+public class Work_AddNewActivity extends BaseActivity {
 
     private TextView titlename;
     private ImageView menuImageView;
     private RelativeLayout backlayout;
+    private String worktype;
     private PopupWindow popupWindow;
 
     /**
@@ -67,7 +69,7 @@ public class Work_detailsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_workdetails);
+        setContentView(R.layout.activity_add_new_work);
         geiIntentData();
         findViewById();
         initView();
@@ -77,7 +79,7 @@ public class Work_detailsActivity extends BaseActivity {
      * 获取数据*
      */
     private void geiIntentData() {
-        workOrder = (WorkOrder) getIntent().getParcelableExtra("workOrder");
+        worktype = getIntent().getStringExtra("worktype");
     }
     @Override
     protected void findViewById() {
@@ -113,7 +115,7 @@ public class Work_detailsActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        titlename.setText(getResources().getString(R.string.work_details));
+        titlename.setText(getResources().getString(R.string.work_new));
         backlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,31 +125,6 @@ public class Work_detailsActivity extends BaseActivity {
         menuImageView.setImageResource(R.drawable.ic_drawer);
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
-
-        wonum.setText(workOrder.wonum);
-        description.setText(workOrder.description);
-        glz.setText(workOrder.glz);
-        gls.setText(workOrder.gls);
-        glbz.setText(workOrder.glbz);
-        status.setText(workOrder.status);
-        statusdate.setText(workOrder.statusdate);
-
-        jpnum.setText(workOrder.jpnum);
-        udisjf.setChecked(ischeck(workOrder.udisjf));
-//        yfwh.setText(ischeck(workOrder.udyfwh));
-        reportedby.setText(workOrder.reportedby);
-        reportdate.setText(workOrder.reportdate);
-        udisjj.setChecked(ischeck(workOrder.udisjj));
-        udisaq.setChecked(ischeck(workOrder.udisaq));
-        udisbx.setChecked(ischeck(workOrder.udisbx));
-        udiscb.setChecked(ischeck(workOrder.udiscb));
-        sdisplayname.setText(workOrder.sdisplayname);
-        udisplayname.setText(workOrder.udisplayname);
-        targstartdate.setText(workOrder.targstartdate);
-        targcompdate.setText(workOrder.targcompdate);
-        actstart.setText(workOrder.actstart);
-        actfinish.setText(workOrder.actfinish);
-        udtjsj.setText(workOrder.udtjsj);
     }
 
     /**
@@ -175,7 +152,7 @@ public class Work_detailsActivity extends BaseActivity {
     private void showPopupWindow(View view) {
 
         // 一个自定义的布局，作为显示的内容
-        View contentView = LayoutInflater.from(Work_detailsActivity.this).inflate(
+        View contentView = LayoutInflater.from(Work_AddNewActivity.this).inflate(
                 R.layout.work_popup_window, null);
 
 
@@ -215,7 +192,7 @@ public class Work_detailsActivity extends BaseActivity {
     private View.OnClickListener planOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(Work_detailsActivity.this,Work_PlanActivity.class);
+            Intent intent = new Intent(Work_AddNewActivity.this,Work_PlanActivity.class);
             startActivity(intent);
         }
     };

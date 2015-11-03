@@ -1,6 +1,7 @@
 package cdhxqh.shekou.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -84,7 +85,9 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
         addimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(Work_ListActivity.this,Work_AddNewActivity.class);
+                intent.putExtra("worktype",worktype);
+                startActivity(intent);
             }
         });
         backlayout.setOnClickListener(new View.OnClickListener() {

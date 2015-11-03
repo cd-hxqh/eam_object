@@ -3,5 +3,5 @@
         <item android:drawable="@drawable/select_true" android:state_checked="true"></item>
         <item android:drawable="@drawable/select_true" android:state_selected="true"></item>
         <item android:drawable="@drawable/select_true" android:state_pressed="true"></item>
-        <item android:drawable="@drawable/select_false"></item>
+        <item android:drawable="@drawable/select_false" android:state_selected="false"></item>
 </selector>

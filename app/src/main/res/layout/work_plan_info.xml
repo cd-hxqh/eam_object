@@ -4,10 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
-    <View
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@color/gray" />
+        android:layout_height="@dimen/dimen_40dp"
+        android:background="@color/gray">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:layout_marginBottom="@dimen/dimen_5"
+            android:text="@string/work_plan_info"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            />
+    </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_30dp">
@@ -16,41 +27,22 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimens_10"
             android:layout_centerVertical="true"
-            android:text="@string/work_num"
+            android:text="@string/work_jpnum"
             android:textColor="@color/black"/>
         <TextView
-            android:id="@+id/work_wonum"
+            android:id="@+id/work_jpnum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dimens_10"
+            android:layout_marginRight="35dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/dark_gray"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimens_10"
-            android:layout_marginTop="20dp"
-            android:layout_centerVertical="true"
-            android:text="@string/work_description"
-            android:textColor="@color/black"/>
-        <EditText
-            android:id="@+id/work_description"
-            android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimens_10"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:inputType="textMultiLine"
-            android:background="@color/white"
-            android:hint="@string/work_description_hint"
+            android:src="@drawable/item_more"
             />
     </RelativeLayout>
     <View
@@ -65,15 +57,23 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimens_10"
             android:layout_centerVertical="true"
-            android:text="@string/work_glz"
+            android:text="@string/work_sdisplayname"
             android:textColor="@color/black"/>
         <TextView
-            android:id="@+id/work_glz"
+            android:id="@+id/work_sdisplayname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimens_10"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/item_more"
+            />
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -87,15 +87,23 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimens_10"
             android:layout_centerVertical="true"
-            android:text="@string/work_gls"
+            android:text="@string/work_udisplayname"
             android:textColor="@color/black"/>
         <TextView
-            android:id="@+id/work_gls"
+            android:id="@+id/work_udisplayname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimens_10"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/item_more"
+            />
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -109,15 +117,23 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimens_10"
             android:layout_centerVertical="true"
-            android:text="@string/work_glbz"
+            android:text="@string/work_targstartdate"
             android:textColor="@color/black"/>
         <TextView
-            android:id="@+id/work_glbz"
+            android:id="@+id/work_targstartdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimens_10"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/item_more"
+            />
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
@@ -131,37 +147,23 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimens_10"
             android:layout_centerVertical="true"
-            android:text="@string/work_status"
+            android:text="@string/work_targcompdate"
             android:textColor="@color/black"/>
         <TextView
-            android:id="@+id/work_status"
+            android:id="@+id/work_targcompdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimens_10"
             android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/dark_gray"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_30dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimens_10"
             android:layout_centerVertical="true"
-            android:text="@string/work_statusdate"
-            android:textColor="@color/black"/>
-        <TextView
-            android:id="@+id/work_statusdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dimens_10"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"/>
+            android:src="@drawable/item_more"
+            />
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
