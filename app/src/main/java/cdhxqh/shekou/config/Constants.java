@@ -61,6 +61,18 @@ public class Constants {
     public static final String MATUSETRANS_NAME="MATUSETRANS";
 
 
+    //领料单appid
+    public static final String INVUSE_APPID="UDUSE";
+    //领料单表名
+    public static final String INVUSE_NAME="INVUSE";
+
+
+    //领料单行appid
+    public static final String INVUSELINE_APPID="UDUSE";
+    //领料单行表名
+    public static final String INVUSELINE_NAME="INVUSELINE";
+
+
 
 
 

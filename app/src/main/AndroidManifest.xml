@@ -97,6 +97,18 @@
             android:name=".ui.activity.MatusetransDetailsActivity"
             android:label="MatusetransActivity" >
         </activity>
+        <activity
+            android:name=".ui.activity.InvuseDetailsActivity"
+            android:label="InvuseDetailsActivity" >
+        </activity>
+        <activity
+            android:name=".ui.activity.InvuselineActivity"
+            android:label="InvuselineActivity" >
+        </activity>
+        <activity
+            android:name=".ui.activity.InvuselinrDetailsActivity"
+            android:label="InvuselinrDetailsActivity" >
+        </activity>
     </application>
 
 </manifest>

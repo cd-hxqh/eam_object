@@ -14,6 +14,8 @@ import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Invbalances;
 import cdhxqh.shekou.model.Invcost;
 import cdhxqh.shekou.model.Inventory;
+import cdhxqh.shekou.model.Invuse;
+import cdhxqh.shekou.model.Invuseline;
 import cdhxqh.shekou.model.Matrectrans;
 import cdhxqh.shekou.model.Matusetrans;
 import cdhxqh.shekou.model.Wfassignment;
@@ -385,7 +387,87 @@ public class JsonUtils {
 
     }
 
+    /**
+     * 解析领料单信息
+     */
+    public static ArrayList<Invuse> parsingInvuse(Context ctx, String data) {
+        Log.i(TAG, "Invuse data=" + data);
+        ArrayList<Invuse> list = null;
+        Invuse invuse = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Invuse>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                invuse = new Invuse();
+                jsonObject = jsonArray.getJSONObject(i);
+                invuse.description = jsonObject.getString("DESCRIPTION"); //描述
+                invuse.fromstoreloc = jsonObject.getString("FROMSTORELOC"); //库房
+                invuse.invuseid = jsonObject.getString("INVUSEID"); //唯一ID
+                invuse.invusenum = jsonObject.getString("INVUSENUM"); //领料单号
+                invuse.orgid = jsonObject.getString("ORGID"); //组织标识
+                invuse.siteid = jsonObject.getString("SITEID"); //地点
+                invuse.status = jsonObject.getString("STATUS"); //状态
+                invuse.statusdate = jsonObject.getString("STATUSDATE"); //状态的日期
+                invuse.udisjj = jsonObject.getString("UDISJJ"); //部门
+                invuse.udissueto = jsonObject.getString("UDISSUETO"); //领料人
+                invuse.wonum = jsonObject.getString("WONUM"); //工单
 
+                list.add(invuse);
+            }
+
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+    /**
+     * 解析领料单行信息
+     */
+    public static ArrayList<Invuseline> parsingInvuseline(Context ctx, String data) {
+        Log.i(TAG, "Invuseline data=" + data);
+        ArrayList<Invuseline> list = null;
+        Invuseline invuseline = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Invuseline>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                invuseline = new Invuseline();
+                jsonObject = jsonArray.getJSONObject(i);
+                invuseline.actualdate = jsonObject.getString("ACTUALDATE"); //实际日期
+                invuseline.description = jsonObject.getString("DESCRIPTION"); //描述
+                invuseline.enterby = jsonObject.getString("ENTERBY"); //输入人
+                invuseline.fromstoreloc = jsonObject.getString("FROMSTORELOC"); //库房
+                invuseline.invuselineid = jsonObject.getString("INVUSELINEID"); //唯一Id
+                invuseline.invuselinenum = jsonObject.getString("INVUSELINENUM"); //唯一Id
+                invuseline.invusenum = jsonObject.getString("INVUSENUM"); //领料单号
+                invuseline.issueunit = jsonObject.getString("ISSUEUNIT"); //发放单位
+                invuseline.itemnum = jsonObject.getString("ITEMNUM"); //备件编码
+                invuseline.linecost = jsonObject.getString("LINECOST"); //行成本
+                invuseline.orgid = jsonObject.getString("ORGID"); //组织标识
+                invuseline.quantity = jsonObject.getString("QUANTITY"); //数量
+                invuseline.refwo = jsonObject.getString("REFWO"); //工单
+                invuseline.returnedqty = jsonObject.getString("RETURNEDQTY"); //已退回数量
+                invuseline.siteid = jsonObject.getString("SITEID"); //地点
+                invuseline.tositeid = jsonObject.getString("TOSITEID"); //目标地点
+                invuseline.tostoreloc = jsonObject.getString("TOSTORELOC"); //目标位置
+                invuseline.unitcost = jsonObject.getString("UNITCOST"); //单位成本
+                invuseline.usetype = jsonObject.getString("USETYPE"); //使用情况类型
+                invuseline.wonum = jsonObject.getString("WONUM"); //工单
+
+                list.add(invuseline);
+            }
+
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
 
 
 }

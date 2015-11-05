@@ -14,7 +14,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.manager.AppManager;
 import cdhxqh.shekou.ui.fragment.InventoryFragment;
+import cdhxqh.shekou.ui.fragment.InvuseFragment;
 import cdhxqh.shekou.ui.fragment.NavigationDrawerFragment;
 import cdhxqh.shekou.ui.fragment.WfassigFragment;
 import cdhxqh.shekou.ui.fragment.WorkFragment;
@@ -35,6 +37,8 @@ public class MainActivity extends BaseActivity
     private WorkFragment mNewWorkFragment;
     /**库存查询**/
     private InventoryFragment mNewInventoryFragment;
+    /**领料管理**/
+    private InvuseFragment mNewInvuseFragment;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -111,6 +115,13 @@ public class MainActivity extends BaseActivity
                 fragmentTransaction.replace(R.id.container, mNewInventoryFragment).commit();
                 break;
             case 3://领料管理
+                if (mNewInvuseFragment == null) {
+                    mNewInvuseFragment = new InvuseFragment();
+                    Bundle bundle = new Bundle();
+                    mNewInvuseFragment.setArguments(bundle);
+                }
+                fragmentTransaction.replace(R.id.container, mNewInvuseFragment).commit();
+
                 break;
         }
 
@@ -148,7 +159,7 @@ public class MainActivity extends BaseActivity
             Toast.makeText(this, getResources().getString(R.string.exit_text), Toast.LENGTH_LONG).show();
             exitTime = System.currentTimeMillis();
         } else {
-            finish();
+            AppManager.AppExit(MainActivity.this);
         }
     }
 

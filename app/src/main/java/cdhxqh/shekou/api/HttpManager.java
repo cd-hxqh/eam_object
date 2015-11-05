@@ -86,6 +86,22 @@ public class HttpManager {
     }
 
     /**
+     * 设置领料单的接口
+     */
+    public static String getInvuseurl(int curpage, int showcount) {
+        return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    }
+
+    /**
+     * 设置领料单行的接口
+     */
+    public static String getInvuselineurl(int curpage, int showcount,String invusenum) {
+        return "{'appid':'" + Constants.INVUSELINE_APPID + "','objectname':'" + Constants.INVUSELINE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'INVUSENUM':'"+invusenum+"'}}";
+    }
+
+
+
+    /**
      * 使用用户名密码登录
      *
      * @param cxt

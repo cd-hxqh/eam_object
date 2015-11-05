@@ -51,10 +51,9 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
-<!-- TODO: Remove or change this placeholder text -->
+    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="exit_text">再按一次退出程序</string>
-
 
 
     <!--工单管理-->
@@ -147,6 +146,9 @@
     <string name="work_glz">管理组</string>
     <string name="work_gls">管理室</string>
     <string name="work_glbz">管理班组</string>
+
+
+    <!--领料管理-->
     <string name="work_status">状态</string>
     <string name="work_statusdate">状态日期</string>
     <string name="work_plan_details">作业计划详情</string>
@@ -181,4 +183,31 @@
     <string name="work_plan_worker">员工</string>
     <string name="work_plan_task">任务</string>
     <string name="work_plan_meterial">物料</string>
+    <string name="invuse_invusenum_text">领料单号:</string>
+    <string name="invuse_description_text">描述:</string>
+    <string name="invuse_udissueto_text">领料人:</string>
+    <string name="invuse_wonum_text">工单:</string>
+    <string name="invuse_status_text">状态:</string>
+    <string name="invuse_statusdate_text">状态日期:</string>
+
+    <!--领料单详情-->
+    <string name="invuse_details_title">领料单详情</string>
+    <string name="invuse_material_button_text">物料清单</string>
+    <string name="invuse_workflow_button_text">审批工作流</string>
+    <string name="invuseline_itemnum_text">备件编码:</string>
+    <string name="invuseline_title_text">物料清单</string>
+    <string name="invuseline_item_num_text">备件:</string>
+    <string name="invuseline_description_text">备件名称:</string>
+    <string name="invuse_quantity_text">数量:</string>
+    <string name="invuseline_linecost_text">单位成本:</string>
+    <string name="invuseline_issueunit_text">发放单位:</string>
+    <string name="invuseline_siteid_text">地点:</string>
+    <string name="invuseline_enterby_text">输入人:</string>
+    <string name="invuseline_details_title">物料详情</string>
+
+
+    <!--弹出框-->
+    <string name="title_alert">提示信息</string>
+    <string name="ok">确定</string>
+    <string name="cancel">取消</string>
 </resources>

@@ -2,6 +2,7 @@ package cdhxqh.shekou.ui.fragment;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -25,9 +26,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.manager.AppManager;
 import cdhxqh.shekou.ui.adapter.DrawerAdapter;
+import cdhxqh.shekou.ui.widget.CustomDialog;
+import cdhxqh.shekou.utils.MessageUtils;
 
 
 /**
@@ -65,6 +70,11 @@ public class NavigationDrawerFragment extends BaseFragment {
     private LinearLayout mProfileLayout;
     private ImageView mUserImgView;
     private TextView mUserTextView;
+
+    /**设置按钮**/
+    private ImageView settingImageView;
+    /**退出按钮**/
+    private ImageView exitImageView;
 
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
@@ -107,6 +117,9 @@ public class NavigationDrawerFragment extends BaseFragment {
         mUserImgView = (ImageView) rootView.findViewById(R.id.img_member);
         mUserTextView = (TextView) rootView.findViewById(R.id.txt_member);
         mDrawerListView = (ListView) rootView.findViewById(R.id.listView);
+
+        exitImageView=(ImageView)rootView.findViewById(R.id.drawer_eixt_id);
+
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -116,8 +129,18 @@ public class NavigationDrawerFragment extends BaseFragment {
         mDrawerListView.setAdapter(new DrawerAdapter(getActivity()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 
+        exitImageView.setOnClickListener(exitOnClickListener);
         return rootView;
     }
+
+    private View.OnClickListener exitOnClickListener=new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            closeDrawer();
+            showAlertDialog();
+        }
+    };
+
 
 
     public boolean isDrawerOpen() {
@@ -172,7 +195,6 @@ public class NavigationDrawerFragment extends BaseFragment {
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                Log.i(TAG,"打开");
                 super.onDrawerOpened(drawerView);
                 if (!isAdded()) {
                     return;
@@ -278,7 +300,6 @@ public class NavigationDrawerFragment extends BaseFragment {
      * 'context', rather than just what's in the current screen.
      */
     private void showGlobalContextActionBar() {
-        Log.i(TAG,"22333444");
         android.support.v7.app.ActionBar actionBar = getActionBarActivity().getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayShowCustomEnabled(false);
@@ -293,4 +314,32 @@ public class NavigationDrawerFragment extends BaseFragment {
          */
         void onNavigationDrawerItemSelected(int position);
     }
+
+
+    /**突出程序**/
+    public void showAlertDialog() {
+
+        CustomDialog.Builder builder = new CustomDialog.Builder(getActivity());
+        builder.setMessage("确定退出程序吗？");
+        builder.setTitle("提示");
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                //设置你的操作事项
+                AppManager.AppExit(getActivity());
+            }
+        });
+
+        builder.setNegativeButton("取消",
+                new android.content.DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+        builder.create().show();
+
+    }
+
+
 }
