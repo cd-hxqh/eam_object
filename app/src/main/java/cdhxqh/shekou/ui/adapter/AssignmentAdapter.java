@@ -1,8 +1,6 @@
 package cdhxqh.shekou.ui.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,17 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cdhxqh.shekou.R;
-import cdhxqh.shekou.model.WorkOrder;
-import cdhxqh.shekou.ui.activity.Work_detailsActivity;
+import cdhxqh.shekou.model.Assignment;
+import cdhxqh.shekou.model.Wplabor;
 
 
 /**
- * Created by think on 2015/8/17.
+ * Created by think on 2015/11/3.
+ * 任务分配
  */
-public class WorkTaskAdapter extends RecyclerView.Adapter<WorkTaskAdapter.ViewHolder> {
+public class AssignmentAdapter extends RecyclerView.Adapter<AssignmentAdapter.ViewHolder> {
     Context mContext;
-    List<WorkOrder>workOrderList = new ArrayList<>();
-    public WorkTaskAdapter(Context context) {
+    List<Assignment>assignmentList = new ArrayList<>();
+    public AssignmentAdapter(Context context) {
         this.mContext = context;
     }
 
@@ -38,26 +37,27 @@ public class WorkTaskAdapter extends RecyclerView.Adapter<WorkTaskAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final WorkOrder workOrder = workOrderList.get(position);
-        holder.itemNumTitle.setText(mContext.getString(R.string.work_number));
-        holder.itemDescTitle.setText(mContext.getString(R.string.work_describe));
-        holder.itemNum.setText(workOrder.wonum);
-        holder.itemDesc.setText(workOrder.description);
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, Work_detailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("workOrder", workOrder);
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
-            }
-        });
+        final Assignment assignment = assignmentList.get(position);
+        holder.itemNumTitle.setText(mContext.getString(R.string.work_plan_task));
+        holder.itemDescTitle.setText(mContext.getString(R.string.work_plan_worker));
+        holder.itemNum.setText(assignment.taskid);
+        holder.itemDesc.setText(assignment.laborcode);
+//        holder.itemDesc.setText(workOrder.description);
+//        holder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(mContext, Work_detailsActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("wpitem", wpitem);
+//                intent.putExtras(bundle);
+//                mContext.startActivity(intent);
+//            }
+//        });
     }
 
     @Override
     public int getItemCount() {
-        return workOrderList.size();
+        return assignmentList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,19 +68,19 @@ public class WorkTaskAdapter extends RecyclerView.Adapter<WorkTaskAdapter.ViewHo
          */
         public CardView cardView;
         /**
-         * 编号名称*
+         * 任务*
          */
         public TextView itemNumTitle;
         /**
-         * 描述名称*
+         * 员工*
          */
         public TextView itemDescTitle;
         /**
-         * 编号*
+         * 任务内容*
          */
         public TextView itemNum;
         /**
-         * 描述*
+         * 员工内容*
          */
         public TextView itemDesc;
 
@@ -97,29 +97,29 @@ public class WorkTaskAdapter extends RecyclerView.Adapter<WorkTaskAdapter.ViewHo
         }
     }
 
-    public void update(ArrayList<WorkOrder> data, boolean merge) {
-        if (merge && workOrderList.size() > 0) {
-            for (int i = 0; i < workOrderList.size(); i++) {
-                WorkOrder workOrder = workOrderList.get(i);
+    public void update(ArrayList<Assignment> data, boolean merge) {
+        if (merge && assignmentList.size() > 0) {
+            for (int i = 0; i < assignmentList.size(); i++) {
+                Assignment wplabor = assignmentList.get(i);
                 boolean exist = false;
                 for (int j = 0; j < data.size(); j++) {
-                    if (data.get(j) == workOrder) {
+                    if (data.get(j) == wplabor) {
                         exist = true;
                         break;
                     }
                 }
                 if (exist) continue;
-                data.add(workOrder);
+                data.add(wplabor);
             }
         }
-        workOrderList = data;
+        assignmentList = data;
         notifyDataSetChanged();
     }
 //
-    public void adddate(ArrayList<WorkOrder> data){
+    public void adddate(ArrayList<Assignment> data){
         if(data.size()>0){
             for(int i = 0;i < data.size();i++){
-                workOrderList.add(data.get(i));
+                assignmentList.add(data.get(i));
             }
         }
         notifyDataSetChanged();

@@ -26,7 +26,6 @@ public class Work_AddNewActivity extends BaseActivity {
     private TextView titlename;
     private ImageView menuImageView;
     private RelativeLayout backlayout;
-    private String worktype;
     private PopupWindow popupWindow;
 
     /**
@@ -42,7 +41,7 @@ public class Work_AddNewActivity extends BaseActivity {
      */
     private LinearLayout reportLinearLayout;
 
-    private WorkOrder workOrder;
+    private WorkOrder workOrder = new WorkOrder();
     private TextView wonum;//工单号
     private EditText description;//工单描述
     private TextView glz;//管理组
@@ -79,7 +78,8 @@ public class Work_AddNewActivity extends BaseActivity {
      * 获取数据*
      */
     private void geiIntentData() {
-        worktype = getIntent().getStringExtra("worktype");
+        String s = getIntent().getExtras().getString("worktype");
+        workOrder.worktype = getIntent().getExtras().getString("worktype");
     }
     @Override
     protected void findViewById() {
@@ -125,6 +125,7 @@ public class Work_AddNewActivity extends BaseActivity {
         menuImageView.setImageResource(R.drawable.ic_drawer);
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
+
     }
 
     /**
@@ -193,6 +194,10 @@ public class Work_AddNewActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(Work_AddNewActivity.this,Work_PlanActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("workOrder", workOrder);
+            intent.putExtras(bundle);
+            startActivity(intent);
             startActivity(intent);
         }
     };
@@ -200,7 +205,12 @@ public class Work_AddNewActivity extends BaseActivity {
     private View.OnClickListener taskOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            Intent intent = new Intent(Work_AddNewActivity.this,AssignmentActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("workOrder", workOrder);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            startActivity(intent);
         }
     };
 

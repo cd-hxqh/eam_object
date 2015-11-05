@@ -37,11 +37,39 @@ public class HttpManager {
     public static String getworkorderUrl(String type,String search,int curpage, int showcount) {
         if(search.equals("")) {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WORKTYPE':'"+type+"'}}";
         }else {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'%"+search+"%'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'%"+search+"%','WORKTYPE':'"+type+"'}}";
         }
+    }
+
+    /**
+     * 设置计划任务接口*
+     */
+    public static String getwoactivityUrl(String type,int curpage, int showcount) {
+        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WOACTIVITY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    }
+
+    /**
+     * 设置计划员工接口*
+     */
+    public static String getwplaborUrl(String type,int curpage, int showcount) {
+        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WPLABOR_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    }
+
+    /**
+     * 设置计划物料接口*
+     */
+    public static String getwpitemUrl(String type,int curpage, int showcount) {
+        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WPITEM_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    }
+
+    /**
+     * 设置任务分配接口*
+     */
+    public static String getassignmentUrl(String type,int curpage, int showcount) {
+        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.ASSIGNMENT_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
     }
 
     /**

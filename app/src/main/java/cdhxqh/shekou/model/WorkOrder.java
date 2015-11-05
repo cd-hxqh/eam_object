@@ -25,7 +25,7 @@ public class WorkOrder extends Entity implements Parcelable {
     public String udiscb;//是否抄表
     public String udisjf;//是否按项目计费
     public String udisjj;//是否紧急维修
-    public String udisplayname;//
+    public String udisplayname;//承包商负责人
     public String udremark;//备注
     public String udtjsj;//停机时间
     public String actstart;//实际开始时间
@@ -34,10 +34,10 @@ public class WorkOrder extends Entity implements Parcelable {
     public String gls;//设备管理室编号
     public String glz;//设备管理组编号
     public String jpnum;//作业计划
-    public String ldispayname;//
+    public String ldispayname;//工作负责人
     public String reportdate;//汇报日期
     public String reportedby;//报告人
-    public String sdisplayname;//
+    public String sdisplayname;//工作执行人
     public String targstartdate;//计划开始时间
     public String targcompdate;//计划完成时间
 

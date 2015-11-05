@@ -1,5 +1,6 @@
 package cdhxqh.shekou.ui.fragment;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +15,7 @@ import cdhxqh.shekou.ui.activity.Work_ListActivity;
 /**
  * 工单的fragment1
  */
-public class WorkFragment extends BaseFragment {
+public class WorkFragment extends Fragment {
 
     private LinearLayout fault_layout,prevent_layout,status_layout,project_layout,
             service_layout,accident_layout,repair_layout;

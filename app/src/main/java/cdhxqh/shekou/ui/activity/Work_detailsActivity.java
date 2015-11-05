@@ -64,6 +64,8 @@ public class Work_detailsActivity extends BaseActivity {
     private TextView actstart;//实际开始时间
     private TextView actfinish;//实际完成时间
     private EditText udtjsj;//停机时间
+    private EditText udremark;//备注
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +111,7 @@ public class Work_detailsActivity extends BaseActivity {
         actstart = (TextView) findViewById(R.id.work_actstart);
         actfinish = (TextView) findViewById(R.id.work_actfinish);
         udtjsj = (EditText) findViewById(R.id.work_udtjsj);
+        udremark = (EditText) findViewById(R.id.work_udremark);
     }
 
     @Override
@@ -148,6 +151,7 @@ public class Work_detailsActivity extends BaseActivity {
         actstart.setText(workOrder.actstart);
         actfinish.setText(workOrder.actfinish);
         udtjsj.setText(workOrder.udtjsj);
+        udremark.setText(workOrder.udremark);
     }
 
     /**
@@ -216,6 +220,9 @@ public class Work_detailsActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
             Intent intent = new Intent(Work_detailsActivity.this,Work_PlanActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("workOrder", workOrder);
+            intent.putExtras(bundle);
             startActivity(intent);
         }
     };
@@ -223,7 +230,11 @@ public class Work_detailsActivity extends BaseActivity {
     private View.OnClickListener taskOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            Intent intent = new Intent(Work_detailsActivity.this,AssignmentActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("workOrder", workOrder);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     };
 

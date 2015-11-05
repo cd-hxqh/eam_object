@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.model.Assignment;
 import cdhxqh.shekou.model.Invbalances;
 import cdhxqh.shekou.model.Invcost;
 import cdhxqh.shekou.model.Inventory;
@@ -19,7 +20,10 @@ import cdhxqh.shekou.model.Invuseline;
 import cdhxqh.shekou.model.Matrectrans;
 import cdhxqh.shekou.model.Matusetrans;
 import cdhxqh.shekou.model.Wfassignment;
+import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
+import cdhxqh.shekou.model.Wpitem;
+import cdhxqh.shekou.model.Wplabor;
 
 /**
  * Json数据解析类
@@ -192,6 +196,145 @@ public class JsonUtils {
                 workOrder.targstartdate = jsonObject.getString("TARGSTARTDATE");//计划开始时间
                 workOrder.targcompdate = jsonObject.getString("TARGCOMPDATE");//计划完成时间
                 list.add(workOrder);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    /**
+     * 解析工单计划任务信息
+     */
+    public static ArrayList<Woactivity> parsingWoactivity(Context ctx, String data) {
+        Log.i(TAG, "Woactivity data=" + data);
+        ArrayList<Woactivity> list = null;
+        Woactivity woactivity = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Woactivity>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                woactivity = new Woactivity();
+                jsonObject = jsonArray.getJSONObject(i);
+                woactivity.taskid = jsonObject.getString("TASKID"); //任务
+                woactivity.description = jsonObject.getString("DESCRIPTION");//描述
+                woactivity.wojo1 = jsonObject.getString("WOJO1");//编号
+                woactivity.wojo2 = jsonObject.getString("WOJO2");//需要安检
+                woactivity.targstartdate = jsonObject.getString("TARGSTARTDATE");//计划开始时间
+                woactivity.targcompdate = jsonObject.getString("TARGCOMPDATE");//计划完成时间
+                woactivity.actstart = jsonObject.getString("ACTSTART");//时间开始时间
+                woactivity.actfinish = jsonObject.getString("ACTFINISH");//实际完成时间
+                woactivity.estdur = jsonObject.getString("ESTDUR");//持续时间
+                list.add(woactivity);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    /**
+     * 解析工单计划员工信息
+     */
+    public static ArrayList<Wplabor> parsingWplabor(Context ctx, String data) {
+        Log.i(TAG, "Wplabor data=" + data);
+        ArrayList<Wplabor> list = null;
+        Wplabor wplabor = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Wplabor>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                wplabor = new Wplabor();
+                jsonObject = jsonArray.getJSONObject(i);
+                wplabor.craft = jsonObject.getString("CRAFT"); //工种
+                wplabor.skilllevel = jsonObject.getString("SKILLLEVEL");//技能级别
+                wplabor.laborcode = jsonObject.getString("LABORCODE");//员工
+                wplabor.vendor = jsonObject.getString("VENDOR");//供应商
+                wplabor.contractnum = jsonObject.getString("CONTRACTNUM");//员工合同
+                wplabor.quantity = jsonObject.getString("QUANTITY");//数量
+                wplabor.laborhrs = jsonObject.getString("LABORHRS");//常规时数
+                wplabor.orgid = jsonObject.getString("ORGID");//组织
+                wplabor.siteid = jsonObject.getString("SITEID");//地点
+                wplabor.wplaborid = jsonObject.getString("WPLABORID");//
+                list.add(wplabor);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    /**
+     * 解析工单计划物料信息
+     */
+    public static ArrayList<Wpitem> parsingWpitem(Context ctx, String data) {
+        Log.i(TAG, "Wpitem data=" + data);
+        ArrayList<Wpitem> list = null;
+        Wpitem wpitem = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Wpitem>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                wpitem = new Wpitem();
+                jsonObject = jsonArray.getJSONObject(i);
+                wpitem.taskid = jsonObject.getString("TASKID"); //任务
+                wpitem.itemnum = jsonObject.getString("ITEMNUM");//项目
+                wpitem.itemqty = jsonObject.getString("ITEMQTY");//项目数量
+                wpitem.orderunit = jsonObject.getString("ORDERUNIT");//订购单位
+                wpitem.unitcost = jsonObject.getString("UNITCOST");//单位成本
+                wpitem.linecost = jsonObject.getString("LINECOST");//行成本
+                wpitem.location = jsonObject.getString("LOCATION");//库房
+                wpitem.storelocsite = jsonObject.getString("STORELOCSITE");//库房地点
+                wpitem.requestnum = jsonObject.getString("REQUESTNUM");//请求
+                wpitem.requiredate = jsonObject.getString("REQUIREDATE");//要求的日期
+                wpitem.orgid = jsonObject.getString("ORGID");//组织标识
+                wpitem.siteid = jsonObject.getString("SITEID");//地点
+                list.add(wpitem);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    /**
+     * 解析任务分配信息
+     */
+    public static ArrayList<Assignment> parsingAssignment(Context ctx, String data) {
+        Log.i(TAG, "Wpitem data=" + data);
+        ArrayList<Assignment> list = null;
+        Assignment assignment = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Assignment>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                assignment = new Assignment();
+                jsonObject = jsonArray.getJSONObject(i);
+                assignment.taskid = jsonObject.getString("TASKID"); //任务
+                assignment.laborcode = jsonObject.getString("LABORCODE");//员工
+                assignment.craftcode = jsonObject.getString("CRAFTCODE");//工种
+                assignment.skilllevel = jsonObject.getString("SKILLLEVEL");//技能级别
+                assignment.contractnum = jsonObject.getString("CONTRACTNUM");//员工合同
+                assignment.vendor = jsonObject.getString("VENDOR");//供应商
+                assignment.scheduledate = jsonObject.getString("SCHEDULEDATE");//调度开始时间
+                assignment.laborhrs = jsonObject.getString("LABORHRS");//时数
+                assignment.status = jsonObject.getString("STATUS");//状态
+                assignment.orgid = jsonObject.getString("ORGID");//组织
+                assignment.siteid = jsonObject.getString("SITEID");//地点
+                assignment.assignmentid = jsonObject.getString("ASSIGNMENTID");//
+                list.add(assignment);
             }
             return list;
         } catch (JSONException e) {

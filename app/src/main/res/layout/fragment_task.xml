@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="5dp"
-    tools:context="cdhxqh.shekou.ui.fragment.TaskFragment">
+    tools:context="cdhxqh.shekou.ui.fragment.WoactivityFragment">
 
     <FrameLayout
         android:layout_width="match_parent"

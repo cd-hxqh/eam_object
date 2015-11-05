@@ -135,6 +135,10 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
                 if (items == null || items.isEmpty()) {
                     nodatalayout.setVisibility(View.VISIBLE);
                 } else {
+                    if(page==1){
+                        workListAdapter = new WorkListAdapter(Work_ListActivity.this);
+                        recyclerView.setAdapter(workListAdapter);
+                    }
                     workListAdapter.adddate(items);
                 }
             }
@@ -179,11 +183,6 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
     @Override
     public void onRefresh() {
         page = 1;
-        workListAdapter = new WorkListAdapter(this);
-        recyclerView.setAdapter(workListAdapter);
-        if(nodatalayout.getVisibility()==View.VISIBLE){
-            nodatalayout.setVisibility(View.GONE);
-        }
         getData(search.getText().toString());
     }
 
