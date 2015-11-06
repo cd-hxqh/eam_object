@@ -13,7 +13,7 @@ import android.widget.TextView;
 import cdhxqh.shekou.R;
 
 /**
- * ×Ô¶¨ÒåDialog
+ * Dialog
  */
 
 public class CustomDialog extends Dialog {

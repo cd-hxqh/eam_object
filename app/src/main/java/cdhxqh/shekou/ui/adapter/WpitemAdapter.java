@@ -15,9 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cdhxqh.shekou.R;
-import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.model.Wpitem;
-import cdhxqh.shekou.ui.activity.Work_detailsActivity;
+import cdhxqh.shekou.ui.activity.WpitemDetailsActivity;
 
 
 /**
@@ -45,16 +44,16 @@ public class WpitemAdapter extends RecyclerView.Adapter<WpitemAdapter.ViewHolder
         holder.itemDescTitle.setText(mContext.getString(R.string.work_plan_desc));
         holder.itemNum.setText(wpitem.itemnum);
 //        holder.itemDesc.setText(workOrder.description);
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(mContext, Work_detailsActivity.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putParcelable("wpitem", wpitem);
-//                intent.putExtras(bundle);
-//                mContext.startActivity(intent);
-//            }
-//        });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, WpitemDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("wpitem", wpitem);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

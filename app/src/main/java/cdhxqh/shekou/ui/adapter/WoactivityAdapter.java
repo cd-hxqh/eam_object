@@ -1,6 +1,8 @@
 package cdhxqh.shekou.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import java.util.List;
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.Wpitem;
+import cdhxqh.shekou.ui.activity.WoactivityDetailsActivity;
 
 
 /**
@@ -42,17 +45,16 @@ public class WoactivityAdapter extends RecyclerView.Adapter<WoactivityAdapter.Vi
         holder.itemDescTitle.setText(mContext.getString(R.string.work_plan_desc));
         holder.itemNum.setText(woactivity.wojo1);
         holder.itemDesc.setText(woactivity.description);
-//        holder.itemDesc.setText(workOrder.description);
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(mContext, Work_detailsActivity.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putParcelable("wpitem", wpitem);
-//                intent.putExtras(bundle);
-//                mContext.startActivity(intent);
-//            }
-//        });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, WoactivityDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("woactivity", woactivity);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

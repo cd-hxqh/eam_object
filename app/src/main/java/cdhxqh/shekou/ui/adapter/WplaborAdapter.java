@@ -1,6 +1,8 @@
 package cdhxqh.shekou.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +17,7 @@ import java.util.List;
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.Wplabor;
+import cdhxqh.shekou.ui.activity.WplaborDetailsActivity;
 
 
 /**
@@ -42,17 +45,16 @@ public class WplaborAdapter extends RecyclerView.Adapter<WplaborAdapter.ViewHold
         holder.itemDescTitle.setText(mContext.getString(R.string.work_plan_laborhrs));
         holder.itemNum.setText(wplabor.laborcode);
         holder.itemDesc.setText(wplabor.laborhrs);
-//        holder.itemDesc.setText(workOrder.description);
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(mContext, Work_detailsActivity.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putParcelable("wpitem", wpitem);
-//                intent.putExtras(bundle);
-//                mContext.startActivity(intent);
-//            }
-//        });
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, WplaborDetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("wplabor", wplabor);
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

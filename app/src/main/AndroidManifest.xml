@@ -66,8 +66,24 @@
             android:label="@string/title_activity_workplan" >
         </activity>
         <activity
+            android:name=".ui.activity.WoactivityDetailsActivity"
+            android:label="@string/title_activity_workplandetails" >
+        </activity>
+        <activity
+            android:name=".ui.activity.WplaborDetailsActivity"
+            android:label="@string/title_activity_workwplabordetails" >
+        </activity>
+        <activity
+            android:name=".ui.activity.WpitemDetailsActivity"
+            android:label="@string/title_activity_workwpitemdetails" >
+        </activity>
+        <activity
             android:name=".ui.activity.AssignmentActivity"
             android:label="@string/title_activity_assignment" >
+        </activity>
+        <activity
+            android:name=".ui.activity.AssignmentDetailsActivity"
+            android:label="@string/title_activity_assignmentdetails" >
         </activity>
         <activity
             android:name=".ui.activity.InventoryActivity"
