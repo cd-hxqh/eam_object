@@ -31,6 +31,7 @@
     <string name="title_activity_workwpitemdetails">物料详情</string>
     <string name="title_activity_assignment">任务分配</string>
     <string name="title_activity_assignmentdetails">分配详情</string>
+    <string name="title_activity_workreport">工单汇报</string>
 
     <!--网络信息提示-->
     <string name="error_title">错误</string>
@@ -241,6 +242,14 @@
     <string name="work_assinment_status">状态</string>
     <string name="work_assinment_orgid">组织</string>
     <string name="work_assinment_siteid">地点</string>
+    
+    <!--工单汇报页面-->
+    <string name="work_report_realinfo">实际情况</string>
+    <string name="work_report_default_report">故障汇报</string>
+    <string name="work_report_woactivity">任务</string>
+    <string name="work_report_wplabor">员工</string>
+    <string name="work_report_wpitem">物料</string>
+
 
     <!--领料单详情-->
     <string name="invuse_details_title">领料单详情</string>

@@ -39,6 +39,8 @@ public class Constants {
     public static final String WPITEM_NAME = "WPITEM";
     //工单任务分配表名
     public static final String ASSIGNMENT_NAME = "ASSIGNMENT";
+    //工单实际员工表名
+    public static final String LABTRANS_NAME = "LABTRANS";
 
     /**库存查询**/
     //库存的appid

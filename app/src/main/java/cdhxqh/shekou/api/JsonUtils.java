@@ -17,6 +17,7 @@ import cdhxqh.shekou.model.Invcost;
 import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Invuseline;
+import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Matrectrans;
 import cdhxqh.shekou.model.Matusetrans;
 import cdhxqh.shekou.model.Wfassignment;
@@ -341,7 +342,48 @@ public class JsonUtils {
             e.printStackTrace();
             return null;
         }
+    }
 
+    /**
+     * 解析实际员工信息
+     */
+    public static ArrayList<Labtrans> parsingLabtrans(Context ctx, String data) {
+        Log.i(TAG, "Labtrans data=" + data);
+        ArrayList<Labtrans> list = null;
+        Labtrans labtrans = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Labtrans>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                labtrans = new Labtrans();
+                jsonObject = jsonArray.getJSONObject(i);
+                labtrans.actualstaskid = jsonObject.getString("ACTUALSTASKID"); //任务
+                labtrans.craft = jsonObject.getString("CRAFT"); //任务
+                labtrans.skilllevel = jsonObject.getString("SKILLLEVEL");//技能级别
+                labtrans.laborcode = jsonObject.getString("LABORCODE");//员工
+                labtrans.startdate = jsonObject.getString("STARTDATE");//工种
+                labtrans.starttime = jsonObject.getString("STARTTIME");//工种
+                labtrans.finishdate = jsonObject.getString("FINISHDATE");//员工合同
+                labtrans.finishtime = jsonObject.getString("FINISHTIME");//供应商
+                labtrans.regularhrs = jsonObject.getString("REGULARHRS");//调度开始时间
+                labtrans.enterby = jsonObject.getString("ENTERBY");//时数
+                labtrans.enterdate = jsonObject.getString("ENTERDATE");//状态
+                labtrans.payrate = jsonObject.getString("PAYRATE");//状态
+                labtrans.linecost = jsonObject.getString("LINECOST");//状态
+                labtrans.assetnum = jsonObject.getString("ASSETNUM");//状态
+                labtrans.transdate = jsonObject.getString("TRANSDATE");//状态
+                labtrans.transtype = jsonObject.getString("TRANSTYPE");//状态
+                labtrans.orgid = jsonObject.getString("ORGID");//组织
+                labtrans.siteid = jsonObject.getString("SITEID");//地点
+                labtrans.labtransid = jsonObject.getString("LABTRANSID");//
+                list.add(labtrans);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**

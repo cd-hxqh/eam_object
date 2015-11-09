@@ -22,7 +22,7 @@ import cdhxqh.shekou.ui.activity.WplaborDetailsActivity;
 
 /**
  * Created by think on 2015/11/3.
- * 员工
+ * 计划员工
  */
 public class WplaborAdapter extends RecyclerView.Adapter<WplaborAdapter.ViewHolder> {
     Context mContext;

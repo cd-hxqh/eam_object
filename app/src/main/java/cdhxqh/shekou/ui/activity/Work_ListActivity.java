@@ -139,7 +139,9 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
                         workListAdapter = new WorkListAdapter(Work_ListActivity.this);
                         recyclerView.setAdapter(workListAdapter);
                     }
-                    workListAdapter.adddate(items);
+                    if(totalPages==page){
+                        workListAdapter.adddate(items);
+                    }
                 }
             }
 

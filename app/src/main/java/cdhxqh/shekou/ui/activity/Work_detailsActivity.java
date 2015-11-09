@@ -241,7 +241,11 @@ public class Work_detailsActivity extends BaseActivity {
     private View.OnClickListener reportOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            Intent intent = new Intent(Work_detailsActivity.this,Work_ReportActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("workOrder", workOrder);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
     };
 }

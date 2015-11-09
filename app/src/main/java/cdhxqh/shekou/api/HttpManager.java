@@ -73,6 +73,13 @@ public class HttpManager {
     }
 
     /**
+     * 设置实际员工接口
+     */
+    public static String getlabtransUrl(String type,int curpage, int showcount){
+        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.LABTRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    }
+
+    /**
      * 设置库存查询的接口
      */
     public static String getInventorurl(int curpage, int showcount) {

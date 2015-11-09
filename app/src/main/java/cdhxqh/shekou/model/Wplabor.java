@@ -11,7 +11,7 @@ import org.json.JSONObject;
  * 计划员工
  */
 public class Wplabor extends Entity implements Parcelable {
-    private static final String TAG = "Wpitem";
+    private static final String TAG = "Wplabor";
     private static final long serialVersionUID = 2015050105L;
 
     public String craft; //工种

@@ -86,6 +86,10 @@
             android:label="@string/title_activity_assignmentdetails" >
         </activity>
         <activity
+            android:name=".ui.activity.Work_ReportActivity"
+            android:label="@string/title_activity_workreport" >
+        </activity>
+        <activity
             android:name=".ui.activity.InventoryActivity"
             android:label="@string/inventoryActivity" >
         </activity>

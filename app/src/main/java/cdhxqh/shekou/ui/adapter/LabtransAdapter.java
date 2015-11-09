@@ -8,8 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,17 +15,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cdhxqh.shekou.R;
-import cdhxqh.shekou.model.WorkOrder;
-import cdhxqh.shekou.ui.activity.Work_detailsActivity;
+import cdhxqh.shekou.model.Labtrans;
+import cdhxqh.shekou.model.Wplabor;
+import cdhxqh.shekou.ui.activity.WplaborDetailsActivity;
 
 
 /**
- * Created by think on 2015/8/17.
+ * Created by think on 2015/11/3.
+ * 实际员工
  */
-public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHolder> {
+public class LabtransAdapter extends RecyclerView.Adapter<LabtransAdapter.ViewHolder> {
     Context mContext;
-    List<WorkOrder>workOrderList = new ArrayList<>();
-    public WorkListAdapter(Context context) {
+    List<Labtrans>labtransList = new ArrayList<>();
+    public LabtransAdapter(Context context) {
         this.mContext = context;
     }
 
@@ -40,17 +40,17 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final WorkOrder workOrder = workOrderList.get(position);
-        holder.itemNumTitle.setText(mContext.getString(R.string.work_number));
-        holder.itemDescTitle.setText(mContext.getString(R.string.work_describe));
-        holder.itemNum.setText(workOrder.wonum);
-        holder.itemDesc.setText(workOrder.description);
+        final Labtrans labtrans = labtransList.get(position);
+        holder.itemNumTitle.setText(mContext.getString(R.string.work_plan_worker));
+        holder.itemDescTitle.setText(mContext.getString(R.string.work_plan_laborhrs));
+        holder.itemNum.setText(labtrans.laborcode);
+        holder.itemDesc.setText(labtrans.regularhrs);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, Work_detailsActivity.class);
+                Intent intent = new Intent(mContext, WplaborDetailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("workOrder", workOrder);
+                bundle.putParcelable("labtrans", labtrans);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
@@ -59,7 +59,7 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return workOrderList.size();
+        return labtransList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -70,19 +70,19 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
          */
         public CardView cardView;
         /**
-         * 编号名称*
+         * 员工*
          */
         public TextView itemNumTitle;
         /**
-         * 描述名称*
+         * 常规时数*
          */
         public TextView itemDescTitle;
         /**
-         * 编号*
+         * 员工内容*
          */
         public TextView itemNum;
         /**
-         * 描述*
+         * 时数内容*
          */
         public TextView itemDesc;
 
@@ -99,31 +99,29 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
         }
     }
 
-    public void update(ArrayList<WorkOrder> data, boolean merge) {
-        if (merge && workOrderList.size() > 0) {
-            for (int i = 0; i < workOrderList.size(); i++) {
-                WorkOrder workOrder = workOrderList.get(i);
+    public void update(ArrayList<Labtrans> data, boolean merge) {
+        if (merge && labtransList.size() > 0) {
+            for (int i = 0; i < labtransList.size(); i++) {
+                Labtrans labtrans = labtransList.get(i);
                 boolean exist = false;
                 for (int j = 0; j < data.size(); j++) {
-                    if (data.get(j) == workOrder) {
+                    if (data.get(j) == labtrans) {
                         exist = true;
                         break;
                     }
                 }
                 if (exist) continue;
-                data.add(workOrder);
+                data.add(labtrans);
             }
         }
-        workOrderList = data;
+        labtransList = data;
         notifyDataSetChanged();
     }
 //
-    public void adddate(ArrayList<WorkOrder> data){
+    public void adddate(ArrayList<Labtrans> data){
         if(data.size()>0){
             for(int i = 0;i < data.size();i++){
-                if(!workOrderList.contains(data.get(i))){
-                    workOrderList.add(data.get(i));
-                }
+                labtransList.add(data.get(i));
             }
         }
         notifyDataSetChanged();
