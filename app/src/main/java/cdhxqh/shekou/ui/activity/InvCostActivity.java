@@ -1,18 +1,12 @@
 package cdhxqh.shekou.ui.activity;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,15 +17,13 @@ import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.model.Invcost;
-import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.ui.adapter.InvcostAdapter;
-import cdhxqh.shekou.ui.adapter.InventoryAdapter;
-import cdhxqh.shekou.utils.MessageUtils;
+import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 
 /**
  * 库存成本
  */
-public class InvCostActivity extends BaseActivity {
+public class InvCostActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     private static final String TAG = "InvCostActivity";
     private static final int RESULT_ADD_TOPIC = 100;
 
@@ -55,13 +47,18 @@ public class InvCostActivity extends BaseActivity {
 
 
     /**
-     * �������*
+     * 暂无数据
      */
     LinearLayout notLinearLayout;
 
     InvcostAdapter invcostAdapter;
 
+    private int page = 1;
+
     private String itemnum;
+
+    private ArrayList<Invcost> items = new ArrayList<Invcost>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,10 +68,12 @@ public class InvCostActivity extends BaseActivity {
         initView();
     }
 
-    /**获取上个界面的数据**/
+    /**
+     * 获取上个界面的数据*
+     */
     private void getInitData() {
-        itemnum=getIntent().getExtras().getString("itemnum");
-        Log.i(TAG,"itemnum="+itemnum);
+        itemnum = getIntent().getExtras().getString("itemnum");
+        Log.i(TAG, "itemnum=" + itemnum);
     }
 
     @Override
@@ -89,22 +88,20 @@ public class InvCostActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         invcostAdapter = new InvcostAdapter(InvCostActivity.this);
         mRecyclerView.setAdapter(invcostAdapter);
-        mSwipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
-        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getItemList(itemnum);
-            }
-        });
-        mSwipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        mSwipeLayout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        mSwipeLayout.setProgressViewOffset(false, 0,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
 
         notLinearLayout = (LinearLayout) findViewById(R.id.have_not_data_id);
+
+
+        mSwipeLayout.setOnRefreshListener(this);
+        mSwipeLayout.setOnLoadListener(this);
+        mSwipeLayout.setRefreshing(false);
+
     }
 
     @Override
@@ -117,7 +114,6 @@ public class InvCostActivity extends BaseActivity {
     }
 
 
-
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -128,11 +124,10 @@ public class InvCostActivity extends BaseActivity {
     /**
      * 获取库存成本
      * --分页
-     *
      */
 
     private void getItemList(String itemnum) {
-        HttpManager.getDataPagingInfo(InvCostActivity.this, HttpManager.getInvcosturl(1, 20, itemnum), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(InvCostActivity.this, HttpManager.getInvcosturl(page, 20, itemnum), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -140,7 +135,14 @@ public class InvCostActivity extends BaseActivity {
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Invcost> items = JsonUtils.parsingInvcost(InvCostActivity.this, results.getResultlist());
+                ArrayList<Invcost> item = JsonUtils.parsingInvcost(InvCostActivity.this, results.getResultlist());
+                if (item != null || item.size() != 0) {
+                    for (int i = 0; i < item.size(); i++) {
+                        items.add(item.get(i));
+                    }
+                }
+
+                mSwipeLayout.setLoading(false);
                 mSwipeLayout.setRefreshing(false);
                 if (items == null || items.isEmpty()) {
                     notLinearLayout.setVisibility(View.VISIBLE);
@@ -152,10 +154,21 @@ public class InvCostActivity extends BaseActivity {
             @Override
             public void onFailure(String error) {
                 mSwipeLayout.setRefreshing(false);
+                mSwipeLayout.setLoading(false);
                 notLinearLayout.setVisibility(View.VISIBLE);
             }
         });
     }
 
 
+    @Override
+    public void onLoad() {
+        page++;
+        getItemList(itemnum);
+    }
+
+    @Override
+    public void onRefresh() {
+        mSwipeLayout.setRefreshing(false);
+    }
 }

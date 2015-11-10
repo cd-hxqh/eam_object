@@ -1,14 +1,10 @@
 package cdhxqh.shekou.ui.fragment;
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +19,13 @@ import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.model.Wfassignment;
 import cdhxqh.shekou.ui.adapter.WfassigAdapter;
+import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 
 
 /**
  * 待办事项列表*
  */
-public class WfassigFragment extends Fragment {
+public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     private static final String TAG = "WfassigFragment";
     private static final int RESULT_ADD_TOPIC = 100;
     /**
@@ -47,6 +44,10 @@ public class WfassigFragment extends Fragment {
     LinearLayout notLinearLayout;
 
     WfassigAdapter wfassigAdapter;
+
+    private int page = 1;
+
+    ArrayList<Wfassignment> items = new ArrayList<Wfassignment>();
 
 
     @Override
@@ -76,21 +77,17 @@ public class WfassigFragment extends Fragment {
         wfassigAdapter = new WfassigAdapter(getActivity());
         mRecyclerView.setAdapter(wfassigAdapter);
         mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
-        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getItemList();
-            }
-        });
-        mSwipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+        mSwipeLayout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        mSwipeLayout.setProgressViewOffset(false, 0,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
 
         notLinearLayout = (LinearLayout) view.findViewById(R.id.have_not_data_id);
+
+        mSwipeLayout.setOnRefreshListener(this);
+        mSwipeLayout.setOnLoadListener(this);
+        mSwipeLayout.setRefreshing(false);
     }
 
     @Override
@@ -105,11 +102,10 @@ public class WfassigFragment extends Fragment {
     /**
      * 获取待办事项信息*
      * --分页
-     *
      */
 
     private void getItemList() {
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwfassignmentUrl(1, 20), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwfassignmentUrl(page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -117,12 +113,19 @@ public class WfassigFragment extends Fragment {
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Wfassignment> items = JsonUtils.parsingWfassignment(getActivity(), results.getResultlist());
+                ArrayList<Wfassignment> item = JsonUtils.parsingWfassignment(getActivity(), results.getResultlist());
+                if (item != null || item.size() != 0) {
+                    for (int i = 0; i < item.size(); i++) {
+                        items.add(item.get(i));
+                    }
+                }
+                mSwipeLayout.setLoading(false);
                 mSwipeLayout.setRefreshing(false);
                 if (items == null || items.isEmpty()) {
                     notLinearLayout.setVisibility(View.VISIBLE);
                 } else {
                     wfassigAdapter.update(items, true);
+                    wfassigAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -135,4 +138,14 @@ public class WfassigFragment extends Fragment {
     }
 
 
+    @Override
+    public void onLoad() {
+        page++;
+        getItemList();
+    }
+
+    @Override
+    public void onRefresh() {
+        mSwipeLayout.setRefreshing(false);
+    }
 }

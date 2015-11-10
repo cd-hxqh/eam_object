@@ -1,12 +1,9 @@
 package cdhxqh.shekou.ui.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,16 +16,15 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
-import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.model.Invuse;
-import cdhxqh.shekou.ui.adapter.InventoryAdapter;
 import cdhxqh.shekou.ui.adapter.InvuseAdapter;
+import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 
 
 /**
  * 领料单查询列表*
  */
-public class InvuseFragment extends Fragment {
+public class InvuseFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener{
     private static final String TAG = "InvuseFragment";
     /**
      * RecyclerView*
@@ -47,6 +43,11 @@ public class InvuseFragment extends Fragment {
 
     InvuseAdapter invuseAdapter;
 
+
+    private int page = 1;
+
+
+    private  ArrayList<Invuse> items=new ArrayList<Invuse>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -81,15 +82,17 @@ public class InvuseFragment extends Fragment {
                 getItemList();
             }
         });
-        mSwipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+        mSwipeLayout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        mSwipeLayout.setProgressViewOffset(false, 0,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
 
         notLinearLayout = (LinearLayout) view.findViewById(R.id.have_not_data_id);
+
+        mSwipeLayout.setOnRefreshListener(this);
+        mSwipeLayout.setOnLoadListener(this);
+        mSwipeLayout.setRefreshing(false);
     }
 
     @Override
@@ -108,7 +111,7 @@ public class InvuseFragment extends Fragment {
      */
 
     private void getItemList() {
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getInvuseurl(1, 20), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getInvuseurl(page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -116,7 +119,15 @@ public class InvuseFragment extends Fragment {
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Invuse> items = JsonUtils.parsingInvuse(getActivity(), results.getResultlist());
+                ArrayList<Invuse> item = JsonUtils.parsingInvuse(getActivity(), results.getResultlist());
+
+                if(item!=null||item.size()!=0){
+                    for (int i=0;i<item.size();i++) {
+                        items.add(item.get(i));
+                    }
+                }
+
+                mSwipeLayout.setLoading(false);
                 mSwipeLayout.setRefreshing(false);
                 if (items == null || items.isEmpty()) {
                     notLinearLayout.setVisibility(View.VISIBLE);
@@ -134,4 +145,14 @@ public class InvuseFragment extends Fragment {
     }
 
 
+    @Override
+    public void onLoad() {
+        page++;
+        getItemList();
+    }
+
+    @Override
+    public void onRefresh() {
+        mSwipeLayout.setRefreshing(false);
+    }
 }

@@ -138,8 +138,8 @@
     <orderEntry type="library" exported="" name="play-services-location-7.3.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-analytics-7.3.0" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-21.0.3" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-22.1.1" level="project" />
     <orderEntry type="library" exported="" name="android-async-http-1.4.7" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-22.1.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-appinvite-7.3.0" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-22.1.1" level="project" />
     <orderEntry type="library" exported="" name="play-services-nearby-7.3.0" level="project" />

@@ -1,7 +1,6 @@
 package cdhxqh.shekou.ui.activity;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,15 +17,14 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
-import cdhxqh.shekou.model.Invbalances;
 import cdhxqh.shekou.model.Matrectrans;
-import cdhxqh.shekou.ui.adapter.InvbalancesAdapter;
 import cdhxqh.shekou.ui.adapter.MatrectransAdapter;
+import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 
 /**
  * 入库
  */
-public class MatrectransActivity extends BaseActivity {
+public class MatrectransActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener{
     private static final String TAG = "MatrectransActivity";
 
     /**
@@ -56,6 +54,10 @@ public class MatrectransActivity extends BaseActivity {
     MatrectransAdapter matrectransAdapter;
 
     private String itemnum;
+
+    private int page = 1;
+
+    private ArrayList<Matrectrans> items=new ArrayList<Matrectrans>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,21 +86,18 @@ public class MatrectransActivity extends BaseActivity {
         matrectransAdapter = new MatrectransAdapter(MatrectransActivity.this);
         mRecyclerView.setAdapter(matrectransAdapter);
         mSwipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
-        mSwipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getItemList(itemnum);
-            }
-        });
-        mSwipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+        mSwipeLayout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        mSwipeLayout.setProgressViewOffset(false, 0,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
 
         notLinearLayout = (LinearLayout) findViewById(R.id.have_not_data_id);
+
+
+        mSwipeLayout.setOnRefreshListener(this);
+        mSwipeLayout.setOnLoadListener(this);
+        mSwipeLayout.setRefreshing(false);
     }
 
     @Override
@@ -134,7 +133,15 @@ public class MatrectransActivity extends BaseActivity {
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Matrectrans> items = JsonUtils.parsingMatrectrans(MatrectransActivity.this, results.getResultlist());
+                ArrayList<Matrectrans> item = JsonUtils.parsingMatrectrans(MatrectransActivity.this, results.getResultlist());
+
+                if (item != null || item.size() != 0) {
+                    for (int i = 0; i < item.size(); i++) {
+                        items.add(item.get(i));
+                    }
+                }
+
+                mSwipeLayout.setLoading(false);
                 mSwipeLayout.setRefreshing(false);
                 if (items == null || items.isEmpty()) {
                     notLinearLayout.setVisibility(View.VISIBLE);
@@ -152,4 +159,14 @@ public class MatrectransActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onLoad() {
+        page++;
+        getItemList(itemnum);
+    }
+
+    @Override
+    public void onRefresh() {
+        mSwipeLayout.setRefreshing(false);
+    }
 }

@@ -1,7 +1,6 @@
 package cdhxqh.shekou.ui.activity;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -19,14 +18,13 @@ import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.model.Invbalances;
-import cdhxqh.shekou.model.Invcost;
 import cdhxqh.shekou.ui.adapter.InvbalancesAdapter;
-import cdhxqh.shekou.ui.adapter.InvcostAdapter;
+import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 
 /**
  * 库存余量
  */
-public class InvbalancesActivity extends BaseActivity {
+public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.ui.widget.SwipeRefreshLayout.OnRefreshListener, cdhxqh.shekou.ui.widget.SwipeRefreshLayout.OnLoadListener{
     private static final String TAG = "InvbalancesActivity";
 
     /**
@@ -56,6 +54,10 @@ public class InvbalancesActivity extends BaseActivity {
     InvbalancesAdapter invbalancesAdapter;
 
     private String itemnum;
+
+    private int page = 1;
+
+    private  ArrayList<Invbalances> items=new ArrayList<Invbalances>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,15 +92,17 @@ public class InvbalancesActivity extends BaseActivity {
                 getItemList(itemnum);
             }
         });
-        mSwipeLayout.setColorScheme(android.R.color.holo_blue_bright,
+        mSwipeLayout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        mSwipeLayout.setProgressViewOffset(false, 0,
-                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
 
 
         notLinearLayout = (LinearLayout) findViewById(R.id.have_not_data_id);
+
+        mSwipeLayout.setOnRefreshListener(this);
+        mSwipeLayout.setOnLoadListener(this);
+        mSwipeLayout.setRefreshing(false);
     }
 
     @Override
@@ -134,7 +138,15 @@ public class InvbalancesActivity extends BaseActivity {
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Invbalances> items = JsonUtils.parsingInvbalances(InvbalancesActivity.this, results.getResultlist());
+                ArrayList<Invbalances> item = JsonUtils.parsingInvbalances(InvbalancesActivity.this, results.getResultlist());
+
+                if (item != null || item.size() != 0) {
+                    for (int i = 0; i < item.size(); i++) {
+                        items.add(item.get(i));
+                    }
+                }
+
+                mSwipeLayout.setLoading(false);
                 mSwipeLayout.setRefreshing(false);
                 if (items == null || items.isEmpty()) {
                     notLinearLayout.setVisibility(View.VISIBLE);
@@ -152,4 +164,14 @@ public class InvbalancesActivity extends BaseActivity {
     }
 
 
+    @Override
+    public void onLoad() {
+        page++;
+        getItemList(itemnum);
+    }
+
+    @Override
+    public void onRefresh() {
+        mSwipeLayout.setRefreshing(false);
+    }
 }
