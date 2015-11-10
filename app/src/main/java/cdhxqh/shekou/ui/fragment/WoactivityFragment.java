@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
  * 工单任务的fragment
  */
 @SuppressLint("ValidFragment")
-public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLayout.OnLoadListener{
+public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     private static String TAG = "WoactivityFragment";
 
     LinearLayoutManager layoutManager;
@@ -41,12 +42,14 @@ public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.O
     private SwipeRefreshLayout refresh_layout = null;
     private int page = 1;
     private WorkOrder workOrder;
+
     public WoactivityFragment() {
     }
 
     public WoactivityFragment(WorkOrder workOrder) {
         this.workOrder = workOrder;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +65,7 @@ public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.O
         initView();
         return view;
     }
+
     /**
      * 初始化界面组件*
      */
@@ -71,7 +75,7 @@ public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.O
         nodatalayout = (LinearLayout) view.findViewById(R.id.have_not_data_id);
     }
 
-    private void initView(){
+    private void initView() {
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);
@@ -91,7 +95,7 @@ public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.O
         getdata();
     }
 
-    private void getdata(){
+    private void getdata() {
         HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwoactivityUrl(workOrder.worktype, page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
@@ -99,8 +103,11 @@ public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.O
             }
 
             @Override
-            public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Woactivity> woactivities = JsonUtils.parsingWoactivity(getActivity(), results.getResultlist());
+            public void onSuccess(Results results, int currentPage, int showcount) {
+                ArrayList<Woactivity> woactivities = null;
+                if (currentPage == page) {
+                    woactivities = JsonUtils.parsingWoactivity(getActivity(), results.getResultlist());
+                }
                 addListData(woactivities);
                 refresh_layout.setRefreshing(false);
                 refresh_layout.setLoading(false);
@@ -108,24 +115,27 @@ public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.O
 
             @Override
             public void onFailure(String error) {
+                if (page == 1) {
+                    nodatalayout.setVisibility(View.VISIBLE);
+                }
                 refresh_layout.setRefreshing(false);
-                nodatalayout.setVisibility(View.VISIBLE);
+                refresh_layout.setLoading(false);
             }
         });
     }
 
-    private void addListData(ArrayList<Woactivity> list){
-        if(nodatalayout.getVisibility()==View.VISIBLE){
+    private void addListData(ArrayList<Woactivity> list) {
+        if (nodatalayout.getVisibility() == View.VISIBLE) {
             nodatalayout.setVisibility(View.GONE);
         }
-        if(page==1&&woactivityAdapter.getItemCount()!=0){
+        if (page == 1 && woactivityAdapter.getItemCount() != 0) {
             woactivityAdapter = new WoactivityAdapter(getActivity());
             recyclerView.setAdapter(woactivityAdapter);
         }
-        if(list==null||list.size()==0){
+        if ((list == null || list.size() == 0) && page == 1) {
             nodatalayout.setVisibility(View.VISIBLE);
-        }else {
-            woactivityAdapter.update(list,true);
+        } else {
+            woactivityAdapter.adddate(list);
         }
     }
 
@@ -137,7 +147,7 @@ public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.O
     }
 
     @Override
-    public void onLoad(){
+    public void onLoad() {
         page++;
         getdata();
     }

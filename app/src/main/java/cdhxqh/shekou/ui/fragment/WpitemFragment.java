@@ -29,7 +29,7 @@ import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
  * 工单员工的fragment
  */
 @SuppressLint("ValidFragment")
-public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLayout.OnLoadListener{
+public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     private static String TAG = "WpitemFragment";
 
     LinearLayoutManager layoutManager;
@@ -39,11 +39,14 @@ public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRef
     private SwipeRefreshLayout refresh_layout = null;
     private int page = 1;
     private WorkOrder workOrder;
+
     public WpitemFragment() {
     }
+
     public WpitemFragment(WorkOrder workOrder) {
         this.workOrder = workOrder;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +62,7 @@ public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRef
         initView();
         return view;
     }
+
     /**
      * 初始化界面组件*
      */
@@ -68,7 +72,7 @@ public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRef
         nodatalayout = (LinearLayout) view.findViewById(R.id.have_not_data_id);
     }
 
-    private void initView(){
+    private void initView() {
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);
@@ -87,16 +91,19 @@ public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRef
         getdata();
     }
 
-    private void getdata(){
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwpitemUrl(workOrder.worktype,page, 20), new HttpRequestHandler<Results>() {
+    private void getdata() {
+        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwpitemUrl(workOrder.worktype, page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
             }
 
             @Override
-            public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Wpitem> items = JsonUtils.parsingWpitem(getActivity(), results.getResultlist());
+            public void onSuccess(Results results, int currentPage, int showcount) {
+                ArrayList<Wpitem> items = null;
+                if (currentPage == page) {
+                    items = JsonUtils.parsingWpitem(getActivity(), results.getResultlist());
+                }
                 addListData(items);
                 refresh_layout.setRefreshing(false);
                 refresh_layout.setLoading(false);
@@ -104,24 +111,27 @@ public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
             @Override
             public void onFailure(String error) {
+                if (page == 1) {
+                    nodatalayout.setVisibility(View.VISIBLE);
+                }
                 refresh_layout.setRefreshing(false);
-                nodatalayout.setVisibility(View.VISIBLE);
+                refresh_layout.setLoading(false);
             }
         });
     }
 
-    private void addListData(ArrayList<Wpitem> list){
-        if(nodatalayout.getVisibility()==View.VISIBLE){
+    private void addListData(ArrayList<Wpitem> list) {
+        if (nodatalayout.getVisibility() == View.VISIBLE) {
             nodatalayout.setVisibility(View.GONE);
         }
-        if(page==1&&wpitemAdapter.getItemCount()!=0){
+        if (page == 1 && wpitemAdapter.getItemCount() != 0) {
             wpitemAdapter = new WpitemAdapter(getActivity());
             recyclerView.setAdapter(wpitemAdapter);
         }
-        if(list==null||list.size()==0){
+        if ((list == null || list.size() == 0) && page == 1) {
             nodatalayout.setVisibility(View.VISIBLE);
-        }else {
-            wpitemAdapter.update(list,true);
+        } else {
+            wpitemAdapter.adddate(list);
         }
     }
 
@@ -133,7 +143,7 @@ public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRef
     }
 
     @Override
-    public void onLoad(){
+    public void onLoad() {
         page++;
         getdata();
     }

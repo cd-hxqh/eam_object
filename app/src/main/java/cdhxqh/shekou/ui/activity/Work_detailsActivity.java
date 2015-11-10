@@ -146,10 +146,10 @@ public class Work_detailsActivity extends BaseActivity {
         udiscb.setChecked(ischeck(workOrder.udiscb));
         sdisplayname.setText(workOrder.sdisplayname);
         udisplayname.setText(workOrder.udisplayname);
-        targstartdate.setText(workOrder.targstartdate);
-        targcompdate.setText(workOrder.targcompdate);
-        actstart.setText(workOrder.actstart);
-        actfinish.setText(workOrder.actfinish);
+        targstartdate.setText(workOrder.targstartdate.equals("null")?"":workOrder.targstartdate);
+        targcompdate.setText(workOrder.targcompdate.equals("null")?"":workOrder.targcompdate);
+        actstart.setText(workOrder.actstart.equals("null")?"":workOrder.actstart);
+        actfinish.setText(workOrder.actfinish.equals("null")?"":workOrder.actfinish);
         udtjsj.setText(workOrder.udtjsj);
         udremark.setText(workOrder.udremark);
     }
@@ -224,6 +224,7 @@ public class Work_detailsActivity extends BaseActivity {
             bundle.putParcelable("workOrder", workOrder);
             intent.putExtras(bundle);
             startActivity(intent);
+            popupWindow.dismiss();
         }
     };
 
@@ -235,6 +236,7 @@ public class Work_detailsActivity extends BaseActivity {
             bundle.putParcelable("workOrder", workOrder);
             intent.putExtras(bundle);
             startActivity(intent);
+            popupWindow.dismiss();
         }
     };
 
@@ -246,6 +248,7 @@ public class Work_detailsActivity extends BaseActivity {
             bundle.putParcelable("workOrder", workOrder);
             intent.putExtras(bundle);
             startActivity(intent);
+            popupWindow.dismiss();
         }
     };
 }

@@ -107,6 +107,9 @@ public class AssignmentActivity extends BaseActivity implements SwipeRefreshLayo
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
+                if (nodatalayout.getVisibility() == View.VISIBLE) {
+                    nodatalayout.setVisibility(View.GONE);
+                }
                 ArrayList<Assignment> items = JsonUtils.parsingAssignment(AssignmentActivity.this, results.getResultlist());
                 refresh_layout.setRefreshing(false);
                 refresh_layout.setLoading(false);
@@ -123,8 +126,11 @@ public class AssignmentActivity extends BaseActivity implements SwipeRefreshLayo
 
             @Override
             public void onFailure(String error) {
+                if (page == 1) {
+                    nodatalayout.setVisibility(View.VISIBLE);
+                }
                 refresh_layout.setRefreshing(false);
-                nodatalayout.setVisibility(View.VISIBLE);
+                refresh_layout.setLoading(false);
             }
         });
     }

@@ -90,6 +90,10 @@
             android:label="@string/title_activity_workreport" >
         </activity>
         <activity
+            android:name=".ui.activity.LabtransDetailsActivity"
+            android:label="@string/title_activity_labtransdetails" >
+        </activity>
+        <activity
             android:name=".ui.activity.InventoryActivity"
             android:label="@string/inventoryActivity" >
         </activity>

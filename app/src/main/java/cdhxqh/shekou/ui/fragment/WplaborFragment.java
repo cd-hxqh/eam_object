@@ -28,7 +28,7 @@ import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
  * 工单员工的fragment
  */
 @SuppressLint("ValidFragment")
-public class WplaborFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLayout.OnLoadListener{
+public class WplaborFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     private static String TAG = "WplaborFragment";
 
     LinearLayoutManager layoutManager;
@@ -38,8 +38,10 @@ public class WplaborFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private SwipeRefreshLayout refresh_layout = null;
     private int page = 1;
     private WorkOrder workOrder;
+
     public WplaborFragment() {
     }
+
     public WplaborFragment(WorkOrder workOrder) {
         this.workOrder = workOrder;
     }
@@ -59,6 +61,7 @@ public class WplaborFragment extends Fragment implements SwipeRefreshLayout.OnRe
         initView();
         return view;
     }
+
     /**
      * 初始化界面组件*
      */
@@ -68,7 +71,7 @@ public class WplaborFragment extends Fragment implements SwipeRefreshLayout.OnRe
         nodatalayout = (LinearLayout) view.findViewById(R.id.have_not_data_id);
     }
 
-    private void initView(){
+    private void initView() {
         layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);
@@ -88,7 +91,7 @@ public class WplaborFragment extends Fragment implements SwipeRefreshLayout.OnRe
         getdata();
     }
 
-    private void getdata(){
+    private void getdata() {
         HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwplaborUrl(workOrder.worktype, page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
@@ -96,8 +99,11 @@ public class WplaborFragment extends Fragment implements SwipeRefreshLayout.OnRe
             }
 
             @Override
-            public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Wplabor> wplabors = JsonUtils.parsingWplabor(getActivity(), results.getResultlist());
+            public void onSuccess(Results results, int currentPage, int showcount) {
+                ArrayList<Wplabor> wplabors = null;
+                if (currentPage == page) {
+                    wplabors = JsonUtils.parsingWplabor(getActivity(), results.getResultlist());
+                }
                 addListData(wplabors);
                 refresh_layout.setRefreshing(false);
                 refresh_layout.setLoading(false);
@@ -105,24 +111,27 @@ public class WplaborFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             @Override
             public void onFailure(String error) {
+                if (page == 1) {
+                    nodatalayout.setVisibility(View.VISIBLE);
+                }
                 refresh_layout.setRefreshing(false);
-                nodatalayout.setVisibility(View.VISIBLE);
+                refresh_layout.setLoading(false);
             }
         });
     }
 
-    private void addListData(ArrayList<Wplabor> list){
-        if(nodatalayout.getVisibility()==View.VISIBLE){
+    private void addListData(ArrayList<Wplabor> list) {
+        if (nodatalayout.getVisibility() == View.VISIBLE) {
             nodatalayout.setVisibility(View.GONE);
         }
-        if(page==1&&wplaborAdapter.getItemCount()!=0){
+        if (page == 1 && wplaborAdapter.getItemCount() != 0) {
             wplaborAdapter = new WplaborAdapter(getActivity());
             recyclerView.setAdapter(wplaborAdapter);
         }
-        if(list==null||list.size()==0){
+        if ((list == null || list.size() == 0) && page == 1) {
             nodatalayout.setVisibility(View.VISIBLE);
-        }else {
-            wplaborAdapter.update(list,true);
+        } else {
+            wplaborAdapter.adddate(list);
         }
     }
 
@@ -134,7 +143,7 @@ public class WplaborFragment extends Fragment implements SwipeRefreshLayout.OnRe
     }
 
     @Override
-    public void onLoad(){
+    public void onLoad() {
         page++;
         getdata();
     }

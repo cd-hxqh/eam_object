@@ -1,6 +1,5 @@
 package cdhxqh.shekou.ui.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,11 +18,10 @@ import java.util.List;
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.ui.fragment.LabtransFragment;
-import cdhxqh.shekou.ui.fragment.ReportDefaultFragment;
+import cdhxqh.shekou.ui.fragment.ReportFailurereportFragment;
 import cdhxqh.shekou.ui.fragment.ReportRealInfoFragment;
 import cdhxqh.shekou.ui.fragment.WoactivityFragment;
 import cdhxqh.shekou.ui.fragment.WpitemFragment;
-import cdhxqh.shekou.ui.fragment.WplaborFragment;
 
 /**
  * Created by think on 2015/11/9.
@@ -47,9 +45,9 @@ public class Work_ReportActivity extends BaseActivity {
     private ViewPager mViewPager;    //下方的可横向拖动的控件
     private List<Fragment> fragmentlist = new ArrayList<Fragment>();
     private ReportRealInfoFragment reportRealInfoFragment;
-    private ReportDefaultFragment reportDefaultFragment;
+    private ReportFailurereportFragment reportDefaultFragment;
+    private WoactivityFragment woactivityFragment;
     private LabtransFragment labtransFragment;
-    private WplaborFragment wplaborFragment;
     private WpitemFragment wpitemFragment;
 
     public WorkOrder workOrder;
@@ -103,14 +101,14 @@ public class Work_ReportActivity extends BaseActivity {
         wpitemlayout.setOnClickListener(new layoutlistener(4));
         fragmentlist = new ArrayList<Fragment>();
         labtransFragment = new LabtransFragment(workOrder);
-        wplaborFragment = new WplaborFragment(workOrder);
+        woactivityFragment = new WoactivityFragment(workOrder);
         wpitemFragment = new WpitemFragment(workOrder);
         reportRealInfoFragment = new ReportRealInfoFragment(workOrder);
-        reportDefaultFragment = new ReportDefaultFragment(workOrder);
+        reportDefaultFragment = new ReportFailurereportFragment(workOrder);
         fragmentlist.add(reportRealInfoFragment);
         fragmentlist.add(reportDefaultFragment);
+        fragmentlist.add(woactivityFragment);
         fragmentlist.add(labtransFragment);
-        fragmentlist.add(wplaborFragment);
         fragmentlist.add(wpitemFragment);
         mViewPager.setAdapter(new MyFrageStatePagerAdapter(getSupportFragmentManager()));//设置ViewPager的适配器
         mViewPager.setOnPageChangeListener(new MyPagerOnPageChangeListener());
