@@ -27,9 +27,16 @@ public class HttpManager {
     /**
      * 设置待办事项接口*
      */
-    public static String getwfassignmentUrl(int curpage, int showcount) {
-        return "{'appid':'" + Constants.WFASSIGNMENT_APPID + "','objectname':'" + Constants.WFASSIGNMENT_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    public static String getwfassignmentUrl(String vlaue,int curpage, int showcount) {
+        if(vlaue.equals("")) {
+            return "{'appid':'" + Constants.WFASSIGNMENT_APPID + "','objectname':'" + Constants.WFASSIGNMENT_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+        }else{
+            return "{'appid':'" + Constants.WFASSIGNMENT_APPID + "','objectname':'" + Constants.WFASSIGNMENT_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WFASSIGNMENTID':'"+vlaue+"'}}";
+        }
     }
+
+
+
 
     /**
      * 设置工单接口*

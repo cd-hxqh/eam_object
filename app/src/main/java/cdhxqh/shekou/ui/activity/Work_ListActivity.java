@@ -103,16 +103,10 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         workListAdapter = new WorkListAdapter(this);
         recyclerView.setAdapter(workListAdapter);
-//        refresh_layout.setColorScheme(android.R.color.holo_blue_bright,
-//                android.R.color.holo_green_light,
-//                android.R.color.holo_orange_light,
-//                android.R.color.holo_red_light);
         refresh_layout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-//        refresh_layout.setProgressViewOffset(false, 0,
-//                (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24, getResources().getDisplayMetrics()));
         refresh_layout.setRefreshing(true);
         getData(searchText);
 
