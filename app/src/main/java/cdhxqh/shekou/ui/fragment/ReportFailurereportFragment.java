@@ -93,7 +93,7 @@ public class ReportFailurereportFragment extends Fragment implements SwipeRefres
     }
 
     private void getdata() {
-        HttpManager.getData(getActivity(), HttpManager.getfailurereportUrl(workOrder.worktype,workOrder.wonum), new HttpRequestHandler<Results>() {
+        HttpManager.getData(getActivity(), HttpManager.getfailurereportUrl(workOrder.worktype, workOrder.wonum), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -116,6 +116,9 @@ public class ReportFailurereportFragment extends Fragment implements SwipeRefres
     }
 
     private void addListData(ArrayList<Failurereport> list) {
+        if (list.size() > 0) {
+
+        }
     }
 
     //下拉刷新触发事件

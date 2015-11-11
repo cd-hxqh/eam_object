@@ -35,16 +35,8 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:text="@string/work_failurereport_udgzzjgdm"
-                            android:textSize="@dimen/dimens_16dp"
-                            android:textColor="@color/light_black"/>
-                        <TextView
-                            android:id="@+id/work_failurereport_udgzzjgdm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_toLeftOf="@id/img_1"
-                            android:textSize="@dimen/dimens_16dp"
-                            android:textColor="@color/light_black"/>
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
 
                         <ImageView
                             android:id="@+id/img_1"
@@ -55,6 +47,15 @@
                             android:layout_marginRight="10dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/item_more" />
+
+                        <TextView
+                            android:id="@+id/work_failurereport_udgzzjgdm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_toLeftOf="@id/img_1"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
                     </RelativeLayout>
 
                     <View
@@ -71,16 +72,8 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:text="@string/work_failurereport_udgzlbdm"
-                            android:textSize="@dimen/dimens_16dp"
-                            android:textColor="@color/light_black"/>
-                        <TextView
-                            android:id="@+id/work_failurereport_udgzlbdm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_toLeftOf="@id/img_2"
-                            android:textSize="@dimen/dimens_16dp"
-                            android:textColor="@color/light_black"/>
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
 
                         <ImageView
                             android:id="@+id/img_2"
@@ -91,6 +84,15 @@
                             android:layout_marginRight="10dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/item_more" />
+
+                        <TextView
+                            android:id="@+id/work_failurereport_udgzlbdm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_toLeftOf="@id/img_2"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
                     </RelativeLayout>
 
                     <View
@@ -107,16 +109,8 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:text="@string/work_failurereport_failurecode"
-                            android:textSize="@dimen/dimens_16dp"
-                            android:textColor="@color/light_black"/>
-                        <TextView
-                            android:id="@+id/work_failurereport_failurecode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_toLeftOf="@id/img_3"
-                            android:textSize="@dimen/dimens_16dp"
-                            android:textColor="@color/light_black"/>
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
 
                         <ImageView
                             android:id="@+id/img_3"
@@ -127,6 +121,15 @@
                             android:layout_marginRight="10dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/item_more" />
+
+                        <TextView
+                            android:id="@+id/work_failurereport_failurecode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_toLeftOf="@id/img_3"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
                     </RelativeLayout>
 
                     <View
@@ -143,16 +146,8 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:text="@string/work_failurereport_faildate"
-                            android:textSize="@dimen/dimens_16dp"
-                            android:textColor="@color/light_black"/>
-                        <TextView
-                            android:id="@+id/work_failurereport_faildate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_toLeftOf="@id/img_4"
-                            android:textSize="@dimen/dimens_16dp"
-                            android:textColor="@color/light_black"/>
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
 
                         <ImageView
                             android:id="@+id/img_4"
@@ -163,6 +158,15 @@
                             android:layout_marginRight="10dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/item_more" />
+
+                        <TextView
+                            android:id="@+id/work_failurereport_faildate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_toLeftOf="@id/img_4"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -177,31 +181,34 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="@string/work_failurereport_bz"
-                        android:textSize="@dimen/dimens_16dp"
-                        android:textColor="@color/light_black"/>
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16dp" />
+
                     <EditText
                         android:id="@+id/work_failurereport_bz"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/border_edit"
                         android:padding="5dp"
-                        android:textSize="@dimen/dimens_16dp"
-                        android:textColor="@color/light_black"/>
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16dp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="@string/work_failurereport_bzdate"
-                        android:textSize="@dimen/dimens_16dp"
-                        android:textColor="@color/light_black"/>
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16dp" />
+
                     <EditText
                         android:id="@+id/work_failurereport_bzdate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@drawable/border_edit"
                         android:padding="5dp"
-                        android:textSize="@dimen/dimens_16dp"
-                        android:textColor="@color/light_black"/>
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16dp" />
                 </LinearLayout>
             </LinearLayout>
         </cdhxqh.shekou.ui.widget.SwipeRefreshLayout>
