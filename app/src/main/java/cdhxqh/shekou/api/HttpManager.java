@@ -89,8 +89,11 @@ public class HttpManager {
     /**
      * 设置库存查询的接口
      */
-    public static String getInventorurl(int curpage, int showcount) {
-        return "{'appid':'" + Constants.INVENTOR_APPID + "','objectname':'" + Constants.INVENTORY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    public static String getInventorurl(String value,int curpage, int showcount) {
+        if(value.equals("")){
+            return "{'appid':'" + Constants.INVENTOR_APPID + "','objectname':'" + Constants.INVENTORY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+        }
+        return "{'appid':'" + Constants.INVENTOR_APPID + "','objectname':'" + Constants.INVENTORY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'"+value+"'}}";
     }
 
 
@@ -130,8 +133,11 @@ public class HttpManager {
     /**
      * 设置领料单的接口
      */
-    public static String getInvuseurl(int curpage, int showcount) {
-        return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    public static String getInvuseurl(String value,int curpage, int showcount) {
+        if(value.equals("")){
+            return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+        }
+        return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'INVUSENUM':'"+value+"'}}";
     }
 
     /**
