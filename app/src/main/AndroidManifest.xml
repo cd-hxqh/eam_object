@@ -86,12 +86,16 @@
             android:label="@string/title_activity_assignmentdetails" >
         </activity>
         <activity
-            android:name=".ui.activity.Work_ReportActivity"
+            android:name=".ui.activity.Work_RealinfoActivity"
             android:label="@string/title_activity_workreport" >
         </activity>
         <activity
             android:name=".ui.activity.LabtransDetailsActivity"
             android:label="@string/title_activity_labtransdetails" >
+        </activity>
+        <activity
+            android:name=".ui.activity.Work_FailurereportActivity"
+            android:label="@string/title_activity_failurereport" >
         </activity>
         <activity
             android:name=".ui.activity.InventoryActivity"

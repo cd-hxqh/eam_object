@@ -37,7 +37,11 @@ public class Work_AddNewActivity extends BaseActivity {
      */
     private LinearLayout taskLinearLayout;
     /**
-     * 工单汇报*
+     * 实际情况
+     */
+    private LinearLayout realinfoLinearLayout;
+    /**
+     * 故障汇报*
      */
     private LinearLayout reportLinearLayout;
 
@@ -183,9 +187,11 @@ public class Work_AddNewActivity extends BaseActivity {
 
         planLinearlayout = (LinearLayout) contentView.findViewById(R.id.work_plan_id);
         taskLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_task_id);
+        realinfoLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_realinfo_id);
         reportLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_report_id);
         planLinearlayout.setOnClickListener(planOnClickListener);
         taskLinearLayout.setOnClickListener(taskOnClickListener);
+        realinfoLinearLayout.setOnClickListener(realinfoOnClickListener);
         reportLinearLayout.setOnClickListener(reportOnClickListener);
 
     }
@@ -210,14 +216,31 @@ public class Work_AddNewActivity extends BaseActivity {
             bundle.putParcelable("workOrder", workOrder);
             intent.putExtras(bundle);
             startActivity(intent);
+            popupWindow.dismiss();
+        }
+    };
+
+    private View.OnClickListener realinfoOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Work_AddNewActivity.this,Work_RealinfoActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("workOrder", workOrder);
+            intent.putExtras(bundle);
             startActivity(intent);
+            popupWindow.dismiss();
         }
     };
 
     private View.OnClickListener reportOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            Intent intent = new Intent(Work_AddNewActivity.this,Work_FailurereportActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("workOrder", workOrder);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            popupWindow.dismiss();
         }
     };
 }

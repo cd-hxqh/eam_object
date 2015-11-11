@@ -33,6 +33,7 @@
     <string name="title_activity_assignmentdetails">分配详情</string>
     <string name="title_activity_workreport">工单汇报</string>
     <string name="title_activity_labtransdetails">实际员工详情</string>
+    <string name="title_activity_failurereport">故障报告</string>
 
     <!--网络信息提示-->
     <string name="error_title">错误</string>
@@ -184,7 +185,8 @@
     <string name="work_work_flow">工作流</string>
     <string name="work_plan">工单计划</string>
     <string name="work_task">任务分配</string>
-    <string name="work_report">工单汇报</string>
+    <string name="work_realinfo">实际情况</string>
+    <string name="work_report">故障汇报</string>
 
     <!--工单计划界面-->
     <string name="work_plan_worker">员工</string>
@@ -258,6 +260,9 @@
     <string name="work_failurereport_faildate">故障日期</string>
     <string name="work_failurereport_bz">备注</string>
     <string name="work_failurereport_bzdate">备注日期</string>
+    <string name="work_failurereport_question">问题</string>
+    <string name="work_failurereport_cause">原因</string>
+    <string name="work_failurereport_rememdy">措施</string>
 
     <!--实际员工页面-->
     <string name="work_labtrans_actualstaskid">任务</string>

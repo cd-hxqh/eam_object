@@ -18,23 +18,19 @@ import java.util.List;
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.ui.fragment.LabtransFragment;
-import cdhxqh.shekou.ui.fragment.ReportFailurereportFragment;
-import cdhxqh.shekou.ui.fragment.ReportRealInfoFragment;
 import cdhxqh.shekou.ui.fragment.WoactivityFragment;
 import cdhxqh.shekou.ui.fragment.WpitemFragment;
 
 /**
  * Created by think on 2015/11/9.
- * 工单汇报页面
+ * 实际情况页面
  */
-public class Work_ReportActivity extends BaseActivity {
+public class Work_RealinfoActivity extends BaseActivity {
 
     private TextView titlename;
     private ImageView menuImageView;
     private RelativeLayout backlayout;
 
-    private LinearLayout realinfolayout;
-    private LinearLayout default_reportlayout;
     private LinearLayout woactivitylayout;
     private LinearLayout wplaborlayout;
     private LinearLayout wpitemlayout;
@@ -44,8 +40,6 @@ public class Work_ReportActivity extends BaseActivity {
     private ImageView mImageView;
     private ViewPager mViewPager;    //下方的可横向拖动的控件
     private List<Fragment> fragmentlist = new ArrayList<Fragment>();
-    private ReportRealInfoFragment reportRealInfoFragment;
-    private ReportFailurereportFragment reportDefaultFragment;
     private WoactivityFragment woactivityFragment;
     private LabtransFragment labtransFragment;
     private WpitemFragment wpitemFragment;
@@ -55,7 +49,7 @@ public class Work_ReportActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_work_report);
+        setContentView(R.layout.activity_work_realinfo);
 
         geiIntentData();
         findViewById();
@@ -72,8 +66,6 @@ public class Work_ReportActivity extends BaseActivity {
         titlename = (TextView) findViewById(R.id.title_name);
         menuImageView = (ImageView) findViewById(R.id.title_add);
         backlayout = (RelativeLayout) findViewById(R.id.title_back);
-        realinfolayout = (LinearLayout) findViewById(R.id.work_report_realinfo);
-        default_reportlayout = (LinearLayout) findViewById(R.id.work_report_default_report);
         woactivitylayout = (LinearLayout) findViewById(R.id.work_report_woactivity);
         wplaborlayout = (LinearLayout) findViewById(R.id.work_report_wplabor);
         wpitemlayout = (LinearLayout) findViewById(R.id.work_report_wpitem);
@@ -85,7 +77,7 @@ public class Work_ReportActivity extends BaseActivity {
     protected void initView() {
         mViewPager.setCurrentItem(currentIndex);
         mViewPager.setOffscreenPageLimit(4);
-        titlename.setText(getResources().getString(R.string.work_report));
+        titlename.setText(getResources().getString(R.string.work_realinfo));
         backlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,19 +86,13 @@ public class Work_ReportActivity extends BaseActivity {
         });
         menuImageView.setImageResource(R.drawable.add);
         menuImageView.setVisibility(View.VISIBLE);
-        realinfolayout.setOnClickListener(new layoutlistener(0));
-        default_reportlayout.setOnClickListener(new layoutlistener(1));
-        woactivitylayout.setOnClickListener(new layoutlistener(2));
-        wplaborlayout.setOnClickListener(new layoutlistener(3));
-        wpitemlayout.setOnClickListener(new layoutlistener(4));
+        woactivitylayout.setOnClickListener(new layoutlistener(0));
+        wplaborlayout.setOnClickListener(new layoutlistener(1));
+        wpitemlayout.setOnClickListener(new layoutlistener(2));
         fragmentlist = new ArrayList<Fragment>();
         labtransFragment = new LabtransFragment(workOrder);
         woactivityFragment = new WoactivityFragment(workOrder);
         wpitemFragment = new WpitemFragment(workOrder);
-        reportRealInfoFragment = new ReportRealInfoFragment(workOrder);
-        reportDefaultFragment = new ReportFailurereportFragment(workOrder);
-        fragmentlist.add(reportRealInfoFragment);
-        fragmentlist.add(reportDefaultFragment);
         fragmentlist.add(woactivityFragment);
         fragmentlist.add(labtransFragment);
         fragmentlist.add(wpitemFragment);
@@ -165,19 +151,31 @@ public class Work_ReportActivity extends BaseActivity {
             /**
              * 利用currentIndex(当前所在页面)和position(下一个页面)以及offset来
              * 设置mTabLineIv的左边距 滑动场景：
+             * 记3个页面,
+             * 从左到右分别为0,1,2
+             * 0->1; 1->2; 2->1; 1->0
              */
 
-            if ((currentIndex == 0 && position == 0) || (currentIndex == 1 && position == 1)
-                    || (currentIndex == 2 && position == 2) || (currentIndex == 3 && position == 3)
-                    || (currentIndex == 4 && position == 4)) {
-                lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 5) + currentIndex
-                        * (screenWidth / 5));
+            if (currentIndex == 0 && position == 0)// 0->1
+            {
+                lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 3) + currentIndex
+                        * (screenWidth / 3));
 
-            } else {
+            } else if (currentIndex == 1 && position == 0) // 1->0
+            {
                 lp.leftMargin = (int) (-(1 - offset)
-                        * (screenWidth * 1.0 / 5) + currentIndex
-                        * (screenWidth / 5));
+                        * (screenWidth * 1.0 / 3) + currentIndex
+                        * (screenWidth / 3));
 
+            } else if (currentIndex == 1 && position == 1) // 1->2
+            {
+                lp.leftMargin = (int) (offset * (screenWidth * 1.0 / 3) + currentIndex
+                        * (screenWidth / 3));
+            } else if (currentIndex == 2 && position == 1) // 2->1
+            {
+                lp.leftMargin = (int) (-(1 - offset)
+                        * (screenWidth * 1.0 / 3) + currentIndex
+                        * (screenWidth / 3));
             }
             mTabLineIv.setLayoutParams(lp);
         }
@@ -209,7 +207,7 @@ public class Work_ReportActivity extends BaseActivity {
         screenWidth = dpMetrics.widthPixels;
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTabLineIv
                 .getLayoutParams();
-        lp.width = screenWidth / 5;
+        lp.width = screenWidth / 3;
         mTabLineIv.setLayoutParams(lp);
     }
 

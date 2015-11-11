@@ -7,136 +7,329 @@
 
     <include layout="@layout/title_main" />
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp">
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
 
-        <LinearLayout
-            android:id="@+id/id_switch_tab_ll"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:id="@+id/work_report_realinfo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="5dip">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/work_report_realinfo"
-                    android:textColor="@color/light_black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/work_report_default_report"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="5dip"
-                android:saveEnabled="false">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/work_report_default_report"
-                    android:textColor="@color/light_black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/work_report_woactivity"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:focusable="false"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="5dip">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/work_report_woactivity"
-                    android:textColor="@color/light_black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/work_report_wplabor"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:focusable="false"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="5dip">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/work_report_wplabor"
-                    android:textColor="@color/light_black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/work_report_wpitem"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:background="@drawable/border"
-                android:focusable="false"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="5dip">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/work_report_wpitem"
-                    android:textColor="@color/light_black"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
+        <cdhxqh.shekou.ui.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true">
+            android:background="@color/white">
 
-            <ImageView
-                android:id="@+id/id_tab_line_iv"
-                android:layout_width="200dp"
-                android:layout_height="2dp"
-                android:background="@color/light_blue_color"
-                android:contentDescription="tab"></ImageView>
-        </LinearLayout>
-    </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/border_container"
+                    android:orientation="vertical">
 
-    </android.support.v4.view.ViewPager>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="@string/work_failurereport_udgzzjgdm"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+
+                        <ImageView
+                            android:id="@+id/img_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/item_more" />
+
+                        <TextView
+                            android:id="@+id/work_failurereport_udgzzjgdm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_toLeftOf="@id/img_1"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/gray" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="@string/work_failurereport_udgzlbdm"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+
+                        <ImageView
+                            android:id="@+id/img_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/item_more" />
+
+                        <TextView
+                            android:id="@+id/work_failurereport_udgzlbdm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_toLeftOf="@id/img_2"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/gray" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="@string/work_failurereport_failurecode"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+
+                        <ImageView
+                            android:id="@+id/img_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/item_more" />
+
+                        <TextView
+                            android:id="@+id/work_failurereport_failurecode"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_toLeftOf="@id/img_3"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/gray" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="@string/work_failurereport_faildate"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+
+                        <ImageView
+                            android:id="@+id/img_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/item_more" />
+
+                        <TextView
+                            android:id="@+id/work_failurereport_faildate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_toLeftOf="@id/img_4"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/work_failurereport_bz"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16dp" />
+
+                    <EditText
+                        android:id="@+id/work_failurereport_bz"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_edit"
+                        android:padding="5dp"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/work_failurereport_bzdate"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16dp" />
+
+                    <EditText
+                        android:id="@+id/work_failurereport_bzdate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/border_edit"
+                        android:padding="5dp"
+                        android:textColor="@color/light_black"
+                        android:textSize="@dimen/dimens_16dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/border_container"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="@string/work_failurereport_question"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+
+                        <ImageView
+                            android:id="@+id/img_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/item_more" />
+
+                        <TextView
+                            android:id="@+id/work_failurereport_question"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_toLeftOf="@id/img_5"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/gray" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="@string/work_failurereport_cause"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+
+                        <ImageView
+                            android:id="@+id/img_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/item_more" />
+
+                        <TextView
+                            android:id="@+id/work_failurereport_cause"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_toLeftOf="@id/img_6"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+                    </RelativeLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/gray" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="@string/work_failurereport_rememdy"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+
+                        <ImageView
+                            android:id="@+id/img_7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="10dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/item_more" />
+
+                        <TextView
+                            android:id="@+id/work_failurereport_rememdy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_toLeftOf="@id/img_7"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </cdhxqh.shekou.ui.widget.SwipeRefreshLayout>
+    </FrameLayout>
 </LinearLayout>
