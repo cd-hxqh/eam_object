@@ -32,6 +32,7 @@ import cdhxqh.shekou.R;
 import cdhxqh.shekou.manager.AppManager;
 import cdhxqh.shekou.ui.adapter.DrawerAdapter;
 import cdhxqh.shekou.ui.widget.CustomDialog;
+import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.MessageUtils;
 
 
@@ -128,7 +129,7 @@ public class NavigationDrawerFragment extends BaseFragment {
         });
         mDrawerListView.setAdapter(new DrawerAdapter(getActivity()));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
-
+        mUserTextView.setText(AccountUtils.getUserName(getActivity()));
         exitImageView.setOnClickListener(exitOnClickListener);
         return rootView;
     }
