@@ -17,6 +17,7 @@ import java.util.List;
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Wplabor;
+import cdhxqh.shekou.ui.activity.LabtransDetailsActivity;
 import cdhxqh.shekou.ui.activity.WplaborDetailsActivity;
 
 
@@ -48,7 +49,7 @@ public class LabtransAdapter extends RecyclerView.Adapter<LabtransAdapter.ViewHo
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, WplaborDetailsActivity.class);
+                Intent intent = new Intent(mContext, LabtransDetailsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putParcelable("labtrans", labtrans);
                 intent.putExtras(bundle);

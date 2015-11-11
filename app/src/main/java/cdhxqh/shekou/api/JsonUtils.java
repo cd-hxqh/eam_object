@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Assignment;
+import cdhxqh.shekou.model.Failurereport;
 import cdhxqh.shekou.model.Invbalances;
 import cdhxqh.shekou.model.Invcost;
 import cdhxqh.shekou.model.Inventory;
@@ -336,6 +337,37 @@ public class JsonUtils {
                 assignment.siteid = jsonObject.getString("SITEID");//地点
                 assignment.assignmentid = jsonObject.getString("ASSIGNMENTID");//
                 list.add(assignment);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 解析故障汇报信息
+     */
+    public static ArrayList<Failurereport> parsingFailurereport(Context ctx, String data) {
+        Log.i(TAG, "Failurereport data=" + data);
+        ArrayList<Failurereport> list = null;
+        Failurereport failurereport = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Failurereport>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                failurereport = new Failurereport();
+                jsonObject = jsonArray.getJSONObject(i);
+                failurereport.wonum = jsonObject.getString("WONUM"); //工单号
+                failurereport.assetnum = jsonObject.getString("ASSETNUM"); //资产
+                failurereport.failurecode = jsonObject.getString("FAILURECODE");//故障代码
+                failurereport.linenum = jsonObject.getString("LINENUM");//行
+                failurereport.type = jsonObject.getString("TYPE");//类型
+                failurereport.orgid = jsonObject.getString("ORGID");//组织
+                failurereport.siteid = jsonObject.getString("SITEID");//地点
+                failurereport.failurereportid = jsonObject.getString("FAILUREREPORTID");//供应商
+                list.add(failurereport);
             }
             return list;
         } catch (JSONException e) {

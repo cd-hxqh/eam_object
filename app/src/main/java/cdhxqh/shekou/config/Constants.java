@@ -41,6 +41,8 @@ public class Constants {
     public static final String ASSIGNMENT_NAME = "ASSIGNMENT";
     //工单实际员工表名
     public static final String LABTRANS_NAME = "LABTRANS";
+    //故障汇报表名
+    public static final String FAILUREREPORT_NAME = "FAILUREREPORT";
 
     /**库存查询**/
     //库存的appid

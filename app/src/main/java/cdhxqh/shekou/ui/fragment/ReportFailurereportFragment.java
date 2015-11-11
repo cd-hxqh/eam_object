@@ -10,40 +10,47 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
+import cdhxqh.shekou.model.Failurereport;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.ui.adapter.WoactivityAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 
 /**
- * 工单任务的fragment
+ * 故障汇报的fragment
  */
 @SuppressLint("ValidFragment")
-public class ReportDefaultFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLayout.OnLoadListener{
-    private static String TAG = "WoactivityFragment";
+public class ReportFailurereportFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+    private static String TAG = "ReportFailurereportFragment";
 
-    LinearLayoutManager layoutManager;
-    public RecyclerView recyclerView;
-    private LinearLayout nodatalayout;
-    private WoactivityAdapter woactivityAdapter;
+    private TextView udgzzjgdm;
+    private TextView udgzlbdm;
+    private TextView failurecode;
+    private TextView faildate;
+    private EditText bz;
+    private EditText bzdate;
     private SwipeRefreshLayout refresh_layout = null;
-    private int page = 1;
     private WorkOrder workOrder;
-    public ReportDefaultFragment() {
+
+    public ReportFailurereportFragment() {
     }
 
-    public ReportDefaultFragment(WorkOrder workOrder) {
+    public ReportFailurereportFragment(WorkOrder workOrder) {
         this.workOrder = workOrder;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,30 +59,28 @@ public class ReportDefaultFragment extends Fragment implements SwipeRefreshLayou
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_task, container,
+        View view = inflater.inflate(R.layout.fragment_failurereport, container,
                 false);
 
         findByIdView(view);
         initView();
         return view;
     }
+
     /**
      * 初始化界面组件*
      */
     private void findByIdView(View view) {
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_id);
+        udgzzjgdm = (TextView) view.findViewById(R.id.work_failurereport_udgzzjgdm);
+        udgzlbdm = (TextView) view.findViewById(R.id.work_failurereport_udgzlbdm);
+        failurecode = (TextView) view.findViewById(R.id.work_failurereport_failurecode);
+        faildate = (TextView) view.findViewById(R.id.work_failurereport_faildate);
+        bz = (EditText) view.findViewById(R.id.work_failurereport_bz);
+        bzdate = (EditText) view.findViewById(R.id.work_failurereport_bzdate);
         refresh_layout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
-        nodatalayout = (LinearLayout) view.findViewById(R.id.have_not_data_id);
     }
 
-    private void initView(){
-        layoutManager = new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layoutManager.scrollToPosition(0);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        woactivityAdapter = new WoactivityAdapter(getActivity());
-        recyclerView.setAdapter(woactivityAdapter);
+    private void initView() {
 
         refresh_layout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -83,22 +88,21 @@ public class ReportDefaultFragment extends Fragment implements SwipeRefreshLayou
                 android.R.color.holo_red_light);
         refresh_layout.setRefreshing(true);
         refresh_layout.setOnRefreshListener(this);
-        refresh_layout.setOnLoadListener(this);
 
         getdata();
     }
 
-    private void getdata(){
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwoactivityUrl(workOrder.worktype, page, 20), new HttpRequestHandler<Results>() {
+    private void getdata() {
+        HttpManager.getData(getActivity(), HttpManager.getfailurereportUrl(workOrder.worktype,workOrder.wonum), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
             }
 
             @Override
-            public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Woactivity> woactivities = JsonUtils.parsingWoactivity(getActivity(), results.getResultlist());
-                addListData(woactivities);
+            public void onSuccess(Results results, int currentPage, int showcount) {
+                ArrayList<Failurereport> failurereports = JsonUtils.parsingFailurereport(getActivity(), results.getResultlist());
+                addListData(failurereports);
                 refresh_layout.setRefreshing(false);
                 refresh_layout.setLoading(false);
             }
@@ -106,36 +110,17 @@ public class ReportDefaultFragment extends Fragment implements SwipeRefreshLayou
             @Override
             public void onFailure(String error) {
                 refresh_layout.setRefreshing(false);
-                nodatalayout.setVisibility(View.VISIBLE);
+                refresh_layout.setLoading(false);
             }
         });
     }
 
-    private void addListData(ArrayList<Woactivity> list){
-        if(nodatalayout.getVisibility()==View.VISIBLE){
-            nodatalayout.setVisibility(View.GONE);
-        }
-        if(page==1&&woactivityAdapter.getItemCount()!=0){
-            woactivityAdapter = new WoactivityAdapter(getActivity());
-            recyclerView.setAdapter(woactivityAdapter);
-        }
-        if(list==null||list.size()==0){
-            nodatalayout.setVisibility(View.VISIBLE);
-        }else {
-            woactivityAdapter.update(list,true);
-        }
+    private void addListData(ArrayList<Failurereport> list) {
     }
 
     //下拉刷新触发事件
     @Override
     public void onRefresh() {
-        page = 1;
-        getdata();
-    }
-
-    @Override
-    public void onLoad(){
-        page++;
         getdata();
     }
 }

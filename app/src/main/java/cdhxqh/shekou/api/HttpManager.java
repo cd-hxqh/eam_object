@@ -87,6 +87,13 @@ public class HttpManager {
     }
 
     /**
+     * 设置故障汇报接口
+     */
+    public static String getfailurereportUrl(String type,String wonum){
+        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.FAILUREREPORT_NAME + "','option':'read','condition':{'WONUM':'"+wonum+"'}}";
+    }
+
+    /**
      * 设置库存查询的接口
      */
     public static String getInventorurl(String value,int curpage, int showcount) {
