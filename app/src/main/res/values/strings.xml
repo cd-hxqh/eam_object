@@ -2,7 +2,7 @@
     <string name="app_name">EAM采购管理</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">新增</string>
     <string name="log">EAM-工程与采购管理系统</string>
     <string name="please_userid">请输入用户名</string>
     <string name="please_password">请输入密码</string>
@@ -307,4 +307,11 @@
     <string name="work_plan_num">物料编码</string>
     <string name="work_plan_desc">物料名单</string>
     <string name="work_plan_laborhrs">常规时数</string>
+
+
+    <string name="action_example">Example action</string>
+    <string name="title_activity_addinvuse">AddinvuseActivity</string>
+    <string name="invuse_displayname_text">申请人:</string>
+    <string name="invuse_createdate_text">申请日期:</string>
+    <string name="add_invuse_title">新建领料单</string>
 </resources>

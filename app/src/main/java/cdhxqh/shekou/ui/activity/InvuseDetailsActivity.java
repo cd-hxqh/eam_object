@@ -16,7 +16,7 @@ import cdhxqh.shekou.model.Matusetrans;
  * 领料单详情
  */
 public class InvuseDetailsActivity extends BaseActivity {
-    private static String TAG = "MatusetransDetailsActivity";
+    private static String TAG = "InvuseDetailsActivity";
 
     /**
      * 返回按钮
@@ -102,7 +102,7 @@ public class InvuseDetailsActivity extends BaseActivity {
         fromstorelocText = (TextView) findViewById(R.id.invuse_location_text_id);
         udissuetoText = (TextView) findViewById(R.id.invuse_udissueto_text_id);
         wonumText = (TextView) findViewById(R.id.invuse_wonum_text_id);
-        statusText = (TextView) findViewById(R.id.invuse_siteid_text_id);
+        statusText = (TextView) findViewById(R.id.invuse_status_text_id);
         statusdateText = (TextView) findViewById(R.id.invuse_statusdate_text_id);
         siteidText = (TextView) findViewById(R.id.invuse_siteid_text_id);
 
@@ -112,7 +112,6 @@ public class InvuseDetailsActivity extends BaseActivity {
         materialBtn=(Button)findViewById(R.id.invuse_material_btn_id);
 
         if (invuse != null) {
-
             invusenumText.setText(invuse.invusenum==null?"暂无数据":invuse.invusenum);
             descriptionText.setText(invuse.description==null?"暂无数据":invuse.description);
             fromstorelocText.setText(invuse.fromstoreloc==null?"暂无数据":invuse.fromstoreloc);

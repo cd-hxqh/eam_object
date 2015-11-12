@@ -1,16 +1,15 @@
 package cdhxqh.shekou.ui.activity;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import cdhxqh.shekou.R;
@@ -25,19 +24,27 @@ import cdhxqh.shekou.ui.fragment.WorkFragment;
 public class MainActivity extends BaseActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    private static final String TAG="MainActivity";
-//    private SpinnerAdapter mSpinnerAdapter;
+    private static final String TAG = "MainActivity";
+    //    private SpinnerAdapter mSpinnerAdapter;
     private NavigationDrawerFragment mNavigationDrawerFragment;
     private ViewGroup mDrawerLayout;
     private View mActionbarCustom;
 
-    /**待办事项**/
+    /**
+     * 待办事项*
+     */
     private WfassigFragment mNewWfassigFragment;
-    /**工单管理**/
+    /**
+     * 工单管理*
+     */
     private WorkFragment mNewWorkFragment;
-    /**库存查询**/
+    /**
+     * 库存查询*
+     */
     private InventoryFragment mNewInventoryFragment;
-    /**领料管理**/
+    /**
+     * 领料管理*
+     */
     private InvuseFragment mNewInvuseFragment;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
@@ -130,21 +137,41 @@ public class MainActivity extends BaseActivity
 
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
-            mTitle = mMainTitles[mSelectPos];
-            actionBar.setDisplayShowCustomEnabled(false);
-            actionBar.setDisplayShowTitleEnabled(true);
-            actionBar.setTitle(mTitle);
+        mTitle = mMainTitles[mSelectPos];
+        actionBar.setDisplayShowCustomEnabled(false);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setTitle(mTitle);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.i(TAG,"this is onCreateOptionsMenu");
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
+            if (mSelectPos == 3) {
+                getMenuInflater().inflate(R.menu.menu_main, menu);
+            }
             restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
     }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if (mSelectPos == 3&&item.getItemId() == R.id.action_add) {
+            Intent intent=new Intent();
+            intent.setClass(MainActivity.this,AddinvuseActivity.class);
+            startActivityForResult(intent,0);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
 
     private long exitTime = 0;
 

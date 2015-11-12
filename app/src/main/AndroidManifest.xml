@@ -141,6 +141,10 @@
             android:name=".ui.activity.InvuselinrDetailsActivity"
             android:label="InvuselinrDetailsActivity" >
         </activity>
+        <activity
+            android:name=".ui.activity.AddinvuseActivity"
+            android:label="@string/title_activity_addinvuse" >
+        </activity>
     </application>
 
 </manifest>
