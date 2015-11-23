@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cdhxqh.shekou.bean.LoginResults;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Assignment;
@@ -37,23 +38,19 @@ public class JsonUtils {
     /**
      * 解析登录信息*
      */
-    public static String parsingAuthStr(final Context cxt, String data) {
-        Log.i(TAG,"data="+data);
-        String isSuccess = null;
-        String errmsg = null;
+    public static LoginResults parsingAuthStr(final Context cxt, String data) {
+        Log.i(TAG, "data=" + data);
+        LoginResults loginResults = new LoginResults();
         try {
             JSONObject json = new JSONObject(data);
-            String jsonString = json.getString("errcode");
-            if (jsonString.equals(Constants.LOGINSUCCESS) || jsonString.equals(Constants.CHANGEIMEI)) {
-                errmsg = json.getString("errmsg");
-            }
-
-            return errmsg;
-
-
+            String errcode = json.getString("errcode");
+            String errmsg = json.getString("errmsg");
+            loginResults.setErrcode(errcode);
+            loginResults.setErrmsg(errmsg);
+            return loginResults;
         } catch (JSONException e) {
             e.printStackTrace();
-            return isSuccess;
+            return null;
         }
     }
 
@@ -156,10 +153,11 @@ public class JsonUtils {
         }
 
     }
+
     /**
      * 解析工单信息
      */
-    public static ArrayList<WorkOrder> parsingWorkOrder(Context ctx, String data,String type) {
+    public static ArrayList<WorkOrder> parsingWorkOrder(Context ctx, String data, String type) {
         Log.i(TAG, "WorkOrder data=" + data);
         ArrayList<WorkOrder> list = null;
         WorkOrder workOrder = null;
@@ -640,6 +638,7 @@ public class JsonUtils {
         }
 
     }
+
     /**
      * 解析领料单行信息
      */

@@ -12,6 +12,7 @@ import org.apache.http.Header;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.application.BaseApplication;
+import cdhxqh.shekou.bean.LoginResults;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
 
@@ -209,8 +210,15 @@ public class HttpManager {
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Log.i(TAG, "SstatusCode=" + statusCode + "responseString=" + responseString);
                 if (statusCode == 200) {
-                    String errmsg = JsonUtils.parsingAuthStr(cxt, responseString);
-                    SafeHandler.onSuccess(handler, errmsg);
+                    LoginResults loginResults = JsonUtils.parsingAuthStr(cxt, responseString);
+                    if(loginResults!=null){
+                        if(loginResults.getErrcode().equals(Constants.LOGINSUCCESS)||loginResults.getErrcode().equals(Constants.CHANGEIMEI)){
+                            SafeHandler.onSuccess(handler, loginResults.getErrmsg());
+                        }else if(loginResults.getErrcode().equals(Constants.USERNAMEERROR)){
+                            SafeHandler.onFailure(handler, loginResults.getErrmsg());
+                        }
+                    }
+
                 }
             }
         });
