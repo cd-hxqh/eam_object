@@ -92,6 +92,7 @@ public class InvCostActivity extends BaseActivity implements SwipeRefreshLayout.
      * 获取上个界面的数据*
      */
     private void getInitData() {
+
         itemnum = getIntent().getExtras().getString("itemnum");
     }
 

@@ -314,4 +314,19 @@
     <string name="invuse_displayname_text">申请人:</string>
     <string name="invuse_createdate_text">申请日期:</string>
     <string name="add_invuse_title">新建领料单</string>
+    <string name="location_name_text">库房名称:</string>
+    <string name="udjbr_text">物管员经办人:</string>
+    <string name="workorder_description_text">工单描述:</string>
+    <string name="wonum_asset_assetnum_text">工单设备:</string>
+    <string name="eq1_text">设备管理组:</string>
+    <string name="eq2_text">设备管理室:</string>
+    <string name="eq3_text">设备管理班组:</string>
+    <string name="udisjj_text">是否紧急</string>
+    <string name="siteid_text">地点:</string>
+    <string name="totalcost_v_text">总价:</string>
+    <string name="sq_displayname_text">申请人:</string>
+    <string name="createdate_text">申请日期:</string>
+    <string name="pz_displayname_text">批准人:</string>
+    <string name="changedate_text">批准日期:</string>
+    <string name="uddept_text">部门:</string>
 </resources>

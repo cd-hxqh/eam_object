@@ -616,23 +616,41 @@ public class JsonUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
                 invuse = new Invuse();
                 jsonObject = jsonArray.getJSONObject(i);
-                invuse.description = jsonObject.getString("DESCRIPTION"); //描述
-                invuse.fromstoreloc = jsonObject.getString("FROMSTORELOC"); //库房
                 invuse.invuseid = jsonObject.getString("INVUSEID"); //唯一ID
                 invuse.invusenum = jsonObject.getString("INVUSENUM"); //领料单号
-                invuse.orgid = jsonObject.getString("ORGID"); //组织标识
-                invuse.siteid = jsonObject.getString("SITEID"); //地点
-                invuse.status = jsonObject.getString("STATUS"); //状态
-                invuse.statusdate = jsonObject.getString("STATUSDATE"); //状态的日期
-                invuse.udisjj = jsonObject.getString("UDISJJ"); //部门
-                invuse.udissueto = jsonObject.getString("UDISSUETO"); //领料人
+                invuse.description = jsonObject.getString("DESCRIPTION"); //描述
+                invuse.fromstoreloc = jsonObject.getString("FROMSTORELOC"); //库房
+                invuse.loc_description = jsonObject.getString("LOC_DESCRIPTION"); //库房名称
                 invuse.wonum = jsonObject.getString("WONUM"); //工单
+                invuse.workorder_description = jsonObject.getString("WORKORDER_DESCRIPTION"); //工单描述  22
+                invuse.udissueto = jsonObject.getString("UDISSUETO"); //领料人
+                invuse.llr_displayname = jsonObject.getString("LLR_DISPLAYNAME"); //领料人名称
+                invuse.uddept = jsonObject.getString("UDDEPT"); //部门  22
+                invuse.uddept_description = jsonObject.getString("UDDEPT_DESCRIPTION"); //部门名称
+                invuse.udjbr = jsonObject.getString("UDJBR"); //物管员经办人  22
+                invuse.udjbr_displayname = jsonObject.getString("UDJBR_DISPLAYNAME"); //物管员经办人（中文）
+                invuse.wonum_asset_assetnum = jsonObject.getString("WONUM_ASSET_ASSETNUM"); //工单设备
+                invuse.eq1 = jsonObject.getString("EQ1"); //设备管理组
+                invuse.eq2 = jsonObject.getString("EQ2"); //设备管理室
+                invuse.eq3 = jsonObject.getString("EQ3"); //设备管理班组
+                invuse.udisjj = jsonObject.getInt("UDISJJ")+""; //是否紧急
+
+                invuse.status = jsonObject.getString("STATUS"); //状态
+                invuse.siteid = jsonObject.getString("SITEID"); //地点
+                invuse.totalcost_v = jsonObject.getString("TOTALCOST_V"); //总价   22
+                invuse.sq_displayname = jsonObject.getString("SQ_DISPLAYNAME"); //申请人
+                invuse.createdate = jsonObject.getString("CREATEDATE"); //申请日期
+                invuse.pz_displayname = jsonObject.getString("PZ_DISPLAYNAME"); //批准人
+                invuse.changedate = jsonObject.getString("CHANGEDATE"); //批准日期
+
 
                 list.add(invuse);
             }
 
             return list;
         } catch (JSONException e) {
+
+            Log.i(TAG,"this jsonexception");
             e.printStackTrace();
             return null;
         }

@@ -19,7 +19,7 @@ public class Invuseline extends Entity implements Parcelable {
     public String enterby; //输入人
     public String fromstoreloc; //库房
     public String invuselineid; //唯一Id
-    public String invuselinenum; //行
+    public String invuselinenum; //行号
     public String invusenum; //领料单号
     public String issueunit;//发放单位
     public String itemnum; // 备件编码
@@ -34,6 +34,16 @@ public class Invuseline extends Entity implements Parcelable {
     public String unitcost; //单位成本
     public String usetype; //使用情况类型
     public String wonum; //工单
+
+
+    public String frombin; //货柜
+    public String udbudctrlnum; //预算编号
+    public String udglaccount; //成本科目
+    public String taskid; //任务号
+    public String assetnum; //设备
+    public String linetype; //行类型
+    public String issueto; //领料人
+    public String remark ; //备注
 
 
 
