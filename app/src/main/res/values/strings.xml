@@ -286,7 +286,7 @@
 
     <!--领料单详情-->
     <string name="invuse_details_title">领料单详情</string>
-    <string name="invuse_material_button_text">物料清单</string>
+    <string name="invuse_material_button_text">备件明细行</string>
     <string name="invuse_workflow_button_text">审批工作流</string>
     <string name="invuseline_itemnum_text">备件编码:</string>
     <string name="invuseline_title_text">物料清单</string>

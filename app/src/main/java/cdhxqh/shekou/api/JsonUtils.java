@@ -671,26 +671,38 @@ public class JsonUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
                 invuseline = new Invuseline();
                 jsonObject = jsonArray.getJSONObject(i);
-                invuseline.actualdate = jsonObject.getString("ACTUALDATE"); //实际日期
-                invuseline.description = jsonObject.getString("DESCRIPTION"); //描述
-                invuseline.enterby = jsonObject.getString("ENTERBY"); //输入人
-                invuseline.fromstoreloc = jsonObject.getString("FROMSTORELOC"); //库房
-                invuseline.invuselineid = jsonObject.getString("INVUSELINEID"); //唯一Id
-                invuseline.invuselinenum = jsonObject.getString("INVUSELINENUM"); //唯一Id
+                invuseline.invuselinenum = jsonObject.getString("INVUSELINENUM"); //编号
+                invuseline.invuselineid = jsonObject.getString("INVUSELINEID"); //唯一ID
+                invuseline.itemnum = jsonObject.getString("ITEMNUM"); //备件
                 invuseline.invusenum = jsonObject.getString("INVUSENUM"); //领料单号
-                invuseline.issueunit = jsonObject.getString("ISSUEUNIT"); //发放单位
-                invuseline.itemnum = jsonObject.getString("ITEMNUM"); //备件编码
-                invuseline.linecost = jsonObject.getString("LINECOST"); //行成本
-                invuseline.orgid = jsonObject.getString("ORGID"); //组织标识
-                invuseline.quantity = jsonObject.getString("QUANTITY"); //数量
-                invuseline.refwo = jsonObject.getString("REFWO"); //工单
-                invuseline.returnedqty = jsonObject.getString("RETURNEDQTY"); //已退回数量
-                invuseline.siteid = jsonObject.getString("SITEID"); //地点
+                invuseline.description = jsonObject.getString("DESCRIPTION"); //描述
+                invuseline.level4 = jsonObject.getString("LEVEL4"); //机构
+                invuseline.level5 = jsonObject.getString("LEVEL5"); //部位(五级)
+                invuseline.level6 = jsonObject.getString("LEVEL6"); //部位(六级)
+                invuseline.quantity = jsonObject.getString("QUANTITY"); //领料数量
+                invuseline.frombin = jsonObject.getString("FROMBIN"); //货柜
+                invuseline.invbalances_curbal = jsonObject.getString("INVBALANCES_CURBAL"); //货柜可用数量
+                invuseline.inventory_curbaltotal = jsonObject.getString("INVENTORY_CURBALTOTAL"); //库存总数量
+                invuseline.inventory_issueunit = jsonObject.getString("INVENTORY_ISSUEUNIT"); //发放单位
+                invuseline.remark = jsonObject.getString("REMARK"); //备注
+                invuseline.udbudctrlnum = jsonObject.getString("UDBUDCTRLNUM"); //预算编号
+                invuseline.budctrl_description = jsonObject.getString("BUDCTRL_DESCRIPTION"); //预算描述
+                invuseline.udglaccount = jsonObject.getString("UDGLACCOUNT"); //成本科目
+                invuseline.chartofaccounts_accountname = jsonObject.getString("CHARTOFACCOUNTS_ACCOUNTNAME"); //成本科目描述
+                invuseline.budctrl_udlimit = jsonObject.getString("BUDCTRL_UDLIMIT"); //预算总额(元)
+                invuseline.budctrl_actual = jsonObject.getString("BUDCTRL_ACTUAL"); //实际金额(元)
+                invuseline.budctrl_remainder = jsonObject.getString("BUDCTRL_REMAINDER"); //剩余金额(元)
+                invuseline.displayunitcost = jsonObject.getString("DISPLAYUNITCOST"); //单位成本
+                invuseline.displaylinecost = jsonObject.getString("DISPLAYLINECOST"); //行成本
+                invuseline.wonum = jsonObject.getString("WONUM"); //工单号
+                invuseline.taskid = jsonObject.getString("TASKID"); //任务号
+                invuseline.assetnum = jsonObject.getString("ASSETNUM"); //设备
+                invuseline.linetype = jsonObject.getString("LINETYPE"); //行类型
                 invuseline.tositeid = jsonObject.getString("TOSITEID"); //目标地点
-                invuseline.tostoreloc = jsonObject.getString("TOSTORELOC"); //目标位置
-                invuseline.unitcost = jsonObject.getString("UNITCOST"); //单位成本
-                invuseline.usetype = jsonObject.getString("USETYPE"); //使用情况类型
-                invuseline.wonum = jsonObject.getString("WONUM"); //工单
+                invuseline.enterby_displayname = jsonObject.getString("ENTERBY_DISPLAYNAME"); //输入人
+                invuseline.issueto = jsonObject.getString("ISSUETO"); //领料人
+                invuseline.issueto_displayname = jsonObject.getString("ISSUETO_DISPLAYNAME"); //领料人
+
 
                 list.add(invuseline);
             }

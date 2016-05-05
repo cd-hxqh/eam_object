@@ -95,13 +95,13 @@ public class InvuselinrDetailsActivity extends BaseActivity {
 
         if (invuseline != null) {
 
-            itemnumText.setText(invuseline.itemnum==null?"暂无数据":invuseline.itemnum);
-            descriptionText.setText(invuseline.description==null?"暂无数据":invuseline.description);
-            quantityText.setText(invuseline.quantity==null?"暂无数据":invuseline.quantity);
-            unitcostText.setText(invuseline.unitcost==null?"暂无数据":invuseline.unitcost);
-            issueunitText.setText(invuseline.issueunit==null?"暂无数据":invuseline.issueunit);
-            siteidText.setText(invuseline.siteid==null?"暂无数据":invuseline.siteid);
-            enterbyText.setText(invuseline.enterby==null?"暂无数据":invuseline.enterby);
+//            itemnumText.setText(invuseline.itemnum==null?"暂无数据":invuseline.itemnum);
+//            descriptionText.setText(invuseline.description==null?"暂无数据":invuseline.description);
+//            quantityText.setText(invuseline.quantity==null?"暂无数据":invuseline.quantity);
+//            unitcostText.setText(invuseline.unitcost==null?"暂无数据":invuseline.unitcost);
+//            issueunitText.setText(invuseline.issueunit==null?"暂无数据":invuseline.issueunit);
+//            siteidText.setText(invuseline.siteid==null?"暂无数据":invuseline.siteid);
+//            enterbyText.setText(invuseline.enterby==null?"暂无数据":invuseline.enterby);
         }
     }
 
