@@ -86,6 +86,13 @@ public class HttpManager {
     }
 
     /**
+     * 设置实际物料接口
+     */
+    public static String getmatusetransUrl(String type, int curpage, int showcount,String wonum) {
+        return "{'appid':'" + Constants.MATUSETRANS_APPID + "','objectname':'" + Constants.MATUSETRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+    }
+
+    /**
      * 设置故障汇报接口
      */
     public static String getfailurereportUrl(String type, String wonum) {

@@ -153,11 +153,10 @@ public class JsonUtils {
         }
 
     }
-
     /**
      * 解析工单信息
      */
-    public static ArrayList<WorkOrder> parsingWorkOrder(Context ctx, String data, String type) {
+    public static ArrayList<WorkOrder> parsingWorkOrder(Context ctx, String data,String type) {
         Log.i(TAG, "WorkOrder data=" + data);
         ArrayList<WorkOrder> list = null;
         WorkOrder workOrder = null;
@@ -171,30 +170,106 @@ public class JsonUtils {
                 workOrder.wonum = jsonObject.getString("WONUM"); //工单号
                 workOrder.status = jsonObject.getString("STATUS");//状态
                 workOrder.statusdate = jsonObject.getString("STATUSDATE");//状态日期
-                workOrder.worktype = type;//工单类型
+                workOrder.worktype = jsonObject.getString("WORKTYPE");//工单类型
                 workOrder.description = jsonObject.getString("DESCRIPTION");//工单描述
                 workOrder.assetnum = jsonObject.getString("ASSETNUM");//设备
-                workOrder.assetdescription = jsonObject.getString("ASSETDESCRIPTION");//设备描述
-                workOrder.udisaq = jsonObject.getString("UDISAQ");//是否安全
-                workOrder.udisbx = jsonObject.getString("UDISBX");//是否保修
-                workOrder.udiscb = jsonObject.getString("UDISCB");//是否抄表
-                workOrder.udisjf = jsonObject.getString("UDISJF");//是否按项目计费
-                workOrder.udisjj = jsonObject.getString("UDISJJ");//是否紧急维修
-                workOrder.udisplayname = jsonObject.getString("UDISPLAYNAME");//
-                workOrder.udremark = jsonObject.getString("UDREMARK");//备注
-                workOrder.udtjsj = jsonObject.getString("UDTJSJ");//停机时间
-                workOrder.actstart = jsonObject.getString("ACTSTART");//实际开始时间
-                workOrder.actfinish = jsonObject.getString("ACTFINISH");//实际完成时间
-                workOrder.glbz = jsonObject.getString("GLBZ");//设备管理班组编号
-                workOrder.gls = jsonObject.getString("GLS");//设备管理室编号
-                workOrder.glz = jsonObject.getString("GLZ");//设备管理组编号
-                workOrder.jpnum = jsonObject.getString("JPNUM");//作业计划
-                workOrder.ldispayname = jsonObject.getString("LDISPAYNAME");//
-                workOrder.reportdate = jsonObject.getString("REPORTDATE");//汇报日期
-                workOrder.reportedby = jsonObject.getString("REPORTEDBY");//报告人
-                workOrder.sdisplayname = jsonObject.getString("SDISPLAYNAME");//
-                workOrder.targstartdate = jsonObject.getString("TARGSTARTDATE");//计划开始时间
-                workOrder.targcompdate = jsonObject.getString("TARGCOMPDATE");//计划完成时间
+                workOrder.woeq3 = jsonObject.getString("WOEQ3");//设备管理班组编号
+                workOrder.woeq2 = jsonObject.getString("WOEQ2");//设备管理室编号
+                workOrder.woeq1 = jsonObject.getString("WOEQ1");//设备管理组编号
+                if (jsonObject.has("UDISJJ")) {
+                    workOrder.udisjj = jsonObject.getString("UDISJJ");//是否紧急维修
+                }
+//                workOrder.assetdescription = jsonObject.getString("ASSETDESCRIPTION");//设备描述
+                if (jsonObject.has("UDISAQ")) {
+                    workOrder.udisaq = jsonObject.getString("UDISAQ");//是否安全
+                }
+                if (jsonObject.has("UDISBX")) {
+                    workOrder.udisbx = jsonObject.getString("UDISBX");//是否保修
+                }
+                if (jsonObject.has("UDISCB")) {
+                    workOrder.udiscb = jsonObject.getString("UDISCB");//是否抄表
+                }
+                if (jsonObject.has("UDCREATEBY")) {
+                    workOrder.udcreateby = jsonObject.getString("UDCREATEBY");//创建人
+                }
+                if (jsonObject.has("UDCREATEDATE")) {
+                    workOrder.udcreatedate = jsonObject.getString("UDCREATEDATE");//创建日期
+                }
+                if (jsonObject.has("JPNUM")) {
+                    workOrder.jpnum = jsonObject.getString("JPNUM");//作业计划
+                }
+                if (jsonObject.has("PMNUM")) {
+                    workOrder.pmnum = jsonObject.getString("PMNUM");//预防性维护
+                }
+                if (jsonObject.has("REPORTDATE")) {
+                    workOrder.reportdate = jsonObject.getString("REPORTDATE");//汇报日期
+                }
+                if (jsonObject.has("REPORTEDBY")) {
+                    workOrder.reportedby = jsonObject.getString("REPORTEDBY");//报告人
+                }
+                if (jsonObject.has("UDYXJ")) {
+                    workOrder.udyxj = jsonObject.getString("UDYXJ");//优先级
+                }
+                if (jsonObject.has("LEAD")) {
+                    workOrder.lead = jsonObject.getString("LEAD");//工作负责人/指派人
+                }
+                if (jsonObject.has("TARGSTARTDATE")) {
+                    workOrder.targstartdate = jsonObject.getString("TARGSTARTDATE");//计划开始时间
+                }
+                if (jsonObject.has("TARGCOMPDATE")) {
+                    workOrder.targcompdate = jsonObject.getString("TARGCOMPDATE");//计划完成时间
+                }
+                if (jsonObject.has("UDACTSTART")) {
+                    workOrder.udactstart = jsonObject.getString("UDACTSTART");//实际开始时间
+                }
+                if (jsonObject.has("UDACTFINISH")) {
+                    workOrder.udactfinish = jsonObject.getString("UDACTFINISH");//实际完成时间
+                }
+                if (jsonObject.has("UDTJSJ")) {
+                    workOrder.udtjsj = jsonObject.getString("UDTJSJ");//实际维修时间
+                }
+                if (jsonObject.has("UDTJTIME")) {
+                    workOrder.udtjtime = jsonObject.getString("UDTJTIME");//停机时间
+                }
+                if (jsonObject.has("UDREMARK")) {
+                    workOrder.udremark = jsonObject.getString("UDREMARK");//备注
+                }
+                if (jsonObject.has("UDISJF")) {
+                    workOrder.udisjf = jsonObject.getString("UDISJF");//是否按项目计费
+                }
+                if (jsonObject.has("UDPROJAPPRNUM")) {
+                    workOrder.udprojapprnum = jsonObject.getString("UDPROJAPPRNUM");//立项编号
+                }
+                if (jsonObject.has("UDBUGNUM")) {
+                    workOrder.udbugnum = jsonObject.getString("UDBUGNUM");//项目预算
+                }
+                if (jsonObject.has("UDASSETBZ")) {
+                    workOrder.udassetbz = jsonObject.getString("UDASSETBZ");//财务公司
+                }
+                if (jsonObject.has("UDEVNUM")) {
+                    workOrder.udevnum = jsonObject.getString("UDEVNUM");//事故编码
+                }
+                if (jsonObject.has("SUPERVISOR")) {
+                    workOrder.supervisor = jsonObject.getString("SUPERVISOR");//抢修执行人
+                }
+                if (jsonObject.has("UDSUPERVISOR2")) {
+                    workOrder.udsupervisor2 = jsonObject.getString("UDSUPERVISOR2");//抢修执行人2
+                }
+                if (jsonObject.has("UDQXBZ")) {
+                    workOrder.udqxbz = jsonObject.getString("UDQXBZ");//抢修班组
+                }
+                if (jsonObject.has("UDWORKMEMO")) {
+                    workOrder.udworkmemo = jsonObject.getString("UDWORKMEMO");//工作备注
+                }
+                if (jsonObject.has("UDISYQ")) {
+                    workOrder.udisyq = jsonObject.getString("UDISYQ");//是否跟进
+                }
+                if (jsonObject.has("FAILURECODE")) {
+                    workOrder.failurecode = jsonObject.getString("FAILURECODE");//故障子机构
+                }
+                if (jsonObject.has("UDGZLBDM")) {
+                    workOrder.udgzlbdm = jsonObject.getString("UDGZLBDM");//故障类别
+                }
                 list.add(workOrder);
             }
             return list;

@@ -86,7 +86,14 @@ public class MatusetransAdapter extends RecyclerView.Adapter<MatusetransAdapter.
         notifyDataSetChanged();
     }
 
-
+    public void adddate(ArrayList<Matusetrans> data){
+        if(data.size()>0){
+            for(int i = 0;i < data.size();i++){
+                mItems.add(data.get(i));
+            }
+        }
+        notifyDataSetChanged();
+    }
     public void removeAllData() {
         if (mItems.size() > 0) {
             mItems.removeAll(mItems);

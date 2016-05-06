@@ -13,37 +13,36 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
+import cdhxqh.shekou.model.Matusetrans;
 import cdhxqh.shekou.model.WorkOrder;
-import cdhxqh.shekou.model.Wpitem;
-import cdhxqh.shekou.ui.adapter.WpitemAdapter;
+import cdhxqh.shekou.ui.adapter.MatusetransAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 
 /**
- * 工单计划物料的fragment
+ * 工单实际物料的fragment
  */
 @SuppressLint("ValidFragment")
-public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
+public class MatusetransFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     private static String TAG = "WpitemFragment";
 
     LinearLayoutManager layoutManager;
     public RecyclerView recyclerView;
     private LinearLayout nodatalayout;
-    private WpitemAdapter wpitemAdapter;
+    private MatusetransAdapter matusetransAdapter;
     private SwipeRefreshLayout refresh_layout = null;
     private int page = 1;
     private WorkOrder workOrder;
 
-    public WpitemFragment() {
+    public MatusetransFragment() {
     }
 
-    public WpitemFragment(WorkOrder workOrder) {
+    public MatusetransFragment(WorkOrder workOrder) {
         this.workOrder = workOrder;
     }
 
@@ -78,8 +77,8 @@ public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRef
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        wpitemAdapter = new WpitemAdapter(getActivity());
-        recyclerView.setAdapter(wpitemAdapter);
+        matusetransAdapter = new MatusetransAdapter(getActivity());
+        recyclerView.setAdapter(matusetransAdapter);
 
         refresh_layout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -92,7 +91,7 @@ public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRef
     }
 
     private void getdata() {
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwpitemUrl(workOrder.worktype, page, 20), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getmatusetransUrl(workOrder.worktype, page, 20,workOrder.wonum), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -100,9 +99,9 @@ public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRef
 
             @Override
             public void onSuccess(Results results, int currentPage, int showcount) {
-                ArrayList<Wpitem> items = null;
+                ArrayList<Matusetrans> items = null;
                 if (currentPage == page) {
-                    items = JsonUtils.parsingWpitem(getActivity(), results.getResultlist());
+                    items = JsonUtils.parsingMatusetrans(getActivity(), results.getResultlist());
                 }
                 addListData(items);
                 refresh_layout.setRefreshing(false);
@@ -120,18 +119,18 @@ public class WpitemFragment extends Fragment implements SwipeRefreshLayout.OnRef
         });
     }
 
-    private void addListData(ArrayList<Wpitem> list) {
+    private void addListData(ArrayList<Matusetrans> list) {
         if (nodatalayout.getVisibility() == View.VISIBLE) {
             nodatalayout.setVisibility(View.GONE);
         }
-        if (page == 1 && wpitemAdapter.getItemCount() != 0) {
-            wpitemAdapter = new WpitemAdapter(getActivity());
-            recyclerView.setAdapter(wpitemAdapter);
+        if (page == 1 && matusetransAdapter.getItemCount() != 0) {
+            matusetransAdapter = new MatusetransAdapter(getActivity());
+            recyclerView.setAdapter(matusetransAdapter);
         }
         if ((list == null || list.size() == 0) && page == 1) {
             nodatalayout.setVisibility(View.VISIBLE);
         } else {
-            wpitemAdapter.adddate(list);
+            matusetransAdapter.adddate(list);
         }
     }
 

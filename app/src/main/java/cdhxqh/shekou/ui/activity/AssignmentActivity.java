@@ -106,7 +106,7 @@ public class AssignmentActivity extends BaseActivity implements SwipeRefreshLayo
             }
 
             @Override
-            public void onSuccess(Results results, int totalPages, int currentPage) {
+            public void onSuccess(Results results, int currentPage, int showcount) {
                 if (nodatalayout.getVisibility() == View.VISIBLE) {
                     nodatalayout.setVisibility(View.GONE);
                 }
@@ -120,7 +120,9 @@ public class AssignmentActivity extends BaseActivity implements SwipeRefreshLayo
                         assignmentAdapter = new AssignmentAdapter(AssignmentActivity.this);
                         recyclerView.setAdapter(assignmentAdapter);
                     }
-                    assignmentAdapter.adddate(items);
+                    if(page==currentPage){
+                        assignmentAdapter.adddate(items);
+                    }
                 }
             }
 

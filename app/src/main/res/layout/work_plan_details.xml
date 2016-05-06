@@ -1,255 +1,312 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    android:id="@+id/work_plan_details"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_40dp"
         android:background="@color/light_gray2">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="@dimen/dimens_10"
             android:layout_marginBottom="@dimen/dimen_5"
+            android:layout_marginLeft="@dimen/dimens_10"
             android:text="@string/work_plan_details"
-            android:textSize="@dimen/dimens_16dp"
             android:textColor="@color/light_black"
-            />
+            android:textSize="@dimen/dimens_16dp" />
     </RelativeLayout>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_40dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimens_10"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimens_10"
             android:text="@string/work_jpnum"
-            android:textSize="@dimen/dimens_16dp"
-            android:textColor="@color/light_black"/>
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/dimens_16dp" />
+
         <TextView
             android:id="@+id/work_jpnum"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="35dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:textSize="@dimen/dimens_16dp"
-            android:textColor="@color/light_black"/>
+            android:layout_marginRight="35dp"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/dimens_16dp" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dimens_10"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/item_more"
-            />
+            android:layout_marginRight="@dimen/dimens_10"
+            android:src="@drawable/item_more" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/line"/>
+        android:background="@drawable/line" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_40dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimens_10"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimens_10"
             android:text="@string/work_isjf"
-            android:textSize="@dimen/dimens_16dp"
-            android:textColor="@color/light_black"/>
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/dimens_16dp" />
+
         <CheckBox
             android:id="@+id/work_isjf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dimens_10"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:button="@drawable/checkbox"
-            android:background="@color/white"/>
+            android:layout_marginRight="@dimen/dimens_10"
+            android:background="@color/white"
+            android:button="@drawable/checkbox" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/line"/>
+        android:background="@drawable/line" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_40dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dimens_10"
-            android:layout_centerVertical="true"
-            android:text="@string/work_yfwh"
-            android:textSize="@dimen/dimens_16dp"
-            android:textColor="@color/light_black"/>
-        <CheckBox
-            android:id="@+id/work_yfwh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dimens_10"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:button="@drawable/checkbox"
-            android:background="@color/white"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/line"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_40dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimens_10"
-            android:layout_centerVertical="true"
-            android:text="@string/work_reportedby"
-            android:textSize="@dimen/dimens_16dp"
-            android:textColor="@color/light_black"/>
-        <TextView
-            android:id="@+id/work_reportedby"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dimens_10"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textSize="@dimen/dimens_16dp"
-            android:textColor="@color/light_black"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/line"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_40dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimens_10"
-            android:layout_centerVertical="true"
-            android:text="@string/work_reportdate"
-            android:textSize="@dimen/dimens_16dp"
-            android:textColor="@color/light_black"/>
-        <TextView
-            android:id="@+id/work_reportdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dimens_10"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:textSize="@dimen/dimens_16dp"
-            android:textColor="@color/light_black"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/line"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_40dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimens_10"
-            android:layout_centerVertical="true"
-            android:text="@string/work_udisjj"
-            android:textSize="@dimen/dimens_16dp"
-            android:textColor="@color/light_black"/>
-        <CheckBox
-            android:id="@+id/work_udisjj"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dimens_10"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:button="@drawable/checkbox"
-            android:background="@color/white"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/line"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_40dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimens_10"
-            android:layout_centerVertical="true"
-            android:text="@string/work_udisaq"
-            android:textSize="@dimen/dimens_16dp"
-            android:textColor="@color/light_black"/>
-        <CheckBox
-            android:id="@+id/work_udisaq"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dimens_10"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:button="@drawable/checkbox"
-            android:background="@color/white"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/line"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_40dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimens_10"
-            android:layout_centerVertical="true"
-            android:text="@string/work_udisbx"
-            android:textSize="@dimen/dimens_16dp"
-            android:textColor="@color/light_black"/>
-        <CheckBox
-            android:id="@+id/work_udisbx"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dimens_10"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:button="@drawable/checkbox"
-            android:background="@color/white"/>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/line"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_40dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimens_10"
-            android:layout_centerVertical="true"
             android:text="@string/work_udiscb"
-            android:textSize="@dimen/dimens_16dp"
-            android:textColor="@color/light_black"/>
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/dimens_16dp" />
+
         <CheckBox
             android:id="@+id/work_udiscb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/dimens_10"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:button="@drawable/checkbox"
-            android:background="@color/white"/>
+            android:layout_marginRight="@dimen/dimens_10"
+            android:background="@color/white"
+            android:button="@drawable/checkbox" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@drawable/line"/>
+        android:background="@drawable/line" />
+
+    <LinearLayout
+        android:id="@+id/work_pmnum_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dimens_10"
+                android:text="@string/work_pmnum"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/work_pmnum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dimens_10"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:text="@string/work_reportedby"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/dimens_16dp" />
+
+        <TextView
+            android:id="@+id/work_reportedby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/dimens_16dp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:text="@string/work_reportdate"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/dimens_16dp" />
+
+        <TextView
+            android:id="@+id/work_reportdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/dimens_16dp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:text="@string/work_udyxj"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/dimens_16dp" />
+
+        <TextView
+            android:id="@+id/work_udyxj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="35dp"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/dimens_16dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:src="@drawable/item_more" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:text="@string/work_udisaq"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/dimens_16dp" />
+
+        <CheckBox
+            android:id="@+id/work_udisaq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:background="@color/white"
+            android:button="@drawable/checkbox" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:text="@string/work_udisbx"
+            android:textColor="@color/light_black"
+            android:textSize="@dimen/dimens_16dp" />
+
+        <CheckBox
+            android:id="@+id/work_udisbx"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:background="@color/white"
+            android:button="@drawable/checkbox" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line" />
+
 </LinearLayout>

@@ -100,20 +100,26 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
                 ArrayList<Failurereport> failurereports = JsonUtils.parsingFailurereport(Work_FailurereportActivity.this, results.getResultlist());
                 addListData(failurereports);
                 refresh_layout.setRefreshing(false);
-                refresh_layout.setLoading(false);
             }
 
             @Override
             public void onFailure(String error) {
                 refresh_layout.setRefreshing(false);
-                refresh_layout.setLoading(false);
             }
         });
     }
 
     private void addListData(ArrayList<Failurereport> list) {
-        if (list.size() == 0) {
-
+        if (list.size() == 3) {
+            for(int i = 0;i < list.size();i ++){
+                if(list.get(i).type.equals("问题")){
+                    question.setText(list.get(i).failurecode);
+                }else if(list.get(i).type.equals("原因")){
+                    cause.setText(list.get(i).failurecode);
+                }else if(list.get(i).type.equals("补救措施")){
+                    rememdy.setText(list.get(i).failurecode);
+                }
+            }
         }
     }
 

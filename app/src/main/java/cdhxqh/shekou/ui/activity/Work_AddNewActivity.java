@@ -46,29 +46,39 @@ public class Work_AddNewActivity extends BaseActivity {
     private LinearLayout reportLinearLayout;
 
     private WorkOrder workOrder = new WorkOrder();
+    private LinearLayout work_numlayout;
     private TextView wonum;//工单号
     private EditText description;//工单描述
+    private TextView worktype;//工作类型
+    private TextView assetnum;//设备
     private TextView glz;//管理组
     private TextView gls;//管理室
     private TextView glbz;//管理班组
     private TextView status;//状态
     private TextView statusdate;//状态日期
+    private LinearLayout work_plan_details_layout;
     private TextView jpnum;//作业计划
     private CheckBox udisjf;//是否按项目计费
-    private CheckBox yfwh;//预防性维护
+    private CheckBox pmnum;//预防性维护
+    private TextView udcreateby;//创建人
+    private TextView udcreatedate;//创建日期
     private TextView reportedby;//报告人
     private TextView reportdate;//报告日期
     private CheckBox udisjj;//是否紧急维修
+    private TextView udyxj;//优先级
     private CheckBox udisaq;//是否安全
     private CheckBox udisbx;//是否保修
     private CheckBox udiscb;//是否抄表
-    private TextView sdisplayname;//工作执行人
+    private LinearLayout work_plan_info_layout;
+    private TextView lead;//工作执行人
     private TextView udisplayname;//承包商负责人
     private TextView targstartdate;//计划开始时间
     private TextView targcompdate;//计划完成时间
+    private LinearLayout work_real_info_layout;
     private TextView actstart;//实际开始时间
     private TextView actfinish;//实际完成时间
-    private EditText udtjsj;//停机时间
+    private LinearLayout work_udremark_layout;
+    private EditText udtjsj;//实际维修时间
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,29 +101,41 @@ public class Work_AddNewActivity extends BaseActivity {
         menuImageView = (ImageView) findViewById(R.id.title_add);
         backlayout = (RelativeLayout) findViewById(R.id.title_back);
 
+        work_numlayout = (LinearLayout) findViewById(R.id.work_numlayout);
         wonum = (TextView) findViewById(R.id.work_wonum);
         description = (EditText) findViewById(R.id.work_description);
+        worktype = (TextView) findViewById(R.id.work_worktype);
+        assetnum = (TextView) findViewById(R.id.work_assetnum);
         glz = (TextView) findViewById(R.id.work_glz);
         gls = (TextView) findViewById(R.id.work_gls);
         glbz = (TextView) findViewById(R.id.work_glbz);
         status = (TextView) findViewById(R.id.work_status);
         statusdate = (TextView) findViewById(R.id.work_statusdate);
 
+        work_plan_details_layout = (LinearLayout) findViewById(R.id.work_plan_details);
         jpnum = (TextView) findViewById(R.id.work_jpnum);
         udisjf = (CheckBox) findViewById(R.id.work_isjf);
-        yfwh = (CheckBox) findViewById(R.id.work_yfwh);
+        pmnum = (CheckBox) findViewById(R.id.work_pmnum);
+        udcreateby = (TextView) findViewById(R.id.work_udcreateby);
+        udcreatedate = (TextView) findViewById(R.id.work_udcreatedate);
         reportedby = (TextView) findViewById(R.id.work_reportedby);
         reportdate = (TextView) findViewById(R.id.work_reportdate);
         udisjj = (CheckBox) findViewById(R.id.work_udisjj);
         udisaq = (CheckBox) findViewById(R.id.work_udisaq);
         udisbx = (CheckBox) findViewById(R.id.work_udisbx);
         udiscb = (CheckBox) findViewById(R.id.work_udiscb);
-        sdisplayname = (TextView) findViewById(R.id.work_sdisplayname);
+
+        work_plan_info_layout = (LinearLayout) findViewById(R.id.work_plan_info);
+        lead = (TextView) findViewById(R.id.work_lead);
         udisplayname = (TextView) findViewById(R.id.work_udisplayname);
         targstartdate = (TextView) findViewById(R.id.work_targstartdate);
         targcompdate = (TextView) findViewById(R.id.work_targcompdate);
+
+        work_real_info_layout = (LinearLayout) findViewById(R.id.work_real_info);
         actstart = (TextView) findViewById(R.id.work_actstart);
         actfinish = (TextView) findViewById(R.id.work_actfinish);
+
+        work_udremark_layout = (LinearLayout) findViewById(R.id.work_udremark_layout);
         udtjsj = (EditText) findViewById(R.id.work_udtjsj);
     }
 
@@ -201,7 +223,7 @@ public class Work_AddNewActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(Work_AddNewActivity.this,Work_PlanActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putParcelable("workOrder", workOrder);
+            bundle.putSerializable("workOrder", workOrder);
             intent.putExtras(bundle);
             startActivity(intent);
             startActivity(intent);
@@ -213,7 +235,7 @@ public class Work_AddNewActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(Work_AddNewActivity.this,AssignmentActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putParcelable("workOrder", workOrder);
+            bundle.putSerializable("workOrder", workOrder);
             intent.putExtras(bundle);
             startActivity(intent);
             popupWindow.dismiss();
@@ -225,7 +247,7 @@ public class Work_AddNewActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(Work_AddNewActivity.this,Work_RealinfoActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putParcelable("workOrder", workOrder);
+            bundle.putSerializable("workOrder", workOrder);
             intent.putExtras(bundle);
             startActivity(intent);
             popupWindow.dismiss();
@@ -237,7 +259,7 @@ public class Work_AddNewActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(Work_AddNewActivity.this,Work_FailurereportActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putParcelable("workOrder", workOrder);
+            bundle.putSerializable("workOrder", workOrder);
             intent.putExtras(bundle);
             startActivity(intent);
             popupWindow.dismiss();

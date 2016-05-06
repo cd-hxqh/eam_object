@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/work_real_info"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -99,6 +100,36 @@
             android:textColor="@color/light_black"/>
         <EditText
             android:id="@+id/work_udtjsj"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@color/white"
+            android:hint="@string/work_udtjsj_hint"
+            android:gravity="right"
+            android:textSize="@dimen/dimens_16dp"
+            android:textColor="@color/light_black"
+            />
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:layout_marginTop="20dp"
+            android:layout_centerVertical="true"
+            android:text="@string/work_udtjtime"
+            android:textSize="@dimen/dimens_16dp"
+            android:textColor="@color/light_black"/>
+        <EditText
+            android:id="@+id/work_udtjtime"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimens_10"

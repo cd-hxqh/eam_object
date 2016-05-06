@@ -101,10 +101,10 @@ public class WplaborFragment extends Fragment implements SwipeRefreshLayout.OnRe
             @Override
             public void onSuccess(Results results, int currentPage, int showcount) {
                 ArrayList<Wplabor> wplabors = null;
+                wplabors = JsonUtils.parsingWplabor(getActivity(), results.getResultlist());
                 if (currentPage == page) {
-                    wplabors = JsonUtils.parsingWplabor(getActivity(), results.getResultlist());
+                    addListData(wplabors);
                 }
-                addListData(wplabors);
                 refresh_layout.setRefreshing(false);
                 refresh_layout.setLoading(false);
             }

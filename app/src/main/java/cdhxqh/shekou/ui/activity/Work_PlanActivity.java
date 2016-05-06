@@ -1,6 +1,7 @@
 package cdhxqh.shekou.ui.activity;
 
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -42,6 +43,7 @@ public class Work_PlanActivity extends BaseActivity {
     private WpitemFragment wpitemFragment;
 
     public WorkOrder workOrder;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +57,7 @@ public class Work_PlanActivity extends BaseActivity {
     private void geiIntentData() {
         workOrder = getIntent().getParcelableExtra("workOrder");
     }
+
     @Override
     protected void findViewById() {
         titlename = (TextView) findViewById(R.id.title_name);
@@ -80,7 +83,7 @@ public class Work_PlanActivity extends BaseActivity {
         });
         menuImageView.setImageResource(R.drawable.add);
         menuImageView.setVisibility(View.VISIBLE);
-//        menuImageView.setOnClickListener(menuImageViewOnClickListener);
+        menuImageView.setOnClickListener(menuImageViewOnClickListener);
         task.setBackground(getResources().getDrawable(R.drawable.button_true_shape));
         task.setOnClickListener(new Buttonlistener());
         worker.setOnClickListener(new Buttonlistener());
@@ -97,26 +100,42 @@ public class Work_PlanActivity extends BaseActivity {
         task.performClick();
     }
 
+    private View.OnClickListener menuImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent;
+            if (currentIndex == 0) {
+
+            } else if (currentIndex == 1) {
+                intent = new Intent(Work_PlanActivity.this,AddWplaborActivity.class);
+                startActivity(intent);
+            } else if (currentIndex == 2) {
+
+            }
+        }
+    };
+
     public class Buttonlistener implements View.OnClickListener {
-        public Buttonlistener(){
+        public Buttonlistener() {
 
         }
+
         @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
         @Override
         public void onClick(View view) {
             resetTextView();
-            if(view.getId()==task.getId()){
+            if (view.getId() == task.getId()) {
                 view.setBackground(getResources().getDrawable(R.drawable.button_true_shape));
                 task.setTextColor(getResources().getColor(R.color.white));
-                currentIndex=0;
-            }else if(view.getId()==worker.getId()){
+                currentIndex = 0;
+            } else if (view.getId() == worker.getId()) {
                 view.setBackground(getResources().getDrawable(R.drawable.button_true_shape));
                 worker.setTextColor(getResources().getColor(R.color.white));
-                currentIndex=1;
-            }else if(view.getId()==meterial.getId()){
+                currentIndex = 1;
+            } else if (view.getId() == meterial.getId()) {
                 view.setBackground(getResources().getDrawable(R.drawable.button_true_shape));
                 meterial.setTextColor(getResources().getColor(R.color.white));
-                currentIndex=2;
+                currentIndex = 2;
             }
             mViewPager.setCurrentItem(currentIndex);
         }

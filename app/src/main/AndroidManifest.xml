@@ -78,6 +78,10 @@
             android:label="@string/title_activity_workwpitemdetails" >
         </activity>
         <activity
+            android:name=".ui.activity.AddWplaborActivity"
+            android:label="@string/title_activity_workwplabor_add" >
+        </activity>
+        <activity
             android:name=".ui.activity.AssignmentActivity"
             android:label="@string/title_activity_assignment" >
         </activity>

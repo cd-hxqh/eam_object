@@ -3,6 +3,7 @@ package cdhxqh.shekou.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,7 @@ import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.ui.adapter.WorkListAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
+import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
  * Created by think on 2015/10/27.
@@ -88,6 +90,13 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
                 Intent intent = new Intent(Work_ListActivity.this,Work_AddNewActivity.class);
                 intent.putExtra("worktype",worktype);
                 startActivity(intent);
+//                new AsyncTask<String,String,String>(){
+//                    @Override
+//                    protected String doInBackground(String... strings) {
+//                        new AndroidClientService().InsertWO("");
+//                        return null;
+//                    }
+//                }.execute();
             }
         });
         backlayout.setOnClickListener(new View.OnClickListener() {
@@ -164,7 +173,7 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
                                     Work_ListActivity.this.getCurrentFocus()
                                             .getWindowToken(),
                                     InputMethodManager.HIDE_NOT_ALWAYS);
-                    searchText = search.getText().toString();
+                    searchText = search.getText().toString().trim();
                     workListAdapter = new WorkListAdapter(Work_ListActivity.this);
                     recyclerView.setAdapter(workListAdapter);
                     getData(searchText);

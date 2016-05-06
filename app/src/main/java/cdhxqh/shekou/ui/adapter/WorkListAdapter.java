@@ -50,7 +50,7 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, Work_detailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("workOrder", workOrder);
+                bundle.putSerializable("workOrder", workOrder);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }

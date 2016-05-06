@@ -18,6 +18,7 @@ import java.util.List;
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.ui.fragment.LabtransFragment;
+import cdhxqh.shekou.ui.fragment.MatusetransFragment;
 import cdhxqh.shekou.ui.fragment.WoactivityFragment;
 import cdhxqh.shekou.ui.fragment.WpitemFragment;
 
@@ -42,7 +43,7 @@ public class Work_RealinfoActivity extends BaseActivity {
     private List<Fragment> fragmentlist = new ArrayList<Fragment>();
     private WoactivityFragment woactivityFragment;
     private LabtransFragment labtransFragment;
-    private WpitemFragment wpitemFragment;
+    private MatusetransFragment matusetransFragment;
 
     public WorkOrder workOrder;
 
@@ -92,10 +93,10 @@ public class Work_RealinfoActivity extends BaseActivity {
         fragmentlist = new ArrayList<Fragment>();
         labtransFragment = new LabtransFragment(workOrder);
         woactivityFragment = new WoactivityFragment(workOrder);
-        wpitemFragment = new WpitemFragment(workOrder);
+        matusetransFragment = new MatusetransFragment(workOrder);
         fragmentlist.add(woactivityFragment);
         fragmentlist.add(labtransFragment);
-        fragmentlist.add(wpitemFragment);
+        fragmentlist.add(matusetransFragment);
         mViewPager.setAdapter(new MyFrageStatePagerAdapter(getSupportFragmentManager()));//设置ViewPager的适配器
         mViewPager.setOnPageChangeListener(new MyPagerOnPageChangeListener());
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/work_numlayout"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -71,11 +72,11 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimens_10"
             android:layout_centerVertical="true"
-            android:text="@string/work_glz"
+            android:text="@string/work_worktype"
             android:textSize="@dimen/dimens_16dp"
             android:textColor="@color/light_black"/>
         <TextView
-            android:id="@+id/work_glz"
+            android:id="@+id/work_worktype"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimens_10"
@@ -84,6 +85,56 @@
             android:textSize="@dimen/dimens_16dp"
             android:textColor="@color/light_black"/>
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:layout_centerVertical="true"
+            android:text="@string/work_assetnum"
+            android:textSize="@dimen/dimens_16dp"
+            android:textColor="@color/light_black"/>
+        <TextView
+            android:id="@+id/work_assetnum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/dimens_16dp"
+            android:textColor="@color/light_black"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"/>
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_40dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dimens_10"
+        android:layout_centerVertical="true"
+        android:text="@string/work_glz"
+        android:textSize="@dimen/dimens_16dp"
+        android:textColor="@color/light_black"/>
+    <TextView
+        android:id="@+id/work_glz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dimens_10"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:textSize="@dimen/dimens_16dp"
+        android:textColor="@color/light_black"/>
+</RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -176,6 +227,81 @@
             android:textColor="@color/light_black"/>
         <TextView
             android:id="@+id/work_statusdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/dimens_16dp"
+            android:textColor="@color/light_black"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:layout_centerVertical="true"
+            android:text="@string/work_udisjj"
+            android:textSize="@dimen/dimens_16dp"
+            android:textColor="@color/light_black"/>
+        <CheckBox
+            android:id="@+id/work_udisjj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/checkbox"
+            android:background="@color/white"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:layout_centerVertical="true"
+            android:text="@string/work_udcreateby"
+            android:textSize="@dimen/dimens_16dp"
+            android:textColor="@color/light_black"/>
+        <TextView
+            android:id="@+id/work_udcreateby"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dimens_10"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/dimens_16dp"
+            android:textColor="@color/light_black"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_40dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimens_10"
+            android:layout_centerVertical="true"
+            android:text="@string/work_udcreatedate"
+            android:textSize="@dimen/dimens_16dp"
+            android:textColor="@color/light_black"/>
+        <TextView
+            android:id="@+id/work_udcreatedate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/dimens_10"
