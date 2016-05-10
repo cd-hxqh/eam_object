@@ -50,7 +50,7 @@ public class WoactivityAdapter extends RecyclerView.Adapter<WoactivityAdapter.Vi
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, WoactivityDetailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("woactivity", woactivity);
+                bundle.putSerializable("woactivity", woactivity);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }

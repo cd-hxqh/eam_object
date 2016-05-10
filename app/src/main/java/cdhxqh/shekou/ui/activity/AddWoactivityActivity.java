@@ -10,12 +10,13 @@ import android.widget.TextView;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Woactivity;
+import cdhxqh.shekou.model.Wplabor;
 
 /**
- * Created by think on 2015/11/6.
- * 任务详情页面
+ * Created by think on 2016/5/10.
+ * 添加工单任务列表
  */
-public class WoactivityDetailsActivity extends BaseActivity {
+public class AddWoactivityActivity extends BaseActivity {
     /**
      * 返回按钮
      */
@@ -36,25 +37,15 @@ public class WoactivityDetailsActivity extends BaseActivity {
     private EditText udremark;//备注
     private Button confirm;//确定
 
-//    private TextView targstartdate;//计划开始时间
-//    private TextView targcompdate;//计划完成时间
-//    private TextView actstart;//时间开始时间
-//    private TextView actfinish;///实际完成时间
-//    private TextView estdur;//持续时间
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_woactivity_details);
+        setContentView(R.layout.activity_add_woactivity);
 
-        geiIntentData();
         findViewById();
         initView();
     }
 
-    private void geiIntentData() {
-        woactivity = (Woactivity) getIntent().getParcelableExtra("woactivity");
-    }
     @Override
     protected void findViewById() {
         backImageView = (ImageView) findViewById(R.id.title_back_id);
@@ -69,11 +60,6 @@ public class WoactivityDetailsActivity extends BaseActivity {
         udyqyy = (EditText) findViewById(R.id.work_woactivity_udyqyy);
         udremark = (EditText) findViewById(R.id.work_woactivity_udremark);
         confirm = (Button) findViewById(R.id.confirm);
-//        targstartdate = (TextView) findViewById(R.id.work_woactivity_targstartdate);
-//        targcompdate = (TextView) findViewById(R.id.work_woactivity_targcompdate);
-//        actstart = (TextView) findViewById(R.id.work_woactivity_actstart);
-//        actfinish = (TextView) findViewById(R.id.work_woactivity_actfinish);
-//        estdur = (TextView) findViewById(R.id.work_woactivity_estdur);
     }
 
     @Override
@@ -84,21 +70,6 @@ public class WoactivityDetailsActivity extends BaseActivity {
                 finish();
             }
         });
-        titleTextView.setText(getResources().getString(R.string.title_activity_workplandetails));
-
-//        taskid.setText(woactivity.taskid);
-//        wojo1.setText(woactivity.wojo1);
-//        description.setText(woactivity.description);
-//        wojo2.setChecked(!woactivity.wojo2.equals("0"));
-//        udisdo.setChecked(!woactivity.udisdo.equals("0"));
-//        udisyq.setChecked(!woactivity.udisyq.equals("0"));
-//        udyqyy.setText(woactivity.udyqyy);
-//        udremark.setText(woactivity.udremark);
-
-//        targstartdate.setText(woactivity.targstartdate);
-//        targcompdate.setText(woactivity.targcompdate);
-//        actstart.setText(woactivity.actstart);
-//        actfinish.setText(woactivity.actfinish);
-//        estdur.setText(woactivity.estdur);
+        titleTextView.setText(getResources().getString(R.string.title_activity_workwoactivity_add));
     }
 }

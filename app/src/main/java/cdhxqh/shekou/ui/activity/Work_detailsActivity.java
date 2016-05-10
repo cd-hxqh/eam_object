@@ -31,10 +31,10 @@ public class Work_detailsActivity extends BaseActivity {
      * 工作计划*
      */
     private LinearLayout planLinearlayout;
-    /**
-     * 任务分配*
-     */
-    private LinearLayout taskLinearLayout;
+//    /**
+//     * 任务分配*
+//     */
+//    private LinearLayout taskLinearLayout;
     /**
      * 实际情况
      */
@@ -48,6 +48,7 @@ public class Work_detailsActivity extends BaseActivity {
     private LinearLayout work_numlayout;
     private TextView wonum;//工单号
     private EditText description;//工单描述
+    private LinearLayout description_layout;
     private TextView worktype;//工作类型
     private TextView assetnum;//设备
     private TextView woeq1;//管理组
@@ -65,12 +66,21 @@ public class Work_detailsActivity extends BaseActivity {
     private TextView reportedby;//报告人
     private TextView reportdate;//报告日期
     private CheckBox udisjj;//是否紧急维修
+    private LinearLayout udisjj_layout;
     private TextView udyxj;//优先级
     private CheckBox udisaq;//是否安全
     private CheckBox udisbx;//是否保修
     private CheckBox udiscb;//是否抄表
+    private TextView udprojapprnum;//立项编号
+    private LinearLayout udprojapprnum_layout;
+    private TextView udevnum;//事故号
+    private LinearLayout udevnum_layout;
+    private TextView udbugnum;//项目预算
+    private TextView wudbugnum_text;
+    private LinearLayout udbugnum_layout;
     private LinearLayout work_plan_info_layout;
     private TextView lead;//工作执行人
+    private LinearLayout work_em_info_layout;
 //    private TextView udisplayname;//承包商负责人
     private TextView targstartdate;//计划开始时间
     private TextView targcompdate;//计划完成时间
@@ -107,6 +117,7 @@ public class Work_detailsActivity extends BaseActivity {
         work_numlayout = (LinearLayout) findViewById(R.id.work_numlayout);
         wonum = (TextView) findViewById(R.id.work_wonum);
         description = (EditText) findViewById(R.id.work_description);
+        description_layout = (LinearLayout) findViewById(R.id.work_description_layout);
         worktype = (TextView) findViewById(R.id.work_worktype);
         assetnum = (TextView) findViewById(R.id.work_assetnum);
         woeq1 = (TextView) findViewById(R.id.work_glz);
@@ -125,13 +136,22 @@ public class Work_detailsActivity extends BaseActivity {
         reportedby = (TextView) findViewById(R.id.work_reportedby);
         reportdate = (TextView) findViewById(R.id.work_reportdate);
         udisjj = (CheckBox) findViewById(R.id.work_udisjj);
+        udisjj_layout = (LinearLayout) findViewById(R.id.work_udisjj_layout);
         udyxj = (TextView) findViewById(R.id.work_udyxj);
         udisaq = (CheckBox) findViewById(R.id.work_udisaq);
         udisbx = (CheckBox) findViewById(R.id.work_udisbx);
         udiscb = (CheckBox) findViewById(R.id.work_udiscb);
+        udprojapprnum = (TextView) findViewById(R.id.work_udprojapprnum);
+        udprojapprnum_layout = (LinearLayout) findViewById(R.id.work_udprojapprnum_layout);
+        udevnum = (TextView) findViewById(R.id.work_udevnum);
+        udevnum_layout = (LinearLayout) findViewById(R.id.work_udevnum_layout);
+        udbugnum = (TextView) findViewById(R.id.work_udbugnum);
+        wudbugnum_text = (TextView) findViewById(R.id.work_udbugnum_text);
+        udbugnum_layout = (LinearLayout) findViewById(R.id.work_udbugnum_layout);
 
         work_plan_info_layout = (LinearLayout) findViewById(R.id.work_plan_info);
         lead = (TextView) findViewById(R.id.work_lead);
+        work_em_info_layout = (LinearLayout) findViewById(R.id.work_em_info);
 //        udisplayname = (TextView) findViewById(R.id.work_udisplayname);
         targstartdate = (TextView) findViewById(R.id.work_targstartdate);
         targcompdate = (TextView) findViewById(R.id.work_targcompdate);
@@ -157,7 +177,6 @@ public class Work_detailsActivity extends BaseActivity {
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
 
-
         wonum.setText(workOrder.wonum);
         description.setText(workOrder.description);
         worktype.setText(workOrder.worktype);
@@ -181,6 +200,9 @@ public class Work_detailsActivity extends BaseActivity {
         udisaq.setChecked(ischeck(workOrder.udisaq));
         udisbx.setChecked(ischeck(workOrder.udisbx));
         udiscb.setChecked(ischeck(workOrder.udiscb));
+        udprojapprnum.setText(workOrder.udprojapprnum);
+        udevnum.setText(workOrder.udevnum);
+        udbugnum.setText(workOrder.udbugnum);
         lead.setText(workOrder.lead);
 //        udisplayname.setText(workOrder.udisplayname);
         targstartdate.setText(workOrder.targstartdate.equals("null") ? "" : workOrder.targstartdate);
@@ -200,10 +222,20 @@ public class Work_detailsActivity extends BaseActivity {
             case "CM"://故障工单
                 break;
             case "EM"://抢修工单
+                udisjj_layout.setVisibility(View.GONE);
+                description_layout.setVisibility(View.GONE);
+                work_plan_details_layout.setVisibility(View.GONE);
+                work_plan_info_layout.setVisibility(View.GONE);
+                work_em_info_layout.setVisibility(View.VISIBLE);
                 break;
             case "EV"://事故工单
+                udbugnum_layout.setVisibility(View.VISIBLE);
+                wudbugnum_text.setText("事故预算");
+                udevnum_layout.setVisibility(View.VISIBLE);
                 break;
             case "PJ"://项目工单
+                udprojapprnum_layout.setVisibility(View.VISIBLE);
+                udbugnum_layout.setVisibility(View.VISIBLE);
                 break;
             case "PM"://预防性维护工单
                 pmnum_layout.setVisibility(View.VISIBLE);
@@ -226,20 +258,20 @@ public class Work_detailsActivity extends BaseActivity {
                 break;
             case "PJ"://项目工单
                 planLinearlayout.setVisibility(View.GONE);
-                taskLinearLayout.setVisibility(View.GONE);
+//                taskLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "PM"://预防性维护工单
                 pmnum_layout.setVisibility(View.VISIBLE);
                 planLinearlayout.setVisibility(View.GONE);
-                taskLinearLayout.setVisibility(View.GONE);
+//                taskLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "RS"://可维修备件工单
                 break;
             case "SR"://状态维修工单
                 planLinearlayout.setVisibility(View.GONE);
-                taskLinearLayout.setVisibility(View.GONE);
+//                taskLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
         }
@@ -301,11 +333,11 @@ public class Work_detailsActivity extends BaseActivity {
         popupWindow.showAsDropDown(view);
 
         planLinearlayout = (LinearLayout) contentView.findViewById(R.id.work_plan_id);
-        taskLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_task_id);
+//        taskLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_task_id);
         realinfoLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_realinfo_id);
         reportLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_report_id);
         planLinearlayout.setOnClickListener(planOnClickListener);
-        taskLinearLayout.setOnClickListener(taskOnClickListener);
+//        taskLinearLayout.setOnClickListener(taskOnClickListener);
         realinfoLinearLayout.setOnClickListener(realinfoOnClickListener);
         reportLinearLayout.setOnClickListener(reportOnClickListener);
         decisionLayout();
@@ -315,7 +347,7 @@ public class Work_detailsActivity extends BaseActivity {
     private View.OnClickListener planOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(Work_detailsActivity.this, Work_PlanActivity.class);
+            Intent intent = new Intent(Work_detailsActivity.this, Woactivity_Activity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("workOrder", workOrder);
             intent.putExtras(bundle);
@@ -324,22 +356,22 @@ public class Work_detailsActivity extends BaseActivity {
         }
     };
 
-    private View.OnClickListener taskOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(Work_detailsActivity.this, AssignmentActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("workOrder", workOrder);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            popupWindow.dismiss();
-        }
-    };
+//    private View.OnClickListener taskOnClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            Intent intent = new Intent(Work_detailsActivity.this, AssignmentActivity.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable("workOrder", workOrder);
+//            intent.putExtras(bundle);
+//            startActivity(intent);
+//            popupWindow.dismiss();
+//        }
+//    };
 
     private View.OnClickListener realinfoOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(Work_detailsActivity.this, Work_RealinfoActivity.class);
+            Intent intent = new Intent(Work_detailsActivity.this, LabtransListActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("workOrder", workOrder);
             intent.putExtras(bundle);

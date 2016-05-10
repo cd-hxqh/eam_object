@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/work_plan_info"
+    android:id="@+id/work_em_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:visibility="gone">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,7 +18,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/dimen_5"
             android:layout_marginLeft="@dimen/dimens_10"
-            android:text="@string/work_plan_info"
+            android:text="@string/work_em_info"
             android:textColor="@color/light_black"
             android:textSize="@dimen/dimens_16dp" />
     </RelativeLayout>
@@ -38,12 +39,12 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/work_lead"
+                android:text="@string/work_udqxbz"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
             <TextView
-                android:id="@+id/work_lead"
+                android:id="@+id/work_udqxbz"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -51,53 +52,7 @@
                 android:gravity="center_vertical"
                 android:hint="@string/have_not_data"
                 android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dimens_10"
-                android:src="@drawable/item_more" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:visibility="gone">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dimens_10"
-                android:text="@string/work_udisplayname"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-
-            <TextView
-                android:id="@+id/work_udisplayname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="35dp"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dimens_10"
-                android:src="@drawable/item_more" />
+                android:textSize="@dimen/dimens_16dp"/>
         </LinearLayout>
 
         <View
@@ -115,12 +70,12 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/work_targstartdate"
+                android:text="@string/work_lead1"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
             <TextView
-                android:id="@+id/work_targstartdate"
+                android:id="@+id/work_lead1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -128,7 +83,7 @@
                 android:gravity="center_vertical"
                 android:hint="@string/have_not_data"
                 android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
+                android:textSize="@dimen/dimens_16dp"/>
         </LinearLayout>
 
         <View
@@ -146,12 +101,12 @@
             <TextView
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/work_targcompdate"
+                android:text="@string/work_supervisor"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
             <TextView
-                android:id="@+id/work_targcompdate"
+                android:id="@+id/work_supervisor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -159,7 +114,38 @@
                 android:gravity="center_vertical"
                 android:hint="@string/have_not_data"
                 android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/work_udsupervisor2"
+                android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/work_udsupervisor2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:drawableRight="@drawable/item_more"
+                android:gravity="center_vertical"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp"/>
         </LinearLayout>
 
         <View

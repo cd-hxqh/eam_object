@@ -51,7 +51,7 @@ public class LabtransAdapter extends RecyclerView.Adapter<LabtransAdapter.ViewHo
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, LabtransDetailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putParcelable("labtrans", labtrans);
+                bundle.putSerializable("labtrans", labtrans);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }

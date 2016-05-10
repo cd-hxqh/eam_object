@@ -50,7 +50,7 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
     }
 
     private void geiIntentData() {
-        workOrder = getIntent().getParcelableExtra("workOrder");
+        workOrder = (WorkOrder) getIntent().getSerializableExtra("workOrder");
     }
     @Override
     protected void findViewById() {

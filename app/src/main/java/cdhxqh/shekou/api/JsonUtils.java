@@ -294,15 +294,20 @@ public class JsonUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
                 woactivity = new Woactivity();
                 jsonObject = jsonArray.getJSONObject(i);
-                woactivity.taskid = jsonObject.getString("TASKID"); //任务
+//                woactivity.taskid = jsonObject.getString("TASKID"); //任务
                 woactivity.description = jsonObject.getString("DESCRIPTION");//描述
                 woactivity.wojo1 = jsonObject.getString("WOJO1");//编号
                 woactivity.wojo2 = jsonObject.getString("WOJO2");//需要安检
-                woactivity.targstartdate = jsonObject.getString("TARGSTARTDATE");//计划开始时间
-                woactivity.targcompdate = jsonObject.getString("TARGCOMPDATE");//计划完成时间
-                woactivity.actstart = jsonObject.getString("ACTSTART");//时间开始时间
-                woactivity.actfinish = jsonObject.getString("ACTFINISH");//实际完成时间
-                woactivity.estdur = jsonObject.getString("ESTDUR");//持续时间
+//                woactivity.wojo2 = jsonObject.getString("UDISDO");//是否完成
+//                woactivity.wojo2 = jsonObject.getString("UDISYQ");//是否延期
+//                woactivity.wojo2 = jsonObject.getString("UDYQYY");//延期原因
+//                woactivity.wojo2 = jsonObject.getString("UDREMARK");//备注
+
+//                woactivity.targstartdate = jsonObject.getString("TARGSTARTDATE");//计划开始时间
+//                woactivity.targcompdate = jsonObject.getString("TARGCOMPDATE");//计划完成时间
+//                woactivity.actstart = jsonObject.getString("ACTSTART");//时间开始时间
+//                woactivity.actfinish = jsonObject.getString("ACTFINISH");//实际完成时间
+//                woactivity.estdur = jsonObject.getString("ESTDUR");//持续时间
                 list.add(woactivity);
             }
             return list;
@@ -469,18 +474,18 @@ public class JsonUtils {
                 labtrans.laborcode = jsonObject.getString("LABORCODE");//员工
                 labtrans.startdate = jsonObject.getString("STARTDATE");//工种
                 labtrans.starttime = jsonObject.getString("STARTTIME");//工种
-                labtrans.finishdate = jsonObject.getString("FINISHDATE");//员工合同
+//                labtrans.finishdate = jsonObject.getString("FINISHDATE");//员工合同
                 labtrans.finishtime = jsonObject.getString("FINISHTIME");//供应商
                 labtrans.regularhrs = jsonObject.getString("REGULARHRS");//调度开始时间
-                labtrans.enterby = jsonObject.getString("ENTERBY");//时数
-                labtrans.enterdate = jsonObject.getString("ENTERDATE");//状态
+//                labtrans.enterby = jsonObject.getString("ENTERBY");//时数
+//                labtrans.enterdate = jsonObject.getString("ENTERDATE");//状态
                 labtrans.payrate = jsonObject.getString("PAYRATE");//状态
                 labtrans.linecost = jsonObject.getString("LINECOST");//状态
                 labtrans.assetnum = jsonObject.getString("ASSETNUM");//状态
-                labtrans.transdate = jsonObject.getString("TRANSDATE");//状态
+//                labtrans.transdate = jsonObject.getString("TRANSDATE");//状态
                 labtrans.transtype = jsonObject.getString("TRANSTYPE");//状态
-                labtrans.orgid = jsonObject.getString("ORGID");//组织
-                labtrans.siteid = jsonObject.getString("SITEID");//地点
+//                labtrans.orgid = jsonObject.getString("ORGID");//组织
+//                labtrans.siteid = jsonObject.getString("SITEID");//地点
                 labtrans.labtransid = jsonObject.getString("LABTRANSID");//
                 list.add(labtrans);
             }

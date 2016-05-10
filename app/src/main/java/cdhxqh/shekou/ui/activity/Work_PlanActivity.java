@@ -55,7 +55,7 @@ public class Work_PlanActivity extends BaseActivity {
     }
 
     private void geiIntentData() {
-        workOrder = getIntent().getParcelableExtra("workOrder");
+        workOrder = (WorkOrder) getIntent().getSerializableExtra("workOrder");
     }
 
     @Override

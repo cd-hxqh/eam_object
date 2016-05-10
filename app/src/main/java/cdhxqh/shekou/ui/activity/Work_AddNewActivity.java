@@ -32,10 +32,10 @@ public class Work_AddNewActivity extends BaseActivity {
      * 工作计划*
      */
     private LinearLayout planLinearlayout;
-    /**
-     * 任务分配*
-     */
-    private LinearLayout taskLinearLayout;
+//    /**
+//     * 任务分配*
+//     */
+//    private LinearLayout taskLinearLayout;
     /**
      * 实际情况
      */
@@ -49,36 +49,49 @@ public class Work_AddNewActivity extends BaseActivity {
     private LinearLayout work_numlayout;
     private TextView wonum;//工单号
     private EditText description;//工单描述
+    private LinearLayout description_layout;
     private TextView worktype;//工作类型
     private TextView assetnum;//设备
-    private TextView glz;//管理组
-    private TextView gls;//管理室
-    private TextView glbz;//管理班组
+    private TextView woeq1;//管理组
+    private TextView woeq2;//管理室
+    private TextView woeq3;//管理班组
     private TextView status;//状态
     private TextView statusdate;//状态日期
     private LinearLayout work_plan_details_layout;
     private TextView jpnum;//作业计划
     private CheckBox udisjf;//是否按项目计费
-    private CheckBox pmnum;//预防性维护
+    private LinearLayout pmnum_layout;
+    private TextView pmnum;//预防性维护
     private TextView udcreateby;//创建人
     private TextView udcreatedate;//创建日期
     private TextView reportedby;//报告人
     private TextView reportdate;//报告日期
     private CheckBox udisjj;//是否紧急维修
+    private LinearLayout udisjj_layout;
     private TextView udyxj;//优先级
     private CheckBox udisaq;//是否安全
     private CheckBox udisbx;//是否保修
     private CheckBox udiscb;//是否抄表
+    private TextView udprojapprnum;//立项编号
+    private LinearLayout udprojapprnum_layout;
+    private TextView udevnum;//事故号
+    private LinearLayout udevnum_layout;
+    private TextView udbugnum;//项目预算
+    private TextView wudbugnum_text;
+    private LinearLayout udbugnum_layout;
     private LinearLayout work_plan_info_layout;
     private TextView lead;//工作执行人
-    private TextView udisplayname;//承包商负责人
+    private LinearLayout work_em_info_layout;
+    //    private TextView udisplayname;//承包商负责人
     private TextView targstartdate;//计划开始时间
     private TextView targcompdate;//计划完成时间
     private LinearLayout work_real_info_layout;
     private TextView actstart;//实际开始时间
     private TextView actfinish;//实际完成时间
-    private LinearLayout work_udremark_layout;
     private EditText udtjsj;//实际维修时间
+    private EditText udtjtime;//停机时间
+    private LinearLayout work_udremark_layout;
+    private EditText udremark;//备注
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,39 +117,51 @@ public class Work_AddNewActivity extends BaseActivity {
         work_numlayout = (LinearLayout) findViewById(R.id.work_numlayout);
         wonum = (TextView) findViewById(R.id.work_wonum);
         description = (EditText) findViewById(R.id.work_description);
+        description_layout = (LinearLayout) findViewById(R.id.work_description_layout);
         worktype = (TextView) findViewById(R.id.work_worktype);
         assetnum = (TextView) findViewById(R.id.work_assetnum);
-        glz = (TextView) findViewById(R.id.work_glz);
-        gls = (TextView) findViewById(R.id.work_gls);
-        glbz = (TextView) findViewById(R.id.work_glbz);
+        woeq1 = (TextView) findViewById(R.id.work_glz);
+        woeq2 = (TextView) findViewById(R.id.work_gls);
+        woeq3 = (TextView) findViewById(R.id.work_glbz);
         status = (TextView) findViewById(R.id.work_status);
         statusdate = (TextView) findViewById(R.id.work_statusdate);
 
         work_plan_details_layout = (LinearLayout) findViewById(R.id.work_plan_details);
         jpnum = (TextView) findViewById(R.id.work_jpnum);
         udisjf = (CheckBox) findViewById(R.id.work_isjf);
-        pmnum = (CheckBox) findViewById(R.id.work_pmnum);
+        pmnum_layout = (LinearLayout) findViewById(R.id.work_pmnum_layout);
+        pmnum = (TextView) findViewById(R.id.work_pmnum);
         udcreateby = (TextView) findViewById(R.id.work_udcreateby);
         udcreatedate = (TextView) findViewById(R.id.work_udcreatedate);
         reportedby = (TextView) findViewById(R.id.work_reportedby);
         reportdate = (TextView) findViewById(R.id.work_reportdate);
         udisjj = (CheckBox) findViewById(R.id.work_udisjj);
+        udisjj_layout = (LinearLayout) findViewById(R.id.work_udisjj_layout);
+        udyxj = (TextView) findViewById(R.id.work_udyxj);
         udisaq = (CheckBox) findViewById(R.id.work_udisaq);
         udisbx = (CheckBox) findViewById(R.id.work_udisbx);
         udiscb = (CheckBox) findViewById(R.id.work_udiscb);
+        udprojapprnum = (TextView) findViewById(R.id.work_udprojapprnum);
+        udprojapprnum_layout = (LinearLayout) findViewById(R.id.work_udprojapprnum_layout);
+        udevnum = (TextView) findViewById(R.id.work_udevnum);
+        udevnum_layout = (LinearLayout) findViewById(R.id.work_udevnum_layout);
+        udbugnum = (TextView) findViewById(R.id.work_udbugnum);
+        wudbugnum_text = (TextView) findViewById(R.id.work_udbugnum_text);
+        udbugnum_layout = (LinearLayout) findViewById(R.id.work_udbugnum_layout);
 
         work_plan_info_layout = (LinearLayout) findViewById(R.id.work_plan_info);
         lead = (TextView) findViewById(R.id.work_lead);
-        udisplayname = (TextView) findViewById(R.id.work_udisplayname);
+        work_em_info_layout = (LinearLayout) findViewById(R.id.work_em_info);
+//        udisplayname = (TextView) findViewById(R.id.work_udisplayname);
         targstartdate = (TextView) findViewById(R.id.work_targstartdate);
         targcompdate = (TextView) findViewById(R.id.work_targcompdate);
-
         work_real_info_layout = (LinearLayout) findViewById(R.id.work_real_info);
         actstart = (TextView) findViewById(R.id.work_actstart);
         actfinish = (TextView) findViewById(R.id.work_actfinish);
-
-        work_udremark_layout = (LinearLayout) findViewById(R.id.work_udremark_layout);
         udtjsj = (EditText) findViewById(R.id.work_udtjsj);
+        udtjtime = (EditText) findViewById(R.id.work_udtjtime);
+        work_udremark_layout = (LinearLayout) findViewById(R.id.work_udremark_layout);
+        udremark = (EditText) findViewById(R.id.work_udremark);
     }
 
     @Override
@@ -152,6 +177,68 @@ public class Work_AddNewActivity extends BaseActivity {
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
 
+        setLayout();
+    }
+
+    //按照工单类型修改布局
+    private void setLayout() {
+        switch (workOrder.worktype) {
+            case "CM"://故障工单
+                break;
+            case "EM"://抢修工单
+                udisjj_layout.setVisibility(View.GONE);
+                description_layout.setVisibility(View.GONE);
+                work_plan_details_layout.setVisibility(View.GONE);
+                work_plan_info_layout.setVisibility(View.GONE);
+                work_em_info_layout.setVisibility(View.VISIBLE);
+                break;
+            case "EV"://事故工单
+                udbugnum_layout.setVisibility(View.VISIBLE);
+                wudbugnum_text.setText("事故预算");
+                udevnum_layout.setVisibility(View.VISIBLE);
+                break;
+            case "PJ"://项目工单
+                udprojapprnum_layout.setVisibility(View.VISIBLE);
+                udbugnum_layout.setVisibility(View.VISIBLE);
+                break;
+            case "PM"://预防性维护工单
+                pmnum_layout.setVisibility(View.VISIBLE);
+                break;
+            case "RS"://可维修备件工单
+                break;
+            case "SR"://状态维修工单
+                break;
+        }
+    }
+
+    //生成菜单
+    private void decisionLayout() {
+        switch (workOrder.worktype) {
+            case "CM"://故障工单
+                break;
+            case "EM"://抢修工单
+                break;
+            case "EV"://事故工单
+                break;
+            case "PJ"://项目工单
+                planLinearlayout.setVisibility(View.GONE);
+//                taskLinearLayout.setVisibility(View.GONE);
+                reportLinearLayout.setVisibility(View.GONE);
+                break;
+            case "PM"://预防性维护工单
+                pmnum_layout.setVisibility(View.VISIBLE);
+                planLinearlayout.setVisibility(View.GONE);
+//                taskLinearLayout.setVisibility(View.GONE);
+                reportLinearLayout.setVisibility(View.GONE);
+                break;
+            case "RS"://可维修备件工单
+                break;
+            case "SR"://状态维修工单
+                planLinearlayout.setVisibility(View.GONE);
+//                taskLinearLayout.setVisibility(View.GONE);
+                reportLinearLayout.setVisibility(View.GONE);
+                break;
+        }
     }
 
     /**
@@ -208,32 +295,20 @@ public class Work_AddNewActivity extends BaseActivity {
         popupWindow.showAsDropDown(view);
 
         planLinearlayout = (LinearLayout) contentView.findViewById(R.id.work_plan_id);
-        taskLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_task_id);
+//        taskLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_task_id);
         realinfoLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_realinfo_id);
         reportLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_report_id);
         planLinearlayout.setOnClickListener(planOnClickListener);
-        taskLinearLayout.setOnClickListener(taskOnClickListener);
+//        taskLinearLayout.setOnClickListener(taskOnClickListener);
         realinfoLinearLayout.setOnClickListener(realinfoOnClickListener);
         reportLinearLayout.setOnClickListener(reportOnClickListener);
-
+        decisionLayout();
     }
 
     private View.OnClickListener planOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(Work_AddNewActivity.this,Work_PlanActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("workOrder", workOrder);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            startActivity(intent);
-        }
-    };
-
-    private View.OnClickListener taskOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent intent = new Intent(Work_AddNewActivity.this,AssignmentActivity.class);
+            Intent intent = new Intent(Work_AddNewActivity.this, Woactivity_Activity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("workOrder", workOrder);
             intent.putExtras(bundle);
@@ -242,10 +317,22 @@ public class Work_AddNewActivity extends BaseActivity {
         }
     };
 
+//    private View.OnClickListener taskOnClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            Intent intent = new Intent(Work_AddNewActivity.this, AssignmentActivity.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable("workOrder", workOrder);
+//            intent.putExtras(bundle);
+//            startActivity(intent);
+//            popupWindow.dismiss();
+//        }
+//    };
+
     private View.OnClickListener realinfoOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(Work_AddNewActivity.this,Work_RealinfoActivity.class);
+            Intent intent = new Intent(Work_AddNewActivity.this, LabtransListActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("workOrder", workOrder);
             intent.putExtras(bundle);
@@ -257,7 +344,7 @@ public class Work_AddNewActivity extends BaseActivity {
     private View.OnClickListener reportOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(Work_AddNewActivity.this,Work_FailurereportActivity.class);
+            Intent intent = new Intent(Work_AddNewActivity.this, Work_FailurereportActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("workOrder", workOrder);
             intent.putExtras(bundle);

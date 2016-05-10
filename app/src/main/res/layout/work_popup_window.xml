@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_5"
-            android:text="@string/work_plan"
+            android:text="@string/work_woactivity"
             android:textSize="@dimen/dimens_16dp"/>
 
     </LinearLayout>
@@ -31,32 +31,32 @@
         android:layout_height="1dp"
         android:background="@drawable/line"></View>
 
-    <LinearLayout
-        android:id="@+id/work_task_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="@dimen/dimens_10">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/work_task_id"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:padding="@dimen/dimens_10">-->
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_inventory_levels" />
+        <!--<ImageView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/ic_inventory_levels" />-->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_5"
-            android:text="@string/work_task"
-            android:textSize="@dimen/dimens_16dp"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:text="@string/work_task"-->
+            <!--android:textSize="@dimen/dimens_16dp"/>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@drawable/line"></View>
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="@drawable/line"></View>-->
 
     <LinearLayout
         android:id="@+id/work_realinfo_id"
@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_5"
-            android:text="@string/work_realinfo"
+            android:text="@string/work_labtrans"
             android:textSize="@dimen/dimens_16dp"/>
 
     </LinearLayout>

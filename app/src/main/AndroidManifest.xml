@@ -66,8 +66,24 @@
             android:label="@string/title_activity_workplan" >
         </activity>
         <activity
+            android:name=".ui.activity.Woactivity_Activity"
+            android:label="@string/title_activity_workwoactivity" >
+        </activity>
+        <activity
             android:name=".ui.activity.WoactivityDetailsActivity"
             android:label="@string/title_activity_workplandetails" >
+        </activity>
+        <activity
+            android:name=".ui.activity.AddWoactivityActivity"
+            android:label="@string/title_activity_workwoactivity_add" >
+        </activity>
+        <activity
+            android:name=".ui.activity.LabtransListActivity"
+            android:label="@string/title_activity_worklabtrans" >
+        </activity>
+        <activity
+            android:name=".ui.activity.AddLabtransActivity"
+            android:label="@string/title_activity_worklabtrans_add" >
         </activity>
         <activity
             android:name=".ui.activity.WplaborDetailsActivity"

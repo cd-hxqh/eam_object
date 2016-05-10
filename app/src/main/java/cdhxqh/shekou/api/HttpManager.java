@@ -54,7 +54,9 @@ public class HttpManager {
      * 设置计划任务接口*
      */
     public static String getwoactivityUrl(String type, int curpage, int showcount) {
-        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WOACTIVITY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WOACTIVITY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'" +
+//                ",'condition':{'WONUM':'" + wonum + "'}" +
+                "}";
     }
 
     /**
@@ -205,6 +207,7 @@ public class HttpManager {
         params.put("loginid", username);
         params.put("password", password);
         params.put("imei", imei);
+        client.setTimeout(20000);
         client.post(Constants.SIGN_IN_URL, params, new TextHttpResponseHandler() {
 
 
@@ -241,6 +244,7 @@ public class HttpManager {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);
+        client.setTimeout(20000);
         client.get(Constants.BASE_URL, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -267,6 +271,7 @@ public class HttpManager {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);
+        client.setTimeout(20000);
         client.get(Constants.BASE_URL, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {

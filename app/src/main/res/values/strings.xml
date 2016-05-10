@@ -26,7 +26,11 @@
     <string name="title_activity_workdetails">工单详情界面</string>
     <string name="title_activity_workaddnew">新建工单</string>
     <string name="title_activity_workplan">工单计划</string>
+    <string name="title_activity_workwoactivity">工单任务</string>
     <string name="title_activity_workplandetails">任务详情</string>
+    <string name="title_activity_workwoactivity_add">添加任务</string>
+    <string name="title_activity_worklabtrans">实际员工</string>
+    <string name="title_activity_worklabtrans_add">添加员工</string>
     <string name="title_activity_workwplabordetails">员工详情</string>
     <string name="title_activity_workwplabor_add">添加员工</string>
     <string name="title_activity_workwpitemdetails">物料详情</string>
@@ -69,7 +73,7 @@
     <string name="work_fault_text">故障工单</string>
     <string name="work_prevent_id">预防性维护工单</string>
     <string name="work_status_text">状态维修工单</string>
-    <string name="work_service_text">可维护备件工单</string>
+    <string name="work_service_text">可维修备件工单</string>
     <string name="work_accident_text">事故工单</string>
     <string name="work_repair_text">抢修工单</string>
 
@@ -162,9 +166,12 @@
     <!--领料管理-->
     <string name="work_status">状态</string>
     <string name="work_statusdate">状态日期</string>
-    <string name="work_plan_details">作业计划详情</string>
+    <string name="work_plan_details">作业详细信息</string>
     <string name="work_jpnum">作业计划</string>
     <string name="work_isjf">是否按项目计费</string>
+    <string name="work_udprojapprnum">立项编号</string>
+    <string name="work_udevnum">事故号</string>
+    <string name="work_udbugnum">项目预算</string>
     <string name="work_pmnum">预防性维护</string>
     <string name="work_udcreateby">创建人</string>
     <string name="work_udcreatedate">创建日期</string>
@@ -180,6 +187,11 @@
     <string name="work_udisplayname">承包商负责人</string>
     <string name="work_targstartdate">计划开始时间</string>
     <string name="work_targcompdate">计划完成时间</string>
+    <string name="work_em_info">处理班组信息</string>
+    <string name="work_udqxbz">抢修班组</string>
+    <string name="work_lead1">抢修负责人</string>
+    <string name="work_supervisor">抢修执行人</string>
+    <string name="work_udsupervisor2">抢修执行人2</string>
     <string name="work_real_info">实际信息</string>
     <string name="work_actstart">实际开始时间</string>
     <string name="work_actfinish">实际完成时间</string>
@@ -191,8 +203,10 @@
     <string name="work_revise">修改</string>
     <string name="work_work_flow">工作流</string>
     <string name="work_plan">工单计划</string>
+    <string name="work_woactivity">工单任务</string>
     <string name="work_task">任务分配</string>
     <string name="work_realinfo">实际情况</string>
+    <string name="work_labtrans">实际员工</string>
     <string name="work_report">故障汇报</string>
 
     <!--工单计划界面-->
@@ -207,9 +221,14 @@
     <string name="invuse_statusdate_text">状态日期:</string>
 
     <!--任务详情界面-->
+    <string name="work_woactivity_taskid">任务</string>
     <string name="work_woactivity_wojo1">编号</string>
     <string name="work_woactivity_description">描述</string>
     <string name="work_woactivity_wojo2">需要安检</string>
+    <string name="work_woactivity_udisdo">是否完成</string>
+    <string name="work_woactivity_udisyq">是否延期</string>
+    <string name="work_woactivity_udyqyy">延期原因</string>
+    <string name="work_woactivity_udremark">备注</string>
     <string name="work_woactivity_targstartdate">计划开始时间</string>
     <string name="work_woactivity_targcompdate">计划完成时间</string>
     <string name="work_woactivity_actstart">实际开始时间</string>
