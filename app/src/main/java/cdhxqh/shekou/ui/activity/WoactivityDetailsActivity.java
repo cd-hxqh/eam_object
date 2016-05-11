@@ -53,7 +53,7 @@ public class WoactivityDetailsActivity extends BaseActivity {
     }
 
     private void geiIntentData() {
-        woactivity = (Woactivity) getIntent().getParcelableExtra("woactivity");
+        woactivity = (Woactivity) getIntent().getSerializableExtra("woactivity");
     }
     @Override
     protected void findViewById() {
@@ -86,14 +86,14 @@ public class WoactivityDetailsActivity extends BaseActivity {
         });
         titleTextView.setText(getResources().getString(R.string.title_activity_workplandetails));
 
-//        taskid.setText(woactivity.taskid);
-//        wojo1.setText(woactivity.wojo1);
-//        description.setText(woactivity.description);
-//        wojo2.setChecked(!woactivity.wojo2.equals("0"));
-//        udisdo.setChecked(!woactivity.udisdo.equals("0"));
-//        udisyq.setChecked(!woactivity.udisyq.equals("0"));
-//        udyqyy.setText(woactivity.udyqyy);
-//        udremark.setText(woactivity.udremark);
+        taskid.setText(woactivity.taskid);
+        wojo1.setText(woactivity.wojo1);
+        description.setText(woactivity.description);
+        wojo2.setChecked(!woactivity.wojo2.equals("N"));
+        udisdo.setChecked(!woactivity.udisdo.equals("N"));
+        udisyq.setChecked(!woactivity.udisyq.equals("N"));
+        udyqyy.setText(woactivity.udyqyy);
+        udremark.setText(woactivity.udremark);
 
 //        targstartdate.setText(woactivity.targstartdate);
 //        targcompdate.setText(woactivity.targcompdate);

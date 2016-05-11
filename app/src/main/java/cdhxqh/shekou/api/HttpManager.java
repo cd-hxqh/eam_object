@@ -54,7 +54,7 @@ public class HttpManager {
      * 设置计划任务接口*
      */
     public static String getwoactivityUrl(String type, int curpage, int showcount) {
-        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WOACTIVITY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'" +
+        return "{'appid':'" + "UDWOALL','objectname':'" + Constants.WOACTIVITY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'" +
 //                ",'condition':{'WONUM':'" + wonum + "'}" +
                 "}";
     }

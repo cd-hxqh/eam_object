@@ -294,14 +294,14 @@ public class JsonUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
                 woactivity = new Woactivity();
                 jsonObject = jsonArray.getJSONObject(i);
-//                woactivity.taskid = jsonObject.getString("TASKID"); //任务
+                woactivity.taskid = jsonObject.getString("TASKID"); //任务
                 woactivity.description = jsonObject.getString("DESCRIPTION");//描述
                 woactivity.wojo1 = jsonObject.getString("WOJO1");//编号
                 woactivity.wojo2 = jsonObject.getString("WOJO2");//需要安检
-//                woactivity.wojo2 = jsonObject.getString("UDISDO");//是否完成
-//                woactivity.wojo2 = jsonObject.getString("UDISYQ");//是否延期
-//                woactivity.wojo2 = jsonObject.getString("UDYQYY");//延期原因
-//                woactivity.wojo2 = jsonObject.getString("UDREMARK");//备注
+                woactivity.udisdo = jsonObject.getString("UDISDO");//是否完成
+                woactivity.udisyq = jsonObject.getString("UDISYQ");//是否延期
+                woactivity.udyqyy = jsonObject.getString("UDYQYY");//延期原因
+                woactivity.udremark = jsonObject.getString("UDREMARK");//备注
 
 //                woactivity.targstartdate = jsonObject.getString("TARGSTARTDATE");//计划开始时间
 //                woactivity.targcompdate = jsonObject.getString("TARGCOMPDATE");//计划完成时间

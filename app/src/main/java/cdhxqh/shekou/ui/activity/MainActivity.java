@@ -130,6 +130,15 @@ public class MainActivity extends BaseActivity
                 fragmentTransaction.replace(R.id.container, mNewInvuseFragment).commit();
 
                 break;
+            case 4://领料管理
+                if (mNewInvuseFragment == null) {
+                    mNewInvuseFragment = new InvuseFragment();
+                    Bundle bundle = new Bundle();
+                    mNewInvuseFragment.setArguments(bundle);
+                }
+                fragmentTransaction.replace(R.id.container, mNewInvuseFragment).commit();
+
+                break;
         }
 
     }
