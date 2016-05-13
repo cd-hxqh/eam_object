@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import cdhxqh.shekou.bean.LoginResults;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
-import cdhxqh.shekou.model.Asset;
+import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.Assignment;
 import cdhxqh.shekou.model.Failurereport;
 import cdhxqh.shekou.model.Invbalances;
@@ -800,26 +800,26 @@ public class JsonUtils {
     /**
      * 解析设备信息
      */
-    public static ArrayList<Asset> parsingAsset(String data) {
-        Log.i(TAG, "Asset data=" + data);
-        ArrayList<Asset> list = null;
-        Asset asset = null;
+    public static ArrayList<Assets> parsingAsset(String data) {
+        Log.i(TAG, "Assets data=" + data);
+        ArrayList<Assets> list = null;
+        Assets assets = null;
         try {
             JSONArray jsonArray = new JSONArray(data);
             JSONObject jsonObject;
-            list = new ArrayList<Asset>();
+            list = new ArrayList<Assets>();
             for (int i = 0; i < jsonArray.length(); i++) {
-                asset = new Asset();
+                assets = new Assets();
                 jsonObject = jsonArray.getJSONObject(i);
-                asset.assetnum = jsonObject.getString("assetnum"); //设备编码
-                asset.description = jsonObject.getString("description"); //设备名称
-                asset.eq1 = jsonObject.getString("eq1"); //管理组
-                asset.eq2 = jsonObject.getString("eq2"); //管理室
-                asset.eq3 = jsonObject.getString("eq3"); //管理班组
-                asset.assettype = jsonObject.getString("assettype"); //资产类型
-                asset.udassettype = jsonObject.getString("udassettype"); //设备类型
-                asset.siteid = jsonObject.getString("siteid"); //地点
-                list.add(asset);
+                assets.assetnum = jsonObject.getString("assetnum"); //设备编码
+                assets.description = jsonObject.getString("description"); //设备名称
+                assets.eq1 = jsonObject.getString("eq1"); //管理组
+                assets.eq2 = jsonObject.getString("eq2"); //管理室
+                assets.eq3 = jsonObject.getString("eq3"); //管理班组
+                assets.assettype = jsonObject.getString("assettype"); //资产类型
+                assets.udassettype = jsonObject.getString("udassettype"); //设备类型
+                assets.siteid = jsonObject.getString("siteid"); //地点
+                list.add(assets);
             }
             return list;
         } catch (JSONException e) {

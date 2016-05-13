@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import cdhxqh.shekou.model.Asset;
+import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.utils.DataUtils;
 
 /**
@@ -31,7 +31,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onCreate(SQLiteDatabase database,
                          ConnectionSource connectionSource) {
         try {
-            TableUtils.createTable(connectionSource, Asset.class);
+            TableUtils.createTable(connectionSource, Assets.class);
 //            TableUtils.createTable(connectionSource, Woactivity.class);
 //            TableUtils.createTable(connectionSource, Wpmaterial.class);
 //            TableUtils.createTable(connectionSource, Wplabor.class);
@@ -62,7 +62,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
     public void onUpgrade(SQLiteDatabase database,
                           ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
-            TableUtils.dropTable(connectionSource, Asset.class, true);
+            TableUtils.dropTable(connectionSource, Assets.class, true);
 //            TableUtils.dropTable(connectionSource, Woactivity.class, true);
 //            TableUtils.dropTable(connectionSource, Wplabor.class, true);
 //            TableUtils.dropTable(connectionSource, Wpmaterial.class, true);

@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +24,7 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
-import cdhxqh.shekou.config.Constants;
-import cdhxqh.shekou.model.Asset;
+import cdhxqh.shekou.model.Assets;
 
 /**
  * Created by think on 2015/12/25.
@@ -299,7 +297,7 @@ public class DownloadActivity extends BaseActivity {
             public void onSuccess(Results data) {
                 if (data != null) {
                     if (buttonText.equals(childArray.get(0).get(0))) {//位置
-                        List<Asset> locations = JsonUtils.parsingAsset(data.getResultlist());
+                        List<Assets> locations = JsonUtils.parsingAsset(data.getResultlist());
                         new AssetDao(DownloadActivity.this).create(locations);
                     }
 //                        else if (buttonText.equals(childArray.get(0).get(1))) {//资产
@@ -357,7 +355,7 @@ public class DownloadActivity extends BaseActivity {
             public void onSuccess(Results data) {
                 if (data != null) {
                     if (buttonText.equals(childArray.get(0).get(0))) {//位置
-//                            List<Asset> locations = Ig_Json_Model.parsingLocation(data);
+//                            List<Assets> locations = Ig_Json_Model.parsingLocation(data);
 //                            new AssetDao(DownloadActivity.this).create(locations);
                     }
 //                        else if (buttonText.equals(childArray.get(0).get(1))) {//资产
