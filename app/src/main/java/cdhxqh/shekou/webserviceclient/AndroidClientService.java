@@ -15,7 +15,7 @@ import java.io.IOException;
 public class AndroidClientService {
     private static final String TAG = "AndroidClientService";
     public String NAMESPACE = "http://webservice.hxqh";
-    public String url = "http://121.35.242.172:7001/meaweb/services/INVENTORYSERVICE";
+    public String url = "http://121.35.242.172:7001/meaweb/services/WORKORDERSERVICE";
     public int timeOut = 60000;
 
     public AndroidClientService() {
@@ -164,6 +164,34 @@ public class AndroidClientService {
         SoapObject soapReq = new SoapObject(NAMESPACE, "workorderserviceInsertWO");
         soapReq.addProperty("json", s);
         soapReq.addProperty("flag",1);
+        soapEnvelope.setOutputSoapObject(soapReq);
+        HttpTransportSE httpTransport = new HttpTransportSE(url);
+        try {
+            httpTransport.call("urn:action", soapEnvelope);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        String obj = null;
+        try {
+            obj = soapEnvelope.getResponse().toString();
+        } catch (SoapFault soapFault) {
+            soapFault.printStackTrace();
+        }
+        return obj;
+    }
+
+    /**
+     * 工单删除
+     */
+    public String DeleteWO(String wonum,String userid) {
+        SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        soapEnvelope.implicitTypes = true;
+        soapEnvelope.dotNet = true;
+        SoapObject soapReq = new SoapObject(NAMESPACE, "workorderserviceDeleteWO");
+        soapReq.addProperty("wonum", wonum);
+        soapReq.addProperty("userid",userid);
         soapEnvelope.setOutputSoapObject(soapReq);
         HttpTransportSE httpTransport = new HttpTransportSE(url);
         try {

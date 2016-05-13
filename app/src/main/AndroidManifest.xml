@@ -165,6 +165,10 @@
             android:name=".ui.activity.AddinvuseActivity"
             android:label="@string/title_activity_addinvuse" >
         </activity>
+        <activity
+            android:name=".ui.activity.DownloadActivity"
+            android:label="@string/title_activity_download" >
+        </activity>
     </application>
 
 </manifest>

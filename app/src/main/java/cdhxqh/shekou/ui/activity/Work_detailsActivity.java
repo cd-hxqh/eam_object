@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -92,6 +93,10 @@ public class Work_detailsActivity extends BaseActivity {
     private LinearLayout work_udremark_layout;
     private EditText udremark;//备注
 
+    private Button delete;
+    private Button revise;
+    private Button work_flow;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -162,6 +167,10 @@ public class Work_detailsActivity extends BaseActivity {
         udtjtime = (EditText) findViewById(R.id.work_udtjtime);
         work_udremark_layout = (LinearLayout) findViewById(R.id.work_udremark_layout);
         udremark = (EditText) findViewById(R.id.work_udremark);
+
+        delete = (Button) findViewById(R.id.work_delete);
+        revise = (Button) findViewById(R.id.work_revise);
+        work_flow = (Button) findViewById(R.id.work_work_flow);
     }
 
     @Override
@@ -212,6 +221,10 @@ public class Work_detailsActivity extends BaseActivity {
         udtjsj.setText(workOrder.udtjsj);
         udtjtime.setText(workOrder.udtjtime);
         udremark.setText(workOrder.udremark);
+
+        delete.setOnClickListener(deleteOnClickListener);
+        revise.setOnClickListener(reviseOnClickListener);
+        work_flow.setOnClickListener(work_flowOnClickListener);
 
         setLayout();
     }
@@ -391,4 +404,36 @@ public class Work_detailsActivity extends BaseActivity {
             popupWindow.dismiss();
         }
     };
+
+    private View.OnClickListener deleteOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    };
+
+    private View.OnClickListener reviseOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    };
+
+    private View.OnClickListener work_flowOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    };
+
+    //删除工单
+    private void Delete(){
+
+    }
+
+    private WorkOrder getWorkOrder(){
+        WorkOrder workOrder = this.workOrder;
+        workOrder.description = description.getText().toString().trim();
+        return workOrder;
+    }
 }

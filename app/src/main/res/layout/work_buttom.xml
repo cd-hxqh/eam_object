@@ -14,6 +14,7 @@
         android:layout_height="60dp"
         android:orientation="horizontal">
         <Button
+            android:id="@+id/work_delete"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
@@ -21,6 +22,7 @@
             android:textColor="@drawable/text_selector"
             android:background="@drawable/button_selector2"/>
         <Button
+            android:id="@+id/work_revise"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"
@@ -28,6 +30,7 @@
             android:textColor="@drawable/text_selector"
             android:background="@drawable/button_selector2"/>
         <Button
+            android:id="@+id/work_work_flow"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.0"

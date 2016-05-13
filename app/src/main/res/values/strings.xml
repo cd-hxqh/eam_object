@@ -39,6 +39,7 @@
     <string name="title_activity_workreport">工单汇报</string>
     <string name="title_activity_labtransdetails">实际员工详情</string>
     <string name="title_activity_failurereport">故障报告</string>
+    <string name="title_activity_download">数据下载</string>
 
     <!--网络信息提示-->
     <string name="error_title">错误</string>
@@ -355,4 +356,23 @@
     <string name="pz_displayname_text">批准人:</string>
     <string name="changedate_text">批准日期:</string>
     <string name="uddept_text">部门:</string>
+
+    <!--设置-->
+    <string name="setting_download">数据下载</string>
+    <string name="setting_data_clear">清除缓存</string>
+    <string name="about_us_title">关于我们</string>
+    <string name="update">版本更新</string>
+    <string name="sure">确定</string>
+    <string name="canel">取消</string>
+    <string name="inputing">正在提交数据</string>
+    <string name="clearing">正在清除数据</string>
+    <string name="downloading">正在下载数据</string>
+    <string name="downloading1">正在下载</string>
+
+    <!--数据下载-->
+    <string name="about">关于</string>
+    <string name="data_download">数据下载</string>
+    <string name="download_all">全部下载</string>
+    <string name="download">下载</string>
+    <string name="downloaded">已下载</string>
 </resources>

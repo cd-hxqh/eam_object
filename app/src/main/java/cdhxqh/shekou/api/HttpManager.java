@@ -188,6 +188,13 @@ public class HttpManager {
         }
     }
 
+    /**
+     * 设置设备下载数据接口
+     */
+    public static String getAssetUrl(String siteid){
+        return "{'appid':'" + Constants.ASSET_APPID + "','objectname':'" + Constants.ASSET_NAME + "','option':'read','condition':{'SITEID':'" + siteid + "'}}";
+    }
+
 
     /**
      * 使用用户名密码登录
@@ -256,7 +263,7 @@ public class HttpManager {
 
                 Results result = JsonUtils.parsingResults1(cxt, responseString);
 
-                SafeHandler.onSuccess(handler, result, result.getCurpage(), result.getShowcount());
+                SafeHandler.onSuccess(handler, result);
 
             }
         });

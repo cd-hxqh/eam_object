@@ -24,7 +24,7 @@ public class DrawerAdapter extends BaseAdapter {
             R.drawable.ic_workorder,
             R.drawable.ic_inventory,
             R.drawable.ic_item,
-            R.drawable.ic_item
+            R.drawable.ic_setting
 
     };
 

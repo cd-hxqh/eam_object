@@ -17,6 +17,7 @@ import cdhxqh.shekou.manager.AppManager;
 import cdhxqh.shekou.ui.fragment.InventoryFragment;
 import cdhxqh.shekou.ui.fragment.InvuseFragment;
 import cdhxqh.shekou.ui.fragment.NavigationDrawerFragment;
+import cdhxqh.shekou.ui.fragment.Setting_Fragment;
 import cdhxqh.shekou.ui.fragment.WfassigFragment;
 import cdhxqh.shekou.ui.fragment.WorkFragment;
 
@@ -46,6 +47,10 @@ public class MainActivity extends BaseActivity
      * 领料管理*
      */
     private InvuseFragment mNewInvuseFragment;
+    /**
+     *
+     */
+    private Setting_Fragment settingFragment;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */
@@ -130,13 +135,13 @@ public class MainActivity extends BaseActivity
                 fragmentTransaction.replace(R.id.container, mNewInvuseFragment).commit();
 
                 break;
-            case 4://领料管理
-                if (mNewInvuseFragment == null) {
-                    mNewInvuseFragment = new InvuseFragment();
+            case 4://设置
+                if (settingFragment == null) {
+                    settingFragment = new Setting_Fragment();
                     Bundle bundle = new Bundle();
-                    mNewInvuseFragment.setArguments(bundle);
+                    settingFragment.setArguments(bundle);
                 }
-                fragmentTransaction.replace(R.id.container, mNewInvuseFragment).commit();
+                fragmentTransaction.replace(R.id.container, settingFragment).commit();
 
                 break;
         }

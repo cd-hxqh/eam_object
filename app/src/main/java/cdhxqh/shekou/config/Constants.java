@@ -84,7 +84,10 @@ public class Constants {
     //领料单行表名
     public static final String INVUSELINE_NAME="INVUSELINE";
 
-
+    //设备appid
+    public static final String ASSET_APPID = "ASSET";
+    //设备表名
+    public static final String ASSET_NAME = "ASSET";
 
 
 
@@ -117,4 +120,20 @@ public class Constants {
     public static final String SERVICE = "RS";//可维护备件工单
     public static final String ACCIDENT = "EV";//事故工单
     public static final String REPAIR = "EM";//抢修工单
+
+
+
+    /**设置数据库参数-开始**/
+    /**
+     * 数据库路径
+     */
+    public static final String PATH_DB = android.os.Environment
+            .getExternalStorageDirectory().getAbsolutePath()
+            + "/Android/data/";
+    /**
+     * 无SD卡的数据库路径
+     */
+    public static final String NOT_SDCARD_PATH_DB = "/data/data/";
+    /** 数据库名称 **/
+    public static final String TB_NAME = "sqlite-eam.db";
 }
