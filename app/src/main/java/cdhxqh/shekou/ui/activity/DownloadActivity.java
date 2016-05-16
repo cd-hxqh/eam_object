@@ -24,6 +24,7 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
+import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Assets;
 
 /**
@@ -128,7 +129,7 @@ public class DownloadActivity extends BaseActivity {
         groupArray.add("巡检");
         List<String> tempArray01 = new ArrayList<String>();
         tempArray01.add("设备");
-//        tempArray01.add("资产");
+        tempArray01.add("作业计划");
 //        tempArray01.add("故障类");
 //        tempArray01.add("问题代码");
 //        tempArray01.add("作业计划");
@@ -144,8 +145,9 @@ public class DownloadActivity extends BaseActivity {
 
         childArray.add(tempArray01);
         childArray.add(tempArray02);
-
+        int i = new AssetDao(DownloadActivity.this).queryForAll().size();
         expandableListView.setAdapter(new MyExpandableListViewAdapter(this));
+
     }
 
     class MyExpandableListViewAdapter extends BaseExpandableListAdapter {
@@ -262,12 +264,12 @@ public class DownloadActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
             String buttonText = childArray.get(group).get(child);
-            if (buttonText.equals(childArray.get(0).get(0))) {//位置
+            if (buttonText.equals(childArray.get(0).get(0))) {//设备
                 downloaddata(HttpManager.getAssetUrl("CCT"), buttonText, button);
+            } else if (buttonText.equals(childArray.get(0).get(1))) {//作业计划
+                downloaddata(HttpManager.getJpNumUrl(""), buttonText, button);
             }
-// else if (buttonText.equals(childArray.get(0).get(1))) {//资产
-//                downloaddata(HttpManager.getUrl(Constants.ASSET_APPID, Constants.ASSET_NAME), buttonText, button);
-//            } else if (buttonText.equals(childArray.get(0).get(2))) {//故障类
+// else if (buttonText.equals(childArray.get(0).get(2))) {//故障类
 //                downloaddata(HttpManager.getUrl(Constants.UDWOCM_APPID, Constants.FAILURECODE_NAME), buttonText, button);
 //            } else if (buttonText.equals(childArray.get(0).get(3))) {//问题代码
 //                downloaddata(HttpManager.getUrl(Constants.UDWOCM_APPID, Constants.FAILURELIST_NAME), buttonText, button);

@@ -85,7 +85,7 @@ public class Constants {
     public static final String INVUSELINE_NAME="INVUSELINE";
 
     //设备appid
-    public static final String ASSET_APPID = "ASSET";
+    public static final String ASSET_APPID = "UDASSET";
     //设备表名
     public static final String ASSET_NAME = "ASSET";
 
@@ -136,4 +136,9 @@ public class Constants {
     public static final String NOT_SDCARD_PATH_DB = "/data/data/";
     /** 数据库名称 **/
     public static final String TB_NAME = "sqlite-eam.db";
+
+    /**
+     * 选项跳转请求值
+     */
+    public static final int ASSETCODE = 100; //设备
 }

@@ -192,7 +192,14 @@ public class HttpManager {
      * 设置设备下载数据接口
      */
     public static String getAssetUrl(String siteid){
-        return "{'appid':'" + Constants.ASSET_APPID + "','objectname':'" + Constants.ASSET_NAME + "','option':'read','condition':{'SITEID':'" + siteid + "'}}";
+        return "{'appid':'" + Constants.ASSET_APPID + "','objectname':'" + Constants.ASSET_NAME + "','option':'read','condition':{'SITEID':'CCT','UDLEVEL':'单体设备','STATUS':'操作中,活动,有限制的使用'}}";
+    }
+
+    /**
+     * 设置作业计划下载数据接口
+     */
+    public static String getJpNumUrl(String siteid){
+        return "{'appid':'" + Constants.ASSET_APPID + "','objectname':'" + Constants.ASSET_NAME + "','option':'read','condition':{'SITEID':'CCT','UDLEVEL':'单体设备','STATUS':'操作中,活动,有限制的使用'}}";
     }
 
 

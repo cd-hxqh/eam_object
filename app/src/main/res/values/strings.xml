@@ -40,6 +40,7 @@
     <string name="title_activity_labtransdetails">实际员工详情</string>
     <string name="title_activity_failurereport">故障报告</string>
     <string name="title_activity_download">数据下载</string>
+    <string name="activity_option_title">选项界面</string>
 
     <!--网络信息提示-->
     <string name="error_title">错误</string>
@@ -375,4 +376,5 @@
     <string name="download_all">全部下载</string>
     <string name="download">下载</string>
     <string name="downloaded">已下载</string>
+    <string name="synchronous_data_text">同步基础数据</string>
 </resources>

@@ -169,6 +169,10 @@
             android:name=".ui.activity.DownloadActivity"
             android:label="@string/title_activity_download" >
         </activity>
+        <activity
+            android:name=".ui.activity.OptionActivity"
+            android:label="@string/activity_option_title" >
+        </activity>
     </application>
 
 </manifest>

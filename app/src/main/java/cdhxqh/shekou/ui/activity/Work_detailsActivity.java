@@ -15,7 +15,11 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.model.WorkOrder;
 
 /**
@@ -222,6 +226,8 @@ public class Work_detailsActivity extends BaseActivity {
         udtjtime.setText(workOrder.udtjtime);
         udremark.setText(workOrder.udremark);
 
+        assetnum.setOnClickListener(new LayoutOnClickListener(Constants.ASSETCODE));
+
         delete.setOnClickListener(deleteOnClickListener);
         revise.setOnClickListener(reviseOnClickListener);
         work_flow.setOnClickListener(work_flowOnClickListener);
@@ -297,11 +303,7 @@ public class Work_detailsActivity extends BaseActivity {
      * @return
      */
     private boolean ischeck(String string) {
-        if (string.equals("1")) {
-            return true;
-        } else {
-            return false;
-        }
+        return string.equals("1");
     }
 
     private View.OnClickListener menuImageViewOnClickListener = new View.OnClickListener() {
@@ -426,6 +428,22 @@ public class Work_detailsActivity extends BaseActivity {
         }
     };
 
+
+    private class LayoutOnClickListener implements View.OnClickListener {
+        int requestCode;
+
+        private LayoutOnClickListener(int requestCode) {
+            this.requestCode = requestCode;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Work_detailsActivity.this, OptionActivity.class);
+            intent.putExtra("requestCode", requestCode);
+            startActivityForResult(intent, requestCode);
+        }
+    }
+
     //删除工单
     private void Delete(){
 
@@ -434,6 +452,61 @@ public class Work_detailsActivity extends BaseActivity {
     private WorkOrder getWorkOrder(){
         WorkOrder workOrder = this.workOrder;
         workOrder.description = description.getText().toString().trim();
+        workOrder.worktype = worktype.getText().toString().trim();
+        workOrder.assetnum = assetnum.getText().toString().trim();
+        workOrder.woeq1 = woeq1.getText().toString().trim();
+        workOrder.woeq2 = woeq2.getText().toString().trim();
+        workOrder.woeq3 = woeq3.getText().toString().trim();
+        workOrder.status = status.getText().toString().trim();
+        workOrder.statusdate = statusdate.getText().toString().trim();
+        workOrder.jpnum = jpnum.getText().toString().trim();
+        workOrder.udisjf = udisjf.getText().toString().trim();
         return workOrder;
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Option option;
+        switch (resultCode) {
+            case Constants.ASSETCODE:
+                option = (Option) data.getSerializableExtra("option");
+                assetnum.setText(option.getName());
+//                assetdesc.setText(option.getDescription());
+                break;
+//            case Constants.LOCATIONCODE:
+//                option = (Option) data.getSerializableExtra("option");
+//                location.setText(option.getName());
+//                locationdesc.setText(option.getDescription());
+//                break;
+//            case Constants.FAILURECODE:
+//                option = (Option) data.getSerializableExtra("option");
+//                failurecode.setText(option.getName());
+//                break;
+//            case Constants.FAILURELIST:
+//                option = (Option) data.getSerializableExtra("option");
+//                problemcode.setText(option.getName());
+//                break;
+//            case Constants.JOBPLAN:
+//                option = (Option) data.getSerializableExtra("option");
+//                jpnum.setText(option.getName());
+//                break;
+//            case 1000:
+//                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");
+//                wplaborList = (ArrayList<Wplabor>) data.getSerializableExtra("wplaborList");
+//                wpmaterialList = (ArrayList<Wpmaterial>) data.getSerializableExtra("wpmaterialList");
+//                editImageView.performClick();
+//                break;
+//            case 2000:
+//                assignmentList = (ArrayList<Assignment>) data.getSerializableExtra("assignmentList");
+//                editImageView.performClick();
+//                break;
+//            case 3000:
+//                labtransList = (ArrayList<Labtrans>) data.getSerializableExtra("labtransList");
+//                editImageView.performClick();
+//                break;
+//            default:
+//                break;
+        }
     }
 }

@@ -41,8 +41,8 @@ public class AssetDao {
             AssetDaoOpe.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
-                    for (Assets location : list) {
-                        AssetDaoOpe.createOrUpdate(location);
+                    for (Assets assets : list) {
+                        AssetDaoOpe.createOrUpdate(assets);
                     }
                     return null;
                 }
@@ -58,7 +58,7 @@ public class AssetDao {
      */
     public List<Assets> queryForAll() {
         try {
-            return AssetDaoOpe.queryBuilder().limit(2000).query();
+            return AssetDaoOpe.queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }

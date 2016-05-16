@@ -806,19 +806,19 @@ public class JsonUtils {
         Assets assets = null;
         try {
             JSONArray jsonArray = new JSONArray(data);
-            JSONObject jsonObject;
+            JSONObject jsonObject = new JSONObject();
             list = new ArrayList<Assets>();
             for (int i = 0; i < jsonArray.length(); i++) {
                 assets = new Assets();
                 jsonObject = jsonArray.getJSONObject(i);
-                assets.assetnum = jsonObject.getString("assetnum"); //设备编码
-                assets.description = jsonObject.getString("description"); //设备名称
-                assets.eq1 = jsonObject.getString("eq1"); //管理组
-                assets.eq2 = jsonObject.getString("eq2"); //管理室
-                assets.eq3 = jsonObject.getString("eq3"); //管理班组
-                assets.assettype = jsonObject.getString("assettype"); //资产类型
-                assets.udassettype = jsonObject.getString("udassettype"); //设备类型
-                assets.siteid = jsonObject.getString("siteid"); //地点
+                assets.assetnum = jsonObject.getString("ASSETNUM"); //设备编码
+                assets.description = jsonObject.getString("DESCRIPTION"); //设备名称
+                assets.eq1 = jsonObject.getString("EQ1"); //管理组
+                assets.eq2 = jsonObject.getString("EQ2"); //管理室
+                assets.eq3 = jsonObject.getString("EQ3"); //管理班组
+                assets.assettype = jsonObject.getString("ASSETTYPE"); //资产类型
+                assets.udassettype = jsonObject.getString("UDASSETTYPE"); //设备类型
+                assets.siteid = jsonObject.getString("SITEID"); //地点
                 list.add(assets);
             }
             return list;
