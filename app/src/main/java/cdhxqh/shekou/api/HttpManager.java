@@ -199,7 +199,14 @@ public class HttpManager {
      * 设置作业计划下载数据接口
      */
     public static String getJpNumUrl(String siteid){
-        return "{'appid':'" + Constants.ASSET_APPID + "','objectname':'" + Constants.ASSET_NAME + "','option':'read','condition':{'SITEID':'CCT','UDLEVEL':'单体设备','STATUS':'操作中,活动,有限制的使用'}}";
+        return "{'appid':'" + Constants.JOBPLAN_APPID + "','objectname':'" + Constants.JOBPLAN_NAME + "','option':'read','condition':{'SITEID':'CCT','UDISOS':'0'}}";
+    }
+
+    /**
+     * 设置人员下载数据接口
+     */
+    public static String getPersonUrl(String siteid){
+        return "{'appid':'" + Constants.PERSON_APPID + "','objectname':'" + Constants.PERSON_NAME + "','option':'read','condition':{'LOCATIONSITE':'CCT'}}";
     }
 
 

@@ -13,13 +13,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cdhxqh.shekou.model.Assets;
+import cdhxqh.shekou.model.JobPlan;
+import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.utils.DataUtils;
 
 /**
  * Created by think on 2015/12/23.
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
     private Map<String, Dao> daos = new HashMap<String, Dao>();
 
     private DatabaseHelper(Context context) {
@@ -32,8 +34,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                          ConnectionSource connectionSource) {
         try {
             TableUtils.createTable(connectionSource, Assets.class);
-//            TableUtils.createTable(connectionSource, Woactivity.class);
-//            TableUtils.createTable(connectionSource, Wpmaterial.class);
+            TableUtils.createTable(connectionSource, JobPlan.class);
+            TableUtils.createTable(connectionSource, Person.class);
 //            TableUtils.createTable(connectionSource, Wplabor.class);
 //            TableUtils.createTable(connectionSource, Assignment.class);
 //            TableUtils.createTable(connectionSource, Labtrans.class);
@@ -63,8 +65,8 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
                           ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
             TableUtils.dropTable(connectionSource, Assets.class, true);
-//            TableUtils.dropTable(connectionSource, Woactivity.class, true);
-//            TableUtils.dropTable(connectionSource, Wplabor.class, true);
+            TableUtils.dropTable(connectionSource, JobPlan.class, true);
+            TableUtils.dropTable(connectionSource, Person.class, true);
 //            TableUtils.dropTable(connectionSource, Wpmaterial.class, true);
 //            TableUtils.dropTable(connectionSource, Assignment.class, true);
 //            TableUtils.dropTable(connectionSource, Labtrans.class, true);

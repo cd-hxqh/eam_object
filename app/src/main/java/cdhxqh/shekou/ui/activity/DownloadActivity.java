@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cdhxqh.shekou.Dao.AssetDao;
+import cdhxqh.shekou.Dao.JobPlanDao;
+import cdhxqh.shekou.Dao.PersonDao;
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
@@ -26,6 +28,8 @@ import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Assets;
+import cdhxqh.shekou.model.JobPlan;
+import cdhxqh.shekou.model.Person;
 
 /**
  * Created by think on 2015/12/25.
@@ -60,11 +64,11 @@ public class DownloadActivity extends BaseActivity {
                 case START:
                     if (count < 10) {
                         mProgressDialog = ProgressDialog.show(DownloadActivity.this, null,
-                                getString(R.string.downloading1)+childArray.get(0).get(count), true, true);
+                                getString(R.string.downloading1) + childArray.get(0).get(count), true, true);
                         mProgressDialog.setCanceledOnTouchOutside(false);
                         mProgressDialog.setCancelable(false);
                         if (count == 0) {//设备
-                            downloaddata(HttpManager.getAssetUrl("CCT"),childArray.get(0).get(count));
+                            downloaddata(HttpManager.getAssetUrl("CCT"), childArray.get(0).get(count));
                         }
 // else if (count == 1) {//资产
 //                            downloaddata(HttpManager.getUrl(Constants.ASSET_APPID, Constants.ASSET_NAME), childArray.get(0).get(count));
@@ -130,7 +134,7 @@ public class DownloadActivity extends BaseActivity {
         List<String> tempArray01 = new ArrayList<String>();
         tempArray01.add("设备");
         tempArray01.add("作业计划");
-//        tempArray01.add("故障类");
+        tempArray01.add("人员");
 //        tempArray01.add("问题代码");
 //        tempArray01.add("作业计划");
 //        tempArray01.add("人员");
@@ -145,7 +149,6 @@ public class DownloadActivity extends BaseActivity {
 
         childArray.add(tempArray01);
         childArray.add(tempArray02);
-        int i = new AssetDao(DownloadActivity.this).queryForAll().size();
         expandableListView.setAdapter(new MyExpandableListViewAdapter(this));
 
     }
@@ -209,7 +212,7 @@ public class DownloadActivity extends BaseActivity {
                 groupHolder = (GroupHolder) convertView.getTag();
             }
             groupHolder.groupText.setText(groupArray.get(groupPosition));
-            groupHolder.downAll.setOnClickListener(new downloadAll(groupPosition,groupHolder.downAll));
+            groupHolder.downAll.setOnClickListener(new downloadAll(groupPosition, groupHolder.downAll));
             return convertView;
         }
 
@@ -268,10 +271,10 @@ public class DownloadActivity extends BaseActivity {
                 downloaddata(HttpManager.getAssetUrl("CCT"), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(1))) {//作业计划
                 downloaddata(HttpManager.getJpNumUrl(""), buttonText, button);
+            } else if (buttonText.equals(childArray.get(0).get(2))) {//故障类
+                downloaddata(HttpManager.getPersonUrl(""), buttonText, button);
             }
-// else if (buttonText.equals(childArray.get(0).get(2))) {//故障类
-//                downloaddata(HttpManager.getUrl(Constants.UDWOCM_APPID, Constants.FAILURECODE_NAME), buttonText, button);
-//            } else if (buttonText.equals(childArray.get(0).get(3))) {//问题代码
+// else if (buttonText.equals(childArray.get(0).get(3))) {//问题代码
 //                downloaddata(HttpManager.getUrl(Constants.UDWOCM_APPID, Constants.FAILURELIST_NAME), buttonText, button);
 //            } else if (buttonText.equals(childArray.get(0).get(4))) {//作业计划
 //                downloaddata(HttpManager.getUrl(Constants.UDWOCM_APPID, Constants.JOBPLAN_NAME), buttonText, button);
@@ -298,17 +301,17 @@ public class DownloadActivity extends BaseActivity {
             @Override
             public void onSuccess(Results data) {
                 if (data != null) {
-                    if (buttonText.equals(childArray.get(0).get(0))) {//位置
-                        List<Assets> locations = JsonUtils.parsingAsset(data.getResultlist());
-                        new AssetDao(DownloadActivity.this).create(locations);
+                    if (buttonText.equals(childArray.get(0).get(0))) {//设备
+                        List<Assets> asset = JsonUtils.parsingAsset(data.getResultlist());
+                        new AssetDao(DownloadActivity.this).create(asset);
+                    } else if (buttonText.equals(childArray.get(0).get(1))) {//作业计划
+                        List<JobPlan> jobPlans = JsonUtils.parsingJobplan(data.getResultlist());
+                        new JobPlanDao(DownloadActivity.this).create(jobPlans);
+                    } else if (buttonText.equals(childArray.get(0).get(2))) {//人员
+                        List<Person> failurecodes = JsonUtils.parsingPerson(data.getResultlist());
+                        new PersonDao(DownloadActivity.this).create(failurecodes);
                     }
-//                        else if (buttonText.equals(childArray.get(0).get(1))) {//资产
-//                            List<Assets> assets = Ig_Json_Model.parsingAsset(data);
-//                            new AssetDao(DownloadActivity.this).create(assets);
-//                        } else if (buttonText.equals(childArray.get(0).get(2))) {//故障类
-//                            List<Failurecode> failurecodes = Ig_Json_Model.parsingFailurecode(data);
-//                            new FailurecodeDao(DownloadActivity.this).create(failurecodes);
-//                        } else if (buttonText.equals(childArray.get(0).get(3))) {//问题代码
+// else if (buttonText.equals(childArray.get(0).get(3))) {//问题代码
 //                            List<Failurelist> failurelists = Ig_Json_Model.parsingFailurelist(data);
 //                            new FailurelistDao(DownloadActivity.this).create(failurelists);
 //                        } else if (buttonText.equals(childArray.get(0).get(4))) {//作业计划
@@ -412,7 +415,8 @@ public class DownloadActivity extends BaseActivity {
     private class downloadAll implements View.OnClickListener {
         int group;
         Button button;
-        private downloadAll(int group,Button button) {
+
+        private downloadAll(int group, Button button) {
             this.group = group;
             this.button = button;
         }

@@ -25,10 +25,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cdhxqh.shekou.Dao.AssetDao;
+import cdhxqh.shekou.Dao.JobPlanDao;
+import cdhxqh.shekou.Dao.PersonDao;
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Assets;
+import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Option;
+import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.ui.adapter.OptionAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 
@@ -188,26 +192,30 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     list.add(option);
                 }
                 break;
-//            case Constants.LOCATIONCODE:
-//                List<Location> locations;
-//                locations = new LocationDao(OptionActivity.this).queryByCount(page, searchText);
-//                for (int i = 0; i < locations.size(); i++) {
-//                    option = new Option();
-//                    option.setName(locations.get(i).location);
-//                    option.setDescription(locations.get(i).description);
-//                    list.add(option);
-//                }
-//                break;
-//            case Constants.FAILURECODE:
-//                List<Failurecode> failurecodes;
-//                failurecodes = new FailurecodeDao(OptionActivity.this).queryByCount(page, searchText);
-//                for (int i = 0; i < failurecodes.size(); i++) {
-//                    option = new Option();
-//                    option.setName(failurecodes.get(i).failurecode);
-//                    option.setDescription(failurecodes.get(i).description);
-//                    list.add(option);
-//                }
-//                break;
+            case Constants.JOBPLANCODE:
+                List<JobPlan> jobPlans;
+                if (getIntent().hasExtra("AssetIsChoose")&&getIntent().getBooleanExtra("AssetIsChoose",false)) {
+                    jobPlans = new JobPlanDao(OptionActivity.this).queryByCount1(page, searchText);
+                }else {
+                    jobPlans = new JobPlanDao(OptionActivity.this).queryByCount(page, searchText);
+                }
+                for (int i = 0; i < jobPlans.size(); i++) {
+                    option = new Option();
+                    option.setName(jobPlans.get(i).jpnum);
+                    option.setDescription(jobPlans.get(i).description);
+                    list.add(option);
+                }
+                break;
+            case Constants.PERSONCODE:
+                List<Person> persons;
+                persons = new PersonDao(OptionActivity.this).queryByCount(page, searchText);
+                for (int i = 0; i < persons.size(); i++) {
+                    option = new Option();
+                    option.setName(persons.get(i).personid);
+                    option.setDescription(persons.get(i).displayname);
+                    list.add(option);
+                }
+                break;
 //            case Constants.FAILURELIST:
 //                List<Failurelist> failurelists;
 //                failurelists = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText);

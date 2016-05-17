@@ -88,8 +88,14 @@ public class Constants {
     public static final String ASSET_APPID = "UDASSET";
     //设备表名
     public static final String ASSET_NAME = "ASSET";
-
-
+    //作业计划appid
+    public static final String JOBPLAN_APPID = "UDJOBPLAN";
+    //作业计划表名
+    public static final String JOBPLAN_NAME = "JOBPLAN";
+    //人员appid
+    public static final String PERSON_APPID = "PERSON";
+    //人员表名
+    public static final String PERSON_NAME = "PERSON";
 
 
 
@@ -141,4 +147,8 @@ public class Constants {
      * 选项跳转请求值
      */
     public static final int ASSETCODE = 100; //设备
+
+    public static final int JOBPLANCODE = 110; //作业计划
+
+    public static final int PERSONCODE = 120;//人员
 }

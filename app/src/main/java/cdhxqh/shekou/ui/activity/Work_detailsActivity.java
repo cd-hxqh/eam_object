@@ -227,6 +227,8 @@ public class Work_detailsActivity extends BaseActivity {
         udremark.setText(workOrder.udremark);
 
         assetnum.setOnClickListener(new LayoutOnClickListener(Constants.ASSETCODE));
+        jpnum.setOnClickListener(new LayoutOnClickListener(Constants.JOBPLANCODE));
+        reportedby.setOnClickListener(new LayoutOnClickListener(Constants.PERSONCODE));
 
         delete.setOnClickListener(deleteOnClickListener);
         revise.setOnClickListener(reviseOnClickListener);
@@ -440,6 +442,9 @@ public class Work_detailsActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(Work_detailsActivity.this, OptionActivity.class);
             intent.putExtra("requestCode", requestCode);
+            if (requestCode==Constants.JOBPLANCODE){
+                intent.putExtra("AssetIsChoose", assetnum.getText().toString().equals(""));
+            }
             startActivityForResult(intent, requestCode);
         }
     }
@@ -474,15 +479,15 @@ public class Work_detailsActivity extends BaseActivity {
                 assetnum.setText(option.getName());
 //                assetdesc.setText(option.getDescription());
                 break;
-//            case Constants.LOCATIONCODE:
-//                option = (Option) data.getSerializableExtra("option");
-//                location.setText(option.getName());
+            case Constants.JOBPLANCODE:
+                option = (Option) data.getSerializableExtra("option");
+                jpnum.setText(option.getName());
 //                locationdesc.setText(option.getDescription());
-//                break;
-//            case Constants.FAILURECODE:
-//                option = (Option) data.getSerializableExtra("option");
-//                failurecode.setText(option.getName());
-//                break;
+                break;
+            case Constants.PERSONCODE:
+                option = (Option) data.getSerializableExtra("option");
+                reportedby.setText(option.getName());
+                break;
 //            case Constants.FAILURELIST:
 //                option = (Option) data.getSerializableExtra("option");
 //                problemcode.setText(option.getName());

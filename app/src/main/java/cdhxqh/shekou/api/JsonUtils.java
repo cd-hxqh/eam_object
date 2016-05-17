@@ -20,9 +20,11 @@ import cdhxqh.shekou.model.Invcost;
 import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Invuseline;
+import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Matrectrans;
 import cdhxqh.shekou.model.Matusetrans;
+import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.model.Wfassignment;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
@@ -827,5 +829,66 @@ public class JsonUtils {
             return null;
         }
 
+    }
+
+    /**
+     * 解析设备信息
+     */
+    public static ArrayList<JobPlan> parsingJobplan(String data) {
+        Log.i(TAG, "JobPlan data=" + data);
+        ArrayList<JobPlan> list = null;
+        JobPlan jobPlan = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<JobPlan>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                jobPlan = new JobPlan();
+                jsonObject = jsonArray.getJSONObject(i);
+                jobPlan.jpnum = jsonObject.getString("JPNUM"); //设备编码
+                jobPlan.description = jsonObject.getString("DESCRIPTION"); //设备名称
+                jobPlan.templatetype = jsonObject.getString("TEMPLATETYPE"); //管理组
+                jobPlan.udassettype = jsonObject.getString("UDASSETTYPE"); //管理室
+                jobPlan.udassettype_description = jsonObject.getString("UDASSETTYPE_DESCRIPTION"); //管理班组
+                jobPlan.udassettype1 = jsonObject.getString("UDASSETTYPE1"); //资产类型
+                jobPlan.orgid = jsonObject.getString("ORGID"); //设备类型
+                jobPlan.siteid = jsonObject.getString("SITEID"); //地点
+                list.add(jobPlan);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 解析人员信息
+     */
+    public static ArrayList<Person> parsingPerson(String data) {
+        Log.i(TAG, "Person data=" + data);
+        ArrayList<Person> list = null;
+        Person person = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<Person>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                person = new Person();
+                jsonObject = jsonArray.getJSONObject(i);
+                person.personid = jsonObject.getString("PERSONID"); //人员
+                person.displayname = jsonObject.getString("DISPLAYNAME"); //名称
+                person.title = jsonObject.getString("TITLE"); //头衔
+                person.department = jsonObject.getString("DEPARTMENT"); //部门
+                person.location = jsonObject.getString("LOCATION"); //人员的位置
+                person.locationsite = jsonObject.getString("LOCATIONSITE"); //人员的地点
+                person.locationorg = jsonObject.getString("LOCATIONORG"); //组织
+                list.add(person);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
