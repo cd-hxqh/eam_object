@@ -86,7 +86,11 @@ public class Work_detailsActivity extends BaseActivity {
     private LinearLayout work_plan_info_layout;
     private TextView lead;//工作执行人
     private LinearLayout work_em_info_layout;
-//    private TextView udisplayname;//承包商负责人
+    private TextView udqxbz;//抢修班组
+    private TextView lead1;//抢修负责人
+    private TextView supervisor;//抢修执行人
+    private TextView udsupervisor2;//抢修执行人2
+    //    private TextView udisplayname;//承包商负责人
     private TextView targstartdate;//计划开始时间
     private TextView targcompdate;//计划完成时间
     private LinearLayout work_real_info_layout;
@@ -161,6 +165,10 @@ public class Work_detailsActivity extends BaseActivity {
         work_plan_info_layout = (LinearLayout) findViewById(R.id.work_plan_info);
         lead = (TextView) findViewById(R.id.work_lead);
         work_em_info_layout = (LinearLayout) findViewById(R.id.work_em_info);
+        udqxbz = (TextView) findViewById(R.id.work_udqxbz);
+        lead1 = (TextView) findViewById(R.id.work_lead1);
+        supervisor = (TextView) findViewById(R.id.work_supervisor);
+        udsupervisor2 = (TextView) findViewById(R.id.work_udsupervisor2);
 //        udisplayname = (TextView) findViewById(R.id.work_udisplayname);
         targstartdate = (TextView) findViewById(R.id.work_targstartdate);
         targcompdate = (TextView) findViewById(R.id.work_targcompdate);
@@ -229,6 +237,12 @@ public class Work_detailsActivity extends BaseActivity {
         assetnum.setOnClickListener(new LayoutOnClickListener(Constants.ASSETCODE));
         jpnum.setOnClickListener(new LayoutOnClickListener(Constants.JOBPLANCODE));
         reportedby.setOnClickListener(new LayoutOnClickListener(Constants.PERSONCODE));
+        lead.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE));
+        udqxbz.setOnClickListener(new LayoutOnClickListener(Constants.ALNDOMAINCODE));
+        lead1.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE1));
+        supervisor.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE2));
+        udsupervisor2.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE3));
+//        udqxbz.setOnClickListener(new );
 
         delete.setOnClickListener(deleteOnClickListener);
         revise.setOnClickListener(reviseOnClickListener);
@@ -442,19 +456,22 @@ public class Work_detailsActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(Work_detailsActivity.this, OptionActivity.class);
             intent.putExtra("requestCode", requestCode);
-            if (requestCode==Constants.JOBPLANCODE){
+            if (requestCode == Constants.JOBPLANCODE) {
                 intent.putExtra("AssetIsChoose", assetnum.getText().toString().equals(""));
+            } else if ((requestCode == Constants.LABORCODE1 || requestCode == Constants.LABORCODE2
+                    || requestCode == Constants.LABORCODE3) && !udqxbz.getText().toString().equals("")) {
+                intent.putExtra("udqxbz", udqxbz.getText().toString());
             }
             startActivityForResult(intent, requestCode);
         }
     }
 
     //删除工单
-    private void Delete(){
+    private void Delete() {
 
     }
 
-    private WorkOrder getWorkOrder(){
+    private WorkOrder getWorkOrder() {
         WorkOrder workOrder = this.workOrder;
         workOrder.description = description.getText().toString().trim();
         workOrder.worktype = worktype.getText().toString().trim();
@@ -488,14 +505,26 @@ public class Work_detailsActivity extends BaseActivity {
                 option = (Option) data.getSerializableExtra("option");
                 reportedby.setText(option.getName());
                 break;
-//            case Constants.FAILURELIST:
-//                option = (Option) data.getSerializableExtra("option");
-//                problemcode.setText(option.getName());
-//                break;
-//            case Constants.JOBPLAN:
-//                option = (Option) data.getSerializableExtra("option");
-//                jpnum.setText(option.getName());
-//                break;
+            case Constants.LABORCODE:
+                option = (Option) data.getSerializableExtra("option");
+                lead.setText(option.getName());
+                break;
+            case Constants.LABORCODE1:
+                option = (Option) data.getSerializableExtra("option");
+                lead1.setText(option.getName());
+                break;
+            case Constants.LABORCODE2:
+                option = (Option) data.getSerializableExtra("option");
+                supervisor.setText(option.getName());
+                break;
+            case Constants.LABORCODE3:
+                option = (Option) data.getSerializableExtra("option");
+                udsupervisor2.setText(option.getName());
+                break;
+            case Constants.ALNDOMAINCODE:
+                option = (Option) data.getSerializableExtra("option");
+                udqxbz.setText(option.getName());
+                break;
 //            case 1000:
 //                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");
 //                wplaborList = (ArrayList<Wplabor>) data.getSerializableExtra("wplaborList");

@@ -96,6 +96,14 @@ public class Constants {
     public static final String PERSON_APPID = "PERSON";
     //人员表名
     public static final String PERSON_NAME = "PERSON";
+    //员工的appid
+    public static final String LABOR_APPID = "LABOR";
+    //员工表名
+    public static final String LABOR_NAME = "LABOR";
+    //
+    public static final String ALNDOMAIN_APPID = "DOMAINADM";
+    //
+    public static final String ALNDOMAIN_NAME = "ALNDOMAIN";
 
 
 
@@ -151,4 +159,14 @@ public class Constants {
     public static final int JOBPLANCODE = 110; //作业计划
 
     public static final int PERSONCODE = 120;//人员
+
+    public static final int LABORCODE = 30;//员工
+
+    public static final int LABORCODE1 = 40;//抢修负责人
+
+    public static final int LABORCODE2 = 50;//抢修执行人
+
+    public static final int LABORCODE3 = 60;//抢修执行人2
+
+    public static final int ALNDOMAINCODE = 70;//抢修班组
 }

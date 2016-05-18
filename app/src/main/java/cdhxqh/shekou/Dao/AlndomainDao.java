@@ -9,22 +9,22 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
-import cdhxqh.shekou.model.JobPlan;
+import cdhxqh.shekou.model.Alndomain;
 
 /**
  * Created by think on 2016/5/18.
  * 作业计划
  */
-public class JobPlanDao {
+public class AlndomainDao {
     private Context context;
-    private Dao<JobPlan, Integer> JobPlanDaoOpe;
+    private Dao<Alndomain, Integer> AlndomainDaoOpe;
     private DatabaseHelper helper;
 
-    public JobPlanDao(Context context) {
+    public AlndomainDao(Context context) {
         this.context = context;
         try {
             helper = DatabaseHelper.getHelper(context);
-            JobPlanDaoOpe = helper.getDao(JobPlan.class);
+            AlndomainDaoOpe = helper.getDao(Alndomain.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -35,14 +35,14 @@ public class JobPlanDao {
      *
      * @param list
      */
-    public void create(final List<JobPlan> list) {
+    public void create(final List<Alndomain> list) {
         try {
             deleteall();
-            JobPlanDaoOpe.callBatchTasks(new Callable<Void>() {
+            AlndomainDaoOpe.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
-                    for (JobPlan jpnum : list) {
-                        JobPlanDaoOpe.createOrUpdate(jpnum);
+                    for (Alndomain alndomain : list) {
+                        AlndomainDaoOpe.createOrUpdate(alndomain);
                     }
                     return null;
                 }
@@ -56,9 +56,9 @@ public class JobPlanDao {
     /**
      * @return
      */
-    public List<JobPlan> queryForAll() {
+    public List<Alndomain> queryForAll() {
         try {
-            return JobPlanDaoOpe.queryForAll();
+            return AlndomainDaoOpe.queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,48 +70,34 @@ public class JobPlanDao {
      *
      * @return
      */
-    public List<JobPlan> queryByCount(int count,String jpnum) {
+    public List<Alndomain> queryByCount(int count,String value) {
         try {
-            return JobPlanDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("jpnum", "%" + jpnum + "%").query();
+            return AlndomainDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("value", "%" + value + "%").query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    /**
-     * 分页查询
-     *
-     * @return
-     */
-    public List<JobPlan> queryByCount1(int count,String jpnum) {
-        try {
-            return JobPlanDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).
-                    where().like("jpnum", "%" + jpnum + "%").and().eq("UDASSETTYPE","AC").query();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     /**
      *
      */
     public void deleteall() {
         try {
-            JobPlanDaoOpe.delete(queryForAll());
+            AlndomainDaoOpe.delete(queryForAll());
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * @param jpnum
+     * @param value
      * @return
      */
-    public List<JobPlan> queryByNum(String jpnum) {
+    public List<Alndomain> queryByNum(String value) {
         try {
-            return JobPlanDaoOpe.queryBuilder().where().like("jpnum", "%" + jpnum + "%").query();
+            return AlndomainDaoOpe.queryBuilder().where().like("value", "%" + value + "%").query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -119,13 +105,13 @@ public class JobPlanDao {
     }
 
     /**
-     * @param jobPlan
+     * @param alndomain
      * @return
      */
-    public boolean isexit(JobPlan jobPlan) {
+    public boolean isexit(Alndomain alndomain) {
         try {
-            List<JobPlan> workOrderList = JobPlanDaoOpe.queryBuilder().where().eq("jpnum", jobPlan.jpnum)
-                    .and().eq("description", jobPlan.description).query();
+            List<Alndomain> workOrderList = AlndomainDaoOpe.queryBuilder().where().eq("value", alndomain.value)
+                    .and().eq("description", alndomain.description).query();
             if (workOrderList.size() > 0) {
                 return true;
             } else {

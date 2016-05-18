@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import cdhxqh.shekou.bean.LoginResults;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.model.Alndomain;
 import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.Assignment;
 import cdhxqh.shekou.model.Failurereport;
@@ -21,6 +22,7 @@ import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Invuseline;
 import cdhxqh.shekou.model.JobPlan;
+import cdhxqh.shekou.model.Labor;
 import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Matrectrans;
 import cdhxqh.shekou.model.Matusetrans;
@@ -884,6 +886,62 @@ public class JsonUtils {
                 person.locationsite = jsonObject.getString("LOCATIONSITE"); //人员的地点
                 person.locationorg = jsonObject.getString("LOCATIONORG"); //组织
                 list.add(person);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 解析员工信息
+     */
+    public static ArrayList<Labor> parsingLabor(String data) {
+        Log.i(TAG, "Person data=" + data);
+        ArrayList<Labor> list = null;
+        Labor labor = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<Labor>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                labor = new Labor();
+                jsonObject = jsonArray.getJSONObject(i);
+                labor.laborcode = jsonObject.getString("LABORCODE"); //员工
+                labor.displayname = jsonObject.getString("DISPLAYNAME"); //名称
+                labor.udisoutside = jsonObject.getString("UDISOUTSIDE"); //是否外部人员
+                labor.craft = jsonObject.getString("CRAFT"); //工种
+                labor.craft_description = jsonObject.getString("CRAFT_DESCRIPTION"); //描述
+                labor.udeq1 = jsonObject.getString("UDEQ1"); //管理组
+                labor.udeq2 = jsonObject.getString("UDEQ2"); //管理室
+                labor.udeq3 = jsonObject.getString("UDEQ3"); //管理班组
+                list.add(labor);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 解析抢修信息
+     */
+    public static ArrayList<Alndomain> parsingAlndomain(String data) {
+        Log.i(TAG, "Alndomain data=" + data);
+        ArrayList<Alndomain> list = null;
+        Alndomain alndomain = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<Alndomain>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                alndomain = new Alndomain();
+                jsonObject = jsonArray.getJSONObject(i);
+                alndomain.value = jsonObject.getString("VALUE"); //值
+                alndomain.description = jsonObject.getString("DESCRIPTION"); //描述
+                list.add(alndomain);
             }
             return list;
         } catch (JSONException e) {

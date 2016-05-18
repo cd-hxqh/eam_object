@@ -9,22 +9,22 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
-import cdhxqh.shekou.model.JobPlan;
+import cdhxqh.shekou.model.Labor;
 
 /**
  * Created by think on 2016/5/18.
- * 作业计划
+ * 员工
  */
-public class JobPlanDao {
+public class LaborDao {
     private Context context;
-    private Dao<JobPlan, Integer> JobPlanDaoOpe;
+    private Dao<Labor, Integer> LaborDaoOpe;
     private DatabaseHelper helper;
 
-    public JobPlanDao(Context context) {
+    public LaborDao(Context context) {
         this.context = context;
         try {
             helper = DatabaseHelper.getHelper(context);
-            JobPlanDaoOpe = helper.getDao(JobPlan.class);
+            LaborDaoOpe = helper.getDao(Labor.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -35,14 +35,14 @@ public class JobPlanDao {
      *
      * @param list
      */
-    public void create(final List<JobPlan> list) {
+    public void create(final List<Labor> list) {
         try {
             deleteall();
-            JobPlanDaoOpe.callBatchTasks(new Callable<Void>() {
+            LaborDaoOpe.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
-                    for (JobPlan jpnum : list) {
-                        JobPlanDaoOpe.createOrUpdate(jpnum);
+                    for (Labor labor : list) {
+                        LaborDaoOpe.createOrUpdate(labor);
                     }
                     return null;
                 }
@@ -56,9 +56,9 @@ public class JobPlanDao {
     /**
      * @return
      */
-    public List<JobPlan> queryForAll() {
+    public List<Labor> queryForAll() {
         try {
-            return JobPlanDaoOpe.queryForAll();
+            return LaborDaoOpe.queryForAll();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,9 +70,9 @@ public class JobPlanDao {
      *
      * @return
      */
-    public List<JobPlan> queryByCount(int count,String jpnum) {
+    public List<Labor> queryByCount(int count,String laborcode) {
         try {
-            return JobPlanDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("jpnum", "%" + jpnum + "%").query();
+            return LaborDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("laborcode", "%" + laborcode + "%").query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -84,10 +84,9 @@ public class JobPlanDao {
      *
      * @return
      */
-    public List<JobPlan> queryByCount1(int count,String jpnum) {
+    public List<Labor> queryByCount1(int count,String laborcode,String udeq1) {
         try {
-            return JobPlanDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).
-                    where().like("jpnum", "%" + jpnum + "%").and().eq("UDASSETTYPE","AC").query();
+            return LaborDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("laborcode", "%" + laborcode + "%").and().eq("udeq1",udeq1).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -99,19 +98,19 @@ public class JobPlanDao {
      */
     public void deleteall() {
         try {
-            JobPlanDaoOpe.delete(queryForAll());
+            LaborDaoOpe.delete(queryForAll());
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * @param jpnum
+     * @param laborcode
      * @return
      */
-    public List<JobPlan> queryByNum(String jpnum) {
+    public List<Labor> queryByNum(String laborcode) {
         try {
-            return JobPlanDaoOpe.queryBuilder().where().like("jpnum", "%" + jpnum + "%").query();
+            return LaborDaoOpe.queryBuilder().where().like("laborcode", "%" + laborcode + "%").query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -119,13 +118,13 @@ public class JobPlanDao {
     }
 
     /**
-     * @param jobPlan
+     * @param labor
      * @return
      */
-    public boolean isexit(JobPlan jobPlan) {
+    public boolean isexit(Labor labor) {
         try {
-            List<JobPlan> workOrderList = JobPlanDaoOpe.queryBuilder().where().eq("jpnum", jobPlan.jpnum)
-                    .and().eq("description", jobPlan.description).query();
+            List<Labor> workOrderList = LaborDaoOpe.queryBuilder().where().eq("laborcode", labor.laborcode)
+                    .and().eq("displayname", labor.displayname).query();
             if (workOrderList.size() > 0) {
                 return true;
             } else {

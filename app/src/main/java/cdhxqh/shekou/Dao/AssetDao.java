@@ -12,7 +12,7 @@ import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
 import cdhxqh.shekou.model.Assets;
 
 /**
- * Created by think on 2015/12/28.
+ * Created by think on 2016/5/18.
  * 资产
  */
 public class AssetDao {

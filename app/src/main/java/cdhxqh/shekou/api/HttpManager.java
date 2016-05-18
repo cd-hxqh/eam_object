@@ -209,6 +209,24 @@ public class HttpManager {
         return "{'appid':'" + Constants.PERSON_APPID + "','objectname':'" + Constants.PERSON_NAME + "','option':'read','condition':{'LOCATIONSITE':'CCT'}}";
     }
 
+    /**
+     * 设置员工下载数据接口
+     */
+    public static String getLaborUrl(String siteid){
+        return "{'appid':'" + Constants.LABOR_APPID + "','objectname':'" + Constants.LABOR_NAME + "','option':'read','condition':{'WORKSITE':'CCT'}}";
+    }
+
+    /**
+     * 设置抢修班组下载数据接口
+     */
+    public static String getAlndomainUrl(String siteid){
+        if (siteid.equals("CCT")) {
+            return "{'appid':'" + Constants.ALNDOMAIN_APPID + "','objectname':'" + Constants.ALNDOMAIN_NAME + "','option':'read','condition':{'domainid':'UDEQ3','description':'ST-1,ST-2,ST-3,ST-4'}}";
+        }else if (siteid.equals("SCT")){
+            return "{'appid':'" + Constants.ALNDOMAIN_APPID + "','objectname':'" + Constants.ALNDOMAIN_NAME + "','option':'read','condition':{'domainid':'UDEQ3','value':'030401,030402,03040',030404'}}";
+        }
+        return null;
+    }
 
     /**
      * 使用用户名密码登录

@@ -24,13 +24,17 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cdhxqh.shekou.Dao.AlndomainDao;
 import cdhxqh.shekou.Dao.AssetDao;
 import cdhxqh.shekou.Dao.JobPlanDao;
+import cdhxqh.shekou.Dao.LaborDao;
 import cdhxqh.shekou.Dao.PersonDao;
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.model.Alndomain;
 import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.JobPlan;
+import cdhxqh.shekou.model.Labor;
 import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.ui.adapter.OptionAdapter;
@@ -216,36 +220,71 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     list.add(option);
                 }
                 break;
-//            case Constants.FAILURELIST:
-//                List<Failurelist> failurelists;
-//                failurelists = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText);
-//                for (int i = 0; i < failurelists.size(); i++) {
-//                    option = new Option();
-//                    option.setName(failurelists.get(i).failurecode);
-//                    option.setDescription(failurelists.get(i).flcdescription);
-//                    list.add(option);
-//                }
-//                break;
-//            case Constants.JOBPLAN:
-//                List<Jobplan> jobplans;
-//                jobplans = new JobplanDao(OptionActivity.this).queryByCount(page, searchText);
-//                for (int i = 0; i < jobplans.size(); i++) {
-//                    option = new Option();
-//                    option.setName(jobplans.get(i).jpnum);
-//                    option.setDescription(jobplans.get(i).description);
-//                    list.add(option);
-//                }
-//                break;
-//            case Constants.CRAFTRATE:
-//                List<Craftrate> craftrates;
-//                craftrates = new CraftrateDao(OptionActivity.this).queryByCount(page, searchText);
-//                for (int i = 0; i < craftrates.size(); i++) {
-//                    option = new Option();
-//                    option.setName(craftrates.get(i).craft);
-//                    option.setDescription(craftrates.get(i).skilllevel);
-//                    list.add(option);
-//                }
-//                break;
+            case Constants.LABORCODE:
+                List<Labor> labors;
+                labors = new LaborDao(OptionActivity.this).queryByCount(page, searchText);
+                for (int i = 0; i < labors.size(); i++) {
+                    option = new Option();
+                    option.setName(labors.get(i).laborcode);
+                    option.setDescription(labors.get(i).displayname);
+                    list.add(option);
+                }
+                break;
+            case Constants.LABORCODE1:
+                List<Labor> labors1;
+                if (getIntent().hasExtra("udqxbz")){
+                    String udeq1 = getIntent().getStringExtra("udqxbz").substring(0,2);
+                    labors1 = new LaborDao(OptionActivity.this).queryByCount1(page, searchText, udeq1);
+                }else {
+                    labors1 = new LaborDao(OptionActivity.this).queryByCount(page, searchText);
+                }
+                for (int i = 0; i < labors1.size(); i++) {
+                    option = new Option();
+                    option.setName(labors1.get(i).laborcode);
+                    option.setDescription(labors1.get(i).displayname);
+                    list.add(option);
+                }
+                break;
+            case Constants.LABORCODE2:
+                List<Labor> labors2;
+                if (getIntent().hasExtra("udqxbz")){
+                    String udeq1 = getIntent().getStringExtra("udqxbz").substring(0,2);
+                    labors2 = new LaborDao(OptionActivity.this).queryByCount1(page, searchText, udeq1);
+                }else {
+                    labors2 = new LaborDao(OptionActivity.this).queryByCount(page, searchText);
+                }
+                for (int i = 0; i < labors2.size(); i++) {
+                    option = new Option();
+                    option.setName(labors2.get(i).laborcode);
+                    option.setDescription(labors2.get(i).displayname);
+                    list.add(option);
+                }
+                break;
+            case Constants.LABORCODE3:
+                List<Labor> labors3;
+                if (getIntent().hasExtra("udqxbz")){
+                    String udeq1 = getIntent().getStringExtra("udqxbz").substring(0,2);
+                    labors3 = new LaborDao(OptionActivity.this).queryByCount1(page, searchText, udeq1);
+                }else {
+                    labors3 = new LaborDao(OptionActivity.this).queryByCount(page, searchText);
+                }
+                for (int i = 0; i < labors3.size(); i++) {
+                    option = new Option();
+                    option.setName(labors3.get(i).laborcode);
+                    option.setDescription(labors3.get(i).displayname);
+                    list.add(option);
+                }
+                break;
+            case Constants.ALNDOMAINCODE:
+                List<Alndomain> alndomains;
+                alndomains = new AlndomainDao(OptionActivity.this).queryByCount(page, searchText);
+                for (int i = 0; i < alndomains.size(); i++) {
+                    option = new Option();
+                    option.setName(alndomains.get(i).value);
+                    option.setDescription(alndomains.get(i).description);
+                    list.add(option);
+                }
+                break;
 //            case Constants.ITEM:
 //                List<Item> items;
 //                items = new ItemDao(OptionActivity.this).queryByCount(page, searchText);
