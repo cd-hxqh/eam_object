@@ -29,6 +29,8 @@ import cdhxqh.shekou.Dao.AssetDao;
 import cdhxqh.shekou.Dao.JobPlanDao;
 import cdhxqh.shekou.Dao.LaborDao;
 import cdhxqh.shekou.Dao.PersonDao;
+import cdhxqh.shekou.Dao.ProjapprDao;
+import cdhxqh.shekou.Dao.UdevDao;
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Alndomain;
@@ -37,6 +39,8 @@ import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
 import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.model.Person;
+import cdhxqh.shekou.model.Projappr;
+import cdhxqh.shekou.model.Udev;
 import cdhxqh.shekou.ui.adapter.OptionAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 
@@ -285,26 +289,26 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     list.add(option);
                 }
                 break;
-//            case Constants.ITEM:
-//                List<Item> items;
-//                items = new ItemDao(OptionActivity.this).queryByCount(page, searchText);
-//                for (int i = 0; i < items.size(); i++) {
-//                    option = new Option();
-//                    option.setName(items.get(i).itemnum);
-//                    option.setDescription(items.get(i).description);
-//                    list.add(option);
-//                }
-//                break;
-//            case Constants.LOCATIONSCODE:
-//                List<Location> locationses;
-//                locationses = new LocationDao(OptionActivity.this).queryByCountForLocations(page, searchText);
-//                for (int i = 0; i < locationses.size(); i++) {
-//                    option = new Option();
-//                    option.setName(locationses.get(i).location);
-//                    option.setDescription(locationses.get(i).description);
-//                    list.add(option);
-//                }
-//                break;
+            case Constants.UDEVCODE:
+                List<Udev> udevs;
+                udevs = new UdevDao(OptionActivity.this).queryByCount(page, searchText);
+                for (int i = 0; i < udevs.size(); i++) {
+                    option = new Option();
+                    option.setName(udevs.get(i).evnum);
+                    option.setDescription(udevs.get(i).description);
+                    list.add(option);
+                }
+                break;
+            case Constants.PROJAPPR:
+                List<Projappr> projapprs;
+                projapprs = new ProjapprDao(OptionActivity.this).queryByCount(page, searchText);
+                for (int i = 0; i < projapprs.size(); i++) {
+                    option = new Option();
+                    option.setName(projapprs.get(i).prjnum);
+                    option.setDescription(projapprs.get(i).description);
+                    list.add(option);
+                }
+                break;
 //
 //            case Constants.PERSON:
 //                List<Person> persons;

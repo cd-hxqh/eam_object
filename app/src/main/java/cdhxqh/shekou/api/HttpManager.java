@@ -229,6 +229,20 @@ public class HttpManager {
     }
 
     /**
+     * 设置事故下载数据接口
+     */
+    public static String getUdevUrl(String siteid){
+        return "{'appid':'" + Constants.UDEV_APPID + "','objectname':'" + Constants.UDEV_NAME + "','option':'read','condition':{'status':'1','siteid':'"+siteid+"'}}";
+    }
+
+    /**
+     * 设置立项申报下载数据接口
+     */
+    public static String getProjapprUrl(String siteid){
+        return "{'appid':'" + Constants.PROJAPPR_APPUD + "','objectname':'" + Constants.PROJAPPR_NAME + "','option':'read','condition':{'status':'APPR','FZDEPARTMENT':'90','siteid':'"+siteid+"'}}";
+    }
+
+    /**
      * 使用用户名密码登录
      *
      * @param cxt

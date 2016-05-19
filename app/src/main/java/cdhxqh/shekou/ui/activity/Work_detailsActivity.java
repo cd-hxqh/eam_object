@@ -242,6 +242,8 @@ public class Work_detailsActivity extends BaseActivity {
         lead1.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE1));
         supervisor.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE2));
         udsupervisor2.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE3));
+        udevnum.setOnClickListener(new LayoutOnClickListener(Constants.UDEVCODE));
+        udprojapprnum.setOnClickListener(new LayoutOnClickListener(Constants.PROJAPPR));
 //        udqxbz.setOnClickListener(new );
 
         delete.setOnClickListener(deleteOnClickListener);
@@ -524,6 +526,14 @@ public class Work_detailsActivity extends BaseActivity {
             case Constants.ALNDOMAINCODE:
                 option = (Option) data.getSerializableExtra("option");
                 udqxbz.setText(option.getName());
+                break;
+            case Constants.UDEVCODE:
+                option = (Option) data.getSerializableExtra("option");
+                udevnum.setText(option.getName());
+                break;
+            case Constants.PROJAPPR:
+                option = (Option) data.getSerializableExtra("option");
+                udprojapprnum.setText(option.getName());
                 break;
 //            case 1000:
 //                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");

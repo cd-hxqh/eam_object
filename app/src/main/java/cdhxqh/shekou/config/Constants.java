@@ -100,11 +100,18 @@ public class Constants {
     public static final String LABOR_APPID = "LABOR";
     //员工表名
     public static final String LABOR_NAME = "LABOR";
-    //
+    //抢修班组的appid
     public static final String ALNDOMAIN_APPID = "DOMAINADM";
-    //
+    //抢修班组的表名
     public static final String ALNDOMAIN_NAME = "ALNDOMAIN";
-
+    //事故appid
+    public static final String UDEV_APPID = "UDEV";
+    //事故表名
+    public static final String UDEV_NAME = "UDEV";
+    //立项申报appid
+    public static final String PROJAPPR_APPUD = "PROJAPPR";
+    //立项申报表名
+    public static final String PROJAPPR_NAME = "PROJAPPR";
 
 
     public static final String USER_INFO = "userinfo";
@@ -169,4 +176,8 @@ public class Constants {
     public static final int LABORCODE3 = 60;//抢修执行人2
 
     public static final int ALNDOMAINCODE = 70;//抢修班组
+
+    public static final int UDEVCODE = 80;//事故
+
+    public static final int PROJAPPR = 90;//立项申报
 }

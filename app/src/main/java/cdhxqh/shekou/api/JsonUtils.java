@@ -27,6 +27,8 @@ import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Matrectrans;
 import cdhxqh.shekou.model.Matusetrans;
 import cdhxqh.shekou.model.Person;
+import cdhxqh.shekou.model.Projappr;
+import cdhxqh.shekou.model.Udev;
 import cdhxqh.shekou.model.Wfassignment;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
@@ -942,6 +944,62 @@ public class JsonUtils {
                 alndomain.value = jsonObject.getString("VALUE"); //值
                 alndomain.description = jsonObject.getString("DESCRIPTION"); //描述
                 list.add(alndomain);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 解析事故信息
+     */
+    public static ArrayList<Udev> parsingUdev(String data) {
+        Log.i(TAG, "Udev data=" + data);
+        ArrayList<Udev> list = null;
+        Udev alndomain = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<Udev>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                alndomain = new Udev();
+                jsonObject = jsonArray.getJSONObject(i);
+                alndomain.evnum = jsonObject.getString("EVNUM"); //事故编码
+                alndomain.description = jsonObject.getString("DESCRIPTION"); //描述
+                alndomain.evtype = jsonObject.getString("EVTYPE"); //事故类型
+                alndomain.evclass = jsonObject.getString("EVCLASS"); //事故分类
+                alndomain.evgrade = jsonObject.getString("EVGRADE"); //事故等级
+                list.add(alndomain);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 解析立项申报信息
+     */
+    public static ArrayList<Projappr> parsingProjappr(String data) {
+        Log.i(TAG, "Projappr data=" + data);
+        ArrayList<Projappr> list = null;
+        Projappr projappr = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<Projappr>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                projappr = new Projappr();
+                jsonObject = jsonArray.getJSONObject(i);
+                projappr.prjnum = jsonObject.getString("PRJNUM"); //项目编码
+                projappr.description = jsonObject.getString("DESCRIPTION"); //描述
+                projappr.year = jsonObject.getString("YEAR"); //项目年份
+                projappr.ysje = jsonObject.getString("YSJE"); //项目预算金额
+                projappr.fzrqm = jsonObject.getString("FZRQM"); //负责人
+                list.add(projappr);
             }
             return list;
         } catch (JSONException e) {
