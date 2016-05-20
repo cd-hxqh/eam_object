@@ -9,6 +9,7 @@ public class Option implements Serializable{
     private String name;
     private String description;
     private String value;
+    private String value2;
 
     public String getName() {
         return name;
@@ -34,4 +35,11 @@ public class Option implements Serializable{
         this.value = value;
     }
 
+    public String getValue2() {
+        return value2;
+    }
+
+    public void setValue2(String value2) {
+        this.value2 = value2;
+    }
 }

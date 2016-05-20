@@ -15,6 +15,10 @@ public class Projappr implements Serializable {
     public int id;
     @DatabaseField(columnName = "prjnum")
     public String prjnum;//项目编码
+    @DatabaseField(columnName = "projapprnum")
+    public String projapprnum;//立项编号
+    @DatabaseField(columnName = "bugnum")
+    public String bugnum;//项目预算
     @DatabaseField(columnName = "description")
     public String description;//描述
     @DatabaseField(columnName = "year")

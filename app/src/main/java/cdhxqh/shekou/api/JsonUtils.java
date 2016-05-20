@@ -995,6 +995,8 @@ public class JsonUtils {
                 projappr = new Projappr();
                 jsonObject = jsonArray.getJSONObject(i);
                 projappr.prjnum = jsonObject.getString("PRJNUM"); //项目编码
+                projappr.projapprnum = jsonObject.getString("PROJAPPRNUM"); //立项编号
+                projappr.bugnum = jsonObject.getString("BUGNUM"); //项目预算
                 projappr.description = jsonObject.getString("DESCRIPTION"); //描述
                 projappr.year = jsonObject.getString("YEAR"); //项目年份
                 projappr.ysje = jsonObject.getString("YSJE"); //项目预算金额

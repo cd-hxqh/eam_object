@@ -533,7 +533,8 @@ public class Work_detailsActivity extends BaseActivity {
                 break;
             case Constants.PROJAPPR:
                 option = (Option) data.getSerializableExtra("option");
-                udprojapprnum.setText(option.getName());
+                udprojapprnum.setText(option.getValue());
+                udbugnum.setText(option.getValue2());
                 break;
 //            case 1000:
 //                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");
