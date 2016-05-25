@@ -28,306 +28,128 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/border_container"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:text="@string/work_failurereport_udgzzjgdm"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16dp" />
-
-                        <ImageView
-                            android:id="@+id/img_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/item_more" />
-
-                        <TextView
-                            android:id="@+id/work_failurereport_udgzzjgdm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_toLeftOf="@id/img_1"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16dp" />
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/gray" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:text="@string/work_failurereport_udgzlbdm"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16dp" />
-
-                        <ImageView
-                            android:id="@+id/img_2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/item_more" />
-
-                        <TextView
-                            android:id="@+id/work_failurereport_udgzlbdm"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_toLeftOf="@id/img_2"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16dp" />
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/gray" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:text="@string/work_failurereport_failurecode"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16dp" />
-
-                        <ImageView
-                            android:id="@+id/img_3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/item_more" />
-
-                        <TextView
-                            android:id="@+id/work_failurereport_failurecode"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_toLeftOf="@id/img_3"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16dp" />
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/gray" />
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:text="@string/work_failurereport_faildate"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16dp" />
-
-                        <ImageView
-                            android:id="@+id/img_4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/item_more" />
-
-                        <TextView
-                            android:id="@+id/work_failurereport_faildate"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_toLeftOf="@id/img_4"
-                            android:textColor="@color/light_black"
-                            android:textSize="@dimen/dimens_16dp" />
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="@string/work_failurereport_bz"
-                        android:textColor="@color/light_black"
-                        android:textSize="@dimen/dimens_16dp" />
-
-                    <EditText
-                        android:id="@+id/work_failurereport_bz"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/border_edit"
-                        android:padding="5dp"
-                        android:textColor="@color/light_black"
-                        android:textSize="@dimen/dimens_16dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="@string/work_failurereport_bzdate"
-                        android:textColor="@color/light_black"
-                        android:textSize="@dimen/dimens_16dp" />
-
-                    <EditText
-                        android:id="@+id/work_failurereport_bzdate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/border_edit"
-                        android:padding="5dp"
-                        android:textColor="@color/light_black"
-                        android:textSize="@dimen/dimens_16dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/border_container"
                     android:orientation="vertical">
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/dimen_40dp"
+                        android:layout_marginLeft="@dimen/dimen_5"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
+                            android:text="@string/work_failurereport_type"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+
+                        <TextView
+                            android:id="@+id/work_failurereport_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dimen_5"
+                            android:drawableRight="@drawable/item_more"
+                            android:gravity="center_vertical"
+                            android:hint="@string/have_not_data"
+                            android:textColor="@color/light_black"
+                            android:textSize="@dimen/dimens_16dp" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@drawable/line" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/dimen_40dp"
+                        android:layout_marginLeft="@dimen/dimen_5"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
                             android:text="@string/work_failurereport_question"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16dp" />
 
-                        <ImageView
-                            android:id="@+id/img_5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/item_more" />
-
                         <TextView
                             android:id="@+id/work_failurereport_question"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_toLeftOf="@id/img_5"
+                            android:layout_marginLeft="@dimen/dimen_5"
+                            android:drawableRight="@drawable/item_more"
+                            android:gravity="center_vertical"
+                            android:hint="@string/have_not_data"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16dp" />
-                    </RelativeLayout>
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/gray" />
+                        android:layout_height="1dp"
+                        android:background="@drawable/line" />
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/dimen_40dp"
+                        android:layout_marginLeft="@dimen/dimen_5"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
                             android:text="@string/work_failurereport_cause"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16dp" />
 
-                        <ImageView
-                            android:id="@+id/img_6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/item_more" />
-
                         <TextView
                             android:id="@+id/work_failurereport_cause"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_toLeftOf="@id/img_6"
+                            android:layout_marginLeft="@dimen/dimen_5"
+                            android:drawableRight="@drawable/item_more"
+                            android:gravity="center_vertical"
+                            android:hint="@string/have_not_data"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16dp" />
-                    </RelativeLayout>
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/gray" />
+                        android:layout_height="1dp"
+                        android:background="@drawable/line" />
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/dimen_40dp"
+                        android:layout_marginLeft="@dimen/dimen_5"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
                             android:text="@string/work_failurereport_rememdy"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16dp" />
 
-                        <ImageView
-                            android:id="@+id/img_7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="10dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/item_more" />
-
                         <TextView
                             android:id="@+id/work_failurereport_rememdy"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_toLeftOf="@id/img_7"
+                            android:layout_marginLeft="@dimen/dimen_5"
+                            android:drawableRight="@drawable/item_more"
+                            android:gravity="center_vertical"
+                            android:hint="@string/have_not_data"
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16dp" />
-                    </RelativeLayout>
+                    </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
         </cdhxqh.shekou.ui.widget.SwipeRefreshLayout>

@@ -20,9 +20,12 @@ import java.util.List;
 
 import cdhxqh.shekou.Dao.AlndomainDao;
 import cdhxqh.shekou.Dao.AssetDao;
+import cdhxqh.shekou.Dao.FailurelistDao;
 import cdhxqh.shekou.Dao.JobPlanDao;
 import cdhxqh.shekou.Dao.LaborDao;
+import cdhxqh.shekou.Dao.LaborcraftrateDao;
 import cdhxqh.shekou.Dao.PersonDao;
+import cdhxqh.shekou.Dao.PmDao;
 import cdhxqh.shekou.Dao.ProjapprDao;
 import cdhxqh.shekou.Dao.UdevDao;
 import cdhxqh.shekou.R;
@@ -33,9 +36,12 @@ import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Alndomain;
 import cdhxqh.shekou.model.Assets;
+import cdhxqh.shekou.model.Failurelist;
 import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
+import cdhxqh.shekou.model.Laborcraftrate;
 import cdhxqh.shekou.model.Person;
+import cdhxqh.shekou.model.Pm;
 import cdhxqh.shekou.model.Projappr;
 import cdhxqh.shekou.model.Udev;
 
@@ -147,14 +153,13 @@ public class DownloadActivity extends BaseActivity {
         tempArray01.add("抢修班组");
         tempArray01.add("事故");
         tempArray01.add("立项申报");
-//        tempArray01.add("工种");
-//        tempArray01.add("项目");
-//        tempArray01.add("员工工种");
+        tempArray01.add("预防性维护");
+        tempArray01.add("员工工种");
+        tempArray01.add("故障代码");
 
         List<String> tempArray02 = new ArrayList<String>();
 //        tempArray02.add("巡检单类型");
 //        tempArray02.add("设备");
-
         childArray.add(tempArray01);
         childArray.add(tempArray02);
         expandableListView.setAdapter(new MyExpandableListViewAdapter(this));
@@ -289,14 +294,13 @@ public class DownloadActivity extends BaseActivity {
                 downloaddata(HttpManager.getUdevUrl("CCT"), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(6))) {//立项申报
                 downloaddata(HttpManager.getProjapprUrl("CCT"), buttonText, button);
+            } else if (buttonText.equals(childArray.get(0).get(7))) {//预防性维护
+                downloaddata(HttpManager.getPmUrl("CCT"), buttonText, button);
+            } else if (buttonText.equals(childArray.get(0).get(8))) {//员工工种
+                downloaddata(HttpManager.getLaborcraftrateUrl("CCT"), buttonText, button);
+            } else if (buttonText.equals(childArray.get(0).get(9))) {//故障代码
+                downloaddata(HttpManager.getFailurelistUrl(), buttonText, button);
             }
-// else if (buttonText.equals(childArray.get(0).get(7))) {//工种
-//                downloaddata(HttpManager.getUrl(Constants.CRAFTRATE_APPID, Constants.CRAFTRATE_NAME), buttonText, button);
-//            } else if (buttonText.equals(childArray.get(0).get(8))) {//项目
-//                downloaddata(HttpManager.getUrl(Constants.ITEM_APPID, Constants.ITEM_NAME), buttonText, button);
-//            } else if (buttonText.equals(childArray.get(0).get(9))) {//员工工种
-//                downloaddata(HttpManager.getUrl(Constants.LABORCRAFTRATE_APPID, Constants.LABORCRAFTRATE_NAME), buttonText, button);
-//            }
             mProgressDialog = ProgressDialog.show(DownloadActivity.this, null,
                     getString(R.string.downloading), true, true);
             mProgressDialog.setCanceledOnTouchOutside(false);
@@ -328,19 +332,18 @@ public class DownloadActivity extends BaseActivity {
                             List<Udev> udevs = JsonUtils.parsingUdev(data.getResultlist());
                             new UdevDao(DownloadActivity.this).create(udevs);
                         } else if (buttonText.equals(childArray.get(0).get(6))) {//立项申报
-                            List<Projappr> jobplans = JsonUtils.parsingProjappr(data.getResultlist());
-                            new ProjapprDao(DownloadActivity.this).create(jobplans);
+                            List<Projappr> projapprs = JsonUtils.parsingProjappr(data.getResultlist());
+                            new ProjapprDao(DownloadActivity.this).create(projapprs);
+                        } else if (buttonText.equals(childArray.get(0).get(7))) {//工种
+                            List<Pm> pms = JsonUtils.parsingPm(data.getResultlist());
+                            new PmDao(DownloadActivity.this).create(pms);
+                        } else if (buttonText.equals(childArray.get(0).get(8))) {//员工工种
+                            List<Laborcraftrate> laborcraftrates = JsonUtils.parsingLaborcraftrate(data.getResultlist());
+                            new LaborcraftrateDao(DownloadActivity.this).create(laborcraftrates);
+                        } else if (buttonText.equals(childArray.get(0).get(9))) {//故障代码
+                            List<Failurelist> failurelists = JsonUtils.parsingFailurelist(data.getResultlist());
+                            new FailurelistDao(DownloadActivity.this).create(failurelists);
                         }
-// else if (buttonText.equals(childArray.get(0).get(7))) {//工种
-//                            List<Craftrate> craftrates = Ig_Json_Model.parsingCraftrate(data);
-//                            new CraftrateDao(DownloadActivity.this).create(craftrates);
-//                        } else if (buttonText.equals(childArray.get(0).get(8))) {//项目
-//                            List<Item> craftrates = Ig_Json_Model.parsingItem(data);
-//                            new ItemDao(DownloadActivity.this).create(craftrates);
-//                        } else if (buttonText.equals(childArray.get(0).get(9))) {//员工工种
-//                            List<Laborcraftrate> craftrates = Ig_Json_Model.parsingLaborcraftrate(data);
-//                            new LaborcraftrateDao(DownloadActivity.this).create(craftrates);
-//                        }
                     mProgressDialog.dismiss();
                     button.setText(getResources().getString(R.string.downloaded));
                 } else {

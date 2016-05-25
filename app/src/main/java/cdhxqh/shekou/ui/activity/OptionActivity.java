@@ -28,7 +28,9 @@ import cdhxqh.shekou.Dao.AlndomainDao;
 import cdhxqh.shekou.Dao.AssetDao;
 import cdhxqh.shekou.Dao.JobPlanDao;
 import cdhxqh.shekou.Dao.LaborDao;
+import cdhxqh.shekou.Dao.LaborcraftrateDao;
 import cdhxqh.shekou.Dao.PersonDao;
+import cdhxqh.shekou.Dao.PmDao;
 import cdhxqh.shekou.Dao.ProjapprDao;
 import cdhxqh.shekou.Dao.UdevDao;
 import cdhxqh.shekou.R;
@@ -37,8 +39,10 @@ import cdhxqh.shekou.model.Alndomain;
 import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
+import cdhxqh.shekou.model.Laborcraftrate;
 import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.model.Person;
+import cdhxqh.shekou.model.Pm;
 import cdhxqh.shekou.model.Projappr;
 import cdhxqh.shekou.model.Udev;
 import cdhxqh.shekou.ui.adapter.OptionAdapter;
@@ -311,18 +315,26 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     list.add(option);
                 }
                 break;
-//
-//            case Constants.PERSON:
-//                List<Person> persons;
-//                persons = new PersonDao(OptionActivity.this).queryByCount(page, searchText);
-//                for (int i = 0; i < persons.size(); i++) {
-//                    option = new Option();
-//                    option.setName(persons.get(i).personid);
-//                    option.setDescription(persons.get(i).displayname);
-//                    list.add(option);
-//                }
-//
-//                break;
+            case Constants.PMCODE:
+                List<Pm> pms;
+                pms = new PmDao(OptionActivity.this).queryByCount(page, searchText);
+                for (int i = 0; i < pms.size(); i++) {
+                    option = new Option();
+                    option.setName(pms.get(i).pmnum);
+                    option.setDescription(pms.get(i).description);
+                    list.add(option);
+                }
+                break;
+            case Constants.LABORCRAFTRATECODE:
+                List<Laborcraftrate> laborcraftrates;
+                laborcraftrates = new LaborcraftrateDao(OptionActivity.this).queryByCount(page, searchText,"CCT");
+                for (int i = 0; i < laborcraftrates.size(); i++) {
+                    option = new Option();
+                    option.setName(laborcraftrates.get(i).laborcode);
+                    option.setDescription(laborcraftrates.get(i).displayname);
+                    list.add(option);
+                }
+                break;
 //            case Constants.LABORCRAFTRATE:
 //                List<Laborcraftrate> laborcraftrates;
 //

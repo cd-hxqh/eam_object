@@ -112,6 +112,18 @@ public class Constants {
     public static final String PROJAPPR_APPUD = "PROJAPPR";
     //立项申报表名
     public static final String PROJAPPR_NAME = "PROJAPPR";
+    //预防性维护appid
+    public static final String PM_APPID = "UDPM";
+    //预防性维护表名
+    public static final String PM_NAME = "PM";
+    //员工工种appid
+    public static final String LABORCRAFTRATE_APPID = "LABOR";
+    //员工工种表名
+    public static final String LABORCRAFTRATE_NAME = "LABORCRAFTRATE";
+    //故障appid
+    public static final String FAILURELIST_APPID = "UDFAILURE";
+    //故障表名
+    public static final String FAILURELIST_NAME = "FAILURELIST";
 
 
     public static final String USER_INFO = "userinfo";
@@ -167,17 +179,21 @@ public class Constants {
 
     public static final int PERSONCODE = 120;//人员
 
-    public static final int LABORCODE = 30;//员工
+    public static final int LABORCODE = 130;//员工
 
-    public static final int LABORCODE1 = 40;//抢修负责人
+    public static final int LABORCODE1 = 140;//抢修负责人
 
-    public static final int LABORCODE2 = 50;//抢修执行人
+    public static final int LABORCODE2 = 150;//抢修执行人
 
-    public static final int LABORCODE3 = 60;//抢修执行人2
+    public static final int LABORCODE3 = 160;//抢修执行人2
 
-    public static final int ALNDOMAINCODE = 70;//抢修班组
+    public static final int ALNDOMAINCODE = 170;//抢修班组
 
-    public static final int UDEVCODE = 80;//事故
+    public static final int UDEVCODE = 180;//事故
 
-    public static final int PROJAPPR = 90;//立项申报
+    public static final int PROJAPPR = 190;//立项申报
+
+    public static final int PMCODE = 200;//预防性维护
+
+    public static final int LABORCRAFTRATECODE = 210;//员工工种
 }

@@ -98,7 +98,7 @@ public class HttpManager {
      * 设置故障汇报接口
      */
     public static String getfailurereportUrl(String type, String wonum) {
-        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.FAILUREREPORT_NAME + "','option':'read','condition':{'WONUM':'" + wonum + "'}}";
+        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.FAILURELIST_NAME + "','option':'read','condition':{'WONUM':'" + wonum + "'}}";
     }
 
     /**
@@ -240,6 +240,27 @@ public class HttpManager {
      */
     public static String getProjapprUrl(String siteid){
         return "{'appid':'" + Constants.PROJAPPR_APPUD + "','objectname':'" + Constants.PROJAPPR_NAME + "','option':'read','condition':{'status':'APPR','FZDEPARTMENT':'90','siteid':'"+siteid+"'}}";
+    }
+
+    /**
+     * 设置立项申报下载数据接口
+     */
+    public static String getPmUrl(String siteid){
+        return "{'appid':'" + Constants.PM_APPID + "','objectname':'" + Constants.PM_NAME + "','option':'read','condition':{'siteid':'"+siteid+"'}}";
+    }
+
+    /**
+     * 设置员工工种下载数据接口
+     */
+    public static String getLaborcraftrateUrl(String siteid){
+        return "{'appid':'" + Constants.LABORCRAFTRATE_APPID + "','objectname':'" + Constants.LABORCRAFTRATE_NAME + "','option':'read','condition':{'defaultcraft':'1'}}";
+    }
+
+    /**
+     * 设置故障下载数据接口
+     */
+    public static String getFailurelistUrl(){
+        return "{'appid':'" + Constants.FAILURELIST_APPID + "','objectname':'" + Constants.FAILURELIST_NAME + "','option':'read'}";
     }
 
     /**

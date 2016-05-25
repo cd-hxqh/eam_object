@@ -244,6 +244,7 @@ public class Work_detailsActivity extends BaseActivity {
         udsupervisor2.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE3));
         udevnum.setOnClickListener(new LayoutOnClickListener(Constants.UDEVCODE));
         udprojapprnum.setOnClickListener(new LayoutOnClickListener(Constants.PROJAPPR));
+        pmnum.setOnClickListener(new LayoutOnClickListener(Constants.PMCODE));
 //        udqxbz.setOnClickListener(new );
 
         delete.setOnClickListener(deleteOnClickListener);
@@ -288,23 +289,27 @@ public class Work_detailsActivity extends BaseActivity {
     private void decisionLayout() {
         switch (workOrder.worktype) {
             case "CM"://故障工单
+                reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "EM"://抢修工单
+                planLinearlayout.setVisibility(View.GONE);
                 break;
             case "EV"://事故工单
+                reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "PJ"://项目工单
-                planLinearlayout.setVisibility(View.GONE);
+//                planLinearlayout.setVisibility(View.GONE);
 //                taskLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "PM"://预防性维护工单
-                pmnum_layout.setVisibility(View.VISIBLE);
+//                pmnum_layout.setVisibility(View.VISIBLE);
                 planLinearlayout.setVisibility(View.GONE);
 //                taskLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "RS"://可维修备件工单
+                reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "SR"://状态维修工单
                 planLinearlayout.setVisibility(View.GONE);
@@ -535,6 +540,10 @@ public class Work_detailsActivity extends BaseActivity {
                 option = (Option) data.getSerializableExtra("option");
                 udprojapprnum.setText(option.getValue());
                 udbugnum.setText(option.getValue2());
+                break;
+            case Constants.PMCODE:
+                option = (Option) data.getSerializableExtra("option");
+                pmnum.setText(option.getName());
                 break;
 //            case 1000:
 //                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");

@@ -14,9 +14,12 @@ import java.util.Map;
 
 import cdhxqh.shekou.model.Alndomain;
 import cdhxqh.shekou.model.Assets;
+import cdhxqh.shekou.model.Failurelist;
 import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
+import cdhxqh.shekou.model.Laborcraftrate;
 import cdhxqh.shekou.model.Person;
+import cdhxqh.shekou.model.Pm;
 import cdhxqh.shekou.model.Projappr;
 import cdhxqh.shekou.model.Udev;
 import cdhxqh.shekou.utils.DataUtils;
@@ -25,7 +28,7 @@ import cdhxqh.shekou.utils.DataUtils;
  * Created by think on 2015/12/23.
  */
 public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 14;
     private Map<String, Dao> daos = new HashMap<String, Dao>();
 
     private DatabaseHelper(Context context) {
@@ -44,9 +47,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Alndomain.class);
             TableUtils.createTable(connectionSource, Udev.class);
             TableUtils.createTable(connectionSource, Projappr.class);
-//            TableUtils.createTable(connectionSource, Assets.class);
-//            TableUtils.createTable(connectionSource, Failurecode.class);
-//            TableUtils.createTable(connectionSource, Failurelist.class);
+            TableUtils.createTable(connectionSource, Pm.class);
+            TableUtils.createTable(connectionSource, Laborcraftrate.class);
+            TableUtils.createTable(connectionSource, Failurelist.class);
 //            TableUtils.createTable(connectionSource, Jobplan.class);
 //            TableUtils.createTable(connectionSource, Person.class);
 //            TableUtils.createTable(connectionSource, Labor.class);
@@ -75,9 +78,9 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Alndomain.class, true);
             TableUtils.dropTable(connectionSource, Udev.class, true);
             TableUtils.dropTable(connectionSource, Projappr.class, true);
-//            TableUtils.dropTable(connectionSource, Assets.class, true);
-//            TableUtils.dropTable(connectionSource, Failurecode.class, true);
-//            TableUtils.dropTable(connectionSource, Failurelist.class, true);
+            TableUtils.dropTable(connectionSource, Pm.class, true);
+            TableUtils.dropTable(connectionSource, Laborcraftrate.class, true);
+            TableUtils.dropTable(connectionSource, Failurelist.class, true);
 //            TableUtils.dropTable(connectionSource, Jobplan.class, true);
 //            TableUtils.dropTable(connectionSource, Person.class, true);
 //            TableUtils.dropTable(connectionSource, Labor.class, true);

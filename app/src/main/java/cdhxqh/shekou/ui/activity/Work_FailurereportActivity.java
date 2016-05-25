@@ -28,12 +28,7 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
     private TextView titlename;
     private ImageView menuImageView;
     private RelativeLayout backlayout;
-    private TextView udgzzjgdm;
-    private TextView udgzlbdm;
-    private TextView failurecode;
-    private TextView faildate;
-    private EditText bz;
-    private EditText bzdate;
+    private TextView type;
     private TextView question;
     private TextView cause;
     private TextView rememdy;
@@ -57,12 +52,6 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
         titlename = (TextView) findViewById(R.id.title_name);
         menuImageView = (ImageView) findViewById(R.id.title_add);
         backlayout = (RelativeLayout) findViewById(R.id.title_back);
-        udgzzjgdm = (TextView) findViewById(R.id.work_failurereport_udgzzjgdm);
-        udgzlbdm = (TextView) findViewById(R.id.work_failurereport_udgzlbdm);
-        failurecode = (TextView) findViewById(R.id.work_failurereport_failurecode);
-        faildate = (TextView) findViewById(R.id.work_failurereport_faildate);
-        bz = (EditText) findViewById(R.id.work_failurereport_bz);
-        bzdate = (EditText) findViewById(R.id.work_failurereport_bzdate);
         question = (TextView) findViewById(R.id.work_failurereport_question);
         cause = (TextView) findViewById(R.id.work_failurereport_cause);
         rememdy = (TextView) findViewById(R.id.work_failurereport_rememdy);

@@ -15,6 +15,7 @@ import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Alndomain;
 import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.Assignment;
+import cdhxqh.shekou.model.Failurelist;
 import cdhxqh.shekou.model.Failurereport;
 import cdhxqh.shekou.model.Invbalances;
 import cdhxqh.shekou.model.Invcost;
@@ -23,10 +24,12 @@ import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Invuseline;
 import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
+import cdhxqh.shekou.model.Laborcraftrate;
 import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Matrectrans;
 import cdhxqh.shekou.model.Matusetrans;
 import cdhxqh.shekou.model.Person;
+import cdhxqh.shekou.model.Pm;
 import cdhxqh.shekou.model.Projappr;
 import cdhxqh.shekou.model.Udev;
 import cdhxqh.shekou.model.Wfassignment;
@@ -451,7 +454,7 @@ public class JsonUtils {
                 failurereport.type = jsonObject.getString("TYPE");//类型
                 failurereport.orgid = jsonObject.getString("ORGID");//组织
                 failurereport.siteid = jsonObject.getString("SITEID");//地点
-                failurereport.failurereportid = jsonObject.getString("FAILUREREPORTID");//供应商
+//                failurereport.failurereportid = jsonObject.getString("FAILUREREPORTID");//供应商
                 list.add(failurereport);
             }
             return list;
@@ -1002,6 +1005,91 @@ public class JsonUtils {
                 projappr.ysje = jsonObject.getString("YSJE"); //项目预算金额
                 projappr.fzrqm = jsonObject.getString("FZRQM"); //负责人
                 list.add(projappr);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 解析预防性维护信息
+     */
+    public static ArrayList<Pm> parsingPm(String data) {
+        Log.i(TAG, "Pm data=" + data);
+        ArrayList<Pm> list = null;
+        Pm pm = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<Pm>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                pm = new Pm();
+                jsonObject = jsonArray.getJSONObject(i);
+                pm.pmnum = jsonObject.getString("PMNUM"); //预防性维护
+                pm.description = jsonObject.getString("DESCRIPTION"); //描述
+                pm.assetnum = jsonObject.getString("ASSETNUM"); //设备
+                pm.jpnum = jsonObject.getString("JPNUM"); //作业计划
+                pm.status = jsonObject.getString("STATUS"); //状态
+                pm.priority = jsonObject.getString("PRIORITY"); //优先级
+                pm.siteid = jsonObject.getString("SITEID"); //地点
+                list.add(pm);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 解析员工工种信息
+     */
+    public static ArrayList<Laborcraftrate> parsingLaborcraftrate(String data) {
+        Log.i(TAG, "Laborcraftrate data=" + data);
+        ArrayList<Laborcraftrate> list = null;
+        Laborcraftrate laborcraftrate = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<Laborcraftrate>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                laborcraftrate = new Laborcraftrate();
+                jsonObject = jsonArray.getJSONObject(i);
+                laborcraftrate.laborcode = jsonObject.getString("LABORCODE"); //员工
+                laborcraftrate.displayname = jsonObject.getString("DISPLAYNAME"); //描述
+                laborcraftrate.craft = jsonObject.getString("CRAFT"); //工种
+                laborcraftrate.craft_description = jsonObject.getString("CRAFT_DESCRIPTION"); //
+                laborcraftrate.locationsite = jsonObject.getString("LOCATIONSITE");
+                list.add(laborcraftrate);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 解析故障列表信息
+     */
+    public static ArrayList<Failurelist> parsingFailurelist(String data) {
+        Log.i(TAG, "Failurelist data=" + data);
+        ArrayList<Failurelist> list = null;
+        Failurelist failurelist = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<Failurelist>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                failurelist = new Failurelist();
+                jsonObject = jsonArray.getJSONObject(i);
+                failurelist.failurecode = jsonObject.getString("FAILURECODE"); //故障代码
+                failurelist.description = jsonObject.getString("DESCRIPTION"); //描述
+                failurelist.parent = jsonObject.getString("PARENT"); //父级
+                failurelist.type = jsonObject.getString("TYPE"); //类型
+                list.add(failurelist);
             }
             return list;
         } catch (JSONException e) {
