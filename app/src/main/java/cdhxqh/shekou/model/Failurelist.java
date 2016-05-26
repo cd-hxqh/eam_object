@@ -8,6 +8,7 @@ import java.io.Serializable;
 /**
  * Created by think on 2016/5/25.
  * 故障代码
+ *
  */
 @DatabaseTable(tableName = "Failurelist")
 public class Failurelist implements Serializable {
