@@ -28,10 +28,10 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
     private TextView titlename;
     private ImageView menuImageView;
     private RelativeLayout backlayout;
-    private TextView type;
-    private TextView question;
-    private TextView cause;
-    private TextView rememdy;
+    private TextView type;//类型
+    private TextView question;//问题
+    private TextView cause;//原因
+    private TextView rememdy;//补救措施
     private SwipeRefreshLayout refresh_layout = null;
     private WorkOrder workOrder;
     @Override
@@ -52,6 +52,7 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
         titlename = (TextView) findViewById(R.id.title_name);
         menuImageView = (ImageView) findViewById(R.id.title_add);
         backlayout = (RelativeLayout) findViewById(R.id.title_back);
+        type = (TextView) findViewById(R.id.work_failurereport_type);
         question = (TextView) findViewById(R.id.work_failurereport_question);
         cause = (TextView) findViewById(R.id.work_failurereport_cause);
         rememdy = (TextView) findViewById(R.id.work_failurereport_rememdy);
@@ -82,13 +83,14 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
+                ArrayList<Failurereport> failurereports = JsonUtils.parsingFailurereport(Work_FailurereportActivity.this, results.getResultlist());
+                addListData(failurereports);
+                refresh_layout.setRefreshing(false);
             }
 
             @Override
             public void onSuccess(Results results, int currentPage, int showcount) {
-                ArrayList<Failurereport> failurereports = JsonUtils.parsingFailurereport(Work_FailurereportActivity.this, results.getResultlist());
-                addListData(failurereports);
-                refresh_layout.setRefreshing(false);
+
             }
 
             @Override
@@ -115,6 +117,7 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
     //下拉刷新触发事件
     @Override
     public void onRefresh() {
+        refresh_layout.setRefreshing(true);
         getdata();
     }
 }

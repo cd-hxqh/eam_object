@@ -291,7 +291,7 @@
     <string name="work_failurereport_type">类别</string>
     <string name="work_failurereport_question">问题</string>
     <string name="work_failurereport_cause">原因</string>
-    <string name="work_failurereport_rememdy">措施</string>
+    <string name="work_failurereport_rememdy">补救措施</string>
 
     <!--实际员工页面-->
     <string name="work_labtrans_actualstaskid">任务</string>
