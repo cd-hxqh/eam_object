@@ -196,4 +196,12 @@ public class Constants {
     public static final int PMCODE = 200;//预防性维护
 
     public static final int LABORCRAFTRATECODE = 210;//员工工种
+
+    public static final int FAILURE_TYPE = 220;//故障原因
+
+    public static final int FAILURE_QUESTION = 230;//故障问题
+
+    public static final int FAILURE_CAUSE = 240;//故障原因
+
+    public static final int FAILURE_REMEMDY = 250;//故障措施
 }

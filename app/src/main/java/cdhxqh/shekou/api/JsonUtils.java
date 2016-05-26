@@ -1089,6 +1089,7 @@ public class JsonUtils {
                 failurelist.description = jsonObject.getString("DESCRIPTION"); //描述
                 failurelist.parent = jsonObject.getString("PARENT"); //父级
                 failurelist.type = jsonObject.getString("TYPE"); //类型
+                failurelist.failurelist = jsonObject.getString("FAILURELIST");
                 list.add(failurelist);
             }
             return list;

@@ -22,4 +22,6 @@ public class Failurelist implements Serializable {
     public String parent;//父级
     @DatabaseField(columnName = "type")
     public String type;//类型
+    @DatabaseField(columnName = "failurelist")
+    public String failurelist;//
 }

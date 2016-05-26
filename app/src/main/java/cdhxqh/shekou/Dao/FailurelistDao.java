@@ -70,9 +70,19 @@ public class FailurelistDao {
      *
      * @return
      */
-    public List<Failurelist> queryByCount(int count,String failurecode) {
+    public List<Failurelist> queryByCount(int count,String failurecode,String parent) {
         try {
-            return FailurelistDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("failurecode", "%" + failurecode + "%").query();
+            return FailurelistDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("failurecode", "%" + failurecode + "%")
+                    .and().eq("parent",parent).query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String queryForParent(String failurecode){
+        try {
+            return FailurelistDaoOpe.queryBuilder().where().eq("failurecode",failurecode).queryForFirst().failurelist;
         } catch (SQLException e) {
             e.printStackTrace();
         }

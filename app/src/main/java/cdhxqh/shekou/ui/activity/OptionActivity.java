@@ -26,6 +26,7 @@ import java.util.List;
 
 import cdhxqh.shekou.Dao.AlndomainDao;
 import cdhxqh.shekou.Dao.AssetDao;
+import cdhxqh.shekou.Dao.FailurelistDao;
 import cdhxqh.shekou.Dao.JobPlanDao;
 import cdhxqh.shekou.Dao.LaborDao;
 import cdhxqh.shekou.Dao.LaborcraftrateDao;
@@ -37,6 +38,7 @@ import cdhxqh.shekou.R;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Alndomain;
 import cdhxqh.shekou.model.Assets;
+import cdhxqh.shekou.model.Failurelist;
 import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
 import cdhxqh.shekou.model.Laborcraftrate;
@@ -73,6 +75,7 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
     private EditText search;
     private String searchText = "";
     public int requestCode;
+    public String parent;
     ArrayList<Option> list;
 
     private String CraftSearch;
@@ -332,6 +335,55 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     option = new Option();
                     option.setName(laborcraftrates.get(i).laborcode);
                     option.setDescription(laborcraftrates.get(i).displayname);
+                    list.add(option);
+                }
+                break;
+            case Constants.FAILURE_TYPE:
+                List<Failurelist> failurelists1;
+                failurelists1 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText,"");
+                for (int i = 0; i < failurelists1.size(); i++) {
+                    option = new Option();
+                    option.setName(failurelists1.get(i).failurecode);
+                    option.setDescription(failurelists1.get(i).description);
+                    list.add(option);
+                }
+                break;
+            case Constants.FAILURE_QUESTION:
+                List<Failurelist> failurelists2;
+                if (getIntent().hasExtra("failurecode")){
+                    parent = new FailurelistDao(OptionActivity.this).queryForParent(getIntent().getStringExtra("failurecode"));
+                }
+                failurelists2 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText,parent);
+                for (int i = 0; i < failurelists2.size(); i++) {
+                    option = new Option();
+                    option.setName(failurelists2.get(i).failurecode);
+                    option.setDescription(failurelists2.get(i).description);
+                    list.add(option);
+                }
+                break;
+            case Constants.FAILURE_CAUSE:
+                List<Failurelist> failurelists3;
+                if (getIntent().hasExtra("failurecode")){
+                    parent = new FailurelistDao(OptionActivity.this).queryForParent(getIntent().getStringExtra("failurecode"));
+                }
+                failurelists3 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText,parent);
+                for (int i = 0; i < failurelists3.size(); i++) {
+                    option = new Option();
+                    option.setName(failurelists3.get(i).failurecode);
+                    option.setDescription(failurelists3.get(i).description);
+                    list.add(option);
+                }
+                break;
+            case Constants.FAILURE_REMEMDY:
+                List<Failurelist> failurelists4;
+                if (getIntent().hasExtra("failurecode")){
+                    parent = new FailurelistDao(OptionActivity.this).queryForParent(getIntent().getStringExtra("failurecode"));
+                }
+                failurelists4 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText,parent);
+                for (int i = 0; i < failurelists4.size(); i++) {
+                    option = new Option();
+                    option.setName(failurelists4.get(i).failurecode);
+                    option.setDescription(failurelists4.get(i).description);
                     list.add(option);
                 }
                 break;

@@ -90,6 +90,11 @@ public class Work_detailsActivity extends BaseActivity {
     private TextView lead1;//抢修负责人
     private TextView supervisor;//抢修执行人
     private TextView udsupervisor2;//抢修执行人2
+    private LinearLayout work_failure_info_layout;
+    private TextView failurecode;//故障子机构
+    private TextView udgzlbdm;//故障类别
+    private EditText udworkmemo;//工作备注
+    private CheckBox udisyq;//是否跟进
     //    private TextView udisplayname;//承包商负责人
     private TextView targstartdate;//计划开始时间
     private TextView targcompdate;//计划完成时间
@@ -169,6 +174,11 @@ public class Work_detailsActivity extends BaseActivity {
         lead1 = (TextView) findViewById(R.id.work_lead1);
         supervisor = (TextView) findViewById(R.id.work_supervisor);
         udsupervisor2 = (TextView) findViewById(R.id.work_udsupervisor2);
+        work_failure_info_layout = (LinearLayout) findViewById(R.id.work_failure_info);
+        failurecode = (TextView) findViewById(R.id.work_failurecode);
+        udgzlbdm = (TextView) findViewById(R.id.work_udgzlbdm);
+        udworkmemo = (EditText) findViewById(R.id.work_udworkmemo);
+        udisyq = (CheckBox) findViewById(R.id.work_udisyq);
 //        udisplayname = (TextView) findViewById(R.id.work_udisplayname);
         targstartdate = (TextView) findViewById(R.id.work_targstartdate);
         targcompdate = (TextView) findViewById(R.id.work_targcompdate);
@@ -225,6 +235,14 @@ public class Work_detailsActivity extends BaseActivity {
         udevnum.setText(workOrder.udevnum);
         udbugnum.setText(workOrder.udbugnum);
         lead.setText(workOrder.lead);
+        udqxbz.setText(workOrder.udqxbz);
+        lead1.setText(workOrder.lead);
+        supervisor.setText(workOrder.supervisor);
+        udsupervisor2.setText(workOrder.udsupervisor2);
+        failurecode.setText(workOrder.failurecode);
+        udgzlbdm.setText(workOrder.udgzlbdm);
+        udworkmemo.setText(workOrder.udworkmemo);
+        udisyq.setChecked(ischeck(workOrder.udisyq));
 //        udisplayname.setText(workOrder.udisplayname);
         targstartdate.setText(workOrder.targstartdate.equals("null") ? "" : workOrder.targstartdate);
         targcompdate.setText(workOrder.targcompdate.equals("null") ? "" : workOrder.targcompdate);
@@ -245,6 +263,7 @@ public class Work_detailsActivity extends BaseActivity {
         udevnum.setOnClickListener(new LayoutOnClickListener(Constants.UDEVCODE));
         udprojapprnum.setOnClickListener(new LayoutOnClickListener(Constants.PROJAPPR));
         pmnum.setOnClickListener(new LayoutOnClickListener(Constants.PMCODE));
+        failurecode.setOnClickListener(new LayoutOnClickListener(Constants.FAILURE_TYPE));
 //        udqxbz.setOnClickListener(new );
 
         delete.setOnClickListener(deleteOnClickListener);
@@ -265,6 +284,8 @@ public class Work_detailsActivity extends BaseActivity {
                 work_plan_details_layout.setVisibility(View.GONE);
                 work_plan_info_layout.setVisibility(View.GONE);
                 work_em_info_layout.setVisibility(View.VISIBLE);
+                work_failure_info_layout.setVisibility(View.VISIBLE);
+                work_udremark_layout.setVisibility(View.GONE);
                 break;
             case "EV"://事故工单
                 udbugnum_layout.setVisibility(View.VISIBLE);
@@ -423,6 +444,7 @@ public class Work_detailsActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = new Intent(Work_detailsActivity.this, Work_FailurereportActivity.class);
             Bundle bundle = new Bundle();
+            workOrder.failurecode = failurecode.getText().toString();
             bundle.putSerializable("workOrder", workOrder);
             intent.putExtras(bundle);
             startActivity(intent);
@@ -544,6 +566,10 @@ public class Work_detailsActivity extends BaseActivity {
             case Constants.PMCODE:
                 option = (Option) data.getSerializableExtra("option");
                 pmnum.setText(option.getName());
+                break;
+            case Constants.FAILURE_TYPE:
+                option = (Option) data.getSerializableExtra("option");
+                failurecode.setText(option.getName());
                 break;
 //            case 1000:
 //                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");

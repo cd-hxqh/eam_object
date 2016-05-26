@@ -28,6 +28,8 @@
 
             <include layout="@layout/work_em_info"></include>
 
+            <include layout="@layout/work_failure_info"></include>
+
             <include layout="@layout/work_real_info"></include>
 
             <include layout="@layout/work_udremark"></include>

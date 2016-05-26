@@ -194,6 +194,11 @@
     <string name="work_lead1">抢修负责人</string>
     <string name="work_supervisor">抢修执行人</string>
     <string name="work_udsupervisor2">抢修执行人2</string>
+    <string name="work_failure_info">故障详细信息</string>
+    <string name="work_failurecode">故障子机构</string>
+    <string name="work_udgzlbdm">故障类别</string>
+    <string name="work_udworkmemo">工作备注</string>
+    <string name="work_udisyq">是否根进</string>
     <string name="work_real_info">实际信息</string>
     <string name="work_actstart">实际开始时间</string>
     <string name="work_actfinish">实际完成时间</string>
