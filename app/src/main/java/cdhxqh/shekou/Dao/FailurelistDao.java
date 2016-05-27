@@ -89,6 +89,15 @@ public class FailurelistDao {
         return null;
     }
 
+    public String queryForParent(String failurecode,String parent){
+        try {
+            return FailurelistDaoOpe.queryBuilder().where().eq("failurecode",failurecode).and().eq("parent",parent).queryForFirst().failurelist;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     /**
      *
      */

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import cdhxqh.shekou.Dao.FailurelistDao;
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
@@ -36,6 +37,7 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
     private TextView question;//问题
     private TextView cause;//原因
     private TextView rememdy;//补救措施
+    private String failurelist;
     private SwipeRefreshLayout refresh_layout = null;
     private WorkOrder workOrder;
 
@@ -128,6 +130,10 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
         int requestCode;
         String failurecode;
 
+        private LayoutOnClickListener(int requestCode) {
+            this.requestCode = requestCode;
+        }
+
         private LayoutOnClickListener(int requestCode, String failurecode) {
             this.requestCode = requestCode;
             this.failurecode = failurecode;
@@ -144,10 +150,29 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
             } else {
                 Intent intent = new Intent(Work_FailurereportActivity.this, OptionActivity.class);
                 intent.putExtra("requestCode", requestCode);
-                intent.putExtra("failurecode", failurecode);
+                if (requestCode == Constants.FAILURE_QUESTION) {
+                    intent.putExtra("failurecode", failurecode);
+                } else if (requestCode == Constants.FAILURE_CAUSE) {
+                    intent.putExtra("failurecode", failurelist == null ? getCauseList() : failurelist);
+                } else if (requestCode == Constants.FAILURE_REMEMDY) {
+                    intent.putExtra("failurecode", failurelist == null ? getRememdyList() : failurelist);
+                }
                 startActivityForResult(intent, requestCode);
             }
         }
+    }
+
+    //当故障数据原本存在，只修改原因时得到failurelist
+    private String getCauseList() {
+        String parent = new FailurelistDao(Work_FailurereportActivity.this).queryForParent(type,"");//第一层类型的parent
+        return new FailurelistDao(this).queryForParent(question.getText().toString(),parent);
+    }
+
+    //当故障数据原本存在，只修改措施时得到failurelist
+    private String getRememdyList() {
+        String parent = new FailurelistDao(Work_FailurereportActivity.this).queryForParent(type,"");//第一层类型的parent
+        String parent2 = new FailurelistDao(this).queryForParent(question.getText().toString(), parent);//第二次原因的parent
+        return new FailurelistDao(this).queryForParent(cause.getText().toString(),parent2);
     }
 
     @Override
@@ -157,14 +182,20 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
             case Constants.FAILURE_QUESTION:
                 option = (Option) data.getSerializableExtra("option");
                 question.setText(option.getName());
+                cause.setText("");
+                rememdy.setText("");
+                failurelist = option.getValue();
                 break;
             case Constants.FAILURE_CAUSE:
                 option = (Option) data.getSerializableExtra("option");
                 cause.setText(option.getName());
+                rememdy.setText("");
+                failurelist = option.getValue();
                 break;
             case Constants.FAILURE_REMEMDY:
                 option = (Option) data.getSerializableExtra("option");
                 rememdy.setText(option.getName());
+//                failurelist = option.getValue();
                 break;
         }
     }
