@@ -31,29 +31,21 @@ public class InvbalancesDetailsActivity extends BaseActivity {
     private TextView titleTextView;
 
 
-
     /**界面信息**/
     /**
-     * 货柜
+     * 货位
      */
     private TextView binnumText;
+    /**
+     * 批号
+     */
+    private TextView udtypeText;
     /**
      * 当前数量
      */
     private TextView curbalText;
 
-    /**
-     * 暂存余量
-     */
-    private TextView stagedcurbalText;
-    /**
-     * 实际库存量
-     */
-    private TextView physcntText;
-    /**
-     * 单位成本
-     */
-    private TextView unitcostText;
+
     /**
      * 实际盘点日期
      */
@@ -84,20 +76,16 @@ public class InvbalancesDetailsActivity extends BaseActivity {
         titleTextView = (TextView) findViewById(R.id.title_name);
 
         binnumText = (TextView) findViewById(R.id.invbalances_binnum_text_id);
-        curbalText = (TextView) findViewById(R.id.invbalances_curbal_text_id);
-        stagedcurbalText = (TextView) findViewById(R.id.invbalances_stagedcurbal_text_id);
-        physcntText = (TextView) findViewById(R.id.invbalances_physcnt_text_id);
-        unitcostText = (TextView) findViewById(R.id.invbalance_unitcost_text_id);
+        udtypeText = (TextView) findViewById(R.id.udtype_text_id);
+        curbalText = (TextView) findViewById(R.id.invbalances_curbal_text);
         physcntdateText = (TextView) findViewById(R.id.invbalances_physcntdate_text_id);
 
         if (invbalances != null) {
 
-            binnumText.setText(invbalances.binnum==null?"暂无数据":invbalances.binnum);
-            curbalText.setText(invbalances.curbal==null?"暂无数据":invbalances.curbal);
-            stagedcurbalText.setText(invbalances.stagedcurbal==null?"暂无数据":invbalances.stagedcurbal);
-            physcntText.setText(invbalances.physcnt==null?"暂无数据":invbalances.physcnt);
-            unitcostText.setText(invbalances.unitcost==null?"暂无数据":invbalances.unitcost);
-            physcntdateText.setText(invbalances.physcntdate==null?"暂无数据":invbalances.physcntdate);
+            binnumText.setText(invbalances.binnum == null ? "暂无数据" : invbalances.binnum);
+            udtypeText.setText(invbalances.udtype == null ? "暂无数据" : invbalances.udtype);
+            curbalText.setText(invbalances.curbal == null ? "暂无数据" : invbalances.curbal);
+            physcntdateText.setText(invbalances.physcntdate == null ? "暂无数据" : invbalances.physcntdate);
         }
     }
 
@@ -114,8 +102,6 @@ public class InvbalancesDetailsActivity extends BaseActivity {
             finish();
         }
     };
-
-
 
 
 }

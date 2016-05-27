@@ -124,7 +124,7 @@
 
 
     <!--库存余量-->
-    <string name="invbalances_binnum_text">货柜:</string>
+    <string name="invbalances_binnum_text">货位:</string>
     <string name="invbalances_curbal_text">当前余量:</string>
     <string name="invbalances_title">库存余量</string>
     <string name="invbalances_stagedcurbal_text">暂存余量:</string>
@@ -383,4 +383,11 @@
     <string name="download">下载</string>
     <string name="downloaded">已下载</string>
     <string name="synchronous_data_text">同步基础数据</string>
+    <string name="issueunit_text">单位:</string>
+    <string name="udfincp_text">财务公司:</string>
+    <string name="status_text">状态:</string>
+    <string name="binnum_text">存放位置:</string>
+    <string name="curbaltotal_text">当前余量:</string>
+    <string name="lastissuedate_text">上次发放日期:</string>
+    <string name="udtype_text">批号:</string>
 </resources>

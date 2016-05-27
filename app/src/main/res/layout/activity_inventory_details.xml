@@ -5,7 +5,9 @@
     android:background="@color/white"
     android:orientation="vertical"
     tools:context="cdhxqh.shekou.ui.activity.Wfassig_DetailsActivity">
+
     <include layout="@layout/title_main"></include>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -118,12 +120,12 @@
                 android:id="@+id/inventory_location_name_title"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/inventory_location_name_text"
+                android:text="@string/issueunit_text"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
             <TextView
-                android:id="@+id/inventory_location_name_text_id"
+                android:id="@+id/issueunit_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -149,12 +151,12 @@
                 android:id="@+id/inventory_issueunit_title"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/inventory_issueunit_text"
+                android:text="@string/udfincp_text"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
             <TextView
-                android:id="@+id/inventory_issueunit_text_id"
+                android:id="@+id/udfincp_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -169,7 +171,6 @@
             android:background="@drawable/line"></View>
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_40dp"
@@ -181,12 +182,12 @@
                 android:id="@+id/inventory_siteid_title"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/inventory_siteid_text"
+                android:text="@string/status_text"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
             <TextView
-                android:id="@+id/inventory_siteid_text_id"
+                android:id="@+id/status_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -212,12 +213,69 @@
                 android:id="@+id/inventory_curbaltotal_title"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/inventory_curbaltotal_text"
+                android:text="@string/binnum_text"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
             <TextView
-                android:id="@+id/inventory_curbaltotal_text_id"
+                android:id="@+id/binnum_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/curbaltotal_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/curbaltotal_text_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/lastissuedate_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/lastissuedate_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"

@@ -33,7 +33,7 @@ import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 /**
  * 库存余量
  */
-public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.ui.widget.SwipeRefreshLayout.OnRefreshListener, cdhxqh.shekou.ui.widget.SwipeRefreshLayout.OnLoadListener{
+public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.ui.widget.SwipeRefreshLayout.OnRefreshListener, cdhxqh.shekou.ui.widget.SwipeRefreshLayout.OnLoadListener {
     private static final String TAG = "InvbalancesActivity";
 
     /**
@@ -61,7 +61,7 @@ public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.u
 
 
     /**
-     *暂无数据*
+     * 暂无数据*
      */
     LinearLayout notLinearLayout;
 
@@ -71,12 +71,13 @@ public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.u
 
     private int page = 1;
 
-    private  ArrayList<Invbalances> items=new ArrayList<Invbalances>();
+    private ArrayList<Invbalances> items = new ArrayList<Invbalances>();
 
     /**
      * 搜索值*
      */
     private String vlaue = "";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,9 +87,11 @@ public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.u
         initView();
     }
 
-    /**获取上个界面的数据**/
+    /**
+     * 获取上个界面的数据*
+     */
     private void getInitData() {
-        itemnum=getIntent().getExtras().getString("itemnum");
+        itemnum = getIntent().getExtras().getString("itemnum");
     }
 
     @Override
@@ -103,7 +106,7 @@ public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.u
         mRecyclerView.setLayoutManager(mLayoutManager);
         invbalancesAdapter = new InvbalancesAdapter(InvbalancesActivity.this);
         mRecyclerView.setAdapter(invbalancesAdapter);
-        mSwipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
+        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         mSwipeLayout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
@@ -123,9 +126,9 @@ public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.u
     protected void initView() {
         backImageView.setOnClickListener(backImageViewOnClickListener);
         titleTextView.setText(getString(R.string.invbalances_title));
-
+        searchEditText.setVisibility(View.GONE);
         mSwipeLayout.setRefreshing(true);
-        getItemList(vlaue,page,itemnum);
+        getItemList(vlaue, page, itemnum);
 
         SpannableString msp = new SpannableString("XX搜索");
         Drawable drawable = getResources().getDrawable(R.drawable.ic_search);
@@ -135,7 +138,6 @@ public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.u
 
         searchEditText.setOnEditorActionListener(searchEditTextOnEditorActionListener);
     }
-
 
 
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
@@ -148,11 +150,10 @@ public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.u
     /**
      * 获取库存成本
      * --分页
-     *
      */
 
-    private void getItemList(String value,int page,String itemnum) {
-        HttpManager.getDataPagingInfo(InvbalancesActivity.this, HttpManager.getInvbalancesurl(value,page, 20, itemnum), new HttpRequestHandler<Results>() {
+    private void getItemList(String value, int page, String itemnum) {
+        HttpManager.getDataPagingInfo(InvbalancesActivity.this, HttpManager.getInvbalancesurl(value, page, 20, itemnum), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -189,7 +190,7 @@ public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.u
     @Override
     public void onLoad() {
         page++;
-        getItemList(vlaue,page,itemnum);
+        getItemList(vlaue, page, itemnum);
     }
 
     @Override
@@ -213,7 +214,7 @@ public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.u
                 notLinearLayout.setVisibility(View.GONE);
                 mSwipeLayout.setRefreshing(true);
                 page = 1;
-                getItemList(vlaue, page,itemnum);
+                getItemList(vlaue, page, itemnum);
                 return true;
             }
             return false;

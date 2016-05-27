@@ -520,21 +520,26 @@ public class JsonUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
                 inventory = new Inventory();
                 jsonObject = jsonArray.getJSONObject(i);
-                inventory.avgcost = jsonObject.getString("AVGCOST"); //平均项目成本
-                inventory.curbal = jsonObject.getString("CURBAL"); //当前余量
-                inventory.issueunit = jsonObject.getString("ISSUEUNIT"); //发放单位
-                inventory.itemnum = jsonObject.getString("ITEMNUM"); //项目编号
-                inventory.lastcost = jsonObject.getString("LASTCOST"); //项目成本
+                inventory.inventoryid = jsonObject.getInt("INVENTORYID"); //唯一ID
+                inventory.itemnum = jsonObject.getString("ITEMNUM"); //库存备件
+                inventory.item_description = jsonObject.getString("ITEM_DESCRIPTION"); //备件描述
                 inventory.location = jsonObject.getString("LOCATION"); //库房
-                inventory.orgid = jsonObject.getString("ORGID"); //组织标识
-                inventory.siteid = jsonObject.getString("SITEID"); //站点
-                inventory.stdcost = jsonObject.getString("STDCOST"); //项目成本
+                inventory.locations_description = jsonObject.getString("LOCATIONS_DESCRIPTION"); //库房名称
+                inventory.issueunit = jsonObject.getString("ISSUEUNIT"); //单位
+                inventory.udfincp = jsonObject.getString("UDFINCP"); //财务公司
+                inventory.udfincp_name = jsonObject.getString("UDFINCP_NAME"); //财务公司（中文）
+                inventory.status = jsonObject.getString("STATUS"); //状态
+                inventory.binnum = jsonObject.getString("BINNUM"); //默认存放位置
+                inventory.siteid = jsonObject.getString("SITEID"); //地点
+                inventory.curbaltotal = jsonObject.getInt("CURBALTOTAL")+""; //当前余量
+                inventory.lastissuedate = jsonObject.getString("LASTISSUEDATE"); //上次发放日期
 
                 list.add(inventory);
             }
 
             return list;
         } catch (JSONException e) {
+            Log.i(TAG,"this is ee");
             e.printStackTrace();
             return null;
         }
@@ -556,13 +561,10 @@ public class JsonUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
                 invcost = new Invcost();
                 jsonObject = jsonArray.getJSONObject(i);
-                invcost.avgcost = jsonObject.getString("AVGCOST"); //平均项目成本
+                invcost.invcostid = jsonObject.getInt("INVCOSTID"); //唯一ID
                 invcost.itemnum = jsonObject.getString("ITEMNUM"); //项目编号
+                invcost.avgcost = jsonObject.getString("AVGCOST"); //平均项目成本
                 invcost.lastcost = jsonObject.getString("LASTCOST"); //项目成本
-                invcost.location = jsonObject.getString("LOCATION"); //库房
-                invcost.orgid = jsonObject.getString("ORGID"); //组织标识
-                invcost.siteid = jsonObject.getString("SITEID"); //站点
-                invcost.stdcost = jsonObject.getString("STDCOST"); //项目成本
 
                 list.add(invcost);
             }
@@ -589,15 +591,11 @@ public class JsonUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
                 invbalances = new Invbalances();
                 jsonObject = jsonArray.getJSONObject(i);
+                invbalances.invbalancesid = jsonObject.getInt("INVBALANCESID"); //唯一ID
+                invbalances.itemnum = jsonObject.getString("ITEMNUM"); //项目编号
                 invbalances.binnum = jsonObject.getString("BINNUM"); //货柜编号
                 invbalances.curbal = jsonObject.getString("CURBAL"); //当前余量
-                invbalances.itemnum = jsonObject.getString("ITEMNUM"); //项目编号
-                invbalances.location = jsonObject.getString("LOCATION"); //库房
-                invbalances.orgid = jsonObject.getString("ORGID"); //组织标识
-                invbalances.physcnt = jsonObject.getString("PHYSCNT"); //实际库存量
                 invbalances.physcntdate = jsonObject.getString("PHYSCNTDATE"); //盘点日期
-                invbalances.siteid = jsonObject.getString("SITEID"); //位置
-                invbalances.stagedcurbal = jsonObject.getString("STAGEDCURBAL"); //暂存余量
 
                 list.add(invbalances);
             }

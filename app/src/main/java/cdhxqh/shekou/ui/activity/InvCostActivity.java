@@ -131,10 +131,9 @@ public class InvCostActivity extends BaseActivity implements SwipeRefreshLayout.
     protected void initView() {
         backImageView.setOnClickListener(backImageViewOnClickListener);
         titleTextView.setText(getString(R.string.inventory_cost_text));
-
+        searchEditText.setVisibility(View.GONE);
         mSwipeLayout.setRefreshing(true);
-        getItemList(vlaue,page,itemnum);
-
+        getItemList(vlaue, page, itemnum);
 
 
         SpannableString msp = new SpannableString("XX搜索");
@@ -159,8 +158,8 @@ public class InvCostActivity extends BaseActivity implements SwipeRefreshLayout.
      * --分页
      */
 
-    private void getItemList(String value,int page,String itemnum) {
-        HttpManager.getDataPagingInfo(InvCostActivity.this, HttpManager.getInvcosturl(value,page, 20, itemnum), new HttpRequestHandler<Results>() {
+    private void getItemList(String value, int page, String itemnum) {
+        HttpManager.getDataPagingInfo(InvCostActivity.this, HttpManager.getInvcosturl(value, page, 20, itemnum), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -197,7 +196,7 @@ public class InvCostActivity extends BaseActivity implements SwipeRefreshLayout.
     @Override
     public void onLoad() {
         page++;
-        getItemList(vlaue,page,itemnum);
+        getItemList(vlaue, page, itemnum);
     }
 
     @Override
@@ -221,7 +220,7 @@ public class InvCostActivity extends BaseActivity implements SwipeRefreshLayout.
                 notLinearLayout.setVisibility(View.GONE);
                 mSwipeLayout.setRefreshing(true);
                 page = 1;
-                getItemList(vlaue, page,itemnum);
+                getItemList(vlaue, page, itemnum);
                 return true;
             }
             return false;
@@ -229,7 +228,6 @@ public class InvCostActivity extends BaseActivity implements SwipeRefreshLayout.
 
 
     };
-
 
 
 }

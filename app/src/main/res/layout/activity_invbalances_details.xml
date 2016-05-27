@@ -58,12 +58,12 @@
                 android:id="@+id/invbalances_curbal_title"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/invbalances_curbal_text"
+                android:text="@string/udtype_text"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
             <TextView
-                android:id="@+id/invbalances_curbal_text_id"
+                android:id="@+id/udtype_text_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -89,77 +89,16 @@
                 android:id="@+id/invbalances_stagedcurbal_title"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/invbalances_stagedcurbal_text"
+                android:text="@string/invbalances_curbal_text"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
             <TextView
-                android:id="@+id/invbalances_stagedcurbal_text_id"
+                android:id="@+id/invbalances_curbal_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:layout_toRightOf="@+id/item_num_title"
-                android:hint="@string/have_not_data"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/line"></View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:layout_marginLeft="@dimen/dimen_5"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/invbalances_physcnt_title"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="@string/invbalances_physcnt_text"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-
-            <TextView
-                android:id="@+id/invbalances_physcnt_text_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:layout_toRightOf="@+id/item_num_title"
-                android:hint="@string/have_not_data"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/line"></View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:layout_marginLeft="@dimen/dimen_5"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/invbalance_unitcost_title"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="@string/invbalance_unitcost_text"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-
-            <TextView
-                android:id="@+id/invbalance_unitcost_text_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_5"
                 android:hint="@string/have_not_data"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />

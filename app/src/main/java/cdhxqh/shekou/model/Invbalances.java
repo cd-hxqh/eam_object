@@ -14,31 +14,22 @@ public class Invbalances extends Entity implements Parcelable {
     private static final String TAG = "Invcost";
     private static final long serialVersionUID = 2015050105L;
 
-    public String binnum; //货柜编号
-    public String curbal; //当前余量
+    public int invbalancesid; //唯一ID
     public String itemnum; //项目编号
-    public String location; //库房
-    public String orgid; //组织标识
-    public String physcnt; //实际库存量
-    public String physcntdate; //盘点日期
-    public String siteid; //位置
-    public String stagedcurbal; //暂存余量
-    public String unitcost; //单位成本
-
+    public String binnum; //货位
+    public String udtype; //批号
+    public String curbal; //当前余量
+    public String physcntdate; //实际盘点日期
 
 
     @Override
     public void parse(JSONObject jsonObject) throws JSONException {
-        binnum = jsonObject.getString("binnum");
-        curbal = jsonObject.getString("curbal");
+        invbalancesid = jsonObject.getInt("invbalancesid");
         itemnum = jsonObject.getString("itemnum");
-        location = jsonObject.getString("location");
-        orgid = jsonObject.getString("orgid");
-        physcnt = jsonObject.getString("physcnt");
+        binnum = jsonObject.getString("binnum");
+        udtype = jsonObject.getString("udtype");
+        curbal = jsonObject.getString("curbal");
         physcntdate = jsonObject.getString("physcntdate");
-        siteid = jsonObject.getString("siteid");
-        stagedcurbal = jsonObject.getString("stagedcurbal");
-        unitcost = jsonObject.getString("UNITCOST");
     }
 
     public Invbalances() {
@@ -46,16 +37,12 @@ public class Invbalances extends Entity implements Parcelable {
 
 
     private Invbalances(Parcel in) {
-        binnum = in.readString();
-        curbal = in.readString();
+        invbalancesid = in.readInt();
         itemnum = in.readString();
-        location = in.readString();
-        orgid = in.readString();
-        physcnt = in.readString();
+        binnum = in.readString();
+        udtype = in.readString();
+        curbal = in.readString();
         physcntdate = in.readString();
-        siteid = in.readString();
-        stagedcurbal = in.readString();
-        unitcost = in.readString();
     }
 
     @Override
@@ -65,16 +52,12 @@ public class Invbalances extends Entity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(binnum);
-        dest.writeString(curbal);
+        dest.writeInt(invbalancesid);
         dest.writeString(itemnum);
-        dest.writeString(location);
-        dest.writeString(orgid);
-        dest.writeString(physcnt);
+        dest.writeString(binnum);
+        dest.writeString(udtype);
+        dest.writeString(curbal);
         dest.writeString(physcntdate);
-        dest.writeString(siteid);
-        dest.writeString(stagedcurbal);
-        dest.writeString(unitcost);
 
     }
 

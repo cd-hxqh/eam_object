@@ -50,22 +50,31 @@ public class InventoryActivity extends BaseActivity {
      * 库房
      */
     private TextView locationText;
+
     /**
-     * 库房名称
-     */
-    private TextView locationDescText;
-    /**
-     * 发放单位
+     * 单位
      */
     private TextView issueunitText;
     /**
-     * 位置
+     * 财务公司
      */
-    private TextView siteidText;
+    private TextView udfincpText;
     /**
-     * 当前余量
+     * 状态
+     */
+    private TextView statusText;
+    /**
+     * 存放位置*
+     */
+    private TextView binnumText;
+    /**
+     * 当前余量*
      */
     private TextView curbaltotalText;
+    /**
+     * 上次发放日期*
+     */
+    private TextView lastissuedateText;
 
     /**
      * inventory*
@@ -113,17 +122,23 @@ public class InventoryActivity extends BaseActivity {
         itemnumText = (TextView) findViewById(R.id.inventory_itemnum_text_id);
         descText = (TextView) findViewById(R.id.inventory_desc_text_id);
         locationText = (TextView) findViewById(R.id.inventory_location_text_id);
-        locationDescText = (TextView) findViewById(R.id.inventory_location_name_text_id);
-        issueunitText = (TextView) findViewById(R.id.inventory_issueunit_text_id);
-        siteidText = (TextView) findViewById(R.id.inventory_siteid_text_id);
-        curbaltotalText = (TextView) findViewById(R.id.inventory_curbaltotal_text_id);
+        issueunitText = (TextView) findViewById(R.id.issueunit_text_id);
+        udfincpText = (TextView) findViewById(R.id.udfincp_text_id);
+        statusText = (TextView) findViewById(R.id.status_text_id);
+        binnumText = (TextView) findViewById(R.id.binnum_text_id);
+        curbaltotalText = (TextView) findViewById(R.id.curbaltotal_text_id);
+        lastissuedateText = (TextView) findViewById(R.id.lastissuedate_text_id);
 
         if (inventory != null) {
             itemnumText.setText(inventory.itemnum);
-            locationText.setText(inventory.location);
+            descText.setText(inventory.item_description);
+            locationText.setText(inventory.locations_description);
             issueunitText.setText(inventory.issueunit);
-            siteidText.setText(inventory.siteid);
-            curbaltotalText.setText(inventory.curbal);
+            udfincpText.setText(inventory.udfincp_name);
+            statusText.setText(inventory.status);
+            binnumText.setText(inventory.binnum);
+            curbaltotalText.setText(inventory.curbaltotal);
+            lastissuedateText.setText(inventory.lastissuedate);
         }
     }
 
@@ -179,12 +194,8 @@ public class InventoryActivity extends BaseActivity {
 
         costLinearlayout = (LinearLayout) contentView.findViewById(R.id.inventory_cost_id);
         levelsLinearLayout = (LinearLayout) contentView.findViewById(R.id.inventory_levels_id);
-        storageLinearLayout = (LinearLayout) contentView.findViewById(R.id.inventory_storage_id);
-        outboundLinearLayout = (LinearLayout) contentView.findViewById(R.id.inventory_outbound_id);
         costLinearlayout.setOnClickListener(costOnClickListener);
         levelsLinearLayout.setOnClickListener(levelsOnClickListener);
-        storageLinearLayout.setOnClickListener(storageOnClickListener);
-        outboundLinearLayout.setOnClickListener(outboundOnClickListener);
 
     }
 
@@ -204,30 +215,14 @@ public class InventoryActivity extends BaseActivity {
             startActivityForResult(intent, 0);
         }
     };
-    private View.OnClickListener storageOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(InventoryActivity.this, MatrectransActivity.class);
-            intent.putExtra("itemnum", inventory.itemnum);
-            startActivityForResult(intent, 0);
-        }
-    };
-    private View.OnClickListener outboundOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(InventoryActivity.this, MatusetransActivity.class);
-            intent.putExtra("itemnum", inventory.itemnum);
-            startActivityForResult(intent, 0);
-        }
-    };
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
+        switch (requestCode) {
             case 0:
-                if(popupWindow!=null){
+                if (popupWindow != null) {
                     popupWindow.dismiss();
                 }
                 break;

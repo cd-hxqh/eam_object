@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * Created by think on 2015/11/3.
- * 计划员工
+ * 实际员工
  */
 public class Labtrans implements Serializable {
     private static final String TAG = "Labtrans";
@@ -20,20 +20,14 @@ public class Labtrans implements Serializable {
     public String craft; //工种
     public String skilllevel; //技能级别
     public String laborcode; //员工
-    public String startdate; //开始日期
+    public String startdate; //工作日期
     public String starttime; //开始时间
-//    public String finishdate; //结束日期
     public String finishtime; //结束时间
     public String regularhrs;//常规时数
-//    public String enterby;//输入人
-//    public String enterdate;//输入日期
     public String payrate;//费率
     public String linecost;//行成本
     public String assetnum;//资产
-//    public String transdate;//交易日期
     public String transtype;//类型
-//    public String orgid; //组织
-//    public String siteid; //地点
     public String labtransid;
 
 //
