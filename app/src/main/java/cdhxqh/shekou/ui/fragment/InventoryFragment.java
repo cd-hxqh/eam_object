@@ -156,6 +156,7 @@ public class InventoryFragment extends Fragment implements SwipeRefreshLayout.On
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
                 ArrayList<Inventory> item = JsonUtils.parsingInventory(getActivity(), results.getResultlist());
+                Log.i(TAG,"size="+item.size());
                 if(item!=null||item.size()!=0){
                     for (int i=0;i<item.size();i++) {
                         items.add(item.get(i));

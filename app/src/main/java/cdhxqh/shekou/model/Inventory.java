@@ -14,29 +14,40 @@ public class Inventory extends Entity implements Parcelable {
     private static final String TAG = "Inventory";
     private static final long serialVersionUID = 2015050105L;
 
-    public String avgcost; //平均项目成本
-    public String curbal; //当前余量
-    public String issueunit; //发放单位
-    public String itemnum; //项目编号
-    public String lastcost; //项目成本
+    public int inventoryid; //唯一ID
+    public String itemnum; //库存备件
+    public String item_description; //备件描述
     public String location; //库房
-    public String orgid; //组织标识
-    public String siteid; //站点
-    public String stdcost; //项目成本
+    public String locations_description; //库房名称
+    public String issueunit; //单位
+    public String udfincp; //财务公司
+    public String udfincp_name; //财务公司（中文）
+    public String status; //状态
+    public String binnum; //默认存放位置
+    public String siteid; //地点
+    public String curbaltotal; //当前余量
+    public String lastissuedate; //上次发放日期
+
+
+
 
 
 
     @Override
     public void parse(JSONObject jsonObject) throws JSONException {
-        avgcost = jsonObject.getString("avgcost");
-        curbal = jsonObject.getString("curbal");
-        issueunit = jsonObject.getString("issueunit");
+        inventoryid = jsonObject.getInt("inventoryid");
         itemnum = jsonObject.getString("itemnum");
-        lastcost = jsonObject.getString("lastcost");
+        item_description = jsonObject.getString("item_description");
         location = jsonObject.getString("location");
-        orgid = jsonObject.getString("orgid");
+        locations_description = jsonObject.getString("locations_description");
+        issueunit = jsonObject.getString("issueunit");
+        udfincp= jsonObject.getString("udfincp");
+        udfincp_name = jsonObject.getString("udfincp_name");
+        status = jsonObject.getString("status");
+        binnum = jsonObject.getString("binnum");
         siteid = jsonObject.getString("siteid");
-        stdcost = jsonObject.getString("stdcost");
+        curbaltotal = jsonObject.getString("curbaltotal");
+        lastissuedate = jsonObject.getString("lastissuedate");
     }
 
     public Inventory() {
@@ -44,15 +55,19 @@ public class Inventory extends Entity implements Parcelable {
 
 
     private Inventory(Parcel in) {
-        avgcost = in.readString();
-        curbal = in.readString();
-        issueunit = in.readString();
+        inventoryid = in.readInt();
         itemnum = in.readString();
-        lastcost = in.readString();
+        item_description = in.readString();
         location = in.readString();
-        orgid = in.readString();
+        locations_description = in.readString();
+        issueunit = in.readString();
+        udfincp = in.readString();
+        udfincp_name = in.readString();
+        status = in.readString();
+        binnum = in.readString();
         siteid = in.readString();
-        stdcost = in.readString();
+        curbaltotal = in.readString();
+        lastissuedate = in.readString();
     }
 
     @Override
@@ -62,15 +77,19 @@ public class Inventory extends Entity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(avgcost);
-        dest.writeString(curbal);
-        dest.writeString(issueunit);
+        dest.writeInt(inventoryid);
         dest.writeString(itemnum);
-        dest.writeString(lastcost);
+        dest.writeString(item_description);
         dest.writeString(location);
-        dest.writeString(orgid);
+        dest.writeString(locations_description);
+        dest.writeString(issueunit);
+        dest.writeString(udfincp);
+        dest.writeString(udfincp_name);
+        dest.writeString(status);
+        dest.writeString(binnum);
         dest.writeString(siteid);
-        dest.writeString(stdcost);
+        dest.writeString(curbaltotal);
+        dest.writeString(lastissuedate);
 
     }
 

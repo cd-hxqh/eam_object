@@ -14,25 +14,20 @@ public class Invcost extends Entity implements Parcelable {
     private static final String TAG = "Invcost";
     private static final long serialVersionUID = 2015050105L;
 
-    public String avgcost; //
-    public String itemnum; //
-    public String lastcost; //
-    public String location; //
-    public String orgid; //
-    public String siteid; //
-    public String stdcost; //
+    public int invcostid; //唯一id
+    public String itemnum; //项目编号
+    public String avgcost; //平均成本
+    public String lastcost; //上次接受成本
+
 
 
 
     @Override
     public void parse(JSONObject jsonObject) throws JSONException {
-        avgcost = jsonObject.getString("avgcost");
+        invcostid = jsonObject.getInt("invcostid");
         itemnum = jsonObject.getString("itemnum");
+        avgcost = jsonObject.getString("avgcost");
         lastcost = jsonObject.getString("lastcost");
-        location = jsonObject.getString("location");
-        orgid = jsonObject.getString("orgid");
-        siteid = jsonObject.getString("siteid");
-        stdcost = jsonObject.getString("stdcost");
     }
 
     public Invcost() {
@@ -40,13 +35,10 @@ public class Invcost extends Entity implements Parcelable {
 
 
     private Invcost(Parcel in) {
-        avgcost = in.readString();
+        invcostid = in.readInt();
         itemnum = in.readString();
+        avgcost = in.readString();
         lastcost = in.readString();
-        location = in.readString();
-        orgid = in.readString();
-        siteid = in.readString();
-        stdcost = in.readString();
     }
 
     @Override
@@ -56,13 +48,10 @@ public class Invcost extends Entity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(invcostid);
         dest.writeString(avgcost);
         dest.writeString(itemnum);
         dest.writeString(lastcost);
-        dest.writeString(location);
-        dest.writeString(orgid);
-        dest.writeString(siteid);
-        dest.writeString(stdcost);
 
     }
 
