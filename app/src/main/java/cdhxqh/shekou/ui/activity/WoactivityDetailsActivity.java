@@ -36,11 +36,6 @@ public class WoactivityDetailsActivity extends BaseActivity {
     private EditText udremark;//备注
     private Button confirm;//确定
 
-//    private TextView targstartdate;//计划开始时间
-//    private TextView targcompdate;//计划完成时间
-//    private TextView actstart;//时间开始时间
-//    private TextView actfinish;///实际完成时间
-//    private TextView estdur;//持续时间
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +50,7 @@ public class WoactivityDetailsActivity extends BaseActivity {
     private void geiIntentData() {
         woactivity = (Woactivity) getIntent().getSerializableExtra("woactivity");
     }
+
     @Override
     protected void findViewById() {
         backImageView = (ImageView) findViewById(R.id.title_back_id);
@@ -69,11 +65,6 @@ public class WoactivityDetailsActivity extends BaseActivity {
         udyqyy = (EditText) findViewById(R.id.work_woactivity_udyqyy);
         udremark = (EditText) findViewById(R.id.work_woactivity_udremark);
         confirm = (Button) findViewById(R.id.confirm);
-//        targstartdate = (TextView) findViewById(R.id.work_woactivity_targstartdate);
-//        targcompdate = (TextView) findViewById(R.id.work_woactivity_targcompdate);
-//        actstart = (TextView) findViewById(R.id.work_woactivity_actstart);
-//        actfinish = (TextView) findViewById(R.id.work_woactivity_actfinish);
-//        estdur = (TextView) findViewById(R.id.work_woactivity_estdur);
     }
 
     @Override
@@ -95,10 +86,26 @@ public class WoactivityDetailsActivity extends BaseActivity {
         udyqyy.setText(woactivity.udyqyy);
         udremark.setText(woactivity.udremark);
 
-//        targstartdate.setText(woactivity.targstartdate);
-//        targcompdate.setText(woactivity.targcompdate);
-//        actstart.setText(woactivity.actstart);
-//        actfinish.setText(woactivity.actfinish);
-//        estdur.setText(woactivity.estdur);
+        confirm.setOnClickListener(confirmOnClickListener);
     }
+
+    private Woactivity getWoactivity() {
+        Woactivity woactivity = this.woactivity;
+        woactivity.taskid = taskid.getText().toString().trim();
+        woactivity.wojo1 = wojo1.getText().toString().trim();
+        woactivity.description = description.getText().toString().trim();
+        woactivity.wojo2 = wojo2.isChecked() ? "Y" : "N";
+        woactivity.udisdo = udisdo.isChecked() ? "Y" : "N";
+        woactivity.udisyq = udisyq.isChecked() ? "Y" : "N";
+        woactivity.udyqyy = udyqyy.getText().toString().trim();
+        woactivity.udremark = udremark.getText().toString().trim();
+        return woactivity;
+    }
+
+    private View.OnClickListener confirmOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+        }
+    };
 }

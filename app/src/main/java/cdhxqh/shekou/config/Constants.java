@@ -204,4 +204,6 @@ public class Constants {
     public static final int FAILURE_CAUSE = 240;//故障原因
 
     public static final int FAILURE_REMEMDY = 250;//故障措施
+
+    public static final int ALNDOMAIN2CODE = 260;//故障类别
 }

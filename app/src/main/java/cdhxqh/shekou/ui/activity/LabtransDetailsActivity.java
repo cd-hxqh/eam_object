@@ -3,6 +3,7 @@ package cdhxqh.shekou.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -40,6 +41,8 @@ public class LabtransDetailsActivity extends BaseActivity {
     private TextView assetnum;//资产
     private TextView transtype;//类型
 
+    private Button confirm;//确定
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +73,8 @@ public class LabtransDetailsActivity extends BaseActivity {
         linecost = (TextView) findViewById(R.id.work_labtrans_linecost);
         assetnum = (TextView) findViewById(R.id.work_labtrans_assetnum);
         transtype = (TextView) findViewById(R.id.work_labtrans_transtype);
+
+        confirm = (Button) findViewById(R.id.confirm);
     }
 
     @Override
@@ -96,6 +101,8 @@ public class LabtransDetailsActivity extends BaseActivity {
         transtype.setText(labtrans.transtype);
 
         laborcode.setOnClickListener(new LayoutOnClickListener(Constants.LABORCRAFTRATECODE));
+
+        confirm.setOnClickListener(confirmOnClickListener);
     }
 
     private class LayoutOnClickListener implements View.OnClickListener {
@@ -112,6 +119,30 @@ public class LabtransDetailsActivity extends BaseActivity {
             startActivityForResult(intent, requestCode);
         }
     }
+
+    private Labtrans getLabtrans(){
+        Labtrans labtrans = this.labtrans;
+        labtrans.actualstaskid = actualstaskid.getText().toString();
+        labtrans.craft = craft.getText().toString();
+        labtrans.skilllevel = skilllevel.getText().toString();
+        labtrans.laborcode = laborcode.getText().toString();
+        labtrans.startdate = startdate.getText().toString();
+        labtrans.starttime = starttime.getText().toString();
+        labtrans.finishtime = finishtime.getText().toString();
+        labtrans.regularhrs = regularhrs.getText().toString();
+        labtrans.payrate = payrate.getText().toString();
+        labtrans.linecost = linecost.getText().toString();
+        labtrans.assetnum = assetnum.getText().toString();
+        labtrans.transtype = transtype.getText().toString();
+        return labtrans;
+    }
+
+    private View.OnClickListener confirmOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            getLabtrans();
+        }
+    };
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

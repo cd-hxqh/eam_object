@@ -13,6 +13,7 @@ import cdhxqh.shekou.bean.LoginResults;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Alndomain;
+import cdhxqh.shekou.model.Alndomain2;
 import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.Assignment;
 import cdhxqh.shekou.model.Failurelist;
@@ -57,6 +58,7 @@ public class JsonUtils {
             String errmsg = json.getString("errmsg");
             loginResults.setErrcode(errcode);
             loginResults.setErrmsg(errmsg);
+            loginResults.setResult(json.getString("result"));
             return loginResults;
         } catch (JSONException e) {
             e.printStackTrace();
@@ -941,6 +943,31 @@ public class JsonUtils {
             list = new ArrayList<Alndomain>();
             for (int i = 0; i < jsonArray.length(); i++) {
                 alndomain = new Alndomain();
+                jsonObject = jsonArray.getJSONObject(i);
+                alndomain.value = jsonObject.getString("VALUE"); //值
+                alndomain.description = jsonObject.getString("DESCRIPTION"); //描述
+                list.add(alndomain);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 解析抢修信息
+     */
+    public static ArrayList<Alndomain2> parsingAlndomain2(String data) {
+        Log.i(TAG, "Alndomain2 data=" + data);
+        ArrayList<Alndomain2> list = null;
+        Alndomain2 alndomain = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<Alndomain2>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                alndomain = new Alndomain2();
                 jsonObject = jsonArray.getJSONObject(i);
                 alndomain.value = jsonObject.getString("VALUE"); //值
                 alndomain.description = jsonObject.getString("DESCRIPTION"); //描述

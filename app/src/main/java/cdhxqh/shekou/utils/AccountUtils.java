@@ -58,6 +58,46 @@ public class AccountUtils {
         sharedPreferences.edit().putString(cxt.getString(R.string.logined_member_username), userName).putString(cxt.getString(R.string.logined_member_password), password).commit();
     }
 
+    /**
+     * 记录登录返回信息
+     * @param cxt
+     * @param insertSite
+     * @param insertOrg
+     * @param personId
+     *
+     */
+    public static void setLoginDetails(Context cxt,String insertSite,String insertOrg,String personId,String userName,String displayName){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
+        sharedPreferences.edit().putString(cxt.getString(R.string.login_insertOrg), insertOrg).putString(cxt.getString(R.string.login_insertSite), insertSite)
+                .putString(cxt.getString(R.string.login_personId), personId).putString(cxt.getString(R.string.login_userName), userName)
+                .putString(cxt.getString(R.string.login_displayName), displayName).commit();
+    }
+
+    public static String getinsertOrg(Context cxt){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
+        return sharedPreferences.getString(cxt.getString(R.string.login_insertOrg), "");
+    }
+
+    public static String getinsertSite(Context cxt){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
+        return sharedPreferences.getString(cxt.getString(R.string.login_insertSite), "");
+    }
+
+    public static String getpersonId(Context cxt){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
+        return sharedPreferences.getString(cxt.getString(R.string.login_personId), "");
+    }
+
+    public static String getuserName(Context cxt){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
+        return sharedPreferences.getString(cxt.getString(R.string.login_userName), "");
+    }
+
+    public static String getdisplayName(Context cxt){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
+        return sharedPreferences.getString(cxt.getString(R.string.login_displayName), "");
+    }
+
 
     /**
      * 获取记住的用户名

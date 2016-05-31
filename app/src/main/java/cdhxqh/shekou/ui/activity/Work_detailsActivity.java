@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,6 @@ public class Work_detailsActivity extends BaseActivity {
      * 故障汇报*
      */
     private LinearLayout reportLinearLayout;
-
     private WorkOrder workOrder;
     private LinearLayout work_numlayout;
     private TextView wonum;//工单号
@@ -264,6 +264,7 @@ public class Work_detailsActivity extends BaseActivity {
         udprojapprnum.setOnClickListener(new LayoutOnClickListener(Constants.PROJAPPR));
         pmnum.setOnClickListener(new LayoutOnClickListener(Constants.PMCODE));
         failurecode.setOnClickListener(new LayoutOnClickListener(Constants.FAILURE_TYPE));
+        udgzlbdm.setOnClickListener(new LayoutOnClickListener(Constants.ALNDOMAIN2CODE));
 //        udqxbz.setOnClickListener(new );
 
         delete.setOnClickListener(deleteOnClickListener);
@@ -442,13 +443,17 @@ public class Work_detailsActivity extends BaseActivity {
     private View.OnClickListener reportOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(Work_detailsActivity.this, Work_FailurereportActivity.class);
-            Bundle bundle = new Bundle();
-            workOrder.failurecode = failurecode.getText().toString();
-            bundle.putSerializable("workOrder", workOrder);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            popupWindow.dismiss();
+            if (failurecode.getText().toString().equals("")){
+                popupWindow.dismiss();
+                Toast.makeText(Work_detailsActivity.this,"请选选择故障子机构",Toast.LENGTH_SHORT).show();
+            }else {
+                Intent intent = new Intent(Work_detailsActivity.this, Work_FailurereportActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("workOrder", getWorkOrder());
+                intent.putExtras(bundle);
+                startActivity(intent);
+                popupWindow.dismiss();
+            }
         }
     };
 
@@ -511,7 +516,39 @@ public class Work_detailsActivity extends BaseActivity {
         workOrder.status = status.getText().toString().trim();
         workOrder.statusdate = statusdate.getText().toString().trim();
         workOrder.jpnum = jpnum.getText().toString().trim();
-        workOrder.udisjf = udisjf.getText().toString().trim();
+        workOrder.udisjf = udisjf.isChecked() ? "1" : "0";
+        workOrder.pmnum = pmnum.getText().toString().trim();
+        workOrder.udcreateby = udcreateby.getText().toString().trim();
+        workOrder.reportedby = reportedby.getText().toString().trim();
+        workOrder.reportdate = reportdate.getText().toString().trim();
+        workOrder.udcreatedate = udcreatedate.getText().toString().trim();
+        workOrder.udisjj = udisjj.isChecked() ? "1" : "0";
+        workOrder.udyxj = udyxj.getText().toString().trim();
+        workOrder.udisaq = udisaq.isChecked() ? "1" : "0";
+        workOrder.udisbx = udisbx.isChecked() ? "1" : "0";
+        workOrder.udiscb = udiscb.isChecked() ? "1" : "0";
+        workOrder.udprojapprnum = udprojapprnum.getText().toString().trim();
+        workOrder.udevnum = udevnum.getText().toString().trim();
+        workOrder.udbugnum = udbugnum.getText().toString().trim();
+        if (workOrder.worktype.equals("EM")) {
+            workOrder.lead = lead1.getText().toString().trim();
+        } else {
+            workOrder.lead = lead.getText().toString().trim();
+        }
+        workOrder.udqxbz = udqxbz.getText().toString().trim();
+        workOrder.supervisor = supervisor.getText().toString().trim();
+        workOrder.udsupervisor2 = udsupervisor2.getText().toString().trim();
+        workOrder.failurecode = failurecode.getText().toString().trim();
+        workOrder.udgzlbdm = udgzlbdm.getText().toString().trim();
+        workOrder.udworkmemo = udworkmemo.getText().toString().trim();
+        workOrder.udisyq = udisyq.isChecked() ? "1" : "0";
+        workOrder.targstartdate = targstartdate.getText().toString().trim();
+        workOrder.targcompdate = targcompdate.getText().toString().trim();
+        workOrder.udactstart = actstart.getText().toString().trim();
+        workOrder.udactfinish = actfinish.getText().toString().trim();
+        workOrder.udtjsj = udtjsj.getText().toString().trim();
+        workOrder.udtjtime = udtjtime.getText().toString().trim();
+        workOrder.udremark = udremark.getText().toString().trim();
         return workOrder;
     }
 
@@ -523,12 +560,10 @@ public class Work_detailsActivity extends BaseActivity {
             case Constants.ASSETCODE:
                 option = (Option) data.getSerializableExtra("option");
                 assetnum.setText(option.getName());
-//                assetdesc.setText(option.getDescription());
                 break;
             case Constants.JOBPLANCODE:
                 option = (Option) data.getSerializableExtra("option");
                 jpnum.setText(option.getName());
-//                locationdesc.setText(option.getDescription());
                 break;
             case Constants.PERSONCODE:
                 option = (Option) data.getSerializableExtra("option");
@@ -570,6 +605,10 @@ public class Work_detailsActivity extends BaseActivity {
             case Constants.FAILURE_TYPE:
                 option = (Option) data.getSerializableExtra("option");
                 failurecode.setText(option.getName());
+                break;
+            case Constants.ALNDOMAIN2CODE:
+                option = (Option) data.getSerializableExtra("option");
+                udgzlbdm.setText(option.getName());
                 break;
 //            case 1000:
 //                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");

@@ -192,28 +192,28 @@ public class HttpManager {
      * 设置设备下载数据接口
      */
     public static String getAssetUrl(String siteid){
-        return "{'appid':'" + Constants.ASSET_APPID + "','objectname':'" + Constants.ASSET_NAME + "','option':'read','condition':{'SITEID':'CCT','UDLEVEL':'单体设备','STATUS':'操作中,活动,有限制的使用'}}";
+        return "{'appid':'" + Constants.ASSET_APPID + "','objectname':'" + Constants.ASSET_NAME + "','option':'read','condition':{'SITEID':'"+siteid+"','UDLEVEL':'单体设备','STATUS':'操作中,活动,有限制的使用'}}";
     }
 
     /**
      * 设置作业计划下载数据接口
      */
     public static String getJpNumUrl(String siteid){
-        return "{'appid':'" + Constants.JOBPLAN_APPID + "','objectname':'" + Constants.JOBPLAN_NAME + "','option':'read','condition':{'SITEID':'CCT','UDISOS':'0'}}";
+        return "{'appid':'" + Constants.JOBPLAN_APPID + "','objectname':'" + Constants.JOBPLAN_NAME + "','option':'read','condition':{'SITEID':'"+siteid+"','UDISOS':'0'}}";
     }
 
     /**
      * 设置人员下载数据接口
      */
     public static String getPersonUrl(String siteid){
-        return "{'appid':'" + Constants.PERSON_APPID + "','objectname':'" + Constants.PERSON_NAME + "','option':'read','condition':{'LOCATIONSITE':'CCT'}}";
+        return "{'appid':'" + Constants.PERSON_APPID + "','objectname':'" + Constants.PERSON_NAME + "','option':'read','condition':{'LOCATIONSITE':'"+siteid+"'}}";
     }
 
     /**
      * 设置员工下载数据接口
      */
     public static String getLaborUrl(String siteid){
-        return "{'appid':'" + Constants.LABOR_APPID + "','objectname':'" + Constants.LABOR_NAME + "','option':'read','condition':{'WORKSITE':'CCT'}}";
+        return "{'appid':'" + Constants.LABOR_APPID + "','objectname':'" + Constants.LABOR_NAME + "','option':'read','condition':{'WORKSITE':'"+siteid+"'}}";
     }
 
     /**
@@ -226,6 +226,13 @@ public class HttpManager {
             return "{'appid':'" + Constants.ALNDOMAIN_APPID + "','objectname':'" + Constants.ALNDOMAIN_NAME + "','option':'read','condition':{'domainid':'UDEQ3','value':'030401,030402,03040',030404'}}";
         }
         return null;
+    }
+
+    /**
+     * 设置故障类别下载数据接口
+     */
+    public static String getAlndomain2Url(){
+        return "{'appid':'" + Constants.ALNDOMAIN_APPID + "','objectname':'" + Constants.ALNDOMAIN_NAME + "','option':'read','condition':{'DOMAINID':'UDGZLBDM'}}";
     }
 
     /**
@@ -297,7 +304,7 @@ public class HttpManager {
                     LoginResults loginResults = JsonUtils.parsingAuthStr(cxt, responseString);
                     if(loginResults!=null){
                         if(loginResults.getErrcode().equals(Constants.LOGINSUCCESS)||loginResults.getErrcode().equals(Constants.CHANGEIMEI)){
-                            SafeHandler.onSuccess(handler, loginResults.getErrmsg());
+                            SafeHandler.onSuccess(handler, loginResults.getResult());
                         }else if(loginResults.getErrcode().equals(Constants.USERNAMEERROR)){
                             SafeHandler.onFailure(handler, loginResults.getErrmsg());
                         }

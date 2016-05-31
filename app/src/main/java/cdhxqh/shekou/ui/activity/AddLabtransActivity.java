@@ -1,5 +1,6 @@
 package cdhxqh.shekou.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Labtrans;
+import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.model.Woactivity;
 
 /**
@@ -79,5 +82,59 @@ public class AddLabtransActivity extends BaseActivity {
             }
         });
         titleTextView.setText(getResources().getString(R.string.title_activity_worklabtrans_add));
+
+        laborcode.setOnClickListener(new LayoutOnClickListener(Constants.LABORCRAFTRATECODE));
+
+        confirm.setOnClickListener(confirmOnClickListener);
+    }
+
+    private class LayoutOnClickListener implements View.OnClickListener {
+        int requestCode;
+
+        private LayoutOnClickListener(int requestCode) {
+            this.requestCode = requestCode;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(AddLabtransActivity.this, OptionActivity.class);
+            intent.putExtra("requestCode", requestCode);
+            startActivityForResult(intent, requestCode);
+        }
+    }
+
+    private Labtrans getLabtrans(){
+        Labtrans labtrans = this.labtrans;
+        labtrans.actualstaskid = actualstaskid.getText().toString();
+        labtrans.craft = craft.getText().toString();
+        labtrans.skilllevel = skilllevel.getText().toString();
+        labtrans.laborcode = laborcode.getText().toString();
+        labtrans.startdate = startdate.getText().toString();
+        labtrans.starttime = starttime.getText().toString();
+        labtrans.finishtime = finishtime.getText().toString();
+        labtrans.regularhrs = regularhrs.getText().toString();
+        labtrans.payrate = payrate.getText().toString();
+        labtrans.linecost = linecost.getText().toString();
+        labtrans.assetnum = assetnum.getText().toString();
+        labtrans.transtype = transtype.getText().toString();
+        return labtrans;
+    }
+
+    private View.OnClickListener confirmOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            getLabtrans();
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Option option;
+        switch (resultCode) {
+            case Constants.LABORCRAFTRATECODE:
+                option = (Option) data.getSerializableExtra("option");
+                laborcode.setText(option.getName());
+                break;
+        }
     }
 }

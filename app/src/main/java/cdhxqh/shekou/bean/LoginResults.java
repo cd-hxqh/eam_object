@@ -29,5 +29,13 @@ public class LoginResults implements Serializable {
         this.errcode = errcode;
     }
 
+    private String result;
 
+    public String getResult() {
+        return result;
+    }
+
+    public void setResult(String result) {
+        this.result = result;
+    }
 }

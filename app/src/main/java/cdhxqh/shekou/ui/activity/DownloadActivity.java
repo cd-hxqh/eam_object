@@ -19,6 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import cdhxqh.shekou.Dao.Alndomain2Dao;
 import cdhxqh.shekou.Dao.AlndomainDao;
 import cdhxqh.shekou.Dao.AssetDao;
 import cdhxqh.shekou.Dao.FailurelistDao;
@@ -36,6 +37,7 @@ import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Alndomain;
+import cdhxqh.shekou.model.Alndomain2;
 import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.Failurelist;
 import cdhxqh.shekou.model.JobPlan;
@@ -45,6 +47,7 @@ import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.model.Pm;
 import cdhxqh.shekou.model.Projappr;
 import cdhxqh.shekou.model.Udev;
+import cdhxqh.shekou.utils.AccountUtils;
 
 /**
  * Created by think on 2015/12/25.
@@ -157,6 +160,7 @@ public class DownloadActivity extends BaseActivity {
         tempArray01.add("预防性维护");
         tempArray01.add("员工工种");
         tempArray01.add("故障代码");
+        tempArray01.add("故障类别");
 
         List<String> tempArray02 = new ArrayList<String>();
 //        tempArray02.add("巡检单类型");
@@ -282,25 +286,27 @@ public class DownloadActivity extends BaseActivity {
         public void onClick(View view) {
             String buttonText = childArray.get(group).get(child);
             if (buttonText.equals(childArray.get(0).get(0))) {//设备
-                downloaddata(HttpManager.getAssetUrl("CCT"), buttonText, button);
+                downloaddata(HttpManager.getAssetUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(1))) {//作业计划
-                downloaddata(HttpManager.getJpNumUrl(""), buttonText, button);
+                downloaddata(HttpManager.getJpNumUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(2))) {//人员
-                downloaddata(HttpManager.getPersonUrl(""), buttonText, button);
+                downloaddata(HttpManager.getPersonUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(3))) {//员工
-                downloaddata(HttpManager.getLaborUrl(""), buttonText, button);
+                downloaddata(HttpManager.getLaborUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(4))) {//抢修班组
-                downloaddata(HttpManager.getAlndomainUrl("CCT"), buttonText, button);
+                downloaddata(HttpManager.getAlndomainUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(5))) {//事故
-                downloaddata(HttpManager.getUdevUrl("CCT"), buttonText, button);
+                downloaddata(HttpManager.getUdevUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(6))) {//立项申报
-                downloaddata(HttpManager.getProjapprUrl("CCT"), buttonText, button);
+                downloaddata(HttpManager.getProjapprUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(7))) {//预防性维护
-                downloaddata(HttpManager.getPmUrl("CCT"), buttonText, button);
+                downloaddata(HttpManager.getPmUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(8))) {//员工工种
-                downloaddata(HttpManager.getLaborcraftrateUrl("CCT"), buttonText, button);
+                downloaddata(HttpManager.getLaborcraftrateUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(9))) {//故障代码
                 downloaddata(HttpManager.getFailurelistUrl(), buttonText, button);
+            } else if (buttonText.equals(childArray.get(0).get(10))) {//故障类别
+                downloaddata(HttpManager.getAlndomain2Url(), buttonText, button);
             }
             mProgressDialog = ProgressDialog.show(DownloadActivity.this, null,
                     getString(R.string.downloading), true, true);
@@ -327,24 +333,27 @@ public class DownloadActivity extends BaseActivity {
                         List<Labor> labors = JsonUtils.parsingLabor(data.getResultlist());
                         new LaborDao(DownloadActivity.this).create(labors);
                     } else if (buttonText.equals(childArray.get(0).get(4))) {//抢修班组
-                            List<Alndomain> alndomains = JsonUtils.parsingAlndomain(data.getResultlist());
-                            new AlndomainDao(DownloadActivity.this).create(alndomains);
-                        } else if (buttonText.equals(childArray.get(0).get(5))) {//事故
-                            List<Udev> udevs = JsonUtils.parsingUdev(data.getResultlist());
-                            new UdevDao(DownloadActivity.this).create(udevs);
-                        } else if (buttonText.equals(childArray.get(0).get(6))) {//立项申报
-                            List<Projappr> projapprs = JsonUtils.parsingProjappr(data.getResultlist());
-                            new ProjapprDao(DownloadActivity.this).create(projapprs);
-                        } else if (buttonText.equals(childArray.get(0).get(7))) {//工种
-                            List<Pm> pms = JsonUtils.parsingPm(data.getResultlist());
-                            new PmDao(DownloadActivity.this).create(pms);
-                        } else if (buttonText.equals(childArray.get(0).get(8))) {//员工工种
-                            List<Laborcraftrate> laborcraftrates = JsonUtils.parsingLaborcraftrate(data.getResultlist());
-                            new LaborcraftrateDao(DownloadActivity.this).create(laborcraftrates);
-                        } else if (buttonText.equals(childArray.get(0).get(9))) {//故障代码
-                            List<Failurelist> failurelists = JsonUtils.parsingFailurelist(data.getResultlist());
-                            new FailurelistDao(DownloadActivity.this).create(failurelists);
-                        }
+                        List<Alndomain> alndomains = JsonUtils.parsingAlndomain(data.getResultlist());
+                        new AlndomainDao(DownloadActivity.this).create(alndomains);
+                    } else if (buttonText.equals(childArray.get(0).get(5))) {//事故
+                        List<Udev> udevs = JsonUtils.parsingUdev(data.getResultlist());
+                        new UdevDao(DownloadActivity.this).create(udevs);
+                    } else if (buttonText.equals(childArray.get(0).get(6))) {//立项申报
+                        List<Projappr> projapprs = JsonUtils.parsingProjappr(data.getResultlist());
+                        new ProjapprDao(DownloadActivity.this).create(projapprs);
+                    } else if (buttonText.equals(childArray.get(0).get(7))) {//工种
+                        List<Pm> pms = JsonUtils.parsingPm(data.getResultlist());
+                        new PmDao(DownloadActivity.this).create(pms);
+                    } else if (buttonText.equals(childArray.get(0).get(8))) {//员工工种
+                        List<Laborcraftrate> laborcraftrates = JsonUtils.parsingLaborcraftrate(data.getResultlist());
+                        new LaborcraftrateDao(DownloadActivity.this).create(laborcraftrates);
+                    } else if (buttonText.equals(childArray.get(0).get(9))) {//故障代码
+                        List<Failurelist> failurelists = JsonUtils.parsingFailurelist(data.getResultlist());
+                        new FailurelistDao(DownloadActivity.this).create(failurelists);
+                    } else if (buttonText.equals(childArray.get(0).get(4))) {//抢修班组
+                        List<Alndomain2> alndomains = JsonUtils.parsingAlndomain2(data.getResultlist());
+                        new Alndomain2Dao(DownloadActivity.this).create(alndomains);
+                    }
                     mProgressDialog.dismiss();
                     button.setText(getResources().getString(R.string.downloaded));
                 } else {

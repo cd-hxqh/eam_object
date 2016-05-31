@@ -11,6 +11,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
@@ -114,13 +117,23 @@ public class LoginActivity extends BaseActivity  implements View.OnClickListener
                     @Override
                     public void onSuccess(String data) {
 
-                        MessageUtils.showMiddleToast(LoginActivity.this, data);
+                        MessageUtils.showMiddleToast(LoginActivity.this, "登录成功");
                         mProgressDialog.dismiss();
                         if (isRemember) {
                             AccountUtils.setChecked(LoginActivity.this, isRemember);
                             //记住密码
                             AccountUtils.setUserNameAndPassWord(LoginActivity.this, mUsername.getText().toString(), mPassword.getText().toString());
                         }
+                        try {//保存登录返回信息
+                            JSONObject object = new JSONObject(data);
+                            JSONObject LoginDetails = object.getJSONObject("userLoginDetails");
+                            AccountUtils.setLoginDetails(LoginActivity.this,LoginDetails.getString("insertOrg"),LoginDetails.getString("insertSite"),
+                                    LoginDetails.getString("personId"),object.getString("userName"),LoginDetails.getString("displayName"));
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                         startIntent();
 
                     }

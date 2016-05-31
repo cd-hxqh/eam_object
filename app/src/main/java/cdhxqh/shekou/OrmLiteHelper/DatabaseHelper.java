@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cdhxqh.shekou.model.Alndomain;
+import cdhxqh.shekou.model.Alndomain2;
 import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.Failurelist;
 import cdhxqh.shekou.model.JobPlan;
@@ -50,7 +51,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Pm.class);
             TableUtils.createTable(connectionSource, Laborcraftrate.class);
             TableUtils.createTable(connectionSource, Failurelist.class);
-//            TableUtils.createTable(connectionSource, Jobplan.class);
+            TableUtils.createTable(connectionSource, Alndomain2.class);
 //            TableUtils.createTable(connectionSource, Person.class);
 //            TableUtils.createTable(connectionSource, Labor.class);
 //            TableUtils.createTable(connectionSource, Craftrate.class);
@@ -81,7 +82,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Pm.class, true);
             TableUtils.dropTable(connectionSource, Laborcraftrate.class, true);
             TableUtils.dropTable(connectionSource, Failurelist.class, true);
-//            TableUtils.dropTable(connectionSource, Jobplan.class, true);
+            TableUtils.dropTable(connectionSource, Alndomain2.class, true);
 //            TableUtils.dropTable(connectionSource, Person.class, true);
 //            TableUtils.dropTable(connectionSource, Labor.class, true);
 //            TableUtils.dropTable(connectionSource, Craftrate.class, true);

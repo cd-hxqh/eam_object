@@ -13,9 +13,20 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.model.Failurereport;
+import cdhxqh.shekou.model.Labtrans;
+import cdhxqh.shekou.model.Option;
+import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
+import cdhxqh.shekou.utils.AccountUtils;
+import cdhxqh.shekou.utils.DateSelect;
+import cdhxqh.shekou.utils.GetDateAndTime;
 
 /**
  * Created by think on 2015/10/29.
@@ -43,9 +54,8 @@ public class Work_AddNewActivity extends BaseActivity {
     /**
      * 故障汇报*
      */
-    private LinearLayout reportLinearLayout;
-
     private WorkOrder workOrder = new WorkOrder();
+    private LinearLayout reportLinearLayout;
     private LinearLayout work_numlayout;
     private TextView wonum;//工单号
     private EditText description;//工单描述
@@ -82,6 +92,15 @@ public class Work_AddNewActivity extends BaseActivity {
     private LinearLayout work_plan_info_layout;
     private TextView lead;//工作执行人
     private LinearLayout work_em_info_layout;
+    private TextView udqxbz;//抢修班组
+    private TextView lead1;//抢修负责人
+    private TextView supervisor;//抢修执行人
+    private TextView udsupervisor2;//抢修执行人2
+    private LinearLayout work_failure_info_layout;
+    private TextView failurecode;//故障子机构
+    private TextView udgzlbdm;//故障类别
+    private EditText udworkmemo;//工作备注
+    private CheckBox udisyq;//是否跟进
     //    private TextView udisplayname;//承包商负责人
     private TextView targstartdate;//计划开始时间
     private TextView targcompdate;//计划完成时间
@@ -92,6 +111,11 @@ public class Work_AddNewActivity extends BaseActivity {
     private EditText udtjtime;//停机时间
     private LinearLayout work_udremark_layout;
     private EditText udremark;//备注
+
+    private ArrayList<Woactivity> woactivityList = new ArrayList<>();
+    private ArrayList<Labtrans> labtransList = new ArrayList<>();
+    private ArrayList<Failurereport> failurereportList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +129,6 @@ public class Work_AddNewActivity extends BaseActivity {
      * 获取数据*
      */
     private void geiIntentData() {
-        String s = getIntent().getExtras().getString("worktype");
         workOrder.worktype = getIntent().getExtras().getString("worktype");
     }
     @Override
@@ -152,6 +175,15 @@ public class Work_AddNewActivity extends BaseActivity {
         work_plan_info_layout = (LinearLayout) findViewById(R.id.work_plan_info);
         lead = (TextView) findViewById(R.id.work_lead);
         work_em_info_layout = (LinearLayout) findViewById(R.id.work_em_info);
+        udqxbz = (TextView) findViewById(R.id.work_udqxbz);
+        lead1 = (TextView) findViewById(R.id.work_lead1);
+        supervisor = (TextView) findViewById(R.id.work_supervisor);
+        udsupervisor2 = (TextView) findViewById(R.id.work_udsupervisor2);
+        work_failure_info_layout = (LinearLayout) findViewById(R.id.work_failure_info);
+        failurecode = (TextView) findViewById(R.id.work_failurecode);
+        udgzlbdm = (TextView) findViewById(R.id.work_udgzlbdm);
+        udworkmemo = (EditText) findViewById(R.id.work_udworkmemo);
+        udisyq = (CheckBox) findViewById(R.id.work_udisyq);
 //        udisplayname = (TextView) findViewById(R.id.work_udisplayname);
         targstartdate = (TextView) findViewById(R.id.work_targstartdate);
         targcompdate = (TextView) findViewById(R.id.work_targcompdate);
@@ -177,7 +209,43 @@ public class Work_AddNewActivity extends BaseActivity {
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
 
+        worktype.setText(workOrder.worktype);
+        status.setText("工单建立");
+        targstartdate.setOnClickListener(new TimeOnClickListener(targstartdate));
+        targcompdate.setOnClickListener(new TimeOnClickListener(targcompdate));
+        actstart.setOnClickListener(new TimeOnClickListener(actstart));
+        actfinish.setOnClickListener(new TimeOnClickListener(actfinish));
+
+        statusdate.setText(GetDateAndTime.GetDateTime());
+        udcreateby.setText(AccountUtils.getdisplayName(Work_AddNewActivity.this));
+        udcreatedate.setText(GetDateAndTime.GetDateTime());
+
+        assetnum.setOnClickListener(new LayoutOnClickListener(Constants.ASSETCODE));
+        jpnum.setOnClickListener(new LayoutOnClickListener(Constants.JOBPLANCODE));
+        reportedby.setOnClickListener(new LayoutOnClickListener(Constants.PERSONCODE));
+        lead.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE));
+        udqxbz.setOnClickListener(new LayoutOnClickListener(Constants.ALNDOMAINCODE));
+        lead1.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE1));
+        supervisor.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE2));
+        udsupervisor2.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE3));
+        udevnum.setOnClickListener(new LayoutOnClickListener(Constants.UDEVCODE));
+        udprojapprnum.setOnClickListener(new LayoutOnClickListener(Constants.PROJAPPR));
+        pmnum.setOnClickListener(new LayoutOnClickListener(Constants.PMCODE));
+        failurecode.setOnClickListener(new LayoutOnClickListener(Constants.FAILURE_TYPE));
+        udgzlbdm.setOnClickListener(new LayoutOnClickListener(Constants.ALNDOMAIN2CODE));
         setLayout();
+    }
+
+    //时间选择监听
+    private class TimeOnClickListener implements View.OnClickListener{
+        TextView textView;
+        private TimeOnClickListener(TextView textView){
+            this.textView = textView;
+        }
+        @Override
+        public void onClick(View view) {
+            new DateSelect(Work_AddNewActivity.this, textView).showDialog();
+        }
     }
 
     //按照工单类型修改布局
@@ -191,6 +259,8 @@ public class Work_AddNewActivity extends BaseActivity {
                 work_plan_details_layout.setVisibility(View.GONE);
                 work_plan_info_layout.setVisibility(View.GONE);
                 work_em_info_layout.setVisibility(View.VISIBLE);
+                work_failure_info_layout.setVisibility(View.VISIBLE);
+                work_udremark_layout.setVisibility(View.GONE);
                 break;
             case "EV"://事故工单
                 udbugnum_layout.setVisibility(View.VISIBLE);
@@ -215,23 +285,27 @@ public class Work_AddNewActivity extends BaseActivity {
     private void decisionLayout() {
         switch (workOrder.worktype) {
             case "CM"://故障工单
+                reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "EM"://抢修工单
+                planLinearlayout.setVisibility(View.GONE);
                 break;
             case "EV"://事故工单
+                reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "PJ"://项目工单
-                planLinearlayout.setVisibility(View.GONE);
+//                planLinearlayout.setVisibility(View.GONE);
 //                taskLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "PM"://预防性维护工单
-                pmnum_layout.setVisibility(View.VISIBLE);
+//                pmnum_layout.setVisibility(View.VISIBLE);
                 planLinearlayout.setVisibility(View.GONE);
 //                taskLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "RS"://可维修备件工单
+                reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "SR"://状态维修工单
                 planLinearlayout.setVisibility(View.GONE);
@@ -305,6 +379,27 @@ public class Work_AddNewActivity extends BaseActivity {
         decisionLayout();
     }
 
+    private class LayoutOnClickListener implements View.OnClickListener {
+        int requestCode;
+
+        private LayoutOnClickListener(int requestCode) {
+            this.requestCode = requestCode;
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Work_AddNewActivity.this, OptionActivity.class);
+            intent.putExtra("requestCode", requestCode);
+            if (requestCode == Constants.JOBPLANCODE) {
+                intent.putExtra("AssetIsChoose", assetnum.getText().toString().equals(""));
+            } else if ((requestCode == Constants.LABORCODE1 || requestCode == Constants.LABORCODE2
+                    || requestCode == Constants.LABORCODE3) && !udqxbz.getText().toString().equals("")) {
+                intent.putExtra("udqxbz", udqxbz.getText().toString());
+            }
+            startActivityForResult(intent, requestCode);
+        }
+    }
+
     private View.OnClickListener planOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -344,12 +439,140 @@ public class Work_AddNewActivity extends BaseActivity {
     private View.OnClickListener reportOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(Work_AddNewActivity.this, Work_FailurereportActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("workOrder", workOrder);
-            intent.putExtras(bundle);
-            startActivity(intent);
-            popupWindow.dismiss();
+            if (failurecode.getText().toString().equals("")){
+                popupWindow.dismiss();
+                Toast.makeText(Work_AddNewActivity.this, "请选选择故障子机构", Toast.LENGTH_SHORT).show();
+            }else {
+                Intent intent = new Intent(Work_AddNewActivity.this, Work_FailurereportActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("workOrder", getWorkOrder());
+                intent.putExtras(bundle);
+                startActivity(intent);
+                popupWindow.dismiss();
+            }
         }
     };
+
+    private WorkOrder getWorkOrder() {
+        WorkOrder workOrder = this.workOrder;
+        workOrder.description = description.getText().toString().trim();
+        workOrder.worktype = worktype.getText().toString().trim();
+        workOrder.assetnum = assetnum.getText().toString().trim();
+        workOrder.woeq1 = woeq1.getText().toString().trim();
+        workOrder.woeq2 = woeq2.getText().toString().trim();
+        workOrder.woeq3 = woeq3.getText().toString().trim();
+        workOrder.status = status.getText().toString().trim();
+        workOrder.statusdate = statusdate.getText().toString().trim();
+        workOrder.jpnum = jpnum.getText().toString().trim();
+        workOrder.udisjf = udisjf.isChecked() ? "1" : "0";
+        workOrder.pmnum = pmnum.getText().toString().trim();
+        workOrder.udcreateby = udcreateby.getText().toString().trim();
+        workOrder.reportedby = reportedby.getText().toString().trim();
+        workOrder.reportdate = reportdate.getText().toString().trim();
+        workOrder.udcreatedate = udcreatedate.getText().toString().trim();
+        workOrder.udisjj = udisjj.isChecked() ? "1" : "0";
+        workOrder.udyxj = udyxj.getText().toString().trim();
+        workOrder.udisaq = udisaq.isChecked() ? "1" : "0";
+        workOrder.udisbx = udisbx.isChecked() ? "1" : "0";
+        workOrder.udiscb = udiscb.isChecked() ? "1" : "0";
+        workOrder.udprojapprnum = udprojapprnum.getText().toString().trim();
+        workOrder.udevnum = udevnum.getText().toString().trim();
+        workOrder.udbugnum = udbugnum.getText().toString().trim();
+        if (workOrder.worktype.equals("EM")) {
+            workOrder.lead = lead1.getText().toString().trim();
+        } else {
+            workOrder.lead = lead.getText().toString().trim();
+        }
+        workOrder.udqxbz = udqxbz.getText().toString().trim();
+        workOrder.supervisor = supervisor.getText().toString().trim();
+        workOrder.udsupervisor2 = udsupervisor2.getText().toString().trim();
+        workOrder.failurecode = failurecode.getText().toString().trim();
+        workOrder.udgzlbdm = udgzlbdm.getText().toString().trim();
+        workOrder.udworkmemo = udworkmemo.getText().toString().trim();
+        workOrder.udisyq = udisyq.isChecked() ? "1" : "0";
+        workOrder.targstartdate = targstartdate.getText().toString().trim();
+        workOrder.targcompdate = targcompdate.getText().toString().trim();
+        workOrder.udactstart = actstart.getText().toString().trim();
+        workOrder.udactfinish = actfinish.getText().toString().trim();
+        workOrder.udtjsj = udtjsj.getText().toString().trim();
+        workOrder.udtjtime = udtjtime.getText().toString().trim();
+        workOrder.udremark = udremark.getText().toString().trim();
+        return workOrder;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Option option;
+        switch (resultCode) {
+            case Constants.ASSETCODE:
+                option = (Option) data.getSerializableExtra("option");
+                assetnum.setText(option.getName());
+                break;
+            case Constants.JOBPLANCODE:
+                option = (Option) data.getSerializableExtra("option");
+                jpnum.setText(option.getName());
+                break;
+            case Constants.PERSONCODE:
+                option = (Option) data.getSerializableExtra("option");
+                reportedby.setText(option.getName());
+                break;
+            case Constants.LABORCODE:
+                option = (Option) data.getSerializableExtra("option");
+                lead.setText(option.getName());
+                break;
+            case Constants.LABORCODE1:
+                option = (Option) data.getSerializableExtra("option");
+                lead1.setText(option.getName());
+                break;
+            case Constants.LABORCODE2:
+                option = (Option) data.getSerializableExtra("option");
+                supervisor.setText(option.getName());
+                break;
+            case Constants.LABORCODE3:
+                option = (Option) data.getSerializableExtra("option");
+                udsupervisor2.setText(option.getName());
+                break;
+            case Constants.ALNDOMAINCODE:
+                option = (Option) data.getSerializableExtra("option");
+                udqxbz.setText(option.getName());
+                break;
+            case Constants.UDEVCODE:
+                option = (Option) data.getSerializableExtra("option");
+                udevnum.setText(option.getName());
+                break;
+            case Constants.PROJAPPR:
+                option = (Option) data.getSerializableExtra("option");
+                udprojapprnum.setText(option.getValue());
+                udbugnum.setText(option.getValue2());
+                break;
+            case Constants.PMCODE:
+                option = (Option) data.getSerializableExtra("option");
+                pmnum.setText(option.getName());
+                break;
+            case Constants.FAILURE_TYPE:
+                option = (Option) data.getSerializableExtra("option");
+                failurecode.setText(option.getName());
+                break;
+            case Constants.ALNDOMAIN2CODE:
+                option = (Option) data.getSerializableExtra("option");
+                udgzlbdm.setText(option.getName());
+                break;
+//            case 1000:
+//                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");
+//                wplaborList = (ArrayList<Wplabor>) data.getSerializableExtra("wplaborList");
+//                wpmaterialList = (ArrayList<Wpmaterial>) data.getSerializableExtra("wpmaterialList");
+//                editImageView.performClick();
+//                break;
+//            case 2000:
+//                assignmentList = (ArrayList<Assignment>) data.getSerializableExtra("assignmentList");
+//                editImageView.performClick();
+//                break;
+//            case 3000:
+//                labtransList = (ArrayList<Labtrans>) data.getSerializableExtra("labtransList");
+//                editImageView.performClick();
+//                break;
+//            default:
+//                break;
+        }
+    }
 }

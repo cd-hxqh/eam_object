@@ -16,6 +16,11 @@
     <string name="logined_member_ischeck">logined_member_ischeck</string>
     <string name="login_error_empty_user">用户名不能为空</string>
     <string name="login_error_empty_passwd">密码不能为空</string>
+    <string name="login_insertOrg">login_insertOrg</string>
+    <string name="login_insertSite">login_insertSite</string>
+    <string name="login_personId">login_personId</string>
+    <string name="login_userName">login_userName</string>
+    <string name="login_displayName">login_displayName</string>
 
 
     <!--界面Activity-->
@@ -303,7 +308,7 @@
     <string name="work_labtrans_craft">工种</string>
     <string name="work_labtrans_skilllevel">技能级别</string>
     <string name="work_labtrans_laborcode">员工</string>
-    <string name="work_labtrans_startdate">开始日期</string>
+    <string name="work_labtrans_startdate">工作日期</string>
     <string name="work_labtrans_starttime">开始时间</string>
     <string name="work_labtrans_finishdate">结束日期</string>
     <string name="work_labtrans_finishtime">结束时间</string>

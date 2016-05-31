@@ -24,6 +24,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import cdhxqh.shekou.Dao.Alndomain2Dao;
 import cdhxqh.shekou.Dao.AlndomainDao;
 import cdhxqh.shekou.Dao.AssetDao;
 import cdhxqh.shekou.Dao.FailurelistDao;
@@ -37,6 +38,7 @@ import cdhxqh.shekou.Dao.UdevDao;
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Alndomain;
+import cdhxqh.shekou.model.Alndomain2;
 import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.Failurelist;
 import cdhxqh.shekou.model.JobPlan;
@@ -392,6 +394,16 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                         option.setValue(failurelists4.get(i).failurelist);
                         list.add(option);
                     }
+                }
+                break;
+            case Constants.ALNDOMAIN2CODE:
+                List<Alndomain2> alndomain2s;
+                alndomain2s = new Alndomain2Dao(OptionActivity.this).queryByCount(page, searchText);
+                for (int i = 0; i < alndomain2s.size(); i++) {
+                    option = new Option();
+                    option.setName(alndomain2s.get(i).value);
+                    option.setDescription(alndomain2s.get(i).description);
+                    list.add(option);
                 }
                 break;
 //            case Constants.LABORCRAFTRATE:

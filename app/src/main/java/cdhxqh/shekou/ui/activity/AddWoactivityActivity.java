@@ -71,5 +71,27 @@ public class AddWoactivityActivity extends BaseActivity {
             }
         });
         titleTextView.setText(getResources().getString(R.string.title_activity_workwoactivity_add));
+
+        confirm.setOnClickListener(confirmOnClickListener);
     }
+
+    private Woactivity getWoactivity() {
+        Woactivity woactivity = new Woactivity();
+        woactivity.taskid = taskid.getText().toString().trim();
+        woactivity.wojo1 = wojo1.getText().toString().trim();
+        woactivity.description = description.getText().toString().trim();
+        woactivity.wojo2 = wojo2.isChecked() ? "Y" : "N";
+        woactivity.udisdo = udisdo.isChecked() ? "Y" : "N";
+        woactivity.udisyq = udisyq.isChecked() ? "Y" : "N";
+        woactivity.udyqyy = udyqyy.getText().toString().trim();
+        woactivity.udremark = udremark.getText().toString().trim();
+        return woactivity;
+    }
+
+    private View.OnClickListener confirmOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            getWoactivity();
+        }
+    };
 }
