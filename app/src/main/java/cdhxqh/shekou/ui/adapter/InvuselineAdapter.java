@@ -17,6 +17,7 @@ import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Invuseline;
 import cdhxqh.shekou.model.Matrectrans;
 import cdhxqh.shekou.ui.activity.InvuselinrDetailsActivity;
+import cdhxqh.shekou.ui.activity.InvuselinrDetailsNewActivity;
 import cdhxqh.shekou.ui.activity.MatrectransDetailsActivity;
 
 /**
@@ -51,10 +52,10 @@ public class InvuselineAdapter extends RecyclerView.Adapter<InvuselineAdapter.Vi
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, InvuselinrDetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("invuseline", item);
-                intent.putExtras(bundle);
+                Intent intent = new Intent(mContext, InvuselinrDetailsNewActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("invuseline", item);
+//                intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
         });

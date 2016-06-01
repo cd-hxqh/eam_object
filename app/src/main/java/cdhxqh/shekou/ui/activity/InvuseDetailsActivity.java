@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -85,7 +86,7 @@ public class InvuseDetailsActivity extends BaseActivity {
     /**
      * 是否紧急*
      */
-    private TextView udisjjText;
+    private CheckBox udisjjText;
 
     /**
      * 状态
@@ -104,7 +105,6 @@ public class InvuseDetailsActivity extends BaseActivity {
      * 申请人*
      */
     private TextView sq_displaynameText;
-
 
 
     /**
@@ -169,7 +169,7 @@ public class InvuseDetailsActivity extends BaseActivity {
         eq1Text = (TextView) findViewById(R.id.eq1_text_id);
         eq2Text = (TextView) findViewById(R.id.eq2_text_id);
         eq3Text = (TextView) findViewById(R.id.eq3_text_id);
-        udisjjText = (TextView) findViewById(R.id.udisjj_text_id);
+        udisjjText = (CheckBox) findViewById(R.id.udisjj_text_id);
         statusText = (TextView) findViewById(R.id.invuse_status_text_id);
         siteidText = (TextView) findViewById(R.id.siteid_text_id);
         totalcost_vText = (TextView) findViewById(R.id.totalcost_v_text_id);
@@ -179,10 +179,9 @@ public class InvuseDetailsActivity extends BaseActivity {
         changedateText = (TextView) findViewById(R.id.changedate_text_id);
 
 
+        worlflowBtn = (Button) findViewById(R.id.approval_button_id);
 
-        worlflowBtn = (Button) findViewById(R.id.invuse_workflow_btn_id);
-
-        materialBtn = (Button) findViewById(R.id.invuse_material_btn_id);
+        materialBtn = (Button) findViewById(R.id.invuseline_button_id);
 
         if (invuse != null) {
             invusenumText.setText(invuse.invusenum == null ? "暂无数据" : invuse.invusenum);
@@ -198,7 +197,11 @@ public class InvuseDetailsActivity extends BaseActivity {
             eq1Text.setText(invuse.eq1 == null ? "暂无数据" : invuse.eq1);
             eq2Text.setText(invuse.eq2 == null ? "暂无数据" : invuse.eq2);
             eq3Text.setText(invuse.eq3 == null ? "暂无数据" : invuse.eq3);
-            udisjjText.setText(invuse.udisjj == null ? "暂无数据" : invuse.udisjj);
+            if (invuse.udisjj.equals("0")) {
+                udisjjText.setChecked(false);
+            } else {
+                udisjjText.setChecked(true);
+            }
             statusText.setText(invuse.status == null ? "暂无数据" : invuse.status);
             siteidText.setText(invuse.siteid == null ? "暂无数据" : invuse.siteid);
             totalcost_vText.setText(invuse.totalcost_v == null ? "暂无数据" : invuse.totalcost_v);
@@ -206,11 +209,6 @@ public class InvuseDetailsActivity extends BaseActivity {
             createdateText.setText(invuse.createdate == null ? "暂无数据" : invuse.createdate);
             pz_displaynameText.setText(invuse.pz_displayname == null ? "暂无数据" : invuse.pz_displayname);
             changedateText.setText(invuse.changedate == null ? "暂无数据" : invuse.changedate);
-
-
-
-
-
 
 
         }

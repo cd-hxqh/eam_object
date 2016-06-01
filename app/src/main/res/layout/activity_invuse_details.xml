@@ -1,24 +1,28 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:orientation="vertical"
-    tools:context="cdhxqh.shekou.ui.activity.Wfassig_DetailsActivity">
+    android:orientation="vertical">
 
-    <include layout="@layout/title_main"></include>
+    <include
+        android:id="@+id/title_main_id"
+        layout="@layout/title_main"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"></include>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_main_id"
+        android:layout_marginBottom="50dp">
 
         <LinearLayout
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title_relativelayout_id"
-            android:orientation="vertical"
-            android:padding="@dimen/dimens_10">
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -266,6 +270,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_40dp"
@@ -440,13 +445,12 @@
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
 
-                <TextView
+                <CheckBox
                     android:id="@+id/udisjj_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
                     android:layout_toRightOf="@+id/item_num_title"
-                    android:hint="@string/have_not_data"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
             </LinearLayout>
@@ -667,34 +671,38 @@
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="30dp"
-                android:orientation="vertical"
-                android:padding="@dimen/dimens_10">
 
-                <Button
-                    android:id="@+id/invuse_workflow_btn_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/dark_gray"
-                    android:text="@string/invuse_workflow_button_text"
-                    android:textColor="@color/white" />
-
-                <Button
-                    android:id="@+id/invuse_material_btn_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_5"
-                    android:background="@color/nomal_button_color"
-                    android:text="@string/invuse_material_button_text"
-                    android:textColor="@color/white" />
-            </LinearLayout>
         </LinearLayout>
 
     </ScrollView>
 
+    <LinearLayout
+        android:id="@+id/boottom_id"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/approval_button_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/button_selector2"
+            android:text="审批工作流"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/invuseline_button_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/button_selector2"
+            android:text="备件明细行"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

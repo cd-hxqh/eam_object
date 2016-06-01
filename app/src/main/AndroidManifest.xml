@@ -162,6 +162,10 @@
             android:label="InvuselinrDetailsActivity" >
         </activity>
         <activity
+            android:name=".ui.activity.InvuselinrDetailsNewActivity"
+            android:label="InvuselinrDetailsNewActivity" >
+        </activity>
+        <activity
             android:name=".ui.activity.AddinvuseActivity"
             android:label="@string/title_activity_addinvuse" >
         </activity>

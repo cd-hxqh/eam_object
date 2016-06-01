@@ -2,6 +2,7 @@ package cdhxqh.shekou.ui.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.api.HttpManager;
@@ -28,6 +30,8 @@ import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.model.Inventory;
+import cdhxqh.shekou.ui.activity.InventoryActivity;
+import cdhxqh.shekou.ui.adapter.BaseQuickAdapter;
 import cdhxqh.shekou.ui.adapter.InventoryAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 
@@ -35,7 +39,7 @@ import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 /**
  * 库存查询列表*
  */
-public class InventoryFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLayout.OnLoadListener{
+public class InventoryFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     private static final String TAG = "InventoryFragment";
     private static final int RESULT_ADD_TOPIC = 100;
 
@@ -64,7 +68,7 @@ public class InventoryFragment extends Fragment implements SwipeRefreshLayout.On
 
     private int page = 1;
 
-    ArrayList<Inventory> items=new ArrayList<Inventory>();
+    ArrayList<Inventory> items = new ArrayList<Inventory>();
 
 
     /**
@@ -96,8 +100,7 @@ public class InventoryFragment extends Fragment implements SwipeRefreshLayout.On
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list_topics);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        inventoryAdapter = new InventoryAdapter(getActivity());
-        mRecyclerView.setAdapter(inventoryAdapter);
+        ;
         mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
         mSwipeLayout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -115,12 +118,18 @@ public class InventoryFragment extends Fragment implements SwipeRefreshLayout.On
         searchEditText = (EditText) view.findViewById(R.id.search_edit);
     }
 
+
+    /**
+     * 设置事件监听*
+     */
+
+
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Bundle args = getArguments();
         mSwipeLayout.setRefreshing(true);
-        getItemList(vlaue,page);
+        getItemList(vlaue, page);
         initView();
     }
 
@@ -143,11 +152,10 @@ public class InventoryFragment extends Fragment implements SwipeRefreshLayout.On
     /**
      * 获取库存查询信息*
      * --分页
-     *
      */
 
-    private void getItemList(String value,int page) {
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getInventorurl(value,page, 20), new HttpRequestHandler<Results>() {
+    private void getItemList(String value, int page) {
+        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getInventorurl(value, page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -155,20 +163,19 @@ public class InventoryFragment extends Fragment implements SwipeRefreshLayout.On
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Inventory> item = JsonUtils.parsingInventory(getActivity(), results.getResultlist());
-                Log.i(TAG,"size="+item.size());
-                if(item!=null||item.size()!=0){
-                    for (int i=0;i<item.size();i++) {
+                List<Inventory> item = JsonUtils.parsingInventory(getActivity(), results.getResultlist());
+                if (item != null || item.size() != 0) {
+                    for (int i = 0; i < item.size(); i++) {
                         items.add(item.get(i));
                     }
                 }
 
                 mSwipeLayout.setLoading(false);
                 mSwipeLayout.setRefreshing(false);
-                if (items == null || items.isEmpty()) {
+                if (items == null || items.size() == 0) {
                     notLinearLayout.setVisibility(View.VISIBLE);
                 } else {
-                    inventoryAdapter.update(items, true);
+                    initAdapter(item);
                 }
             }
 
@@ -184,7 +191,7 @@ public class InventoryFragment extends Fragment implements SwipeRefreshLayout.On
     @Override
     public void onLoad() {
         page++;
-        getItemList(vlaue,page);
+        getItemList(vlaue, page);
     }
 
 
@@ -205,7 +212,8 @@ public class InventoryFragment extends Fragment implements SwipeRefreshLayout.On
                                         .getWindowToken(),
                                 InputMethodManager.HIDE_NOT_ALWAYS);
                 vlaue = searchEditText.getText().toString();
-                inventoryAdapter.removeAllData();
+                inventoryAdapter.removeAll(items);
+                items = new ArrayList<Inventory>();
                 notLinearLayout.setVisibility(View.GONE);
                 mSwipeLayout.setRefreshing(true);
                 page = 1;
@@ -219,6 +227,22 @@ public class InventoryFragment extends Fragment implements SwipeRefreshLayout.On
     };
 
 
-
+    /**
+     * 获取数据*
+     */
+    private void initAdapter(final List<Inventory> list) {
+        inventoryAdapter = new InventoryAdapter(getActivity(), R.layout.list_item, list);
+        mRecyclerView.setAdapter(inventoryAdapter);
+        inventoryAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), InventoryActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("inventory", list.get(position));
+                intent.putExtras(bundle);
+                getActivity().startActivity(intent);
+            }
+        });
+    }
 
 }

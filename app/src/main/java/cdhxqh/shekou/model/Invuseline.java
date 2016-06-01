@@ -14,8 +14,8 @@ public class Invuseline extends Entity implements Parcelable {
     private static final String TAG = "Invuseline";
     private static final long serialVersionUID = 2015050105L;
 
-    public String invuselinenum; //编号
     public String invuselineid; //唯一ID
+    public String invuselinenum; //编号
     public String itemnum; //备件
     public String invusenum; //领料单号
     public String description; //描述

@@ -8,6 +8,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
+
 import org.apache.http.Header;
 
 import cdhxqh.shekou.R;
@@ -302,10 +303,10 @@ public class HttpManager {
                 Log.i(TAG, "SstatusCode=" + statusCode + "responseString=" + responseString);
                 if (statusCode == 200) {
                     LoginResults loginResults = JsonUtils.parsingAuthStr(cxt, responseString);
-                    if(loginResults!=null){
-                        if(loginResults.getErrcode().equals(Constants.LOGINSUCCESS)||loginResults.getErrcode().equals(Constants.CHANGEIMEI)){
+                    if (loginResults != null) {
+                        if (loginResults.getErrcode().equals(Constants.LOGINSUCCESS) || loginResults.getErrcode().equals(Constants.CHANGEIMEI)) {
                             SafeHandler.onSuccess(handler, loginResults.getResult());
-                        }else if(loginResults.getErrcode().equals(Constants.USERNAMEERROR)){
+                        } else if (loginResults.getErrcode().equals(Constants.USERNAMEERROR)) {
                             SafeHandler.onFailure(handler, loginResults.getErrmsg());
                         }
                     }
@@ -327,6 +328,7 @@ public class HttpManager {
         params.put("data", data);
         client.setTimeout(20000);
         client.get(Constants.BASE_URL, params, new TextHttpResponseHandler() {
+
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 SafeHandler.onFailure(handler, cxt.getString(R.string.get_data_info_fail));

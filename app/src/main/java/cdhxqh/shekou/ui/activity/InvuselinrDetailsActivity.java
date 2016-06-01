@@ -83,13 +83,13 @@ public class InvuselinrDetailsActivity extends BaseActivity {
         backImageView = (ImageView) findViewById(R.id.title_back_id);
         titleTextView = (TextView) findViewById(R.id.title_name);
 
-        itemnumText = (TextView) findViewById(R.id.invuseline_itemnum_text_id);
-        descriptionText = (TextView) findViewById(R.id.invuseline_description_text_id);
-        quantityText = (TextView) findViewById(R.id.invuse_quantity_text_id);
-        unitcostText = (TextView) findViewById(R.id.invuseline_linecost_text_id);
-        issueunitText = (TextView) findViewById(R.id.invuseline_issueunit_text_id);
-        siteidText = (TextView) findViewById(R.id.invuseline_siteid_text_id);
-        enterbyText = (TextView) findViewById(R.id.invuseline_enterby_text_id);
+//        itemnumText = (TextView) findViewById(R.id.invuseline_itemnum_text_id);
+//        descriptionText = (TextView) findViewById(R.id.invuseline_description_text_id);
+//        quantityText = (TextView) findViewById(R.id.invuse_quantity_text_id);
+//        unitcostText = (TextView) findViewById(R.id.invuseline_linecost_text_id);
+//        issueunitText = (TextView) findViewById(R.id.invuseline_issueunit_text_id);
+//        siteidText = (TextView) findViewById(R.id.invuseline_siteid_text_id);
+//        enterbyText = (TextView) findViewById(R.id.invuseline_enterby_text_id);
 
 
 

@@ -64,6 +64,8 @@
     <!--登录信息提示-->
     <string name="login_successful_hint">登陆成功</string>
 
+    <!--正在加载中-->
+    <string name="loading">正在加载中...</string>
 
     <!--主界面-->
     <string name="login_please_login">尚未登录</string>
@@ -361,7 +363,7 @@
     <string name="eq1_text">设备管理组:</string>
     <string name="eq2_text">设备管理室:</string>
     <string name="eq3_text">设备管理班组:</string>
-    <string name="udisjj_text">是否紧急</string>
+    <string name="udisjj_text">是否紧急:</string>
     <string name="siteid_text">地点:</string>
     <string name="totalcost_v_text">总价:</string>
     <string name="sq_displayname_text">申请人:</string>
@@ -396,4 +398,13 @@
     <string name="curbaltotal_text">当前余量:</string>
     <string name="lastissuedate_text">上次发放日期:</string>
     <string name="udtype_text">批号:</string>
+    <string name="level4_text">机构:</string>
+    <string name="level5_text">部位(五级):</string>
+    <string name="level6_text">部位(六级):</string>
+    <string name="quantity_text">领料数量:</string>
+    <string name="frombin_txt">货柜:</string>
+    <string name="curbal_text">货柜可用数量:</string>
+    <string name="curbaltotal_1_text">库存总数量:</string>
+    <string name="issueunit_1_text">发放单位:</string>
+    <string name="remark_text">备注:</string>
 </resources>
