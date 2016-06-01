@@ -30,6 +30,8 @@ public abstract class BaseActivity extends ActionBarActivity {
     protected SharedPreferences myshared;
     protected BaseApplication baseApplication;
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,8 +111,7 @@ public abstract class BaseActivity extends ActionBarActivity {
     /**
      * 加载进度条
      */
-    public void showProgressDialog() {
-        ProgressDialog progressDialog = null;
+    public void showProgressDialog(String message) {
 
         if (progressDialog != null) {
             progressDialog.cancel();
@@ -120,10 +121,16 @@ public abstract class BaseActivity extends ActionBarActivity {
 //        progressDialog.setIndeterminateDrawable(drawable);
         progressDialog.setIndeterminate(true);
         progressDialog.setCancelable(true);
-        progressDialog.setMessage("请稍候，正在努力加载。。");
+        progressDialog.setMessage(message);
         progressDialog.show();
     }
 
+    /**关闭进度条**/
+    public void closeProgressDialog(){
+        if (progressDialog != null) {
+            progressDialog.dismiss();
+        }
+    }
 
     public void DisplayToast(String str) {
         Toast.makeText(this, str, Toast.LENGTH_SHORT).show();

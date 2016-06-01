@@ -1123,4 +1123,120 @@ public class JsonUtils {
             return null;
         }
     }
+
+    /**
+     * 封装工单数据
+     * @param workOrder
+     * @param woactivities
+     * @param labtranses
+     * @param failurereports
+     * @return
+     */
+    public static String WorkToJson(WorkOrder workOrder, ArrayList<Woactivity> woactivities
+            , ArrayList<Labtrans> labtranses, ArrayList<Failurereport> failurereports){
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("wonum", workOrder.wonum);
+            jsonObject.put("status", workOrder.status);
+            jsonObject.put("statusdate", workOrder.statusdate);
+            jsonObject.put("worktype", workOrder.worktype);
+            jsonObject.put("description", workOrder.description);
+            jsonObject.put("assetnum", workOrder.assetnum);
+            jsonObject.put("woeq1", workOrder.woeq1);
+            jsonObject.put("woeq2", workOrder.woeq2);
+            jsonObject.put("woeq3", workOrder.woeq2);
+            jsonObject.put("udisjj", workOrder.udisjj);
+            jsonObject.put("udisaq", workOrder.udisaq);
+            jsonObject.put("udiscb", workOrder.udiscb);
+            jsonObject.put("udisbx", workOrder.udisbx);
+            jsonObject.put("udcreateby", workOrder.udcreateby);
+            jsonObject.put("udcreatedate", workOrder.udcreatedate);
+            jsonObject.put("jpnum", workOrder.jpnum);
+            jsonObject.put("pmnum", workOrder.pmnum);
+            jsonObject.put("reportedby", workOrder.reportedby);
+            jsonObject.put("reportdate", workOrder.reportdate);
+            jsonObject.put("udyxj", workOrder.udyxj);
+            jsonObject.put("lead", workOrder.lead);
+            jsonObject.put("targcompdate", workOrder.targcompdate);
+            jsonObject.put("targstartdate", workOrder.targstartdate);
+            jsonObject.put("udactstart", workOrder.udactstart);
+            jsonObject.put("udactfinish", workOrder.udactfinish);
+            jsonObject.put("udtjsj", workOrder.udtjsj);
+            jsonObject.put("udtjtime", workOrder.udtjtime);
+            jsonObject.put("udremark", workOrder.udremark);
+            jsonObject.put("udprojapprnum", workOrder.udprojapprnum);
+            jsonObject.put("udbugnum", workOrder.udbugnum);
+            jsonObject.put("udisjf", workOrder.udisjf);
+            jsonObject.put("udassetbz", workOrder.udassetbz);
+            jsonObject.put("udevnum", workOrder.udevnum);
+            jsonObject.put("supervisor", workOrder.supervisor);
+            jsonObject.put("udsupervisor2", workOrder.udsupervisor2);
+            jsonObject.put("udqxbz", workOrder.udqxbz);
+            jsonObject.put("udworkmemo", workOrder.udworkmemo);
+            jsonObject.put("udisyq", workOrder.udisyq);
+            jsonObject.put("failurecode", workOrder.failurecode);
+            jsonObject.put("udgzlbdm", workOrder.udtjsj);
+            if (woactivities != null && woactivities.size() != 0) {
+                JSONArray woactivityArray = new JSONArray();
+                JSONObject woactivityObj;
+                for (int i = 0; i < woactivities.size(); i++) {
+                    woactivityObj = new JSONObject();
+                    woactivityObj.put("taskid", woactivities.get(i).taskid);
+                    woactivityObj.put("description", woactivities.get(i).description);
+                    woactivityObj.put("wojo1", woactivities.get(i).wojo1);
+                    woactivityObj.put("wojo2", woactivities.get(i).wojo2);
+                    woactivityObj.put("udisdo", woactivities.get(i).udisdo);
+                    woactivityObj.put("udisyq", woactivities.get(i).udisyq);
+                    woactivityObj.put("udyqyy", woactivities.get(i).udyqyy);
+                    woactivityObj.put("udremark", woactivities.get(i).udremark);
+//                    if(!workOrder.isnew){
+//                        woactivityObj.put("TYPE",woactivities.get(i).type);
+//                    }
+                    woactivityArray.put(woactivityObj);
+                }
+                jsonObject.put("wotasks", woactivityArray);
+            }
+            if (labtranses != null && labtranses.size() != 0) {
+                JSONArray labtransArray = new JSONArray();
+                JSONObject labtransObj;
+                for (int i = 0; i < labtranses.size(); i++) {
+                    labtransObj = new JSONObject();
+                    labtransObj.put("taskid", labtranses.get(i).actualstaskid);
+                    labtransObj.put("craft", labtranses.get(i).craft);
+                    labtransObj.put("skilllevel", labtranses.get(i).skilllevel);
+                    labtransObj.put("laborcode", labtranses.get(i).laborcode);
+                    labtransObj.put("startdate", labtranses.get(i).startdate);
+                    labtransObj.put("starttime", labtranses.get(i).starttime);
+                    labtransObj.put("finishtime", labtranses.get(i).finishtime);
+                    labtransObj.put("regularhrs", labtranses.get(i).regularhrs);
+                    labtransObj.put("payrate", labtranses.get(i).payrate);
+                    labtransObj.put("linecost", labtranses.get(i).linecost);
+                    labtransObj.put("assetnum", labtranses.get(i).assetnum);
+                    labtransObj.put("transtype", labtranses.get(i).transtype);
+//                    if(!workOrder.isnew){
+//                        woactivityObj.put("TYPE",woactivities.get(i).type);
+//                    }
+                    labtransArray.put(labtransObj);
+                }
+                jsonObject.put("labtrans", labtransArray);
+            }
+            if (failurereports != null && failurereports.size() != 0) {
+                JSONArray failurereportArray = new JSONArray();
+                JSONObject failurereportObj;
+                for (int i = 0; i < failurereports.size(); i++) {
+                    failurereportObj = new JSONObject();
+                    failurereportObj.put("wonum", failurereports.get(i).wonum);
+                    failurereportObj.put("failurecode", failurereports.get(i).failurecode);
+                    failurereportObj.put("assetnum", failurereports.get(i).assetnum);
+                    failurereportObj.put("linenum", failurereports.get(i).linenum);
+                    failurereportObj.put("type", failurereports.get(i).type);
+                    failurereportArray.put(failurereportObj);
+                }
+                jsonObject.put("failurereport", failurereportArray);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

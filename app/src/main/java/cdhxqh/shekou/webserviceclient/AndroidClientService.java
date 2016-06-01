@@ -14,8 +14,8 @@ import java.io.IOException;
  */
 public class AndroidClientService {
     private static final String TAG = "AndroidClientService";
-    public String NAMESPACE = "http://webservice.hxqh";
-    public String url = "http://121.35.242.172:7001/meaweb/services/WORKORDERSERVICE";
+    public static String NAMESPACE = "http://webservice.hxqh";
+    public static String url = "http://121.35.242.172:7001/meaweb/services/WORKORDERSERVICE";
     public int timeOut = 60000;
 
     public AndroidClientService() {
@@ -152,18 +152,46 @@ public class AndroidClientService {
     }
 
     /**
-     * 测试方法
+     * 工单新增方法
      *
-     * @param s
+     * @param json
      * @return
      */
-    public String InsertWO(String s) {
+    public static String InsertWO(String json, String userid,String url) {
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
         soapEnvelope.dotNet = true;
         SoapObject soapReq = new SoapObject(NAMESPACE, "workorderserviceInsertWO");
-        soapReq.addProperty("json", s);
-        soapReq.addProperty("flag",1);
+        soapReq.addProperty("json", json);
+        soapReq.addProperty("userid",userid);
+        soapEnvelope.setOutputSoapObject(soapReq);
+        HttpTransportSE httpTransport = new HttpTransportSE(url);
+        try {
+            httpTransport.call("urn:action", soapEnvelope);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        String obj = null;
+        try {
+            obj = soapEnvelope.getResponse().toString();
+        } catch (SoapFault soapFault) {
+            soapFault.printStackTrace();
+        }
+        return obj;
+    }
+
+    /**
+     * 工单修改
+     */
+    public String UpdateWO(String json,String userid,String url) {
+        SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        soapEnvelope.implicitTypes = true;
+        soapEnvelope.dotNet = true;
+        SoapObject soapReq = new SoapObject(NAMESPACE, "workorderserviceUpdateWO");
+        soapReq.addProperty("json", json);
+        soapReq.addProperty("userid",userid);
         soapEnvelope.setOutputSoapObject(soapReq);
         HttpTransportSE httpTransport = new HttpTransportSE(url);
         try {
@@ -185,7 +213,7 @@ public class AndroidClientService {
     /**
      * 工单删除
      */
-    public String DeleteWO(String wonum,String userid) {
+    public String DeleteWO(String wonum,String userid,String url) {
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
         soapEnvelope.dotNet = true;

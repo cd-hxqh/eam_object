@@ -213,6 +213,7 @@
     <string name="work_udremark">备注</string>
     <string name="work_delete">删除</string>
     <string name="work_revise">修改</string>
+    <string name="work_insert">新增</string>
     <string name="work_work_flow">工作流</string>
     <string name="work_plan">工单计划</string>
     <string name="work_woactivity">工单任务</string>

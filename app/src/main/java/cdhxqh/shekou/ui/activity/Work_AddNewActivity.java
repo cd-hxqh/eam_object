@@ -1,11 +1,13 @@
 package cdhxqh.shekou.ui.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,9 +17,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flyco.animation.BaseAnimatorSet;
+import com.flyco.animation.BounceEnter.BounceTopEnter;
+import com.flyco.animation.SlideExit.SlideBottomExit;
+import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.widget.NormalDialog;
+
 import java.util.ArrayList;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Failurereport;
 import cdhxqh.shekou.model.Labtrans;
@@ -27,6 +36,7 @@ import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.DateSelect;
 import cdhxqh.shekou.utils.GetDateAndTime;
+import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
  * Created by think on 2015/10/29.
@@ -112,9 +122,15 @@ public class Work_AddNewActivity extends BaseActivity {
     private LinearLayout work_udremark_layout;
     private EditText udremark;//备注
 
+    private Button insert;//新增
+    private Button work_flow;//工作流
+
     private ArrayList<Woactivity> woactivityList = new ArrayList<>();
     private ArrayList<Labtrans> labtransList = new ArrayList<>();
     private ArrayList<Failurereport> failurereportList = new ArrayList<>();
+
+    private BaseAnimatorSet mBasIn;
+    private BaseAnimatorSet mBasOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,6 +139,9 @@ public class Work_AddNewActivity extends BaseActivity {
         geiIntentData();
         findViewById();
         initView();
+
+        mBasIn = new BounceTopEnter();
+        mBasOut = new SlideBottomExit();
     }
 
     /**
@@ -194,6 +213,9 @@ public class Work_AddNewActivity extends BaseActivity {
         udtjtime = (EditText) findViewById(R.id.work_udtjtime);
         work_udremark_layout = (LinearLayout) findViewById(R.id.work_udremark_layout);
         udremark = (EditText) findViewById(R.id.work_udremark);
+
+        insert = (Button) findViewById(R.id.work_insert);
+        work_flow = (Button) findViewById(R.id.work_work_flow);
     }
 
     @Override
@@ -233,7 +255,78 @@ public class Work_AddNewActivity extends BaseActivity {
         pmnum.setOnClickListener(new LayoutOnClickListener(Constants.PMCODE));
         failurecode.setOnClickListener(new LayoutOnClickListener(Constants.FAILURE_TYPE));
         udgzlbdm.setOnClickListener(new LayoutOnClickListener(Constants.ALNDOMAIN2CODE));
+
+        insert.setOnClickListener(insertOnClickListener);
         setLayout();
+    }
+
+    private View.OnClickListener insertOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if (targstartdate.getText().equals("") || targcompdate.getText().equals("")
+                    || actstart.getText().equals("") || actfinish.getText().equals("")) {
+                Toast.makeText(Work_AddNewActivity.this, "请输入日期时间", Toast.LENGTH_SHORT).show();
+            } else {
+                final NormalDialog dialog = new NormalDialog(Work_AddNewActivity.this);
+                dialog.content("确定新增工单吗?")//
+                        .showAnim(mBasIn)//
+                        .dismissAnim(mBasOut)//
+                        .show();
+                dialog.setOnBtnClickL(
+                        new OnBtnClickL() {
+                            @Override
+                            public void onBtnClick() {
+                                dialog.dismiss();
+                            }
+                        },
+                        new OnBtnClickL() {
+                            @Override
+                            public void onBtnClick() {
+                                showProgressDialog("数据提交中...");
+                                startAsyncTask();
+                                dialog.dismiss();
+                            }
+                        });
+            }
+        }
+    };
+
+    /**
+     * 提交数据*
+     */
+    private void startAsyncTask() {
+//        if (wonumlayout.getVisibility() == View.GONE) {
+//            if (NetWorkHelper.isNetwork(Work_AddNewActivity.this)) {
+//                MessageUtils.showMiddleToast(Work_AddNewActivity.this, "暂无网络,现离线保存数据!");
+//                saveWorkOrder();
+//                closeProgressDialog();
+//            } else {
+                final String updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
+                new AsyncTask<String, String, String>() {
+                    @Override
+                    protected String doInBackground(String... strings) {
+                        String addresult = AndroidClientService.InsertWO(updataInfo, AccountUtils.getpersonId(Work_AddNewActivity.this),"");
+                        return addresult;
+                    }
+
+                    @Override
+                    protected void onPostExecute(String s) {
+                        super.onPostExecute(s);
+                        if (s == null || s.equals("")) {
+                            Toast.makeText(Work_AddNewActivity.this, "新增工单失败", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(Work_AddNewActivity.this, "新增工单" + s + "成功", Toast.LENGTH_SHORT).show();
+//                            wonumlayout.setVisibility(View.VISIBLE);
+                            wonum.setText(s);
+                        }
+                        closeProgressDialog();
+                    }
+                }.execute();
+//            }
+//        } else {
+//            Toast.makeText(Work_AddNewActivity.this, "工单已新增", Toast.LENGTH_SHORT).show();
+//            closeProgressDialog();
+//        }
     }
 
     //时间选择监听
@@ -406,8 +499,9 @@ public class Work_AddNewActivity extends BaseActivity {
             Intent intent = new Intent(Work_AddNewActivity.this, Woactivity_Activity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("workOrder", workOrder);
+            bundle.putSerializable("woactivityList", woactivityList);
             intent.putExtras(bundle);
-            startActivity(intent);
+            startActivityForResult(intent, 1000);
             popupWindow.dismiss();
         }
     };
@@ -430,8 +524,10 @@ public class Work_AddNewActivity extends BaseActivity {
             Intent intent = new Intent(Work_AddNewActivity.this, LabtransListActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("workOrder", workOrder);
+            bundle.putSerializable("woactivityList", woactivityList);
+            bundle.putSerializable("labtransList", labtransList);
             intent.putExtras(bundle);
-            startActivity(intent);
+            startActivityForResult(intent, 2000);
             popupWindow.dismiss();
         }
     };
@@ -446,8 +542,9 @@ public class Work_AddNewActivity extends BaseActivity {
                 Intent intent = new Intent(Work_AddNewActivity.this, Work_FailurereportActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("workOrder", getWorkOrder());
+                bundle.putSerializable("failurereportList", failurereportList);
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent, 3000);
                 popupWindow.dismiss();
             }
         }
@@ -557,22 +654,18 @@ public class Work_AddNewActivity extends BaseActivity {
                 option = (Option) data.getSerializableExtra("option");
                 udgzlbdm.setText(option.getName());
                 break;
-//            case 1000:
-//                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");
-//                wplaborList = (ArrayList<Wplabor>) data.getSerializableExtra("wplaborList");
-//                wpmaterialList = (ArrayList<Wpmaterial>) data.getSerializableExtra("wpmaterialList");
-//                editImageView.performClick();
-//                break;
-//            case 2000:
-//                assignmentList = (ArrayList<Assignment>) data.getSerializableExtra("assignmentList");
-//                editImageView.performClick();
-//                break;
-//            case 3000:
-//                labtransList = (ArrayList<Labtrans>) data.getSerializableExtra("labtransList");
-//                editImageView.performClick();
-//                break;
-//            default:
-//                break;
+            case 1000:
+                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");
+                break;
+            case 2000:
+                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");
+                labtransList = (ArrayList<Labtrans>) data.getSerializableExtra("labtransList");
+                break;
+            case 3000:
+                failurereportList = (ArrayList<Failurereport>) data.getSerializableExtra("failurereportList");
+                break;
+            default:
+                break;
         }
     }
 }
