@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cdhxqh.shekou" >
+    package="cdhxqh.shekou">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -25,11 +25,11 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/SampleTheme" >
+        android:theme="@style/SampleTheme">
         <activity
             android:name=".ui.activity.LoadActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,145 +38,110 @@
         </activity>
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:label="@string/title_activity_login" >
-        </activity>
+            android:label="@string/title_activity_login"></activity>
         <activity
             android:name=".ui.activity.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/shekou.ActivityTheme" >
-        </activity>
+            android:theme="@style/shekou.ActivityTheme"></activity>
         <activity
             android:name=".ui.activity.Wfassig_DetailsActivity"
-            android:label="@string/title_activity_wfassig__details" >
-        </activity>
+            android:label="@string/title_activity_wfassig__details"></activity>
         <activity
             android:name=".ui.activity.Work_ListActivity"
-            android:label="@string/title_activity_worklist" >
-        </activity>
+            android:label="@string/title_activity_worklist"></activity>
         <activity
             android:name=".ui.activity.Work_detailsActivity"
-            android:label="@string/title_activity_workdetails" >
-        </activity>
+            android:label="@string/title_activity_workdetails"></activity>
         <activity
             android:name=".ui.activity.Work_AddNewActivity"
-            android:label="@string/title_activity_workaddnew" >
-        </activity>
+            android:label="@string/title_activity_workaddnew"></activity>
         <activity
             android:name=".ui.activity.Work_PlanActivity"
-            android:label="@string/title_activity_workplan" >
-        </activity>
+            android:label="@string/title_activity_workplan"></activity>
         <activity
             android:name=".ui.activity.Woactivity_Activity"
-            android:label="@string/title_activity_workwoactivity" >
-        </activity>
+            android:label="@string/title_activity_workwoactivity"></activity>
         <activity
             android:name=".ui.activity.WoactivityDetailsActivity"
-            android:label="@string/title_activity_workplandetails" >
-        </activity>
+            android:label="@string/title_activity_workplandetails"></activity>
         <activity
             android:name=".ui.activity.AddWoactivityActivity"
-            android:label="@string/title_activity_workwoactivity_add" >
-        </activity>
+            android:label="@string/title_activity_workwoactivity_add"></activity>
         <activity
             android:name=".ui.activity.LabtransListActivity"
-            android:label="@string/title_activity_worklabtrans" >
-        </activity>
+            android:label="@string/title_activity_worklabtrans"></activity>
         <activity
             android:name=".ui.activity.AddLabtransActivity"
-            android:label="@string/title_activity_worklabtrans_add" >
-        </activity>
+            android:label="@string/title_activity_worklabtrans_add"></activity>
         <activity
             android:name=".ui.activity.WplaborDetailsActivity"
-            android:label="@string/title_activity_workwplabordetails" >
-        </activity>
+            android:label="@string/title_activity_workwplabordetails"></activity>
         <activity
             android:name=".ui.activity.WpitemDetailsActivity"
-            android:label="@string/title_activity_workwpitemdetails" >
-        </activity>
+            android:label="@string/title_activity_workwpitemdetails"></activity>
         <activity
             android:name=".ui.activity.AddWplaborActivity"
-            android:label="@string/title_activity_workwplabor_add" >
-        </activity>
+            android:label="@string/title_activity_workwplabor_add"></activity>
         <activity
             android:name=".ui.activity.AssignmentActivity"
-            android:label="@string/title_activity_assignment" >
-        </activity>
+            android:label="@string/title_activity_assignment"></activity>
         <activity
             android:name=".ui.activity.AssignmentDetailsActivity"
-            android:label="@string/title_activity_assignmentdetails" >
-        </activity>
+            android:label="@string/title_activity_assignmentdetails"></activity>
         <activity
             android:name=".ui.activity.Work_RealinfoActivity"
-            android:label="@string/title_activity_workreport" >
-        </activity>
+            android:label="@string/title_activity_workreport"></activity>
         <activity
             android:name=".ui.activity.LabtransDetailsActivity"
-            android:label="@string/title_activity_labtransdetails" >
-        </activity>
+            android:label="@string/title_activity_labtransdetails"></activity>
         <activity
             android:name=".ui.activity.Work_FailurereportActivity"
-            android:label="@string/title_activity_failurereport" >
-        </activity>
+            android:label="@string/title_activity_failurereport"></activity>
         <activity
             android:name=".ui.activity.InventoryActivity"
-            android:label="@string/inventoryActivity" >
-        </activity>
+            android:label="@string/inventoryActivity"></activity>
         <activity
             android:name=".ui.activity.InvCostActivity"
-            android:label="InvCostActivity" >
-        </activity>
+            android:label="InvCostActivity"></activity>
         <activity
             android:name=".ui.activity.InvbalancesActivity"
-            android:label="InvbalancesActivity" >
-        </activity>
+            android:label="InvbalancesActivity"></activity>
         <activity
             android:name=".ui.activity.InvbalancesDetailsActivity"
-            android:label="InvbalancesDetailsActivity" >
-        </activity>
+            android:label="InvbalancesDetailsActivity"></activity>
         <activity
             android:name=".ui.activity.MatrectransActivity"
-            android:label="MatrectransActivity" >
-        </activity>
+            android:label="MatrectransActivity"></activity>
         <activity
             android:name=".ui.activity.MatrectransDetailsActivity"
-            android:label="MatusetransDetailsActivity" >
-        </activity>
+            android:label="MatusetransDetailsActivity"></activity>
         <activity
             android:name=".ui.activity.MatusetransActivity"
-            android:label="MatusetransActivity" >
-        </activity>
+            android:label="MatusetransActivity"></activity>
         <activity
             android:name=".ui.activity.MatusetransDetailsActivity"
-            android:label="MatusetransActivity" >
-        </activity>
+            android:label="MatusetransActivity"></activity>
         <activity
             android:name=".ui.activity.InvuseDetailsActivity"
-            android:label="InvuseDetailsActivity" >
-        </activity>
+            android:label="InvuseDetailsActivity"></activity>
         <activity
             android:name=".ui.activity.InvuselineActivity"
-            android:label="InvuselineActivity" >
-        </activity>
+            android:label="InvuselineActivity"></activity>
         <activity
             android:name=".ui.activity.InvuselinrDetailsActivity"
-            android:label="InvuselinrDetailsActivity" >
-        </activity>
+            android:label="InvuselinrDetailsActivity"></activity>
         <activity
             android:name=".ui.activity.InvuselinrDetailsNewActivity"
-            android:label="InvuselinrDetailsNewActivity" >
-        </activity>
+            android:label="InvuselinrDetailsNewActivity"></activity>
         <activity
             android:name=".ui.activity.AddinvuseActivity"
-            android:label="@string/title_activity_addinvuse" >
-        </activity>
+            android:label="@string/title_activity_addinvuse"></activity>
         <activity
             android:name=".ui.activity.DownloadActivity"
-            android:label="@string/title_activity_download" >
-        </activity>
+            android:label="@string/title_activity_download"></activity>
         <activity
             android:name=".ui.activity.OptionActivity"
-            android:label="@string/activity_option_title" >
-        </activity>
+            android:label="@string/activity_option_title"></activity>
     </application>
 
 </manifest>

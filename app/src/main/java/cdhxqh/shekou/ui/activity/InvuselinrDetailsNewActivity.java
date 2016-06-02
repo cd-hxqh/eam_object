@@ -4,23 +4,19 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.model.Invuseline;
 
 
 public class InvuselinrDetailsNewActivity extends BaseActivity {
@@ -52,17 +48,144 @@ public class InvuselinrDetailsNewActivity extends BaseActivity {
 
     private ImageView imageView;
 
+    private Invuseline invuseline;
+    /**行项**/
+    /**
+     * 备件*
+     */
+    private TextView itemnumText;
+    /**
+     * 备件名称*
+     */
+    private TextView bjNmaeText;
+    /**
+     * 机构*
+     */
+    private TextView level4Text;
+    /**
+     * 部件（五级）*
+     */
+    private TextView level5Text;
+    /**
+     * 部件（六级）*
+     */
+    private TextView level6Text;
+    /**
+     * 领料数量*
+     */
+    private TextView quantityText;
+    /**
+     * 货柜*
+     */
+    private TextView frombinText;
+    /**
+     * 货柜可用数量*
+     */
+    private TextView curbalText;
+    /**
+     * 库存总数量*
+     */
+    private TextView curbaltotalText;
+    /**
+     * 发放单位*
+     */
+    private TextView issueunitText;
+    /**
+     * 备注*
+     */
+    private TextView remarkText;
+
+
+    /**数量和成本**/
+    /**
+     * 预算编号*
+     */
+    private TextView udbudctrlnumText;
+    /**
+     * 预算描述*
+     */
+    private TextView budctrlText;
+    /**
+     * 成本科目*
+     */
+    private TextView udglaccountText;
+    /**
+     * 科目描述*
+     */
+    private TextView chartofaccountsText;
+    /**
+     * 预算总额*
+     */
+    private TextView udlimitText;
+    /**
+     * 实际金额*
+     */
+    private TextView actualText;
+    /**
+     * 剩余金额*
+     */
+    private TextView remainderText;
+    /**
+     * 单位成本*
+     */
+    private TextView displayunitcostText;
+    /**
+     * 行成本*
+     */
+    private TextView displaylinecostText;
+
+    /**工单**/
+    /**
+     * 工单号*
+     */
+    private TextView wonumText;
+    /**
+     * 任务号*
+     */
+    private TextView taskidText;
+    /**
+     * 设备*
+     */
+    private TextView assetnumText;
+
+    /**其他**/
+    /**
+     * 行类型*
+     */
+    private TextView linetypeText;
+    /**
+     * 目标地点*
+     */
+    private TextView tositeidText;
+    /**
+     * 输入人*
+     */
+    private TextView enterbyText;
+    /**
+     * 领料人*
+     */
+    private TextView issuetoText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invuseline_new_details);
+        super.onCreate(savedInstanceState);
+        initData();
         findViewById();
         initView();
         InitImageView();
         InitTextView();
         InitViewPager();
 
+    }
+
+
+    /**
+     * 初始化界面数据*
+     */
+    private void initData() {
+        invuseline = (Invuseline) getIntent().getParcelableExtra("invuseline");
     }
 
     @Override
@@ -77,6 +200,8 @@ public class InvuselinrDetailsNewActivity extends BaseActivity {
 
 
         viewPager = (ViewPager) this.findViewById(R.id.pager);
+
+
     }
 
     @Override
@@ -98,17 +223,23 @@ public class InvuselinrDetailsNewActivity extends BaseActivity {
         views = new ArrayList<View>();
         LayoutInflater inflater = getLayoutInflater();
         view1 = inflater.inflate(R.layout.activity_sl_details, null);
-        view2 = inflater.inflate(R.layout.tab_top2, null);
-        view3 = inflater.inflate(R.layout.tab_top2, null);
-        view4 = inflater.inflate(R.layout.tab_top2, null);
+        view2 = inflater.inflate(R.layout.activity_slcb_details, null);
+        view3 = inflater.inflate(R.layout.activity_gd_details, null);
+        view4 = inflater.inflate(R.layout.activity_qt_details, null);
         views.add(view1);
         views.add(view2);
         views.add(view3);
         views.add(view4);
         viewPager.setAdapter(new MyViewPagerAdapter(views));
         viewPager.setCurrentItem(0);
+        inithx(view1);
+        initslcb(view2);
+        initgd(view3);
+        initqt(view4);
         setBackground(0);
         viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+
+
     }
 
     /**
@@ -218,21 +349,130 @@ public class InvuselinrDetailsNewActivity extends BaseActivity {
             slText.setBackgroundResource(R.color.light_gray);
             gdText.setBackgroundResource(R.color.light_gray);
             qtText.setBackgroundResource(R.color.light_gray);
+            showhx();
         } else if (index == 1) {
             hxText.setBackgroundResource(R.color.light_gray);
             slText.setBackgroundResource(R.color.nomal_button_color);
             gdText.setBackgroundResource(R.color.light_gray);
             qtText.setBackgroundResource(R.color.light_gray);
+            showslcb();
         } else if (index == 2) {
             hxText.setBackgroundResource(R.color.light_gray);
             slText.setBackgroundResource(R.color.light_gray);
             gdText.setBackgroundResource(R.color.nomal_button_color);
             qtText.setBackgroundResource(R.color.light_gray);
+            showgd();
         } else if (index == 3) {
             hxText.setBackgroundResource(R.color.light_gray);
             slText.setBackgroundResource(R.color.light_gray);
             gdText.setBackgroundResource(R.color.light_gray);
             qtText.setBackgroundResource(R.color.nomal_button_color);
+            showqt();
         }
+    }
+
+
+    /**
+     * 初始化行项*
+     */
+    private void inithx(View view) {
+        itemnumText = (TextView) view.findViewById(R.id.invuseline_itemnum_text_id);
+        bjNmaeText = (TextView) view.findViewById(R.id.invuseline_description_text_id);
+        level4Text = (TextView) view.findViewById(R.id.level4_text_id);
+        level5Text = (TextView) view.findViewById(R.id.level5_text_id);
+        level6Text = (TextView) view.findViewById(R.id.level6_text_id);
+        quantityText = (TextView) view.findViewById(R.id.quantity_text_id);
+        frombinText = (TextView) view.findViewById(R.id.frombin_txt_id);
+        curbalText = (TextView) view.findViewById(R.id.curbal_text_id);
+        curbaltotalText = (TextView) view.findViewById(R.id.curbaltotal_text_id);
+        issueunitText = (TextView) view.findViewById(R.id.issueunit_text_id);
+        remarkText = (TextView) view.findViewById(R.id.remark_text_id);
+    }
+
+    /**
+     * 初始化数量和成本*
+     */
+    private void initslcb(View view) {
+        udbudctrlnumText = (TextView) view.findViewById(R.id.udbudctrlnum_text_id);
+        budctrlText = (TextView) view.findViewById(R.id.budctrl_description_text_id);
+        udglaccountText = (TextView) view.findViewById(R.id.udglaccount_text_id);
+        chartofaccountsText = (TextView) view.findViewById(R.id.chartofaccounts_accountname_text_id);
+        udlimitText = (TextView) view.findViewById(R.id.budctrl_udlimit_text_id);
+        actualText = (TextView) view.findViewById(R.id.budctrl_actual_text_id);
+        remainderText = (TextView) view.findViewById(R.id.budctrl_remainder_text_id);
+        displayunitcostText = (TextView) view.findViewById(R.id.displayunitcost_text_id);
+        displaylinecostText = (TextView) view.findViewById(R.id.displaylinecost_text_id);
+    }
+
+    /**
+     * 初始化工单*
+     */
+    private void initgd(View view) {
+        wonumText = (TextView) view.findViewById(R.id.wonum_text_id);
+        taskidText = (TextView) view.findViewById(R.id.taskid_text_id);
+        assetnumText = (TextView) view.findViewById(R.id.assetnum_text_id);
+    }
+
+    /**
+     * 初始化其他*
+     */
+    private void initqt(View view) {
+        linetypeText = (TextView) view.findViewById(R.id.linetype_text_id);
+        tositeidText = (TextView) view.findViewById(R.id.tositeid_text_id);
+        enterbyText = (TextView) view.findViewById(R.id.enterby_displayname_text_id);
+        issuetoText = (TextView) view.findViewById(R.id.issueto_text_id);
+    }
+
+    /**
+     * 显示行项信息*
+     */
+    private void showhx() {
+        itemnumText.setText(invuseline.itemnum);
+        bjNmaeText.setText(invuseline.description);
+        level4Text.setText(invuseline.level4);
+        level5Text.setText(invuseline.level5);
+        level6Text.setText(invuseline.level6);
+        quantityText.setText(invuseline.quantity);
+        frombinText.setText(invuseline.frombin);
+        curbalText.setText(invuseline.invbalances_curbal);
+        curbaltotalText.setText(invuseline.inventory_curbaltotal);
+        issueunitText.setText(invuseline.inventory_issueunit);
+        remarkText.setText(invuseline.remark);
+    }
+
+    /**
+     * 显示数量和成本*
+     */
+    private void showslcb() {
+        udbudctrlnumText.setText(invuseline.udbudctrlnum);
+        budctrlText.setText(invuseline.budctrl_description);
+        udglaccountText.setText(invuseline.udglaccount);
+        chartofaccountsText.setText(invuseline.chartofaccounts_accountname);
+        udlimitText.setText(invuseline.budctrl_udlimit);
+        actualText.setText(invuseline.budctrl_actual);
+        remainderText.setText(invuseline.budctrl_remainder);
+        displayunitcostText.setText(invuseline.displayunitcost);
+        displaylinecostText.setText(invuseline.displaylinecost);
+    }
+
+
+    /**
+     * 显示工单信息*
+     */
+    private void showgd() {
+        wonumText.setText(invuseline.wonum);
+        taskidText.setText(invuseline.taskid);
+        assetnumText.setText(invuseline.assetnum);
+    }
+
+
+    /**
+     * 显示其他信息*
+     */
+    private void showqt() {
+        linetypeText.setText(invuseline.linetype);
+        tositeidText.setText(invuseline.tositeid);
+        enterbyText.setText(invuseline.enterby_displayname);
+        issuetoText.setText(invuseline.issueto_displayname);
     }
 }

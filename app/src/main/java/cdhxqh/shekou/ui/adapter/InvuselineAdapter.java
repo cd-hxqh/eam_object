@@ -53,9 +53,9 @@ public class InvuselineAdapter extends RecyclerView.Adapter<InvuselineAdapter.Vi
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, InvuselinrDetailsNewActivity.class);
-//                Bundle bundle = new Bundle();
-//                bundle.putParcelable("invuseline", item);
-//                intent.putExtras(bundle);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("invuseline", item);
+                intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
         });

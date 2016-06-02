@@ -409,4 +409,18 @@
     <string name="remark_text">备注:</string>
     <string name="udbudctrlnum_text">预算编号:</string>
     <string name="budctrl_description_text">预算描述:</string>
+    <string name="udglaccount_text">成本科目:</string>
+    <string name="chartofaccounts_accountname_text">科目描述:</string>
+    <string name="budctrl_udlimit_text">预算总额(元):</string>
+    <string name="budctrl_actual_text">实际金额(元):</string>
+    <string name="budctrl_remainder_text">剩余金额(元):</string>
+    <string name="displayunitcost_text">单位成本:</string>
+    <string name="displaylinecost_text">行成本:</string>
+    <string name="wonum_text">工单号:</string>
+    <string name="taskid_text">任务号:</string>
+    <string name="assetnum_text">设备:</string>
+    <string name="linetype_text">行类型:</string>
+    <string name="tositeid_text">目标地点:</string>
+    <string name="enterby_displayname_text">输入人:</string>
+    <string name="issueto_text">领料人:</string>
 </resources>
