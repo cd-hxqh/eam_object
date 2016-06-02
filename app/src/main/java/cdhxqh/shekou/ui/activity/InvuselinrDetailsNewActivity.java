@@ -97,7 +97,7 @@ public class InvuselinrDetailsNewActivity extends BaseActivity {
     private void InitViewPager() {
         views = new ArrayList<View>();
         LayoutInflater inflater = getLayoutInflater();
-        view1 = inflater.inflate(R.layout.tab_top2, null);
+        view1 = inflater.inflate(R.layout.activity_sl_details, null);
         view2 = inflater.inflate(R.layout.tab_top2, null);
         view3 = inflater.inflate(R.layout.tab_top2, null);
         view4 = inflater.inflate(R.layout.tab_top2, null);
@@ -204,7 +204,6 @@ public class InvuselinrDetailsNewActivity extends BaseActivity {
         public void onPageSelected(int arg0) {
             setBackground(arg0);
 
-            Toast.makeText(InvuselinrDetailsNewActivity.this, "您选择了" + viewPager.getCurrentItem() + "页卡", Toast.LENGTH_SHORT).show();
         }
 
     }
