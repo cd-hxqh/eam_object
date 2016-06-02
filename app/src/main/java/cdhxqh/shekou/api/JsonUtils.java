@@ -165,6 +165,35 @@ public class JsonUtils {
         }
 
     }
+
+
+    public static String parsingwfserviceGoOnResult(String data) {
+        Log.i(TAG,"data="+data);
+        String result = null;
+        try {
+            JSONObject object = new JSONObject(data);
+            if (object.has("status")) {
+                result = object.getString("status");
+            } else {
+                result = "";
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * 解析工单信息
      */

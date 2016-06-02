@@ -30,6 +30,7 @@ import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.model.Wfassignment;
 import cdhxqh.shekou.ui.adapter.WfassigAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
+import cdhxqh.shekou.utils.AccountUtils;
 
 
 /**
@@ -147,7 +148,7 @@ public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRe
      */
 
     private void getItemList(String vlaue, int page) {
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwfassignmentUrl(vlaue, page, 20), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwfassignmentUrl(AccountUtils.getUserName(getActivity()), vlaue, page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);

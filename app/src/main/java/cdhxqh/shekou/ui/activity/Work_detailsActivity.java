@@ -242,7 +242,7 @@ public class Work_detailsActivity extends BaseActivity {
         failurecode.setText(workOrder.failurecode);
         udgzlbdm.setText(workOrder.udgzlbdm);
         udworkmemo.setText(workOrder.udworkmemo);
-        udisyq.setChecked(ischeck(workOrder.udisyq));
+//        udisyq.setChecked(ischeck(workOrder.udisyq));
 //        udisplayname.setText(workOrder.udisplayname);
         targstartdate.setText(workOrder.targstartdate.equals("null") ? "" : workOrder.targstartdate);
         targcompdate.setText(workOrder.targcompdate.equals("null") ? "" : workOrder.targcompdate);
