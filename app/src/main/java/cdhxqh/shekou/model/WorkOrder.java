@@ -59,6 +59,7 @@ public class WorkOrder implements Serializable {
     public String udgzlbdm;//故障类别
 //    public String ldispayname;//工作负责人
 
+    public boolean isnew;//是否是新增工单
 
 
 

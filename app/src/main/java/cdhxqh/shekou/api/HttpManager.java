@@ -41,13 +41,13 @@ public class HttpManager {
     /**
      * 设置工单接口*
      */
-    public static String getworkorderUrl(String type, String search, int curpage, int showcount) {
+    public static String getworkorderUrl(String type, String search,String siteid, int curpage, int showcount) {
         if (search.equals("")) {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WORKTYPE':'" + type + "'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "'}}";
         } else {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'%" + search + "%','WORKTYPE':'" + type + "'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'%" + search + "%','WORKTYPE':'" + type + "','SITEID':'" + siteid + "'}}";
         }
     }
 
@@ -67,9 +67,9 @@ public class HttpManager {
     /**
      * 设置计划任务接口*
      */
-    public static String getwoactivityUrl(String type, int curpage, int showcount) {
+    public static String getwoactivityUrl(String type,String wonum, int curpage, int showcount) {
         return "{'appid':'" + "UDWOALL','objectname':'" + Constants.WOACTIVITY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'" +
-//                ",'condition':{'WONUM':'" + wonum + "'}" +
+                ",'condition':{'WONUM':'" + wonum + "'}" +
                 "}";
     }
 

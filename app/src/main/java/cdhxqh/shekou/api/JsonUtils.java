@@ -37,6 +37,7 @@ import cdhxqh.shekou.model.Udev;
 import cdhxqh.shekou.model.Wfassignment;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
+import cdhxqh.shekou.model.WorkResult;
 import cdhxqh.shekou.model.WorkOrderTem;
 import cdhxqh.shekou.model.Wpitem;
 import cdhxqh.shekou.model.Wplabor;
@@ -327,6 +328,7 @@ public class JsonUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
                 woactivity = new Woactivity();
                 jsonObject = jsonArray.getJSONObject(i);
+                woactivity.workorderid = jsonObject.getString("WORKORDERID");
                 woactivity.taskid = jsonObject.getString("TASKID"); //任务
                 woactivity.description = jsonObject.getString("DESCRIPTION");//描述
                 woactivity.wojo1 = jsonObject.getString("WOJO1");//编号
@@ -336,11 +338,6 @@ public class JsonUtils {
                 woactivity.udyqyy = jsonObject.getString("UDYQYY");//延期原因
                 woactivity.udremark = jsonObject.getString("UDREMARK");//备注
 
-//                woactivity.targstartdate = jsonObject.getString("TARGSTARTDATE");//计划开始时间
-//                woactivity.targcompdate = jsonObject.getString("TARGCOMPDATE");//计划完成时间
-//                woactivity.actstart = jsonObject.getString("ACTSTART");//时间开始时间
-//                woactivity.actfinish = jsonObject.getString("ACTFINISH");//实际完成时间
-//                woactivity.estdur = jsonObject.getString("ESTDUR");//持续时间
                 list.add(woactivity);
             }
             return list;
@@ -470,6 +467,7 @@ public class JsonUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
                 failurereport = new Failurereport();
                 jsonObject = jsonArray.getJSONObject(i);
+                failurereport.failurereportid = jsonObject.getString("FAILUREREPORTID");
                 failurereport.wonum = jsonObject.getString("WONUM"); //工单号
                 failurereport.assetnum = jsonObject.getString("ASSETNUM"); //资产
                 failurereport.failurecode = jsonObject.getString("FAILURECODE");//故障代码
@@ -849,6 +847,7 @@ public class JsonUtils {
                 assets.assettype = jsonObject.getString("ASSETTYPE"); //资产类型
                 assets.udassettype = jsonObject.getString("UDASSETTYPE"); //设备类型
                 assets.siteid = jsonObject.getString("SITEID"); //地点
+                assets.ownersite = jsonObject.getString("OWNERSITE");//财务公司
                 list.add(assets);
             }
             return list;
@@ -1217,6 +1216,8 @@ public class JsonUtils {
                     woactivityArray.put(woactivityObj);
                 }
                 jsonObject.put("wotasks", woactivityArray);
+            }else {
+                jsonObject.put("wotasks", new JSONArray());
             }
             if (labtranses != null && labtranses.size() != 0) {
                 JSONArray labtransArray = new JSONArray();
@@ -1241,6 +1242,8 @@ public class JsonUtils {
                     labtransArray.put(labtransObj);
                 }
                 jsonObject.put("labtrans", labtransArray);
+            }else {
+                jsonObject.put("labtrans", new JSONArray());
             }
             if (failurereports != null && failurereports.size() != 0) {
                 JSONArray failurereportArray = new JSONArray();
@@ -1255,11 +1258,59 @@ public class JsonUtils {
                     failurereportArray.put(failurereportObj);
                 }
                 jsonObject.put("failurereport", failurereportArray);
+            }else {
+                jsonObject.put("failurereport", new JSONArray());
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return null;
+        return jsonObject.toString();
+    }
+
+    /**
+     * 解析新增工单返回信息
+     * @param data
+     * @return
+     */
+    public static WorkResult parsingInsertWO(String data) {
+        Log.i(TAG, "data=" + data);
+        String woNum = null;
+        WorkResult workResult = new WorkResult();
+        try {
+            JSONObject object = new JSONObject(data);
+            if(object.has("errorMsg")){
+                workResult.errorMsg = object.getString("errorMsg");
+            }
+            if(object.has("wonum")){
+                workResult.wonum = object.getString("wonum");
+            }
+            if(object.has("errorNo")){
+                workResult.errorNo = object.getString("errorNo");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return workResult;
+    }
+
+    public static WorkResult parsinDeleteWo(String data) {
+        Log.i(TAG, "data=" + data);
+        WorkResult workResult = new WorkResult();
+        try {
+            JSONObject object = new JSONObject(data);
+            if(object.has("msg")){
+                workResult.errorMsg = object.getString("msg");
+            }
+            if(object.has("wonum")){
+                workResult.wonum = object.getString("wonum");
+            }
+            if(object.has("success")){
+                workResult.errorNo = object.getString("success");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return workResult;
     }
 
 

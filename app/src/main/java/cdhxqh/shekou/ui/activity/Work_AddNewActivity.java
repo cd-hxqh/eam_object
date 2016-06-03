@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,8 +21,11 @@ import android.widget.Toast;
 import com.flyco.animation.BaseAnimatorSet;
 import com.flyco.animation.BounceEnter.BounceTopEnter;
 import com.flyco.animation.SlideExit.SlideBottomExit;
+import com.flyco.dialog.entity.DialogMenuItem;
 import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.NormalDialog;
+import com.flyco.dialog.widget.NormalListDialog;
 
 import java.util.ArrayList;
 
@@ -33,6 +37,7 @@ import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
+import cdhxqh.shekou.model.WorkResult;
 import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.DateSelect;
 import cdhxqh.shekou.utils.GetDateAndTime;
@@ -131,6 +136,7 @@ public class Work_AddNewActivity extends BaseActivity {
 
     private BaseAnimatorSet mBasIn;
     private BaseAnimatorSet mBasOut;
+    private ArrayList<DialogMenuItem> mMenuItems = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +148,7 @@ public class Work_AddNewActivity extends BaseActivity {
 
         mBasIn = new BounceTopEnter();
         mBasOut = new SlideBottomExit();
+        addudyxjData();
     }
 
     /**
@@ -150,6 +157,7 @@ public class Work_AddNewActivity extends BaseActivity {
     private void geiIntentData() {
         workOrder.worktype = getIntent().getExtras().getString("worktype");
     }
+
     @Override
     protected void findViewById() {
         titlename = (TextView) findViewById(R.id.title_name);
@@ -231,12 +239,16 @@ public class Work_AddNewActivity extends BaseActivity {
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
 
+        workOrder.isnew = true;
+
         worktype.setText(workOrder.worktype);
         status.setText("工单建立");
         targstartdate.setOnClickListener(new TimeOnClickListener(targstartdate));
         targcompdate.setOnClickListener(new TimeOnClickListener(targcompdate));
         actstart.setOnClickListener(new TimeOnClickListener(actstart));
         actfinish.setOnClickListener(new TimeOnClickListener(actfinish));
+        reportdate.setOnClickListener(new TimeOnClickListener(reportdate));
+        udyxj.setOnClickListener(udyxjOnClickListener);
 
         statusdate.setText(GetDateAndTime.GetDateTime());
         udcreateby.setText(AccountUtils.getdisplayName(Work_AddNewActivity.this));
@@ -260,12 +272,51 @@ public class Work_AddNewActivity extends BaseActivity {
         setLayout();
     }
 
+    private View.OnClickListener udyxjOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            NormalListDialog();
+        }
+    };
+
+    private void NormalListDialog() {
+        final NormalListDialog dialog = new NormalListDialog(Work_AddNewActivity.this, mMenuItems);
+        dialog.title("请选择")//
+                .showAnim(mBasIn)//
+                .dismissAnim(mBasOut)//
+                .show();
+        dialog.setOnOperItemClickL(new OnOperItemClickL() {
+            @Override
+            public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                udyxj.setText(mMenuItems.get(position).mOperName);
+
+                dialog.dismiss();
+            }
+        });
+    }
+
+    /**
+     * 添加数据*
+     */
+    private void addudyxjData() {
+        String[] lctypes = getResources().getStringArray(R.array.udyxj_tab_titles);
+
+        for (int i = 0; i < lctypes.length; i++)
+            mMenuItems.add(new DialogMenuItem(lctypes[i], 0));
+
+
+    }
+
     private View.OnClickListener insertOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (targstartdate.getText().equals("") || targcompdate.getText().equals("")
-                    || actstart.getText().equals("") || actfinish.getText().equals("")) {
+            if (actstart.getText().toString().equals("") || actfinish.getText().toString().equals("")) {
                 Toast.makeText(Work_AddNewActivity.this, "请输入日期时间", Toast.LENGTH_SHORT).show();
+            } else if (udtjtime.getText().toString().equals("")) {
+                Toast.makeText(Work_AddNewActivity.this, "请输入停机时间", Toast.LENGTH_SHORT).show();
+            } else if (assetnum.getText().toString().equals("")) {
+                Toast.makeText(Work_AddNewActivity.this, "请选择设备", Toast.LENGTH_SHORT).show();
             } else {
                 final NormalDialog dialog = new NormalDialog(Work_AddNewActivity.this);
                 dialog.content("确定新增工单吗?")//
@@ -301,27 +352,28 @@ public class Work_AddNewActivity extends BaseActivity {
 //                saveWorkOrder();
 //                closeProgressDialog();
 //            } else {
-                final String updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
-                new AsyncTask<String, String, String>() {
-                    @Override
-                    protected String doInBackground(String... strings) {
-                        String addresult = AndroidClientService.InsertWO(updataInfo, AccountUtils.getpersonId(Work_AddNewActivity.this),"");
-                        return addresult;
-                    }
+        final String updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
+        new AsyncTask<String, String, WorkResult>() {
+            @Override
+            protected WorkResult doInBackground(String... strings) {
+                WorkResult addresult = AndroidClientService.InsertWO(updataInfo, AccountUtils.getpersonId(Work_AddNewActivity.this), Constants.WORK_URL);
+                return addresult;
+            }
 
-                    @Override
-                    protected void onPostExecute(String s) {
-                        super.onPostExecute(s);
-                        if (s == null || s.equals("")) {
-                            Toast.makeText(Work_AddNewActivity.this, "新增工单失败", Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(Work_AddNewActivity.this, "新增工单" + s + "成功", Toast.LENGTH_SHORT).show();
-//                            wonumlayout.setVisibility(View.VISIBLE);
-                            wonum.setText(s);
-                        }
-                        closeProgressDialog();
-                    }
-                }.execute();
+            @Override
+            protected void onPostExecute(WorkResult workResult) {
+                super.onPostExecute(workResult);
+                if (workResult == null) {
+                    Toast.makeText(Work_AddNewActivity.this, "新增工单失败", Toast.LENGTH_SHORT).show();
+                } else if (!workResult.errorMsg.equals("成功!")) {
+                    Toast.makeText(Work_AddNewActivity.this, workResult.errorMsg, Toast.LENGTH_SHORT).show();
+                } else if (workResult.errorMsg.equals("成功!")) {
+                    Toast.makeText(Work_AddNewActivity.this, "工单" + workResult.wonum + "新增成功", Toast.LENGTH_SHORT).show();
+                    wonum.setText(workResult.wonum);
+                }
+                closeProgressDialog();
+            }
+        }.execute();
 //            }
 //        } else {
 //            Toast.makeText(Work_AddNewActivity.this, "工单已新增", Toast.LENGTH_SHORT).show();
@@ -330,11 +382,13 @@ public class Work_AddNewActivity extends BaseActivity {
     }
 
     //时间选择监听
-    private class TimeOnClickListener implements View.OnClickListener{
+    private class TimeOnClickListener implements View.OnClickListener {
         TextView textView;
-        private TimeOnClickListener(TextView textView){
+
+        private TimeOnClickListener(TextView textView) {
             this.textView = textView;
         }
+
         @Override
         public void onClick(View view) {
             new DateSelect(Work_AddNewActivity.this, textView).showDialog();
@@ -410,13 +464,14 @@ public class Work_AddNewActivity extends BaseActivity {
 
     /**
      * 根据工单信息确定是否勾选
+     *
      * @param string
      * @return
      */
-    private boolean ischeck(String string){
-        if(string.equals("1")){
+    private boolean ischeck(String string) {
+        if (string.equals("1")) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
@@ -427,6 +482,7 @@ public class Work_AddNewActivity extends BaseActivity {
             showPopupWindow(menuImageView);
         }
     };
+
     /**
      * 初始化showPopupWindow*
      */
@@ -535,10 +591,10 @@ public class Work_AddNewActivity extends BaseActivity {
     private View.OnClickListener reportOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (failurecode.getText().toString().equals("")){
+            if (failurecode.getText().toString().equals("")) {
                 popupWindow.dismiss();
                 Toast.makeText(Work_AddNewActivity.this, "请选选择故障子机构", Toast.LENGTH_SHORT).show();
-            }else {
+            } else {
                 Intent intent = new Intent(Work_AddNewActivity.this, Work_FailurereportActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("workOrder", getWorkOrder());
@@ -552,6 +608,7 @@ public class Work_AddNewActivity extends BaseActivity {
 
     private WorkOrder getWorkOrder() {
         WorkOrder workOrder = this.workOrder;
+        workOrder.wonum = "";
         workOrder.description = description.getText().toString().trim();
         workOrder.worktype = worktype.getText().toString().trim();
         workOrder.assetnum = assetnum.getText().toString().trim();
@@ -604,6 +661,7 @@ public class Work_AddNewActivity extends BaseActivity {
             case Constants.ASSETCODE:
                 option = (Option) data.getSerializableExtra("option");
                 assetnum.setText(option.getName());
+                workOrder.udassetbz = option.getValue();
                 break;
             case Constants.JOBPLANCODE:
                 option = (Option) data.getSerializableExtra("option");

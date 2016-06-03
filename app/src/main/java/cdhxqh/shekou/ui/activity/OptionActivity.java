@@ -213,7 +213,7 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     option = new Option();
                     option.setName(assets.get(i).assetnum);
                     option.setDescription(assets.get(i).description);
-//                    option.setValue(assets.get(i).location);
+                    option.setValue(assets.get(i).ownersite);
                     list.add(option);
                 }
                 break;

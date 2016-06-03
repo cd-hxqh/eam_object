@@ -13,6 +13,9 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 
 import cdhxqh.shekou.api.JsonUtils;
+import cdhxqh.shekou.model.WorkResult;
+
+import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.config.Constants;
 
 /**
@@ -22,7 +25,7 @@ public class AndroidClientService {
     private static final String TAG = "AndroidClientService";
     public static String NAMESPACE = "http://www.ibm.com/maximo";
     public static String url = "http://121.35.242.172:7001/meaweb/services/WORKORDERSERVICE";
-    public int timeOut = 60000;
+    public static int timeOut = 60000;
 
     public AndroidClientService() {
     }
@@ -98,7 +101,7 @@ public class AndroidClientService {
      * @param s
      * @return
      */
-    public String TestInsertWO(String s) {
+    public String TestInsertWO(String s,String url) {
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
         soapEnvelope.dotNet = true;
@@ -216,67 +219,68 @@ public class AndroidClientService {
      * @param json
      * @return
      */
-    public static String InsertWO(String json, String userid,String url) {
+    public static WorkResult InsertWO(String json, String userid,String url) {
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
         soapEnvelope.dotNet = true;
-        SoapObject soapReq = new SoapObject(NAMESPACE, "workorderserviceInsertWO");
-        soapReq.addProperty("json", json);
+        SoapObject soapReq = new SoapObject(NAMESPACE, "workorderserviceWO01ByAdd");
+        soapReq.addProperty("json",json);
         soapReq.addProperty("userid",userid);
         soapEnvelope.setOutputSoapObject(soapReq);
-        HttpTransportSE httpTransport = new HttpTransportSE(url);
+        HttpTransportSE httpTransport = new HttpTransportSE(url,timeOut);
         try {
             httpTransport.call("urn:action", soapEnvelope);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
+        } catch (IOException | XmlPullParserException e) {
+//            e.printStackTrace();
+            return null;
         }
         String obj = null;
+        WorkResult workResult = null;
         try {
             obj = soapEnvelope.getResponse().toString();
+            workResult = JsonUtils.parsingInsertWO(obj);
         } catch (SoapFault soapFault) {
             soapFault.printStackTrace();
         }
-        return obj;
+        return workResult;
     }
 
     /**
      * 工单修改
      */
-    public String UpdateWO(String json,String userid,String url) {
+    public static WorkResult UpdateWO(String json, String userid, String url) {
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
         soapEnvelope.dotNet = true;
-        SoapObject soapReq = new SoapObject(NAMESPACE, "workorderserviceUpdateWO");
+        SoapObject soapReq = new SoapObject(NAMESPACE, "workorderserviceWO02ByUpdate");
         soapReq.addProperty("json", json);
         soapReq.addProperty("userid",userid);
         soapEnvelope.setOutputSoapObject(soapReq);
-        HttpTransportSE httpTransport = new HttpTransportSE(url);
+        HttpTransportSE httpTransport = new HttpTransportSE(url,timeOut);
         try {
             httpTransport.call("urn:action", soapEnvelope);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
+        } catch (IOException | XmlPullParserException e) {
+            return null;
         }
         String obj = null;
+        WorkResult workResult = null;
         try {
             obj = soapEnvelope.getResponse().toString();
+            workResult = JsonUtils.parsingInsertWO(obj);
         } catch (SoapFault soapFault) {
             soapFault.printStackTrace();
         }
-        return obj;
+        return workResult;
     }
 
     /**
      * 工单删除
      */
-    public String DeleteWO(String wonum,String userid,String url) {
+    public static WorkResult DeleteWO(String wonum, String userid, String url) {
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
         soapEnvelope.dotNet = true;
-        SoapObject soapReq = new SoapObject(NAMESPACE, "workorderserviceDeleteWO");
+        SoapObject soapReq = new SoapObject(NAMESPACE, "workorderserviceWO03ByDelete");
         soapReq.addProperty("wonum", wonum);
         soapReq.addProperty("userid",userid);
         soapEnvelope.setOutputSoapObject(soapReq);
@@ -286,14 +290,16 @@ public class AndroidClientService {
         } catch (IOException e) {
             e.printStackTrace();
         } catch (XmlPullParserException e) {
-            e.printStackTrace();
+            return null;
         }
         String obj = null;
+        WorkResult workResult = null;
         try {
             obj = soapEnvelope.getResponse().toString();
+            workResult = JsonUtils.parsinDeleteWo(obj);
         } catch (SoapFault soapFault) {
             soapFault.printStackTrace();
         }
-        return obj;
+        return workResult;
     }
 }

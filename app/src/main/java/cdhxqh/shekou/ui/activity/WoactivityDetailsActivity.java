@@ -26,6 +26,8 @@ public class WoactivityDetailsActivity extends BaseActivity {
     private TextView titleTextView;
 
     private Woactivity woactivity = new Woactivity();
+    private int position;
+
     private TextView taskid;//任务
     private TextView wojo1;//编号
     private TextView description;//描述
@@ -49,6 +51,7 @@ public class WoactivityDetailsActivity extends BaseActivity {
 
     private void geiIntentData() {
         woactivity = (Woactivity) getIntent().getSerializableExtra("woactivity");
+        position = getIntent().getIntExtra("position",0);
     }
 
     @Override

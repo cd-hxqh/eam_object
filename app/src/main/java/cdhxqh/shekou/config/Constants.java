@@ -20,6 +20,9 @@ public class Constants {
     /**通用接口查询**/
     public static final String BASE_URL = HTTP_API_URL + "common/api";
 
+    /**工单接口**/
+    public static final String WORK_URL = "http://121.35.242.172:7001/meaweb/services/WORKORDERSERVICE";
+
     /**------------------数据库表名配置－－开始**/
     //待办事项的appid
     public static final String WFASSIGNMENT_APPID="INBOX";

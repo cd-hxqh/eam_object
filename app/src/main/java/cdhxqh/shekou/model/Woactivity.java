@@ -16,7 +16,7 @@ public class Woactivity implements Serializable {
     private static final String TAG = "Woactivity";
     private static final long serialVersionUID = 2015050105L;
 
-
+    public String workorderid;//唯一标识
     public String taskid; //任务
     public String description; //描述
     public String wojo1; //编号

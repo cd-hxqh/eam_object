@@ -7,6 +7,10 @@
         <item>领料管理</item>
         <item>设置</item>
     </string-array>
-
+    <string-array name="udyxj_tab_titles">
+        <item>低</item>
+        <item>中</item>
+        <item>高</item>
+    </string-array>
 
 </resources>

@@ -34,6 +34,7 @@ import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.ui.adapter.WorkListAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
+import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
@@ -124,7 +125,7 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
     }
 
     private void getData(String search){
-        HttpManager.getDataPagingInfo(this, HttpManager.getworkorderUrl(worktype,search, page, 20), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(this, HttpManager.getworkorderUrl(worktype,search, AccountUtils.getinsertSite(Work_ListActivity.this), page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);

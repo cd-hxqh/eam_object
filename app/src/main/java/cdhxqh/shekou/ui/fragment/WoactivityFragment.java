@@ -96,7 +96,7 @@ public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.O
     }
 
     private void getdata() {
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwoactivityUrl(workOrder.worktype, page, 20), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwoactivityUrl(workOrder.worktype,workOrder.wonum, page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);

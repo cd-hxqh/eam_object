@@ -1,11 +1,13 @@
 package cdhxqh.shekou.ui.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -16,12 +18,30 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flyco.animation.BaseAnimatorSet;
+import com.flyco.animation.BounceEnter.BounceTopEnter;
+import com.flyco.animation.SlideExit.SlideBottomExit;
+import com.flyco.dialog.entity.DialogMenuItem;
+import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.listener.OnOperItemClickL;
+import com.flyco.dialog.widget.NormalDialog;
+import com.flyco.dialog.widget.NormalListDialog;
+
 import java.util.ArrayList;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.model.Failurereport;
+import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Option;
+import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
+import cdhxqh.shekou.model.WorkResult;
+import cdhxqh.shekou.utils.AccountUtils;
+import cdhxqh.shekou.utils.DateSelect;
+import cdhxqh.shekou.utils.MessageUtils;
+import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
  * Created by think on 2015/10/29.
@@ -110,6 +130,14 @@ public class Work_detailsActivity extends BaseActivity {
     private Button revise;
     private Button work_flow;
 
+    private ArrayList<Woactivity> woactivityList = new ArrayList<>();
+    private ArrayList<Labtrans> labtransList = new ArrayList<>();
+    private ArrayList<Failurereport> failurereportList = new ArrayList<>();
+
+    private BaseAnimatorSet mBasIn;
+    private BaseAnimatorSet mBasOut;
+    private ArrayList<DialogMenuItem> mMenuItems = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +145,10 @@ public class Work_detailsActivity extends BaseActivity {
         geiIntentData();
         findViewById();
         initView();
+
+        mBasIn = new BounceTopEnter();
+        mBasOut = new SlideBottomExit();
+        addudyxjData();
     }
 
     /**
@@ -208,6 +240,8 @@ public class Work_detailsActivity extends BaseActivity {
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
 
+        workOrder.isnew = false;
+
         wonum.setText(workOrder.wonum);
         description.setText(workOrder.description);
         worktype.setText(workOrder.worktype);
@@ -252,6 +286,13 @@ public class Work_detailsActivity extends BaseActivity {
         udtjtime.setText(workOrder.udtjtime);
         udremark.setText(workOrder.udremark);
 
+        targstartdate.setOnClickListener(new TimeOnClickListener(targstartdate));
+        targcompdate.setOnClickListener(new TimeOnClickListener(targcompdate));
+        actstart.setOnClickListener(new TimeOnClickListener(actstart));
+        actfinish.setOnClickListener(new TimeOnClickListener(actfinish));
+        reportdate.setOnClickListener(new TimeOnClickListener(reportdate));
+        udyxj.setOnClickListener(udyxjOnClickListener);
+
         assetnum.setOnClickListener(new LayoutOnClickListener(Constants.ASSETCODE));
         jpnum.setOnClickListener(new LayoutOnClickListener(Constants.JOBPLANCODE));
         reportedby.setOnClickListener(new LayoutOnClickListener(Constants.PERSONCODE));
@@ -272,6 +313,54 @@ public class Work_detailsActivity extends BaseActivity {
         work_flow.setOnClickListener(work_flowOnClickListener);
 
         setLayout();
+    }
+
+    private View.OnClickListener udyxjOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            NormalListDialog();
+        }
+    };
+
+    private void NormalListDialog() {
+        final NormalListDialog dialog = new NormalListDialog(Work_detailsActivity.this, mMenuItems);
+        dialog.title("请选择")//
+                .showAnim(mBasIn)//
+                .dismissAnim(mBasOut)//
+                .show();
+        dialog.setOnOperItemClickL(new OnOperItemClickL() {
+            @Override
+            public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                udyxj.setText(mMenuItems.get(position).mOperName);
+
+                dialog.dismiss();
+            }
+        });
+    }
+
+    /**
+     * 添加数据*
+     */
+    private void addudyxjData() {
+        String[] lctypes = getResources().getStringArray(R.array.udyxj_tab_titles);
+
+        for (int i = 0; i < lctypes.length; i++)
+            mMenuItems.add(new DialogMenuItem(lctypes[i], 0));
+
+
+    }
+
+    //时间选择监听
+    private class TimeOnClickListener implements View.OnClickListener{
+        TextView textView;
+        private TimeOnClickListener(TextView textView){
+            this.textView = textView;
+        }
+        @Override
+        public void onClick(View view) {
+            new DateSelect(Work_detailsActivity.this, textView).showDialog();
+        }
     }
 
     //按照工单类型修改布局
@@ -348,6 +437,9 @@ public class Work_detailsActivity extends BaseActivity {
      * @return
      */
     private boolean ischeck(String string) {
+        if (string == null){
+            return false;
+        }
         return string.equals("1");
     }
 
@@ -460,14 +552,21 @@ public class Work_detailsActivity extends BaseActivity {
     private View.OnClickListener deleteOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            deleteDataInfo();
         }
     };
 
     private View.OnClickListener reviseOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-
+            if (actstart.getText().equals("") || actfinish.getText().equals("")) {
+                Toast.makeText(Work_detailsActivity.this, "请输入日期时间", Toast.LENGTH_SHORT).show();
+            } else
+//            if (status.getText().toString().equals(Constants.WAIT_APPROVAL) || status.getText().toString().equals(Constants.APPROVALED)) {
+                submitDataInfo();
+//            } else {
+//                MessageUtils.showMiddleToast(Work_detailsActivity.this, "工单状态不允许修改");
+//            }
         }
     };
 
@@ -477,6 +576,72 @@ public class Work_detailsActivity extends BaseActivity {
 
         }
     };
+
+    /**
+     * 提交数据*
+     */
+    private void submitDataInfo() {
+        final NormalDialog dialog = new NormalDialog(Work_detailsActivity.this);
+        dialog.content("确定修改工单吗?")//
+                .showAnim(mBasIn)//
+                .dismissAnim(mBasOut)//
+                .show();
+        dialog.setOnBtnClickL(
+                new OnBtnClickL() {
+                    @Override
+                    public void onBtnClick() {
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnClickL() {
+                    @Override
+                    public void onBtnClick() {
+                        showProgressDialog("数据提交中...");
+                        startAsyncTask();
+                        dialog.dismiss();
+                    }
+                });
+    }
+
+
+    /**
+     * 提交数据*
+     */
+    private void startAsyncTask() {
+//        if (NetWorkHelper.isNetwork(Work_DetailsActivity.this)) {
+//            MessageUtils.showMiddleToast(Work_DetailsActivity.this, "暂无网络,现离线保存数据!");
+//            saveWorkOrder();
+//        } else {
+            String updataInfo = null;
+//            if (workOrder.status.equals(Constants.WAIT_APPROVAL)) {
+                updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
+//            } else if (workOrder.status.equals(Constants.APPROVALED)) {
+//                updataInfo = JsonUtils.WorkToJson(getWorkOrder(), null, null, null, null, getLabtransList());
+//            }
+            final String finalUpdataInfo = updataInfo;
+            new AsyncTask<String, String, WorkResult>() {
+                @Override
+                protected WorkResult doInBackground(String... strings) {
+                    WorkResult reviseresult = AndroidClientService.UpdateWO(finalUpdataInfo, AccountUtils.getpersonId(Work_detailsActivity.this), Constants.WORK_URL);
+                    return reviseresult;
+                }
+
+                @Override
+                protected void onPostExecute(WorkResult workResult) {
+                    super.onPostExecute(workResult);
+                    if (workResult==null) {
+                        Toast.makeText(Work_detailsActivity.this, "修改工单失败", Toast.LENGTH_SHORT).show();
+                    }else if (workResult.errorMsg.equals("成功!")) {
+                        Toast.makeText(Work_detailsActivity.this, "修改工单成功", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(Work_detailsActivity.this, workResult.errorMsg, Toast.LENGTH_SHORT).show();
+                    }
+                    closeProgressDialog();
+                }
+            }.execute();
+//        }
+
+    }
 
 
     private class LayoutOnClickListener implements View.OnClickListener {
@@ -500,8 +665,58 @@ public class Work_detailsActivity extends BaseActivity {
         }
     }
 
-    //删除工单
-    private void Delete() {
+    /**
+     * 提交数据*
+     */
+    private void deleteDataInfo() {
+        final NormalDialog dialog = new NormalDialog(Work_detailsActivity.this);
+        dialog.content("确定删除工单吗?")//
+                .showAnim(mBasIn)//
+                .dismissAnim(mBasOut)//
+                .show();
+        dialog.setOnBtnClickL(
+                new OnBtnClickL() {
+                    @Override
+                    public void onBtnClick() {
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnClickL() {
+                    @Override
+                    public void onBtnClick() {
+                        showProgressDialog("数据提交中...");
+                        deleteAsyncTask();
+                        dialog.dismiss();
+                    }
+                });
+    }
+
+    /**
+     * 提交数据*
+     */
+    private void deleteAsyncTask() {
+        new AsyncTask<String, String, WorkResult>() {
+            @Override
+            protected WorkResult doInBackground(String... strings) {
+                WorkResult reviseresult = AndroidClientService.DeleteWO(wonum.getText().toString(), AccountUtils.getpersonId(Work_detailsActivity.this), Constants.WORK_URL);
+                return reviseresult;
+            }
+
+            @Override
+            protected void onPostExecute(WorkResult workResult) {
+                super.onPostExecute(workResult);
+                if (workResult==null) {
+                    Toast.makeText(Work_detailsActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
+                }else if (workResult.errorMsg.equals("操作成功！")&&workResult.errorNo.equals("0")) {
+                    Toast.makeText(Work_detailsActivity.this, workResult.errorMsg, Toast.LENGTH_SHORT).show();
+                    Work_detailsActivity.this.finish();
+                } else {
+                    Toast.makeText(Work_detailsActivity.this, workResult.errorMsg, Toast.LENGTH_SHORT).show();
+                }
+                closeProgressDialog();
+            }
+        }.execute();
+//        }
 
     }
 
@@ -560,6 +775,7 @@ public class Work_detailsActivity extends BaseActivity {
             case Constants.ASSETCODE:
                 option = (Option) data.getSerializableExtra("option");
                 assetnum.setText(option.getName());
+                workOrder.udassetbz = option.getValue();
                 break;
             case Constants.JOBPLANCODE:
                 option = (Option) data.getSerializableExtra("option");

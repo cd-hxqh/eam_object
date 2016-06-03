@@ -29,4 +29,6 @@ public class Assets implements Serializable {
     public String udassettype;//设备类型
     @DatabaseField(columnName = "siteid")
     public String siteid;//地点
+    @DatabaseField(columnName = "ownersite")
+    public String ownersite;//财务公司
 }

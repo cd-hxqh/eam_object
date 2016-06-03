@@ -91,12 +91,14 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
         refresh_layout.setOnRefreshListener(this);
         refresh_layout.setOnLoadListener(this);
 
-        getdata();
+        if (workOrder.wonum!=null&&!workOrder.wonum.equals("")) {
+            getdata();
+        }
     }
 
     private void getdata() {
         if (workOrder.wonum != null && !workOrder.wonum.equals("")) {
-            HttpManager.getDataPagingInfo(Woactivity_Activity.this, HttpManager.getwoactivityUrl(workOrder.worktype, page, 20), new HttpRequestHandler<Results>() {
+            HttpManager.getDataPagingInfo(Woactivity_Activity.this, HttpManager.getwoactivityUrl(workOrder.worktype,workOrder.wonum, page, 20), new HttpRequestHandler<Results>() {
                 @Override
                 public void onSuccess(Results results) {
                     Log.i(TAG, "data=" + results);
