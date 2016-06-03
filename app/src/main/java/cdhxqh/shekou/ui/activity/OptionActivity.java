@@ -31,6 +31,7 @@ import cdhxqh.shekou.Dao.FailurelistDao;
 import cdhxqh.shekou.Dao.JobPlanDao;
 import cdhxqh.shekou.Dao.LaborDao;
 import cdhxqh.shekou.Dao.LaborcraftrateDao;
+import cdhxqh.shekou.Dao.LocationDao;
 import cdhxqh.shekou.Dao.PersonDao;
 import cdhxqh.shekou.Dao.PmDao;
 import cdhxqh.shekou.Dao.ProjapprDao;
@@ -44,6 +45,7 @@ import cdhxqh.shekou.model.Failurelist;
 import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
 import cdhxqh.shekou.model.Laborcraftrate;
+import cdhxqh.shekou.model.Locations;
 import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.model.Pm;
@@ -69,9 +71,13 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     LinearLayoutManager layoutManager;
     public RecyclerView recyclerView;
-    /**暂无数据**/
+    /**
+     * 暂无数据*
+     */
     private LinearLayout nodatalayout;
-    /**同步数据**/
+    /**
+     * 同步数据*
+     */
     private Button synchronousbtn;
     private OptionAdapter optionAdapter;
     private EditText search;
@@ -144,13 +150,15 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
         synchronousbtn.setOnClickListener(synchronousbtnOnClickListener);
     }
 
-    /**同步数据**/
-    private View.OnClickListener synchronousbtnOnClickListener=new View.OnClickListener() {
+    /**
+     * 同步数据*
+     */
+    private View.OnClickListener synchronousbtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent =new Intent();
-            intent.setClass(OptionActivity.this,DownloadActivity.class);
-            startActivityForResult(intent,1000);
+            Intent intent = new Intent();
+            intent.setClass(OptionActivity.this, DownloadActivity.class);
+            startActivityForResult(intent, 1000);
         }
     };
 
@@ -160,7 +168,7 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
         super.onActivityResult(requestCode1, resultCode, data);
         switch (requestCode1) {
             case 1000:
-                Log.i(TAG,"requestCode="+requestCode1);
+                Log.i(TAG, "requestCode=" + requestCode1);
                 getData(searchText);
                 break;
         }
@@ -196,7 +204,7 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
     private void getData(String searchText) {
         list = new ArrayList<Option>();
         Option option;
-        Log.i(TAG,"requestCode="+requestCode);
+        Log.i(TAG, "requestCode=" + requestCode);
         switch (requestCode) {
             case Constants.ASSETCODE:
                 List<Assets> assets;
@@ -211,9 +219,9 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 break;
             case Constants.JOBPLANCODE:
                 List<JobPlan> jobPlans;
-                if (getIntent().hasExtra("AssetIsChoose")&&getIntent().getBooleanExtra("AssetIsChoose",false)) {
+                if (getIntent().hasExtra("AssetIsChoose") && getIntent().getBooleanExtra("AssetIsChoose", false)) {
                     jobPlans = new JobPlanDao(OptionActivity.this).queryByCount1(page, searchText);
-                }else {
+                } else {
                     jobPlans = new JobPlanDao(OptionActivity.this).queryByCount(page, searchText);
                 }
                 for (int i = 0; i < jobPlans.size(); i++) {
@@ -245,10 +253,10 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 break;
             case Constants.LABORCODE1:
                 List<Labor> labors1;
-                if (getIntent().hasExtra("udqxbz")){
-                    String udeq1 = getIntent().getStringExtra("udqxbz").substring(0,2);
+                if (getIntent().hasExtra("udqxbz")) {
+                    String udeq1 = getIntent().getStringExtra("udqxbz").substring(0, 2);
                     labors1 = new LaborDao(OptionActivity.this).queryByCount1(page, searchText, udeq1);
-                }else {
+                } else {
                     labors1 = new LaborDao(OptionActivity.this).queryByCount(page, searchText);
                 }
                 for (int i = 0; i < labors1.size(); i++) {
@@ -260,10 +268,10 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 break;
             case Constants.LABORCODE2:
                 List<Labor> labors2;
-                if (getIntent().hasExtra("udqxbz")){
-                    String udeq1 = getIntent().getStringExtra("udqxbz").substring(0,2);
+                if (getIntent().hasExtra("udqxbz")) {
+                    String udeq1 = getIntent().getStringExtra("udqxbz").substring(0, 2);
                     labors2 = new LaborDao(OptionActivity.this).queryByCount1(page, searchText, udeq1);
-                }else {
+                } else {
                     labors2 = new LaborDao(OptionActivity.this).queryByCount(page, searchText);
                 }
                 for (int i = 0; i < labors2.size(); i++) {
@@ -275,10 +283,10 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 break;
             case Constants.LABORCODE3:
                 List<Labor> labors3;
-                if (getIntent().hasExtra("udqxbz")){
-                    String udeq1 = getIntent().getStringExtra("udqxbz").substring(0,2);
+                if (getIntent().hasExtra("udqxbz")) {
+                    String udeq1 = getIntent().getStringExtra("udqxbz").substring(0, 2);
                     labors3 = new LaborDao(OptionActivity.this).queryByCount1(page, searchText, udeq1);
-                }else {
+                } else {
                     labors3 = new LaborDao(OptionActivity.this).queryByCount(page, searchText);
                 }
                 for (int i = 0; i < labors3.size(); i++) {
@@ -332,7 +340,7 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 break;
             case Constants.LABORCRAFTRATECODE:
                 List<Laborcraftrate> laborcraftrates;
-                laborcraftrates = new LaborcraftrateDao(OptionActivity.this).queryByCount(page, searchText,"CCT");
+                laborcraftrates = new LaborcraftrateDao(OptionActivity.this).queryByCount(page, searchText, "CCT");
                 for (int i = 0; i < laborcraftrates.size(); i++) {
                     option = new Option();
                     option.setName(laborcraftrates.get(i).laborcode);
@@ -342,7 +350,7 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 break;
             case Constants.FAILURE_TYPE:
                 List<Failurelist> failurelists1;
-                failurelists1 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText,"");
+                failurelists1 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText, "");
                 for (int i = 0; i < failurelists1.size(); i++) {
                     option = new Option();
                     option.setName(failurelists1.get(i).failurecode);
@@ -352,10 +360,10 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 break;
             case Constants.FAILURE_QUESTION:
                 List<Failurelist> failurelists2;
-                if (getIntent().hasExtra("failurecode")&&!getIntent().getStringExtra("failurecode").equals("")){
+                if (getIntent().hasExtra("failurecode") && !getIntent().getStringExtra("failurecode").equals("")) {
                     parent = new FailurelistDao(OptionActivity.this).queryForParent(getIntent().getStringExtra("failurecode"));
                 }
-                failurelists2 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText,parent);
+                failurelists2 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText, parent);
                 for (int i = 0; i < failurelists2.size(); i++) {
                     option = new Option();
                     option.setName(failurelists2.get(i).failurecode);
@@ -366,11 +374,11 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 break;
             case Constants.FAILURE_CAUSE:
                 List<Failurelist> failurelists3;
-                if (getIntent().hasExtra("failurecode")&&!getIntent().getStringExtra("failurecode").equals("")){
+                if (getIntent().hasExtra("failurecode") && !getIntent().getStringExtra("failurecode").equals("")) {
 //                    parent = new FailurelistDao(OptionActivity.this).queryForParent(getIntent().getStringExtra("failurecode"));
                     parent = getIntent().getStringExtra("failurecode");
                 }
-                failurelists3 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText,parent);
+                failurelists3 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText, parent);
                 for (int i = 0; i < failurelists3.size(); i++) {
                     option = new Option();
                     option.setName(failurelists3.get(i).failurecode);
@@ -381,12 +389,12 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 break;
             case Constants.FAILURE_REMEMDY:
                 List<Failurelist> failurelists4;
-                if (getIntent().hasExtra("failurecode")&&!getIntent().getStringExtra("failurecode").equals("")){
+                if (getIntent().hasExtra("failurecode") && !getIntent().getStringExtra("failurecode").equals("")) {
 //                    parent = new FailurelistDao(OptionActivity.this).queryForParent(getIntent().getStringExtra("failurecode"));
                     parent = getIntent().getStringExtra("failurecode");
                 }
-                failurelists4 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText,parent);
-                if (failurelists4.size()>0) {
+                failurelists4 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText, parent);
+                if (failurelists4.size() > 0) {
                     for (int i = 0; i < failurelists4.size(); i++) {
                         option = new Option();
                         option.setName(failurelists4.get(i).failurecode);
@@ -406,24 +414,22 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     list.add(option);
                 }
                 break;
-//            case Constants.LABORCRAFTRATE:
-//                List<Laborcraftrate> laborcraftrates;
-//
-//                if (searchText.equals("") && !CraftSearch.equals("")) {
-//                    laborcraftrates = new LaborcraftrateDao(OptionActivity.this).queryByCraft(page, searchText, CraftSearch);
-//                } else {
-//                    laborcraftrates = new LaborcraftrateDao(OptionActivity.this).queryByCount(page, searchText);
-//                }
-//                for (int i = 0; i < laborcraftrates.size(); i++) {
-//                    option = new Option();
-//                    option.setName(laborcraftrates.get(i).laborcode);
-//                    option.setDescription(laborcraftrates.get(i).craft);
-//                    list.add(option);
-//                }
-//                break;
+            case Constants.LOCATIONCODE:
+                Log.i(TAG,"这是库房");
+                List<Locations> locationses;
+
+
+                locationses = new LocationDao(OptionActivity.this).findByLocations("库房", "");
+
+                for (int i = 0; i < locationses.size(); i++) {
+                    option = new Option();
+                    option.setName(locationses.get(i).location);
+                    option.setDescription(locationses.get(i).description);
+                    list.add(option);
+                }
+                break;
         }
 
-        Log.i(TAG,"ssssssssssssss");
         if (page == 1) {
             optionAdapter = new OptionAdapter(OptionActivity.this);
             recyclerView.setAdapter(optionAdapter);
@@ -434,7 +440,7 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
             nodatalayout.setVisibility(View.VISIBLE);
             synchronousbtn.setVisibility(View.VISIBLE);
             recyclerView.setVisibility(View.GONE);
-        }else{
+        } else {
             nodatalayout.setVisibility(View.GONE);
             synchronousbtn.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);

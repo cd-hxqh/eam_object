@@ -19,6 +19,7 @@ import cdhxqh.shekou.model.Failurelist;
 import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
 import cdhxqh.shekou.model.Laborcraftrate;
+import cdhxqh.shekou.model.Locations;
 import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.model.Pm;
 import cdhxqh.shekou.model.Projappr;
@@ -52,15 +53,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Laborcraftrate.class);
             TableUtils.createTable(connectionSource, Failurelist.class);
             TableUtils.createTable(connectionSource, Alndomain2.class);
-//            TableUtils.createTable(connectionSource, Person.class);
-//            TableUtils.createTable(connectionSource, Labor.class);
-//            TableUtils.createTable(connectionSource, Craftrate.class);
-//            TableUtils.createTable(connectionSource, Item.class);
-//            TableUtils.createTable(connectionSource, Laborcraftrate.class);
-//
-//            TableUtils.createTable(connectionSource, Udinspo.class);
-//            TableUtils.createTable(connectionSource, Udinspoasset.class);
-//            TableUtils.createTable(connectionSource, Udinspojxxm.class);
+            TableUtils.createTable(connectionSource, Locations.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -83,15 +76,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Laborcraftrate.class, true);
             TableUtils.dropTable(connectionSource, Failurelist.class, true);
             TableUtils.dropTable(connectionSource, Alndomain2.class, true);
-//            TableUtils.dropTable(connectionSource, Person.class, true);
-//            TableUtils.dropTable(connectionSource, Labor.class, true);
-//            TableUtils.dropTable(connectionSource, Craftrate.class, true);
-//            TableUtils.dropTable(connectionSource, Item.class, true);
-//            TableUtils.dropTable(connectionSource, Laborcraftrate.class, true);
-//
-//            TableUtils.dropTable(connectionSource, Udinspo.class, true);
-//            TableUtils.dropTable(connectionSource, Udinspoasset.class, true);
-//            TableUtils.dropTable(connectionSource, Udinspojxxm.class, true);
+            TableUtils.dropTable(connectionSource, Locations.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             e.printStackTrace();

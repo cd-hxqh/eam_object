@@ -20,7 +20,7 @@ import cdhxqh.shekou.config.Constants;
  */
 public class AndroidClientService {
     private static final String TAG = "AndroidClientService";
-    public static String NAMESPACE = "http://webservice.hxqh";
+    public static String NAMESPACE = "http://www.ibm.com/maximo";
     public static String url = "http://121.35.242.172:7001/meaweb/services/WORKORDERSERVICE";
     public int timeOut = 60000;
 
@@ -49,23 +49,23 @@ public class AndroidClientService {
     public static String approve(Context context, String processname, String mbo, String keyValue, String key, String zx, String desc) {
 
 
-        String url = Constants.HTTP_API_URL + "meaweb/services/WFSERVICE";
+        String url = "http://121.35.242.172:7001/meaweb/services/WFMENAGEMENTSERVIC";
 
         Log.i(TAG,"url="+url);
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
         soapEnvelope.dotNet = true;
-        SoapObject soapReq = new SoapObject(NAMESPACE, "wfservicewfGoOn");
-        soapReq.addProperty("ownertable", processname);//工单：UDFJHWO，采购申请（含零星和集中采购风电场部分审批）：UDPR，集中汇总采购计划流程（分公司发起）：UDPRHZ
+        SoapObject soapReq = new SoapObject(NAMESPACE, "wfmenagementservicwfGoOn");
+        soapReq.addProperty("processname", processname);//工单：UDFJHWO，采购申请（含零星和集中采购风电场部分审批）：UDPR，集中汇总采购计划流程（分公司发起）：UDPRHZ
         soapReq.addProperty("mboName", mbo);//工单WORKORDER,采购申请pr
-        soapReq.addProperty("memo", keyValue);//对应的表ID的值，如工单需要传送wonum的值，采购申请prnum的值
+        soapReq.addProperty("keyValue", keyValue);//对应的表ID的值，如工单需要传送wonum的值，采购申请prnum的值
         soapReq.addProperty("key", key);//对应的表ID，如工单：wonum，采购申请，prnum
         soapReq.addProperty("zx", zx);//审批的结果，1为审批通过，0为审批不通过
         if (!desc.equals("")) {
             soapReq.addProperty("desc", desc);//审批意见
         }
         soapEnvelope.setOutputSoapObject(soapReq);
-        HttpTransportSE httpTransport = new HttpTransportSE(url, 1200000);
+        HttpTransportSE httpTransport = new HttpTransportSE(url, 120000);
         try {
             httpTransport.call("urn:action", soapEnvelope);
         } catch (IOException e) {

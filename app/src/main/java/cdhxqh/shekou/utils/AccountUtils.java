@@ -3,6 +3,7 @@ package cdhxqh.shekou.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import cdhxqh.shekou.R;
 
@@ -67,6 +68,7 @@ public class AccountUtils {
      *
      */
     public static void setLoginDetails(Context cxt,String insertSite,String insertOrg,String personId,String userName,String displayName){
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
         sharedPreferences.edit().putString(cxt.getString(R.string.login_insertOrg), insertOrg).putString(cxt.getString(R.string.login_insertSite), insertSite)
                 .putString(cxt.getString(R.string.login_personId), personId).putString(cxt.getString(R.string.login_userName), userName)

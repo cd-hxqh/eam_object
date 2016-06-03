@@ -52,6 +52,19 @@ public class HttpManager {
     }
 
     /**
+     * 设置选择工单接口*
+     */
+    public static String getChooseWorkOrderUrl(String search, int curpage, int showcount) {
+        if (search.equals("")) {
+            return "{'appid':'" +Constants.WOTRACK_APPID+ "','objectname':'" + Constants.WORKORDER_APPID + "'," +
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WORKTYPE':'!=OSPR'}}";
+        } else {
+            return "{'appid':'" +Constants.WOTRACK_APPID + "','objectname':'" + Constants.WORKORDER_APPID + "'," +
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'%" + search + "%','WORKTYPE':'!=OSPR'}}";
+        }
+    }
+
+    /**
      * 设置计划任务接口*
      */
     public static String getwoactivityUrl(String type, int curpage, int showcount) {
@@ -271,6 +284,16 @@ public class HttpManager {
         return "{'appid':'" + Constants.FAILURELIST_APPID + "','objectname':'" + Constants.FAILURELIST_NAME + "','option':'read'}";
     }
 
+
+    /**
+     * 设置库房下载数据接口
+     */
+    public static String getLocationUrl(){
+        return "{'appid':'" + Constants.UDSTORELOC_APPID + "','objectname':'" + Constants.LOCATIONS_NAME + "','option':'read','condition':{'TYPE':'=库房'}}";
+    }
+
+
+
     /**
      * 使用用户名密码登录
      *
@@ -323,6 +346,7 @@ public class HttpManager {
      * 不分页获取信息方法*
      */
     public static void getData(final Context cxt, String data, final HttpRequestHandler<Results> handler) {
+        Log.i(TAG,"data="+data);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);

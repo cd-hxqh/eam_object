@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
@@ -26,6 +27,7 @@ import cdhxqh.shekou.Dao.FailurelistDao;
 import cdhxqh.shekou.Dao.JobPlanDao;
 import cdhxqh.shekou.Dao.LaborDao;
 import cdhxqh.shekou.Dao.LaborcraftrateDao;
+import cdhxqh.shekou.Dao.LocationDao;
 import cdhxqh.shekou.Dao.PersonDao;
 import cdhxqh.shekou.Dao.PmDao;
 import cdhxqh.shekou.Dao.ProjapprDao;
@@ -43,6 +45,7 @@ import cdhxqh.shekou.model.Failurelist;
 import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
 import cdhxqh.shekou.model.Laborcraftrate;
+import cdhxqh.shekou.model.Locations;
 import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.model.Pm;
 import cdhxqh.shekou.model.Projappr;
@@ -148,7 +151,8 @@ public class DownloadActivity extends BaseActivity {
         });
 
         groupArray.add("工单");
-        groupArray.add("巡检");
+        groupArray.add("领料单");
+
         List<String> tempArray01 = new ArrayList<String>();
         tempArray01.add("设备");
         tempArray01.add("作业计划");
@@ -163,8 +167,8 @@ public class DownloadActivity extends BaseActivity {
         tempArray01.add("故障类别");
 
         List<String> tempArray02 = new ArrayList<String>();
-//        tempArray02.add("巡检单类型");
-//        tempArray02.add("设备");
+        tempArray02.add("库房");
+        tempArray02.add("设备");
         childArray.add(tempArray01);
         childArray.add(tempArray02);
         expandableListView.setAdapter(new MyExpandableListViewAdapter(this));
@@ -308,6 +312,12 @@ public class DownloadActivity extends BaseActivity {
             } else if (buttonText.equals(childArray.get(0).get(10))) {//故障类别
                 downloaddata(HttpManager.getAlndomain2Url(), buttonText, button);
             }
+
+
+
+            else if (buttonText.equals(childArray.get(1).get(0))) {//位置
+                downloaddata(HttpManager.getLocationUrl(), buttonText, button);
+            }
             mProgressDialog = ProgressDialog.show(DownloadActivity.this, null,
                     getString(R.string.downloading), true, true);
             mProgressDialog.setCanceledOnTouchOutside(false);
@@ -319,6 +329,7 @@ public class DownloadActivity extends BaseActivity {
         HttpManager.getData(DownloadActivity.this, url, new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results data) {
+                Log.i(TAG,"data="+data);
                 if (data != null) {
                     if (buttonText.equals(childArray.get(0).get(0))) {//设备
                         List<Assets> asset = JsonUtils.parsingAsset(data.getResultlist());
@@ -353,6 +364,10 @@ public class DownloadActivity extends BaseActivity {
                     } else if (buttonText.equals(childArray.get(0).get(4))) {//抢修班组
                         List<Alndomain2> alndomains = JsonUtils.parsingAlndomain2(data.getResultlist());
                         new Alndomain2Dao(DownloadActivity.this).create(alndomains);
+                    }else if (buttonText.equals(childArray.get(1).get(0))) {//库房
+
+                        List<Locations> locationses = JsonUtils.parsingLocations(data.getResultlist());
+                        new LocationDao(DownloadActivity.this).create(locationses);
                     }
                     mProgressDialog.dismiss();
                     button.setText(getResources().getString(R.string.downloaded));

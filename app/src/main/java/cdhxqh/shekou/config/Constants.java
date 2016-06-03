@@ -126,6 +126,17 @@ public class Constants {
     public static final String FAILURELIST_NAME = "FAILURELIST";
 
 
+
+    /**位置表**/
+    public static final String UDSTORELOC_APPID = "UDSTORELOC";
+    /**位置表名**/
+    public static final String LOCATIONS_NAME = "LOCATIONS";
+
+    /**选择工单**/
+    public static final String WOTRACK_APPID = "WOTRACK";
+    /**选择工单表名**/
+    public static final String WORKORDER_APPID = "WORKORDER";
+
     public static final String USER_INFO = "userinfo";
     public static final String NAME_KEY = "name_key";
     public static final String PASS_KEY = "pass_key";
@@ -206,4 +217,8 @@ public class Constants {
     public static final int FAILURE_REMEMDY = 250;//故障措施
 
     public static final int ALNDOMAIN2CODE = 260;//故障类别
+
+    public static final int LOCATIONCODE = 270;//库房
+
+    public static final int WORKORDERCODE = 280;//工单
 }

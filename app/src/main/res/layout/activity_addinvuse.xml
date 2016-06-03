@@ -22,8 +22,8 @@
             android:layout_height="@dimen/dimen_40dp"
             android:layout_marginLeft="@dimen/dimen_5"
             android:gravity="center_vertical"
-            android:paddingBottom="@dimen/dimen_5"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dimen_5">
 
             <TextView
                 android:id="@+id/invuse_description_title"
@@ -37,14 +37,14 @@
                 android:id="@+id/invuse_description_text_id"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="@dimen/dimen_5"
+                android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:layout_toRightOf="@+id/item_num_title"
                 android:background="@drawable/bg_edittext"
-                android:hint="@string/have_not_data"
-                android:textColor="@color/light_black"
-                android:layout_gravity="center"
                 android:gravity="center_vertical"
+                android:hint="@string/have_not_data"
+                android:paddingLeft="@dimen/dimen_5"
+                android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
         </LinearLayout>
 
@@ -87,37 +87,6 @@
             android:layout_height="1dp"
             android:background="@drawable/line"></View>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:layout_marginLeft="@dimen/dimen_5"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/invuse_udissueto_title"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="@string/invuse_udissueto_text"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-
-            <TextView
-                android:id="@+id/invuse_udissueto_text_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:layout_toRightOf="@+id/item_num_title"
-                android:drawableRight="@drawable/item_more"
-                android:hint="@string/have_not_data"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/line"></View>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -150,7 +119,6 @@
             android:layout_height="1dp"
             android:background="@drawable/line"></View>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_40dp"
@@ -159,21 +127,21 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/invuse_status_title"
+                android:id="@+id/invuse_udissueto_title"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/invuse_status_text"
+                android:text="@string/invuse_udissueto_text"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
             <TextView
-                android:id="@+id/invuse_status_text_id"
-                android:layout_width="wrap_content"
+                android:id="@+id/invuse_udissueto_text_id"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
+                android:layout_toRightOf="@+id/item_num_title"
+                android:drawableRight="@drawable/item_more"
                 android:hint="@string/have_not_data"
-                android:singleLine="false"
-                android:text="已输入"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
         </LinearLayout>
@@ -195,12 +163,12 @@
                 android:id="@+id/invuse_statusdate_title"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/invuse_statusdate_text"
+                android:text="@string/udjbr_text"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
             <TextView
-                android:id="@+id/invuse_statusdate_text_id"
+                android:id="@+id/udjbr_text_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -215,7 +183,6 @@
             android:layout_height="1dp"
             android:background="@drawable/line"></View>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_40dp"
@@ -224,80 +191,18 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/invuse_siteid_title"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/matusetrans_location_text"
+                android:text="@string/udisjj_text"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
-            <TextView
-                android:id="@+id/invuse_siteid_text_id"
-                android:layout_width="wrap_content"
+            <CheckBox
+                android:id="@+id/udisjj_text_id"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
-                android:hint="@string/have_not_data"
-                android:text="STC"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/line"></View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:layout_marginLeft="@dimen/dimen_5"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/invuse_displayname_title"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="@string/invuse_displayname_text"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-
-            <TextView
-                android:id="@+id/invuse_displayname_text_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:hint="@string/have_not_data"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/line"></View>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:layout_marginLeft="@dimen/dimen_5"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/invuse_createdate_title"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="@string/invuse_createdate_text"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-
-            <TextView
-                android:id="@+id/invuse_createdate_text_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:hint="@string/have_not_data"
+                android:longClickable="true"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
         </LinearLayout>
@@ -311,20 +216,31 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/boottom_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:orientation="vertical"
-        android:padding="@dimen/dimens_10">
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/invuse_material_btn_id"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_5"
-            android:background="@color/nomal_button_color"
-            android:text="@string/invuse_material_button_text"
-            android:textColor="@color/white" />
+            android:id="@+id/add_button_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/button_selector2"
+            android:text="新建"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/invuseline_button_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/button_selector2"
+            android:text="备件明细行"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
     </LinearLayout>
 
 </RelativeLayout>

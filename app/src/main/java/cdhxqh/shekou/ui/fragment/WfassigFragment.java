@@ -148,7 +148,7 @@ public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRe
      */
 
     private void getItemList(String vlaue, int page) {
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwfassignmentUrl(AccountUtils.getUserName(getActivity()), vlaue, page, 20), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwfassignmentUrl(AccountUtils.getpersonId(getActivity()), vlaue, page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);

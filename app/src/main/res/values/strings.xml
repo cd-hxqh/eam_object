@@ -260,7 +260,7 @@
     <string name="work_wplabor_quantity">数量</string>
     <string name="work_wplabor_orgid">组织</string>
     <string name="work_wplabor_siteid">地点</string>
-    
+
     <!--物料详情界面-->
     <string name="work_wpitem_itemnum">物料编码</string>
     <string name="work_wpitem_itemqty">数量</string>
@@ -286,7 +286,7 @@
     <string name="work_assinment_status">状态</string>
     <string name="work_assinment_orgid">组织</string>
     <string name="work_assinment_siteid">地点</string>
-    
+
     <!--工单汇报页面-->
     <string name="work_report_realinfo">实际情况</string>
     <string name="work_report_default_report">故障汇报</string>
@@ -391,6 +391,8 @@
     <string name="download">下载</string>
     <string name="downloaded">已下载</string>
     <string name="synchronous_data_text">同步基础数据</string>
+
+    <!--领料单详情-->
     <string name="issueunit_text">单位:</string>
     <string name="udfincp_text">财务公司:</string>
     <string name="status_text">状态:</string>

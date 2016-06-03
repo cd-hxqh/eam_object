@@ -27,6 +27,7 @@ import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
 import cdhxqh.shekou.model.Laborcraftrate;
 import cdhxqh.shekou.model.Labtrans;
+import cdhxqh.shekou.model.Locations;
 import cdhxqh.shekou.model.Matrectrans;
 import cdhxqh.shekou.model.Matusetrans;
 import cdhxqh.shekou.model.Person;
@@ -36,6 +37,7 @@ import cdhxqh.shekou.model.Udev;
 import cdhxqh.shekou.model.Wfassignment;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
+import cdhxqh.shekou.model.WorkOrderTem;
 import cdhxqh.shekou.model.Wpitem;
 import cdhxqh.shekou.model.Wplabor;
 
@@ -168,7 +170,7 @@ public class JsonUtils {
 
 
     public static String parsingwfserviceGoOnResult(String data) {
-        Log.i(TAG,"data="+data);
+        Log.i(TAG, "data=" + data);
         String result = null;
         try {
             JSONObject object = new JSONObject(data);
@@ -184,20 +186,10 @@ public class JsonUtils {
     }
 
 
-
-
-
-
-
-
-
-
-
-
     /**
      * 解析工单信息
      */
-    public static ArrayList<WorkOrder> parsingWorkOrder(Context ctx, String data,String type) {
+    public static ArrayList<WorkOrder> parsingWorkOrder(Context ctx, String data, String type) {
         Log.i(TAG, "WorkOrder data=" + data);
         ArrayList<WorkOrder> list = null;
         WorkOrder workOrder = null;
@@ -562,7 +554,7 @@ public class JsonUtils {
                 inventory.status = jsonObject.getString("STATUS"); //状态
                 inventory.binnum = jsonObject.getString("BINNUM"); //默认存放位置
                 inventory.siteid = jsonObject.getString("SITEID"); //地点
-                inventory.curbaltotal = jsonObject.getInt("CURBALTOTAL")+""; //当前余量
+                inventory.curbaltotal = jsonObject.getInt("CURBALTOTAL") + ""; //当前余量
                 inventory.lastissuedate = jsonObject.getString("LASTISSUEDATE"); //上次发放日期
 
                 list.add(inventory);
@@ -570,7 +562,7 @@ public class JsonUtils {
 
             return list;
         } catch (JSONException e) {
-            Log.i(TAG,"this is ee");
+            Log.i(TAG, "this is ee");
             e.printStackTrace();
             return null;
         }
@@ -752,7 +744,7 @@ public class JsonUtils {
                 invuse.eq1 = jsonObject.getString("EQ1"); //设备管理组
                 invuse.eq2 = jsonObject.getString("EQ2"); //设备管理室
                 invuse.eq3 = jsonObject.getString("EQ3"); //设备管理班组
-                invuse.udisjj = jsonObject.getInt("UDISJJ")+""; //是否紧急
+                invuse.udisjj = jsonObject.getInt("UDISJJ") + ""; //是否紧急
 
                 invuse.status = jsonObject.getString("STATUS"); //状态
                 invuse.siteid = jsonObject.getString("SITEID"); //地点
@@ -769,7 +761,7 @@ public class JsonUtils {
             return list;
         } catch (JSONException e) {
 
-            Log.i(TAG,"this jsonexception");
+            Log.i(TAG, "this jsonexception");
             e.printStackTrace();
             return null;
         }
@@ -1155,6 +1147,7 @@ public class JsonUtils {
 
     /**
      * 封装工单数据
+     *
      * @param workOrder
      * @param woactivities
      * @param labtranses
@@ -1162,7 +1155,7 @@ public class JsonUtils {
      * @return
      */
     public static String WorkToJson(WorkOrder workOrder, ArrayList<Woactivity> woactivities
-            , ArrayList<Labtrans> labtranses, ArrayList<Failurereport> failurereports){
+            , ArrayList<Labtrans> labtranses, ArrayList<Failurereport> failurereports) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("wonum", workOrder.wonum);
@@ -1268,4 +1261,66 @@ public class JsonUtils {
         }
         return null;
     }
+
+
+    /**
+     * 解析位置列表信息
+     */
+    public static ArrayList<Locations> parsingLocations(String data) {
+        Log.i(TAG, "Locations data=" + data);
+        ArrayList<Locations> list = null;
+        Locations locations = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<Locations>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                locations = new Locations();
+                jsonObject = jsonArray.getJSONObject(i);
+                locations.locationsid = jsonObject.getString("LOCATIONSID"); //id
+                locations.location = jsonObject.getString("LOCATION"); //编号
+                locations.description = jsonObject.getString("DESCRIPTION"); //描述
+                locations.orgid = jsonObject.getString("ORGID"); //组织
+                locations.siteid = jsonObject.getString("SITEID");//地点
+                locations.type = jsonObject.getString("TYPE");//类型
+                list.add(locations);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    /**
+     * 解析选择工单列表信息
+     */
+    public static ArrayList<WorkOrderTem> parsingWorkOrderTem(String data) {
+        Log.i(TAG, "WorkOrderTem data=" + data);
+        ArrayList<WorkOrderTem> list = null;
+        WorkOrderTem workOrderTem = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<WorkOrderTem>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                workOrderTem = new WorkOrderTem();
+                jsonObject = jsonArray.getJSONObject(i);
+                workOrderTem.wonum = jsonObject.getString("WONUM"); //工单
+                workOrderTem.description = jsonObject.getString("DESCRIPTION"); //描述
+                workOrderTem.status = jsonObject.getString("STATUS"); //状态
+                workOrderTem.siteid = jsonObject.getString("SITEID");//地点
+                workOrderTem.worktype = jsonObject.getString("WORKTYPE");//类型
+                workOrderTem.udcreateby = jsonObject.getString("UDCREATEBY");//类型
+                list.add(workOrderTem);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
 }

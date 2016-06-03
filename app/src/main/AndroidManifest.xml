@@ -137,6 +137,9 @@
             android:name=".ui.activity.AddinvuseActivity"
             android:label="@string/title_activity_addinvuse"></activity>
         <activity
+            android:name=".ui.activity.Work_Choose_Activity"
+            android:label="Work_Choose_Activity"></activity>
+        <activity
             android:name=".ui.activity.DownloadActivity"
             android:label="@string/title_activity_download"></activity>
         <activity
