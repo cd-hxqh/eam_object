@@ -9,33 +9,39 @@
 
     <include layout="@layout/title_main"></include>
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:layout_height="wrap_content">
 
-            <include layout="@layout/work_numlayout"></include>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
 
-            <include layout="@layout/work_plan_details"></include>
+                <include layout="@layout/work_numlayout"></include>
 
-            <include layout="@layout/work_plan_info"></include>
+                <include layout="@layout/work_plan_details"></include>
 
-            <include layout="@layout/work_em_info"></include>
+                <include layout="@layout/work_plan_info"></include>
 
-            <include layout="@layout/work_failure_info"></include>
+                <include layout="@layout/work_em_info"></include>
 
-            <include layout="@layout/work_real_info"></include>
+                <include layout="@layout/work_failure_info"></include>
 
-            <include layout="@layout/work_udremark"></include>
+                <include layout="@layout/work_real_info"></include>
 
-            <include layout="@layout/work_buttom"></include>
-        </LinearLayout>
-    </ScrollView>
+                <include layout="@layout/work_udremark"></include>
 
+
+            </LinearLayout>
+        </ScrollView>
+
+        <include layout="@layout/work_buttom"></include>
+    </RelativeLayout>
 </LinearLayout>

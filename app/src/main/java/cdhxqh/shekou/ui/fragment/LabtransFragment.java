@@ -79,7 +79,7 @@ public class LabtransFragment extends Fragment implements SwipeRefreshLayout.OnR
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        labtransAdapter = new LabtransAdapter(getActivity());
+//        labtransAdapter = new LabtransAdapter(getActivity());
         recyclerView.setAdapter(labtransAdapter);
 
         refresh_layout.setColor(android.R.color.holo_blue_bright,
@@ -94,7 +94,7 @@ public class LabtransFragment extends Fragment implements SwipeRefreshLayout.OnR
     }
 
     private void getdata() {
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getlabtransUrl(workOrder.worktype, page, 20), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getlabtransUrl(workOrder.worktype,workOrder.wonum, page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -127,7 +127,7 @@ public class LabtransFragment extends Fragment implements SwipeRefreshLayout.OnR
             nodatalayout.setVisibility(View.GONE);
         }
         if (page == 1 && labtransAdapter.getItemCount() != 0) {
-            labtransAdapter = new LabtransAdapter(getActivity());
+//            labtransAdapter = new LabtransAdapter(getActivity());
             recyclerView.setAdapter(labtransAdapter);
         }
         if ((list == null || list.size() == 0) && page == 1) {

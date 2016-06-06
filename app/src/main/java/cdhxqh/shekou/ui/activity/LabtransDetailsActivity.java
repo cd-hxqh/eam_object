@@ -6,11 +6,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Option;
+import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.Wplabor;
 
 /**
@@ -41,6 +45,9 @@ public class LabtransDetailsActivity extends BaseActivity {
     private TextView assetnum;//资产
     private TextView transtype;//类型
 
+    private int position;
+    private ArrayList<Woactivity> woactivityList = new ArrayList<>();
+
     private Button confirm;//确定
 
     @Override
@@ -55,6 +62,8 @@ public class LabtransDetailsActivity extends BaseActivity {
 
     private void geiIntentData() {
         labtrans = (Labtrans) getIntent().getSerializableExtra("labtrans");
+        woactivityList = (ArrayList<Woactivity>) getIntent().getSerializableExtra("woactivityList");
+        position = getIntent().getIntExtra("position",0);
     }
     @Override
     protected void findViewById() {
@@ -140,7 +149,31 @@ public class LabtransDetailsActivity extends BaseActivity {
     private View.OnClickListener confirmOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            getLabtrans();
+            Intent intent = getIntent();
+            if(labtrans.actualstaskid.equals(actualstaskid.getText().toString())
+                    &&labtrans.craft.equals(craft.getText().toString())
+                    &&labtrans.skilllevel.equals(skilllevel.getText().toString())
+                    &&labtrans.laborcode.equals(laborcode.getText().toString())
+                    &&labtrans.startdate.equals(startdate.getText().toString())
+                    &&labtrans.starttime.equals(starttime.getText().toString())
+                    &&labtrans.finishtime.equals(finishtime.getText().toString())
+                    &&labtrans.regularhrs.equals(regularhrs.getText().toString())
+                    &&labtrans.payrate.equals(payrate.getText().toString())
+                    &&labtrans.linecost.equals(linecost.getText().toString())
+                    &&labtrans.assetnum.equals(assetnum.getText().toString())
+                    &&labtrans.transtype.equals(transtype.getText().toString())) {//如果内容没有修改
+                intent.putExtra("labtrans",labtrans);
+            }else {
+                Labtrans labtrans = getLabtrans();
+                if(labtrans.optiontype==null||!labtrans.optiontype.equals("add")) {
+                    labtrans.optiontype = "update";
+                }
+                intent.putExtra("labtrans", labtrans);
+                Toast.makeText(LabtransDetailsActivity.this, "实际员工本地修改成功", Toast.LENGTH_SHORT).show();
+            }
+            intent.putExtra("position", position);
+            LabtransDetailsActivity.this.setResult(2, intent);
+            finish();
         }
     };
 

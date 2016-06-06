@@ -1,5 +1,6 @@
 package cdhxqh.shekou.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -7,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Woactivity;
@@ -72,6 +74,8 @@ public class AddWoactivityActivity extends BaseActivity {
         });
         titleTextView.setText(getResources().getString(R.string.title_activity_workwoactivity_add));
 
+        taskid.setText(getIntent().getIntExtra("taskid", 0) + "");
+
         confirm.setOnClickListener(confirmOnClickListener);
     }
 
@@ -85,13 +89,18 @@ public class AddWoactivityActivity extends BaseActivity {
         woactivity.udisyq = udisyq.isChecked() ? "Y" : "N";
         woactivity.udyqyy = udyqyy.getText().toString().trim();
         woactivity.udremark = udremark.getText().toString().trim();
+        woactivity.optiontype = "add";
         return woactivity;
     }
 
     private View.OnClickListener confirmOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            getWoactivity();
+            Intent intent = getIntent();
+            intent.putExtra("woactivity",getWoactivity());
+            AddWoactivityActivity.this.setResult(1, intent);
+            Toast.makeText(AddWoactivityActivity.this, "任务本地新增成功", Toast.LENGTH_SHORT).show();
+            finish();
         }
     };
 }

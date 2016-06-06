@@ -502,8 +502,9 @@ public class Work_detailsActivity extends BaseActivity {
             Intent intent = new Intent(Work_detailsActivity.this, Woactivity_Activity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("workOrder", workOrder);
+            bundle.putSerializable("woactivityList", woactivityList);
             intent.putExtras(bundle);
-            startActivity(intent);
+            startActivityForResult(intent,1000);
             popupWindow.dismiss();
         }
     };
@@ -526,8 +527,10 @@ public class Work_detailsActivity extends BaseActivity {
             Intent intent = new Intent(Work_detailsActivity.this, LabtransListActivity.class);
             Bundle bundle = new Bundle();
             bundle.putSerializable("workOrder", workOrder);
+            bundle.putSerializable("woactivityList", woactivityList);
+            bundle.putSerializable("labtransList", labtransList);
             intent.putExtras(bundle);
-            startActivity(intent);
+            startActivityForResult(intent, 2000);
             popupWindow.dismiss();
         }
     };
@@ -535,15 +538,16 @@ public class Work_detailsActivity extends BaseActivity {
     private View.OnClickListener reportOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (failurecode.getText().toString().equals("")){
+            if (failurecode.getText().toString().equals("")) {
                 popupWindow.dismiss();
-                Toast.makeText(Work_detailsActivity.this,"请选选择故障子机构",Toast.LENGTH_SHORT).show();
-            }else {
+                Toast.makeText(Work_detailsActivity.this, "请选选择故障子机构", Toast.LENGTH_SHORT).show();
+            } else {
                 Intent intent = new Intent(Work_detailsActivity.this, Work_FailurereportActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("workOrder", getWorkOrder());
+                bundle.putSerializable("failurereportList", failurereportList);
                 intent.putExtras(bundle);
-                startActivity(intent);
+                startActivityForResult(intent, 3000);
                 popupWindow.dismiss();
             }
         }
@@ -826,22 +830,17 @@ public class Work_detailsActivity extends BaseActivity {
                 option = (Option) data.getSerializableExtra("option");
                 udgzlbdm.setText(option.getName());
                 break;
-//            case 1000:
-//                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");
-//                wplaborList = (ArrayList<Wplabor>) data.getSerializableExtra("wplaborList");
-//                wpmaterialList = (ArrayList<Wpmaterial>) data.getSerializableExtra("wpmaterialList");
-//                editImageView.performClick();
-//                break;
-//            case 2000:
-//                assignmentList = (ArrayList<Assignment>) data.getSerializableExtra("assignmentList");
-//                editImageView.performClick();
-//                break;
-//            case 3000:
-//                labtransList = (ArrayList<Labtrans>) data.getSerializableExtra("labtransList");
-//                editImageView.performClick();
-//                break;
-//            default:
-//                break;
+            case 1000:
+                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");
+                break;
+            case 2000:
+                labtransList = (ArrayList<Labtrans>) data.getSerializableExtra("labtransList");
+                break;
+            case 3000:
+                failurereportList = (ArrayList<Failurereport>) data.getSerializableExtra("failurereportList");
+                break;
+            default:
+                break;
         }
     }
 }

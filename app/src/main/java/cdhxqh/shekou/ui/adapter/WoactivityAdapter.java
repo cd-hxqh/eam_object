@@ -18,6 +18,7 @@ import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.Wpitem;
 import cdhxqh.shekou.ui.activity.WoactivityDetailsActivity;
+import cdhxqh.shekou.ui.activity.Woactivity_Activity;
 
 
 /**
@@ -25,9 +26,10 @@ import cdhxqh.shekou.ui.activity.WoactivityDetailsActivity;
  * 任务
  */
 public class WoactivityAdapter extends RecyclerView.Adapter<WoactivityAdapter.ViewHolder> {
-    Context mContext;
-    List<Woactivity>woactivityList = new ArrayList<>();
-    public WoactivityAdapter(Context context) {
+    Woactivity_Activity mContext;
+    public List<Woactivity>woactivityList = new ArrayList<>();
+    public ArrayList<Woactivity> deleteList = new ArrayList<>();
+    public WoactivityAdapter(Woactivity_Activity context) {
         this.mContext = context;
     }
 
@@ -41,9 +43,9 @@ public class WoactivityAdapter extends RecyclerView.Adapter<WoactivityAdapter.Vi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Woactivity woactivity = woactivityList.get(position);
-        holder.itemNumTitle.setText(mContext.getString(R.string.item_num_title));
-        holder.itemDescTitle.setText(mContext.getString(R.string.work_plan_desc));
-        holder.itemNum.setText(woactivity.wojo1);
+        holder.itemNumTitle.setText(mContext.getString(R.string.work_woactivity_taskid));
+        holder.itemDescTitle.setText(mContext.getString(R.string.work_woactivity_description));
+        holder.itemNum.setText(woactivity.taskid);
         holder.itemDesc.setText(woactivity.description);
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,8 +53,9 @@ public class WoactivityAdapter extends RecyclerView.Adapter<WoactivityAdapter.Vi
                 Intent intent = new Intent(mContext, WoactivityDetailsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("woactivity", woactivity);
+                bundle.putSerializable("position", position);
                 intent.putExtras(bundle);
-                mContext.startActivity(intent);
+                mContext.startActivityForResult(intent, 2);
             }
         });
     }
@@ -125,5 +128,21 @@ public class WoactivityAdapter extends RecyclerView.Adapter<WoactivityAdapter.Vi
             }
         }
         notifyDataSetChanged();
+    }
+
+    public void adddate(Woactivity woactivity) {
+        woactivityList.add(woactivity);
+        notifyDataSetChanged();
+    }
+
+    public ArrayList<Woactivity> getList(){
+        ArrayList<Woactivity> list = new ArrayList<>();
+        if(woactivityList.size()!=0) {
+            list.addAll(woactivityList);
+        }
+        if(deleteList.size()!=0) {
+            list.addAll(deleteList);
+        }
+        return list;
     }
 }

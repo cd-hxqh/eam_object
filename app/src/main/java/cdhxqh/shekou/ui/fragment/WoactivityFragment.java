@@ -81,7 +81,7 @@ public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.O
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        woactivityAdapter = new WoactivityAdapter(getActivity());
+//        woactivityAdapter = new WoactivityAdapter(getActivity());
         recyclerView.setAdapter(woactivityAdapter);
 
         refresh_layout.setColor(android.R.color.holo_blue_bright,
@@ -129,7 +129,7 @@ public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.O
             nodatalayout.setVisibility(View.GONE);
         }
         if (page == 1 && woactivityAdapter.getItemCount() != 0) {
-            woactivityAdapter = new WoactivityAdapter(getActivity());
+//            woactivityAdapter = new WoactivityAdapter(getActivity());
             recyclerView.setAdapter(woactivityAdapter);
         }
         if ((list == null || list.size() == 0) && page == 1) {

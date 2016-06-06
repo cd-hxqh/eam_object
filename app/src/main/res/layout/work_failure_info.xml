@@ -141,8 +141,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
-                android:background="@color/white"
-                android:button="@drawable/checkbox" />
+                android:layout_toRightOf="@+id/item_num_title"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
         </LinearLayout>
 
         <View

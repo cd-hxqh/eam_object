@@ -26,6 +26,7 @@ public class Failurereport implements Serializable {
     public String siteid; //地点
     public String parent;
     public String description;
+    public String optiontype;
 
 
 

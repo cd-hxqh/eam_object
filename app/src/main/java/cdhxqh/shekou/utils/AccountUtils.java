@@ -67,7 +67,7 @@ public class AccountUtils {
      * @param personId
      *
      */
-    public static void setLoginDetails(Context cxt,String insertSite,String insertOrg,String personId,String userName,String displayName){
+    public static void setLoginDetails(Context cxt,String insertOrg,String insertSite,String personId,String userName,String displayName){
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
         sharedPreferences.edit().putString(cxt.getString(R.string.login_insertOrg), insertOrg).putString(cxt.getString(R.string.login_insertSite), insertSite)

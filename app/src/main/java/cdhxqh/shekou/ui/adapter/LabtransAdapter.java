@@ -18,6 +18,7 @@ import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Wplabor;
 import cdhxqh.shekou.ui.activity.LabtransDetailsActivity;
+import cdhxqh.shekou.ui.activity.LabtransListActivity;
 import cdhxqh.shekou.ui.activity.WplaborDetailsActivity;
 
 
@@ -26,9 +27,10 @@ import cdhxqh.shekou.ui.activity.WplaborDetailsActivity;
  * 实际员工
  */
 public class LabtransAdapter extends RecyclerView.Adapter<LabtransAdapter.ViewHolder> {
-    Context mContext;
-    List<Labtrans>labtransList = new ArrayList<>();
-    public LabtransAdapter(Context context) {
+    LabtransListActivity mContext;
+    public List<Labtrans>labtransList = new ArrayList<>();
+    public ArrayList<Labtrans> deleteList = new ArrayList<>();
+    public LabtransAdapter(LabtransListActivity context) {
         this.mContext = context;
     }
 
@@ -51,7 +53,9 @@ public class LabtransAdapter extends RecyclerView.Adapter<LabtransAdapter.ViewHo
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, LabtransDetailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("labtrans", labtrans);
+                bundle.putSerializable("labtrans",labtrans);
+                bundle.putSerializable("woactivityList", mContext.woactivityList);
+                bundle.putSerializable("position", position);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
@@ -126,5 +130,21 @@ public class LabtransAdapter extends RecyclerView.Adapter<LabtransAdapter.ViewHo
             }
         }
         notifyDataSetChanged();
+    }
+
+    public void adddate(Labtrans labtrans) {
+        labtransList.add(labtrans);
+        notifyDataSetChanged();
+    }
+
+    public ArrayList<Labtrans> getList(){
+        ArrayList<Labtrans> list = new ArrayList<>();
+        if(labtransList.size()!=0) {
+            list.addAll(labtransList);
+        }
+        if(deleteList.size()!=0) {
+            list.addAll(deleteList);
+        }
+        return list;
     }
 }

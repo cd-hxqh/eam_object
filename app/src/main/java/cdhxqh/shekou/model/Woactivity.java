@@ -26,6 +26,7 @@ public class Woactivity implements Serializable {
     public String udyqyy;//延期原因
     public String udremark;//备注
     public String wonum;//所属工单
+    public String optiontype;//
 //    public String targstartdate; //计划开始时间
 //    public String targcompdate; //计划完成时间
 //    public String actstart; //实际开始时间

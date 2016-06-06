@@ -8,6 +8,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.config.Constants;
@@ -117,13 +118,18 @@ public class AddLabtransActivity extends BaseActivity {
         labtrans.linecost = linecost.getText().toString();
         labtrans.assetnum = assetnum.getText().toString();
         labtrans.transtype = transtype.getText().toString();
+        labtrans.optiontype = "add";
         return labtrans;
     }
 
     private View.OnClickListener confirmOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            getLabtrans();
+            Intent intent = getIntent();
+            intent.putExtra("labtrans",getLabtrans());
+            AddLabtransActivity.this.setResult(1, intent);
+            Toast.makeText(AddLabtransActivity.this, "实际员工本地新增成功", Toast.LENGTH_SHORT).show();
+            finish();
         }
     };
 

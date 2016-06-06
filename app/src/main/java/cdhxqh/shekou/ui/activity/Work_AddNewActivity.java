@@ -716,7 +716,6 @@ public class Work_AddNewActivity extends BaseActivity {
                 woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");
                 break;
             case 2000:
-                woactivityList = (ArrayList<Woactivity>) data.getSerializableExtra("woactivityList");
                 labtransList = (ArrayList<Labtrans>) data.getSerializableExtra("labtransList");
                 break;
             case 3000:

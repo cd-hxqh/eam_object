@@ -7,9 +7,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.flyco.animation.BaseAnimatorSet;
+import com.flyco.animation.BounceEnter.BounceTopEnter;
+import com.flyco.animation.SlideExit.SlideBottomExit;
+import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.widget.NormalDialog;
 
 import java.util.ArrayList;
 
@@ -40,6 +47,13 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
     private SwipeRefreshLayout refresh_layout = null;
     private int page = 1;
     private WorkOrder workOrder;
+    private BaseAnimatorSet mBasIn;
+    private BaseAnimatorSet mBasOut;
+    private LinearLayout confirmlayout;
+    private Button confirmBtn;
+
+    public ArrayList<Woactivity> woactivityList = new ArrayList<>();
+    public ArrayList<Labtrans> labtransList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +67,8 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
 
     private void getData() {
         workOrder = (WorkOrder) getIntent().getSerializableExtra("workOrder");
+        woactivityList = (ArrayList<Woactivity>) getIntent().getSerializableExtra("woactivityList");
+        labtransList = (ArrayList<Labtrans>) getIntent().getSerializableExtra("labtransList");
     }
 
     @Override
@@ -63,20 +79,19 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView_id);
         refresh_layout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         nodatalayout = (LinearLayout) findViewById(R.id.have_not_data_id);
+        confirmlayout = (LinearLayout) findViewById(R.id.confirm_layout);
+        confirmBtn = (Button) findViewById(R.id.ok);
     }
 
     @Override
     protected void initView() {
-        backImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+        backImageView.setOnClickListener(backOnClickListener);
         titleTextView.setText(getResources().getString(R.string.title_activity_worklabtrans));
         menuImageView.setImageResource(R.drawable.add);
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
+        confirmlayout.setVisibility(View.GONE);
+        confirmBtn.setOnClickListener(confirmBtnOnClickListener);
         layoutManager = new LinearLayoutManager(LabtransListActivity.this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.scrollToPosition(0);
@@ -93,12 +108,22 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
         refresh_layout.setOnRefreshListener(this);
         refresh_layout.setOnLoadListener(this);
 
-        getdata();
+        mBasIn = new BounceTopEnter();
+        mBasOut = new SlideBottomExit();
+
+        if (!workOrder.isnew && (labtransList == null || labtransList.size() == 0)) {
+            refresh_layout.setRefreshing(true);
+            getdata();
+        } else {
+            if (labtransList != null && labtransList.size() != 0) {
+                labtransAdapter.update(labtransList, true);
+            }
+        }
     }
 
     private void getdata() {
         if (workOrder.wonum!=null&&!workOrder.wonum.equals("")) {
-            HttpManager.getDataPagingInfo(LabtransListActivity.this, HttpManager.getlabtransUrl(workOrder.worktype, page, 20), new HttpRequestHandler<Results>() {
+            HttpManager.getDataPagingInfo(LabtransListActivity.this, HttpManager.getlabtransUrl(workOrder.worktype,workOrder.wonum, page, 20), new HttpRequestHandler<Results>() {
                 @Override
                 public void onSuccess(Results results) {
                     Log.i(TAG, "data=" + results);
@@ -150,19 +175,124 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
         public void onClick(View view) {
             Intent intent;
             intent = new Intent(LabtransListActivity.this, AddLabtransActivity.class);
-            startActivity(intent);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("workOrder", workOrder);
+            bundle.putSerializable("woactivityList", woactivityList);
+            intent.putExtras(bundle);
+            startActivityForResult(intent, 1);
+        }
+    };
+
+    private View.OnClickListener backOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (confirmlayout.getVisibility() == View.VISIBLE) {
+                final NormalDialog dialog = new NormalDialog(LabtransListActivity.this);
+                dialog.content("确定放弃修改吗?")//
+                        .showAnim(mBasIn)//
+                        .dismissAnim(mBasOut)//
+                        .show();
+
+                dialog.setOnBtnClickL(
+                        new OnBtnClickL() {
+                            @Override
+                            public void onBtnClick() {
+                                dialog.dismiss();
+                            }
+                        },
+                        new OnBtnClickL() {
+                            @Override
+                            public void onBtnClick() {
+                                LabtransListActivity.this.finish();
+//                            dialog.dismiss();
+                            }
+                        });
+            } else {
+                LabtransListActivity.this.finish();
+            }
+        }
+    };
+
+    private void setNodataLayout() {
+        if (labtransAdapter.getItemCount() == 0) {
+            nodatalayout.setVisibility(View.VISIBLE);
+        } else {
+            nodatalayout.setVisibility(View.GONE);
+        }
+    }
+
+    private View.OnClickListener confirmBtnOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = getIntent();
+            intent.putExtra("labtransList",labtransAdapter.getList());
+            LabtransListActivity.this.setResult(2000, intent);
+            LabtransListActivity.this.finish();
         }
     };
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (resultCode) {
+            case 1://新增
+                if (data != null) {
+                    Labtrans labtrans = (Labtrans) data.getSerializableExtra("labtrans");
+                    labtransAdapter.adddate(labtrans);
+                    nodatalayout.setVisibility(View.GONE);
+                }
+                confirmlayout.setVisibility(View.VISIBLE);
+                setNodataLayout();
+                break;
+            case 2://修改
+                if (data != null) {
+                    Labtrans labtrans = (Labtrans) data.getSerializableExtra("labtrans");
+                    int position = data.getIntExtra("position", 0);
+                    labtransAdapter.labtransList.set(position, labtrans);
+                    labtransAdapter.notifyDataSetChanged();
+                }
+                confirmlayout.setVisibility(View.VISIBLE);
+                setNodataLayout();
+                break;
+            case 3://本地任务删除
+                if (data != null) {
+                    int position = data.getIntExtra("position", 0);
+                    labtransAdapter.labtransList.remove(position);
+                    labtransAdapter.notifyDataSetChanged();
+                }
+                confirmlayout.setVisibility(View.VISIBLE);
+                setNodataLayout();
+                break;
+            case 4://服务器任务删除操作
+                if (data != null) {
+                    Labtrans labtrans = (Labtrans) data.getSerializableExtra("labtrans");
+                    int position = data.getIntExtra("position", 0);
+                    labtransAdapter.deleteList.add(labtrans);
+                    labtransAdapter.labtransList.remove(position);
+                    labtransAdapter.notifyDataSetChanged();
+                }
+                confirmlayout.setVisibility(View.VISIBLE);
+                setNodataLayout();
+                break;
+        }
+    }
+
+    @Override
     public void onRefresh() {
-        page = 1;
-        getdata();
+        if (!workOrder.isnew && (labtransList == null || labtransList.size() == 0)) {
+            refresh_layout.setRefreshing(true);
+            getdata();
+        } else {
+            if (labtransList != null && labtransList.size() != 0) {
+                labtransAdapter.update(labtransList, true);
+            }
+        }
     }
 
     @Override
     public void onLoad() {
-        page++;
-        getdata();
+        if (!workOrder.isnew) {
+            page++;
+            getdata();
+        }
     }
 }

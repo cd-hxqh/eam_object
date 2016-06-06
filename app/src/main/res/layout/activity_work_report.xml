@@ -119,7 +119,22 @@
                             android:textColor="@color/light_black"
                             android:textSize="@dimen/dimens_16dp" />
                     </LinearLayout>
-
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <Button
+                            android:id="@+id/confirm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="30dp"
+                            android:paddingLeft="@dimen/dimen_40dp"
+                            android:paddingRight="@dimen/dimen_40dp"
+                            android:layout_centerHorizontal="true"
+                            android:background="@drawable/button_selector"
+                            android:text="@string/ok"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+                    </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
         </cdhxqh.shekou.ui.widget.SwipeRefreshLayout>

@@ -130,8 +130,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
-                android:button="@drawable/checkbox"
-                android:background="@color/white"/>
+                android:layout_toRightOf="@+id/item_num_title"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp"/>
         </LinearLayout>
 
         <View
@@ -158,8 +159,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
-                android:button="@drawable/checkbox"
-                android:background="@color/white"/>
+                android:layout_toRightOf="@+id/item_num_title"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp"/>
         </LinearLayout>
 
         <View
@@ -186,8 +188,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
-                android:button="@drawable/checkbox"
-                android:background="@color/white"/>
+                android:layout_toRightOf="@+id/item_num_title"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp"/>
         </LinearLayout>
 
         <View

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -34,12 +35,18 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
     private ImageView menuImageView;
     private RelativeLayout backlayout;
     String type;//类型
+    private String question_text;
+    private String cause_text;
+    private String rememdy_text;
     private TextView question;//问题
     private TextView cause;//原因
     private TextView rememdy;//补救措施
     private String failurelist;
     private SwipeRefreshLayout refresh_layout = null;
     private WorkOrder workOrder;
+    private Button confirm;//确定
+
+    private ArrayList<Failurereport> failurereportList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +60,7 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
 
     private void geiIntentData() {
         workOrder = (WorkOrder) getIntent().getSerializableExtra("workOrder");
+        failurereportList = (ArrayList<Failurereport>) getIntent().getSerializableExtra("failurereportList");
         type = workOrder.failurecode;
     }
 
@@ -65,6 +73,7 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
         cause = (TextView) findViewById(R.id.work_failurereport_cause);
         rememdy = (TextView) findViewById(R.id.work_failurereport_rememdy);
         refresh_layout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
+        confirm = (Button) findViewById(R.id.confirm);
     }
 
     @Override
@@ -83,7 +92,13 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
         refresh_layout.setRefreshing(true);
         refresh_layout.setOnRefreshListener(this);
 
-        getdata();
+        confirm.setOnClickListener(confirmOnClickListener);
+
+        if (failurereportList == null||failurereportList.size()==0) {
+            getdata();
+        }else {
+            addListData(failurereportList);
+        }
 
         question.setOnClickListener(new LayoutOnClickListener(Constants.FAILURE_QUESTION, type));
         cause.setOnClickListener(new LayoutOnClickListener(Constants.FAILURE_CAUSE, question.getText().toString()));
@@ -97,6 +112,7 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
                 Log.i(TAG, "data=" + results);
                 ArrayList<Failurereport> failurereports = JsonUtils.parsingFailurereport(Work_FailurereportActivity.this, results.getResultlist());
                 addListData(failurereports);
+                failurereportList = failurereports;
                 refresh_layout.setRefreshing(false);
             }
 
@@ -113,17 +129,74 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
     }
 
     private void addListData(ArrayList<Failurereport> list) {
-        if (list.size() == 3) {
+        if (list.size() != 0) {
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).type.equals("问题")) {
                     question.setText(list.get(i).failurecode);
+                    question_text = list.get(i).failurecode;
                 } else if (list.get(i).type.equals("原因")) {
                     cause.setText(list.get(i).failurecode);
+                    cause_text = list.get(i).failurecode;
                 } else if (list.get(i).type.equals("补救措施")) {
                     rememdy.setText(list.get(i).failurecode);
+                    rememdy_text = list.get(i).failurecode;
                 }
             }
         }
+    }
+
+    private View.OnClickListener confirmOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = getIntent();
+            if(question_text.equals(question.getText().toString())
+                    &&cause_text.equals(cause.getText().toString())
+                    &&rememdy_text.equals(rememdy.getText().toString())) {//如果内容没有修改
+//                intent.putExtra("woactivity",woactivity);
+            }else {
+//                Failurereport woactivity = getWoactivity();
+//                if(woactivity.optiontype==null||!woactivity.optiontype.equals("add")) {
+//                    woactivity.optiontype = "update";
+//                }
+//                intent.putExtra("woactivity", woactivity);
+//                Toast.makeText(WoactivityDetailsActivity.this, "任务本地修改成功", Toast.LENGTH_SHORT).show();
+            }
+//            intent.putExtra("position", position);
+//            WoactivityDetailsActivity.this.setResult(2, intent);
+            finish();
+        }
+    };
+
+    private ArrayList<Failurereport> getFailurereportList(){
+        if(question_text.equals(question.getText().toString())
+                &&cause_text.equals(cause.getText().toString())
+                &&rememdy_text.equals(rememdy.getText().toString())) {//如果内容没有修改
+            return failurereportList;
+        }else{
+            ArrayList<Failurereport> failurereports = new ArrayList<>();
+            Failurereport failurereport;
+            if (!question_text.equals(question.getText().toString())){
+//                failurereport =
+            }
+            if (!cause_text.equals(cause.getText().toString())){
+
+            }
+            if (!rememdy_text.equals(rememdy.getText().toString())){
+
+            }
+            return failurereports;
+        }
+    }
+
+    private Failurereport getfailurereport(String type){
+        if (failurereportList.size() != 0) {
+            for (int i = 0; i < failurereportList.size(); i++) {
+                if (failurereportList.get(i).type.equals(type)) {
+                    return failurereportList.get(i);
+                }
+            }
+        }
+        return null;
     }
 
     private class LayoutOnClickListener implements View.OnClickListener {
