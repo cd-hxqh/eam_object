@@ -425,4 +425,9 @@
     <string name="tositeid_text">目标地点:</string>
     <string name="enterby_displayname_text">输入人:</string>
     <string name="issueto_text">领料人:</string>
+    <string name="work_invuse_title">工单领料</string>
+    <string name="not_work_invuse_title">非工单领料</string>
+    <string name="udreason_text">领料原因:</string>
+    <string name="add_invuseline_text">新增备件明细</string>
+    <string name="invuseline_title">备件明细</string>
 </resources>

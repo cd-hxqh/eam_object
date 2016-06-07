@@ -1,0 +1,304 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context="cdhxqh.shekou.ui.activity.Wfassig_DetailsActivity">
+
+    <include layout="@layout/title_main"></include>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_relativelayout_id"
+        android:orientation="vertical"
+        android:padding="@dimen/dimens_10">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dimen_5">
+
+            <TextView
+                android:id="@+id/invuse_description_title"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/invuseline_item_num_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/invuseline_item_num_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:drawableRight="@drawable/item_more"
+                android:gravity="center_vertical"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/invuse_location_title"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/invuseline_description_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/invuseline_description_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:layout_toRightOf="@+id/item_num_title"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
+
+        <LinearLayout
+            android:id="@+id/invuse_wonum_linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/level5_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/level5_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:drawableRight="@drawable/item_more"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/wonum_view_id"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/level6_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/level6_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:layout_toRightOf="@+id/item_num_title"
+                android:drawableRight="@drawable/item_more"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/frombin_txt"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/frombin_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:drawableRight="@drawable/item_more"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/invuse_statusdate_title"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/quantity_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <EditText
+                android:id="@+id/quantity_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:hint="@string/have_not_data"
+                android:inputType="numberDecimal"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/issueto_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/issueto_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:drawableRight="@drawable/item_more"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
+        <LinearLayout
+            android:id="@+id/udreason_linearlayout_id"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dimen_5"
+            android:paddingTop="@dimen/dimen_5">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/remark_text"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <EditText
+                android:id="@+id/remark_text_id"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:background="@drawable/bg_edittext"
+                android:gravity="center_vertical"
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/udreason_view_id"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/boottom_id"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/add_button_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/button_selector2"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

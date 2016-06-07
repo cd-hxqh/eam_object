@@ -294,6 +294,7 @@ public class DownloadActivity extends BaseActivity {
             } else if (buttonText.equals(childArray.get(0).get(1))) {//作业计划
                 downloaddata(HttpManager.getJpNumUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(2))) {//人员
+                Log.i(TAG,"site="+AccountUtils.getinsertSite(DownloadActivity.this));
                 downloaddata(HttpManager.getPersonUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(3))) {//员工
                 downloaddata(HttpManager.getLaborUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);

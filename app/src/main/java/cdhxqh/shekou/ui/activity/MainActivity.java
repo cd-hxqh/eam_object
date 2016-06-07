@@ -160,9 +160,7 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            if (mSelectPos == 3) {
-                getMenuInflater().inflate(R.menu.menu_main, menu);
-            }
+
             restoreActionBar();
             return true;
         }
@@ -170,21 +168,12 @@ public class MainActivity extends BaseActivity
     }
 
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (mSelectPos == 3&&item.getItemId() == R.id.action_add) {
-            Intent intent=new Intent();
-            intent.setClass(MainActivity.this,AddinvuseActivity.class);
-            startActivityForResult(intent,0);
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
-
-
 
 
     private long exitTime = 0;

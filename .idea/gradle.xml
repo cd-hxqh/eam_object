@@ -9,6 +9,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/FlycoAnimation_Lib" />
+            <option value="$PROJECT_DIR$/FlycoDialog_Lib" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

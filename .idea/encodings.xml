@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/ui/activity/Woactivity_Activity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/ui/indicator/ColorGradient.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/ui/indicator/FixedIndicatorView.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/ui/indicator/FragmentListPageAdapter.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/ui/indicator/Indicator.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/ui/indicator/IndicatorViewPager.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/ui/indicator/OnTransitionTextListener.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/ui/indicator/ScrollBar.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/ui/viewpager/RecycleBin.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/ui/viewpager/RecyclingPagerAdapter.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/ui/viewpager/SViewPager.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/color/tab_top2_selector.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/tab_top2.xml" charset="GBK" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

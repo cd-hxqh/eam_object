@@ -3,6 +3,9 @@ package cdhxqh.shekou.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -10,40 +13,73 @@ import org.json.JSONObject;
  * Created by apple on 15/10/26.
  * 领料单行
  */
+@DatabaseTable(tableName = "Invuseline")
 public class Invuseline extends Entity implements Parcelable {
     private static final String TAG = "Invuseline";
     private static final long serialVersionUID = 2015050105L;
-
+    @DatabaseField(generatedId = true)
+    public int id;
+    @DatabaseField(columnName = "invuselineid")
     public String invuselineid; //唯一ID
+    @DatabaseField(columnName = "invuselinenum")
     public String invuselinenum; //编号
+    @DatabaseField(columnName = "itemnum")
     public String itemnum; //备件
+    @DatabaseField(columnName = "invusenum")
     public String invusenum; //领料单号
+    @DatabaseField(columnName = "description")
     public String description; //描述
+    @DatabaseField(columnName = "level4")
     public String level4; //机构
+    @DatabaseField(columnName = "level5")
     public String level5; //部位(五级)
+    @DatabaseField(columnName = "level6")
     public String level6; //部位(六级)
+    @DatabaseField(columnName = "quantity")
     public String quantity; //领料数量
+    @DatabaseField(columnName = "frombin")
     public String frombin; //货柜
+    @DatabaseField(columnName = "invbalances_curbal")
     public String invbalances_curbal; //货柜可用数量
+    @DatabaseField(columnName = "inventory_curbaltotal")
     public String inventory_curbaltotal; //库存总数量
+    @DatabaseField(columnName = "inventory_issueunit")
     public String inventory_issueunit; //发放单位
+    @DatabaseField(columnName = "remark")
     public String remark; //备注
+    @DatabaseField(columnName = "udbudctrlnum")
     public String udbudctrlnum; //预算编号
+    @DatabaseField(columnName = "budctrl_description")
     public String budctrl_description; //预算描述
+    @DatabaseField(columnName = "udglaccount")
     public String udglaccount; //成本科目
+    @DatabaseField(columnName = "chartofaccounts_accountname")
     public String chartofaccounts_accountname; //成本科目描述
+    @DatabaseField(columnName = "budctrl_udlimit")
     public String budctrl_udlimit; //预算总额(元)
+    @DatabaseField(columnName = "budctrl_actual")
     public String budctrl_actual; //实际金额(元)
+    @DatabaseField(columnName = "budctrl_remainder")
     public String budctrl_remainder; //剩余金额(元)
+    @DatabaseField(columnName = "displayunitcost")
     public String displayunitcost; //单位成本
+    @DatabaseField(columnName = "displaylinecost")
     public String displaylinecost; //行成本
+    @DatabaseField(columnName = "wonum")
     public String wonum; //工单号
+    @DatabaseField(columnName = "taskid")
     public String taskid; //任务号
+    @DatabaseField(columnName = "assetnum")
     public String assetnum; //设备
+    @DatabaseField(columnName = "linetype")
     public String linetype; //行类型
+    @DatabaseField(columnName = "tositeid")
     public String tositeid; //目标地点
+    @DatabaseField(columnName = "enterby_displayname")
     public String enterby_displayname; //输入人
+    @DatabaseField(columnName = "issueto")
     public String issueto; //领料人
+    @DatabaseField(columnName = "issueto_displayname")
     public String issueto_displayname; //领料人名称
 
 

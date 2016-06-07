@@ -71,7 +71,6 @@ public class InvuselineAdapter extends RecyclerView.Adapter<InvuselineAdapter.Vi
     public void update(ArrayList<Invuseline> data, boolean merge) {
         if (merge && mItems.size() > 0) {
             for (int i = 0; i < mItems.size(); i++) {
-                Log.i(TAG, "mItems=" + mItems.get(i).invuselineid);
                 Invuseline obj = mItems.get(i);
                 boolean exist = false;
                 for (int j = 0; j < data.size(); j++) {

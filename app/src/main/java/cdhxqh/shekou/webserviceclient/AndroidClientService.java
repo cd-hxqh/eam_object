@@ -13,6 +13,7 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 
 import cdhxqh.shekou.api.JsonUtils;
+import cdhxqh.shekou.bean.InvuseResult;
 import cdhxqh.shekou.model.WorkResult;
 
 import cdhxqh.shekou.api.JsonUtils;
@@ -302,4 +303,42 @@ public class AndroidClientService {
         }
         return workResult;
     }
+
+
+
+
+    /**
+     * 领料单新增方法
+     *
+     * @param json
+     * @return
+     */
+    public static InvuseResult InsertInvuse(String json, String userid,String url) {
+        SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        soapEnvelope.implicitTypes = true;
+        soapEnvelope.dotNet = true;
+        SoapObject soapReq = new SoapObject(NAMESPACE, "invuseserviceINVUSE01ByAdd");
+        soapReq.addProperty("json",json);
+        soapReq.addProperty("userid",userid);
+        soapEnvelope.setOutputSoapObject(soapReq);
+        HttpTransportSE httpTransport = new HttpTransportSE(url,timeOut);
+        try {
+            httpTransport.call("urn:action", soapEnvelope);
+        } catch (IOException | XmlPullParserException e) {
+            return null;
+        }
+        String obj = null;
+        InvuseResult invuseResult = null;
+        try {
+            obj = soapEnvelope.getResponse().toString();
+            invuseResult = JsonUtils.parsingInsertIn(obj);
+        } catch (SoapFault soapFault) {
+            soapFault.printStackTrace();
+        }
+        return invuseResult;
+    }
+
+
+
+
 }

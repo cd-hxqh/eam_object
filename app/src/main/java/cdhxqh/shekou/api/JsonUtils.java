@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cdhxqh.shekou.bean.InvuseResult;
 import cdhxqh.shekou.bean.LoginResults;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
@@ -745,12 +746,15 @@ public class JsonUtils {
                 invuse.udisjj = jsonObject.getInt("UDISJJ") + ""; //是否紧急
 
                 invuse.status = jsonObject.getString("STATUS"); //状态
+                invuse.statusdate = jsonObject.getString("STATUSDATE"); //状态日期
                 invuse.siteid = jsonObject.getString("SITEID"); //地点
                 invuse.totalcost_v = jsonObject.getString("TOTALCOST_V"); //总价   22
                 invuse.sq_displayname = jsonObject.getString("SQ_DISPLAYNAME"); //申请人
                 invuse.createdate = jsonObject.getString("CREATEDATE"); //申请日期
                 invuse.pz_displayname = jsonObject.getString("PZ_DISPLAYNAME"); //批准人
                 invuse.changedate = jsonObject.getString("CHANGEDATE"); //批准日期
+                invuse.udapptype = jsonObject.getString("UDAPPTYPE"); //领料类型
+                invuse.udreason = jsonObject.getString("UDREASON"); //原因
 
 
                 list.add(invuse);
@@ -1216,7 +1220,7 @@ public class JsonUtils {
                     woactivityArray.put(woactivityObj);
                 }
                 jsonObject.put("wotasks", woactivityArray);
-            }else {
+            } else {
                 jsonObject.put("wotasks", new JSONArray());
             }
             if (labtranses != null && labtranses.size() != 0) {
@@ -1242,7 +1246,7 @@ public class JsonUtils {
                     labtransArray.put(labtransObj);
                 }
                 jsonObject.put("labtrans", labtransArray);
-            }else {
+            } else {
                 jsonObject.put("labtrans", new JSONArray());
             }
             if (failurereports != null && failurereports.size() != 0) {
@@ -1258,7 +1262,7 @@ public class JsonUtils {
                     failurereportArray.put(failurereportObj);
                 }
                 jsonObject.put("failurereport", failurereportArray);
-            }else {
+            } else {
                 jsonObject.put("failurereport", new JSONArray());
             }
         } catch (JSONException e) {
@@ -1269,6 +1273,7 @@ public class JsonUtils {
 
     /**
      * 解析新增工单返回信息
+     *
      * @param data
      * @return
      */
@@ -1278,13 +1283,13 @@ public class JsonUtils {
         WorkResult workResult = new WorkResult();
         try {
             JSONObject object = new JSONObject(data);
-            if(object.has("errorMsg")){
+            if (object.has("errorMsg")) {
                 workResult.errorMsg = object.getString("errorMsg");
             }
-            if(object.has("wonum")){
+            if (object.has("wonum")) {
                 workResult.wonum = object.getString("wonum");
             }
-            if(object.has("errorNo")){
+            if (object.has("errorNo")) {
                 workResult.errorNo = object.getString("errorNo");
             }
         } catch (JSONException e) {
@@ -1298,13 +1303,13 @@ public class JsonUtils {
         WorkResult workResult = new WorkResult();
         try {
             JSONObject object = new JSONObject(data);
-            if(object.has("msg")){
+            if (object.has("msg")) {
                 workResult.errorMsg = object.getString("msg");
             }
-            if(object.has("wonum")){
+            if (object.has("wonum")) {
                 workResult.wonum = object.getString("wonum");
             }
-            if(object.has("success")){
+            if (object.has("success")) {
                 workResult.errorNo = object.getString("success");
             }
         } catch (JSONException e) {
@@ -1371,6 +1376,100 @@ public class JsonUtils {
             e.printStackTrace();
             return null;
         }
+    }
+
+
+    /**
+     * 解析新增领料单返回信息
+     *
+     * @param data
+     * @return
+     */
+    public static InvuseResult parsingInsertIn(String data) {
+        Log.i(TAG, "data=" + data);
+        InvuseResult invuseResult = new InvuseResult();
+        try {
+            JSONObject object = new JSONObject(data);
+            if (object.has("errorMsg")) {
+                invuseResult.errorMsg = object.getString("errorMsg");
+            }
+            if (object.has("invusenum")) {
+                invuseResult.invusenum = object.getString("invusenum");
+            }
+            if (object.has("errorNo")) {
+                invuseResult.errorNo = object.getString("errorNo");
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return invuseResult;
+    }
+
+
+    /**
+     * 封装领料单数据*
+     */
+    public static String InvuseToJson(Invuse invuse, ArrayList<Invuseline> invuselines) {
+
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("invusenum", invuse.invusenum);
+            jsonObject.put("description", invuse.description);
+            jsonObject.put("fromstoreloc", invuse.fromstoreloc);
+            jsonObject.put("wonum", invuse.wonum);
+            jsonObject.put("udissueto", invuse.udissueto);
+            jsonObject.put("uddept", invuse.uddept);
+            jsonObject.put("udisjj", invuse.udisjj);
+            jsonObject.put("udjbr", invuse.udjbr);
+            jsonObject.put("status", invuse.status);
+            jsonObject.put("udapptype", invuse.udapptype);
+            jsonObject.put("udreason", invuse.udreason);
+            jsonObject.put("statusdate", invuse.statusdate);
+            jsonObject.put("createdate", invuse.createdate);
+
+            if (invuselines != null && invuselines.size() != 0) {
+                JSONArray invuselinesArray = new JSONArray();
+                JSONObject invuselinesObj;
+                for (int i = 0; i < invuselines.size(); i++) {
+                    invuselinesObj = new JSONObject();
+                    invuselinesObj.put("invusenum", invuselines.get(i).invusenum);
+                    invuselinesObj.put("itemnum", "SP02271009AAFL");
+                    invuselinesObj.put("usetype", "发放");
+                    invuselinesObj.put("quantity", invuselines.get(i).quantity);
+                    invuselinesObj.put("frombin", "5#A-2-3");
+                    invuselinesObj.put("taskid", invuselines.get(i).taskid);
+                    invuselinesObj.put("issueto", invuselines.get(i).issueto);
+                    invuselinesObj.put("level5", invuselines.get(i).level5);
+                    invuselinesObj.put("level6", invuselines.get(i).level6);
+                    invuselinesObj.put("remark", invuselines.get(i).remark);
+                    invuselinesArray.put(invuselinesObj);
+                }
+                jsonObject.put("invuseline", invuselinesArray);
+            } else {
+                JSONArray invuselines1Array = new JSONArray();
+                JSONObject invuselines1Obj;
+                invuselines1Obj = new JSONObject();
+                invuselines1Obj.put("invusenum", "");
+                invuselines1Obj.put("itemnum", "");
+                invuselines1Obj.put("usetype", "");
+                invuselines1Obj.put("quantity", "");
+                invuselines1Obj.put("frombin", "");
+                invuselines1Obj.put("taskid", "");
+                invuselines1Obj.put("issueto", "");
+                invuselines1Obj.put("level5", "");
+                invuselines1Obj.put("level6", "");
+                invuselines1Obj.put("remark", "");
+                invuselines1Array.put(invuselines1Obj);
+
+
+                jsonObject.put("invuseline", invuselines1Array);
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject.toString();
     }
 
 

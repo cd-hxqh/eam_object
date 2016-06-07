@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
 
-    <include layout="@layout/title_main"></include>
+    <include
+        android:id="@+id/title_main_id"
+        layout="@layout/title_main"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"></include>
 
     <include
         layout="@layout/fragment_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/title_main_id"
         android:layout_marginTop="@dimen/dimen_5"></include>
 
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/boottom_id"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/add_button_id"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/button_selector2"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -98,7 +98,7 @@ public class HttpManager {
      * 设置实际员工接口
      */
     public static String getlabtransUrl(String type,String wonum, int curpage, int showcount) {
-        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.LABTRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'" + wonum + "'}}";
+        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.LABTRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'REFWO':'" + wonum + "'}}";
     }
 
     /**
@@ -184,11 +184,11 @@ public class HttpManager {
     /**
      * 设置领料单的接口
      */
-    public static String getInvuseurl(String value, int curpage, int showcount) {
+    public static String getInvuseurl(String value, String udapptype,int curpage, int showcount) {
         if (value.equals("")) {
-            return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+            return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'UDAPPTYPE':'" + udapptype + "'}}";
         }
-        return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'INVUSENUM':'" + value + "'}}";
+        return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'INVUSENUM':'" + value + "','UDAPPTYPE':'" + udapptype + "'}}";
     }
 
     /**

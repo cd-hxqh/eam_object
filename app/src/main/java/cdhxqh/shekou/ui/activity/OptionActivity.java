@@ -241,6 +241,16 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     list.add(option);
                 }
                 break;
+            case Constants.PERSONCODE1:
+                List<Person> persons1;
+                persons1 = new PersonDao(OptionActivity.this).queryByCount(page, searchText);
+                for (int i = 0; i < persons1.size(); i++) {
+                    option = new Option();
+                    option.setName(persons1.get(i).personid);
+                    option.setDescription(persons1.get(i).displayname);
+                    list.add(option);
+                }
+                break;
             case Constants.LABORCODE:
                 List<Labor> labors;
                 labors = new LaborDao(OptionActivity.this).queryByCount(page, searchText);
@@ -415,7 +425,6 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 }
                 break;
             case Constants.LOCATIONCODE:
-                Log.i(TAG,"这是库房");
                 List<Locations> locationses;
 
 

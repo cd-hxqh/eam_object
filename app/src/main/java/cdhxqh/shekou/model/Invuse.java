@@ -32,12 +32,15 @@ public class Invuse extends Entity implements Parcelable {
     public String eq3; //设备管理班组
     public String udisjj; //是否紧急
     public String status; //状态
+    public String statusdate; //状态日期
     public String siteid; //地点
     public String totalcost_v; //总价
     public String sq_displayname; //申请人
     public String createdate; //申请日期
     public String pz_displayname; //批准人
     public String changedate; //批准日期
+    public String udapptype; //类型
+    public String udreason; //原因
 
 
 

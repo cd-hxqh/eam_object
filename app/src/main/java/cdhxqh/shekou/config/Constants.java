@@ -23,6 +23,9 @@ public class Constants {
     /**工单接口**/
     public static final String WORK_URL = "http://121.35.242.172:7001/meaweb/services/WORKORDERSERVICE";
 
+    /**工单接口**/
+    public static final String INVUSE_URL = "http://121.35.242.172:7001/meaweb/services/INVUSESERVICE";
+
     /**------------------数据库表名配置－－开始**/
     //待办事项的appid
     public static final String WFASSIGNMENT_APPID="INBOX";
@@ -192,6 +195,8 @@ public class Constants {
     public static final int JOBPLANCODE = 110; //作业计划
 
     public static final int PERSONCODE = 120;//人员
+
+    public static final int PERSONCODE1 = 121;//物管员经办人
 
     public static final int LABORCODE = 130;//员工
 

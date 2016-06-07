@@ -158,6 +158,10 @@
             android:label="InvuseDetailsActivity" >
         </activity>
         <activity
+            android:name=".ui.activity.InvuseActivity"
+            android:label="InvuseActivity" >
+        </activity>
+        <activity
             android:name=".ui.activity.InvuselineActivity"
             android:label="InvuselineActivity" >
         </activity>
@@ -172,6 +176,14 @@
         <activity
             android:name=".ui.activity.AddinvuseActivity"
             android:label="@string/title_activity_addinvuse" >
+        </activity>
+        <activity
+            android:name=".ui.activity.AddInvuselineActivity"
+            android:label="AddInvuselineActivity" >
+        </activity>
+        <activity
+            android:name=".ui.activity.AddInvuseDetailActivity"
+            android:label="AddInvuseDetailActivity" >
         </activity>
         <activity
             android:name=".ui.activity.Work_Choose_Activity"
