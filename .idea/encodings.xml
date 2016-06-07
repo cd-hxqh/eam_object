@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+<<<<<<< Updated upstream
     <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/ui/activity/LabtransListActivity.java" charset="UTF-8" />
+=======
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/model/Alndomain.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/model/Failurelist.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/model/JobPlan.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/model/Labor.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/model/Laborcraftrate.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/model/Person.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/model/Pm.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/model/Projappr.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/cdhxqh/shekou/model/Udev.java" charset="UTF-8" />
+>>>>>>> Stashed changes
   </component>
 </project>
