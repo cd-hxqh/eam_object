@@ -104,7 +104,7 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        refresh_layout.setRefreshing(true);
+
         refresh_layout.setOnRefreshListener(this);
         refresh_layout.setOnLoadListener(this);
 
@@ -114,9 +114,12 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
         if (!workOrder.isnew && (labtransList == null || labtransList.size() == 0)) {
             refresh_layout.setRefreshing(true);
             getdata();
+            refresh_layout.setRefreshing(true);
         } else {
             if (labtransList != null && labtransList.size() != 0) {
                 labtransAdapter.update(labtransList, true);
+            }else {
+                nodatalayout.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -133,7 +136,7 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
                 public void onSuccess(Results results, int currentPage, int showcount) {
                     ArrayList<Labtrans> labtranses = null;
                     if (currentPage == page) {
-                        labtranses = JsonUtils.parsingLabtrans(LabtransListActivity.this, results.getResultlist());
+                        labtranses = JsonUtils.parsingLabtrans(LabtransListActivity.this, results.getResultlist(),workOrder.wonum);
                     }
                     addListData(labtranses);
                     refresh_layout.setRefreshing(false);

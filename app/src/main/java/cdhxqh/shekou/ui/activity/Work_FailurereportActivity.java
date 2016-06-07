@@ -44,9 +44,11 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
     private String failurelist;
     private SwipeRefreshLayout refresh_layout = null;
     private WorkOrder workOrder;
+    private boolean ishistory;//是否是从主表传过来的信息
     private Button confirm;//确定
 
     private ArrayList<Failurereport> failurereportList = new ArrayList<>();
+    private ArrayList<Failurereport> failurereportList1 = new ArrayList<>();//修改前信息
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,15 +91,18 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        refresh_layout.setRefreshing(true);
+
         refresh_layout.setOnRefreshListener(this);
 
         confirm.setOnClickListener(confirmOnClickListener);
 
         if (failurereportList == null||failurereportList.size()==0) {
+            refresh_layout.setRefreshing(true);
             getdata();
+            ishistory = false;
         }else {
             addListData(failurereportList);
+            ishistory = true;
         }
 
         question.setOnClickListener(new LayoutOnClickListener(Constants.FAILURE_QUESTION, type));
@@ -113,6 +118,7 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
                 ArrayList<Failurereport> failurereports = JsonUtils.parsingFailurereport(Work_FailurereportActivity.this, results.getResultlist());
                 addListData(failurereports);
                 failurereportList = failurereports;
+                failurereportList1 = failurereports;
                 refresh_layout.setRefreshing(false);
             }
 
@@ -149,43 +155,61 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
         @Override
         public void onClick(View view) {
             Intent intent = getIntent();
-            if(question_text.equals(question.getText().toString())
-                    &&cause_text.equals(cause.getText().toString())
-                    &&rememdy_text.equals(rememdy.getText().toString())) {//如果内容没有修改
-//                intent.putExtra("woactivity",woactivity);
-            }else {
+//            if(question_text.equals(question.getText().toString())
+//                    &&cause_text.equals(cause.getText().toString())
+//                    &&rememdy_text.equals(rememdy.getText().toString())) {//如果内容没有修改
+//                intent.putExtra("failurereportList",failurereportList);
+//            }else {
 //                Failurereport woactivity = getWoactivity();
 //                if(woactivity.optiontype==null||!woactivity.optiontype.equals("add")) {
 //                    woactivity.optiontype = "update";
 //                }
-//                intent.putExtra("woactivity", woactivity);
-//                Toast.makeText(WoactivityDetailsActivity.this, "任务本地修改成功", Toast.LENGTH_SHORT).show();
-            }
+                intent.putExtra("failurereportList", getFailurereportList());
+                Toast.makeText(Work_FailurereportActivity.this, "任务本地修改成功", Toast.LENGTH_SHORT).show();
+//            }
 //            intent.putExtra("position", position);
-//            WoactivityDetailsActivity.this.setResult(2, intent);
+            Work_FailurereportActivity.this.setResult(3000, intent);
             finish();
         }
     };
 
     private ArrayList<Failurereport> getFailurereportList(){
-        if(question_text.equals(question.getText().toString())
-                &&cause_text.equals(cause.getText().toString())
-                &&rememdy_text.equals(rememdy.getText().toString())) {//如果内容没有修改
-            return failurereportList;
-        }else{
+//        if(question_text.equals(question.getText().toString())
+//                &&cause_text.equals(cause.getText().toString())
+//                &&rememdy_text.equals(rememdy.getText().toString())) {//如果内容没有修改
+//            return failurereportList;
+//        }else{
             ArrayList<Failurereport> failurereports = new ArrayList<>();
             Failurereport failurereport;
             if (!question_text.equals(question.getText().toString())){
-//                failurereport =
+                if (!question.getText().toString().equals("")){
+                    failurereport = getfailurereport("问题");
+                    failurereport.failurecode = question.getText().toString();
+                    failurereports.add(failurereport);
+                }else {
+                    return failurereports;
+                }
             }
             if (!cause_text.equals(cause.getText().toString())){
-
+                if (!cause.getText().toString().equals("")){
+                    failurereport = getfailurereport("原因");
+                    failurereport.failurecode = cause.getText().toString();
+                    failurereports.add(failurereport);
+                }else {
+                    return failurereports;
+                }
             }
             if (!rememdy_text.equals(rememdy.getText().toString())){
-
+                if (!rememdy.getText().toString().equals("")){
+                    failurereport = getfailurereport("补救措施");
+                    failurereport.failurecode = rememdy.getText().toString();
+                    failurereports.add(failurereport);
+                }else {
+                    return failurereports;
+                }
             }
             return failurereports;
-        }
+//        }
     }
 
     private Failurereport getfailurereport(String type){

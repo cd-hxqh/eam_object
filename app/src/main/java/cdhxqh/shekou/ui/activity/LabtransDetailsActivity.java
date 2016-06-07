@@ -3,10 +3,19 @@ package cdhxqh.shekou.ui.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.flyco.animation.BaseAnimatorSet;
+import com.flyco.animation.BounceEnter.BounceTopEnter;
+import com.flyco.animation.SlideExit.SlideBottomExit;
+import com.flyco.dialog.entity.DialogMenuItem;
+import com.flyco.dialog.listener.OnOperItemClickL;
+import com.flyco.dialog.widget.NormalListDialog;
 
 import java.util.ArrayList;
 
@@ -16,6 +25,8 @@ import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.Wplabor;
+import cdhxqh.shekou.utils.DateSelect;
+import cdhxqh.shekou.utils.DateTimeSelect;
 
 /**
  * Created by think on 2015/11/6.
@@ -33,20 +44,21 @@ public class LabtransDetailsActivity extends BaseActivity {
 
     private Labtrans labtrans = new Labtrans();
     private TextView actualstaskid; //任务
-    private TextView craft; //工种
-    private TextView skilllevel; //技能级别
     private TextView laborcode; //员工
     private TextView startdate; //开始日期
     private TextView starttime; //开始时间
     private TextView finishtime; //结束时间
-    private TextView regularhrs;//常规时数
-    private TextView payrate;//费率
+    private EditText regularhrs;//常规时数
+    private EditText payrate;//费率
     private TextView linecost;//行成本
-    private TextView assetnum;//资产
-    private TextView transtype;//类型
+//    private TextView assetnum;//资产
+//    private TextView transtype;//类型
 
     private int position;
     private ArrayList<Woactivity> woactivityList = new ArrayList<>();
+    private BaseAnimatorSet mBasIn;
+    private BaseAnimatorSet mBasOut;
+    private ArrayList<DialogMenuItem> mMenuItems = new ArrayList<>();
 
     private Button confirm;//确定
 
@@ -58,6 +70,9 @@ public class LabtransDetailsActivity extends BaseActivity {
         geiIntentData();
         findViewById();
         initView();
+        mBasIn = new BounceTopEnter();
+        mBasOut = new SlideBottomExit();
+        addtaskidData();
     }
 
     private void geiIntentData() {
@@ -71,17 +86,15 @@ public class LabtransDetailsActivity extends BaseActivity {
         titleTextView = (TextView) findViewById(R.id.title_name);
 
         actualstaskid = (TextView) findViewById(R.id.work_labtrans_actualstaskid);
-        craft = (TextView) findViewById(R.id.work_labtrans_craft);
-        skilllevel = (TextView) findViewById(R.id.work_labtrans_skilllevel);
         laborcode = (TextView) findViewById(R.id.work_labtrans_laborcode);
         startdate = (TextView) findViewById(R.id.work_labtrans_startdate);
         starttime = (TextView) findViewById(R.id.work_labtrans_starttime);
         finishtime = (TextView) findViewById(R.id.work_labtrans_finishtime);
-        regularhrs = (TextView) findViewById(R.id.work_labtrans_regularhrs);
-        payrate = (TextView) findViewById(R.id.work_labtrans_payrate);
+        regularhrs = (EditText) findViewById(R.id.work_labtrans_regularhrs);
+        payrate = (EditText) findViewById(R.id.work_labtrans_payrate);
         linecost = (TextView) findViewById(R.id.work_labtrans_linecost);
-        assetnum = (TextView) findViewById(R.id.work_labtrans_assetnum);
-        transtype = (TextView) findViewById(R.id.work_labtrans_transtype);
+//        assetnum = (TextView) findViewById(R.id.work_labtrans_assetnum);
+//        transtype = (TextView) findViewById(R.id.work_labtrans_transtype);
 
         confirm = (Button) findViewById(R.id.confirm);
     }
@@ -97,8 +110,6 @@ public class LabtransDetailsActivity extends BaseActivity {
         titleTextView.setText(getResources().getString(R.string.title_activity_labtransdetails));
 
         actualstaskid.setText(labtrans.actualstaskid);
-        craft.setText(labtrans.craft);
-        skilllevel.setText(labtrans.skilllevel);
         laborcode.setText(labtrans.laborcode);
         startdate.setText(labtrans.startdate);
         starttime.setText(labtrans.starttime);
@@ -106,12 +117,70 @@ public class LabtransDetailsActivity extends BaseActivity {
         regularhrs.setText(labtrans.regularhrs);
         payrate.setText(labtrans.payrate);
         linecost.setText(labtrans.linecost);
-        assetnum.setText(labtrans.assetnum);
-        transtype.setText(labtrans.transtype);
+//        assetnum.setText(labtrans.assetnum);
+//        transtype.setText(labtrans.transtype);
 
+        actualstaskid.setOnClickListener(actualstaskidOnClickListener);
         laborcode.setOnClickListener(new LayoutOnClickListener(Constants.LABORCRAFTRATECODE));
+        startdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DateSelect(LabtransDetailsActivity.this, startdate).showDialog();
+            }
+        });
+        starttime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DateTimeSelect(LabtransDetailsActivity.this,starttime).showDialog();
+            }
+        });
+        finishtime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DateTimeSelect(LabtransDetailsActivity.this,finishtime).showDialog();
+            }
+        });
 
         confirm.setOnClickListener(confirmOnClickListener);
+    }
+
+    private View.OnClickListener actualstaskidOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (woactivityList == null || woactivityList.size() == 0) {
+                Toast.makeText(LabtransDetailsActivity.this, "无任务数据", Toast.LENGTH_SHORT).show();
+            } else {
+                NormalListDialog();
+            }
+        }
+    };
+
+    private void NormalListDialog() {
+        final NormalListDialog dialog = new NormalListDialog(LabtransDetailsActivity.this, mMenuItems);
+        dialog.title("请选择")//
+                .showAnim(mBasIn)//
+                .dismissAnim(mBasOut)//
+                .show();
+        dialog.setOnOperItemClickL(new OnOperItemClickL() {
+            @Override
+            public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                actualstaskid.setText(mMenuItems.get(position).mOperName);
+
+                dialog.dismiss();
+            }
+        });
+    }
+
+    /**
+     * 添加数据*
+     */
+    private void addtaskidData() {
+
+        for (int i = 0; i < woactivityList.size(); i++)
+            mMenuItems.add(new DialogMenuItem(woactivityList.get(i).taskid, 0));
+
+
     }
 
     private class LayoutOnClickListener implements View.OnClickListener {
@@ -132,8 +201,6 @@ public class LabtransDetailsActivity extends BaseActivity {
     private Labtrans getLabtrans(){
         Labtrans labtrans = this.labtrans;
         labtrans.actualstaskid = actualstaskid.getText().toString();
-        labtrans.craft = craft.getText().toString();
-        labtrans.skilllevel = skilllevel.getText().toString();
         labtrans.laborcode = laborcode.getText().toString();
         labtrans.startdate = startdate.getText().toString();
         labtrans.starttime = starttime.getText().toString();
@@ -141,8 +208,8 @@ public class LabtransDetailsActivity extends BaseActivity {
         labtrans.regularhrs = regularhrs.getText().toString();
         labtrans.payrate = payrate.getText().toString();
         labtrans.linecost = linecost.getText().toString();
-        labtrans.assetnum = assetnum.getText().toString();
-        labtrans.transtype = transtype.getText().toString();
+//        labtrans.assetnum = assetnum.getText().toString();
+//        labtrans.transtype = transtype.getText().toString();
         return labtrans;
     }
 
@@ -151,8 +218,6 @@ public class LabtransDetailsActivity extends BaseActivity {
         public void onClick(View view) {
             Intent intent = getIntent();
             if(labtrans.actualstaskid.equals(actualstaskid.getText().toString())
-                    &&labtrans.craft.equals(craft.getText().toString())
-                    &&labtrans.skilllevel.equals(skilllevel.getText().toString())
                     &&labtrans.laborcode.equals(laborcode.getText().toString())
                     &&labtrans.startdate.equals(startdate.getText().toString())
                     &&labtrans.starttime.equals(starttime.getText().toString())
@@ -160,8 +225,9 @@ public class LabtransDetailsActivity extends BaseActivity {
                     &&labtrans.regularhrs.equals(regularhrs.getText().toString())
                     &&labtrans.payrate.equals(payrate.getText().toString())
                     &&labtrans.linecost.equals(linecost.getText().toString())
-                    &&labtrans.assetnum.equals(assetnum.getText().toString())
-                    &&labtrans.transtype.equals(transtype.getText().toString())) {//如果内容没有修改
+//                    &&labtrans.assetnum.equals(assetnum.getText().toString())
+//                    &&labtrans.transtype.equals(transtype.getText().toString())
+                    ) {//如果内容没有修改
                 intent.putExtra("labtrans",labtrans);
             }else {
                 Labtrans labtrans = getLabtrans();

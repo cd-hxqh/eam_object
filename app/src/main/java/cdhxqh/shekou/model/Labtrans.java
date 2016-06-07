@@ -29,7 +29,7 @@ public class Labtrans implements Serializable {
     public String assetnum;//资产
     public String transtype;//类型
     public String labtransid;
-    public String wonum;//所属工单
+    public String refwo;//所属工单
     public String optiontype;
 
 //

@@ -28,7 +28,7 @@
             android:layout_weight="1.0"
             android:text="@string/work_insert"
             android:textColor="@drawable/text_selector"
-            android:background="@drawable/button_selector3"/>
+            android:background="@drawable/button_selector2"/>
         <Button
             android:id="@+id/work_work_flow"
             android:layout_width="0dp"
@@ -36,6 +36,6 @@
             android:layout_weight="1.0"
             android:text="@string/work_work_flow"
             android:textColor="@drawable/text_selector"
-            android:background="@drawable/button_selector3"/>
+            android:background="@drawable/button_selector2"/>
     </LinearLayout>
 </LinearLayout>

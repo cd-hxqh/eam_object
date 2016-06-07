@@ -67,9 +67,11 @@
 
                 <TextView
                     android:id="@+id/work_labtrans_laborcode"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
+                    android:drawableRight="@drawable/item_more"
+                    android:gravity="center_vertical"
                     android:hint="@string/have_not_data"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
@@ -81,64 +83,64 @@
                 android:layout_below="@+id/num_linearlayout_id"
                 android:background="@drawable/line"></View>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:orientation="horizontal">-->
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="@dimen/dimen_40dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/work_labtrans_craft"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
+                <!--<TextView-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="@dimen/dimen_40dp"-->
+                    <!--android:gravity="center_vertical"-->
+                    <!--android:text="@string/work_labtrans_craft"-->
+                    <!--android:textColor="@color/light_black"-->
+                    <!--android:textSize="@dimen/dimens_16dp" />-->
 
-                <TextView
-                    android:id="@+id/work_labtrans_craft"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:hint="@string/have_not_data"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:id="@+id/work_labtrans_craft"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                    <!--android:hint="@string/have_not_data"-->
+                    <!--android:textColor="@color/light_black"-->
+                    <!--android:textSize="@dimen/dimens_16dp" />-->
+            <!--</LinearLayout>-->
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line"></View>
+            <!--<View-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@drawable/line"></View>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/dimen_40dp"-->
+                <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:orientation="horizontal">-->
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/work_labtrans_skilllevel"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
+                <!--<TextView-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/work_labtrans_skilllevel"-->
+                    <!--android:textColor="@color/light_black"-->
+                    <!--android:textSize="@dimen/dimens_16dp" />-->
 
-                <TextView
-                    android:id="@+id/work_labtrans_skilllevel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:hint="@string/have_not_data"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:id="@+id/work_labtrans_skilllevel"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                    <!--android:hint="@string/have_not_data"-->
+                    <!--android:textColor="@color/light_black"-->
+                    <!--android:textSize="@dimen/dimens_16dp" />-->
+            <!--</LinearLayout>-->
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line"></View>
+            <!--<View-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@drawable/line"></View>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -156,9 +158,11 @@
 
                 <TextView
                     android:id="@+id/work_labtrans_startdate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
+                    android:drawableRight="@drawable/item_more"
+                    android:gravity="center_vertical"
                     android:hint="@string/have_not_data"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
@@ -185,9 +189,11 @@
 
                 <TextView
                     android:id="@+id/work_labtrans_starttime"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
+                    android:drawableRight="@drawable/item_more"
+                    android:gravity="center_vertical"
                     android:hint="@string/have_not_data"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
@@ -245,9 +251,11 @@
 
                 <TextView
                     android:id="@+id/work_labtrans_finishtime"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
+                    android:drawableRight="@drawable/item_more"
+                    android:gravity="center_vertical"
                     android:hint="@string/have_not_data"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
@@ -272,12 +280,13 @@
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/work_labtrans_regularhrs"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
-                    android:hint="@string/have_not_data"
+                    android:inputType="textMultiLine"
+                    android:gravity="center_vertical"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
             </LinearLayout>
@@ -358,12 +367,13 @@
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
 
-                <TextView
+                <EditText
                     android:id="@+id/work_labtrans_payrate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
-                    android:hint="@string/have_not_data"
+                    android:inputType="textMultiLine"
+                    android:gravity="center_vertical"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
             </LinearLayout>
@@ -402,34 +412,34 @@
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/dimen_40dp"-->
+                <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:orientation="horizontal">-->
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/work_labtrans_assetnum"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
+                <!--<TextView-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/work_labtrans_assetnum"-->
+                    <!--android:textColor="@color/light_black"-->
+                    <!--android:textSize="@dimen/dimens_16dp" />-->
 
-                <TextView
-                    android:id="@+id/work_labtrans_assetnum"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:hint="@string/have_not_data"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:id="@+id/work_labtrans_assetnum"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                    <!--android:hint="@string/have_not_data"-->
+                    <!--android:textColor="@color/light_black"-->
+                    <!--android:textSize="@dimen/dimens_16dp" />-->
+            <!--</LinearLayout>-->
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line"></View>
+            <!--<View-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@drawable/line"></View>-->
 
             <!--<LinearLayout-->
             <!--android:layout_width="match_parent"-->
@@ -460,34 +470,34 @@
             <!--android:layout_height="1dp"-->
             <!--android:background="@drawable/line"></View>-->
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/dimen_40dp"-->
+                <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                <!--android:gravity="center_vertical"-->
+                <!--android:orientation="horizontal">-->
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/work_labtrans_transtype"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
+                <!--<TextView-->
+                    <!--android:layout_width="100dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="@string/work_labtrans_transtype"-->
+                    <!--android:textColor="@color/light_black"-->
+                    <!--android:textSize="@dimen/dimens_16dp" />-->
 
-                <TextView
-                    android:id="@+id/work_labtrans_transtype"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:hint="@string/have_not_data"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:id="@+id/work_labtrans_transtype"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                    <!--android:hint="@string/have_not_data"-->
+                    <!--android:textColor="@color/light_black"-->
+                    <!--android:textSize="@dimen/dimens_16dp" />-->
+            <!--</LinearLayout>-->
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line"></View>
+            <!--<View-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="1dp"-->
+                <!--android:background="@drawable/line"></View>-->
 
             <!--<LinearLayout-->
             <!--android:layout_width="match_parent"-->

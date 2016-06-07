@@ -113,6 +113,8 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
         } else {
             if (woactivityList != null && woactivityList.size() != 0) {
                 woactivityAdapter.update(woactivityList, true);
+            }else {
+                nodatalayout.setVisibility(View.VISIBLE);
             }
         }
     }
@@ -129,7 +131,7 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
                 public void onSuccess(Results results, int currentPage, int showcount) {
                     ArrayList<Woactivity> woactivities = null;
                     if (currentPage == page) {
-                        woactivities = JsonUtils.parsingWoactivity(Woactivity_Activity.this, results.getResultlist());
+                        woactivities = JsonUtils.parsingWoactivity(Woactivity_Activity.this, results.getResultlist(),workOrder.wonum);
                     }
                     addListData(woactivities);
                     refresh_layout.setRefreshing(false);

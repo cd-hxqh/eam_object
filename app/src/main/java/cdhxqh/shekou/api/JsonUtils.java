@@ -341,7 +341,7 @@ public class JsonUtils {
     /**
      * 解析工单计划任务信息
      */
-    public static ArrayList<Woactivity> parsingWoactivity(Context ctx, String data) {
+    public static ArrayList<Woactivity> parsingWoactivity(Context ctx, String data,String wonum) {
         Log.i(TAG, "Woactivity data=" + data);
         ArrayList<Woactivity> list = null;
         Woactivity woactivity = null;
@@ -361,7 +361,7 @@ public class JsonUtils {
                 woactivity.udisyq = jsonObject.getString("UDISYQ");//是否延期
                 woactivity.udyqyy = jsonObject.getString("UDYQYY");//延期原因
                 woactivity.udremark = jsonObject.getString("UDREMARK");//备注
-
+                woactivity.wonum = wonum;
                 list.add(woactivity);
             }
             return list;
@@ -512,7 +512,7 @@ public class JsonUtils {
     /**
      * 解析实际员工信息
      */
-    public static ArrayList<Labtrans> parsingLabtrans(Context ctx, String data) {
+    public static ArrayList<Labtrans> parsingLabtrans(Context ctx, String data,String wonum) {
         Log.i(TAG, "Labtrans data=" + data);
         ArrayList<Labtrans> list = null;
         Labtrans labtrans = null;
@@ -542,6 +542,7 @@ public class JsonUtils {
 //                labtrans.orgid = jsonObject.getString("ORGID");//组织
 //                labtrans.siteid = jsonObject.getString("SITEID");//地点
                 labtrans.labtransid = jsonObject.getString("LABTRANSID");//
+                labtrans.refwo = wonum;
                 list.add(labtrans);
             }
             return list;

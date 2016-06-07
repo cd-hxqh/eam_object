@@ -82,7 +82,11 @@ public class FailurelistDao {
 
     public String queryForParent(String failurecode){
         try {
-            return FailurelistDaoOpe.queryBuilder().where().eq("failurecode",failurecode).queryForFirst().failurelist;
+            if (FailurelistDaoOpe.queryBuilder().where().eq("failurecode",failurecode).query().size()>0) {
+                return FailurelistDaoOpe.queryBuilder().where().eq("failurecode", failurecode).queryForFirst().failurelist;
+            }else {
+                return null;
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

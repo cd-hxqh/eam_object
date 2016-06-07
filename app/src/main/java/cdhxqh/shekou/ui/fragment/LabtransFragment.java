@@ -104,7 +104,7 @@ public class LabtransFragment extends Fragment implements SwipeRefreshLayout.OnR
             public void onSuccess(Results results, int currentPage, int showcount) {
                 ArrayList<Labtrans> labtranses = null;
                 if (currentPage == page) {
-                    labtranses = JsonUtils.parsingLabtrans(getActivity(), results.getResultlist());
+                    labtranses = JsonUtils.parsingLabtrans(getActivity(), results.getResultlist(),workOrder.wonum);
                 }
                 addListData(labtranses);
                 refresh_layout.setRefreshing(false);

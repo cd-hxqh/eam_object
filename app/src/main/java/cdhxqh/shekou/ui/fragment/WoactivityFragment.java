@@ -106,7 +106,7 @@ public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.O
             public void onSuccess(Results results, int currentPage, int showcount) {
                 ArrayList<Woactivity> woactivities = null;
                 if (currentPage == page) {
-                    woactivities = JsonUtils.parsingWoactivity(getActivity(), results.getResultlist());
+                    woactivities = JsonUtils.parsingWoactivity(getActivity(), results.getResultlist(),workOrder.wonum);
                 }
                 addListData(woactivities);
                 refresh_layout.setRefreshing(false);

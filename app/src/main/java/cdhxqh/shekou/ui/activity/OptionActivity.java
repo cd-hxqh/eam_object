@@ -371,9 +371,14 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
             case Constants.FAILURE_QUESTION:
                 List<Failurelist> failurelists2;
                 if (getIntent().hasExtra("failurecode") && !getIntent().getStringExtra("failurecode").equals("")) {
+                    String s = getIntent().getStringExtra("failurecode");
                     parent = new FailurelistDao(OptionActivity.this).queryForParent(getIntent().getStringExtra("failurecode"));
                 }
-                failurelists2 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText, parent);
+                if (parent==null){
+                    failurelists2 = new ArrayList<>();
+                }else {
+                    failurelists2 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText, parent);
+                }
                 for (int i = 0; i < failurelists2.size(); i++) {
                     option = new Option();
                     option.setName(failurelists2.get(i).failurecode);

@@ -39,7 +39,7 @@ import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.model.WorkResult;
 import cdhxqh.shekou.utils.AccountUtils;
-import cdhxqh.shekou.utils.DateSelect;
+import cdhxqh.shekou.utils.DateTimeSelect;
 import cdhxqh.shekou.utils.GetDateAndTime;
 import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
@@ -391,7 +391,7 @@ public class Work_AddNewActivity extends BaseActivity {
 
         @Override
         public void onClick(View view) {
-            new DateSelect(Work_AddNewActivity.this, textView).showDialog();
+            new DateTimeSelect(Work_AddNewActivity.this, textView).showDialog();
         }
     }
 
