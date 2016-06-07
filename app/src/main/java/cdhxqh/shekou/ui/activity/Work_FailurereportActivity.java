@@ -139,13 +139,13 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).type.equals("问题")) {
                     question.setText(list.get(i).failurecode);
-                    question_text = list.get(i).failurecode;
+//                    question_text = list.get(i).failurecode;
                 } else if (list.get(i).type.equals("原因")) {
                     cause.setText(list.get(i).failurecode);
-                    cause_text = list.get(i).failurecode;
+//                    cause_text = list.get(i).failurecode;
                 } else if (list.get(i).type.equals("补救措施")) {
                     rememdy.setText(list.get(i).failurecode);
-                    rememdy_text = list.get(i).failurecode;
+//                    rememdy_text = list.get(i).failurecode;
                 }
             }
         }
@@ -181,33 +181,45 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
 //        }else{
             ArrayList<Failurereport> failurereports = new ArrayList<>();
             Failurereport failurereport;
-            if (!question_text.equals(question.getText().toString())){
+//            if (!question_text.equals(question.getText().toString())){
                 if (!question.getText().toString().equals("")){
                     failurereport = getfailurereport("问题");
+                    failurereport.wonum = workOrder.wonum;
+                    failurereport.assetnum = workOrder.assetnum;
+                    failurereport.linenum = "1";
+                    failurereport.type = "问题";
                     failurereport.failurecode = question.getText().toString();
                     failurereports.add(failurereport);
                 }else {
                     return failurereports;
                 }
-            }
-            if (!cause_text.equals(cause.getText().toString())){
+//            }
+//            if (!cause_text.equals(cause.getText().toString())){
                 if (!cause.getText().toString().equals("")){
                     failurereport = getfailurereport("原因");
+                    failurereport.wonum = workOrder.wonum;
+                    failurereport.assetnum = workOrder.assetnum;
+                    failurereport.linenum = "2";
+                    failurereport.type = "原因";
                     failurereport.failurecode = cause.getText().toString();
                     failurereports.add(failurereport);
                 }else {
                     return failurereports;
                 }
-            }
-            if (!rememdy_text.equals(rememdy.getText().toString())){
+//            }
+//            if (!rememdy_text.equals(rememdy.getText().toString())){
                 if (!rememdy.getText().toString().equals("")){
                     failurereport = getfailurereport("补救措施");
+                    failurereport.wonum = workOrder.wonum;
+                    failurereport.assetnum = workOrder.assetnum;
+                    failurereport.linenum = "3";
+                    failurereport.type = "补救措施";
                     failurereport.failurecode = rememdy.getText().toString();
                     failurereports.add(failurereport);
                 }else {
                     return failurereports;
                 }
-            }
+//            }
             return failurereports;
 //        }
     }
@@ -220,7 +232,7 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
                 }
             }
         }
-        return null;
+        return new Failurereport();
     }
 
     private class LayoutOnClickListener implements View.OnClickListener {

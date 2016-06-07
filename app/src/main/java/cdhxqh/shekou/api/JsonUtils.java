@@ -1253,8 +1253,8 @@ public class JsonUtils {
                 for (int i = 0; i < labtranses.size(); i++) {
                     labtransObj = new JSONObject();
                     labtransObj.put("taskid", labtranses.get(i).actualstaskid);
-                    labtransObj.put("craft", labtranses.get(i).craft);
-                    labtransObj.put("skilllevel", labtranses.get(i).skilllevel);
+//                    labtransObj.put("craft", labtranses.get(i).craft);
+//                    labtransObj.put("skilllevel", labtranses.get(i).skilllevel);
                     labtransObj.put("laborcode", labtranses.get(i).laborcode);
                     labtransObj.put("startdate", labtranses.get(i).startdate);
                     labtransObj.put("starttime", labtranses.get(i).starttime);
@@ -1262,8 +1262,8 @@ public class JsonUtils {
                     labtransObj.put("regularhrs", labtranses.get(i).regularhrs);
                     labtransObj.put("payrate", labtranses.get(i).payrate);
                     labtransObj.put("linecost", labtranses.get(i).linecost);
-                    labtransObj.put("assetnum", labtranses.get(i).assetnum);
-                    labtransObj.put("transtype", labtranses.get(i).transtype);
+//                    labtransObj.put("assetnum", labtranses.get(i).assetnum);
+//                    labtransObj.put("transtype", labtranses.get(i).transtype);
 //                    if(!workOrder.isnew){
 //                        woactivityObj.put("TYPE",woactivities.get(i).type);
 //                    }
