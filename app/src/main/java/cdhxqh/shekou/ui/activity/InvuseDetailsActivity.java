@@ -1,6 +1,8 @@
 package cdhxqh.shekou.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,10 +10,18 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.flyco.animation.BaseAnimatorSet;
+import com.flyco.animation.BounceEnter.BounceTopEnter;
+import com.flyco.animation.SlideExit.SlideBottomExit;
+import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.widget.MaterialDialog;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Matusetrans;
+import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
  * 领料单详情
@@ -137,6 +147,10 @@ public class InvuseDetailsActivity extends BaseActivity {
      */
     private Invuse invuse;
 
+    private ProgressDialog mProgressDialog;
+    private BaseAnimatorSet mBasIn;
+    private BaseAnimatorSet mBasOut;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,6 +233,10 @@ public class InvuseDetailsActivity extends BaseActivity {
         backImageView.setOnClickListener(backImageViewOnClickListener);
         titleTextView.setText(getString(R.string.invuse_details_title));
         materialBtn.setOnClickListener(materialBtnOnClickListener);
+        worlflowBtn.setOnClickListener(worlflowBtnBtnOnClickListener);
+
+        mBasIn = new BounceTopEnter();
+        mBasOut = new SlideBottomExit();
 
     }
 
@@ -229,7 +247,9 @@ public class InvuseDetailsActivity extends BaseActivity {
         }
     };
 
-
+    /**
+     * 备件明细*
+     */
     private View.OnClickListener materialBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -240,5 +260,81 @@ public class InvuseDetailsActivity extends BaseActivity {
 
         }
     };
+
+    /**
+     * 启动工作流*
+     */
+
+    private View.OnClickListener worlflowBtnBtnOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            MaterialDialogOneBtn1();
+
+        }
+    };
+
+    private void MaterialDialogOneBtn1() {//启动工作流
+        final MaterialDialog dialog = new MaterialDialog(InvuseDetailsActivity.this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.isTitleShow(false)//
+                .btnNum(2)
+                .content("是否启动工作流")//
+                .btnText("是", "否")//
+                .showAnim(mBasIn)//
+                .dismissAnim(mBasOut)
+                .show();
+
+        dialog.setOnBtnClickL(
+                new OnBtnClickL() {//是
+                    @Override
+                    public void onBtnClick() {
+                        startWork(invuse.invuseid);
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnClickL() {//否
+                    @Override
+                    public void onBtnClick() {
+                        dialog.dismiss();
+                    }
+                }
+        );
+    }
+
+
+    /**
+     * 启动工作流工作流
+     *
+     * @param id
+     */
+    private void startWork(final String id) {
+        Log.i(TAG, "id=" + id);
+        mProgressDialog = ProgressDialog.show(InvuseDetailsActivity.this, null,
+                getString(R.string.inputing), true, true);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setCancelable(false);
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                String result = AndroidClientService.startwf(InvuseDetailsActivity.this, "UDINVUSE", "INVUSE", id, "INVUSEID");
+
+                Log.i(TAG, "result=" + result);
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                if (s == null || s.equals("")) {
+                    Toast.makeText(InvuseDetailsActivity.this, "失败", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(InvuseDetailsActivity.this, "成功", Toast.LENGTH_SHORT).show();
+                }
+                mProgressDialog.dismiss();
+            }
+        }.execute();
+    }
+
 
 }

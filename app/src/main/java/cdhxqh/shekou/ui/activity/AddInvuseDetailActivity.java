@@ -52,15 +52,7 @@ public class AddInvuseDetailActivity extends BaseActivity {
      */
     private TextView itemdescriptionText;
 
-    /**
-     * 部位五级
-     */
 
-    private TextView level5Text;
-    /**
-     * 部位六级
-     */
-    private TextView level6Text;
     /**
      * 数量
      */
@@ -121,9 +113,6 @@ public class AddInvuseDetailActivity extends BaseActivity {
         itemText = (TextView) findViewById(R.id.invuseline_item_num_text_id);
         itemdescriptionText = (TextView) findViewById(R.id.invuseline_description_text_id);
 
-        level5Text = (TextView) findViewById(R.id.level5_text_id);
-        level6Text = (TextView) findViewById(R.id.level6_text_id);
-
 
         quantityText = (TextView) findViewById(R.id.quantity_text_id);
         frombinText = (TextView) findViewById(R.id.frombin_txt);
@@ -141,8 +130,6 @@ public class AddInvuseDetailActivity extends BaseActivity {
         titleTextView.setText(getString(R.string.add_invuseline_text));
 
         itemText.setOnClickListener(itemTextOnClickListener);
-        level5Text.setOnClickListener(level5TextOnClickListener);
-        level6Text.setOnClickListener(level6TextOnClickListener);
         frombinText.setOnClickListener(frombinTextOnClickListener);
         issuetoText.setOnClickListener(issuetoTextOnClickListener);
         addButton.setOnClickListener(addButtonOnClickListener);
@@ -270,9 +257,6 @@ public class AddInvuseDetailActivity extends BaseActivity {
 
         String description = itemdescriptionText.getText().toString(); //备件名称
 
-        String level5 = level5Text.getText().toString(); //部件5级
-
-        String level6 = level6Text.getText().toString(); //部件6级
 
         String quantity = quantityText.getText().toString(); //数量
 
@@ -290,8 +274,6 @@ public class AddInvuseDetailActivity extends BaseActivity {
         invuseline.frombin = frombin;
         invuseline.taskid = "";
         invuseline.issueto = issueto;
-        invuseline.level5 = level5;
-        invuseline.level6 = level6;
         invuseline.remark = remark;
 
         return invuseline;

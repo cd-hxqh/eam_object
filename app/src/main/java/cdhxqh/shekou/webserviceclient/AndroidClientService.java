@@ -43,7 +43,42 @@ public class AndroidClientService {
         this.url = url;
     }
 
-
+    /**
+     * 开始工作流
+     * context 上下文
+     * processname 过程名
+     * keyValue 对应的
+     * @return
+     */
+    public static String startwf(Context context, String processname, String mbo, String keyValue, String key) {
+        String url = Constants.HTTPS_API_URL+Constants.WORK_FLOW_URL;
+        SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        soapEnvelope.implicitTypes = true;
+        soapEnvelope.dotNet = true;
+        SoapObject soapReq = new SoapObject(NAMESPACE, "wfmenagementservicstartWF");
+        soapReq.addProperty("processname", processname);//工单：UDFJHWO，采购申请（含零星和集中采购风电场部分审批）：UDPR，集中汇总采购计划流程（分公司发起）：UDPRHZ
+        soapReq.addProperty("mbo", mbo);//工单WORKORDER,采购申请pr
+        soapReq.addProperty("keyValue", keyValue);//对应的表ID的值，如工单需要传送workorderid的值，采购申请prnum的值
+        soapReq.addProperty("key", key);//对应的表ID，如工单：wonum，采购申请，prnum
+        soapEnvelope.setOutputSoapObject(soapReq);
+        HttpTransportSE httpTransport = new HttpTransportSE(url, timeOut);
+        try {
+            httpTransport.call("urn:action", soapEnvelope);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        String obj = null;
+        String result = null;
+        try {
+            obj = soapEnvelope.getResponse().toString();
+            result = JsonUtils.parsingwfserviceResult(obj);
+        } catch (SoapFault soapFault) {
+            soapFault.printStackTrace();
+        }
+        return result;
+    }
 
     /**
      * 审批工作流
@@ -53,9 +88,8 @@ public class AndroidClientService {
     public static String approve(Context context, String processname, String mbo, String keyValue, String key, String zx, String desc) {
 
 
-        String url = "http://121.35.242.172:7001/meaweb/services/WFMENAGEMENTSERVIC";
+        String url = Constants.HTTPS_API_URL+Constants.WORK_FLOW_URL;
 
-        Log.i(TAG,"url="+url);
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
         soapEnvelope.dotNet = true;

@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,10 +15,16 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
+import cdhxqh.shekou.api.JsonUtils;
+import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.manager.AppManager;
+import cdhxqh.shekou.model.Invuse;
+import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.MessageUtils;
 
@@ -25,7 +32,7 @@ import cdhxqh.shekou.utils.MessageUtils;
 /**
  * 登录界面
  */
-public class LoginActivity extends BaseActivity  implements View.OnClickListener{
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
 
     private static final String TAG = "Activity_Login";
@@ -56,6 +63,7 @@ public class LoginActivity extends BaseActivity  implements View.OnClickListener
         findViewById();
         initView();
     }
+
     @Override
     protected void findViewById() {
         mUsername = (EditText) findViewById(R.id.user_login_id);
@@ -102,7 +110,6 @@ public class LoginActivity extends BaseActivity  implements View.OnClickListener
     }
 
 
-
     /**
      * 登陆*
      */
@@ -127,9 +134,9 @@ public class LoginActivity extends BaseActivity  implements View.OnClickListener
                         try {//保存登录返回信息
                             JSONObject object = new JSONObject(data);
                             JSONObject LoginDetails = object.getJSONObject("userLoginDetails");
-                            AccountUtils.setLoginDetails(LoginActivity.this,LoginDetails.getString("insertOrg"),LoginDetails.getString("insertSite"),
-                                    LoginDetails.getString("personId"),object.getString("userName"),LoginDetails.getString("displayName"));
-
+                            AccountUtils.setLoginDetails(LoginActivity.this, LoginDetails.getString("insertOrg"), LoginDetails.getString("insertSite"),
+                                    LoginDetails.getString("personId"), object.getString("userName"), LoginDetails.getString("displayName"));
+                            findByDepartment(LoginDetails.getString("personId"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -175,6 +182,32 @@ public class LoginActivity extends BaseActivity  implements View.OnClickListener
         }
     }
 
+    /**
+     * 根据PersionId查询所属部门*
+     */
+    private void findByDepartment(String persionId) {
+        HttpManager.getData(LoginActivity.this, HttpManager.getPersonUrl1(persionId), new HttpRequestHandler<Results>() {
+            @Override
+            public void onSuccess(Results results) {
 
+                ArrayList<Person> item = JsonUtils.parsingPerson(results.getResultlist());
+
+                if (item != null || item.size() != 0) {
+                    AccountUtils.setDepartment(LoginActivity.this, item.get(0).department);
+                }
+            }
+
+            @Override
+            public void onSuccess(Results results, int totalPages, int currentPage) {
+
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+
+            }
+        });
+    }
 
 }

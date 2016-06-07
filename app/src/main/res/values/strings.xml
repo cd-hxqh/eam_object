@@ -21,6 +21,7 @@
     <string name="login_personId">login_personId</string>
     <string name="login_userName">login_userName</string>
     <string name="login_displayName">login_displayName</string>
+    <string name="login_department">login_department</string>
 
 
     <!--界面Activity-->

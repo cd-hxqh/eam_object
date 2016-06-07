@@ -170,7 +170,30 @@ public class JsonUtils {
 
     }
 
+    /**
+     * 启动工作流*
+     */
+    public static String parsingwfserviceResult(String data) {
+        Log.i(TAG, "data=" + data);
 
+        String result = null;
+        try {
+            JSONObject object = new JSONObject(data);
+            if (object.has("msg")) {
+                result = object.getString("msg");
+            } else {
+                result = "";
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+
+    /**
+     * 审批工作流*
+     */
     public static String parsingwfserviceGoOnResult(String data) {
         Log.i(TAG, "data=" + data);
         String result = null;

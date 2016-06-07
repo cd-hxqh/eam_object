@@ -124,7 +124,7 @@ public class AddinvuseActivity extends BaseActivity {
     private String udapptype;
 
 
-    ArrayList<Invuseline> list=new ArrayList<Invuseline>();
+    ArrayList<Invuseline> list = new ArrayList<Invuseline>();
 
 
     @Override
@@ -312,7 +312,7 @@ public class AddinvuseActivity extends BaseActivity {
                 udjbrText.setText(option.getDescription());
                 break;
             case 0:
-                list= data.getParcelableArrayListExtra("invuselines");
+                list = data.getParcelableArrayListExtra("invuselines");
                 break;
             default:
                 break;
@@ -329,7 +329,6 @@ public class AddinvuseActivity extends BaseActivity {
     private void startAsyncTask() {
 
         final String updataInfo = JsonUtils.InvuseToJson(encapsulationInvuse(), list);
-        Log.i(TAG, "updataInfo=" + updataInfo);
         new AsyncTask<String, String, InvuseResult>() {
             @Override
             protected InvuseResult doInBackground(String... strings) {
@@ -379,7 +378,7 @@ public class AddinvuseActivity extends BaseActivity {
         invuse.fromstoreloc = fromstoreloc;
         invuse.wonum = wonum;
         invuse.udissueto = udissueto;
-        invuse.uddept = "90";
+        invuse.uddept = AccountUtils.getDepartment(AddinvuseActivity.this);
         invuse.udisjj = udisjj + "";
         invuse.udjbr = udjbr;
         invuse.status = "申请建立";

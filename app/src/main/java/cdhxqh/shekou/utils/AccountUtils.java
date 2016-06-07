@@ -124,5 +124,24 @@ public class AccountUtils {
     }
 
 
+    /**
+     * 设置部门
+     *
+     *
+     */
 
+    public static void setDepartment(Context cxt, String department) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
+        sharedPreferences.edit().putString(cxt.getString(R.string.login_department), department).commit();
+    }
+    /**
+     * 获取部门
+     *
+     *
+     */
+
+    public static String  getDepartment(Context cxt) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
+        return sharedPreferences.getString(cxt.getString(R.string.login_department), "");
+    }
 }

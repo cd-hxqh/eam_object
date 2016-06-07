@@ -86,70 +86,6 @@
 
 
         <LinearLayout
-            android:id="@+id/invuse_wonum_linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:layout_marginLeft="@dimen/dimen_5"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="@string/level5_text"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-
-            <TextView
-                android:id="@+id/level5_text_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:drawableRight="@drawable/item_more"
-                android:hint="@string/have_not_data"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-        </LinearLayout>
-
-        <View
-            android:id="@+id/wonum_view_id"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/line"></View>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:layout_marginLeft="@dimen/dimen_5"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="@string/level6_text"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-
-            <TextView
-                android:id="@+id/level6_text_id"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:layout_toRightOf="@+id/item_num_title"
-                android:drawableRight="@drawable/item_more"
-                android:hint="@string/have_not_data"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/line"></View>
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_40dp"
             android:layout_marginLeft="@dimen/dimen_5"
@@ -178,7 +114,6 @@
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="@drawable/line"></View>
-
 
 
         <LinearLayout

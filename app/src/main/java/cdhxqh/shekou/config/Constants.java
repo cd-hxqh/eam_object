@@ -10,6 +10,9 @@ public class Constants {
      */
     public static final String HTTP_API_URL = "http://121.35.242.172:7001/maximo/mobile/";
 
+    public static final String HTTPS_API_URL = "http://121.35.242.172:7001/meaweb/services";
+
+
     /**
      * 登陆URL*
      */
@@ -25,6 +28,8 @@ public class Constants {
 
     /**工单接口**/
     public static final String INVUSE_URL = "http://121.35.242.172:7001/meaweb/services/INVUSESERVICE";
+    /**工作流**/
+    public static final String WORK_FLOW_URL = "/WFMENAGEMENTSERVIC";
 
     /**------------------数据库表名配置－－开始**/
     //待办事项的appid

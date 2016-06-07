@@ -222,6 +222,12 @@ public class HttpManager {
     public static String getPersonUrl(String siteid){
         return "{'appid':'" + Constants.PERSON_APPID + "','objectname':'" + Constants.PERSON_NAME + "','option':'read','condition':{'LOCATIONSITE':'"+siteid+"'}}";
     }
+    /**
+     * 设置根据人员id查询人员信息
+     */
+    public static String getPersonUrl1(String persionid){
+        return "{'appid':'" + Constants.PERSON_APPID + "','objectname':'" + Constants.PERSON_NAME + "','option':'read','condition':{'PERSONID':'"+persionid+"'}}";
+    }
 
     /**
      * 设置员工下载数据接口
