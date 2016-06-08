@@ -8,7 +8,7 @@ import org.json.JSONObject;
 
 /**
  * Created by apple on 15/10/26.
- *  领料单
+ * 领料单
  */
 public class Invuse extends Entity implements Parcelable {
     private static final String TAG = "Invuse";
@@ -43,8 +43,6 @@ public class Invuse extends Entity implements Parcelable {
     public String udreason; //原因
 
 
-
-
     @Override
     public void parse(JSONObject jsonObject) throws JSONException {
         invuseid = jsonObject.getString("invuseid");
@@ -66,12 +64,17 @@ public class Invuse extends Entity implements Parcelable {
         eq3 = jsonObject.getString("eq3");
         udisjj = jsonObject.getString("udisjj");
         status = jsonObject.getString("status");
+
+        statusdate = jsonObject.getString("statusdate");
         siteid = jsonObject.getString("siteid");
         totalcost_v = jsonObject.getString("totalcost_v");
         sq_displayname = jsonObject.getString("sq_displayname");
         createdate = jsonObject.getString("createdate");
         pz_displayname = jsonObject.getString("pz_displayname");
         changedate = jsonObject.getString("changedate");
+        udapptype = jsonObject.getString("udapptype");
+        udreason = jsonObject.getString("udreason");
+
 
     }
 
@@ -99,14 +102,16 @@ public class Invuse extends Entity implements Parcelable {
         eq3 = in.readString();
         udisjj = in.readString();
         status = in.readString();
+
+        statusdate = in.readString();
         siteid = in.readString();
         totalcost_v = in.readString();
         sq_displayname = in.readString();
         createdate = in.readString();
         pz_displayname = in.readString();
         changedate = in.readString();
-
-
+        udapptype = in.readString();
+        udreason = in.readString();
 
 
     }
@@ -137,12 +142,15 @@ public class Invuse extends Entity implements Parcelable {
         dest.writeString(eq3);
         dest.writeString(udisjj);
         dest.writeString(status);
+        dest.writeString(statusdate);
         dest.writeString(siteid);
         dest.writeString(totalcost_v);
         dest.writeString(sq_displayname);
         dest.writeString(createdate);
         dest.writeString(pz_displayname);
         dest.writeString(changedate);
+        dest.writeString(udapptype);
+        dest.writeString(udreason);
 
 
     }

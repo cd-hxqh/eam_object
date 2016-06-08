@@ -102,23 +102,19 @@ public class InvuseAdapter extends RecyclerView.Adapter<InvuseAdapter.ViewHolder
          */
         public CardView cardView;
         /**
-         *
          * 编号*
          */
         public TextView itemNumTitle;
         /**
-         *
          * 描述*
          */
         public TextView itemDescTitle;
         /**
-         *
          * 编号*
          */
         public TextView itemNum;
         /**
          * 描述*
-         *
          */
         public TextView itemDesc;
 
@@ -126,8 +122,8 @@ public class InvuseAdapter extends RecyclerView.Adapter<InvuseAdapter.ViewHolder
             super(view);
             cardView = (CardView) view.findViewById(R.id.card_container);
 
-            itemNumTitle=(TextView) view.findViewById(R.id.item_num_title);
-            itemDescTitle=(TextView) view.findViewById(R.id.item_desc_title);
+            itemNumTitle = (TextView) view.findViewById(R.id.item_num_title);
+            itemDescTitle = (TextView) view.findViewById(R.id.item_desc_title);
 
 
             itemNum = (TextView) view.findViewById(R.id.item_num_text);

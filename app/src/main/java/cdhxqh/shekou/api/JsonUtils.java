@@ -1438,19 +1438,19 @@ public class JsonUtils {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("invusenum", invuse.invusenum);
-            jsonObject.put("description", invuse.description);
-            jsonObject.put("fromstoreloc", invuse.fromstoreloc);
-            jsonObject.put("wonum", invuse.wonum);
-            jsonObject.put("udissueto", invuse.udissueto);
-            jsonObject.put("uddept", invuse.uddept);
-            jsonObject.put("udisjj", invuse.udisjj);
-            jsonObject.put("udjbr", invuse.udjbr);
-            jsonObject.put("status", invuse.status);
-            jsonObject.put("udapptype", invuse.udapptype);
-            jsonObject.put("udreason", invuse.udreason);
-            jsonObject.put("statusdate", invuse.statusdate);
-            jsonObject.put("createdate", invuse.createdate);
+            jsonObject.put("invusenum", null==invuse.invusenum?"":invuse.invusenum);
+            jsonObject.put("description", null==invuse.description?"":invuse.description);
+            jsonObject.put("fromstoreloc", null==invuse.fromstoreloc?"":invuse.fromstoreloc);
+            jsonObject.put("wonum", null==invuse.wonum?"":invuse.wonum);
+            jsonObject.put("udissueto", null==invuse.udissueto?"":invuse.udissueto);
+            jsonObject.put("uddept", null==invuse.uddept?"":invuse.uddept);
+            jsonObject.put("udisjj", null==invuse.udisjj?"":invuse.udisjj);
+            jsonObject.put("udjbr", null==invuse.udjbr?"":invuse.udjbr);
+            jsonObject.put("status", null==invuse.status?"":invuse.status);
+            jsonObject.put("udapptype", null==invuse.udapptype?"":invuse.udapptype);
+            jsonObject.put("udreason", null==invuse.udreason?"":invuse.udreason);
+            jsonObject.put("statusdate", null==invuse.statusdate?"":invuse.statusdate);
+            jsonObject.put("createdate", null==invuse.createdate?"":invuse.createdate);
 
             if (invuselines != null && invuselines.size() != 0) {
                 JSONArray invuselinesArray = new JSONArray();

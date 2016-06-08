@@ -19,8 +19,12 @@ import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.MaterialDialog;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.api.JsonUtils;
+import cdhxqh.shekou.bean.InvuseResult;
+import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Matusetrans;
+import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
@@ -37,6 +41,10 @@ public class InvuseDetailsActivity extends BaseActivity {
      * 标题
      */
     private TextView titleTextView;
+    /**
+     * 修改按钮*
+     */
+    private ImageView updateImageView;
 
 
     /**界面信息**/
@@ -163,12 +171,14 @@ public class InvuseDetailsActivity extends BaseActivity {
 
     private void geiIntentData() {
         invuse = (Invuse) getIntent().getParcelableExtra("invuse");
+        Log.i(TAG,"udapptype="+invuse.udapptype+"invusenum="+invuse.invusenum);
     }
 
     @Override
     protected void findViewById() {
         backImageView = (ImageView) findViewById(R.id.title_back_id);
         titleTextView = (TextView) findViewById(R.id.title_name);
+        updateImageView = (ImageView) findViewById(R.id.title_add);
 
         invusenumText = (TextView) findViewById(R.id.invuse_invusenum_text_id);
         descriptionText = (TextView) findViewById(R.id.invuse_description_text_id);
@@ -232,6 +242,10 @@ public class InvuseDetailsActivity extends BaseActivity {
     protected void initView() {
         backImageView.setOnClickListener(backImageViewOnClickListener);
         titleTextView.setText(getString(R.string.invuse_details_title));
+        updateImageView.setVisibility(View.VISIBLE);
+        updateImageView.setImageResource(R.drawable.edit_query);
+        updateImageView.setOnClickListener(updateImageViewOnClickListener);
+
         materialBtn.setOnClickListener(materialBtnOnClickListener);
         worlflowBtn.setOnClickListener(worlflowBtnBtnOnClickListener);
 
@@ -319,7 +333,6 @@ public class InvuseDetailsActivity extends BaseActivity {
             protected String doInBackground(String... strings) {
                 String result = AndroidClientService.startwf(InvuseDetailsActivity.this, "UDINVUSE", "INVUSE", id, "INVUSEID");
 
-                Log.i(TAG, "result=" + result);
                 return result;
             }
 
@@ -332,6 +345,90 @@ public class InvuseDetailsActivity extends BaseActivity {
                     Toast.makeText(InvuseDetailsActivity.this, "成功", Toast.LENGTH_SHORT).show();
                 }
                 mProgressDialog.dismiss();
+            }
+        }.execute();
+    }
+
+    /**
+     * 修改信息*
+     */
+    private View.OnClickListener updateImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            showProgressDialog("数据更新中...");
+            startAsyncTask();
+        }
+    };
+
+
+    /**
+     * 封装*
+     */
+    private Invuse encapsulationInvuse() {
+        String invusenum = invuse.invusenum; //编号
+        String description = descriptionText.getText().toString(); //描述
+        String fromstoreloc = fromstorelocText.getText().toString(); //库房
+        String wonum = wonumText.getText().toString(); //工单
+        String udissueto = invuse.udissueto;//领料人
+        String uddept = invuse.uddept;//部门
+        String udisjj = invuse.udisjj;//是否紧急
+        String udjbr = udjbr_displaynameText.getText().toString();//物管员经办人
+        String status = invuse.status;//物管员经办人
+        String udapptype = invuse.udapptype;//类型
+        Log.i(TAG,"udapptype="+udapptype);
+        String udreason = invuse.udreason;//原因
+        String statusdate = invuse.statusdate;//状态日期
+        String createdate = invuse.createdate;//创建日期
+
+        Invuse invuse = new Invuse();
+        invuse.invusenum = invusenum;
+        invuse.description = description;
+        invuse.fromstoreloc = fromstoreloc;
+        invuse.wonum = wonum;
+        invuse.udissueto = udissueto;
+        invuse.uddept = uddept;
+        invuse.udisjj = udisjj;
+        invuse.udjbr = udjbr;
+        invuse.status = status;
+        invuse.udapptype = udapptype;
+        invuse.udreason = udreason;
+        invuse.statusdate = statusdate;
+        invuse.createdate = createdate;
+        return invuse;
+    }
+
+
+    /**
+     * 提交数据*
+     */
+    private void startAsyncTask() {
+
+        final String updataInfo = JsonUtils.InvuseToJson(encapsulationInvuse(), null);
+        Log.i(TAG,"updataInfo="+updataInfo);
+        new AsyncTask<String, String, InvuseResult>() {
+            @Override
+            protected InvuseResult doInBackground(String... strings) {
+                InvuseResult addresult = AndroidClientService.UpdateInvuse(updataInfo, AccountUtils.getpersonId(InvuseDetailsActivity.this), Constants.INVUSE_URL);
+
+                return addresult;
+            }
+
+            @Override
+            protected void onPostExecute(InvuseResult invuseResult) {
+                super.onPostExecute(invuseResult);
+
+
+                if (invuseResult == null) {
+                    Toast.makeText(InvuseDetailsActivity.this, "更新工单失败", Toast.LENGTH_SHORT).show();
+                } else if (!invuseResult.errorMsg.equals("成功!")) {
+
+                    Toast.makeText(InvuseDetailsActivity.this, invuseResult.errorMsg, Toast.LENGTH_SHORT).show();
+                    finish();
+                } else if (invuseResult.errorMsg.equals("成功!")) {
+                    Toast.makeText(InvuseDetailsActivity.this, "工单" + invuseResult.invusenum + "更新成功", Toast.LENGTH_SHORT).show();
+
+                }
+                closeProgressDialog();
             }
         }.execute();
     }

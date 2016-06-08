@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,11 +6,16 @@
     android:orientation="vertical"
     tools:context="cdhxqh.shekou.ui.activity.LabtransDetailsActivity">
 
-    <include layout="@layout/title_main"></include>
+    <include
+        android:id="@+id/title_main_id"
+        layout="@layout/title_main"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"></include>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_main_id">
 
         <LinearLayout
 
@@ -84,63 +89,63 @@
                 android:background="@drawable/line"></View>
 
             <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginLeft="@dimen/dimen_5"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:orientation="horizontal">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="100dp"-->
-                    <!--android:layout_height="@dimen/dimen_40dp"-->
-                    <!--android:gravity="center_vertical"-->
-                    <!--android:text="@string/work_labtrans_craft"-->
-                    <!--android:textColor="@color/light_black"-->
-                    <!--android:textSize="@dimen/dimens_16dp" />-->
+            <!--<TextView-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="@dimen/dimen_40dp"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:text="@string/work_labtrans_craft"-->
+            <!--android:textColor="@color/light_black"-->
+            <!--android:textSize="@dimen/dimens_16dp" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/work_labtrans_craft"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="@dimen/dimen_5"-->
-                    <!--android:hint="@string/have_not_data"-->
-                    <!--android:textColor="@color/light_black"-->
-                    <!--android:textSize="@dimen/dimens_16dp" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/work_labtrans_craft"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:hint="@string/have_not_data"-->
+            <!--android:textColor="@color/light_black"-->
+            <!--android:textSize="@dimen/dimens_16dp" />-->
             <!--</LinearLayout>-->
 
             <!--<View-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:background="@drawable/line"></View>-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@drawable/line"></View>-->
 
             <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/dimen_40dp"-->
-                <!--android:layout_marginLeft="@dimen/dimen_5"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:orientation="horizontal">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dimen_40dp"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="100dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/work_labtrans_skilllevel"-->
-                    <!--android:textColor="@color/light_black"-->
-                    <!--android:textSize="@dimen/dimens_16dp" />-->
+            <!--<TextView-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/work_labtrans_skilllevel"-->
+            <!--android:textColor="@color/light_black"-->
+            <!--android:textSize="@dimen/dimens_16dp" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/work_labtrans_skilllevel"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="@dimen/dimen_5"-->
-                    <!--android:hint="@string/have_not_data"-->
-                    <!--android:textColor="@color/light_black"-->
-                    <!--android:textSize="@dimen/dimens_16dp" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/work_labtrans_skilllevel"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:hint="@string/have_not_data"-->
+            <!--android:textColor="@color/light_black"-->
+            <!--android:textSize="@dimen/dimens_16dp" />-->
             <!--</LinearLayout>-->
 
             <!--<View-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:background="@drawable/line"></View>-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@drawable/line"></View>-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -285,8 +290,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
-                    android:inputType="textMultiLine"
                     android:gravity="center_vertical"
+                    android:inputType="textMultiLine"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
             </LinearLayout>
@@ -372,8 +377,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
-                    android:inputType="textMultiLine"
                     android:gravity="center_vertical"
+                    android:inputType="textMultiLine"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
             </LinearLayout>
@@ -413,33 +418,33 @@
                 android:background="@drawable/line"></View>
 
             <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/dimen_40dp"-->
-                <!--android:layout_marginLeft="@dimen/dimen_5"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:orientation="horizontal">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dimen_40dp"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="100dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/work_labtrans_assetnum"-->
-                    <!--android:textColor="@color/light_black"-->
-                    <!--android:textSize="@dimen/dimens_16dp" />-->
+            <!--<TextView-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/work_labtrans_assetnum"-->
+            <!--android:textColor="@color/light_black"-->
+            <!--android:textSize="@dimen/dimens_16dp" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/work_labtrans_assetnum"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="@dimen/dimen_5"-->
-                    <!--android:hint="@string/have_not_data"-->
-                    <!--android:textColor="@color/light_black"-->
-                    <!--android:textSize="@dimen/dimens_16dp" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/work_labtrans_assetnum"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:hint="@string/have_not_data"-->
+            <!--android:textColor="@color/light_black"-->
+            <!--android:textSize="@dimen/dimens_16dp" />-->
             <!--</LinearLayout>-->
 
             <!--<View-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:background="@drawable/line"></View>-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@drawable/line"></View>-->
 
             <!--<LinearLayout-->
             <!--android:layout_width="match_parent"-->
@@ -471,33 +476,33 @@
             <!--android:background="@drawable/line"></View>-->
 
             <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/dimen_40dp"-->
-                <!--android:layout_marginLeft="@dimen/dimen_5"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:orientation="horizontal">-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dimen_40dp"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
 
-                <!--<TextView-->
-                    <!--android:layout_width="100dp"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:text="@string/work_labtrans_transtype"-->
-                    <!--android:textColor="@color/light_black"-->
-                    <!--android:textSize="@dimen/dimens_16dp" />-->
+            <!--<TextView-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/work_labtrans_transtype"-->
+            <!--android:textColor="@color/light_black"-->
+            <!--android:textSize="@dimen/dimens_16dp" />-->
 
-                <!--<TextView-->
-                    <!--android:id="@+id/work_labtrans_transtype"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="@dimen/dimen_5"-->
-                    <!--android:hint="@string/have_not_data"-->
-                    <!--android:textColor="@color/light_black"-->
-                    <!--android:textSize="@dimen/dimens_16dp" />-->
+            <!--<TextView-->
+            <!--android:id="@+id/work_labtrans_transtype"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:hint="@string/have_not_data"-->
+            <!--android:textColor="@color/light_black"-->
+            <!--android:textSize="@dimen/dimens_16dp" />-->
             <!--</LinearLayout>-->
 
             <!--<View-->
-                <!--android:layout_width="fill_parent"-->
-                <!--android:layout_height="1dp"-->
-                <!--android:background="@drawable/line"></View>-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@drawable/line"></View>-->
 
             <!--<LinearLayout-->
             <!--android:layout_width="match_parent"-->
@@ -556,24 +561,24 @@
             <!--android:layout_width="fill_parent"-->
             <!--android:layout_height="1dp"-->
             <!--android:background="@drawable/line"></View>-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <Button
-                    android:id="@+id/confirm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/button_selector"
-                    android:paddingLeft="@dimen/dimen_40dp"
-                    android:paddingRight="@dimen/dimen_40dp"
-                    android:text="@string/ok"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-            </RelativeLayout>
         </LinearLayout>
 
     </ScrollView>
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/confirm"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.0"
+            android:background="@drawable/button_selector2"
+            android:text="@string/ok"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+</RelativeLayout>
