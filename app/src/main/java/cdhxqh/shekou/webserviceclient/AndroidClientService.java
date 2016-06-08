@@ -117,7 +117,7 @@ public class AndroidClientService {
             obj = soapEnvelope.getResponse().toString();
             result = JsonUtils.parsingwfserviceGoOnResult(obj);
         } catch (SoapFault soapFault) {
-            Log.i(TAG,"ssssss");
+            Log.i(TAG, "ssssss");
             return null;
         }
         return result;
@@ -352,6 +352,37 @@ public class AndroidClientService {
         soapEnvelope.implicitTypes = true;
         soapEnvelope.dotNet = true;
         SoapObject soapReq = new SoapObject(NAMESPACE, "invuseserviceINVUSE01ByAdd");
+        soapReq.addProperty("json",json);
+        soapReq.addProperty("userid",userid);
+        soapEnvelope.setOutputSoapObject(soapReq);
+        HttpTransportSE httpTransport = new HttpTransportSE(url,timeOut);
+        try {
+            httpTransport.call("urn:action", soapEnvelope);
+        } catch (IOException | XmlPullParserException e) {
+            return null;
+        }
+        String obj = null;
+        InvuseResult invuseResult = null;
+        try {
+            obj = soapEnvelope.getResponse().toString();
+            invuseResult = JsonUtils.parsingInsertIn(obj);
+        } catch (SoapFault soapFault) {
+            soapFault.printStackTrace();
+        }
+        return invuseResult;
+    }
+
+    /**
+     * 领料单更新
+     *
+     * @param json
+     * @return
+     */
+    public static InvuseResult UpdateInvuse(String json, String userid,String url) {
+        SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        soapEnvelope.implicitTypes = true;
+        soapEnvelope.dotNet = true;
+        SoapObject soapReq = new SoapObject(NAMESPACE, "invuseserviceINVUSE02ByUpdate");
         soapReq.addProperty("json",json);
         soapReq.addProperty("userid",userid);
         soapEnvelope.setOutputSoapObject(soapReq);

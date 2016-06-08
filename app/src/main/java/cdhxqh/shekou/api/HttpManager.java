@@ -29,7 +29,7 @@ public class HttpManager {
     /**
      * 设置待办事项接口*
      */
-    public static String getwfassignmentUrl(String persionid,String vlaue, int curpage, int showcount) {
+    public static String getwfassignmentUrl(String persionid, String vlaue, int curpage, int showcount) {
         if (vlaue.equals("")) {
             return "{'appid':'" + Constants.WFASSIGNMENT_APPID + "','objectname':'" + Constants.WFASSIGNMENT_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WFASSIGNMENTID DESC','condition':{'ASSIGNCODE':'" + persionid + "','ASSIGNSTATUS':'=活动'}}";
         } else {
@@ -41,7 +41,7 @@ public class HttpManager {
     /**
      * 设置工单接口*
      */
-    public static String getworkorderUrl(String type, String search,String siteid, int curpage, int showcount) {
+    public static String getworkorderUrl(String type, String search, String siteid, int curpage, int showcount) {
         if (search.equals("")) {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
                     "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "'}}";
@@ -56,10 +56,10 @@ public class HttpManager {
      */
     public static String getChooseWorkOrderUrl(String search, int curpage, int showcount) {
         if (search.equals("")) {
-            return "{'appid':'" +Constants.WOTRACK_APPID+ "','objectname':'" + Constants.WORKORDER_APPID + "'," +
+            return "{'appid':'" + Constants.WOTRACK_APPID + "','objectname':'" + Constants.WORKORDER_APPID + "'," +
                     "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WORKTYPE':'!=OSPR'}}";
         } else {
-            return "{'appid':'" +Constants.WOTRACK_APPID + "','objectname':'" + Constants.WORKORDER_APPID + "'," +
+            return "{'appid':'" + Constants.WOTRACK_APPID + "','objectname':'" + Constants.WORKORDER_APPID + "'," +
                     "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'%" + search + "%','WORKTYPE':'!=OSPR'}}";
         }
     }
@@ -67,7 +67,7 @@ public class HttpManager {
     /**
      * 设置计划任务接口*
      */
-    public static String getwoactivityUrl(String type,String wonum, int curpage, int showcount) {
+    public static String getwoactivityUrl(String type, String wonum, int curpage, int showcount) {
         return "{'appid':'" + "UDWOALL','objectname':'" + Constants.WOACTIVITY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'" +
                 ",'condition':{'WONUM':'" + wonum + "'}" +
                 "}";
@@ -97,14 +97,14 @@ public class HttpManager {
     /**
      * 设置实际员工接口
      */
-    public static String getlabtransUrl(String type,String wonum, int curpage, int showcount) {
+    public static String getlabtransUrl(String type, String wonum, int curpage, int showcount) {
         return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.LABTRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'REFWO':'" + wonum + "'}}";
     }
 
     /**
      * 设置实际物料接口
      */
-    public static String getmatusetransUrl(String type, int curpage, int showcount,String wonum) {
+    public static String getmatusetransUrl(String type, int curpage, int showcount, String wonum) {
         return "{'appid':'" + Constants.MATUSETRANS_APPID + "','objectname':'" + Constants.MATUSETRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
     }
 
@@ -184,11 +184,11 @@ public class HttpManager {
     /**
      * 设置领料单的接口
      */
-    public static String getInvuseurl(String value, String udapptype,int curpage, int showcount) {
+    public static String getInvuseurl(String value, String udapptype, int curpage, int showcount) {
         if (value.equals("")) {
-            return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'UDAPPTYPE':'" + udapptype + "'}}";
+            return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'UDAPPTYPE':'=" + udapptype + "'}}";
         }
-        return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'INVUSENUM':'" + value + "','UDAPPTYPE':'" + udapptype + "'}}";
+        return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'INVUSENUM':'" + value + "','UDAPPTYPE':'=" + udapptype + "'}}";
     }
 
     /**
@@ -205,44 +205,45 @@ public class HttpManager {
     /**
      * 设置设备下载数据接口
      */
-    public static String getAssetUrl(String siteid){
-        return "{'appid':'" + Constants.ASSET_APPID + "','objectname':'" + Constants.ASSET_NAME + "','option':'read','condition':{'SITEID':'"+siteid+"','UDLEVEL':'单体设备','STATUS':'操作中,活动,有限制的使用'}}";
+    public static String getAssetUrl(String siteid) {
+        return "{'appid':'" + Constants.ASSET_APPID + "','objectname':'" + Constants.ASSET_NAME + "','option':'read','condition':{'SITEID':'" + siteid + "','UDLEVEL':'单体设备','STATUS':'操作中,活动,有限制的使用'}}";
     }
 
     /**
      * 设置作业计划下载数据接口
      */
-    public static String getJpNumUrl(String siteid){
-        return "{'appid':'" + Constants.JOBPLAN_APPID + "','objectname':'" + Constants.JOBPLAN_NAME + "','option':'read','condition':{'SITEID':'"+siteid+"','UDISOS':'0'}}";
+    public static String getJpNumUrl(String siteid) {
+        return "{'appid':'" + Constants.JOBPLAN_APPID + "','objectname':'" + Constants.JOBPLAN_NAME + "','option':'read','condition':{'SITEID':'" + siteid + "','UDISOS':'0'}}";
     }
 
     /**
      * 设置人员下载数据接口
      */
-    public static String getPersonUrl(String siteid){
-        return "{'appid':'" + Constants.PERSON_APPID + "','objectname':'" + Constants.PERSON_NAME + "','option':'read','condition':{'LOCATIONSITE':'"+siteid+"'}}";
+    public static String getPersonUrl(String siteid) {
+        return "{'appid':'" + Constants.PERSON_APPID + "','objectname':'" + Constants.PERSON_NAME + "','option':'read','condition':{'LOCATIONSITE':'" + siteid + "'}}";
     }
+
     /**
      * 设置根据人员id查询人员信息
      */
-    public static String getPersonUrl1(String persionid){
-        return "{'appid':'" + Constants.PERSON_APPID + "','objectname':'" + Constants.PERSON_NAME + "','option':'read','condition':{'PERSONID':'"+persionid+"'}}";
+    public static String getPersonUrl1(String persionid) {
+        return "{'appid':'" + Constants.PERSON_APPID + "','objectname':'" + Constants.PERSON_NAME + "','option':'read','condition':{'PERSONID':'" + persionid + "'}}";
     }
 
     /**
      * 设置员工下载数据接口
      */
-    public static String getLaborUrl(String siteid){
-        return "{'appid':'" + Constants.LABOR_APPID + "','objectname':'" + Constants.LABOR_NAME + "','option':'read','condition':{'WORKSITE':'"+siteid+"'}}";
+    public static String getLaborUrl(String siteid) {
+        return "{'appid':'" + Constants.LABOR_APPID + "','objectname':'" + Constants.LABOR_NAME + "','option':'read','condition':{'WORKSITE':'" + siteid + "'}}";
     }
 
     /**
      * 设置抢修班组下载数据接口
      */
-    public static String getAlndomainUrl(String siteid){
+    public static String getAlndomainUrl(String siteid) {
         if (siteid.equals("CCT")) {
             return "{'appid':'" + Constants.ALNDOMAIN_APPID + "','objectname':'" + Constants.ALNDOMAIN_NAME + "','option':'read','condition':{'domainid':'UDEQ3','description':'ST-1,ST-2,ST-3,ST-4'}}";
-        }else if (siteid.equals("SCT")){
+        } else if (siteid.equals("SCT")) {
             return "{'appid':'" + Constants.ALNDOMAIN_APPID + "','objectname':'" + Constants.ALNDOMAIN_NAME + "','option':'read','condition':{'domainid':'UDEQ3','value':'030401,030402,03040',030404'}}";
         }
         return null;
@@ -251,42 +252,42 @@ public class HttpManager {
     /**
      * 设置故障类别下载数据接口
      */
-    public static String getAlndomain2Url(){
+    public static String getAlndomain2Url() {
         return "{'appid':'" + Constants.ALNDOMAIN_APPID + "','objectname':'" + Constants.ALNDOMAIN_NAME + "','option':'read','condition':{'DOMAINID':'UDGZLBDM'}}";
     }
 
     /**
      * 设置事故下载数据接口
      */
-    public static String getUdevUrl(String siteid){
-        return "{'appid':'" + Constants.UDEV_APPID + "','objectname':'" + Constants.UDEV_NAME + "','option':'read','condition':{'status':'1','siteid':'"+siteid+"'}}";
+    public static String getUdevUrl(String siteid) {
+        return "{'appid':'" + Constants.UDEV_APPID + "','objectname':'" + Constants.UDEV_NAME + "','option':'read','condition':{'status':'1','siteid':'" + siteid + "'}}";
     }
 
     /**
      * 设置立项申报下载数据接口
      */
-    public static String getProjapprUrl(String siteid){
-        return "{'appid':'" + Constants.PROJAPPR_APPUD + "','objectname':'" + Constants.PROJAPPR_NAME + "','option':'read','condition':{'status':'APPR','FZDEPARTMENT':'90','siteid':'"+siteid+"'}}";
+    public static String getProjapprUrl(String siteid) {
+        return "{'appid':'" + Constants.PROJAPPR_APPUD + "','objectname':'" + Constants.PROJAPPR_NAME + "','option':'read','condition':{'status':'APPR','FZDEPARTMENT':'90','siteid':'" + siteid + "'}}";
     }
 
     /**
      * 设置立项申报下载数据接口
      */
-    public static String getPmUrl(String siteid){
-        return "{'appid':'" + Constants.PM_APPID + "','objectname':'" + Constants.PM_NAME + "','option':'read','condition':{'siteid':'"+siteid+"'}}";
+    public static String getPmUrl(String siteid) {
+        return "{'appid':'" + Constants.PM_APPID + "','objectname':'" + Constants.PM_NAME + "','option':'read','condition':{'siteid':'" + siteid + "'}}";
     }
 
     /**
      * 设置员工工种下载数据接口
      */
-    public static String getLaborcraftrateUrl(String siteid){
+    public static String getLaborcraftrateUrl(String siteid) {
         return "{'appid':'" + Constants.LABORCRAFTRATE_APPID + "','objectname':'" + Constants.LABORCRAFTRATE_NAME + "','option':'read','condition':{'defaultcraft':'1'}}";
     }
 
     /**
      * 设置故障下载数据接口
      */
-    public static String getFailurelistUrl(){
+    public static String getFailurelistUrl() {
         return "{'appid':'" + Constants.FAILURELIST_APPID + "','objectname':'" + Constants.FAILURELIST_NAME + "','option':'read'}";
     }
 
@@ -294,10 +295,9 @@ public class HttpManager {
     /**
      * 设置库房下载数据接口
      */
-    public static String getLocationUrl(){
+    public static String getLocationUrl() {
         return "{'appid':'" + Constants.UDSTORELOC_APPID + "','objectname':'" + Constants.LOCATIONS_NAME + "','option':'read','condition':{'TYPE':'=库房'}}";
     }
-
 
 
     /**
@@ -352,7 +352,7 @@ public class HttpManager {
      * 不分页获取信息方法*
      */
     public static void getData(final Context cxt, String data, final HttpRequestHandler<Results> handler) {
-        Log.i(TAG,"data="+data);
+        Log.i(TAG, "data=" + data);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);

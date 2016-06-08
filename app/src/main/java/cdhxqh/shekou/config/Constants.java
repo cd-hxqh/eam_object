@@ -26,8 +26,8 @@ public class Constants {
     /**工单接口**/
     public static final String WORK_URL = "http://121.35.242.172:7001/meaweb/services/WORKORDERSERVICE";
 
-    /**工单接口**/
-    public static final String INVUSE_URL = "http://121.35.242.172:7001/meaweb/services/INVUSESERVICE";
+    /**领料单接口**/
+    public static final String INVUSE_URL = HTTPS_API_URL+"/INVUSESERVICE";
     /**工作流**/
     public static final String WORK_FLOW_URL = "/WFMENAGEMENTSERVIC";
 

@@ -18,6 +18,7 @@
         android:padding="@dimen/dimens_10">
 
         <LinearLayout
+            android:id="@+id/wonum_linearLayout_id"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_40dp"
             android:layout_marginLeft="@dimen/dimen_5"
@@ -43,6 +44,7 @@
         </LinearLayout>
 
         <View
+            android:id="@+id/wonum_view_id"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@drawable/line" />
@@ -55,7 +57,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">

@@ -72,7 +72,9 @@ public class Work_AddNewActivity extends BaseActivity {
     private WorkOrder workOrder = new WorkOrder();
     private LinearLayout reportLinearLayout;
     private LinearLayout work_numlayout;
+    private LinearLayout numlayout;
     private TextView wonum;//工单号
+    private View wonumview;//工单号
     private EditText description;//工单描述
     private LinearLayout description_layout;
     private TextView worktype;//工作类型
@@ -165,7 +167,9 @@ public class Work_AddNewActivity extends BaseActivity {
         backlayout = (RelativeLayout) findViewById(R.id.title_back);
 
         work_numlayout = (LinearLayout) findViewById(R.id.work_numlayout);
+        numlayout = (LinearLayout) findViewById(R.id.wonum_linearLayout_id);
         wonum = (TextView) findViewById(R.id.work_wonum);
+        wonumview = (View) findViewById(R.id.wonum_view_id);
         description = (EditText) findViewById(R.id.work_description);
         description_layout = (LinearLayout) findViewById(R.id.work_description_layout);
         worktype = (TextView) findViewById(R.id.work_worktype);
@@ -238,7 +242,9 @@ public class Work_AddNewActivity extends BaseActivity {
         menuImageView.setImageResource(R.drawable.ic_drawer);
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
-
+        numlayout.setVisibility(View.GONE);
+        wonumview.setVisibility(View.GONE);
+        work_flow.setVisibility(View.GONE);
         workOrder.isnew = true;
 
         worktype.setText(workOrder.worktype);
