@@ -27,6 +27,7 @@ import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.ui.activity.Work_ListActivity;
 import cdhxqh.shekou.ui.adapter.WoactivityAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
+import cdhxqh.shekou.utils.AccountUtils;
 
 /**
  * 工单任务的fragment
@@ -96,7 +97,7 @@ public class WoactivityFragment extends Fragment implements SwipeRefreshLayout.O
     }
 
     private void getdata() {
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwoactivityUrl(workOrder.worktype,workOrder.wonum, page, 20), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwoactivityUrl(workOrder.worktype,workOrder.wonum, AccountUtils.getinsertSite(getActivity()), page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);

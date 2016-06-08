@@ -67,9 +67,9 @@ public class HttpManager {
     /**
      * 设置计划任务接口*
      */
-    public static String getwoactivityUrl(String type, String wonum, int curpage, int showcount) {
+    public static String getwoactivityUrl(String type,String wonum,String sitesite, int curpage, int showcount) {
         return "{'appid':'" + "UDWOALL','objectname':'" + Constants.WOACTIVITY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'" +
-                ",'condition':{'WONUM':'" + wonum + "'}" +
+                ",'condition':{'parent':'" + wonum + "','siteid':'"+sitesite+"'}" +
                 "}";
     }
 
@@ -104,7 +104,7 @@ public class HttpManager {
     /**
      * 设置实际物料接口
      */
-    public static String getmatusetransUrl(String type, int curpage, int showcount, String wonum) {
+    public static String getmatusetransUrl(String type, int curpage, int showcount,String wonum) {
         return "{'appid':'" + Constants.MATUSETRANS_APPID + "','objectname':'" + Constants.MATUSETRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
     }
 

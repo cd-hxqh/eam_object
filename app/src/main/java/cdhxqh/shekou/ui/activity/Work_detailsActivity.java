@@ -1,8 +1,10 @@
 package cdhxqh.shekou.ui.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,8 +25,11 @@ import com.flyco.animation.BounceEnter.BounceTopEnter;
 import com.flyco.animation.SlideExit.SlideBottomExit;
 import com.flyco.dialog.entity.DialogMenuItem;
 import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.listener.OnBtnEditClickL;
 import com.flyco.dialog.listener.OnOperItemClickL;
+import com.flyco.dialog.widget.MaterialDialog;
 import com.flyco.dialog.widget.NormalDialog;
+import com.flyco.dialog.widget.NormalEditTextDialog;
 import com.flyco.dialog.widget.NormalListDialog;
 
 import java.util.ArrayList;
@@ -40,6 +45,7 @@ import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.model.WorkResult;
 import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.DateTimeSelect;
+import cdhxqh.shekou.utils.WorkTitle;
 import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
@@ -136,6 +142,7 @@ public class Work_detailsActivity extends BaseActivity {
     private BaseAnimatorSet mBasIn;
     private BaseAnimatorSet mBasOut;
     private ArrayList<DialogMenuItem> mMenuItems = new ArrayList<>();
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,7 +235,7 @@ public class Work_detailsActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        titlename.setText(getResources().getString(R.string.work_details));
+        titlename.setText(WorkTitle.getTitle(workOrder.worktype));
         backlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -309,7 +316,7 @@ public class Work_detailsActivity extends BaseActivity {
 
         delete.setOnClickListener(deleteOnClickListener);
         revise.setOnClickListener(reviseOnClickListener);
-        work_flow.setOnClickListener(work_flowOnClickListener);
+        work_flow.setOnClickListener(approvalBtnOnClickListener);
 
         setLayout();
     }
@@ -564,19 +571,13 @@ public class Work_detailsActivity extends BaseActivity {
         public void onClick(View view) {
             if (actstart.getText().equals("") || actfinish.getText().equals("")) {
                 Toast.makeText(Work_detailsActivity.this, "请输入日期时间", Toast.LENGTH_SHORT).show();
-            } else
-//            if (status.getText().toString().equals(Constants.WAIT_APPROVAL) || status.getText().toString().equals(Constants.APPROVALED)) {
-                submitDataInfo();
-//            } else {
-//                MessageUtils.showMiddleToast(Work_detailsActivity.this, "工单状态不允许修改");
-//            }
-        }
-    };
-
-    private View.OnClickListener work_flowOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
+            } else {
+                if (workOrder.status.equals(Constants.STATUS25)) {
+                    submitDataInfo();
+                }else {
+                    Toast.makeText(Work_detailsActivity.this,"该状态无法修改",Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     };
 
@@ -721,6 +722,111 @@ public class Work_detailsActivity extends BaseActivity {
         }.execute();
 //        }
 
+    }
+
+    //工作流审批
+    private View.OnClickListener approvalBtnOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            MaterialDialogOneBtn1();
+        }
+    };
+
+
+    private void MaterialDialogOneBtn1() {//审批工作流
+        final MaterialDialog dialog = new MaterialDialog(Work_detailsActivity.this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.isTitleShow(false)//
+                .btnNum(2)
+                .content("是否填写输入意见")//
+                .btnText("是", "否，直接提交")//
+                .showAnim(mBasIn)//
+                .dismissAnim(mBasOut)
+                .show();
+
+        dialog.setOnBtnClickL(
+                new OnBtnClickL() {//是
+                    @Override
+                    public void onBtnClick() {
+                        EditDialog(true);
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnClickL() {//否
+                    @Override
+                    public void onBtnClick() {
+                        wfgoon(workOrder.wonum, "1", "");
+                        dialog.dismiss();
+                    }
+                }
+        );
+    }
+
+
+    private void EditDialog(final boolean isok) {//输入审核意见
+        final NormalEditTextDialog dialog = new NormalEditTextDialog(Work_detailsActivity.this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.isTitleShow(false)//
+                .btnNum(2)
+                .content(isok ? "通过" : "不通过")//
+                .btnText("提交", "取消")//
+                .showAnim(mBasIn)//
+                .dismissAnim(mBasOut)
+                .show();
+
+        dialog.setOnBtnClickL(
+                new OnBtnEditClickL() {
+                    @Override
+                    public void onBtnClick(String text) {
+                        wfgoon(workOrder.wonum, "1", text);
+
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnEditClickL() {
+                    @Override
+                    public void onBtnClick(String text) {
+
+                        dialog.dismiss();
+                    }
+                }
+        );
+    }
+
+
+    /**
+     * 审批工作流
+     *
+     * @param id
+     * @param zx
+     */
+    private void wfgoon(final String id, final String zx, final String desc) {
+        mProgressDialog = ProgressDialog.show(Work_detailsActivity.this, null,
+                getString(R.string.inputing), true, true);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setCancelable(false);
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                String result = AndroidClientService.approve(Work_detailsActivity.this, "UDFJHWO", "WORKORDER", id, "WONUM" + "ID", zx, desc);
+
+                Log.i(TAG, "result=" + result);
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                if (s == null || s.equals("")) {
+                    Toast.makeText(Work_detailsActivity.this, "审批失败", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Work_detailsActivity.this, "审批成功", Toast.LENGTH_SHORT).show();
+                }
+                mProgressDialog.dismiss();
+            }
+        }.execute();
     }
 
     private WorkOrder getWorkOrder() {

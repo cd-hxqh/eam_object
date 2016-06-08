@@ -6,438 +6,410 @@
     android:orientation="vertical"
     tools:context="cdhxqh.shekou.ui.activity.Wfassig_DetailsActivity">
 
-    <include
-        android:id="@+id/title_main_id"
-        layout="@layout/title_main"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"></include>
+    <include layout="@layout/title_main"></include>
 
-    <ScrollView
+    <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title_main_id">
+        android:layout_below="@+id/title_relativelayout_id"
+        android:orientation="vertical"
+        android:padding="@dimen/dimens_10"
+        android:focusableInTouchMode="true"
+        android:focusable="true">
 
         <LinearLayout
-
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/title_relativelayout_id"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:orientation="vertical"
-            android:padding="@dimen/dimens_10">
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/work_woactivity_taskid"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <TextView
+                android:id="@+id/work_woactivity_taskid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:hint="@string/have_not_data"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/work_woactivity_taskid"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
+        <View
+            android:id="@+id/view_1_id"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/num_linearlayout_id"
+            android:background="@drawable/line"></View>
 
-                <TextView
-                    android:id="@+id/work_woactivity_taskid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:hint="@string/have_not_data"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <View
-                android:id="@+id/view_1_id"
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/num_linearlayout_id"
-                android:background="@drawable/line"></View>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/work_woactivity_wojo1"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/work_woactivity_wojo1"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-
-                <EditText
-                    android:id="@+id/work_woactivity_wojo1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:gravity="center_vertical"
-                    android:hint="@string/have_not_data"
-                    android:inputType="textMultiLine"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/num_linearlayout_id"
-                android:background="@drawable/line"></View>
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/work_woactivity_wojo1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
+                android:inputType="textMultiLine"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="@dimen/dimen_40dp"
-                    android:gravity="center_vertical"
-                    android:text="@string/work_woactivity_description"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/num_linearlayout_id"
+            android:background="@drawable/line"></View>
 
-                <EditText
-                    android:id="@+id/work_woactivity_description"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:gravity="center_vertical"
-                    android:hint="@string/have_not_data"
-                    android:inputType="textMultiLine"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line"></View>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="100dp"
                 android:layout_height="@dimen/dimen_40dp"
-                android:layout_marginLeft="@dimen/dimen_5"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:text="@string/work_woactivity_description"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/work_woactivity_wojo2"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-
-                <CheckBox
-                    android:id="@+id/work_woactivity_wojo2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:layout_toRightOf="@+id/item_num_title"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line"></View>
-
-            <LinearLayout
+            <EditText
+                android:id="@+id/work_woactivity_description"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
+                android:inputType="textMultiLine"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/work_woactivity_udisdo"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
 
-                <CheckBox
-                    android:id="@+id/work_woactivity_udisdo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:layout_toRightOf="@+id/item_num_title"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line"></View>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/work_woactivity_wojo2"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
+            <CheckBox
+                android:id="@+id/work_woactivity_wojo2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_toRightOf="@+id/item_num_title"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp"/>
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/work_woactivity_udisyq"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
 
-                <CheckBox
-                    android:id="@+id/work_woactivity_udisyq"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:layout_toRightOf="@+id/item_num_title"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line"></View>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/work_woactivity_udisdo"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
+            <CheckBox
+                android:id="@+id/work_woactivity_udisdo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_toRightOf="@+id/item_num_title"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp"/>
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/work_woactivity_udyqyy"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
 
-                <EditText
-                    android:id="@+id/work_woactivity_udyqyy"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:gravity="center_vertical"
-                    android:hint="@string/have_not_data"
-                    android:inputType="textMultiLine"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/work_woactivity_udisyq"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
 
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
+            <CheckBox
+                android:id="@+id/work_woactivity_udisyq"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:layout_toRightOf="@+id/item_num_title"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp"/>
+        </LinearLayout>
 
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/work_woactivity_udremark"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
 
-                <EditText
-                    android:id="@+id/work_woactivity_udremark"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:gravity="center_vertical"
-                    android:hint="@string/have_not_data"
-                    android:inputType="textMultiLine"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/work_woactivity_udyqyy"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
 
-            </LinearLayout>
-
-            <View
+            <EditText
+                android:id="@+id/work_woactivity_udyqyy"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line" />
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/dimen_40dp"-->
-            <!--android:layout_marginLeft="@dimen/dimen_5"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/work_woactivity_targstartdate"-->
-            <!--android:textColor="@color/light_black"-->
-            <!--android:textSize="@dimen/dimens_16dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/work_woactivity_targstartdate"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/dimen_5"-->
-            <!--android:hint="@string/have_not_data"-->
-            <!--android:textColor="@color/light_black"-->
-            <!--android:textSize="@dimen/dimens_16dp" />-->
-            <!--</LinearLayout>-->
-
-            <!--<View-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:background="@drawable/line"></View>-->
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/dimen_40dp"-->
-            <!--android:layout_marginLeft="@dimen/dimen_5"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/work_woactivity_targcompdate"-->
-            <!--android:textColor="@color/light_black"-->
-            <!--android:textSize="@dimen/dimens_16dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/work_woactivity_targcompdate"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/dimen_5"-->
-            <!--android:hint="@string/have_not_data"-->
-            <!--android:textColor="@color/light_black"-->
-            <!--android:textSize="@dimen/dimens_16dp" />-->
-            <!--</LinearLayout>-->
-
-            <!--<View-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:background="@drawable/line"></View>-->
-
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/dimen_40dp"-->
-            <!--android:layout_marginLeft="@dimen/dimen_5"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/work_woactivity_actstart"-->
-            <!--android:textColor="@color/light_black"-->
-            <!--android:textSize="@dimen/dimens_16dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/work_woactivity_actstart"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/dimen_5"-->
-            <!--android:hint="@string/have_not_data"-->
-            <!--android:textColor="@color/light_black"-->
-            <!--android:textSize="@dimen/dimens_16dp" />-->
-            <!--</LinearLayout>-->
-
-            <!--<View-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:background="@drawable/line"></View>-->
-
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/dimen_40dp"-->
-            <!--android:layout_marginLeft="@dimen/dimen_5"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/work_woactivity_actfinish"-->
-            <!--android:textColor="@color/light_black"-->
-            <!--android:textSize="@dimen/dimens_16dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/work_woactivity_actfinish"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/dimen_5"-->
-            <!--android:hint="@string/have_not_data"-->
-            <!--android:textColor="@color/light_black"-->
-            <!--android:textSize="@dimen/dimens_16dp" />-->
-            <!--</LinearLayout>-->
-
-            <!--<View-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:background="@drawable/line"></View>-->
-
-            <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/dimen_40dp"-->
-            <!--android:layout_marginLeft="@dimen/dimen_5"-->
-            <!--android:gravity="center_vertical"-->
-            <!--android:orientation="horizontal">-->
-
-            <!--<TextView-->
-            <!--android:layout_width="100dp"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/work_woactivity_estdur"-->
-            <!--android:textColor="@color/light_black"-->
-            <!--android:textSize="@dimen/dimens_16dp" />-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/work_woactivity_estdur"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/dimen_5"-->
-            <!--android:hint="@string/have_not_data"-->
-            <!--android:textColor="@color/light_black"-->
-            <!--android:textSize="@dimen/dimens_16dp" />-->
-            <!--</LinearLayout>-->
-
-            <!--<View-->
-            <!--android:layout_width="fill_parent"-->
-            <!--android:layout_height="1dp"-->
-            <!--android:background="@drawable/line"></View>-->
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:inputType="textMultiLine"
+                android:gravity="center_vertical"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
 
 
         </LinearLayout>
-    </ScrollView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line" />
 
-        <Button
-            android:id="@+id/confirm"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:background="@drawable/button_selector2"
-            android:text="@string/ok"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_40dp"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="@string/work_woactivity_udremark"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+            <EditText
+                android:id="@+id/work_woactivity_udremark"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:inputType="textMultiLine"
+                android:gravity="center_vertical"
+                android:textColor="@color/light_black"
+                android:textSize="@dimen/dimens_16dp" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line" />
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dimen_40dp"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/work_woactivity_targstartdate"-->
+                <!--android:textColor="@color/light_black"-->
+                <!--android:textSize="@dimen/dimens_16dp" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/work_woactivity_targstartdate"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                <!--android:hint="@string/have_not_data"-->
+                <!--android:textColor="@color/light_black"-->
+                <!--android:textSize="@dimen/dimens_16dp" />-->
+        <!--</LinearLayout>-->
+
+        <!--<View-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@drawable/line"></View>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dimen_40dp"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/work_woactivity_targcompdate"-->
+                <!--android:textColor="@color/light_black"-->
+                <!--android:textSize="@dimen/dimens_16dp" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/work_woactivity_targcompdate"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                <!--android:hint="@string/have_not_data"-->
+                <!--android:textColor="@color/light_black"-->
+                <!--android:textSize="@dimen/dimens_16dp" />-->
+        <!--</LinearLayout>-->
+
+        <!--<View-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@drawable/line"></View>-->
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dimen_40dp"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/work_woactivity_actstart"-->
+                <!--android:textColor="@color/light_black"-->
+                <!--android:textSize="@dimen/dimens_16dp" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/work_woactivity_actstart"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                <!--android:hint="@string/have_not_data"-->
+                <!--android:textColor="@color/light_black"-->
+                <!--android:textSize="@dimen/dimens_16dp" />-->
+        <!--</LinearLayout>-->
+
+        <!--<View-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@drawable/line"></View>-->
+
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dimen_40dp"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/work_woactivity_actfinish"-->
+                <!--android:textColor="@color/light_black"-->
+                <!--android:textSize="@dimen/dimens_16dp" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/work_woactivity_actfinish"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                <!--android:hint="@string/have_not_data"-->
+                <!--android:textColor="@color/light_black"-->
+                <!--android:textSize="@dimen/dimens_16dp" />-->
+        <!--</LinearLayout>-->
+
+        <!--<View-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@drawable/line"></View>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/dimen_40dp"-->
+            <!--android:layout_marginLeft="@dimen/dimen_5"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/work_woactivity_estdur"-->
+                <!--android:textColor="@color/light_black"-->
+                <!--android:textSize="@dimen/dimens_16dp" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/work_woactivity_estdur"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/dimen_5"-->
+                <!--android:hint="@string/have_not_data"-->
+                <!--android:textColor="@color/light_black"-->
+                <!--android:textSize="@dimen/dimens_16dp" />-->
+        <!--</LinearLayout>-->
+
+        <!--<View-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:background="@drawable/line"></View>-->
+
+
     </LinearLayout>
+
+    <include layout="@layout/work_buttom3"></include>
 </RelativeLayout>

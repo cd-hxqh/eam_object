@@ -27,6 +27,7 @@ import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.utils.DateSelect;
 import cdhxqh.shekou.utils.DateTimeSelect;
+import cdhxqh.shekou.utils.TimeSelect;
 
 /**
  * Created by think on 2016/5/10.
@@ -54,6 +55,7 @@ public class AddLabtransActivity extends BaseActivity {
 //    private TextView assetnum;//资产
 //    private TextView transtype;//类型
     private Button confirm;
+    private Button delete;
 
     private ArrayList<Woactivity> woactivityList = new ArrayList<>();
     private BaseAnimatorSet mBasIn;
@@ -93,6 +95,7 @@ public class AddLabtransActivity extends BaseActivity {
 //        assetnum = (TextView) findViewById(R.id.work_labtrans_assetnum);
 //        transtype = (TextView) findViewById(R.id.work_labtrans_transtype);
         confirm = (Button) findViewById(R.id.confirm);
+        delete = (Button) findViewById(R.id.work_delete);
     }
 
     @Override
@@ -117,17 +120,18 @@ public class AddLabtransActivity extends BaseActivity {
         starttime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DateTimeSelect(AddLabtransActivity.this,starttime).showDialog();
+                new TimeSelect(AddLabtransActivity.this,starttime).showDialog();
             }
         });
         finishtime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DateTimeSelect(AddLabtransActivity.this,finishtime).showDialog();
+                new TimeSelect(AddLabtransActivity.this,finishtime).showDialog();
             }
         });
 
         confirm.setOnClickListener(confirmOnClickListener);
+        delete.setOnClickListener(deleteOnClickListener);
     }
 
     private View.OnClickListener actualstaskidOnClickListener = new View.OnClickListener() {
@@ -207,6 +211,13 @@ public class AddLabtransActivity extends BaseActivity {
             intent.putExtra("labtrans", getLabtrans());
             AddLabtransActivity.this.setResult(1, intent);
             Toast.makeText(AddLabtransActivity.this, "实际员工本地新增成功", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    };
+
+    private View.OnClickListener deleteOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
             finish();
         }
     };

@@ -25,10 +25,12 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
+import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.ui.adapter.WoactivityAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
+import cdhxqh.shekou.utils.AccountUtils;
 
 /**
  * Created by think on 2016/5/10.
@@ -44,7 +46,7 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
     private WoactivityAdapter woactivityAdapter;
     private SwipeRefreshLayout refresh_layout = null;
     private int page = 1;
-    private WorkOrder workOrder;
+    public WorkOrder workOrder;
     public ArrayList<Woactivity> woactivityList = new ArrayList<>();
 
     private BaseAnimatorSet mBasIn;
@@ -107,6 +109,12 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
         mBasIn = new BounceTopEnter();
         mBasOut = new SlideBottomExit();
 
+        if ((workOrder.status != null && workOrder.status.equals(Constants.STATUS25))||workOrder.isnew) {
+            menuImageView.setVisibility(View.VISIBLE);
+        }else {
+            menuImageView.setVisibility(View.GONE);
+        }
+
         if (!workOrder.isnew && (woactivityList == null || woactivityList.size() == 0)) {
             refresh_layout.setRefreshing(true);
             getdata();
@@ -121,7 +129,7 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
 
     private void getdata() {
         if (workOrder.wonum != null && !workOrder.wonum.equals("")) {
-            HttpManager.getDataPagingInfo(Woactivity_Activity.this, HttpManager.getwoactivityUrl(workOrder.worktype, workOrder.wonum, page, 20), new HttpRequestHandler<Results>() {
+            HttpManager.getDataPagingInfo(Woactivity_Activity.this, HttpManager.getwoactivityUrl(workOrder.worktype, workOrder.wonum, AccountUtils.getinsertSite(Woactivity_Activity.this), page, 20), new HttpRequestHandler<Results>() {
                 @Override
                 public void onSuccess(Results results) {
                     Log.i(TAG, "data=" + results);

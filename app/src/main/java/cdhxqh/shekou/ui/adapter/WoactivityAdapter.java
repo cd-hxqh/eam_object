@@ -53,6 +53,7 @@ public class WoactivityAdapter extends RecyclerView.Adapter<WoactivityAdapter.Vi
                 Intent intent = new Intent(mContext, WoactivityDetailsActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("woactivity", woactivity);
+                bundle.putSerializable("workOrder",mContext.workOrder);
                 bundle.putSerializable("position", position);
                 intent.putExtras(bundle);
                 mContext.startActivityForResult(intent, 2);

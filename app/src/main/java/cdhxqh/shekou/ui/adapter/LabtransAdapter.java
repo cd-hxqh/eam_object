@@ -56,6 +56,7 @@ public class LabtransAdapter extends RecyclerView.Adapter<LabtransAdapter.ViewHo
                 bundle.putSerializable("labtrans",labtrans);
                 bundle.putSerializable("woactivityList", mContext.woactivityList);
                 bundle.putSerializable("position", position);
+                bundle.putString("status",mContext.workOrder.status);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }

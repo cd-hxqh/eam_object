@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,11 +57,14 @@ public class LabtransDetailsActivity extends BaseActivity {
 
     private int position;
     private ArrayList<Woactivity> woactivityList = new ArrayList<>();
+    private String status;
     private BaseAnimatorSet mBasIn;
     private BaseAnimatorSet mBasOut;
     private ArrayList<DialogMenuItem> mMenuItems = new ArrayList<>();
 
+    private LinearLayout buttonlayout;
     private Button confirm;//确定
+    private Button delete;//删除
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +83,7 @@ public class LabtransDetailsActivity extends BaseActivity {
         labtrans = (Labtrans) getIntent().getSerializableExtra("labtrans");
         woactivityList = (ArrayList<Woactivity>) getIntent().getSerializableExtra("woactivityList");
         position = getIntent().getIntExtra("position",0);
+        status = getIntent().getStringExtra("status");
     }
     @Override
     protected void findViewById() {
@@ -96,7 +101,9 @@ public class LabtransDetailsActivity extends BaseActivity {
 //        assetnum = (TextView) findViewById(R.id.work_labtrans_assetnum);
 //        transtype = (TextView) findViewById(R.id.work_labtrans_transtype);
 
+        buttonlayout = (LinearLayout) findViewById(R.id.button_layout);
         confirm = (Button) findViewById(R.id.confirm);
+        delete = (Button) findViewById(R.id.work_delete);
     }
 
     @Override
@@ -120,6 +127,13 @@ public class LabtransDetailsActivity extends BaseActivity {
 //        assetnum.setText(labtrans.assetnum);
 //        transtype.setText(labtrans.transtype);
 
+        if (status != null && (status.equals(Constants.STATUS7)
+                || status.equals(Constants.STATUS18) || status.equals(Constants.STATUS10))) {
+            buttonlayout.setVisibility(View.VISIBLE);
+        }else {
+            buttonlayout.setVisibility(View.GONE);
+        }
+
         actualstaskid.setOnClickListener(actualstaskidOnClickListener);
         laborcode.setOnClickListener(new LayoutOnClickListener(Constants.LABORCRAFTRATECODE));
         startdate.setOnClickListener(new View.OnClickListener() {
@@ -142,6 +156,7 @@ public class LabtransDetailsActivity extends BaseActivity {
         });
 
         confirm.setOnClickListener(confirmOnClickListener);
+        delete.setOnClickListener(deleteOnClickListener);
     }
 
     private View.OnClickListener actualstaskidOnClickListener = new View.OnClickListener() {
@@ -239,6 +254,23 @@ public class LabtransDetailsActivity extends BaseActivity {
             }
             intent.putExtra("position", position);
             LabtransDetailsActivity.this.setResult(2, intent);
+            finish();
+        }
+    };
+
+    private View.OnClickListener deleteOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = getIntent();
+            intent.putExtra("position", position);
+            if (labtrans.labtransid == null||labtrans.labtransid.equals("")){
+                LabtransDetailsActivity.this.setResult(3, intent);
+            }else {
+                Labtrans labtrans = getLabtrans();
+                labtrans.optiontype = "delete";
+                intent.putExtra("labtrans", labtrans);
+                LabtransDetailsActivity.this.setResult(4, intent);
+            }
             finish();
         }
     };

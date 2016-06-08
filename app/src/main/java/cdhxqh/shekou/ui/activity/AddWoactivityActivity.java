@@ -38,6 +38,7 @@ public class AddWoactivityActivity extends BaseActivity {
     private EditText udyqyy;//延期原因
     private EditText udremark;//备注
     private Button confirm;//确定
+    private Button delete;//删除
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class AddWoactivityActivity extends BaseActivity {
         udyqyy = (EditText) findViewById(R.id.work_woactivity_udyqyy);
         udremark = (EditText) findViewById(R.id.work_woactivity_udremark);
         confirm = (Button) findViewById(R.id.confirm);
+        delete = (Button) findViewById(R.id.work_delete);
     }
 
     @Override
@@ -77,6 +79,7 @@ public class AddWoactivityActivity extends BaseActivity {
         taskid.setText(getIntent().getIntExtra("taskid", 0) + "");
 
         confirm.setOnClickListener(confirmOnClickListener);
+        delete.setOnClickListener(deleteOnClickListener);
     }
 
     private Woactivity getWoactivity() {
@@ -100,6 +103,13 @@ public class AddWoactivityActivity extends BaseActivity {
             intent.putExtra("woactivity",getWoactivity());
             AddWoactivityActivity.this.setResult(1, intent);
             Toast.makeText(AddWoactivityActivity.this, "任务本地新增成功", Toast.LENGTH_SHORT).show();
+            finish();
+        }
+    };
+
+    private View.OnClickListener deleteOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
             finish();
         }
     };

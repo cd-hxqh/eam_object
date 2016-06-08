@@ -18,36 +18,43 @@
         android:padding="@dimen/dimens_10">
 
         <LinearLayout
-            android:id="@+id/wonum_linearLayout_id"
+            android:id="@+id/wonum_layout"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dimen_40dp"
-            android:layout_marginLeft="@dimen/dimen_5"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="@string/work_num"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
-
-            <TextView
-                android:id="@+id/work_wonum"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dimen_40dp"
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:gravity="center_vertical"
-                android:hint="@string/have_not_data"
-                android:textColor="@color/light_black"
-                android:textSize="@dimen/dimens_16dp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/work_num"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/dimens_16dp" />
+
+                <TextView
+                    android:id="@+id/work_wonum"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_5"
+                    android:gravity="center_vertical"
+                    android:hint="@string/have_not_data"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/dimens_16dp" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/line" />
         </LinearLayout>
 
-        <View
-            android:id="@+id/wonum_view_id"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@drawable/line" />
 
         <LinearLayout
             android:id="@+id/work_description_layout"
@@ -57,7 +64,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/dimen_40dp"
                 android:layout_marginLeft="@dimen/dimen_5"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -74,9 +81,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
-                    android:inputType="textMultiLine"
                     android:gravity="center_vertical"
                     android:hint="@string/work_description_hint"
+                    android:inputType="textMultiLine"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
 
@@ -150,6 +157,11 @@
             android:layout_height="1dp"
             android:background="@drawable/line" />
 
+        <LinearLayout
+            android:id="@+id/gl_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_40dp"
@@ -239,7 +251,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@drawable/line" />
-
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen_40dp"

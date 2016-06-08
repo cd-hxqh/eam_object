@@ -41,6 +41,7 @@ import cdhxqh.shekou.model.WorkResult;
 import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.DateTimeSelect;
 import cdhxqh.shekou.utils.GetDateAndTime;
+import cdhxqh.shekou.utils.WorkTitle;
 import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
@@ -72,13 +73,13 @@ public class Work_AddNewActivity extends BaseActivity {
     private WorkOrder workOrder = new WorkOrder();
     private LinearLayout reportLinearLayout;
     private LinearLayout work_numlayout;
-    private LinearLayout numlayout;
+    private LinearLayout wonum_layout;
     private TextView wonum;//工单号
-    private View wonumview;//工单号
     private EditText description;//工单描述
     private LinearLayout description_layout;
     private TextView worktype;//工作类型
     private TextView assetnum;//设备
+    private LinearLayout gl_layout;
     private TextView woeq1;//管理组
     private TextView woeq2;//管理室
     private TextView woeq3;//管理班组
@@ -167,13 +168,13 @@ public class Work_AddNewActivity extends BaseActivity {
         backlayout = (RelativeLayout) findViewById(R.id.title_back);
 
         work_numlayout = (LinearLayout) findViewById(R.id.work_numlayout);
-        numlayout = (LinearLayout) findViewById(R.id.wonum_linearLayout_id);
+        wonum_layout = (LinearLayout) findViewById(R.id.wonum_layout);
         wonum = (TextView) findViewById(R.id.work_wonum);
-        wonumview = (View) findViewById(R.id.wonum_view_id);
         description = (EditText) findViewById(R.id.work_description);
         description_layout = (LinearLayout) findViewById(R.id.work_description_layout);
         worktype = (TextView) findViewById(R.id.work_worktype);
         assetnum = (TextView) findViewById(R.id.work_assetnum);
+        gl_layout = (LinearLayout) findViewById(R.id.gl_layout);
         woeq1 = (TextView) findViewById(R.id.work_glz);
         woeq2 = (TextView) findViewById(R.id.work_gls);
         woeq3 = (TextView) findViewById(R.id.work_glbz);
@@ -232,7 +233,7 @@ public class Work_AddNewActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        titlename.setText(getResources().getString(R.string.work_new));
+        titlename.setText(WorkTitle.getTitle(workOrder.worktype));
         backlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -242,9 +243,10 @@ public class Work_AddNewActivity extends BaseActivity {
         menuImageView.setImageResource(R.drawable.ic_drawer);
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
-        numlayout.setVisibility(View.GONE);
-        wonumview.setVisibility(View.GONE);
+        wonum_layout.setVisibility(View.GONE);
+        gl_layout.setVisibility(View.GONE);
         work_flow.setVisibility(View.GONE);
+
         workOrder.isnew = true;
 
         worktype.setText(workOrder.worktype);
@@ -257,7 +259,7 @@ public class Work_AddNewActivity extends BaseActivity {
         udyxj.setOnClickListener(udyxjOnClickListener);
 
         statusdate.setText(GetDateAndTime.GetDateTime());
-        udcreateby.setText(AccountUtils.getdisplayName(Work_AddNewActivity.this));
+        udcreateby.setText(AccountUtils.getpersonId(Work_AddNewActivity.this));
         udcreatedate.setText(GetDateAndTime.GetDateTime());
 
         assetnum.setOnClickListener(new LayoutOnClickListener(Constants.ASSETCODE));

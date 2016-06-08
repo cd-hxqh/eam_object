@@ -25,6 +25,7 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
+import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
@@ -46,7 +47,7 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
     private LabtransAdapter labtransAdapter;
     private SwipeRefreshLayout refresh_layout = null;
     private int page = 1;
-    private WorkOrder workOrder;
+    public WorkOrder workOrder;
     private BaseAnimatorSet mBasIn;
     private BaseAnimatorSet mBasOut;
     private LinearLayout confirmlayout;
@@ -111,6 +112,13 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
         mBasIn = new BounceTopEnter();
         mBasOut = new SlideBottomExit();
 
+        if (workOrder.status != null && (workOrder.status.equals(Constants.STATUS7)
+                || workOrder.status.equals(Constants.STATUS18) || workOrder.status.equals(Constants.STATUS10))) {
+            menuImageView.setVisibility(View.VISIBLE);
+        }else {
+            menuImageView.setVisibility(View.GONE);
+        }
+
         if (!workOrder.isnew && (labtransList == null || labtransList.size() == 0)) {
             refresh_layout.setRefreshing(true);
             getdata();
@@ -118,15 +126,15 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
         } else {
             if (labtransList != null && labtransList.size() != 0) {
                 labtransAdapter.update(labtransList, true);
-            }else {
+            } else {
                 nodatalayout.setVisibility(View.VISIBLE);
             }
         }
     }
 
     private void getdata() {
-        if (workOrder.wonum!=null&&!workOrder.wonum.equals("")) {
-            HttpManager.getDataPagingInfo(LabtransListActivity.this, HttpManager.getlabtransUrl(workOrder.worktype,workOrder.wonum, page, 20), new HttpRequestHandler<Results>() {
+        if (workOrder.wonum != null && !workOrder.wonum.equals("")) {
+            HttpManager.getDataPagingInfo(LabtransListActivity.this, HttpManager.getlabtransUrl(workOrder.worktype, workOrder.wonum, page, 20), new HttpRequestHandler<Results>() {
                 @Override
                 public void onSuccess(Results results) {
                     Log.i(TAG, "data=" + results);
@@ -136,7 +144,7 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
                 public void onSuccess(Results results, int currentPage, int showcount) {
                     ArrayList<Labtrans> labtranses = null;
                     if (currentPage == page) {
-                        labtranses = JsonUtils.parsingLabtrans(LabtransListActivity.this, results.getResultlist(),workOrder.wonum);
+                        labtranses = JsonUtils.parsingLabtrans(LabtransListActivity.this, results.getResultlist(), workOrder.wonum);
                     }
                     addListData(labtranses);
                     refresh_layout.setRefreshing(false);
@@ -152,7 +160,7 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
                     refresh_layout.setLoading(false);
                 }
             });
-        }else {
+        } else {
             refresh_layout.setRefreshing(false);
             refresh_layout.setLoading(false);
         }
@@ -228,7 +236,7 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
         @Override
         public void onClick(View v) {
             Intent intent = getIntent();
-            intent.putExtra("labtransList",labtransAdapter.getList());
+            intent.putExtra("labtransList", labtransAdapter.getList());
             LabtransListActivity.this.setResult(2000, intent);
             LabtransListActivity.this.finish();
         }

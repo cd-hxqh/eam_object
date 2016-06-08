@@ -53,6 +53,7 @@ public class DateSelect {
             } else {
                 sb.append(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
             }
+            updateLabel(textView);
         }
     }
 

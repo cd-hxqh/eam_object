@@ -176,6 +176,34 @@ public class Constants {
     public static final String ACCIDENT = "EV";//事故工单
     public static final String REPAIR = "EM";//抢修工单
 
+    //工单状态
+    public static final String STATUS1 = "已批准";
+    public static final String STATUS2 = "取消";
+    public static final String STATUS3 = "关闭";
+    public static final String STATUS4 = "完成";
+    public static final String STATUS5 = "等待厂家处理";
+    public static final String STATUS6 = "已验收";
+    public static final String STATUS7 = "工单执行";
+    public static final String STATUS8 = "已完成/关闭";
+    public static final String STATUS9 = "提交监督审核";
+    public static final String STATUS10 = "提交主任审核";
+    public static final String STATUS11 = "工作计划";
+    public static final String STATUS12 = "未通过实现后复审";
+    public static final String STATUS13 = "调度";
+    public static final String STATUS14 = "调度";
+    public static final String STATUS15 = "复审";
+    public static final String STATUS16 = "已拒绝";
+    public static final String STATUS17 = "已拒绝";
+    public static final String STATUS18 = "提交主任分配";
+    public static final String STATUS19 = "工单修正";
+    public static final String STATUS20 = "询比价处理";
+    public static final String STATUS21 = "审核完成";
+    public static final String STATUS22 = "外协执行";
+    public static final String STATUS23 = "外协执行完成";
+    public static final String STATUS24 = "服务验收";
+    public static final String STATUS25 = "工单建立";
+
+
 
 
     /**设置数据库参数-开始**/

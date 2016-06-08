@@ -7,11 +7,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Woactivity;
+import cdhxqh.shekou.model.WorkOrder;
 
 /**
  * Created by think on 2015/11/6.
@@ -28,6 +31,7 @@ public class WoactivityDetailsActivity extends BaseActivity {
     private TextView titleTextView;
 
     private Woactivity woactivity = new Woactivity();
+    private WorkOrder workOrder;
     private int position;
 
     private TextView taskid;//任务
@@ -38,7 +42,9 @@ public class WoactivityDetailsActivity extends BaseActivity {
     private CheckBox udisyq;//是否延期
     private EditText udyqyy;//延期原因
     private EditText udremark;//备注
+    private LinearLayout buttonlayout;
     private Button confirm;//确定
+    private Button delete;//删除
 
 
     @Override
@@ -53,6 +59,7 @@ public class WoactivityDetailsActivity extends BaseActivity {
 
     private void geiIntentData() {
         woactivity = (Woactivity) getIntent().getSerializableExtra("woactivity");
+        workOrder = (WorkOrder) getIntent().getSerializableExtra("workOrder");
         position = getIntent().getIntExtra("position",0);
     }
 
@@ -69,7 +76,9 @@ public class WoactivityDetailsActivity extends BaseActivity {
         udisyq = (CheckBox) findViewById(R.id.work_woactivity_udisyq);
         udyqyy = (EditText) findViewById(R.id.work_woactivity_udyqyy);
         udremark = (EditText) findViewById(R.id.work_woactivity_udremark);
+        buttonlayout = (LinearLayout) findViewById(R.id.button_layout);
         confirm = (Button) findViewById(R.id.confirm);
+        delete = (Button) findViewById(R.id.work_delete);
     }
 
     @Override
@@ -91,7 +100,14 @@ public class WoactivityDetailsActivity extends BaseActivity {
         udyqyy.setText(woactivity.udyqyy);
         udremark.setText(woactivity.udremark);
 
+        if ((workOrder.status != null && workOrder.status.equals(Constants.STATUS25))||workOrder.isnew) {
+            buttonlayout.setVisibility(View.VISIBLE);
+        }else {
+            buttonlayout.setVisibility(View.GONE);
+        }
+
         confirm.setOnClickListener(confirmOnClickListener);
+        delete.setOnClickListener(deleteOnClickListener);
     }
 
     private Woactivity getWoactivity() {
@@ -130,6 +146,23 @@ public class WoactivityDetailsActivity extends BaseActivity {
             }
             intent.putExtra("position", position);
             WoactivityDetailsActivity.this.setResult(2, intent);
+            finish();
+        }
+    };
+
+    private View.OnClickListener deleteOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = getIntent();
+            intent.putExtra("position", position);
+            if (woactivity.workorderid == null||woactivity.workorderid.equals("")){
+                WoactivityDetailsActivity.this.setResult(3, intent);
+            }else {
+                Woactivity woactivity = getWoactivity();
+                woactivity.optiontype = "delete";
+                intent.putExtra("woactivity", woactivity);
+                WoactivityDetailsActivity.this.setResult(4, intent);
+            }
             finish();
         }
     };
