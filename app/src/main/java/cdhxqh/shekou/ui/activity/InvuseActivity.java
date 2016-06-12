@@ -52,7 +52,9 @@ public class InvuseActivity extends BaseActivity implements SwipeRefreshLayout.O
      */
     private EditText searchEditText;
 
-    /**添加功能**/
+    /**
+     * 添加功能*
+     */
     private ImageView addImageView;
 
     /**
@@ -99,7 +101,6 @@ public class InvuseActivity extends BaseActivity implements SwipeRefreshLayout.O
      */
     private void getInitData() {
         udapptype = getIntent().getExtras().getString("udapptype");
-        Log.i(TAG, "udapptype=" + udapptype);
     }
 
     @Override
@@ -134,9 +135,9 @@ public class InvuseActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     @Override
     protected void initView() {
-        if(udapptype.equals("USE")){//工单领料
+        if (udapptype.equals("USE")) {//工单领料
             titleTextView.setText(getString(R.string.work_invuse_title));
-        }else{
+        } else {
             titleTextView.setText(getString(R.string.not_work_invuse_title));
         }
         backImageView.setOnClickListener(backImageViewOnClickListener);
@@ -166,8 +167,8 @@ public class InvuseActivity extends BaseActivity implements SwipeRefreshLayout.O
     private View.OnClickListener addImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent=getIntent();
-            intent.setClass(InvuseActivity.this,AddinvuseActivity.class);
+            Intent intent = getIntent();
+            intent.setClass(InvuseActivity.this, AddinvuseActivity.class);
             startActivityForResult(intent, 0);
         }
     };
@@ -220,7 +221,12 @@ public class InvuseActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     @Override
     public void onRefresh() {
-        mSwipeLayout.setRefreshing(false);
+        page = 1;
+        invuseAdapter.removeAllData();
+        notLinearLayout.setVisibility(View.GONE);
+        mSwipeLayout.setRefreshing(true);
+        getItemList(vlaue, udapptype);
+
     }
 
 

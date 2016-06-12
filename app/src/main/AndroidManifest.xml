@@ -155,6 +155,7 @@
         </activity>
         <activity
             android:name=".ui.activity.InvuseDetailsActivity"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"
             android:label="InvuseDetailsActivity" >
         </activity>
         <activity

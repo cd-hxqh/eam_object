@@ -6,9 +6,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +21,9 @@ import com.flyco.animation.SlideExit.SlideBottomExit;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.flyco.dialog.widget.MaterialDialog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.InvuseResult;
@@ -25,6 +31,7 @@ import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Matusetrans;
 import cdhxqh.shekou.utils.AccountUtils;
+import cdhxqh.shekou.utils.MessageUtils;
 import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
@@ -138,6 +145,11 @@ public class InvuseDetailsActivity extends BaseActivity {
      */
     private TextView changedateText;
 
+    /**
+     * 审批工作流布局*
+     */
+    private LinearLayout boottomLinearLayout;
+
 
     /**
      * 审批工作流
@@ -149,6 +161,21 @@ public class InvuseDetailsActivity extends BaseActivity {
      */
 
     private Button materialBtn;
+
+
+    /**
+     * 编辑布局*
+     */
+    private LinearLayout editLinearLayout;
+    /**
+     * 修改*
+     */
+    private Button updateButton;
+    /**
+     * 删除*
+     */
+    private Button deleteButton;
+
 
     /**
      * matusetrans*
@@ -171,7 +198,6 @@ public class InvuseDetailsActivity extends BaseActivity {
 
     private void geiIntentData() {
         invuse = (Invuse) getIntent().getParcelableExtra("invuse");
-        Log.i(TAG,"udapptype="+invuse.udapptype+"invusenum="+invuse.invusenum);
     }
 
     @Override
@@ -206,6 +232,11 @@ public class InvuseDetailsActivity extends BaseActivity {
         worlflowBtn = (Button) findViewById(R.id.approval_button_id);
 
         materialBtn = (Button) findViewById(R.id.invuseline_button_id);
+
+        boottomLinearLayout = (LinearLayout) findViewById(R.id.boottom_id);
+        editLinearLayout = (LinearLayout) findViewById(R.id.edit_id);
+        updateButton = (Button) findViewById(R.id.update_button_id);
+        deleteButton = (Button) findViewById(R.id.delete_button_id);
 
         if (invuse != null) {
             invusenumText.setText(invuse.invusenum == null ? "暂无数据" : invuse.invusenum);
@@ -248,9 +279,12 @@ public class InvuseDetailsActivity extends BaseActivity {
 
         materialBtn.setOnClickListener(materialBtnOnClickListener);
         worlflowBtn.setOnClickListener(worlflowBtnBtnOnClickListener);
+        updateButton.setOnClickListener(updateButtonOnClickListener);
+        deleteButton.setOnClickListener(deleteButtonOnClickListener);
 
         mBasIn = new BounceTopEnter();
         mBasOut = new SlideBottomExit();
+
 
     }
 
@@ -350,13 +384,54 @@ public class InvuseDetailsActivity extends BaseActivity {
     }
 
     /**
-     * 修改信息*
+     * 编辑信息*
      */
     private View.OnClickListener updateImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
+
+//            showProgressDialog("数据更新中...");
+//            startAsyncTask();
+
+            if (boottomLinearLayout.isShown()) {
+                boottomLinearLayout.setVisibility(View.GONE);
+                editLinearLayout.setVisibility(View.VISIBLE);
+                Animation animation = AnimationUtils.loadAnimation(InvuseDetailsActivity.this, R.anim.slide_bottom_to_top);
+                editLinearLayout.startAnimation(animation);
+            } else {
+                boottomLinearLayout.setVisibility(View.VISIBLE);
+                editLinearLayout.setVisibility(View.GONE);
+                Animation animation = AnimationUtils.loadAnimation(InvuseDetailsActivity.this, R.anim.slide_bottom_to_top);
+                boottomLinearLayout.startAnimation(animation);
+            }
+
+        }
+    };
+
+    /**
+     * 修改信息*
+     */
+    private View.OnClickListener updateButtonOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
             showProgressDialog("数据更新中...");
             startAsyncTask();
+
+
+        }
+    };
+    /**
+     * 删除信息*
+     */
+    private View.OnClickListener deleteButtonOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            showProgressDialog("数据删除中...");
+            deleteAsyncTask();
+
+
         }
     };
 
@@ -375,7 +450,7 @@ public class InvuseDetailsActivity extends BaseActivity {
         String udjbr = udjbr_displaynameText.getText().toString();//物管员经办人
         String status = invuse.status;//物管员经办人
         String udapptype = invuse.udapptype;//类型
-        Log.i(TAG,"udapptype="+udapptype);
+        Log.i(TAG, "udapptype=" + udapptype);
         String udreason = invuse.udreason;//原因
         String statusdate = invuse.statusdate;//状态日期
         String createdate = invuse.createdate;//创建日期
@@ -404,7 +479,6 @@ public class InvuseDetailsActivity extends BaseActivity {
     private void startAsyncTask() {
 
         final String updataInfo = JsonUtils.InvuseToJson(encapsulationInvuse(), null);
-        Log.i(TAG,"updataInfo="+updataInfo);
         new AsyncTask<String, String, InvuseResult>() {
             @Override
             protected InvuseResult doInBackground(String... strings) {
@@ -419,15 +493,54 @@ public class InvuseDetailsActivity extends BaseActivity {
 
 
                 if (invuseResult == null) {
-                    Toast.makeText(InvuseDetailsActivity.this, "更新工单失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InvuseDetailsActivity.this, "更新失败", Toast.LENGTH_SHORT).show();
                 } else if (!invuseResult.errorMsg.equals("成功!")) {
 
                     Toast.makeText(InvuseDetailsActivity.this, invuseResult.errorMsg, Toast.LENGTH_SHORT).show();
                     finish();
                 } else if (invuseResult.errorMsg.equals("成功!")) {
-                    Toast.makeText(InvuseDetailsActivity.this, "工单" + invuseResult.invusenum + "更新成功", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(InvuseDetailsActivity.this, "领料单" + invuseResult.invusenum + "更新成功", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
+                closeProgressDialog();
+            }
+        }.execute();
+    }
+
+    /**
+     * 删除数据*
+     */
+    private void deleteAsyncTask() {
+
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                String result = AndroidClientService.DeleteInvuse(invuse.invusenum, AccountUtils.getpersonId(InvuseDetailsActivity.this), Constants.INVUSE_URL);
+
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String result) {
+                super.onPostExecute(result);
+                String success;
+                String msg;
+                try {
+                    JSONObject jsonObject = new JSONObject(result);
+                    success = jsonObject.getString("success");
+                    msg = jsonObject.getString("msg");
+                    if (success.equals("1")) {
+                        MessageUtils.showMiddleToast(InvuseDetailsActivity.this, msg);
+                        finish();
+                    } else {
+                        MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "删除失败");
+                    }
+
+                } catch (JSONException e) {
+                    MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "删除失败");
+                }
+
+
                 closeProgressDialog();
             }
         }.execute();
