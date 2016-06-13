@@ -189,7 +189,11 @@ public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
     @Override
     public void onRefresh() {
-        mSwipeLayout.setRefreshing(false);
+        page = 1;
+        wfassigAdapter.removeAllData();
+        notLinearLayout.setVisibility(View.GONE);
+        mSwipeLayout.setRefreshing(true);
+        getItemList(vlaue, page);
     }
 
 

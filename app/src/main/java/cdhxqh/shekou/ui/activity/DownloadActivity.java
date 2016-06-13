@@ -51,6 +51,7 @@ import cdhxqh.shekou.model.Pm;
 import cdhxqh.shekou.model.Projappr;
 import cdhxqh.shekou.model.Udev;
 import cdhxqh.shekou.utils.AccountUtils;
+import cdhxqh.shekou.utils.MessageUtils;
 
 /**
  * Created by think on 2015/12/25.
@@ -59,7 +60,9 @@ import cdhxqh.shekou.utils.AccountUtils;
 public class DownloadActivity extends BaseActivity {
 
     private static final String TAG = "DownloadActivity";
-    private static final int START = 0;
+    private static final int START = 0; //工单
+    private static final int START1 = 1; //领料单
+    private static final int REFRESH_ITEM = 2; //刷洗子项
     /**
      * 标题*
      */
@@ -73,52 +76,58 @@ public class DownloadActivity extends BaseActivity {
     List<String> groupArray = new ArrayList<String>();
     //子标题
     List<List<String>> childArray = new ArrayList<List<String>>();
+    /**
+     * 显示下载*
+     */
+    List<List<String>> isDownList = new ArrayList<List<String>>();
 
     private ProgressDialog mProgressDialog;
     private Button DownloadAll;
-    private int count = 0;
+    private int count = 0; //工单
+    private int count_1 = 1; //领料单
+
+
+    /**
+     * 定义List的url*
+     */
+    private List<String> urlList = new ArrayList<String>();
+
+    private MyExpandableListViewAdapter myExpandableListViewAdapter;
+
 
     Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case START:
-                    if (count < 10) {
-                        mProgressDialog = ProgressDialog.show(DownloadActivity.this, null,
-                                getString(R.string.downloading1) + childArray.get(0).get(count), true, true);
-                        mProgressDialog.setCanceledOnTouchOutside(false);
-                        mProgressDialog.setCancelable(false);
-                        if (count == 0) {//设备
-                            downloaddata(HttpManager.getAssetUrl("CCT"), childArray.get(0).get(count));
-                        }
-// else if (count == 1) {//资产
-//                            downloaddata(HttpManager.getUrl(Constants.ASSET_APPID, Constants.ASSET_NAME), childArray.get(0).get(count));
-//                        } else if (count == 2) {//故障类
-//                            downloaddata(HttpManager.getUrl(Constants.UDWOCM_APPID, Constants.FAILURECODE_NAME), childArray.get(0).get(count));
-//                        } else if (count == 3) {//问题代码
-//                            downloaddata(HttpManager.getUrl(Constants.UDWOCM_APPID, Constants.FAILURELIST_NAME), childArray.get(0).get(count));
-//                        } else if (count == 4) {//作业计划
-//                            downloaddata(HttpManager.getUrl(Constants.UDWOCM_APPID, Constants.JOBPLAN_NAME), childArray.get(0).get(count));
-//                        } else if (count == 5) {//人员
-//                            downloaddata(HttpManager.getUrl(Constants.PERSON_APPID, Constants.PERSON_NAME), childArray.get(0).get(count));
-//                        } else if (count == 6) {//员工
-//                            downloaddata(HttpManager.getUrl(Constants.LABOR_APPID, Constants.LABOR_NAME), childArray.get(0).get(count));
-//                        } else if (count == 7) {//工种
-//                            downloaddata(HttpManager.getUrl(Constants.CRAFTRATE_APPID, Constants.CRAFTRATE_NAME), childArray.get(0).get(count));
-//                        } else if (count == 8) {//项目
-//                            downloaddata(HttpManager.getUrl(Constants.ITEM_APPID, Constants.ITEM_NAME), childArray.get(0).get(count));
-//                        } else if (count == 9) {//员工工种
-//                            downloaddata(HttpManager.getUrl(Constants.LABORCRAFTRATE_APPID, Constants.LABORCRAFTRATE_NAME), childArray.get(0).get(count));
-//                        }
-                        count++;
-                    } else if (count == 10) {//全部下载完成
-                        mProgressDialog.dismiss();
-                        DownloadAll.setText(getResources().getString(R.string.downloaded));
+
+                    mProgressDialog.dismiss();
+                    DownloadAll.setText("已下载");
+                    for (int i = 0; i < isDownList.get(0).size(); i++) {
+                        isDownList.get(0).remove(i);
+                        isDownList.get(0).add(i,"已下载");
                     }
+
+
+                    myExpandableListViewAdapter.notifyDataSetChanged();
+
                     break;
-//                case F:
-//                    mProgressDialog.dismiss();
-//                    break;
+                case START1:
+                    mProgressDialog.dismiss();
+                    DownloadAll.setText("已下载");
+                    for (int i = 0; i < isDownList.get(1).size(); i++) {
+                        isDownList.get(1).remove(i);
+                        isDownList.get(1).add(i,"已下载");
+                    }
+
+
+                    myExpandableListViewAdapter.notifyDataSetChanged();
+
+                    break;
+                case REFRESH_ITEM:
+
+                    mProgressDialog.dismiss();
+                    break;
             }
         }
     };
@@ -168,10 +177,12 @@ public class DownloadActivity extends BaseActivity {
 
         List<String> tempArray02 = new ArrayList<String>();
         tempArray02.add("库房");
-        tempArray02.add("设备");
         childArray.add(tempArray01);
         childArray.add(tempArray02);
-        expandableListView.setAdapter(new MyExpandableListViewAdapter(this));
+        addisDown();
+        myExpandableListViewAdapter = new MyExpandableListViewAdapter(this);
+        expandableListView.setAdapter(myExpandableListViewAdapter);
+
 
     }
 
@@ -222,6 +233,7 @@ public class DownloadActivity extends BaseActivity {
         @Override
         public View getGroupView(int groupPosition, boolean isExpanded,
                                  View convertView, ViewGroup parent) {
+            final int p = groupPosition;
             GroupHolder groupHolder = null;
             if (convertView == null) {
                 convertView = getLayoutInflater().from(context).inflate(
@@ -235,6 +247,7 @@ public class DownloadActivity extends BaseActivity {
             }
             groupHolder.groupText.setText(groupArray.get(groupPosition));
             groupHolder.downAll.setOnClickListener(new downloadAll(groupPosition, groupHolder.downAll));
+
             return convertView;
         }
 
@@ -254,6 +267,7 @@ public class DownloadActivity extends BaseActivity {
             }
             itemHolder.childText.setText(childArray.get(groupPosition).get(
                     childPosition));
+            itemHolder.down.setText(isDownList.get(groupPosition).get(childPosition));
             itemHolder.down.setOnClickListener(new DownloadOnclickListener(groupPosition, childPosition, itemHolder.down));
             return convertView;
         }
@@ -264,6 +278,7 @@ public class DownloadActivity extends BaseActivity {
         }
 
     }
+
 
     class GroupHolder {
         public TextView groupText;
@@ -294,7 +309,6 @@ public class DownloadActivity extends BaseActivity {
             } else if (buttonText.equals(childArray.get(0).get(1))) {//作业计划
                 downloaddata(HttpManager.getJpNumUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(2))) {//人员
-                Log.i(TAG,"site="+AccountUtils.getinsertSite(DownloadActivity.this));
                 downloaddata(HttpManager.getPersonUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(3))) {//员工
                 downloaddata(HttpManager.getLaborUrl(AccountUtils.getinsertSite(DownloadActivity.this)), buttonText, button);
@@ -312,11 +326,7 @@ public class DownloadActivity extends BaseActivity {
                 downloaddata(HttpManager.getFailurelistUrl(), buttonText, button);
             } else if (buttonText.equals(childArray.get(0).get(10))) {//故障类别
                 downloaddata(HttpManager.getAlndomain2Url(), buttonText, button);
-            }
-
-
-
-            else if (buttonText.equals(childArray.get(1).get(0))) {//位置
+            } else if (buttonText.equals(childArray.get(1).get(0))) {//库房
                 downloaddata(HttpManager.getLocationUrl(), buttonText, button);
             }
             mProgressDialog = ProgressDialog.show(DownloadActivity.this, null,
@@ -330,7 +340,6 @@ public class DownloadActivity extends BaseActivity {
         HttpManager.getData(DownloadActivity.this, url, new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results data) {
-                Log.i(TAG,"data="+data);
                 if (data != null) {
                     if (buttonText.equals(childArray.get(0).get(0))) {//设备
                         List<Assets> asset = JsonUtils.parsingAsset(data.getResultlist());
@@ -353,7 +362,7 @@ public class DownloadActivity extends BaseActivity {
                     } else if (buttonText.equals(childArray.get(0).get(6))) {//立项申报
                         List<Projappr> projapprs = JsonUtils.parsingProjappr(data.getResultlist());
                         new ProjapprDao(DownloadActivity.this).create(projapprs);
-                    } else if (buttonText.equals(childArray.get(0).get(7))) {//工种
+                    } else if (buttonText.equals(childArray.get(0).get(7))) {//预防性维护
                         List<Pm> pms = JsonUtils.parsingPm(data.getResultlist());
                         new PmDao(DownloadActivity.this).create(pms);
                     } else if (buttonText.equals(childArray.get(0).get(8))) {//员工工种
@@ -362,10 +371,10 @@ public class DownloadActivity extends BaseActivity {
                     } else if (buttonText.equals(childArray.get(0).get(9))) {//故障代码
                         List<Failurelist> failurelists = JsonUtils.parsingFailurelist(data.getResultlist());
                         new FailurelistDao(DownloadActivity.this).create(failurelists);
-                    } else if (buttonText.equals(childArray.get(0).get(4))) {//抢修班组
+                    } else if (buttonText.equals(childArray.get(0).get(10))) {//故障类别
                         List<Alndomain2> alndomains = JsonUtils.parsingAlndomain2(data.getResultlist());
                         new Alndomain2Dao(DownloadActivity.this).create(alndomains);
-                    }else if (buttonText.equals(childArray.get(1).get(0))) {//库房
+                    } else if (buttonText.equals(childArray.get(1).get(0))) {//库房
 
                         List<Locations> locationses = JsonUtils.parsingLocations(data.getResultlist());
                         new LocationDao(DownloadActivity.this).create(locationses);
@@ -373,7 +382,7 @@ public class DownloadActivity extends BaseActivity {
                     mProgressDialog.dismiss();
                     button.setText(getResources().getString(R.string.downloaded));
                 } else {
-                    Toast.makeText(DownloadActivity.this, "下载数据出现问题", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(DownloadActivity.this, "下载数据出现问题");
                     mProgressDialog.dismiss();
                 }
             }
@@ -391,48 +400,53 @@ public class DownloadActivity extends BaseActivity {
         });
     }
 
-    private void downloaddata(String url, final String buttonText) {
+    private void downloaddata1(String url, final String buttonText) {
         HttpManager.getData(DownloadActivity.this, url, new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results data) {
+                mProgressDialog.setMessage(getString(R.string.downloading1) + buttonText);
+                count++;
                 if (data != null) {
-                    if (buttonText.equals(childArray.get(0).get(0))) {//位置
-//                            List<Assets> locations = Ig_Json_Model.parsingLocation(data);
-//                            new AssetDao(DownloadActivity.this).create(locations);
+                    if (buttonText.equals(childArray.get(0).get(0))) {//设备
+                        List<Assets> asset = JsonUtils.parsingAsset(data.getResultlist());
+                        new AssetDao(DownloadActivity.this).create(asset);
+                    } else if (buttonText.equals(childArray.get(0).get(1))) {//作业计划
+                        List<JobPlan> jobPlans = JsonUtils.parsingJobplan(data.getResultlist());
+                        new JobPlanDao(DownloadActivity.this).create(jobPlans);
+                    } else if (buttonText.equals(childArray.get(0).get(2))) {//人员
+                        List<Person> persons = JsonUtils.parsingPerson(data.getResultlist());
+                        new PersonDao(DownloadActivity.this).create(persons);
+                    } else if (buttonText.equals(childArray.get(0).get(3))) {//员工
+                        List<Labor> labors = JsonUtils.parsingLabor(data.getResultlist());
+                        new LaborDao(DownloadActivity.this).create(labors);
+                    } else if (buttonText.equals(childArray.get(0).get(4))) {//抢修班组
+                        List<Alndomain> alndomains = JsonUtils.parsingAlndomain(data.getResultlist());
+                        new AlndomainDao(DownloadActivity.this).create(alndomains);
+                    } else if (buttonText.equals(childArray.get(0).get(5))) {//事故
+                        List<Udev> udevs = JsonUtils.parsingUdev(data.getResultlist());
+                        new UdevDao(DownloadActivity.this).create(udevs);
+                    } else if (buttonText.equals(childArray.get(0).get(6))) {//立项申报
+                        List<Projappr> projapprs = JsonUtils.parsingProjappr(data.getResultlist());
+                        new ProjapprDao(DownloadActivity.this).create(projapprs);
+                    } else if (buttonText.equals(childArray.get(0).get(7))) {//预防性维护
+                        List<Pm> pms = JsonUtils.parsingPm(data.getResultlist());
+                        new PmDao(DownloadActivity.this).create(pms);
+                    } else if (buttonText.equals(childArray.get(0).get(8))) {//员工工种
+                        List<Laborcraftrate> laborcraftrates = JsonUtils.parsingLaborcraftrate(data.getResultlist());
+                        new LaborcraftrateDao(DownloadActivity.this).create(laborcraftrates);
+                    } else if (buttonText.equals(childArray.get(0).get(9))) {//故障代码
+                        List<Failurelist> failurelists = JsonUtils.parsingFailurelist(data.getResultlist());
+                        new FailurelistDao(DownloadActivity.this).create(failurelists);
+                    } else if (buttonText.equals(childArray.get(0).get(10))) {//故障类别
+                        List<Alndomain2> alndomains = JsonUtils.parsingAlndomain2(data.getResultlist());
+                        new Alndomain2Dao(DownloadActivity.this).create(alndomains);
                     }
-//                        else if (buttonText.equals(childArray.get(0).get(1))) {//资产
-//                            List<Assets> assets = Ig_Json_Model.parsingAsset(data);
-//                            new AssetDao(DownloadActivity.this).create(assets);
-//                        } else if (buttonText.equals(childArray.get(0).get(2))) {//故障类
-//                            List<Failurecode> failurecodes = Ig_Json_Model.parsingFailurecode(data);
-//                            new FailurecodeDao(DownloadActivity.this).create(failurecodes);
-//                        } else if (buttonText.equals(childArray.get(0).get(3))) {//问题代码
-//                            List<Failurelist> failurelists = Ig_Json_Model.parsingFailurelist(data);
-//                            new FailurelistDao(DownloadActivity.this).create(failurelists);
-//                        } else if (buttonText.equals(childArray.get(0).get(4))) {//作业计划
-//                            List<Jobplan> jobplans = Ig_Json_Model.parsingJobplan(data);
-//                            new JobplanDao(DownloadActivity.this).create(jobplans);
-//                        } else if (buttonText.equals(childArray.get(0).get(5))) {//人员
-//                            List<Person> jobplans = Ig_Json_Model.parsingPerson(data);
-//                            new PersonDao(DownloadActivity.this).create(jobplans);
-//                        } else if (buttonText.equals(childArray.get(0).get(6))) {//员工
-//                            List<Labor> jobplans = Ig_Json_Model.parsingLabor(data);
-//                            new LaborDao(DownloadActivity.this).create(jobplans);
-//                        } else if (buttonText.equals(childArray.get(0).get(7))) {//工种
-//                            List<Craftrate> craftrates = Ig_Json_Model.parsingCraftrate(data);
-//                            new CraftrateDao(DownloadActivity.this).create(craftrates);
-//                        } else if (buttonText.equals(childArray.get(0).get(8))) {//项目
-//                            List<Item> craftrates = Ig_Json_Model.parsingItem(data);
-//                            new ItemDao(DownloadActivity.this).create(craftrates);
-//                        } else if (buttonText.equals(childArray.get(0).get(9))) {//员工工种
-//                            List<Laborcraftrate> craftrates = Ig_Json_Model.parsingLaborcraftrate(data);
-//                            new LaborcraftrateDao(DownloadActivity.this).create(craftrates);
-//                        }
-                    mHandler.sendEmptyMessage(START);
-                    mProgressDialog.dismiss();
+                    if (count == childArray.get(0).size()) {
+
+                        mHandler.sendEmptyMessage(START);
+                    }
                 } else {
-                    Toast.makeText(DownloadActivity.this, "下载数据出现问题", Toast.LENGTH_SHORT).show();
-                    mProgressDialog.dismiss();
+                    MessageUtils.showMiddleToast(DownloadActivity.this, "下载数据出现问题");
                 }
             }
 
@@ -443,7 +457,41 @@ public class DownloadActivity extends BaseActivity {
 
             @Override
             public void onFailure(String error) {
-                Toast.makeText(DownloadActivity.this, "下载失败", Toast.LENGTH_SHORT).show();
+                MessageUtils.showMiddleToast(DownloadActivity.this, "下载失败");
+            }
+
+        });
+    }
+    private void downloaddata2(String url, final String buttonText) {
+        Log.i(TAG, "url=" + url);
+        HttpManager.getData(DownloadActivity.this, url, new HttpRequestHandler<Results>() {
+            @Override
+            public void onSuccess(Results data) {
+                mProgressDialog.setMessage(getString(R.string.downloading1) + buttonText);
+                count++;
+                if (data != null) {
+                    if (buttonText.equals(childArray.get(1).get(0))) {//库房
+
+                        List<Locations> locationses = JsonUtils.parsingLocations(data.getResultlist());
+                        new LocationDao(DownloadActivity.this).create(locationses);
+                    }
+                    if (count == childArray.get(1).size()) {
+
+                        mHandler.sendEmptyMessage(START1);
+                    }
+                } else {
+                    MessageUtils.showMiddleToast(DownloadActivity.this, "下载数据出现问题");
+                }
+            }
+
+            @Override
+            public void onSuccess(Results data, int totalPages, int currentPage) {
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+                MessageUtils.showMiddleToast(DownloadActivity.this, "下载失败");
             }
 
         });
@@ -460,11 +508,82 @@ public class DownloadActivity extends BaseActivity {
 
         @Override
         public void onClick(View view) {
+            count=0;
             if (group == 0) {
-                mHandler.sendEmptyMessage(START);
+
+                addUrl();
+                mProgressDialog = new ProgressDialog(DownloadActivity.this);
+                mProgressDialog.setMessage(getString(R.string.downloading1) + childArray.get(0).get(0));
+                mProgressDialog.show();
+                for (int i = 0; i < urlList.size(); i++) {
+
+                    downloaddata1(urlList.get(i), childArray.get(0).get(i));
+
+                }
+                DownloadAll = button;
+
+
+            } else if (group == 1) {
+                addUrl1();
+                mProgressDialog = new ProgressDialog(DownloadActivity.this);
+                mProgressDialog.setMessage(getString(R.string.downloading1) + childArray.get(1).get(0));
+                mProgressDialog.show();
+                for (int i = 0; i < urlList.size(); i++) {
+
+                    downloaddata2(urlList.get(i), childArray.get(0).get(i));
+
+                }
+
                 DownloadAll = button;
             }
         }
     }
 
+
+    /**
+     * 封装需要工单下载的url*
+     */
+    private void addUrl() {
+        urlList = new ArrayList<String>();
+        urlList.add(HttpManager.getAssetUrl(AccountUtils.getinsertSite(DownloadActivity.this)));//设备
+        urlList.add(HttpManager.getJpNumUrl(AccountUtils.getinsertSite(DownloadActivity.this)));//作业计划
+        urlList.add(HttpManager.getPersonUrl(AccountUtils.getinsertSite(DownloadActivity.this)));//人员
+        urlList.add(HttpManager.getLaborUrl(AccountUtils.getinsertSite(DownloadActivity.this)));//员工
+        urlList.add(HttpManager.getAlndomainUrl(AccountUtils.getinsertSite(DownloadActivity.this)));//抢修班组
+        urlList.add(HttpManager.getUdevUrl(AccountUtils.getinsertSite(DownloadActivity.this)));//事故
+        urlList.add(HttpManager.getProjapprUrl(AccountUtils.getinsertSite(DownloadActivity.this)));//立项申报
+        urlList.add(HttpManager.getPmUrl(AccountUtils.getinsertSite(DownloadActivity.this)));//预防性维护
+        urlList.add(HttpManager.getLaborcraftrateUrl(AccountUtils.getinsertSite(DownloadActivity.this)));//员工工种
+        urlList.add(HttpManager.getFailurelistUrl());//故障代码
+        urlList.add(HttpManager.getAlndomain2Url());//故障类别
+    }
+    /**
+     * 封装领料单需要下载的url*
+     */
+    private void addUrl1() {
+        urlList = new ArrayList<String>();
+        urlList.add(HttpManager.getLocationUrl());//库房
+    }
+
+
+
+
+    /**
+     * 添加子项列表数据*
+     */
+    private void addisDown() {
+        List<String> isDowns = null;
+
+        //添加主项
+        for (int i = 0; i < childArray.size(); i++) {
+            isDowns = new ArrayList<String>();
+
+            for (int j = 0; j < childArray.get(i).size(); j++) {
+                isDowns.add("下载");
+            }
+            isDownList.add(isDowns);
+        }
+
+
+    }
 }

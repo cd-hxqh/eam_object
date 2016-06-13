@@ -20,6 +20,7 @@ import com.flyco.dialog.widget.NormalEditTextDialog;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.model.Wfassignment;
+import cdhxqh.shekou.utils.MessageUtils;
 import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
@@ -207,11 +208,13 @@ public class Wfassig_DetailsActivity extends BaseActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 if (s == null || s.equals("")) {
-                    Toast.makeText(Wfassig_DetailsActivity.this, "审批失败", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(Wfassig_DetailsActivity.this, "审批失败");
                 } else {
-                    Toast.makeText(Wfassig_DetailsActivity.this, "审批成功", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(Wfassig_DetailsActivity.this, "审批成功");
+
                 }
                 mProgressDialog.dismiss();
+                finish();
             }
         }.execute();
     }
