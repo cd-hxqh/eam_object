@@ -364,7 +364,7 @@ public class Work_AddNewActivity extends BaseActivity {
         new AsyncTask<String, String, WorkResult>() {
             @Override
             protected WorkResult doInBackground(String... strings) {
-                WorkResult addresult = AndroidClientService.InsertWO(updataInfo, AccountUtils.getpersonId(Work_AddNewActivity.this), Constants.WORK_URL);
+                WorkResult addresult = AndroidClientService.InsertWO(updataInfo, AccountUtils.getpersonId(Work_AddNewActivity.this),AccountUtils.getIpAddress(Work_AddNewActivity.this)+ Constants.WORK_URL);
                 return addresult;
             }
 

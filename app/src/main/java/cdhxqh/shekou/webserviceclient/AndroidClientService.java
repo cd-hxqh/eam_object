@@ -18,6 +18,7 @@ import cdhxqh.shekou.model.WorkResult;
 
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.utils.AccountUtils;
 
 /**
  * Created by think on 2015/8/11.
@@ -52,7 +53,7 @@ public class AndroidClientService {
      * @return
      */
     public static String startwf(Context context, String processname, String mbo, String keyValue, String key) {
-        String url = Constants.HTTPS_API_URL + Constants.WORK_FLOW_URL;
+        String url = AccountUtils.getIpAddress(context) + Constants.WORK_FLOW_URL;
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
         soapEnvelope.dotNet = true;
@@ -89,7 +90,7 @@ public class AndroidClientService {
     public static String approve(Context context, String processname, String mbo, String keyValue, String key, String zx, String desc) {
 
 
-        String url = Constants.HTTPS_API_URL + Constants.WORK_FLOW_URL;
+        String url = AccountUtils.getIpAddress(context) + Constants.WORK_FLOW_URL;
 
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;

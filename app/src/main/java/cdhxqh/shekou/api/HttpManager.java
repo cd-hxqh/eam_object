@@ -16,6 +16,7 @@ import cdhxqh.shekou.application.BaseApplication;
 import cdhxqh.shekou.bean.LoginResults;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.utils.AccountUtils;
 
 /**
  * Created by apple on 15/5/27.
@@ -67,9 +68,9 @@ public class HttpManager {
     /**
      * 设置计划任务接口*
      */
-    public static String getwoactivityUrl(String type,String wonum,String sitesite, int curpage, int showcount) {
+    public static String getwoactivityUrl(String type, String wonum, String sitesite, int curpage, int showcount) {
         return "{'appid':'" + "UDWOALL','objectname':'" + Constants.WOACTIVITY_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'" +
-                ",'condition':{'parent':'" + wonum + "','siteid':'"+sitesite+"'}" +
+                ",'condition':{'parent':'" + wonum + "','siteid':'" + sitesite + "'}" +
                 "}";
     }
 
@@ -104,7 +105,7 @@ public class HttpManager {
     /**
      * 设置实际物料接口
      */
-    public static String getmatusetransUrl(String type, int curpage, int showcount,String wonum) {
+    public static String getmatusetransUrl(String type, int curpage, int showcount, String wonum) {
         return "{'appid':'" + Constants.MATUSETRANS_APPID + "','objectname':'" + Constants.MATUSETRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
     }
 
@@ -312,14 +313,15 @@ public class HttpManager {
     public static void loginWithUsername(final Context cxt, final String username, final String password, String imei,
                                          final HttpRequestHandler<String> handler) {
 
-
+        String ip_adress = AccountUtils.getIpAddress(cxt)+Constants.SIGN_IN_URL;
+        Log.i(TAG, "ip_adress=" + ip_adress);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("loginid", username);
         params.put("password", password);
         params.put("imei", imei);
         client.setTimeout(20000);
-        client.post(Constants.SIGN_IN_URL, params, new TextHttpResponseHandler() {
+        client.post(ip_adress, params, new TextHttpResponseHandler() {
 
 
             @Override
@@ -352,12 +354,12 @@ public class HttpManager {
      * 不分页获取信息方法*
      */
     public static void getData(final Context cxt, String data, final HttpRequestHandler<Results> handler) {
-        Log.i(TAG, "data=" + data);
+        String url=AccountUtils.getIpAddress(cxt)+Constants.BASE_URL;
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);
         client.setTimeout(20000);
-        client.get(Constants.BASE_URL, params, new TextHttpResponseHandler() {
+        client.get(url, params, new TextHttpResponseHandler() {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
@@ -381,11 +383,12 @@ public class HttpManager {
      */
     public static void getDataPagingInfo(final Context cxt, String data, final HttpRequestHandler<Results> handler) {
         Log.i(TAG, "data=" + data);
+        String url=AccountUtils.getIpAddress(cxt)+Constants.BASE_URL;
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);
         client.setTimeout(20000);
-        client.get(Constants.BASE_URL, params, new TextHttpResponseHandler() {
+        client.get(url, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
                 SafeHandler.onFailure(handler, cxt.getString(R.string.get_data_info_fail));

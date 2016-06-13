@@ -626,7 +626,7 @@ public class Work_detailsActivity extends BaseActivity {
             new AsyncTask<String, String, WorkResult>() {
                 @Override
                 protected WorkResult doInBackground(String... strings) {
-                    WorkResult reviseresult = AndroidClientService.UpdateWO(finalUpdataInfo, AccountUtils.getpersonId(Work_detailsActivity.this), Constants.WORK_URL);
+                    WorkResult reviseresult = AndroidClientService.UpdateWO(finalUpdataInfo, AccountUtils.getpersonId(Work_detailsActivity.this), AccountUtils.getIpAddress(Work_detailsActivity.this)+Constants.WORK_URL);
                     return reviseresult;
                 }
 
@@ -702,7 +702,7 @@ public class Work_detailsActivity extends BaseActivity {
         new AsyncTask<String, String, WorkResult>() {
             @Override
             protected WorkResult doInBackground(String... strings) {
-                WorkResult reviseresult = AndroidClientService.DeleteWO(wonum.getText().toString(), AccountUtils.getpersonId(Work_detailsActivity.this), Constants.WORK_URL);
+                WorkResult reviseresult = AndroidClientService.DeleteWO(wonum.getText().toString(), AccountUtils.getpersonId(Work_detailsActivity.this), AccountUtils.getIpAddress(Work_detailsActivity.this)+ Constants.WORK_URL);
                 return reviseresult;
             }
 

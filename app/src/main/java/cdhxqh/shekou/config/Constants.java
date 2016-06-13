@@ -8,28 +8,30 @@ public class Constants {
     /**
      * 基础接口*
      */
-    public static final String HTTP_API_URL = "http://121.35.242.172:7001/maximo/mobile/";
-
-    public static final String HTTPS_API_URL = "http://121.35.242.172:7001/meaweb/services";
+    /**默认**/
+    public static final String HTTP_API_IP = "http://121.35.242.172:7001";
+//    public static final String HTTP_API_URL = "http://121.35.242.172:7001/maximo/mobile/";
+//
+//    public static final String HTTPS_API_URL = "http://121.35.242.172:7001/meaweb/services";
 
 
     /**
      * 登陆URL*
      */
 
-    public static final String SIGN_IN_URL = HTTP_API_URL + "system/login";
+    public static final String SIGN_IN_URL =  "/maximo/mobile/system/login";
 
 
     /**通用接口查询**/
-    public static final String BASE_URL = HTTP_API_URL + "common/api";
+    public static final String BASE_URL ="/maximo/mobile/common/api";
 
     /**工单接口**/
-    public static final String WORK_URL = "http://121.35.242.172:7001/meaweb/services/WORKORDERSERVICE";
+    public static final String WORK_URL = "/meaweb/services/WORKORDERSERVICE";
 
     /**领料单接口**/
-    public static final String INVUSE_URL = HTTPS_API_URL+"/INVUSESERVICE";
+    public static final String INVUSE_URL ="/meaweb/services/INVUSESERVICE";
     /**工作流**/
-    public static final String WORK_FLOW_URL = "/WFMENAGEMENTSERVIC";
+    public static final String WORK_FLOW_URL = "/meaweb/services/WFMENAGEMENTSERVIC";
 
     /**------------------数据库表名配置－－开始**/
     //待办事项的appid

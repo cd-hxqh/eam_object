@@ -482,7 +482,7 @@ public class InvuseDetailsActivity extends BaseActivity {
         new AsyncTask<String, String, InvuseResult>() {
             @Override
             protected InvuseResult doInBackground(String... strings) {
-                InvuseResult addresult = AndroidClientService.UpdateInvuse(updataInfo, AccountUtils.getpersonId(InvuseDetailsActivity.this), Constants.INVUSE_URL);
+                InvuseResult addresult = AndroidClientService.UpdateInvuse(updataInfo, AccountUtils.getpersonId(InvuseDetailsActivity.this),  AccountUtils.getIpAddress(InvuseDetailsActivity.this)+Constants.INVUSE_URL);
 
                 return addresult;
             }
@@ -515,7 +515,7 @@ public class InvuseDetailsActivity extends BaseActivity {
         new AsyncTask<String, String, String>() {
             @Override
             protected String doInBackground(String... strings) {
-                String result = AndroidClientService.DeleteInvuse(invuse.invusenum, AccountUtils.getpersonId(InvuseDetailsActivity.this), Constants.INVUSE_URL);
+                String result = AndroidClientService.DeleteInvuse(invuse.invusenum, AccountUtils.getpersonId(InvuseDetailsActivity.this), AccountUtils.getIpAddress(InvuseDetailsActivity.this)+Constants.INVUSE_URL);
 
                 return result;
             }

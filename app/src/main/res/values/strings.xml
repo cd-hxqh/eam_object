@@ -22,6 +22,7 @@
     <string name="login_userName">login_userName</string>
     <string name="login_displayName">login_displayName</string>
     <string name="login_department">login_department</string>
+    <string name="ip_address">ip_address</string>
 
 
     <!--界面Activity-->

@@ -6,11 +6,20 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.flyco.animation.BaseAnimatorSet;
+import com.flyco.animation.BounceEnter.BounceTopEnter;
+import com.flyco.animation.SlideExit.SlideBottomExit;
+import com.flyco.dialog.entity.DialogMenuItem;
+import com.flyco.dialog.listener.OnOperItemClickL;
+import com.flyco.dialog.widget.NormalListDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,6 +31,7 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
+import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.manager.AppManager;
 import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Person;
@@ -52,11 +62,24 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     String imei; //imei
 
+    /**
+     * 服务器Ip 地址*
+     */
+    private TextView ipText;
+
+
+    private ArrayList<DialogMenuItem> mMenuItems = new ArrayList<>();
+    private BaseAnimatorSet mBasIn;
+    private BaseAnimatorSet mBasOut;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-
+        Log.i(TAG, "ip=" + AccountUtils.getIpAddress(LoginActivity.this));
+        if (AccountUtils.getIpAddress(LoginActivity.this).equals("")) {
+            AccountUtils.setIpAddress(LoginActivity.this, Constants.HTTP_API_IP);
+        }
         imei = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
                 .getDeviceId();
 
@@ -70,6 +93,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mPassword = (EditText) findViewById(R.id.user_login_password);
         checkBox = (CheckBox) findViewById(R.id.isremenber_password);
         mLogin = (Button) findViewById(R.id.user_login);
+        ipText = (TextView) findViewById(R.id.ip_address_id);
     }
 
     @Override
@@ -82,6 +106,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
         checkBox.setOnCheckedChangeListener(cheBoxOnCheckedChangListener);
         mLogin.setOnClickListener(this);
+        ipText.setOnClickListener(this);
+        mBasIn = new BounceTopEnter();
+        mBasOut = new SlideBottomExit();
+        addIpData();
     }
 
     private CompoundButton.OnCheckedChangeListener cheBoxOnCheckedChangListener = new CompoundButton.OnCheckedChangeListener() {
@@ -104,6 +132,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 } else {
                     login();
                 }
+                break;
+
+            case R.id.ip_address_id:
+                NormalListDialog();
                 break;
 
         }
@@ -210,4 +242,33 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         });
     }
 
+
+    private void NormalListDialog() {
+        final NormalListDialog dialog = new NormalListDialog(LoginActivity.this, mMenuItems);
+        dialog.title("请选择")//
+                .showAnim(mBasIn)//
+                .dismissAnim(mBasOut)//
+                .show();
+        dialog.setOnOperItemClickL(new OnOperItemClickL() {
+            @Override
+            public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AccountUtils.setIpAddress(LoginActivity.this, mMenuItems.get(position).mOperName);
+
+                dialog.dismiss();
+            }
+        });
+    }
+
+
+    /**
+     * 设置服务端地址*
+     */
+    private void addIpData() {
+        String[] inspotypes = getResources().getStringArray(R.array.ip_adress_text);
+
+        for (int i = 0; i < inspotypes.length; i++)
+            mMenuItems.add(new DialogMenuItem(inspotypes[i], 0));
+
+
+    }
 }

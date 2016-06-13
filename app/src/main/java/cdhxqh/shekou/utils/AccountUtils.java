@@ -144,4 +144,29 @@ public class AccountUtils {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
         return sharedPreferences.getString(cxt.getString(R.string.login_department), "");
     }
+
+
+    /**
+     * 设置服务器IP地址*
+     */
+    public static void setIpAddress(Context cxt, String ip) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
+        sharedPreferences.edit().putString(cxt.getString(R.string.ip_address), ip).commit();
+
+    }
+
+    /**
+     * 获取服务器IP地址*
+     */
+    public static String getIpAddress(Context cxt) {
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(cxt);
+        return sharedPreferences.getString(cxt.getString(R.string.ip_address), "");
+    }
+
+
+
+
+
 }

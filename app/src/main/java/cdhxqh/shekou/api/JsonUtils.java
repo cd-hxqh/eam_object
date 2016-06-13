@@ -62,7 +62,11 @@ public class JsonUtils {
             String errmsg = json.getString("errmsg");
             loginResults.setErrcode(errcode);
             loginResults.setErrmsg(errmsg);
-            loginResults.setResult(json.getString("result"));
+            if (errcode.equals(Constants.LOGINSUCCESS) || errcode.equals(Constants.CHANGEIMEI)) {
+                loginResults.setResult(json.getString("result"));
+            }
+
+
             return loginResults;
         } catch (JSONException e) {
             e.printStackTrace();

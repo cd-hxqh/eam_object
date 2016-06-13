@@ -332,7 +332,7 @@ public class AddinvuseActivity extends BaseActivity {
         new AsyncTask<String, String, InvuseResult>() {
             @Override
             protected InvuseResult doInBackground(String... strings) {
-                InvuseResult addresult = AndroidClientService.InsertInvuse(updataInfo, AccountUtils.getpersonId(AddinvuseActivity.this), Constants.INVUSE_URL);
+                InvuseResult addresult = AndroidClientService.InsertInvuse(updataInfo, AccountUtils.getpersonId(AddinvuseActivity.this), AccountUtils.getIpAddress(AddinvuseActivity.this)+Constants.INVUSE_URL);
 
                 return addresult;
             }

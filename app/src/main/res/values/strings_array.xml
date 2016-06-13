@@ -13,4 +13,10 @@
         <item>高</item>
     </string-array>
 
+    <string-array name="ip_adress_text">
+        <item>http://172.16.1.75:7001</item>
+        <item>http://121.35.242.172:7001</item>
+
+    </string-array>
+
 </resources>
