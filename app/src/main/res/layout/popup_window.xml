@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_5"
             android:text="@string/inventory_cost_text"
-            android:textSize="@dimen/dimens_16dp"/>
+            android:textSize="@dimen/dimens_16dp" />
 
     </LinearLayout>
 
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_5"
             android:text="@string/inventory_levels_text"
-            android:textSize="@dimen/dimens_16dp"/>
+            android:textSize="@dimen/dimens_16dp" />
 
     </LinearLayout>
 
@@ -58,7 +58,34 @@
         android:layout_height="1dp"
         android:background="@drawable/line"></View>
 
+    <LinearLayout
+        android:id="@+id/inventory_matrectrans_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/dimens_10"
+        android:visibility="gone">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_inventory_levels" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_5"
+            android:text="@string/inventory_matrectrans_text"
+            android:textSize="@dimen/dimens_16dp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"
+        android:visibility="gone"></View>
 
 
 </LinearLayout>

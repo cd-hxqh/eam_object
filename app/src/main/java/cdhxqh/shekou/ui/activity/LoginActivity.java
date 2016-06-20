@@ -20,6 +20,7 @@ import com.flyco.animation.SlideExit.SlideBottomExit;
 import com.flyco.dialog.entity.DialogMenuItem;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.NormalListDialog;
+import com.umeng.update.UmengUpdateAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -82,9 +83,16 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
         imei = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
                 .getDeviceId();
-
+        setUmeng();
         findViewById();
         initView();
+    }
+
+
+    private void setUmeng() {
+        UmengUpdateAgent.update(this);
+        UmengUpdateAgent.setUpdateOnlyWifi(false);
+        UmengUpdateAgent.setDeltaUpdate(true);
     }
 
     @Override

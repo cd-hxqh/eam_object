@@ -12,6 +12,11 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.umeng.update.UmengUpdateAgent;
+import com.umeng.update.UmengUpdateListener;
+import com.umeng.update.UpdateResponse;
+import com.umeng.update.UpdateStatus;
+
 import java.util.logging.LogRecord;
 
 import cdhxqh.shekou.R;
@@ -105,7 +110,7 @@ public class Setting_Fragment extends BaseFragment {
                             "正在检测更新，请耐心等候...", true, true);
                     mProgressDialog.setCanceledOnTouchOutside(false);
                     mProgressDialog.setCancelable(false);
-//                    setForceUpdate();
+                    setForceUpdate();
                     break;
             }
         }
@@ -153,37 +158,34 @@ public class Setting_Fragment extends BaseFragment {
     };
 
 
-//    /**
-//     * 手动强制更新
-//     */
-//    private void setForceUpdate() {
-//        UmengUpdateAgent.setUpdateAutoPopup(false);
-//        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
-//
-//            @Override
-//            public void onUpdateReturned(int updateStatus,
-//                                         UpdateResponse updateInfo) {
-//                mProgressDialog.dismiss();
-//                switch (updateStatus) {
-//                    case UpdateStatus.Yes: // has update
-//                        UmengUpdateAgent
-//                                .showUpdateDialog(getActivity(), updateInfo);
-//                        break;
-//                    case UpdateStatus.No: // has no update
-//                        Toast.makeText(getActivity(), "未发现新版本，当前安装的已是最新版本",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case UpdateStatus.NoneWifi: // none wifi
-//                        Toast.makeText(getActivity(), "没有wifi连接， 只在wifi下更新",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                    case UpdateStatus.Timeout: // time out
-//                        Toast.makeText(getActivity(), "更新超时,请检查网络",
-//                                Toast.LENGTH_SHORT).show();
-//                        break;
-//                }
-//            }
-//        });
-//        UmengUpdateAgent.forceUpdate(getActivity());
-//    }
+    /**
+     * 手动强制更新
+     */
+    private void setForceUpdate() {
+        UmengUpdateAgent.setUpdateAutoPopup(false);
+        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
+
+            @Override
+            public void onUpdateReturned(int updateStatus,
+                                         UpdateResponse updateInfo) {
+                mProgressDialog.dismiss();
+                switch (updateStatus) {
+                    case UpdateStatus.Yes: // has update
+                        UmengUpdateAgent
+                                .showUpdateDialog(getActivity(), updateInfo);
+                        break;
+                    case UpdateStatus.No: // has no update
+                        MessageUtils.showMiddleToast(getActivity(), "未发现新版本，当前安装的已是最新版本");
+                        break;
+                    case UpdateStatus.NoneWifi: // none wifi
+                        MessageUtils.showMiddleToast(getActivity(), "没有wifi连接， 只在wifi下更新");
+                        break;
+                    case UpdateStatus.Timeout: // time out
+                        MessageUtils.showMiddleToast(getActivity(), "更新超时,请检查网络");
+                        break;
+                }
+            }
+        });
+        UmengUpdateAgent.forceUpdate(getActivity());
+    }
 }

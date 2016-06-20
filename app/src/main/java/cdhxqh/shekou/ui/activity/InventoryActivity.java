@@ -91,6 +91,8 @@ public class InventoryActivity extends BaseActivity {
      * 库存余量
      */
     private LinearLayout levelsLinearLayout;
+    /**库存交易**/
+    private LinearLayout matrectransLinearLayout;
     /**
      * 入库
      */

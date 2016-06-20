@@ -162,6 +162,29 @@
         <activity
             android:name=".ui.activity.About_us_Activity"
             android:label="@string/about_us_text"></activity>
+
+        <!-- Update Activitys Start -->
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- Update Activitys End -->
+
+
+        <!-- Caution! Do not change this app key. It is only for demo usage. -->
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="57679d8667e58ebaf5003194" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng" />
+
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" />
+
+
+
     </application>
 
 </manifest>
