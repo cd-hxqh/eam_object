@@ -84,6 +84,7 @@
     <string name="work_fault_text">故障工单</string>
     <string name="work_prevent_id">预防性维护工单</string>
     <string name="work_status_text">状态维修工单</string>
+    <string name="work_project_text">项目工单</string>
     <string name="work_service_text">可维修备件工单</string>
     <string name="work_accident_text">事故工单</string>
     <string name="work_repair_text">抢修工单</string>
@@ -129,8 +130,8 @@
     <!--工单列表界面-->
     <string name="work_list_title">工单列表</string>
     <string name="work_list_search">搜索</string>
-    <string name="work_number">工单号</string>
-    <string name="work_describe">描述</string>
+    <string name="work_number">工单号:</string>
+    <string name="work_describe">描述:</string>
 
 
     <!--库存余量-->
@@ -165,44 +166,44 @@
     <!--工单详情界面-->
     <string name="work_details">工单详情</string>
     <string name="work_new">新建工单</string>
-    <string name="work_num">工单号</string>
-    <string name="work_description">工单描述</string>
+    <string name="work_num">工单号:</string>
+    <string name="work_description">工单描述:</string>
     <string name="work_description_hint">请输入相关描述</string>
-    <string name="work_worktype">工单类型</string>
-    <string name="work_assetnum">设备</string>
-    <string name="work_glz">管理组</string>
-    <string name="work_gls">管理室</string>
-    <string name="work_glbz">管理班组</string>
+    <string name="work_worktype">工单类型:</string>
+    <string name="work_assetnum">设备:</string>
+    <string name="work_glz">管理组:</string>
+    <string name="work_gls">管理室:</string>
+    <string name="work_glbz">管理班组:</string>
 
 
     <!--领料管理-->
-    <string name="work_status">状态</string>
-    <string name="work_statusdate">状态日期</string>
+    <string name="work_status">状态:</string>
+    <string name="work_statusdate">状态日期:</string>
     <string name="work_plan_details">作业详细信息</string>
-    <string name="work_jpnum">作业计划</string>
-    <string name="work_isjf">是否按项目计费</string>
-    <string name="work_udprojapprnum">立项编号</string>
+    <string name="work_jpnum">作业计划:</string>
+    <string name="work_isjf">是否按项目计费:</string>
+    <string name="work_udprojapprnum">立项编号:</string>
     <string name="work_udevnum">事故号</string>
     <string name="work_udbugnum">项目预算</string>
     <string name="work_pmnum">预防性维护</string>
-    <string name="work_udcreateby">创建人</string>
-    <string name="work_udcreatedate">创建日期</string>
-    <string name="work_reportedby">报告人</string>
-    <string name="work_reportdate">报告日期</string>
-    <string name="work_udisjj">是否紧急维修</string>
-    <string name="work_udyxj">优先级</string>
-    <string name="work_udisaq">是否安全</string>
-    <string name="work_udisbx">是否保修</string>
-    <string name="work_udiscb">是否抄表</string>
+    <string name="work_udcreateby">创建人:</string>
+    <string name="work_udcreatedate">创建日期:</string>
+    <string name="work_reportedby">报告人:</string>
+    <string name="work_reportdate">报告日期:</string>
+    <string name="work_udisjj">是否紧急维修:</string>
+    <string name="work_udyxj">优先级:</string>
+    <string name="work_udisaq">是否安全:</string>
+    <string name="work_udisbx">是否保修:</string>
+    <string name="work_udiscb">是否抄表:</string>
     <string name="work_plan_info">计划信息</string>
-    <string name="work_lead">工作负责人</string>
-    <string name="work_udisplayname">承包商负责人</string>
-    <string name="work_targstartdate">计划开始时间</string>
-    <string name="work_targcompdate">计划完成时间</string>
+    <string name="work_lead">工作负责人:</string>
+    <string name="work_udisplayname">承包商负责人:</string>
+    <string name="work_targstartdate">计划开始时间:</string>
+    <string name="work_targcompdate">计划完成时间:</string>
     <string name="work_em_info">处理班组信息</string>
-    <string name="work_udqxbz">抢修班组</string>
-    <string name="work_lead1">抢修负责人</string>
-    <string name="work_supervisor">抢修执行人</string>
+    <string name="work_udqxbz">抢修班组:</string>
+    <string name="work_lead1">抢修负责人:</string>
+    <string name="work_supervisor">抢修执行人:</string>
     <string name="work_udsupervisor2">抢修执行人2</string>
     <string name="work_failure_info">故障详细信息</string>
     <string name="work_failurecode">故障子机构</string>
@@ -210,10 +211,10 @@
     <string name="work_udworkmemo">工作备注</string>
     <string name="work_udisyq">是否根进</string>
     <string name="work_real_info">实际信息</string>
-    <string name="work_actstart">实际开始时间</string>
-    <string name="work_actfinish">实际完成时间</string>
-    <string name="work_udtjsj">实际维修时间</string>
-    <string name="work_udtjtime">停机时间</string>
+    <string name="work_actstart">实际开始时间:</string>
+    <string name="work_actfinish">实际完成时间:</string>
+    <string name="work_udtjsj">实际维修时间:</string>
+    <string name="work_udtjtime">停机时间:</string>
     <string name="work_udtjsj_hint">请输入时间</string>
     <string name="work_udremark">备注</string>
     <string name="work_delete">删除</string>

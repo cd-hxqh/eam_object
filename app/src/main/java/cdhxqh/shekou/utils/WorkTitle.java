@@ -8,25 +8,25 @@ public class WorkTitle {
         String title = "工单";
         switch (type){
             case "CM":
-                title = "故障工单";
+                title = "故障工单详情";
                 break;
             case "PM":
-                title = "预防性维护工单";
+                title = "预防性维护工单详情";
                 break;
             case "SR":
-                title = "状态维修工单";
+                title = "状态维修工单详情";
                 break;
             case "PJ":
-                title = "项目工单";
+                title = "项目工单详情";
                 break;
             case "RS":
-                title = "可维护备件工单";
+                title = "可维护备件工单详情";
                 break;
             case "EV":
-                title = "事故工单";
+                title = "事故工单详情";
                 break;
             case "EM":
-                title = "抢修工单";
+                title = "抢修工单详情";
                 break;
         }
         return title;

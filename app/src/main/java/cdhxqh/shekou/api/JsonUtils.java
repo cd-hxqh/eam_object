@@ -233,6 +233,7 @@ public class JsonUtils {
                 workOrder.status = jsonObject.getString("STATUS");//状态
                 workOrder.statusdate = jsonObject.getString("STATUSDATE");//状态日期
                 workOrder.worktype = jsonObject.getString("WORKTYPE");//工单类型
+                workOrder.wtypedesc = jsonObject.getString("WTYPEDESC");//工单类型名称
                 workOrder.description = jsonObject.getString("DESCRIPTION");//工单描述
                 workOrder.assetnum = jsonObject.getString("ASSETNUM");//设备
                 workOrder.woeq3 = jsonObject.getString("WOEQ3");//设备管理班组编号
@@ -253,6 +254,9 @@ public class JsonUtils {
                 }
                 if (jsonObject.has("UDCREATEBY")) {
                     workOrder.udcreateby = jsonObject.getString("UDCREATEBY");//创建人
+                }
+                if (jsonObject.has("UDCREATEBYNAME")) {
+                    workOrder.udcreatebyname = jsonObject.getString("UDCREATEBYNAME");//创建人名称
                 }
                 if (jsonObject.has("UDCREATEDATE")) {
                     workOrder.udcreatedate = jsonObject.getString("UDCREATEDATE");//创建日期

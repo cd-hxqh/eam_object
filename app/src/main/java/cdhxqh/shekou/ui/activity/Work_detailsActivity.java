@@ -250,7 +250,7 @@ public class Work_detailsActivity extends BaseActivity {
 
         wonum.setText(workOrder.wonum);
         description.setText(workOrder.description);
-        worktype.setText(workOrder.worktype);
+        worktype.setText(workOrder.wtypedesc);
         assetnum.setText(workOrder.assetnum);
         woeq1.setText(workOrder.woeq1);
         woeq2.setText(workOrder.woeq2);
@@ -262,7 +262,7 @@ public class Work_detailsActivity extends BaseActivity {
         udisjf.setChecked(ischeck(workOrder.udisjf));
         pmnum.setText(workOrder.pmnum);
 //        yfwh.setText(ischeck(workOrder.udyfwh));
-        udcreateby.setText(workOrder.udcreateby);
+        udcreateby.setText(workOrder.udcreatebyname);
         udcreatedate.setText(workOrder.udcreatedate);
         reportedby.setText(workOrder.reportedby);
         reportdate.setText(workOrder.reportdate);
@@ -358,11 +358,13 @@ public class Work_detailsActivity extends BaseActivity {
     }
 
     //时间选择监听
-    private class TimeOnClickListener implements View.OnClickListener{
+    private class TimeOnClickListener implements View.OnClickListener {
         TextView textView;
-        private TimeOnClickListener(TextView textView){
+
+        private TimeOnClickListener(TextView textView) {
             this.textView = textView;
         }
+
         @Override
         public void onClick(View view) {
             new DateTimeSelect(Work_detailsActivity.this, textView).showDialog();
@@ -443,7 +445,7 @@ public class Work_detailsActivity extends BaseActivity {
      * @return
      */
     private boolean ischeck(String string) {
-        if (string == null){
+        if (string == null) {
             return false;
         }
         return string.equals("1");
@@ -510,7 +512,7 @@ public class Work_detailsActivity extends BaseActivity {
             bundle.putSerializable("workOrder", workOrder);
             bundle.putSerializable("woactivityList", woactivityList);
             intent.putExtras(bundle);
-            startActivityForResult(intent,1000);
+            startActivityForResult(intent, 1000);
             popupWindow.dismiss();
         }
     };
@@ -574,8 +576,8 @@ public class Work_detailsActivity extends BaseActivity {
             } else {
                 if (workOrder.status.equals(Constants.STATUS25)) {
                     submitDataInfo();
-                }else {
-                    Toast.makeText(Work_detailsActivity.this,"该状态无法修改",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Work_detailsActivity.this, "该状态无法修改", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -616,33 +618,33 @@ public class Work_detailsActivity extends BaseActivity {
 //            MessageUtils.showMiddleToast(Work_DetailsActivity.this, "暂无网络,现离线保存数据!");
 //            saveWorkOrder();
 //        } else {
-            String updataInfo = null;
+        String updataInfo = null;
 //            if (workOrder.status.equals(Constants.WAIT_APPROVAL)) {
-                updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
+        updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
 //            } else if (workOrder.status.equals(Constants.APPROVALED)) {
 //                updataInfo = JsonUtils.WorkToJson(getWorkOrder(), null, null, null, null, getLabtransList());
 //            }
-            final String finalUpdataInfo = updataInfo;
-            new AsyncTask<String, String, WorkResult>() {
-                @Override
-                protected WorkResult doInBackground(String... strings) {
-                    WorkResult reviseresult = AndroidClientService.UpdateWO(finalUpdataInfo, AccountUtils.getpersonId(Work_detailsActivity.this), AccountUtils.getIpAddress(Work_detailsActivity.this)+Constants.WORK_URL);
-                    return reviseresult;
-                }
+        final String finalUpdataInfo = updataInfo;
+        new AsyncTask<String, String, WorkResult>() {
+            @Override
+            protected WorkResult doInBackground(String... strings) {
+                WorkResult reviseresult = AndroidClientService.UpdateWO(finalUpdataInfo, AccountUtils.getpersonId(Work_detailsActivity.this), AccountUtils.getIpAddress(Work_detailsActivity.this) + Constants.WORK_URL);
+                return reviseresult;
+            }
 
-                @Override
-                protected void onPostExecute(WorkResult workResult) {
-                    super.onPostExecute(workResult);
-                    if (workResult==null) {
-                        Toast.makeText(Work_detailsActivity.this, "修改工单失败", Toast.LENGTH_SHORT).show();
-                    }else if (workResult.errorMsg.equals("成功!")) {
-                        Toast.makeText(Work_detailsActivity.this, "修改工单成功", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(Work_detailsActivity.this, workResult.errorMsg, Toast.LENGTH_SHORT).show();
-                    }
-                    closeProgressDialog();
+            @Override
+            protected void onPostExecute(WorkResult workResult) {
+                super.onPostExecute(workResult);
+                if (workResult == null) {
+                    Toast.makeText(Work_detailsActivity.this, "修改工单失败", Toast.LENGTH_SHORT).show();
+                } else if (workResult.errorMsg.equals("成功!")) {
+                    Toast.makeText(Work_detailsActivity.this, "修改工单成功", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(Work_detailsActivity.this, workResult.errorMsg, Toast.LENGTH_SHORT).show();
                 }
-            }.execute();
+                closeProgressDialog();
+            }
+        }.execute();
 //        }
 
     }
@@ -702,16 +704,16 @@ public class Work_detailsActivity extends BaseActivity {
         new AsyncTask<String, String, WorkResult>() {
             @Override
             protected WorkResult doInBackground(String... strings) {
-                WorkResult reviseresult = AndroidClientService.DeleteWO(wonum.getText().toString(), AccountUtils.getpersonId(Work_detailsActivity.this), AccountUtils.getIpAddress(Work_detailsActivity.this)+ Constants.WORK_URL);
+                WorkResult reviseresult = AndroidClientService.DeleteWO(wonum.getText().toString(), AccountUtils.getpersonId(Work_detailsActivity.this), AccountUtils.getIpAddress(Work_detailsActivity.this) + Constants.WORK_URL);
                 return reviseresult;
             }
 
             @Override
             protected void onPostExecute(WorkResult workResult) {
                 super.onPostExecute(workResult);
-                if (workResult==null) {
+                if (workResult == null) {
                     Toast.makeText(Work_detailsActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
-                }else if (workResult.errorMsg.equals("操作成功！")&&workResult.errorNo.equals("0")) {
+                } else if (workResult.errorMsg.equals("操作成功！") && workResult.errorNo.equals("0")) {
                     Toast.makeText(Work_detailsActivity.this, workResult.errorMsg, Toast.LENGTH_SHORT).show();
                     Work_detailsActivity.this.finish();
                 } else {

@@ -12,12 +12,14 @@
     <!--</RelativeLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
         android:orientation="horizontal">
         <Button
             android:id="@+id/work_delete"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:layout_weight="1.0"
             android:text="@string/work_delete"
             android:textColor="@drawable/text_selector"

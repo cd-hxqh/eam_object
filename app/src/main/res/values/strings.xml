@@ -84,6 +84,7 @@
     <string name="work_fault_text">故障工单</string>
     <string name="work_prevent_id">预防性维护工单</string>
     <string name="work_status_text">状态维修工单</string>
+    <string name="work_project_text">项目工单</string>
     <string name="work_service_text">可维修备件工单</string>
     <string name="work_accident_text">事故工单</string>
     <string name="work_repair_text">抢修工单</string>
@@ -129,8 +130,8 @@
     <!--工单列表界面-->
     <string name="work_list_title">工单列表</string>
     <string name="work_list_search">搜索</string>
-    <string name="work_number">工单号</string>
-    <string name="work_describe">描述</string>
+    <string name="work_number">工单号:</string>
+    <string name="work_describe">描述:</string>
 
 
     <!--库存余量-->

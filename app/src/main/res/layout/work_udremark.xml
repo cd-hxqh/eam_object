@@ -22,12 +22,12 @@
     </RelativeLayout>
     <EditText
         android:id="@+id/work_udremark"
+        android:layout_margin="@dimen/dimen_5"
+        android:padding="@dimen/dimen_5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dimen_5"
-        android:layout_marginBottom="@dimen/dimen_5"
         android:inputType="textMultiLine"
-        android:background="@color/white"
+        android:background="@drawable/bg_edittext"
         android:textSize="@dimen/dimens_16dp"
         android:textColor="@color/light_black"/>
 </LinearLayout>

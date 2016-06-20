@@ -45,10 +45,10 @@ public class HttpManager {
     public static String getworkorderUrl(String type, String search, String siteid, int curpage, int showcount) {
         if (search.equals("")) {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'!=已完成/关闭'}}";
         } else {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'%" + search + "%','WORKTYPE':'" + type + "','SITEID':'" + siteid + "'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'%" + search + "%','WORKTYPE':'" + type + "','SITEID':'" + siteid +  "','STATUS':'!=已完成/关闭'}}";
         }
     }
 

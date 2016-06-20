@@ -31,6 +31,7 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
+import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.ui.adapter.WorkListAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
@@ -41,7 +42,7 @@ import cdhxqh.shekou.webserviceclient.AndroidClientService;
  * Created by think on 2015/10/27.
  * 工单详情界面
  */
-public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener,SwipeRefreshLayout.OnLoadListener{
+public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     private static String TAG = "Work_ListActivity";
 
     private TextView titlename;
@@ -56,19 +57,21 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
     private EditText search;
     private String searchText = "";
     private int page = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worklist);
 
-        findViewById();
         getIntentData();
+        findViewById();
         initView();
     }
 
-    private void getIntentData(){
+    private void getIntentData() {
         worktype = getIntent().getStringExtra("worktype");
     }
+
     @Override
     protected void findViewById() {
         titlename = (TextView) findViewById(R.id.title_name);
@@ -83,21 +86,29 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
     @Override
     protected void initView() {
         setSearchEdit();
-        titlename.setText(R.string.work_list_title);
+        if (worktype.equals(Constants.FAULT)) {//故障工单
+            titlename.setText(R.string.work_fault_text);
+        } else if (worktype.equals(Constants.PREVENT)) {//预防性维护工单
+            titlename.setText(R.string.work_prevent_id);
+        } else if (worktype.equals(Constants.STATUS)) {//状态维修工单
+            titlename.setText(R.string.work_status_text);
+        } else if (worktype.equals(Constants.PROJECT)) {//项目工单
+            titlename.setText(R.string.work_project_text);
+        } else if (worktype.equals(Constants.SERVICE)) {//可维修备件工单
+            titlename.setText(R.string.work_service_text);
+        } else if (worktype.equals(Constants.ACCIDENT)) {//事故工单
+            titlename.setText(R.string.work_accident_text);
+        } else if (worktype.equals(Constants.REPAIR)) {//抢修工单
+            titlename.setText(R.string.work_repair_text);
+        }
+
         addimg.setVisibility(View.VISIBLE);
         addimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Work_ListActivity.this,Work_AddNewActivity.class);
-                intent.putExtra("worktype",worktype);
+                Intent intent = new Intent(Work_ListActivity.this, Work_AddNewActivity.class);
+                intent.putExtra("worktype", worktype);
                 startActivity(intent);
-//                new AsyncTask<String,String,String>(){
-//                    @Override
-//                    protected String doInBackground(String... strings) {
-//                        new AndroidClientService().InsertWO("");
-//                        return null;
-//                    }
-//                }.execute();
             }
         });
         backlayout.setOnClickListener(new View.OnClickListener() {
@@ -124,8 +135,8 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
         refresh_layout.setOnLoadListener(this);
     }
 
-    private void getData(String search){
-        HttpManager.getDataPagingInfo(this, HttpManager.getworkorderUrl(worktype,search, AccountUtils.getinsertSite(Work_ListActivity.this), page, 20), new HttpRequestHandler<Results>() {
+    private void getData(String search) {
+        HttpManager.getDataPagingInfo(this, HttpManager.getworkorderUrl(worktype, search, AccountUtils.getinsertSite(Work_ListActivity.this), page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -133,17 +144,17 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<WorkOrder> items = JsonUtils.parsingWorkOrder(Work_ListActivity.this, results.getResultlist(),worktype);
+                ArrayList<WorkOrder> items = JsonUtils.parsingWorkOrder(Work_ListActivity.this, results.getResultlist(), worktype);
                 refresh_layout.setRefreshing(false);
                 refresh_layout.setLoading(false);
                 if (items == null || items.isEmpty()) {
                     nodatalayout.setVisibility(View.VISIBLE);
                 } else {
-                    if(page==1){
+                    if (page == 1) {
                         workListAdapter = new WorkListAdapter(Work_ListActivity.this);
                         recyclerView.setAdapter(workListAdapter);
                     }
-                    if(totalPages==page){
+                    if (totalPages == page) {
                         workListAdapter.adddate(items);
                     }
                 }
@@ -157,7 +168,7 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
         });
     }
 
-    private void setSearchEdit(){
+    private void setSearchEdit() {
         SpannableString msp = new SpannableString("XX搜索");
         Drawable drawable = getResources().getDrawable(R.drawable.ic_search);
         msp.setSpan(new ImageSpan(drawable), 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -167,7 +178,7 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     // 先隐藏键盘
                     ((InputMethodManager) search.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
                             .hideSoftInputFromWindow(
@@ -193,7 +204,7 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
     }
 
     @Override
-    public void onLoad(){
+    public void onLoad() {
         page++;
         getData(searchText);
     }

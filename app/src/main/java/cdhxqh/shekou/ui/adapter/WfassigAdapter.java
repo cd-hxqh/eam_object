@@ -39,8 +39,8 @@ public class WfassigAdapter extends BaseQuickAdapter<Wfassignment> {
     @Override
     protected void convert(BaseViewHolder helper, Wfassignment item) {
         CardView cardView = helper.getView(R.id.card_container);
-        helper.setText(R.id.item_num_title, mContext.getString(R.string.inventory_itemnum_text));
-        helper.setText(R.id.item_desc_title, mContext.getString(R.string.inventory_location_text));
+//        helper.setText(R.id.item_num_title, mContext.getString(R.string.inventory_itemnum_text));
+//        helper.setText(R.id.item_desc_title, mContext.getString(R.string.inventory_location_text));
         helper.setText(R.id.item_num_text, item.wfassignmentid + "");
         helper.setText(R.id.item_desc_text, item.description);
     }

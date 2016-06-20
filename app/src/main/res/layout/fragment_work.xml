@@ -12,7 +12,7 @@
         android:background="@color/white">
 
 
-        <TableRow  android:layout_marginTop="@dimen/dimens_10">
+        <TableRow android:layout_marginTop="@dimen/dimens_10">
 
             <LinearLayout
                 android:id="@+id/work_linear_fault_id"
@@ -95,7 +95,7 @@
             </LinearLayout>
         </TableRow>
 
-        <TableRow  android:layout_marginTop="@dimen/dimens_10">
+        <TableRow android:layout_marginTop="@dimen/dimens_10">
 
             <LinearLayout
                 android:id="@+id/work_linear_project_id"
@@ -118,7 +118,7 @@
                     android:gravity="center"
                     android:padding="5dp"
 
-                    android:text="项目工单"></TextView>
+                    android:text="@string/work_project_text"></TextView>
 
             </LinearLayout>
 
@@ -178,7 +178,7 @@
             </LinearLayout>
         </TableRow>
 
-        <TableRow  android:layout_marginTop="@dimen/dimens_10">
+        <TableRow android:layout_marginTop="@dimen/dimens_10">
 
             <LinearLayout
                 android:id="@+id/work_linear_repair_id"

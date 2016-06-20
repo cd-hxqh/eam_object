@@ -19,6 +19,7 @@ public class WorkOrder implements Serializable {
     public String status;//状态
     public String statusdate;//状态日期
     public String worktype;//工单类型
+    public String wtypedesc;//工单类型名称
     public String description;//描述
     public String assetnum;//设备
 //    public String assetdescription;//设备描述
@@ -30,6 +31,7 @@ public class WorkOrder implements Serializable {
     public String udisbx;//是否保修
     public String udiscb;//是否抄表
     public String udcreateby;//创建人
+    public String udcreatebyname;//创建人名称
     public String udcreatedate;//创建日期
     public String jpnum;//作业计划
     public String pmnum;//预防性维护
