@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">EAM采购管理</string>
+    <string name="app_name">EAM资产管理</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">新增</string>
-    <string name="log">EAM-工程与采购管理系统</string>
+    <string name="log">EAM-资产管理系统</string>
     <string name="please_userid">请输入用户名</string>
     <string name="please_password">请输入密码</string>
     <string name="remenber_pass">记住密码</string>
@@ -432,4 +432,5 @@
     <string name="udreason_text">领料原因:</string>
     <string name="add_invuseline_text">新增备件明细</string>
     <string name="invuseline_title">备件明细</string>
+    <string name="about_us_text">关于我们</string>
 </resources>

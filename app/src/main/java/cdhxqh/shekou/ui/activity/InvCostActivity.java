@@ -69,7 +69,18 @@ public class InvCostActivity extends BaseActivity implements SwipeRefreshLayout.
 
     private int page = 1;
 
+    /**
+     * 编号*
+     */
     private String itemnum;
+    /**
+     * 库房*
+     */
+    private String location;
+    /**
+     * 站点*
+     */
+    private String siteid;
 
     private ArrayList<Invcost> items = new ArrayList<Invcost>();
 
@@ -94,6 +105,9 @@ public class InvCostActivity extends BaseActivity implements SwipeRefreshLayout.
     private void getInitData() {
 
         itemnum = getIntent().getExtras().getString("itemnum");
+        location = getIntent().getExtras().getString("location");
+        siteid = getIntent().getExtras().getString("siteid");
+        Log.i(TAG, "itemnum=" + itemnum + ",location=" + location + ",siteid=" + siteid);
     }
 
     @Override
@@ -159,7 +173,7 @@ public class InvCostActivity extends BaseActivity implements SwipeRefreshLayout.
      */
 
     private void getItemList(String value, int page, String itemnum) {
-        HttpManager.getDataPagingInfo(InvCostActivity.this, HttpManager.getInvcosturl(value, page, 20, itemnum), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(InvCostActivity.this, HttpManager.getInvcosturl(value, page, 20, itemnum, location, siteid), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);

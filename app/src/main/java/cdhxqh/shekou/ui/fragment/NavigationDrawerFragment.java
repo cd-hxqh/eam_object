@@ -42,7 +42,7 @@ import cdhxqh.shekou.utils.MessageUtils;
  * design guidelines</a> for a complete explanation of the behaviors implemented here.
  */
 public class NavigationDrawerFragment extends BaseFragment {
-    private static final String TAG="NavigationDrawerFragment";
+    private static final String TAG = "NavigationDrawerFragment";
 
     /**
      * Remember the position of the selected item.
@@ -72,10 +72,11 @@ public class NavigationDrawerFragment extends BaseFragment {
     private ImageView mUserImgView;
     private TextView mUserTextView;
 
-    /**设置按钮**/
-    private ImageView settingImageView;
-    /**退出按钮**/
-    private ImageView exitImageView;
+
+    /**
+     * 退出按钮*
+     */
+    private LinearLayout exitImageView;
 
     private int mCurrentSelectedPosition = 0;
     private boolean mFromSavedInstanceState;
@@ -119,7 +120,7 @@ public class NavigationDrawerFragment extends BaseFragment {
         mUserTextView = (TextView) rootView.findViewById(R.id.txt_member);
         mDrawerListView = (ListView) rootView.findViewById(R.id.listView);
 
-        exitImageView=(ImageView)rootView.findViewById(R.id.drawer_eixt_id);
+        exitImageView = (LinearLayout) rootView.findViewById(R.id.exit_linearlayout_id);
 
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -134,14 +135,13 @@ public class NavigationDrawerFragment extends BaseFragment {
         return rootView;
     }
 
-    private View.OnClickListener exitOnClickListener=new View.OnClickListener() {
+    private View.OnClickListener exitOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             closeDrawer();
             showAlertDialog();
         }
     };
-
 
 
     public boolean isDrawerOpen() {
@@ -317,7 +317,9 @@ public class NavigationDrawerFragment extends BaseFragment {
     }
 
 
-    /**突出程序**/
+    /**
+     * 突出程序*
+     */
     public void showAlertDialog() {
 
         CustomDialog.Builder builder = new CustomDialog.Builder(getActivity());

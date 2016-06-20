@@ -34,7 +34,7 @@ public class NormalListDialog extends BaseDialog<NormalListDialog> {
     /** corner radius,dp(圆角程度,单位dp) */
     private float mCornerRadius = 5;
     /** title background color(标题背景颜色) */
-    private int mTitleBgColor = Color.parseColor("#37c4bc");
+    private int mTitleBgColor = Color.parseColor("#0F75B4");
     /** title text(标题) */
     private String mTitle = "提示";
     /** title textcolor(标题颜色) */

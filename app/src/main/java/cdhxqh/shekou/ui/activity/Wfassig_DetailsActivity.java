@@ -87,7 +87,7 @@ public class Wfassig_DetailsActivity extends BaseActivity {
 
         if (wfassignment != null) {
             descriptionText.setText(wfassignment.description);
-            processnameText.setText(wfassignment.processname);
+            processnameText.setText(wfassignment.app);
             assigncodedescText.setText(wfassignment.assigncodedesc);
             assignstatusText.setText(wfassignment.assignstatus);
             startdateText.setText(wfassignment.startdate);

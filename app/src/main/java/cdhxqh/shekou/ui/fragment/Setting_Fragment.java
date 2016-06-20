@@ -3,14 +3,21 @@ package cdhxqh.shekou.ui.fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.logging.LogRecord;
+
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.ui.activity.About_us_Activity;
 import cdhxqh.shekou.ui.activity.DownloadActivity;
+import cdhxqh.shekou.utils.MessageUtils;
 
 
 /**
@@ -18,12 +25,27 @@ import cdhxqh.shekou.ui.activity.DownloadActivity;
  */
 public class Setting_Fragment extends BaseFragment {
 
+    private static final String TAG = "Setting_Fragment";
+
+    /**
+     * 下载数据*
+     */
     private RelativeLayout downlayout;
+    /**
+     * 清除缓存*
+     */
     private RelativeLayout clearlayout;
+    /**
+     * 关于我们*
+     */
     private RelativeLayout about;
+    /**
+     * 版本更新*
+     */
     private RelativeLayout update;
     private ProgressDialog mProgressDialog;
     Intent intent;
+
     public Setting_Fragment() {
     }
 
@@ -75,7 +97,7 @@ public class Setting_Fragment extends BaseFragment {
                     clearData();
                     break;
                 case R.id.about: //关于
-//                    intent = new Intent(getActivity(), About_us_Activity.class);
+                    intent = new Intent(getActivity(), About_us_Activity.class);
                     startActivity(intent);
                     break;
                 case R.id.update://检查更新
@@ -83,31 +105,58 @@ public class Setting_Fragment extends BaseFragment {
                             "正在检测更新，请耐心等候...", true, true);
                     mProgressDialog.setCanceledOnTouchOutside(false);
                     mProgressDialog.setCancelable(false);
-                    setForceUpdate();
+//                    setForceUpdate();
                     break;
             }
         }
     };
 
     //清除基础数据
-    private void clearData(){
-//        mProgressDialog = ProgressDialog.show(getActivity(), null,
-//                getString(R.string.clearing), true, true);
-//        mProgressDialog.setCanceledOnTouchOutside(false);
-//        mProgressDialog.setCancelable(false);
-//        new WorkOrderDao(getActivity()).deleteall();
-//        new WoactivityDao(getActivity()).deleteall();
-//        new WplaborDao(getActivity()).deleteall();
-//        new WpmeterialDao(getActivity()).deleteall();
-//        new AssignmentDao(getActivity()).deleteall();
-//        new LabtransDao(getActivity()).deleteall();
-        mProgressDialog.dismiss();
+    private void clearData() {
+        mProgressDialog = ProgressDialog.show(getActivity(), null,
+                getString(R.string.clearing), true, true);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setCancelable(false);
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                try {
+                    Looper.prepare();
+                    sleep(3000);
+                    mHandler.sendEmptyMessage(1000);
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }.start();
+
+
     }
 
-    /**
-     * 手动强制更新
-     */
-    private void setForceUpdate() {
+
+    private Handler mHandler = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            Log.i(TAG, "msg.what=" + msg.what);
+            switch (msg.what) {
+                case 1000:
+                    mProgressDialog.dismiss();
+                    MessageUtils.showMiddleToast(getActivity(), "清除成功");
+                    break;
+            }
+        }
+
+        ;
+    };
+
+
+//    /**
+//     * 手动强制更新
+//     */
+//    private void setForceUpdate() {
 //        UmengUpdateAgent.setUpdateAutoPopup(false);
 //        UmengUpdateAgent.setUpdateListener(new UmengUpdateListener() {
 //
@@ -136,5 +185,5 @@ public class Setting_Fragment extends BaseFragment {
 //            }
 //        });
 //        UmengUpdateAgent.forceUpdate(getActivity());
-    }
+//    }
 }

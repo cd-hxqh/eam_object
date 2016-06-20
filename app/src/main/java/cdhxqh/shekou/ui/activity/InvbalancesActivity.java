@@ -66,8 +66,18 @@ public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.u
     LinearLayout notLinearLayout;
 
     InvbalancesAdapter invbalancesAdapter;
-
+    /**
+     * 编号*
+     */
     private String itemnum;
+    /**
+     * 库房*
+     */
+    private String location;
+    /**
+     * 站点*
+     */
+    private String siteid;
 
     private int page = 1;
 
@@ -92,6 +102,8 @@ public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.u
      */
     private void getInitData() {
         itemnum = getIntent().getExtras().getString("itemnum");
+        location = getIntent().getExtras().getString("location");
+        siteid = getIntent().getExtras().getString("siteid");
     }
 
     @Override
@@ -153,7 +165,7 @@ public class InvbalancesActivity extends BaseActivity implements cdhxqh.shekou.u
      */
 
     private void getItemList(String value, int page, String itemnum) {
-        HttpManager.getDataPagingInfo(InvbalancesActivity.this, HttpManager.getInvbalancesurl(value, page, 20, itemnum), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(InvbalancesActivity.this, HttpManager.getInvbalancesurl(value, page, 20, itemnum, location, siteid), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);

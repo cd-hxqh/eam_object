@@ -204,6 +204,8 @@ public class InventoryActivity extends BaseActivity {
         public void onClick(View v) {
             Intent intent = new Intent(InventoryActivity.this, InvCostActivity.class);
             intent.putExtra("itemnum", inventory.itemnum);
+            intent.putExtra("location", inventory.location);
+            intent.putExtra("siteid", inventory.siteid);
             startActivityForResult(intent, 0);
         }
     };
@@ -212,6 +214,8 @@ public class InventoryActivity extends BaseActivity {
         public void onClick(View v) {
             Intent intent = new Intent(InventoryActivity.this, InvbalancesActivity.class);
             intent.putExtra("itemnum", inventory.itemnum);
+            intent.putExtra("location", inventory.location);
+            intent.putExtra("siteid", inventory.siteid);
             startActivityForResult(intent, 0);
         }
     };

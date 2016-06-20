@@ -2,6 +2,7 @@ package cdhxqh.shekou.ui.fragment;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,30 +22,36 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
+import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.model.Wfassignment;
+import cdhxqh.shekou.ui.activity.InventoryActivity;
+import cdhxqh.shekou.ui.activity.Wfassig_DetailsActivity;
+import cdhxqh.shekou.ui.adapter.BaseQuickAdapter;
+import cdhxqh.shekou.ui.adapter.InventoryAdapter;
 import cdhxqh.shekou.ui.adapter.WfassigAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 import cdhxqh.shekou.utils.AccountUtils;
 
 
 /**
- * 待办事项列表*
+ * 待办任务*
  */
-public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
+public class WfassigFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     private static final String TAG = "WfassigFragment";
     private static final int RESULT_ADD_TOPIC = 100;
+
 
     /**
      * 搜索按钮*
      */
     private EditText searchEditText;
-
 
     /**
      * RecyclerView*
@@ -66,6 +73,7 @@ public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private int page = 1;
 
     ArrayList<Wfassignment> items = new ArrayList<Wfassignment>();
+
 
     /**
      * 搜索值*
@@ -96,8 +104,7 @@ public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRe
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list_topics);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        wfassigAdapter = new WfassigAdapter(getActivity());
-        mRecyclerView.setAdapter(wfassigAdapter);
+        ;
         mSwipeLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_container);
         mSwipeLayout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -113,8 +120,13 @@ public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 
         searchEditText = (EditText) view.findViewById(R.id.search_edit);
-
     }
+
+
+    /**
+     * 设置事件监听*
+     */
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -122,10 +134,9 @@ public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRe
         Bundle args = getArguments();
         mSwipeLayout.setRefreshing(true);
         getItemList(vlaue, page);
-
         initView();
-
     }
+
 
     /**
      * 初始化界面组件*
@@ -143,12 +154,12 @@ public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 
     /**
-     * 获取待办事项信息*
+     * 获取库存查询信息*
      * --分页
      */
 
-    private void getItemList(String vlaue, int page) {
-        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwfassignmentUrl(AccountUtils.getpersonId(getActivity()), vlaue, page, 20), new HttpRequestHandler<Results>() {
+    private void getItemList(String value, int page) {
+        HttpManager.getDataPagingInfo(getActivity(), HttpManager.getwfassignmentUrl(AccountUtils.getpersonId(getActivity()), value, page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -156,19 +167,19 @@ public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Wfassignment> item = JsonUtils.parsingWfassignment(getActivity(), results.getResultlist());
+                List<Wfassignment> item = JsonUtils.parsingWfassignment(getActivity(), results.getResultlist());
                 if (item != null || item.size() != 0) {
                     for (int i = 0; i < item.size(); i++) {
                         items.add(item.get(i));
                     }
                 }
+
                 mSwipeLayout.setLoading(false);
                 mSwipeLayout.setRefreshing(false);
-                if (items == null || items.isEmpty()) {
+                if (items == null || items.size() == 0) {
                     notLinearLayout.setVisibility(View.VISIBLE);
                 } else {
-                    wfassigAdapter.update(items, true);
-                    wfassigAdapter.notifyDataSetChanged();
+                    initAdapter(item);
                 }
             }
 
@@ -187,13 +198,10 @@ public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRe
         getItemList(vlaue, page);
     }
 
+
     @Override
     public void onRefresh() {
-        page = 1;
-        wfassigAdapter.removeAllData();
-        notLinearLayout.setVisibility(View.GONE);
-        mSwipeLayout.setRefreshing(true);
-        getItemList(vlaue, page);
+        mSwipeLayout.setRefreshing(false);
     }
 
 
@@ -208,7 +216,8 @@ public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRe
                                         .getWindowToken(),
                                 InputMethodManager.HIDE_NOT_ALWAYS);
                 vlaue = searchEditText.getText().toString();
-                wfassigAdapter.removeAllData();
+                wfassigAdapter.removeAll(items);
+                items = new ArrayList<Wfassignment>();
                 notLinearLayout.setVisibility(View.GONE);
                 mSwipeLayout.setRefreshing(true);
                 page = 1;
@@ -220,4 +229,24 @@ public class WfassigFragment extends Fragment implements SwipeRefreshLayout.OnRe
 
 
     };
+
+
+    /**
+     * 获取数据*
+     */
+    private void initAdapter(final List<Wfassignment> list) {
+        wfassigAdapter = new WfassigAdapter(getActivity(), R.layout.list_item, list);
+        mRecyclerView.setAdapter(wfassigAdapter);
+        wfassigAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(getActivity(), Wfassig_DetailsActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("wfassignment", list.get(position));
+                intent.putExtras(bundle);
+                getActivity().startActivity(intent);
+            }
+        });
+    }
+
 }

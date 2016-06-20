@@ -46,7 +46,7 @@ public class LoadActivity extends BaseActivity {
 
 
     /**
-     * ��ת����¼����*
+     * 跳转至相应的界面
      */
     private void jumpLoginActivity() {
         Intent intent = new Intent();

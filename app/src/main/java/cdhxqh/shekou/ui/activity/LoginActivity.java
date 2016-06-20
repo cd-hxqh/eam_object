@@ -69,6 +69,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
     private ArrayList<DialogMenuItem> mMenuItems = new ArrayList<>();
+    private String[] idadresss;
     private BaseAnimatorSet mBasIn;
     private BaseAnimatorSet mBasOut;
 
@@ -76,7 +77,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-        Log.i(TAG, "ip=" + AccountUtils.getIpAddress(LoginActivity.this));
         if (AccountUtils.getIpAddress(LoginActivity.this).equals("")) {
             AccountUtils.setIpAddress(LoginActivity.this, Constants.HTTP_API_IP);
         }
@@ -252,7 +252,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         dialog.setOnOperItemClickL(new OnOperItemClickL() {
             @Override
             public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AccountUtils.setIpAddress(LoginActivity.this, mMenuItems.get(position).mOperName);
+                Log.i(TAG, "ip=" + idadresss[position]);
+                AccountUtils.setIpAddress(LoginActivity.this, idadresss[position]);
 
                 dialog.dismiss();
             }
@@ -264,7 +265,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
      * 设置服务端地址*
      */
     private void addIpData() {
-        String[] inspotypes = getResources().getStringArray(R.array.ip_adress_text);
+        String[] inspotypes = getResources().getStringArray(R.array.ip_adress_zh_text);
+        idadresss = getResources().getStringArray(R.array.ip_adress_text);
 
         for (int i = 0; i < inspotypes.length; i++)
             mMenuItems.add(new DialogMenuItem(inspotypes[i], 0));

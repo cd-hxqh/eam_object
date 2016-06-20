@@ -39,30 +39,33 @@
         android:layout_below="@+id/profile_layout"
         android:divider="@android:color/white"
         android:dividerHeight="0.5dp"
-        android:listSelector="@color/light_blue_color"
-         />
+        android:listSelector="@color/light_blue_color" />
+
 
     <LinearLayout
+        android:id="@+id/exit_linearlayout_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
-        android:gravity="bottom"
         android:layout_marginBottom="20dp"
-        android:orientation="horizontal">
+        android:gravity="bottom"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/drawer_setting_id"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/ic_setting" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/white"></View>
+
+
 
         <ImageView
             android:id="@+id/drawer_eixt_id"
             android:layout_width="40dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dimen_5"
             android:layout_weight="1"
             android:src="@drawable/ic_exit" />
 

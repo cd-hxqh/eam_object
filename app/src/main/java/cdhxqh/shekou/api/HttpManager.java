@@ -34,7 +34,7 @@ public class HttpManager {
         if (vlaue.equals("")) {
             return "{'appid':'" + Constants.WFASSIGNMENT_APPID + "','objectname':'" + Constants.WFASSIGNMENT_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WFASSIGNMENTID DESC','condition':{'ASSIGNCODE':'" + persionid + "','ASSIGNSTATUS':'=活动'}}";
         } else {
-            return "{'appid':'" + Constants.WFASSIGNMENT_APPID + "','objectname':'" + Constants.WFASSIGNMENT_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WFASSIGNMENTID DESC','condition':{'DESCRIPTION':'" + vlaue + "','ASSIGNCODE':'" + persionid + "','ASSIGNSTATUS':'＝活动'}}";
+            return "{'appid':'" + Constants.WFASSIGNMENT_APPID + "','objectname':'" + Constants.WFASSIGNMENT_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WFASSIGNMENTID DESC','condition':{'WFASSIGNMENTID':'" + vlaue + "','ASSIGNCODE':'" + persionid + "','ASSIGNSTATUS':'=活动'}}";
         }
     }
 
@@ -131,11 +131,11 @@ public class HttpManager {
      * 设置库存成本的接口
      * 根据Itemnum
      */
-    public static String getInvcosturl(String value, int curpage, int showcount, String itemnum) {
+    public static String getInvcosturl(String value, int curpage, int showcount, String itemnum, String location, String siteid) {
         if (value.equals("")) {
-            return "{'appid':'" + Constants.INVCOST_APPID + "','objectname':'" + Constants.INVCOST_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'" + itemnum + "'}}";
+            return "{'appid':'" + Constants.INVCOST_APPID + "','objectname':'" + Constants.INVCOST_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'" + itemnum + "','LOCATION':'" + location + "','SITEID':'" + siteid + "'}}";
         } else {
-            return "{'appid':'" + Constants.INVCOST_APPID + "','objectname':'" + Constants.INVCOST_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'" + itemnum + "','ITEMNUM':'" + value + "'}}";
+            return "{'appid':'" + Constants.INVCOST_APPID + "','objectname':'" + Constants.INVCOST_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'" + itemnum + "','ITEMNUM':'" + value + "','LOCATION':'" + location + "','SITEID':'" + siteid + "'}}";
 
         }
     }
@@ -144,12 +144,12 @@ public class HttpManager {
      * 设置库存余量的接口
      * 根据Itemnum
      */
-    public static String getInvbalancesurl(String value, int curpage, int showcount, String itemnum) {
+    public static String getInvbalancesurl(String value, int curpage, int showcount, String itemnum, String location, String siteid) {
         if (value.equals("")) {
-            return "{'appid':'" + Constants.INVBALANCES_APPID + "','objectname':'" + Constants.INVBALANCES_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'" + itemnum + "'}}";
+            return "{'appid':'" + Constants.INVBALANCES_APPID + "','objectname':'" + Constants.INVBALANCES_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'" + itemnum + "','LOCATION':'" + location + "','SITEID':'" + siteid + "'}}";
 
         } else {
-            return "{'appid':'" + Constants.INVBALANCES_APPID + "','objectname':'" + Constants.INVBALANCES_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'" + itemnum + "','BINNUM':'" + value + "'}}";
+            return "{'appid':'" + Constants.INVBALANCES_APPID + "','objectname':'" + Constants.INVBALANCES_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'" + itemnum + "','BINNUM':'" + value + "','LOCATION':'" + location + "','SITEID':'" + siteid + "'}}";
 
         }
     }
@@ -313,7 +313,7 @@ public class HttpManager {
     public static void loginWithUsername(final Context cxt, final String username, final String password, String imei,
                                          final HttpRequestHandler<String> handler) {
 
-        String ip_adress = AccountUtils.getIpAddress(cxt)+Constants.SIGN_IN_URL;
+        String ip_adress = AccountUtils.getIpAddress(cxt) + Constants.SIGN_IN_URL;
         Log.i(TAG, "ip_adress=" + ip_adress);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
@@ -354,7 +354,7 @@ public class HttpManager {
      * 不分页获取信息方法*
      */
     public static void getData(final Context cxt, String data, final HttpRequestHandler<Results> handler) {
-        String url=AccountUtils.getIpAddress(cxt)+Constants.BASE_URL;
+        String url = AccountUtils.getIpAddress(cxt) + Constants.BASE_URL;
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);
@@ -383,7 +383,8 @@ public class HttpManager {
      */
     public static void getDataPagingInfo(final Context cxt, String data, final HttpRequestHandler<Results> handler) {
         Log.i(TAG, "data=" + data);
-        String url=AccountUtils.getIpAddress(cxt)+Constants.BASE_URL;
+        String url = AccountUtils.getIpAddress(cxt) + Constants.BASE_URL;
+        Log.i(TAG, "url=" + url);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);

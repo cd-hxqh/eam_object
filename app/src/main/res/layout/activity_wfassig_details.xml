@@ -62,7 +62,7 @@
                 android:id="@+id/wfassig_processname_title"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:text="@string/wfassig_processname_text"
+                android:text="应用程序名:"
                 android:textColor="@color/light_black"
                 android:textSize="@dimen/dimens_16dp" />
 
