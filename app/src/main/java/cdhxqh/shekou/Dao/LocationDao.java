@@ -46,6 +46,7 @@ public class LocationDao {
                 @Override
                 public Void call() throws Exception {
                     for (Locations locations : list) {
+                        deleteByLocationNum(locations);
                         locationsesDao.createOrUpdate(locations);
                     }
                     return null;
@@ -154,4 +155,25 @@ public class LocationDao {
         }
         return null;
     }
+
+
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByLocationNum(Locations locations) {
+        try {
+            List<Locations> locationsList = locationsesDao.queryBuilder().where().eq("locationsid", locations.locationsid).query();
+
+            if (null != locationsList && locationsList.size() != 0) {
+                locationsesDao.delete(locationsList.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
 }

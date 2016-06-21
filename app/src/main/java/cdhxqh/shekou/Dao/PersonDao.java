@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
+import cdhxqh.shekou.model.Locations;
 import cdhxqh.shekou.model.Person;
 
 /**
@@ -37,11 +38,11 @@ public class PersonDao {
      */
     public void create(final List<Person> list) {
         try {
-            deleteall();
             PersonDaoOpe.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
                     for (Person person : list) {
+                        deleteByPersonNum(person);
                         PersonDaoOpe.createOrUpdate(person);
                     }
                     return null;
@@ -122,4 +123,27 @@ public class PersonDao {
         }
         return false;
     }
+
+
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByPersonNum(Person person) {
+        try {
+            List<Person> personList = PersonDaoOpe.queryBuilder().where().eq("personid", person.personid).query();
+
+            if (null != personList && personList.size() != 0) {
+                PersonDaoOpe.delete(personList.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
+
 }

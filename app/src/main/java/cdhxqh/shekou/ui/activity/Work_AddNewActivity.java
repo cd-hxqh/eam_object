@@ -272,6 +272,8 @@ public class Work_AddNewActivity extends BaseActivity {
         statusdate.setText(GetDateAndTime.GetDateTime());
         udcreateby.setText(AccountUtils.getpersonId(Work_AddNewActivity.this));
         udcreatedate.setText(GetDateAndTime.GetDateTime());
+        reportedby.setText(AccountUtils.getpersonId(Work_AddNewActivity.this));
+        reportdate.setText(GetDateAndTime.GetDateTime());
 
         assetnum.setOnClickListener(new LayoutOnClickListener(Constants.ASSETCODE));
         jpnum.setOnClickListener(new LayoutOnClickListener(Constants.JOBPLANCODE));

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
+import cdhxqh.shekou.model.Invuseline;
 import cdhxqh.shekou.model.Laborcraftrate;
 
 /**
@@ -37,11 +38,11 @@ public class LaborcraftrateDao {
      */
     public void create(final List<Laborcraftrate> list) {
         try {
-            deleteall();
             LaborcraftrateDaoOpe.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
                     for (Laborcraftrate laborcraftrate : list) {
+                        deleteByLaborcraftrateNum(laborcraftrate);
                         LaborcraftrateDaoOpe.createOrUpdate(laborcraftrate);
                     }
                     return null;
@@ -134,4 +135,25 @@ public class LaborcraftrateDao {
         }
         return false;
     }
+
+
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByLaborcraftrateNum(Laborcraftrate laborcraftrate) {
+        try {
+            List<Laborcraftrate> laborcraftrateList = LaborcraftrateDaoOpe.queryBuilder().where().eq("laborcode", laborcraftrate.laborcode).query();
+
+            if (null != laborcraftrateList && laborcraftrateList.size() != 0) {
+                LaborcraftrateDaoOpe.delete(laborcraftrateList.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
 }

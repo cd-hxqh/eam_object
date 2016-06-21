@@ -10,6 +10,7 @@ import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
 import cdhxqh.shekou.model.Alndomain;
+import cdhxqh.shekou.model.Alndomain2;
 
 /**
  * Created by think on 2016/5/18.
@@ -42,6 +43,7 @@ public class AlndomainDao {
                 @Override
                 public Void call() throws Exception {
                     for (Alndomain alndomain : list) {
+                        deleteByAlndomainNum(alndomain);
                         AlndomainDaoOpe.createOrUpdate(alndomain);
                     }
                     return null;
@@ -122,4 +124,24 @@ public class AlndomainDao {
         }
         return false;
     }
+
+
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByAlndomainNum(Alndomain alndomain) {
+        try {
+            List<Alndomain> alndomainList = AlndomainDaoOpe.queryBuilder().where().eq("value", alndomain.value).query();
+
+            if (null != alndomainList && alndomainList.size() != 0) {
+                AlndomainDaoOpe.delete(alndomainList.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
 }

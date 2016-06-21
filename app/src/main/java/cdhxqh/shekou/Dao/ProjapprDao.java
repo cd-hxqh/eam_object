@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
+import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.model.Projappr;
 
 /**
@@ -37,11 +38,11 @@ public class ProjapprDao {
      */
     public void create(final List<Projappr> list) {
         try {
-            deleteall();
             ProjapprDaoOpe.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
                     for (Projappr projappr : list) {
+                        deleteByProjapprNum(projappr);
                         ProjapprDaoOpe.createOrUpdate(projappr);
                     }
                     return null;
@@ -121,4 +122,25 @@ public class ProjapprDao {
         }
         return false;
     }
+
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByProjapprNum(Projappr projappr) {
+        try {
+            List<Projappr> projapprList = ProjapprDaoOpe.queryBuilder().where().eq("prjnum", projappr.prjnum).query();
+
+            if (null != projapprList && projapprList.size() != 0) {
+                ProjapprDaoOpe.delete(projapprList.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
 }

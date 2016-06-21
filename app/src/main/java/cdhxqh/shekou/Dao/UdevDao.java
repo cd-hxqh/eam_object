@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
+import cdhxqh.shekou.model.Projappr;
 import cdhxqh.shekou.model.Udev;
 
 /**
@@ -37,11 +38,11 @@ public class UdevDao {
      */
     public void create(final List<Udev> list) {
         try {
-            deleteall();
             UdevDaoOpe.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
                     for (Udev udev : list) {
+                        deleteByUdevNum(udev);
                         UdevDaoOpe.createOrUpdate(udev);
                     }
                     return null;
@@ -70,7 +71,7 @@ public class UdevDao {
      *
      * @return
      */
-    public List<Udev> queryByCount(int count,String evnum) {
+    public List<Udev> queryByCount(int count, String evnum) {
         try {
             return UdevDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("evnum", "%" + evnum + "%").query();
         } catch (SQLException e) {
@@ -121,4 +122,24 @@ public class UdevDao {
         }
         return false;
     }
+
+
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByUdevNum(Udev udev) {
+        try {
+            List<Udev> udevList = UdevDaoOpe.queryBuilder().where().eq("evnum", udev.evnum).query();
+
+            if (null != udevList && udevList.size() != 0) {
+                UdevDaoOpe.delete(udevList.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
 }

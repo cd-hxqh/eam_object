@@ -10,6 +10,7 @@ import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
 import cdhxqh.shekou.model.Assets;
+import cdhxqh.shekou.model.Failurelist;
 import cdhxqh.shekou.model.Invuseline;
 
 /**
@@ -40,6 +41,7 @@ public class InvuselineDao {
                 @Override
                 public Void call() throws Exception {
                     for (Invuseline invuseline : list) {
+                        deleteByInvuselineNum(invuseline);
                         InvuselineDaoOpe.createOrUpdate(invuseline);
                     }
                     return null;
@@ -78,5 +80,20 @@ public class InvuselineDao {
         return null;
     }
 
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByInvuselineNum(Invuseline invuseline) {
+        try {
+            List<Invuseline> invuselineList = InvuselineDaoOpe.queryBuilder().where().eq("invusenum", invuseline.invusenum).query();
 
+            if (null != invuselineList && invuselineList.size() != 0) {
+                InvuselineDaoOpe.delete(invuselineList.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 }

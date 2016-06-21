@@ -1,6 +1,7 @@
 package cdhxqh.shekou.Dao;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
 
@@ -16,6 +17,7 @@ import cdhxqh.shekou.model.Assets;
  * 资产
  */
 public class AssetDao {
+    private static final String TAG = "AssetDao";
     private Context context;
     private Dao<Assets, Integer> AssetDaoOpe;
     private DatabaseHelper helper;
@@ -36,17 +38,12 @@ public class AssetDao {
      * @param list
      */
     public void create(final List<Assets> list) {
+
         try {
-            deleteall();
-            AssetDaoOpe.callBatchTasks(new Callable<Void>() {
-                @Override
-                public Void call() throws Exception {
-                    for (Assets assets : list) {
-                        AssetDaoOpe.createOrUpdate(assets);
-                    }
-                    return null;
-                }
-            });
+            for (Assets assets : list) {
+                deleteByAssetNum(assets);
+                AssetDaoOpe.createOrUpdate(assets);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,7 +67,7 @@ public class AssetDao {
      *
      * @return
      */
-    public List<Assets> queryByCount(int count,String assetnum) {
+    public List<Assets> queryByCount(int count, String assetnum) {
         try {
             return AssetDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("assetnum", "%" + assetnum + "%").query();
         } catch (SQLException e) {
@@ -84,8 +81,10 @@ public class AssetDao {
      */
     public void deleteall() {
         try {
+            Log.i(TAG, "111");
             AssetDaoOpe.delete(AssetDaoOpe.queryForAll());
         } catch (SQLException e) {
+            Log.i(TAG, "2222");
             e.printStackTrace();
         }
     }
@@ -121,4 +120,23 @@ public class AssetDao {
         }
         return false;
     }
+
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByAssetNum(Assets asset) {
+        try {
+            List<Assets> assetList = AssetDaoOpe.queryBuilder().where().eq("assetnum", asset.assetnum).query();
+
+            if (null != assetList && assetList.size() != 0) {
+                AssetDaoOpe.delete(assetList.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
 }

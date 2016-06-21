@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
+import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.JobPlan;
 
 /**
@@ -37,11 +38,11 @@ public class JobPlanDao {
      */
     public void create(final List<JobPlan> list) {
         try {
-            deleteall();
             JobPlanDaoOpe.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
                     for (JobPlan jpnum : list) {
+                        deleteByJobPlanNum(jpnum);
                         JobPlanDaoOpe.createOrUpdate(jpnum);
                     }
                     return null;
@@ -70,7 +71,7 @@ public class JobPlanDao {
      *
      * @return
      */
-    public List<JobPlan> queryByCount(int count,String jpnum) {
+    public List<JobPlan> queryByCount(int count, String jpnum) {
         try {
             return JobPlanDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("jpnum", "%" + jpnum + "%").query();
         } catch (SQLException e) {
@@ -84,10 +85,10 @@ public class JobPlanDao {
      *
      * @return
      */
-    public List<JobPlan> queryByCount1(int count,String jpnum) {
+    public List<JobPlan> queryByCount1(int count, String jpnum) {
         try {
             return JobPlanDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).
-                    where().like("jpnum", "%" + jpnum + "%").and().eq("UDASSETTYPE","AC").query();
+                    where().like("jpnum", "%" + jpnum + "%").and().eq("UDASSETTYPE", "AC").query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -135,5 +136,23 @@ public class JobPlanDao {
             e.printStackTrace();
         }
         return false;
+    }
+
+
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByJobPlanNum(JobPlan jobPlan) {
+        try {
+            List<JobPlan> jobPlanList = JobPlanDaoOpe.queryBuilder().where().eq("jpnum", jobPlan.jpnum).query();
+
+            if (null != jobPlanList && jobPlanList.size() != 0) {
+                JobPlanDaoOpe.delete(jobPlanList.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }

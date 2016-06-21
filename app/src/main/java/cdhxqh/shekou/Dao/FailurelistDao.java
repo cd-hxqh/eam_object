@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
+import cdhxqh.shekou.model.Alndomain;
 import cdhxqh.shekou.model.Failurelist;
 
 /**
@@ -37,11 +38,11 @@ public class FailurelistDao {
      */
     public void create(final List<Failurelist> list) {
         try {
-            deleteall();
             FailurelistDaoOpe.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
                     for (Failurelist failurelist : list) {
+                        deleteByFailurelistNum(failurelist);
                         FailurelistDaoOpe.createOrUpdate(failurelist);
                     }
                     return null;
@@ -144,4 +145,32 @@ public class FailurelistDao {
         }
         return false;
     }
+
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByFailurelistNum(Failurelist failurelist) {
+        try {
+            List<Failurelist> failurelistList = FailurelistDaoOpe.queryBuilder().where().eq("failurecode", failurelist.failurecode).query();
+
+            if (null != failurelistList && failurelistList.size() != 0) {
+                FailurelistDaoOpe.delete(failurelistList.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

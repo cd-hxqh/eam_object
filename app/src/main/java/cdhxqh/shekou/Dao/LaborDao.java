@@ -10,6 +10,7 @@ import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
 import cdhxqh.shekou.model.Labor;
+import cdhxqh.shekou.model.Laborcraftrate;
 
 /**
  * Created by think on 2016/5/18.
@@ -37,11 +38,11 @@ public class LaborDao {
      */
     public void create(final List<Labor> list) {
         try {
-            deleteall();
             LaborDaoOpe.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
                     for (Labor labor : list) {
+                        deleteByLaborNum(labor);
                         LaborDaoOpe.createOrUpdate(labor);
                     }
                     return null;
@@ -86,7 +87,7 @@ public class LaborDao {
      */
     public List<Labor> queryByCount1(int count,String laborcode,String udeq1) {
         try {
-            return LaborDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("laborcode", "%" + laborcode + "%").and().eq("udeq1",udeq1).query();
+            return LaborDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("laborcode", "%" + laborcode + "%").and().eq("udeq1", udeq1).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -135,4 +136,23 @@ public class LaborDao {
         }
         return false;
     }
+
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByLaborNum(Labor labor) {
+        try {
+            List<Labor> laborList = LaborDaoOpe.queryBuilder().where().eq("laborcode", labor.laborcode).query();
+
+            if (null != laborList && laborList.size() != 0) {
+                LaborDaoOpe.delete(laborList.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
 }

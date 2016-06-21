@@ -10,6 +10,7 @@ import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
 import cdhxqh.shekou.model.Alndomain2;
+import cdhxqh.shekou.model.Person;
 
 /**
  * Created by think on 2016/5/18.
@@ -37,11 +38,11 @@ public class Alndomain2Dao {
      */
     public void create(final List<Alndomain2> list) {
         try {
-            deleteall();
             AlndomainDaoOpe.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
                     for (Alndomain2 alndomain : list) {
+                        deleteByAlndomain2Num(alndomain);
                         AlndomainDaoOpe.createOrUpdate(alndomain);
                     }
                     return null;
@@ -70,7 +71,7 @@ public class Alndomain2Dao {
      *
      * @return
      */
-    public List<Alndomain2> queryByCount(int count,String value) {
+    public List<Alndomain2> queryByCount(int count, String value) {
         try {
             return AlndomainDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("value", "%" + value + "%").query();
         } catch (SQLException e) {
@@ -122,4 +123,23 @@ public class Alndomain2Dao {
         }
         return false;
     }
+
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByAlndomain2Num(Alndomain2 alndomain2) {
+        try {
+            List<Alndomain2> alndomain2List = AlndomainDaoOpe.queryBuilder().where().eq("value", alndomain2.value).query();
+
+            if (null != alndomain2List && alndomain2List.size() != 0) {
+                AlndomainDaoOpe.delete(alndomain2List.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
 }

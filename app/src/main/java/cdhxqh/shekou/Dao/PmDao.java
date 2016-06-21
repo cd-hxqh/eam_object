@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import cdhxqh.shekou.OrmLiteHelper.DatabaseHelper;
+import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.model.Pm;
 
 /**
@@ -37,11 +38,11 @@ public class PmDao {
      */
     public void create(final List<Pm> list) {
         try {
-            deleteall();
             PmDaoOpe.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
                     for (Pm pm : list) {
+                        deleteByPmNum(pm);
                         PmDaoOpe.createOrUpdate(pm);
                     }
                     return null;
@@ -109,7 +110,7 @@ public class PmDao {
      */
     public boolean isexit(Pm pm) {
         try {
-            List<Pm> workOrderList = PmDaoOpe.queryBuilder().where().eq("evnum", pm.pmnum)
+            List<Pm> workOrderList = PmDaoOpe.queryBuilder().where().eq("pmnum", pm.pmnum)
                     .and().eq("description", pm.description).query();
             if (workOrderList.size() > 0) {
                 return true;
@@ -121,4 +122,23 @@ public class PmDao {
         }
         return false;
     }
+
+
+    /**
+     * 根据编号删除信息*
+     */
+    private void deleteByPmNum(Pm pm) {
+        try {
+            List<Pm> pmList = PmDaoOpe.queryBuilder().where().eq("pmnum", pm.pmnum).query();
+
+            if (null != pmList && pmList.size() != 0) {
+                PmDaoOpe.delete(pmList.get(0));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
 }
