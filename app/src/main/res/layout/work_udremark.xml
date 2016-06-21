@@ -1,33 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/work_udremark_layout"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/dimen_40dp"
         android:background="@color/light_gray2">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginLeft="@dimen/dimens_10"
             android:layout_marginBottom="@dimen/dimen_5"
+            android:layout_marginLeft="@dimen/dimens_10"
             android:text="@string/work_udremark"
-            android:textSize="@dimen/dimens_16dp"
             android:textColor="@color/light_black"
-            />
+            android:textSize="@dimen/dimens_16dp" />
     </RelativeLayout>
+
     <EditText
         android:id="@+id/work_udremark"
-        android:layout_margin="@dimen/dimen_5"
-        android:padding="@dimen/dimen_5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:inputType="textMultiLine"
+        android:layout_margin="@dimen/dimen_5"
         android:background="@drawable/bg_edittext"
-        android:textSize="@dimen/dimens_16dp"
-        android:textColor="@color/light_black"/>
+        android:hint="@string/have_not_data"
+        android:inputType="textMultiLine"
+        android:padding="@dimen/dimen_5"
+        android:textColor="@color/light_black"
+        android:textSize="@dimen/dimens_16dp" />
 </LinearLayout>

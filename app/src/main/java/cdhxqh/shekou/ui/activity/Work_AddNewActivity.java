@@ -3,6 +3,7 @@ package cdhxqh.shekou.ui.activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -49,6 +50,7 @@ import cdhxqh.shekou.webserviceclient.AndroidClientService;
  * 新建工单
  */
 public class Work_AddNewActivity extends BaseActivity {
+    private static final String TAG="Work_AddNewActivity";
 
     private TextView titlename;
     private ImageView menuImageView;
@@ -122,10 +124,13 @@ public class Work_AddNewActivity extends BaseActivity {
     //    private TextView udisplayname;//承包商负责人
     private TextView targstartdate;//计划开始时间
     private TextView targcompdate;//计划完成时间
-    private LinearLayout work_real_info_layout;
     private TextView actstart;//实际开始时间
     private TextView actfinish;//实际完成时间
+
+    private LinearLayout udtjsj_layout;
+    private View udtjsj_view;
     private EditText udtjsj;//实际维修时间
+
     private EditText udtjtime;//停机时间
     private LinearLayout work_udremark_layout;
     private EditText udremark;//备注
@@ -219,10 +224,14 @@ public class Work_AddNewActivity extends BaseActivity {
 //        udisplayname = (TextView) findViewById(R.id.work_udisplayname);
         targstartdate = (TextView) findViewById(R.id.work_targstartdate);
         targcompdate = (TextView) findViewById(R.id.work_targcompdate);
-        work_real_info_layout = (LinearLayout) findViewById(R.id.work_real_info);
+
         actstart = (TextView) findViewById(R.id.work_actstart);
         actfinish = (TextView) findViewById(R.id.work_actfinish);
+
+        udtjsj_layout = (LinearLayout) findViewById(R.id.udtjsj_linearlayout_id);
+        udtjsj_view = (View) findViewById(R.id.udtjsj_view_id);
         udtjsj = (EditText) findViewById(R.id.work_udtjsj);
+
         udtjtime = (EditText) findViewById(R.id.work_udtjtime);
         work_udremark_layout = (LinearLayout) findViewById(R.id.work_udremark_layout);
         udremark = (EditText) findViewById(R.id.work_udremark);
@@ -233,7 +242,7 @@ public class Work_AddNewActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        titlename.setText(WorkTitle.getTitle(workOrder.worktype));
+        titlename.setText(WorkTitle.getTitleadd(workOrder.worktype) + "新建");
         backlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -246,11 +255,13 @@ public class Work_AddNewActivity extends BaseActivity {
         wonum_layout.setVisibility(View.GONE);
         gl_layout.setVisibility(View.GONE);
         work_flow.setVisibility(View.GONE);
+        udtjsj_layout.setVisibility(View.GONE);
+        udtjsj_view.setVisibility(View.GONE);
 
         workOrder.isnew = true;
 
-        worktype.setText(workOrder.worktype);
-        status.setText("工单建立");
+        worktype.setText(WorkTitle.getTitleadd(workOrder.worktype));
+        status.setText(getString(R.string.addstatus_text));
         targstartdate.setOnClickListener(new TimeOnClickListener(targstartdate));
         targcompdate.setOnClickListener(new TimeOnClickListener(targcompdate));
         actstart.setOnClickListener(new TimeOnClickListener(actstart));
@@ -354,13 +365,8 @@ public class Work_AddNewActivity extends BaseActivity {
      * 提交数据*
      */
     private void startAsyncTask() {
-//        if (wonumlayout.getVisibility() == View.GONE) {
-//            if (NetWorkHelper.isNetwork(Work_AddNewActivity.this)) {
-//                MessageUtils.showMiddleToast(Work_AddNewActivity.this, "暂无网络,现离线保存数据!");
-//                saveWorkOrder();
-//                closeProgressDialog();
-//            } else {
         final String updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
+        Log.i(TAG,"updataInfo="+updataInfo);
         new AsyncTask<String, String, WorkResult>() {
             @Override
             protected WorkResult doInBackground(String... strings) {
@@ -382,11 +388,6 @@ public class Work_AddNewActivity extends BaseActivity {
                 closeProgressDialog();
             }
         }.execute();
-//            }
-//        } else {
-//            Toast.makeText(Work_AddNewActivity.this, "工单已新增", Toast.LENGTH_SHORT).show();
-//            closeProgressDialog();
-//        }
     }
 
     //时间选择监听
@@ -618,7 +619,7 @@ public class Work_AddNewActivity extends BaseActivity {
         WorkOrder workOrder = this.workOrder;
         workOrder.wonum = "";
         workOrder.description = description.getText().toString().trim();
-        workOrder.worktype = worktype.getText().toString().trim();
+//        workOrder.worktype = worktype.getText().toString().trim();
         workOrder.assetnum = assetnum.getText().toString().trim();
         workOrder.woeq1 = woeq1.getText().toString().trim();
         workOrder.woeq2 = woeq2.getText().toString().trim();
@@ -656,7 +657,7 @@ public class Work_AddNewActivity extends BaseActivity {
         workOrder.targcompdate = targcompdate.getText().toString().trim();
         workOrder.udactstart = actstart.getText().toString().trim();
         workOrder.udactfinish = actfinish.getText().toString().trim();
-        workOrder.udtjsj = udtjsj.getText().toString().trim();
+//        workOrder.udtjsj = udtjsj.getText().toString().trim();
         workOrder.udtjtime = udtjtime.getText().toString().trim();
         workOrder.udremark = udremark.getText().toString().trim();
         return workOrder;

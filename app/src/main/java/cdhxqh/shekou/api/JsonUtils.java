@@ -1218,7 +1218,7 @@ public class JsonUtils {
             jsonObject.put("targstartdate", workOrder.targstartdate);
             jsonObject.put("udactstart", workOrder.udactstart);
             jsonObject.put("udactfinish", workOrder.udactfinish);
-            jsonObject.put("udtjsj", workOrder.udtjsj);
+            jsonObject.put("udtjsj","");
             jsonObject.put("udtjtime", workOrder.udtjtime);
             jsonObject.put("udremark", workOrder.udremark);
             jsonObject.put("udprojapprnum", workOrder.udprojapprnum);
@@ -1232,7 +1232,7 @@ public class JsonUtils {
             jsonObject.put("udworkmemo", workOrder.udworkmemo);
             jsonObject.put("udisyq", workOrder.udisyq);
             jsonObject.put("failurecode", workOrder.failurecode);
-            jsonObject.put("udgzlbdm", workOrder.udtjsj);
+            jsonObject.put("udgzlbdm", workOrder.udgzlbdm);
             if (woactivities != null && woactivities.size() != 0) {
                 JSONArray woactivityArray = new JSONArray();
                 JSONObject woactivityObj;

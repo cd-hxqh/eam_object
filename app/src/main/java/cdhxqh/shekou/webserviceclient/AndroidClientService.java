@@ -262,7 +262,6 @@ public class AndroidClientService {
         try {
             httpTransport.call("urn:action", soapEnvelope);
         } catch (IOException | XmlPullParserException e) {
-//            e.printStackTrace();
             return null;
         }
         String obj = null;

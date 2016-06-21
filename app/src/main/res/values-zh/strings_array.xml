@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+    <string-array name="drawer_tab_titles">
+        <item>待办任务</item>
+        <item>工单管理</item>
+        <item>库存查询</item>
+        <item>领料管理</item>
+        <item>设置</item>
+    </string-array>
+    <string-array name="udyxj_tab_titles">
+        <item>低</item>
+        <item>中</item>
+        <item>高</item>
+    </string-array>
+
+    <string-array name="ip_adress_text">
+        <item>http://172.16.1.75:7001</item>
+        <item>http://121.35.242.172:7001</item>
+    </string-array>
+    <string-array name="ip_adress_zh_text">
+        <item>内网</item>
+        <item>外网</item>
+
+    </string-array>
+
+</resources>
