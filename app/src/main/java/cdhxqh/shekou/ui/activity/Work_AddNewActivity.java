@@ -42,6 +42,7 @@ import cdhxqh.shekou.model.WorkResult;
 import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.DateTimeSelect;
 import cdhxqh.shekou.utils.GetDateAndTime;
+import cdhxqh.shekou.utils.MessageUtils;
 import cdhxqh.shekou.utils.WorkTitle;
 import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
@@ -50,7 +51,7 @@ import cdhxqh.shekou.webserviceclient.AndroidClientService;
  * 新建工单
  */
 public class Work_AddNewActivity extends BaseActivity {
-    private static final String TAG="Work_AddNewActivity";
+    private static final String TAG = "Work_AddNewActivity";
 
     private TextView titlename;
     private ImageView menuImageView;
@@ -81,6 +82,7 @@ public class Work_AddNewActivity extends BaseActivity {
     private LinearLayout description_layout;
     private TextView worktype;//工作类型
     private TextView assetnum;//设备
+    private TextView assetname;//设备名称
     private LinearLayout gl_layout;
     private TextView woeq1;//管理组
     private TextView woeq2;//管理室
@@ -179,6 +181,7 @@ public class Work_AddNewActivity extends BaseActivity {
         description_layout = (LinearLayout) findViewById(R.id.work_description_layout);
         worktype = (TextView) findViewById(R.id.work_worktype);
         assetnum = (TextView) findViewById(R.id.work_assetnum);
+        assetname = (TextView) findViewById(R.id.work_assetnum_name);
         gl_layout = (LinearLayout) findViewById(R.id.gl_layout);
         woeq1 = (TextView) findViewById(R.id.work_glz);
         woeq2 = (TextView) findViewById(R.id.work_gls);
@@ -274,6 +277,7 @@ public class Work_AddNewActivity extends BaseActivity {
         udcreatedate.setText(GetDateAndTime.GetDateTime());
         reportedby.setText(AccountUtils.getpersonId(Work_AddNewActivity.this));
         reportdate.setText(GetDateAndTime.GetDateTime());
+        udiscb.setChecked(true);
 
         assetnum.setOnClickListener(new LayoutOnClickListener(Constants.ASSETCODE));
         jpnum.setOnClickListener(new LayoutOnClickListener(Constants.JOBPLANCODE));
@@ -332,12 +336,8 @@ public class Work_AddNewActivity extends BaseActivity {
     private View.OnClickListener insertOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (actstart.getText().toString().equals("") || actfinish.getText().toString().equals("")) {
-                Toast.makeText(Work_AddNewActivity.this, "请输入日期时间", Toast.LENGTH_SHORT).show();
-            } else if (udtjtime.getText().toString().equals("")) {
-                Toast.makeText(Work_AddNewActivity.this, "请输入停机时间", Toast.LENGTH_SHORT).show();
-            } else if (assetnum.getText().toString().equals("")) {
-                Toast.makeText(Work_AddNewActivity.this, "请选择设备", Toast.LENGTH_SHORT).show();
+            if (assetnum.getText().toString().equals("")) {
+                MessageUtils.showErrorMessage(Work_AddNewActivity.this, "设备必填项");
             } else {
                 final NormalDialog dialog = new NormalDialog(Work_AddNewActivity.this);
                 dialog.content("确定新增工单吗?")//
@@ -368,11 +368,11 @@ public class Work_AddNewActivity extends BaseActivity {
      */
     private void startAsyncTask() {
         final String updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
-        Log.i(TAG,"updataInfo="+updataInfo);
+        Log.i(TAG, "updataInfo=" + updataInfo);
         new AsyncTask<String, String, WorkResult>() {
             @Override
             protected WorkResult doInBackground(String... strings) {
-                WorkResult addresult = AndroidClientService.InsertWO(updataInfo, AccountUtils.getpersonId(Work_AddNewActivity.this),AccountUtils.getIpAddress(Work_AddNewActivity.this)+ Constants.WORK_URL);
+                WorkResult addresult = AndroidClientService.InsertWO(updataInfo, AccountUtils.getpersonId(Work_AddNewActivity.this), AccountUtils.getIpAddress(Work_AddNewActivity.this) + Constants.WORK_URL);
                 return addresult;
             }
 
@@ -380,12 +380,14 @@ public class Work_AddNewActivity extends BaseActivity {
             protected void onPostExecute(WorkResult workResult) {
                 super.onPostExecute(workResult);
                 if (workResult == null) {
-                    Toast.makeText(Work_AddNewActivity.this, "新增工单失败", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(Work_AddNewActivity.this, "新增工单失败");
                 } else if (!workResult.errorMsg.equals("成功!")) {
-                    Toast.makeText(Work_AddNewActivity.this, workResult.errorMsg, Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(Work_AddNewActivity.this, workResult.errorMsg);
+                    finish();
                 } else if (workResult.errorMsg.equals("成功!")) {
-                    Toast.makeText(Work_AddNewActivity.this, "工单" + workResult.wonum + "新增成功", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(Work_AddNewActivity.this, "工单" + workResult.wonum + "新增成功");
                     wonum.setText(workResult.wonum);
+                    finish();
                 }
                 closeProgressDialog();
             }
@@ -672,6 +674,7 @@ public class Work_AddNewActivity extends BaseActivity {
             case Constants.ASSETCODE:
                 option = (Option) data.getSerializableExtra("option");
                 assetnum.setText(option.getName());
+                assetname.setText(option.getDescription());
                 workOrder.udassetbz = option.getValue();
                 break;
             case Constants.JOBPLANCODE:

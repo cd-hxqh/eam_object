@@ -242,7 +242,7 @@ public class JsonUtils {
                 if (jsonObject.has("UDISJJ")) {
                     workOrder.udisjj = jsonObject.getString("UDISJJ");//是否紧急维修
                 }
-//                workOrder.assetdescription = jsonObject.getString("ASSETDESCRIPTION");//设备描述
+                workOrder.assetdescription = jsonObject.getString("ASSETDESCRIPTION");//设备描述
                 if (jsonObject.has("UDISAQ")) {
                     workOrder.udisaq = jsonObject.getString("UDISAQ");//是否安全
                 }

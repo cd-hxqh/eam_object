@@ -150,6 +150,7 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
                 if (items == null || items.isEmpty()) {
                     nodatalayout.setVisibility(View.VISIBLE);
                 } else {
+                    nodatalayout.setVisibility(View.GONE);
                     if (page == 1) {
                         workListAdapter = new WorkListAdapter(Work_ListActivity.this);
                         recyclerView.setAdapter(workListAdapter);

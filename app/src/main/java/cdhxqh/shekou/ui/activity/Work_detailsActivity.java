@@ -45,6 +45,7 @@ import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.model.WorkResult;
 import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.DateTimeSelect;
+import cdhxqh.shekou.utils.MessageUtils;
 import cdhxqh.shekou.utils.WorkTitle;
 import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
@@ -81,6 +82,7 @@ public class Work_detailsActivity extends BaseActivity {
     private LinearLayout description_layout;
     private TextView worktype;//工作类型
     private TextView assetnum;//设备
+    private TextView assetname;//设备名称
     private TextView woeq1;//管理组
     private TextView woeq2;//管理室
     private TextView woeq3;//管理班组
@@ -176,6 +178,7 @@ public class Work_detailsActivity extends BaseActivity {
         description_layout = (LinearLayout) findViewById(R.id.work_description_layout);
         worktype = (TextView) findViewById(R.id.work_worktype);
         assetnum = (TextView) findViewById(R.id.work_assetnum);
+        assetname = (TextView) findViewById(R.id.work_assetnum_name);
         woeq1 = (TextView) findViewById(R.id.work_glz);
         woeq2 = (TextView) findViewById(R.id.work_gls);
         woeq3 = (TextView) findViewById(R.id.work_glbz);
@@ -252,6 +255,7 @@ public class Work_detailsActivity extends BaseActivity {
         description.setText(workOrder.description);
         worktype.setText(workOrder.wtypedesc);
         assetnum.setText(workOrder.assetnum);
+        assetname.setText(workOrder.assetdescription);
         woeq1.setText(workOrder.woeq1);
         woeq2.setText(workOrder.woeq2);
         woeq3.setText(workOrder.woeq3);
@@ -571,14 +575,11 @@ public class Work_detailsActivity extends BaseActivity {
     private View.OnClickListener reviseOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (actstart.getText().equals("") || actfinish.getText().equals("")) {
-                Toast.makeText(Work_detailsActivity.this, "请输入日期时间", Toast.LENGTH_SHORT).show();
+
+            if (workOrder.status.equals(Constants.STATUS25)) {
+                submitDataInfo();
             } else {
-                if (workOrder.status.equals(Constants.STATUS25)) {
-                    submitDataInfo();
-                } else {
-                    Toast.makeText(Work_detailsActivity.this, "该状态无法修改", Toast.LENGTH_SHORT).show();
-                }
+                MessageUtils.showMiddleToast(Work_detailsActivity.this, "该状态无法修改");
             }
         }
     };
@@ -614,16 +615,8 @@ public class Work_detailsActivity extends BaseActivity {
      * 提交数据*
      */
     private void startAsyncTask() {
-//        if (NetWorkHelper.isNetwork(Work_DetailsActivity.this)) {
-//            MessageUtils.showMiddleToast(Work_DetailsActivity.this, "暂无网络,现离线保存数据!");
-//            saveWorkOrder();
-//        } else {
         String updataInfo = null;
-//            if (workOrder.status.equals(Constants.WAIT_APPROVAL)) {
         updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
-//            } else if (workOrder.status.equals(Constants.APPROVALED)) {
-//                updataInfo = JsonUtils.WorkToJson(getWorkOrder(), null, null, null, null, getLabtransList());
-//            }
         final String finalUpdataInfo = updataInfo;
         new AsyncTask<String, String, WorkResult>() {
             @Override
@@ -636,11 +629,11 @@ public class Work_detailsActivity extends BaseActivity {
             protected void onPostExecute(WorkResult workResult) {
                 super.onPostExecute(workResult);
                 if (workResult == null) {
-                    Toast.makeText(Work_detailsActivity.this, "修改工单失败", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(Work_detailsActivity.this, "修改工单失败");
                 } else if (workResult.errorMsg.equals("成功!")) {
-                    Toast.makeText(Work_detailsActivity.this, "修改工单成功", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(Work_detailsActivity.this, "修改工单成功");
                 } else {
-                    Toast.makeText(Work_detailsActivity.this, workResult.errorMsg, Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(Work_detailsActivity.this, workResult.errorMsg);
                 }
                 closeProgressDialog();
             }
@@ -886,6 +879,7 @@ public class Work_detailsActivity extends BaseActivity {
             case Constants.ASSETCODE:
                 option = (Option) data.getSerializableExtra("option");
                 assetnum.setText(option.getName());
+                assetname.setText(option.getDescription());
                 workOrder.udassetbz = option.getValue();
                 break;
             case Constants.JOBPLANCODE:

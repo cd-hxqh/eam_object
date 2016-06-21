@@ -22,7 +22,7 @@ public class WorkOrder implements Serializable {
     public String wtypedesc;//工单类型名称
     public String description;//描述
     public String assetnum;//设备
-//    public String assetdescription;//设备描述
+    public String assetdescription;//设备描述
     public String woeq3;//设备管理班组编号
     public String woeq2;//设备管理室编号
     public String woeq1;//设备管理组编号
