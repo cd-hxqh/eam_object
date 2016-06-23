@@ -26,7 +26,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_fault"></ImageView>
+                    android:src="@drawable/ic_gdll"></ImageView>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_prevent"></ImageView>
+                    android:src="@drawable/ic_fgdll"></ImageView>
 
                 <TextView
                     android:id="@+id/work_text_prevent_id"

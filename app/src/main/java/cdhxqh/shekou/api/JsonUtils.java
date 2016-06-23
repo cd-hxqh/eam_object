@@ -162,6 +162,7 @@ public class JsonUtils {
                 wfassignment.ownertable = jsonObject.getString("OWNERTABLE"); //所有者表
                 wfassignment.processname = jsonObject.getString("PROCESSNAME"); //过程
                 wfassignment.startdate = jsonObject.getString("STARTDATE"); //开始日期
+                wfassignment.udassign01 = jsonObject.getString("UDASSIGN01"); //应用
 
                 list.add(wfassignment);
             }
@@ -349,7 +350,7 @@ public class JsonUtils {
     /**
      * 解析工单计划任务信息
      */
-    public static ArrayList<Woactivity> parsingWoactivity(Context ctx, String data,String wonum) {
+    public static ArrayList<Woactivity> parsingWoactivity(Context ctx, String data, String wonum) {
         Log.i(TAG, "Woactivity data=" + data);
         ArrayList<Woactivity> list = null;
         Woactivity woactivity = null;
@@ -520,7 +521,7 @@ public class JsonUtils {
     /**
      * 解析实际员工信息
      */
-    public static ArrayList<Labtrans> parsingLabtrans(Context ctx, String data,String wonum) {
+    public static ArrayList<Labtrans> parsingLabtrans(Context ctx, String data, String wonum) {
         Log.i(TAG, "Labtrans data=" + data);
         ArrayList<Labtrans> list = null;
         Labtrans labtrans = null;
@@ -1218,7 +1219,7 @@ public class JsonUtils {
             jsonObject.put("targstartdate", workOrder.targstartdate);
             jsonObject.put("udactstart", workOrder.udactstart);
             jsonObject.put("udactfinish", workOrder.udactfinish);
-            jsonObject.put("udtjsj","");
+            jsonObject.put("udtjsj", "");
             jsonObject.put("udtjtime", workOrder.udtjtime);
             jsonObject.put("udremark", workOrder.udremark);
             jsonObject.put("udprojapprnum", workOrder.udprojapprnum);
@@ -1446,19 +1447,19 @@ public class JsonUtils {
 
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("invusenum", null==invuse.invusenum?"":invuse.invusenum);
-            jsonObject.put("description", null==invuse.description?"":invuse.description);
-            jsonObject.put("fromstoreloc", null==invuse.fromstoreloc?"":invuse.fromstoreloc);
-            jsonObject.put("wonum", null==invuse.wonum?"":invuse.wonum);
-            jsonObject.put("udissueto", null==invuse.udissueto?"":invuse.udissueto);
-            jsonObject.put("uddept", null==invuse.uddept?"":invuse.uddept);
-            jsonObject.put("udisjj", null==invuse.udisjj?"":invuse.udisjj);
-            jsonObject.put("udjbr", null==invuse.udjbr?"":invuse.udjbr);
-            jsonObject.put("status", null==invuse.status?"":invuse.status);
-            jsonObject.put("udapptype", null==invuse.udapptype?"":invuse.udapptype);
-            jsonObject.put("udreason", null==invuse.udreason?"":invuse.udreason);
-            jsonObject.put("statusdate", null==invuse.statusdate?"":invuse.statusdate);
-            jsonObject.put("createdate", null==invuse.createdate?"":invuse.createdate);
+            jsonObject.put("invusenum", null == invuse.invusenum ? "" : invuse.invusenum);
+            jsonObject.put("description", null == invuse.description ? "" : invuse.description);
+            jsonObject.put("fromstoreloc", null == invuse.fromstoreloc ? "" : invuse.fromstoreloc);
+            jsonObject.put("wonum", null == invuse.wonum ? "" : invuse.wonum);
+            jsonObject.put("udissueto", null == invuse.udissueto ? "" : invuse.udissueto);
+            jsonObject.put("uddept", null == invuse.uddept ? "" : invuse.uddept);
+            jsonObject.put("udisjj", null == invuse.udisjj ? "" : invuse.udisjj);
+            jsonObject.put("udjbr", null == invuse.udjbr ? "" : invuse.udjbr);
+            jsonObject.put("status", null == invuse.status ? "" : invuse.status);
+            jsonObject.put("udapptype", null == invuse.udapptype ? "" : invuse.udapptype);
+            jsonObject.put("udreason", null == invuse.udreason ? "" : invuse.udreason);
+            jsonObject.put("statusdate", null == invuse.statusdate ? "" : invuse.statusdate);
+            jsonObject.put("createdate", null == invuse.createdate ? "" : invuse.createdate);
 
             if (invuselines != null && invuselines.size() != 0) {
                 JSONArray invuselinesArray = new JSONArray();

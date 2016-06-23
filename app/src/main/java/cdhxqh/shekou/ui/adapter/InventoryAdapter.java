@@ -39,9 +39,9 @@ public class InventoryAdapter extends BaseQuickAdapter<Inventory> {
     protected void convert(BaseViewHolder helper, Inventory item) {
         CardView cardView = helper.getView(R.id.card_container);
         helper.setText(R.id.item_num_title, mContext.getString(R.string.inventory_itemnum_text));
-        helper.setText(R.id.item_desc_title, mContext.getString(R.string.inventory_location_text));
+        helper.setText(R.id.item_desc_title, mContext.getString(R.string.inventory_desc_name_text));
         helper.setText(R.id.item_num_text, item.itemnum);
-        helper.setText(R.id.item_desc_text, item.location);
+        helper.setText(R.id.item_desc_text, item.item_description);
     }
 
 

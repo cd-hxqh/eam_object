@@ -53,7 +53,7 @@ import cdhxqh.shekou.webserviceclient.AndroidClientService;
  * Created by think on 2015/10/29.
  */
 public class Work_detailsActivity extends BaseActivity {
-
+    private static final String TAG="Work_detailsActivity";
     private TextView titlename;
     private ImageView menuImageView;
     private RelativeLayout backlayout;
@@ -617,6 +617,8 @@ public class Work_detailsActivity extends BaseActivity {
     private void startAsyncTask() {
         String updataInfo = null;
         updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
+        Log.i(TAG,"updataInfo="+updataInfo);
+
         final String finalUpdataInfo = updataInfo;
         new AsyncTask<String, String, WorkResult>() {
             @Override
@@ -827,7 +829,7 @@ public class Work_detailsActivity extends BaseActivity {
     private WorkOrder getWorkOrder() {
         WorkOrder workOrder = this.workOrder;
         workOrder.description = description.getText().toString().trim();
-        workOrder.worktype = worktype.getText().toString().trim();
+//        workOrder.worktype = worktype.getText().toString().trim();
         workOrder.assetnum = assetnum.getText().toString().trim();
         workOrder.woeq1 = woeq1.getText().toString().trim();
         workOrder.woeq2 = woeq2.getText().toString().trim();

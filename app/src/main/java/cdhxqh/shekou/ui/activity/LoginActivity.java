@@ -84,7 +84,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
         BDAutoUpdateSDK.uiUpdateAction(this, new MyUICheckUpdateCallback());
-//        BDAutoUpdateSDK.cpUpdateCheck(this, new MyCPCheckUpdateCallback());
         if (AccountUtils.getIpAddress(LoginActivity.this).equals("")) {
             AccountUtils.setIpAddress(LoginActivity.this, Constants.HTTP_API_IP);
         }
@@ -291,50 +290,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     }
 
-    private class MyCPCheckUpdateCallback implements CPCheckUpdateCallback {
 
-        @Override
-        public void onCheckUpdateCallback(AppUpdateInfo info, AppUpdateInfoForInstall infoForInstall) {
-            Log.i(TAG,"info="+info+",infoForInstall="+infoForInstall);
-            if (infoForInstall != null && !TextUtils.isEmpty(infoForInstall.getInstallPath())) {
-                BDAutoUpdateSDK.cpUpdateInstall(getApplicationContext(), infoForInstall.getInstallPath());
-            } else if (info != null) {
-
-                Log.i(TAG,"versionname="+info.getAppVersionName()+",versioncode="+info.getAppVersionCode());
-
-                BDAutoUpdateSDK.cpUpdateDownload(LoginActivity.this, info, new UpdateDownloadCallback());
-            } else {
-
-            }
-        }
-
-    }
-
-    private class UpdateDownloadCallback implements CPUpdateDownloadCallback {
-
-        @Override
-        public void onDownloadComplete(String apkPath) {
-            BDAutoUpdateSDK.cpUpdateInstall(getApplicationContext(), apkPath);
-        }
-
-        @Override
-        public void onStart() {
-        }
-
-        @Override
-        public void onPercent(int percent, long rcvLen, long fileSize) {
-        }
-
-        @Override
-        public void onFail(Throwable error, String content) {
-        }
-
-        @Override
-        public void onStop() {
-
-        }
-
-    }
 
 
 }

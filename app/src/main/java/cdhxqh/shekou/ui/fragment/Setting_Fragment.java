@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,12 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 
+import com.baidu.autoupdatesdk.AppUpdateInfo;
+import com.baidu.autoupdatesdk.AppUpdateInfoForInstall;
+import com.baidu.autoupdatesdk.BDAutoUpdateSDK;
+import com.baidu.autoupdatesdk.CPCheckUpdateCallback;
+import com.baidu.autoupdatesdk.CPUpdateDownloadCallback;
+import com.baidu.autoupdatesdk.UICheckUpdateCallback;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.ui.activity.About_us_Activity;
@@ -104,6 +111,7 @@ public class Setting_Fragment extends BaseFragment {
                             "正在检测更新，请耐心等候...", true, true);
                     mProgressDialog.setCanceledOnTouchOutside(false);
                     mProgressDialog.setCancelable(false);
+                    updateVersion();
                     break;
             }
         }
@@ -150,5 +158,41 @@ public class Setting_Fragment extends BaseFragment {
         ;
     };
 
+    /**
+     * 手动更新*
+     */
+    private void updateVersion() {
+        BDAutoUpdateSDK.cpUpdateCheck(getActivity(), new MyCPCheckUpdateCallback());
 
+    }
+
+
+    private class MyCPCheckUpdateCallback implements CPCheckUpdateCallback {
+
+        @Override
+        public void onCheckUpdateCallback(AppUpdateInfo info, AppUpdateInfoForInstall infoForInstall) {
+            if (infoForInstall != null && !TextUtils.isEmpty(infoForInstall.getInstallPath())) {
+                mProgressDialog.dismiss();
+                BDAutoUpdateSDK.uiUpdateAction(getActivity(), new MyUICheckUpdateCallback());
+            } else if (info != null) {
+                mProgressDialog.dismiss();
+                Log.i(TAG, "versionname=" + info.getAppVersionName() + ",versioncode=" + info.getAppVersionCode());
+                BDAutoUpdateSDK.uiUpdateAction(getActivity(), new MyUICheckUpdateCallback());
+
+            } else {
+                MessageUtils.showMiddleToast(getActivity(), "已是最新版本");
+            }
+
+            mProgressDialog.dismiss();
+        }
+
+    }
+
+    private class MyUICheckUpdateCallback implements UICheckUpdateCallback {
+        @Override
+        public void onCheckComplete() {
+            Log.i(TAG, "onCheckComplete");
+        }
+
+    }
 }
