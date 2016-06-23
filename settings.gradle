@@ -1,1 +1,2 @@
 include ':app', ':FlycoAnimation_Lib', ':FlycoDialog_Lib'
+include ':bDIntegrationSDK_LibProject'

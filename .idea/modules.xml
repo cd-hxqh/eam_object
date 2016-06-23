@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/FlycoAnimation_Lib/FlycoAnimation_Lib.iml" filepath="$PROJECT_DIR$/FlycoAnimation_Lib/FlycoAnimation_Lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/FlycoDialog_Lib/FlycoDialog_Lib.iml" filepath="$PROJECT_DIR$/FlycoDialog_Lib/FlycoDialog_Lib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bDIntegrationSDK_LibProject/bDIntegrationSDK_LibProject.iml" filepath="$PROJECT_DIR$/bDIntegrationSDK_LibProject/bDIntegrationSDK_LibProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/eam_object.iml" filepath="$PROJECT_DIR$/eam_object.iml" />
     </modules>
   </component>

@@ -175,6 +175,7 @@
     <string name="work_glz">管理组:</string>
     <string name="work_gls">管理室:</string>
     <string name="work_glbz">管理班组:</string>
+    <string name="addstatus_text">工单建立</string>
 
 
     <!--领料管理-->

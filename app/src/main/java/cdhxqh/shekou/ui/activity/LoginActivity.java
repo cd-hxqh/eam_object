@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,13 +15,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.baidu.autoupdatesdk.AppUpdateInfo;
+import com.baidu.autoupdatesdk.AppUpdateInfoForInstall;
+import com.baidu.autoupdatesdk.BDAutoUpdateSDK;
+import com.baidu.autoupdatesdk.CPCheckUpdateCallback;
+import com.baidu.autoupdatesdk.CPUpdateDownloadCallback;
+import com.baidu.autoupdatesdk.UICheckUpdateCallback;
 import com.flyco.animation.BaseAnimatorSet;
 import com.flyco.animation.BounceEnter.BounceTopEnter;
 import com.flyco.animation.SlideExit.SlideBottomExit;
 import com.flyco.dialog.entity.DialogMenuItem;
 import com.flyco.dialog.listener.OnOperItemClickL;
 import com.flyco.dialog.widget.NormalListDialog;
-import com.umeng.update.UmengUpdateAgent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +40,6 @@ import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.manager.AppManager;
-import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.MessageUtils;
@@ -78,22 +83,17 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
+        BDAutoUpdateSDK.uiUpdateAction(this, new MyUICheckUpdateCallback());
+//        BDAutoUpdateSDK.cpUpdateCheck(this, new MyCPCheckUpdateCallback());
         if (AccountUtils.getIpAddress(LoginActivity.this).equals("")) {
             AccountUtils.setIpAddress(LoginActivity.this, Constants.HTTP_API_IP);
         }
         imei = ((TelephonyManager) getSystemService(TELEPHONY_SERVICE))
                 .getDeviceId();
-        setUmeng();
         findViewById();
         initView();
     }
 
-
-    private void setUmeng() {
-        UmengUpdateAgent.update(this);
-        UmengUpdateAgent.setUpdateOnlyWifi(false);
-        UmengUpdateAgent.setDeltaUpdate(true);
-    }
 
     @Override
     protected void findViewById() {
@@ -281,4 +281,60 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
 
     }
+
+
+    private class MyUICheckUpdateCallback implements UICheckUpdateCallback {
+        @Override
+        public void onCheckComplete() {
+            Log.i(TAG, "onCheckComplete");
+        }
+
+    }
+
+    private class MyCPCheckUpdateCallback implements CPCheckUpdateCallback {
+
+        @Override
+        public void onCheckUpdateCallback(AppUpdateInfo info, AppUpdateInfoForInstall infoForInstall) {
+            Log.i(TAG,"info="+info+",infoForInstall="+infoForInstall);
+            if (infoForInstall != null && !TextUtils.isEmpty(infoForInstall.getInstallPath())) {
+                BDAutoUpdateSDK.cpUpdateInstall(getApplicationContext(), infoForInstall.getInstallPath());
+            } else if (info != null) {
+
+                Log.i(TAG,"versionname="+info.getAppVersionName()+",versioncode="+info.getAppVersionCode());
+
+                BDAutoUpdateSDK.cpUpdateDownload(LoginActivity.this, info, new UpdateDownloadCallback());
+            } else {
+
+            }
+        }
+
+    }
+
+    private class UpdateDownloadCallback implements CPUpdateDownloadCallback {
+
+        @Override
+        public void onDownloadComplete(String apkPath) {
+            BDAutoUpdateSDK.cpUpdateInstall(getApplicationContext(), apkPath);
+        }
+
+        @Override
+        public void onStart() {
+        }
+
+        @Override
+        public void onPercent(int percent, long rcvLen, long fileSize) {
+        }
+
+        @Override
+        public void onFail(Throwable error, String content) {
+        }
+
+        @Override
+        public void onStop() {
+
+        }
+
+    }
+
+
 }
