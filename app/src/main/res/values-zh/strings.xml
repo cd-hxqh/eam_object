@@ -166,46 +166,46 @@
     <!--工单详情界面-->
     <string name="work_details">工单详情</string>
     <string name="work_new">新建工单</string>
-    <string name="work_num">工单号:</string>
-    <string name="work_description">工单描述:</string>
+    <string name="work_num">工单号</string>
+    <string name="work_description">工单描述</string>
     <string name="work_description_hint">请输入相关描述</string>
-    <string name="work_worktype">工单类型:</string>
+    <string name="work_worktype">工单类型</string>
     <string name="work_assetnum">设备:</string>
     <string name="work_assetnum_name">设备名称:</string>
-    <string name="work_glz">管理组:</string>
-    <string name="work_gls">管理室:</string>
-    <string name="work_glbz">管理班组:</string>
+    <string name="work_glz">管理组</string>
+    <string name="work_gls">管理室</string>
+    <string name="work_glbz">管理班组</string>
     <string name="addstatus_text">工单建立</string>
 
 
     <!--领料管理-->
-    <string name="work_status">状态:</string>
-    <string name="work_statusdate">状态日期:</string>
+    <string name="work_status">状态</string>
+    <string name="work_statusdate">状态日期</string>
     <string name="work_plan_details">作业详细信息</string>
-    <string name="work_jpnum">作业计划:</string>
-    <string name="work_isjf">是否按项目计费:</string>
-    <string name="work_udprojapprnum">立项编号:</string>
+    <string name="work_jpnum">作业计划</string>
+    <string name="work_isjf">是否按项目计费</string>
+    <string name="work_udprojapprnum">立项编号</string>
     <string name="work_udevnum">事故号</string>
     <string name="work_udbugnum">项目预算</string>
     <string name="work_pmnum">预防性维护</string>
-    <string name="work_udcreateby">创建人:</string>
-    <string name="work_udcreatedate">创建日期:</string>
-    <string name="work_reportedby">报告人:</string>
-    <string name="work_reportdate">报告日期:</string>
-    <string name="work_udisjj">是否紧急维修:</string>
-    <string name="work_udyxj">优先级:</string>
-    <string name="work_udisaq">是否安全:</string>
-    <string name="work_udisbx">是否保修:</string>
-    <string name="work_udiscb">是否抄表:</string>
+    <string name="work_udcreateby">创建人</string>
+    <string name="work_udcreatedate">创建日期</string>
+    <string name="work_reportedby">报告人</string>
+    <string name="work_reportdate">报告日期</string>
+    <string name="work_udisjj">是否紧急维修</string>
+    <string name="work_udyxj">优先级</string>
+    <string name="work_udisaq">是否安全</string>
+    <string name="work_udisbx">是否保修</string>
+    <string name="work_udiscb">是否抄表</string>
     <string name="work_plan_info">计划信息</string>
-    <string name="work_lead">工作负责人:</string>
-    <string name="work_udisplayname">承包商负责人:</string>
-    <string name="work_targstartdate">计划开始时间:</string>
-    <string name="work_targcompdate">计划完成时间:</string>
+    <string name="work_lead">工作负责人</string>
+    <string name="work_udisplayname">承包商负责人</string>
+    <string name="work_targstartdate">计划开始时间</string>
+    <string name="work_targcompdate">计划完成时间</string>
     <string name="work_em_info">处理班组信息</string>
-    <string name="work_udqxbz">抢修班组:</string>
-    <string name="work_lead1">抢修负责人:</string>
-    <string name="work_supervisor">抢修执行人:</string>
+    <string name="work_udqxbz">抢修班组</string>
+    <string name="work_lead1">抢修负责人</string>
+    <string name="work_supervisor">抢修执行人</string>
     <string name="work_udsupervisor2">抢修执行人2</string>
     <string name="work_failure_info">故障详细信息</string>
     <string name="work_failurecode">故障子机构:</string>
@@ -437,33 +437,9 @@
     <string name="add_invuseline_text">新增备件明细</string>
     <string name="invuseline_title">备件明细</string>
     <string name="about_us_text">关于我们</string>
+    <string name="gzgd_num">故障工单:</string>
+    <string name="gdms_text">工单描述:</string>
+    <string name="qxgd_text">抢修工单:</string>
 
 
-    <!--友盟自动更新-->
-    <string name="umeng_example_home_btn_analytics">统计分析</string>
-    <string name="umeng_example_home_btn_xp">应用联盟</string>
-    <string name="umeng_example_home_btn_ad">移动广告</string>
-    <string name="umeng_example_home_btn_tools">工具</string>
-    <string name="umeng_example_home_btn_fb">用户反馈</string>
-    <string name="umeng_example_home_btn_update">自动更新</string>
-    <string name="umeng_example_home_btn_plus">社交分享</string>
-    <string name="umeng_example_home_btn_xp_ufp">Umeng For Publisher</string>
-    <string name="umeng_example_xp_home_btn_container">嵌入容器</string>
-    <string name="umeng_example_xp_home_btn_banner">横幅</string>
-    <string name="umeng_example_xp_home_btn_banner_ufp">"横幅\n(UFP)"</string>
-    <string name="umeng_example_xp_home_btn_handler">小把手</string>
-    <string name="umeng_example_xp_home_btn_handler_ufp">"小把手\n(UFP)"</string>
-    <string name="umeng_example_xp_home_btn_tab">多页面</string>
-    <string name="umeng_example_xp_home_btn_custom">自定义样式</string>
-    <string name="umeng_example_xp_home_btn_wap">Web页</string>
-    <string name="umeng_example_xp_home_btn_wap_ufp">"Web页\n(UFP)"</string>
-    <string name="umeng_example_xp_home_btn_textlink">文字链</string>
-    <string name="umeng_example_xp_home_btn_container_header">轮播大图\n(UFP)</string>
-    <string name="umeng_example_xp_home_btn_push_header">推送弹窗\n(UFP)</string>
-    <string name="umeng_example_xp_home_handler_icons">图标列表\n(UFP)</string>
-    <string name="umeng_example_fb_home_btn_simple">简单反馈</string>
-    <string name="actionbar_activity_not_found">打开Activity失败</string>
-    <string name="umeng_example_home_hint_wait">敬请期待</string>
-
-    <string name="intro"> 下面展示使用 js 调用友盟 自定义事件  APIs</string>
 </resources>
