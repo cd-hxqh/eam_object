@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -145,6 +146,9 @@ public class InvuseDetailsActivity extends BaseActivity {
      */
     private TextView changedateText;
 
+    /**领料原因**/
+    private EditText udreasonEditText;
+
     /**
      * 审批工作流布局*
      */
@@ -175,6 +179,40 @@ public class InvuseDetailsActivity extends BaseActivity {
      * 删除*
      */
     private Button deleteButton;
+
+
+    /**
+     * 非工单领料需要隐藏的字段*
+     */
+    //工单
+    private LinearLayout wonumLinearLayout;
+    private View wonumView;
+    //工单描述
+    private LinearLayout wonumDescLinearLayout;
+    private View wonumDescView;
+    //部门
+    private LinearLayout uddetLinearLayout;
+    private View uddetView;
+    //工单设备
+    private LinearLayout wonumAssetLinearLayout;
+    private View wonumAssetView;
+    //设备管理组
+    private LinearLayout eq1LinearLayout;
+    private View eq1View;
+    //设备管理室
+    private LinearLayout eq2LinearLayout;
+    private View eq2View;
+    //设备管理班组
+    private LinearLayout eq3LinearLayout;
+    private View eq3View;
+    //是否紧急
+    private LinearLayout udisjjLinearLayout;
+    private View udisjjView;
+    /**
+     * 领料原因*
+     */
+    private LinearLayout udreasonLinearLayout;
+    private View udreasonView;
 
 
     /**
@@ -227,6 +265,27 @@ public class InvuseDetailsActivity extends BaseActivity {
         createdateText = (TextView) findViewById(R.id.createdate_text_id);
         pz_displaynameText = (TextView) findViewById(R.id.pz_displayname_text_id);
         changedateText = (TextView) findViewById(R.id.changedate_text_id);
+        udreasonEditText = (EditText) findViewById(R.id.udreason_text_id);
+
+
+        wonumLinearLayout = (LinearLayout) findViewById(R.id.wonum_linearlayout_id);
+        wonumView = (View) findViewById(R.id.wonum_view_id);
+        wonumDescLinearLayout = (LinearLayout) findViewById(R.id.wonum_desc_linearLayout_id);
+        wonumDescView = (View) findViewById(R.id.wonum_desc_view_id);
+        uddetLinearLayout = (LinearLayout) findViewById(R.id.uddet_linearLayout_id);
+        uddetView = (View) findViewById(R.id.uddept_view_id);
+        wonumAssetLinearLayout = (LinearLayout) findViewById(R.id.wonum_asset_linearlayout_id);
+        wonumAssetView = (View) findViewById(R.id.wonum_asset_view_id);
+        eq1LinearLayout = (LinearLayout) findViewById(R.id.ea1_linearLayout_id);
+        eq1View = (View) findViewById(R.id.eq1_view_id);
+        eq2LinearLayout = (LinearLayout) findViewById(R.id.eq2_linearLayout_id);
+        eq2View = (View) findViewById(R.id.eq2_view_id);
+        eq3LinearLayout = (LinearLayout) findViewById(R.id.eq3_linearLayout_id);
+        eq3View = (View) findViewById(R.id.eq3_view_id);
+        udisjjLinearLayout = (LinearLayout) findViewById(R.id.udisjj_linearlayout_id);
+        udisjjView = (View) findViewById(R.id.udisjj_view_id);
+        udreasonLinearLayout = (LinearLayout) findViewById(R.id.udreason_linearlayout_id);
+        udreasonView = (View) findViewById(R.id.udreason_view_id);
 
 
         worlflowBtn = (Button) findViewById(R.id.approval_button_id);
@@ -264,6 +323,7 @@ public class InvuseDetailsActivity extends BaseActivity {
             createdateText.setText(invuse.createdate == null ? "暂无数据" : invuse.createdate);
             pz_displaynameText.setText(invuse.pz_displayname == null ? "暂无数据" : invuse.pz_displayname);
             changedateText.setText(invuse.changedate == null ? "暂无数据" : invuse.changedate);
+            udreasonEditText.setText(invuse.udreason == null ? "暂无数据" : invuse.udreason);
 
 
         }
@@ -284,7 +344,26 @@ public class InvuseDetailsActivity extends BaseActivity {
 
         mBasIn = new BounceTopEnter();
         mBasOut = new SlideBottomExit();
-
+        if (invuse.udapptype.equals("UNWOUSE")) {//非工单领料
+            wonumLinearLayout.setVisibility(View.GONE);
+            wonumView.setVisibility(View.GONE);
+            wonumDescLinearLayout.setVisibility(View.GONE);
+            wonumDescView.setVisibility(View.GONE);
+            uddetLinearLayout.setVisibility(View.GONE);
+            uddetView.setVisibility(View.GONE);
+            wonumAssetLinearLayout.setVisibility(View.GONE);
+            wonumAssetView.setVisibility(View.GONE);
+            eq1LinearLayout.setVisibility(View.GONE);
+            eq1View.setVisibility(View.GONE);
+            eq2LinearLayout.setVisibility(View.GONE);
+            eq2View.setVisibility(View.GONE);
+            eq3LinearLayout.setVisibility(View.GONE);
+            eq3View.setVisibility(View.GONE);
+            udisjjLinearLayout.setVisibility(View.GONE);
+            udisjjView.setVisibility(View.GONE);
+            udreasonLinearLayout.setVisibility(View.VISIBLE);
+            udreasonView.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -482,7 +561,7 @@ public class InvuseDetailsActivity extends BaseActivity {
         new AsyncTask<String, String, InvuseResult>() {
             @Override
             protected InvuseResult doInBackground(String... strings) {
-                InvuseResult addresult = AndroidClientService.UpdateInvuse(updataInfo, AccountUtils.getpersonId(InvuseDetailsActivity.this),  AccountUtils.getIpAddress(InvuseDetailsActivity.this)+Constants.INVUSE_URL);
+                InvuseResult addresult = AndroidClientService.UpdateInvuse(updataInfo, AccountUtils.getpersonId(InvuseDetailsActivity.this), AccountUtils.getIpAddress(InvuseDetailsActivity.this) + Constants.INVUSE_URL);
 
                 return addresult;
             }
@@ -515,7 +594,7 @@ public class InvuseDetailsActivity extends BaseActivity {
         new AsyncTask<String, String, String>() {
             @Override
             protected String doInBackground(String... strings) {
-                String result = AndroidClientService.DeleteInvuse(invuse.invusenum, AccountUtils.getpersonId(InvuseDetailsActivity.this), AccountUtils.getIpAddress(InvuseDetailsActivity.this)+Constants.INVUSE_URL);
+                String result = AndroidClientService.DeleteInvuse(invuse.invusenum, AccountUtils.getpersonId(InvuseDetailsActivity.this), AccountUtils.getIpAddress(InvuseDetailsActivity.this) + Constants.INVUSE_URL);
 
                 return result;
             }

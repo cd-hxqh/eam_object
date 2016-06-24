@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,11 +70,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     String imei; //imei
 
+    private RadioGroup radioGroup;
     /**
-     * 服务器Ip 地址*
+     * 内网*
      */
-    private TextView ipText;
-
+    private RadioButton neiwangRadio;
+    /**
+     * 外网*
+     */
+    private RadioButton waiwangRadio;
 
     private ArrayList<DialogMenuItem> mMenuItems = new ArrayList<>();
     private String[] idadresss;
@@ -100,7 +106,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mPassword = (EditText) findViewById(R.id.user_login_password);
         checkBox = (CheckBox) findViewById(R.id.isremenber_password);
         mLogin = (Button) findViewById(R.id.user_login);
-        ipText = (TextView) findViewById(R.id.ip_address_id);
+        radioGroup = (RadioGroup) findViewById(R.id.radiogroup_id);
+        waiwangRadio = (RadioButton) findViewById(R.id.waiwang_id);
+        neiwangRadio = (RadioButton) findViewById(R.id.neiwang_id);
     }
 
     @Override
@@ -113,11 +121,24 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
         checkBox.setOnCheckedChangeListener(cheBoxOnCheckedChangListener);
         mLogin.setOnClickListener(this);
-        ipText.setOnClickListener(this);
         mBasIn = new BounceTopEnter();
         mBasOut = new SlideBottomExit();
         addIpData();
+        waiwangRadio.setChecked(true);
+        radioGroup.setOnCheckedChangeListener(radioGroupOnCheckedChangeListener);
     }
+
+    private RadioGroup.OnCheckedChangeListener radioGroupOnCheckedChangeListener = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            if (checkedId == neiwangRadio.getId()) {
+                AccountUtils.setIpAddress(LoginActivity.this, Constants.HTTPZHENGSHI_API_IP);
+            } else if (checkedId == waiwangRadio.getId()) {
+                AccountUtils.setIpAddress(LoginActivity.this, Constants.HTTP_API_IP);
+            }
+        }
+    };
+
 
     private CompoundButton.OnCheckedChangeListener cheBoxOnCheckedChangListener = new CompoundButton.OnCheckedChangeListener() {
         @Override
@@ -141,9 +162,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
                 break;
 
-            case R.id.ip_address_id:
-                NormalListDialog();
-                break;
 
         }
     }
@@ -289,8 +307,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
 
     }
-
-
 
 
 }

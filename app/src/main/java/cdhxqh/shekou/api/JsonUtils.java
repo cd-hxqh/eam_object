@@ -337,6 +337,18 @@ public class JsonUtils {
                 if (jsonObject.has("UDGZLBDM")) {
                     workOrder.udgzlbdm = jsonObject.getString("UDGZLBDM");//故障类别
                 }
+                if (jsonObject.has("GZGDWONUM")) {
+                    workOrder.gzgdwonum = jsonObject.getString("GZGDWONUM");//抢修工单中对应的故障工单编号
+                }
+                if (jsonObject.has("GZGDDESCRIPTION")) {
+                    workOrder.gzgddescription = jsonObject.getString("GZGDDESCRIPTION");//抢修工单中对应的故障工单描述
+                }
+                if (jsonObject.has("QXGDWONUM")) {
+                    workOrder.qxgdwonum = jsonObject.getString("QXGDWONUM");//故障工单中对应的抢修工单编号
+                }
+                if (jsonObject.has("QXGDDESCRIPTION")) {
+                    workOrder.qxgddescription = jsonObject.getString("QXGDDESCRIPTION");//故障工单中对应的抢修工单描述
+                }
                 list.add(workOrder);
             }
             return list;

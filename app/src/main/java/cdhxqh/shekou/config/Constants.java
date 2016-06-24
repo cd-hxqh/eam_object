@@ -8,8 +8,10 @@ public class Constants {
     /**
      * 基础接口*
      */
-    /**默认**/
+    /**默认 外网**/
     public static final String HTTP_API_IP = "http://121.35.242.172:7001";
+    /**内网**/
+    public static final String HTTPZHENGSHI_API_IP = "http://172.16.1.75:7001";
 //    public static final String HTTP_API_URL = "http://121.35.242.172:7001/maximo/mobile/";
 //
 //    public static final String HTTPS_API_URL = "http://121.35.242.172:7001/meaweb/services";

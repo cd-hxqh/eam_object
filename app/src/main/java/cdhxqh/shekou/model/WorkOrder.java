@@ -60,6 +60,15 @@ public class WorkOrder implements Serializable {
     public String failurecode;//故障子机构
     public String udgzlbdm;//故障类别
 //    public String ldispayname;//工作负责人
+    public String gzgdwonum;//抢修工单管理故障工单编号
+    public String gzgddescription;//抢修工单管理故障工单描述
+
+    public String qxgdwonum;//故障工单管理抢修工单编号
+    public String qxgddescription;//故障工单管理抢修工单描述
+
+
+
+
 
     public boolean isnew;//是否是新增工单
 

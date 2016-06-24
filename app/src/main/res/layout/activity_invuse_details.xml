@@ -152,6 +152,7 @@
 
 
             <LinearLayout
+                android:id="@+id/wonum_linearlayout_id"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_40dp"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -178,11 +179,13 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/wonum_view_id"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
 
             <LinearLayout
+                android:id="@+id/wonum_desc_linearLayout_id"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_40dp"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -207,6 +210,7 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/wonum_desc_view_id"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
@@ -244,6 +248,7 @@
                 android:background="@drawable/line"></View>
 
             <LinearLayout
+                android:id="@+id/uddet_linearLayout_id"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_40dp"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -270,6 +275,7 @@
 
 
             <View
+                android:id="@+id/uddept_view_id"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
@@ -308,6 +314,7 @@
 
 
             <LinearLayout
+                android:id="@+id/wonum_asset_linearlayout_id"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_40dp"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -334,12 +341,14 @@
 
 
             <View
+                android:id="@+id/wonum_asset_view_id"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
 
 
             <LinearLayout
+                android:id="@+id/ea1_linearLayout_id"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_40dp"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -366,12 +375,14 @@
 
 
             <View
+                android:id="@+id/eq1_view_id"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
 
 
             <LinearLayout
+                android:id="@+id/eq2_linearLayout_id"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_40dp"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -398,12 +409,14 @@
 
 
             <View
+                android:id="@+id/eq2_view_id"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
 
 
             <LinearLayout
+                android:id="@+id/eq3_linearLayout_id"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_40dp"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -430,12 +443,14 @@
 
 
             <View
+                android:id="@+id/eq3_view_id"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
 
 
             <LinearLayout
+                android:id="@+id/udisjj_linearlayout_id"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_40dp"
                 android:layout_marginLeft="@dimen/dimen_5"
@@ -461,6 +476,7 @@
 
 
             <View
+                android:id="@+id/udisjj_view_id"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
@@ -674,6 +690,45 @@
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
+
+            <LinearLayout
+                android:id="@+id/udreason_linearlayout_id"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/dimen_5"
+                android:paddingTop="@dimen/dimen_5">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/udreason_text"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/dimens_16dp" />
+
+                <EditText
+                    android:id="@+id/udreason_text_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dimen_5"
+                    android:layout_marginRight="@dimen/dimen_5"
+                    android:background="@drawable/bg_edittext"
+                    android:gravity="center_vertical"
+                    android:hint="@string/have_not_data"
+                    android:paddingLeft="@dimen/dimen_5"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/dimens_16dp" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/udreason_view_id"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/line"
+                android:visibility="gone"></View>
 
 
         </LinearLayout>

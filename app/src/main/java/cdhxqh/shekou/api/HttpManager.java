@@ -42,13 +42,14 @@ public class HttpManager {
     /**
      * 设置工单接口*
      */
-    public static String getworkorderUrl(String type, String search, String siteid, int curpage, int showcount) {
-        if (search.equals("")) {
+    public static String getworkorderUrl(String type, String vlaue, String siteid, int curpage, int showcount) {
+        if (vlaue.equals("")) {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'!=已完成/关闭'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'!=已完成/关闭'}}";
         } else {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'%" + search + "%','WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'!=已完成/关闭'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'!=已完成/关闭'}" + ",'sinorsearch':{'WONUM':'" + vlaue + "','DESCRIPTION':'" + vlaue + "'}}";
+
         }
     }
 
@@ -189,7 +190,7 @@ public class HttpManager {
         if (value.equals("")) {
             return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'UDAPPTYPE':'=" + udapptype + "'}}";
         }
-        return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'INVUSENUM':'" + value + "','UDAPPTYPE':'=" + udapptype + "'}}";
+        return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'UDAPPTYPE':'=" + udapptype + "'}" + ",'sinorsearch':{'INVUSENUM':'" + value + "','DESCRIPTION':'" + value + "'}}";
     }
 
     /**
@@ -388,7 +389,7 @@ public class HttpManager {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);
-        client.setTimeout(20000);
+        client.setTimeout(60000);
         client.get(url, params, new TextHttpResponseHandler() {
             @Override
             public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {

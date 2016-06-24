@@ -86,6 +86,18 @@ public class Work_detailsActivity extends BaseActivity {
     private TextView woeq1;//管理组
     private TextView woeq2;//管理室
     private TextView woeq3;//管理班组
+
+    /**抢修工单**/
+    private LinearLayout qxgdnumLinearLayout;
+    private View qxgdView;
+    private TextView qxgdText;
+    /**描述**/
+    private LinearLayout qxgddescLinearLayout;
+    private View qxgdmsView;
+    private TextView qxgdmsText;
+
+
+
     private TextView status;//状态
     private TextView statusdate;//状态日期
     private LinearLayout work_plan_details_layout;
@@ -132,6 +144,15 @@ public class Work_detailsActivity extends BaseActivity {
     private EditText udtjtime;//停机时间
     private LinearLayout work_udremark_layout;
     private EditText udremark;//备注
+
+    /**故障工单**/
+    private LinearLayout gzgdLinearLayout;
+    private View gzgdView;
+    private TextView gzgdText;
+    /**工单描述**/
+    private LinearLayout gdmsLinearLayout;
+    private View gdmsView;
+    private TextView gdmsText;
 
     private Button delete;
     private Button revise;
@@ -182,6 +203,16 @@ public class Work_detailsActivity extends BaseActivity {
         woeq1 = (TextView) findViewById(R.id.work_glz);
         woeq2 = (TextView) findViewById(R.id.work_gls);
         woeq3 = (TextView) findViewById(R.id.work_glbz);
+
+        qxgdnumLinearLayout=(LinearLayout)findViewById(R.id.qxgd_linearlayout_id);
+        qxgdView=(View)findViewById(R.id.qxgd_view_id);
+        qxgdText=(TextView)findViewById(R.id.qxgd_text_id);
+        qxgddescLinearLayout=(LinearLayout)findViewById(R.id.qxgdms_linearLayout_id);
+        qxgdmsView=(View)findViewById(R.id.qxgdms_view_id);
+        qxgdmsText=(TextView)findViewById(R.id.qxgdms_id);
+
+
+
         status = (TextView) findViewById(R.id.work_status);
         statusdate = (TextView) findViewById(R.id.work_statusdate);
 
@@ -231,6 +262,16 @@ public class Work_detailsActivity extends BaseActivity {
         work_udremark_layout = (LinearLayout) findViewById(R.id.work_udremark_layout);
         udremark = (EditText) findViewById(R.id.work_udremark);
 
+        gzgdLinearLayout=(LinearLayout)findViewById(R.id.gzgd_linearlayout_id);
+        gzgdView=(View)findViewById(R.id.gzgd_view_id);
+        gzgdText=(TextView)findViewById(R.id.gzgd_num_text);
+        gdmsLinearLayout=(LinearLayout)findViewById(R.id.gd_text_id);
+        gdmsView=(View)findViewById(R.id.gdms_view_id);
+        gdmsText=(TextView)findViewById(R.id.gdms_text_id);
+
+
+
+
         delete = (Button) findViewById(R.id.work_delete);
         revise = (Button) findViewById(R.id.work_revise);
         work_flow = (Button) findViewById(R.id.work_work_flow);
@@ -248,6 +289,25 @@ public class Work_detailsActivity extends BaseActivity {
         menuImageView.setImageResource(R.drawable.ic_drawer);
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
+
+        if (workOrder.worktype.equals("CM")){//故障工单
+            qxgdnumLinearLayout.setVisibility(View.VISIBLE);
+            qxgdView.setVisibility(View.VISIBLE);
+            qxgddescLinearLayout.setVisibility(View.VISIBLE);
+            qxgdmsView.setVisibility(View.VISIBLE);
+            qxgdText.setText(workOrder.qxgdwonum);
+            qxgdmsText.setText(workOrder.qxgddescription);
+        }
+        if (workOrder.worktype.equals("EM")){//抢修工单
+            gzgdLinearLayout.setVisibility(View.VISIBLE);
+            gzgdView.setVisibility(View.VISIBLE);
+            gdmsLinearLayout.setVisibility(View.VISIBLE);
+            gdmsView.setVisibility(View.VISIBLE);
+            gzgdText.setText(workOrder.gzgdwonum);
+            gdmsText.setText(workOrder.gzgddescription);
+        }
+
+
 
         workOrder.isnew = false;
 

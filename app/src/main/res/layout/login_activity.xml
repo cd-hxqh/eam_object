@@ -90,20 +90,37 @@
                     android:id="@+id/isremenber_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:button="@drawable/checkbox"
                     android:text="@string/remenber_pass"
                     android:textColor="@color/white"
                     android:textSize="14sp" />
 
-                <TextView
-                    android:id="@+id/ip_address_id"
+                <RadioGroup
+                    android:id="@+id/radiogroup_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="服务器地址"
-                    android:textColor="@color/white"
+                    android:orientation="horizontal">
 
-                    android:textSize="14sp" />
+                    <RadioButton
+                        android:id="@+id/waiwang_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="外网"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <RadioButton
+                        android:id="@+id/neiwang_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="内网"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+
+                </RadioGroup>
 
             </RelativeLayout>
 
