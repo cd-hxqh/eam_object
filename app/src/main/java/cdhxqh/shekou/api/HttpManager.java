@@ -45,10 +45,10 @@ public class HttpManager {
     public static String getworkorderUrl(String type, String vlaue, String siteid, int curpage, int showcount) {
         if (vlaue.equals("")) {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'!=已完成/关闭'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'!=已完成/关闭'"+ ",'STATUS':'!=已取消'"+ ",'STATUS':'!=完成'"+",'STATUS':'!=取消'}}";
         } else {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'!=已完成/关闭'}" + ",'sinorsearch':{'WONUM':'" + vlaue + "','DESCRIPTION':'" + vlaue + "'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'!=已完成/关闭'"+ ",'STATUS':'!=已取消'"+ ",'STATUS':'!=完成'"+",'STATUS':'!=取消'}" + ",'sinorsearch':{'WONUM':'" + vlaue + "','DESCRIPTION':'" + vlaue + "'}}";
 
         }
     }
