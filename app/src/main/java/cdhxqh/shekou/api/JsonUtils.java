@@ -599,7 +599,9 @@ public class JsonUtils {
                 inventory.binnum = jsonObject.getString("BINNUM"); //默认存放位置
                 inventory.siteid = jsonObject.getString("SITEID"); //地点
                 inventory.curbaltotal = jsonObject.getInt("CURBALTOTAL") + ""; //当前余量
-                inventory.lastissuedate = jsonObject.getString("LASTISSUEDATE"); //上次发放日期
+                inventory.avblbalance = jsonObject.getString("AVBLBALANCE"); //可用量
+                inventory.item_inspectionrequired = jsonObject.getString("ITEM_INSPECTIONREQUIRED"); //接收时检查
+                inventory.item_udisreturn = jsonObject.getString("ITEM_UDISRETURN"); //是否退还旧件
 
                 list.add(inventory);
             }

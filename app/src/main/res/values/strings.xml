@@ -402,7 +402,7 @@
     <string name="issueunit_text">单位:</string>
     <string name="udfincp_text">财务公司:</string>
     <string name="status_text">状态:</string>
-    <string name="binnum_text">存放位置:</string>
+    <string name="binnum_text">默认存放位置:</string>
     <string name="curbaltotal_text">当前余量:</string>
     <string name="lastissuedate_text">上次发放日期:</string>
     <string name="udtype_text">批号:</string>
@@ -440,6 +440,10 @@
     <string name="gzgd_num">故障工单:</string>
     <string name="gdms_text">工单描述:</string>
     <string name="qxgd_text">抢修工单:</string>
+    <string name="siteid_1_text">地点:</string>
+    <string name="jsjx_text">接收时检查:</string>
+    <string name="is_jj_text">是否退还旧件:</string>
+    <string name="avblbalance_text">可用量:</string>
 
 
 </resources>

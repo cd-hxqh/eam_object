@@ -402,7 +402,7 @@
     <string name="issueunit_text">单位:</string>
     <string name="udfincp_text">财务公司:</string>
     <string name="status_text">状态:</string>
-    <string name="binnum_text">存放位置:</string>
+    <string name="binnum_text">默认存放位置:</string>
     <string name="curbaltotal_text">当前余量:</string>
     <string name="lastissuedate_text">上次发放日期:</string>
     <string name="udtype_text">批号:</string>

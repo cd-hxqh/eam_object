@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -64,9 +65,18 @@ public class InventoryActivity extends BaseActivity {
      */
     private TextView statusText;
     /**
-     * 存放位置*
+     * 默认存放位置*
      */
     private TextView binnumText;
+    /**地点**/
+    private TextView siteidText;
+    /**接收时检查**/
+    private CheckBox jsjc;
+    /**是否退还旧件**/
+    private CheckBox isthjj;
+    /**可用量**/
+    private TextView  avblbalanceText;
+
     /**
      * 当前余量*
      */
@@ -91,6 +101,8 @@ public class InventoryActivity extends BaseActivity {
      * 库存余量
      */
     private LinearLayout levelsLinearLayout;
+
+
     /**库存交易**/
     private LinearLayout matrectransLinearLayout;
     /**
@@ -128,6 +140,13 @@ public class InventoryActivity extends BaseActivity {
         udfincpText = (TextView) findViewById(R.id.udfincp_text_id);
         statusText = (TextView) findViewById(R.id.status_text_id);
         binnumText = (TextView) findViewById(R.id.binnum_text_id);
+
+        siteidText = (TextView) findViewById(R.id.siteid_text_id);
+        jsjc = (CheckBox) findViewById(R.id.jsjx_text_id);
+        isthjj = (CheckBox) findViewById(R.id.is_jj_text_id);
+        avblbalanceText = (TextView) findViewById(R.id.avblbalance_text_id);
+
+
         curbaltotalText = (TextView) findViewById(R.id.curbaltotal_text_id);
         lastissuedateText = (TextView) findViewById(R.id.lastissuedate_text_id);
 
@@ -139,6 +158,18 @@ public class InventoryActivity extends BaseActivity {
             udfincpText.setText(inventory.udfincp_name);
             statusText.setText(inventory.status);
             binnumText.setText(inventory.binnum);
+            siteidText.setText(inventory.siteid);
+            if(inventory.item_inspectionrequired.equals("Y")){
+                jsjc.setChecked(true);
+            }else{
+                jsjc.setChecked(false);
+            }
+            if(inventory.item_udisreturn.equals("Y")){
+                isthjj.setChecked(true);
+            }else{
+                isthjj.setChecked(false);
+            }
+            avblbalanceText.setText(inventory.avblbalance);
             curbaltotalText.setText(inventory.curbaltotal);
             lastissuedateText.setText(inventory.lastissuedate);
         }

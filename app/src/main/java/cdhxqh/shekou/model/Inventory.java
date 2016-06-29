@@ -27,6 +27,9 @@ public class Inventory extends Entity implements Parcelable {
     public String siteid; //地点
     public String curbaltotal; //当前余量
     public String lastissuedate; //上次发放日期
+    public String avblbalance; //可用量
+    public String item_inspectionrequired; //接收时检查
+    public String item_udisreturn; //是否退还旧件
 
 
 
@@ -48,6 +51,9 @@ public class Inventory extends Entity implements Parcelable {
         siteid = jsonObject.getString("siteid");
         curbaltotal = jsonObject.getString("curbaltotal");
         lastissuedate = jsonObject.getString("lastissuedate");
+        avblbalance = jsonObject.getString("avblbalance");
+        item_inspectionrequired = jsonObject.getString("item_inspectionrequired");
+        item_udisreturn = jsonObject.getString("item_udisreturn");
     }
 
     public Inventory() {
@@ -68,6 +74,9 @@ public class Inventory extends Entity implements Parcelable {
         siteid = in.readString();
         curbaltotal = in.readString();
         lastissuedate = in.readString();
+        avblbalance = in.readString();
+        item_inspectionrequired = in.readString();
+        item_udisreturn = in.readString();
     }
 
     @Override
@@ -90,6 +99,9 @@ public class Inventory extends Entity implements Parcelable {
         dest.writeString(siteid);
         dest.writeString(curbaltotal);
         dest.writeString(lastissuedate);
+        dest.writeString(avblbalance);
+        dest.writeString(item_inspectionrequired);
+        dest.writeString(item_udisreturn);
 
     }
 
