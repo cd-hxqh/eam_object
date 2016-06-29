@@ -337,6 +337,7 @@ public class DownloadActivity extends BaseActivity {
     }
 
     private void downloaddata(String url, final String buttonText, final Button button) {
+
         HttpManager.getData(DownloadActivity.this, url, new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results data) {

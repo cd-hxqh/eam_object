@@ -53,7 +53,7 @@ import cdhxqh.shekou.webserviceclient.AndroidClientService;
  * Created by think on 2015/10/29.
  */
 public class Work_detailsActivity extends BaseActivity {
-    private static final String TAG="Work_detailsActivity";
+    private static final String TAG = "Work_detailsActivity";
     private TextView titlename;
     private ImageView menuImageView;
     private RelativeLayout backlayout;
@@ -87,15 +87,18 @@ public class Work_detailsActivity extends BaseActivity {
     private TextView woeq2;//管理室
     private TextView woeq3;//管理班组
 
-    /**抢修工单**/
+    /**
+     * 抢修工单*
+     */
     private LinearLayout qxgdnumLinearLayout;
     private View qxgdView;
     private TextView qxgdText;
-    /**描述**/
+    /**
+     * 描述*
+     */
     private LinearLayout qxgddescLinearLayout;
     private View qxgdmsView;
     private TextView qxgdmsText;
-
 
 
     private TextView status;//状态
@@ -145,11 +148,15 @@ public class Work_detailsActivity extends BaseActivity {
     private LinearLayout work_udremark_layout;
     private EditText udremark;//备注
 
-    /**故障工单**/
+    /**
+     * 故障工单*
+     */
     private LinearLayout gzgdLinearLayout;
     private View gzgdView;
     private TextView gzgdText;
-    /**工单描述**/
+    /**
+     * 工单描述*
+     */
     private LinearLayout gdmsLinearLayout;
     private View gdmsView;
     private TextView gdmsText;
@@ -157,6 +164,13 @@ public class Work_detailsActivity extends BaseActivity {
     private Button delete;
     private Button revise;
     private Button work_flow;
+
+
+    /**
+     * 以生成的领料单*
+     */
+    private LinearLayout invuseLinearLayout;
+
 
     private ArrayList<Woactivity> woactivityList = new ArrayList<>();
     private ArrayList<Labtrans> labtransList = new ArrayList<>();
@@ -166,6 +180,12 @@ public class Work_detailsActivity extends BaseActivity {
     private BaseAnimatorSet mBasOut;
     private ArrayList<DialogMenuItem> mMenuItems = new ArrayList<>();
     private ProgressDialog mProgressDialog;
+
+
+    /**
+     * 流出审批过程名*
+     */
+    private String processname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,13 +224,12 @@ public class Work_detailsActivity extends BaseActivity {
         woeq2 = (TextView) findViewById(R.id.work_gls);
         woeq3 = (TextView) findViewById(R.id.work_glbz);
 
-        qxgdnumLinearLayout=(LinearLayout)findViewById(R.id.qxgd_linearlayout_id);
-        qxgdView=(View)findViewById(R.id.qxgd_view_id);
-        qxgdText=(TextView)findViewById(R.id.qxgd_text_id);
-        qxgddescLinearLayout=(LinearLayout)findViewById(R.id.qxgdms_linearLayout_id);
-        qxgdmsView=(View)findViewById(R.id.qxgdms_view_id);
-        qxgdmsText=(TextView)findViewById(R.id.qxgdms_id);
-
+        qxgdnumLinearLayout = (LinearLayout) findViewById(R.id.qxgd_linearlayout_id);
+        qxgdView = (View) findViewById(R.id.qxgd_view_id);
+        qxgdText = (TextView) findViewById(R.id.qxgd_text_id);
+        qxgddescLinearLayout = (LinearLayout) findViewById(R.id.qxgdms_linearLayout_id);
+        qxgdmsView = (View) findViewById(R.id.qxgdms_view_id);
+        qxgdmsText = (TextView) findViewById(R.id.qxgdms_id);
 
 
         status = (TextView) findViewById(R.id.work_status);
@@ -262,12 +281,12 @@ public class Work_detailsActivity extends BaseActivity {
         work_udremark_layout = (LinearLayout) findViewById(R.id.work_udremark_layout);
         udremark = (EditText) findViewById(R.id.work_udremark);
 
-        gzgdLinearLayout=(LinearLayout)findViewById(R.id.gzgd_linearlayout_id);
-        gzgdView=(View)findViewById(R.id.gzgd_view_id);
-        gzgdText=(TextView)findViewById(R.id.gzgd_num_text);
-        gdmsLinearLayout=(LinearLayout)findViewById(R.id.gd_text_id);
-        gdmsView=(View)findViewById(R.id.gdms_view_id);
-        gdmsText=(TextView)findViewById(R.id.gdms_text_id);
+        gzgdLinearLayout = (LinearLayout) findViewById(R.id.gzgd_linearlayout_id);
+        gzgdView = (View) findViewById(R.id.gzgd_view_id);
+        gzgdText = (TextView) findViewById(R.id.gzgd_num_text);
+        gdmsLinearLayout = (LinearLayout) findViewById(R.id.gd_text_id);
+        gdmsView = (View) findViewById(R.id.gdms_view_id);
+        gdmsText = (TextView) findViewById(R.id.gdms_text_id);
 
 
 
@@ -290,7 +309,7 @@ public class Work_detailsActivity extends BaseActivity {
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
 
-        if (workOrder.worktype.equals("CM")){//故障工单
+        if (workOrder.worktype.equals("CM")) {//故障工单
             qxgdnumLinearLayout.setVisibility(View.VISIBLE);
             qxgdView.setVisibility(View.VISIBLE);
             qxgddescLinearLayout.setVisibility(View.VISIBLE);
@@ -298,7 +317,7 @@ public class Work_detailsActivity extends BaseActivity {
             qxgdText.setText(workOrder.qxgdwonum);
             qxgdmsText.setText(workOrder.qxgddescription);
         }
-        if (workOrder.worktype.equals("EM")){//抢修工单
+        if (workOrder.worktype.equals("EM")) {//抢修工单
             gzgdLinearLayout.setVisibility(View.VISIBLE);
             gzgdView.setVisibility(View.VISIBLE);
             gdmsLinearLayout.setVisibility(View.VISIBLE);
@@ -306,7 +325,6 @@ public class Work_detailsActivity extends BaseActivity {
             gzgdText.setText(workOrder.gzgdwonum);
             gdmsText.setText(workOrder.gzgddescription);
         }
-
 
 
         workOrder.isnew = false;
@@ -560,10 +578,12 @@ public class Work_detailsActivity extends BaseActivity {
 //        taskLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_task_id);
         realinfoLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_realinfo_id);
         reportLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_report_id);
+        invuseLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_invuse_id);
         planLinearlayout.setOnClickListener(planOnClickListener);
 //        taskLinearLayout.setOnClickListener(taskOnClickListener);
         realinfoLinearLayout.setOnClickListener(realinfoOnClickListener);
         reportLinearLayout.setOnClickListener(reportOnClickListener);
+        invuseLinearLayout.setOnClickListener(invuseOnClickListener);
         decisionLayout();
 
     }
@@ -625,6 +645,26 @@ public class Work_detailsActivity extends BaseActivity {
         }
     };
 
+
+    /**
+     * 领料单*
+     */
+    private View.OnClickListener invuseOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            Intent intent = new Intent(Work_detailsActivity.this, InvuseActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putInt("entrance", 1);
+            bundle.putString("udapptype", "USE");
+            bundle.putString("wonum", workOrder.wonum);
+            intent.putExtras(bundle);
+            startActivityForResult(intent, 3000);
+            popupWindow.dismiss();
+        }
+    };
+
+
     private View.OnClickListener deleteOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -677,7 +717,6 @@ public class Work_detailsActivity extends BaseActivity {
     private void startAsyncTask() {
         String updataInfo = null;
         updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
-        Log.i(TAG,"updataInfo="+updataInfo);
 
         final String finalUpdataInfo = updataInfo;
         new AsyncTask<String, String, WorkResult>() {
@@ -813,7 +852,7 @@ public class Work_detailsActivity extends BaseActivity {
                 new OnBtnClickL() {//否
                     @Override
                     public void onBtnClick() {
-                        wfgoon(workOrder.wonum, "1", "");
+                        wfgoon(workOrder.workorderid, "1", "");
                         dialog.dismiss();
                     }
                 }
@@ -837,7 +876,7 @@ public class Work_detailsActivity extends BaseActivity {
                 new OnBtnEditClickL() {
                     @Override
                     public void onBtnClick(String text) {
-                        wfgoon(workOrder.wonum, "1", text);
+                        wfgoon(workOrder.workorderid, "1", text);
 
                         dialog.dismiss();
                     }
@@ -867,7 +906,9 @@ public class Work_detailsActivity extends BaseActivity {
         new AsyncTask<String, String, String>() {
             @Override
             protected String doInBackground(String... strings) {
-                String result = AndroidClientService.approve(Work_detailsActivity.this, "UDFJHWO", "WORKORDER", id, "WONUM" + "ID", zx, desc);
+
+
+                String result = AndroidClientService.approve(Work_detailsActivity.this, getprocessname(workOrder.worktype), "WORKORDER", id, "WORKORDERID", zx, desc);
 
                 Log.i(TAG, "result=" + result);
                 return result;
@@ -877,14 +918,48 @@ public class Work_detailsActivity extends BaseActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 if (s == null || s.equals("")) {
-                    Toast.makeText(Work_detailsActivity.this, "审批失败", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(Work_detailsActivity.this, "审批失败");
                 } else {
-                    Toast.makeText(Work_detailsActivity.this, "审批成功", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(Work_detailsActivity.this, "审批成功");
+                    finish();
                 }
                 mProgressDialog.dismiss();
             }
         }.execute();
     }
+
+
+    /**
+     * 获取工单工程名*
+     */
+    private String getprocessname(String worktype) {
+        String processname = "";
+        switch (worktype) {
+            case "CM":
+                processname = "UDWO02";
+                break;
+            case "PM":
+                processname = "UDWO03";
+                break;
+            case "SR":
+                processname = "UDWO04";
+                break;
+            case "PJ":
+                processname = "UDWO05";
+                break;
+            case "RS":
+                processname = "UDWO06";
+                break;
+            case "EV":
+                processname = "UDWO07";
+                break;
+            case "EM":
+                processname = "UDWO08";
+                break;
+        }
+        return processname;
+    }
+
 
     private WorkOrder getWorkOrder() {
         WorkOrder workOrder = this.workOrder;

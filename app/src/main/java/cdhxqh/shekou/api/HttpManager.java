@@ -192,6 +192,15 @@ public class HttpManager {
         }
         return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'UDAPPTYPE':'=" + udapptype + "'}" + ",'sinorsearch':{'INVUSENUM':'" + value + "','DESCRIPTION':'" + value + "'}}";
     }
+    /**
+     * 根据工单编号查询领料单的接口
+     */
+    public static String getByWonumInvuseurl(String value,String wonum, String udapptype, int curpage, int showcount) {
+        if (value.equals("")) {
+            return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'UDAPPTYPE':'=" + udapptype +  "','WONUM':'=" + wonum + "'}}";
+        }
+        return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'UDAPPTYPE':'=" + udapptype +  "','WONUM':'=" +wonum+"'}" + ",'sinorsearch':{'INVUSENUM':'" + value + "','DESCRIPTION':'" + value + "'}}";
+    }
 
     /**
      * 设置领料单行的接口
@@ -355,7 +364,9 @@ public class HttpManager {
      * 不分页获取信息方法*
      */
     public static void getData(final Context cxt, String data, final HttpRequestHandler<Results> handler) {
+        Log.i(TAG,"data="+data);
         String url = AccountUtils.getIpAddress(cxt) + Constants.BASE_URL;
+        Log.i(TAG,"url="+url);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);

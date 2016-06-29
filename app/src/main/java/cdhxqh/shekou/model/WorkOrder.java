@@ -15,6 +15,7 @@ public class WorkOrder implements Serializable {
 //    private static final String TAG = "WorkOrder";
 //    private static final long serialVersionUID = 2015050105L;
 
+    public String workorderid;//工单唯一
     public String wonum;//工单号
     public String status;//状态
     public String statusdate;//状态日期
@@ -49,7 +50,7 @@ public class WorkOrder implements Serializable {
     public String udremark;//备注
     public String udisjf;//是否按项目计费
     public String udprojapprnum;//立项编号
-    public String udbugnum;//项目预算
+    public String udbugnum;//项目预算/事故预算
     public String udassetbz;//财务公司
     public String udevnum;//事故编码
     public String supervisor;//抢修执行人
@@ -75,121 +76,4 @@ public class WorkOrder implements Serializable {
 
 
 
-//    @Override
-//    public void parse(JSONObject jsonObject) throws JSONException {
-//        wonum = jsonObject.getString("wonum");
-//        status = jsonObject.getString("status");
-//        statusdate = jsonObject.getString("statusdate");
-//        worktype = jsonObject.getString("worktype");
-//        description = jsonObject.getString("description");
-//        assetnum = jsonObject.getString("assetnum");
-////        assetdescription = jsonObject.getString("assetdescription");
-//        udisaq = jsonObject.getString("udisaq");
-//        udisbx = jsonObject.getString("udisbx");
-//        udiscb = jsonObject.getString("udiscb");
-//        udisjf = jsonObject.getString("udisjf");
-//        udisjj = jsonObject.getString("udisjj");
-////        udisplayname = jsonObject.getString("udisplayname");
-//        udremark = jsonObject.getString("udremark");
-//        udtjsj = jsonObject.getString("udtjsj");
-//        actstart = jsonObject.getString("actstart");
-//        actfinish = jsonObject.getString("actfinish");
-//        woeq3 = jsonObject.getString("woeq3");
-//        woeq2 = jsonObject.getString("woeq2");
-//        woeq1 = jsonObject.getString("woeq1");
-//        jpnum = jsonObject.getString("jpnum");
-////        ldispayname = jsonObject.getString("ldispayname");
-//        udcreateby = jsonObject.getString("udcreateby");
-//        udcreatedate = jsonObject.getString("udcreatedate");
-//        reportdate = jsonObject.getString("reportdate");
-//        reportedby = jsonObject.getString("reportedby");
-//        lead = jsonObject.getString("lead");
-//        targstartdate = jsonObject.getString("targstartdate");
-//        targcompdate = jsonObject.getString("targcompdate");
-//    }
-//
-//    public WorkOrder() {
-//    }
-//
-//
-//    private WorkOrder(Parcel in) {
-//        wonum = in.readString();
-//        status = in.readString();
-//        statusdate = in.readString();
-//        worktype = in.readString();
-//        description = in.readString();
-//        assetnum = in.readString();
-////        assetdescription = in.readString();
-//        udisaq = in.readString();
-//        udisbx = in.readString();
-//        udiscb = in.readString();
-//        udisjf = in.readString();
-//        udisjj = in.readString();
-////        udisplayname = in.readString();
-//        udremark = in.readString();
-//        udtjsj = in.readString();
-//        actstart = in.readString();
-//        actfinish = in.readString();
-//        woeq3 = in.readString();
-//        woeq2 = in.readString();
-//        woeq1 = in.readString();
-//        jpnum = in.readString();
-////        ldispayname = in.readString();
-//        udcreateby = in.readString();
-//        udcreatedate = in.readString();
-//        reportdate = in.readString();
-//        reportedby = in.readString();
-//        lead = in.readString();
-//        targstartdate = in.readString();
-//        targcompdate = in.readString();
-//    }
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void writeToParcel(Parcel dest, int flags) {
-//        dest.writeString(wonum);
-//        dest.writeString(status);
-//        dest.writeString(statusdate);
-//        dest.writeString(worktype);
-//        dest.writeString(description);
-//        dest.writeString(assetnum);
-////        dest.writeString(assetdescription);
-//        dest.writeString(udisaq);
-//        dest.writeString(udisbx);
-//        dest.writeString(udiscb);
-//        dest.writeString(udisjf);
-//        dest.writeString(udisjj);
-////        dest.writeString(udisplayname);
-//        dest.writeString(udremark);
-//        dest.writeString(udtjsj);
-//        dest.writeString(actstart);
-//        dest.writeString(actfinish);
-//        dest.writeString(woeq3);
-//        dest.writeString(woeq2);
-//        dest.writeString(woeq1);
-//        dest.writeString(jpnum);
-////        dest.writeString(ldispayname);
-//        dest.writeString(udcreateby);
-//        dest.writeString(udcreatedate);
-//        dest.writeString(reportdate);
-//        dest.writeString(reportedby);
-//        dest.writeString(lead);
-//        dest.writeString(targstartdate);
-//        dest.writeString(targcompdate);
-//    }
-//
-//    public static final Creator<WorkOrder> CREATOR = new Creator<WorkOrder>() {
-//        @Override
-//        public WorkOrder createFromParcel(Parcel source) {
-//            return new WorkOrder(source);
-//        }
-//
-//        @Override
-//        public WorkOrder[] newArray(int size) {
-//            return new WorkOrder[size];
-//        }
-//    };
 }

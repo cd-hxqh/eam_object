@@ -87,6 +87,17 @@ public class InvuseActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     String udapptype;
 
+
+    /**
+     * 领料单入口*
+     */
+    private int entrance;
+
+    /**
+     * 工单编号*
+     */
+    private String wonum;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +111,13 @@ public class InvuseActivity extends BaseActivity implements SwipeRefreshLayout.O
      * 获取上个界面的数据*
      */
     private void getInitData() {
+        entrance = getIntent().getExtras().getInt("entrance");
+        if (entrance == 1) {
+            wonum = getIntent().getExtras().getString("wonum");
+
+        }
         udapptype = getIntent().getExtras().getString("udapptype");
+
     }
 
     @Override
@@ -179,7 +196,15 @@ public class InvuseActivity extends BaseActivity implements SwipeRefreshLayout.O
      */
 
     private void getItemList(String value, String udapptype) {
-        HttpManager.getDataPagingInfo(InvuseActivity.this, HttpManager.getInvuseurl(value, udapptype, page, 20), new HttpRequestHandler<Results>() {
+        String url = "";
+        if (entrance == 0) {
+            url = HttpManager.getInvuseurl(value, udapptype, page, 20);
+        } else {
+            url = HttpManager.getByWonumInvuseurl(value, wonum, udapptype, page, 20);
+        }
+
+
+        HttpManager.getDataPagingInfo(InvuseActivity.this, url, new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);

@@ -89,8 +89,11 @@ public class AndroidClientService {
      */
     public static String approve(Context context, String processname, String mbo, String keyValue, String key, String zx, String desc) {
 
+        Log.i(TAG,"processname="+processname+",mbo="+mbo+",keyValue="+keyValue+",key="+key+",zx="+zx+",desc="+desc);
 
         String url = AccountUtils.getIpAddress(context) + Constants.WORK_FLOW_URL;
+
+        Log.i(TAG,"url="+url);
 
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
@@ -119,7 +122,6 @@ public class AndroidClientService {
             obj = soapEnvelope.getResponse().toString();
             result = JsonUtils.parsingwfserviceGoOnResult(obj);
         } catch (SoapFault soapFault) {
-            Log.i(TAG, "ssssss");
             return null;
         }
         return result;

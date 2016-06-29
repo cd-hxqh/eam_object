@@ -423,7 +423,7 @@ public class Work_AddNewActivity extends BaseActivity {
                 work_udremark_layout.setVisibility(View.GONE);
                 break;
             case "EV"://事故工单
-                udbugnum_layout.setVisibility(View.VISIBLE);
+                udbugnum_layout.setVisibility(View.GONE);
                 wudbugnum_text.setText("事故预算");
                 udevnum_layout.setVisibility(View.VISIBLE);
                 break;

@@ -61,6 +61,7 @@ public class InvuseFragment extends Fragment {
         public void onClick(View view) {
             Intent intent = new Intent(getActivity(), InvuseActivity.class);
             intent.putExtra("udapptype", "USE");
+            intent.putExtra("entrance", 0);
             startActivityForResult(intent, 0);
         }
     };
@@ -71,6 +72,7 @@ public class InvuseFragment extends Fragment {
         public void onClick(View view) {
             Intent intent = new Intent(getActivity(), InvuseActivity.class);
             intent.putExtra("udapptype", "UNWOUSE");
+            intent.putExtra("entrance", 0);
             startActivityForResult(intent, 0);
         }
     };

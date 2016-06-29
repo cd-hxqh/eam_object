@@ -230,6 +230,7 @@ public class JsonUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
                 workOrder = new WorkOrder();
                 jsonObject = jsonArray.getJSONObject(i);
+                workOrder.workorderid = jsonObject.getInt("WORKORDERID")+""; //唯一ID
                 workOrder.wonum = jsonObject.getString("WONUM"); //工单号
                 workOrder.status = jsonObject.getString("STATUS");//状态
                 workOrder.statusdate = jsonObject.getString("STATUSDATE");//状态日期
