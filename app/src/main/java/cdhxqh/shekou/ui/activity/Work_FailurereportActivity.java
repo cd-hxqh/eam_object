@@ -24,6 +24,7 @@ import cdhxqh.shekou.model.Failurereport;
 import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.model.WorkOrder;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
+import cdhxqh.shekou.utils.MessageUtils;
 
 /**
  * Created by think on 2015/11/11.
@@ -45,7 +46,11 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
     private SwipeRefreshLayout refresh_layout = null;
     private WorkOrder workOrder;
     private boolean ishistory;//是否是从主表传过来的信息
+
+
     private Button confirm;//确定
+
+    private Button delete;//删除
 
     private ArrayList<Failurereport> failurereportList = new ArrayList<>();
     private ArrayList<Failurereport> failurereportList1 = new ArrayList<>();//修改前信息
@@ -76,6 +81,7 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
         rememdy = (TextView) findViewById(R.id.work_failurereport_rememdy);
         refresh_layout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         confirm = (Button) findViewById(R.id.confirm);
+        delete = (Button) findViewById(R.id.work_delete);
     }
 
     @Override
@@ -95,12 +101,13 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
         refresh_layout.setOnRefreshListener(this);
 
         confirm.setOnClickListener(confirmOnClickListener);
+        delete.setOnClickListener(deleteOnClickListener);
 
-        if (failurereportList == null||failurereportList.size()==0) {
+        if (failurereportList == null || failurereportList.size() == 0) {
             refresh_layout.setRefreshing(true);
             getdata();
             ishistory = false;
-        }else {
+        } else {
             addListData(failurereportList);
             ishistory = true;
         }
@@ -139,92 +146,87 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
             for (int i = 0; i < list.size(); i++) {
                 if (list.get(i).type.equals("问题")) {
                     question.setText(list.get(i).failurecode);
-//                    question_text = list.get(i).failurecode;
                 } else if (list.get(i).type.equals("原因")) {
                     cause.setText(list.get(i).failurecode);
-//                    cause_text = list.get(i).failurecode;
                 } else if (list.get(i).type.equals("补救措施")) {
                     rememdy.setText(list.get(i).failurecode);
-//                    rememdy_text = list.get(i).failurecode;
                 }
             }
         }
     }
 
+
+    /**
+     * 确定*
+     */
     private View.OnClickListener confirmOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Intent intent = getIntent();
-//            if(question_text.equals(question.getText().toString())
-//                    &&cause_text.equals(cause.getText().toString())
-//                    &&rememdy_text.equals(rememdy.getText().toString())) {//如果内容没有修改
-//                intent.putExtra("failurereportList",failurereportList);
-//            }else {
-//                Failurereport woactivity = getWoactivity();
-//                if(woactivity.optiontype==null||!woactivity.optiontype.equals("add")) {
-//                    woactivity.optiontype = "update";
-//                }
-                intent.putExtra("failurereportList", getFailurereportList());
-                Toast.makeText(Work_FailurereportActivity.this, "任务本地修改成功", Toast.LENGTH_SHORT).show();
-//            }
-//            intent.putExtra("position", position);
+            intent.putExtra("failurereportList", getFailurereportList());
+            MessageUtils.showMiddleToast(Work_FailurereportActivity.this, "故障本地修改成功");
             Work_FailurereportActivity.this.setResult(3000, intent);
             finish();
         }
     };
 
-    private ArrayList<Failurereport> getFailurereportList(){
-//        if(question_text.equals(question.getText().toString())
-//                &&cause_text.equals(cause.getText().toString())
-//                &&rememdy_text.equals(rememdy.getText().toString())) {//如果内容没有修改
-//            return failurereportList;
-//        }else{
-            ArrayList<Failurereport> failurereports = new ArrayList<>();
-            Failurereport failurereport;
-//            if (!question_text.equals(question.getText().toString())){
-                if (!question.getText().toString().equals("")){
-                    failurereport = getfailurereport("问题");
-                    failurereport.wonum = workOrder.wonum;
-                    failurereport.assetnum = workOrder.assetnum;
-                    failurereport.linenum = "1";
-                    failurereport.type = "问题";
-                    failurereport.failurecode = question.getText().toString();
-                    failurereports.add(failurereport);
-                }else {
-                    return failurereports;
-                }
-//            }
-//            if (!cause_text.equals(cause.getText().toString())){
-                if (!cause.getText().toString().equals("")){
-                    failurereport = getfailurereport("原因");
-                    failurereport.wonum = workOrder.wonum;
-                    failurereport.assetnum = workOrder.assetnum;
-                    failurereport.linenum = "2";
-                    failurereport.type = "原因";
-                    failurereport.failurecode = cause.getText().toString();
-                    failurereports.add(failurereport);
-                }else {
-                    return failurereports;
-                }
-//            }
-//            if (!rememdy_text.equals(rememdy.getText().toString())){
-                if (!rememdy.getText().toString().equals("")){
-                    failurereport = getfailurereport("补救措施");
-                    failurereport.wonum = workOrder.wonum;
-                    failurereport.assetnum = workOrder.assetnum;
-                    failurereport.linenum = "3";
-                    failurereport.type = "补救措施";
-                    failurereport.failurecode = rememdy.getText().toString();
-                    failurereports.add(failurereport);
-                }else {
-                    return failurereports;
-                }
-//            }
+    /**
+     * 删除*
+     */
+
+    private View.OnClickListener deleteOnClickListener = new View.OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            Intent intent = getIntent();
+            intent.putExtra("failurereportList", new ArrayList<Failurereport>());
+            MessageUtils.showMiddleToast(Work_FailurereportActivity.this, "故障本地删除成功");
+            Work_FailurereportActivity.this.setResult(3000, intent);
+            finish();
+        }
+    };
+
+
+    private ArrayList<Failurereport> getFailurereportList() {
+        ArrayList<Failurereport> failurereports = new ArrayList<>();
+        Failurereport failurereport;
+        if (!question.getText().toString().equals("")) {
+            failurereport = getfailurereport("问题");
+            failurereport.wonum = workOrder.wonum;
+            failurereport.assetnum = workOrder.assetnum;
+            failurereport.linenum = "1";
+            failurereport.type = "问题";
+            failurereport.failurecode = question.getText().toString();
+            failurereports.add(failurereport);
+        } else {
             return failurereports;
-//        }
+        }
+        if (!cause.getText().toString().equals("")) {
+            failurereport = getfailurereport("原因");
+            failurereport.wonum = workOrder.wonum;
+            failurereport.assetnum = workOrder.assetnum;
+            failurereport.linenum = "2";
+            failurereport.type = "原因";
+            failurereport.failurecode = cause.getText().toString();
+            failurereports.add(failurereport);
+        } else {
+            return failurereports;
+        }
+        if (!rememdy.getText().toString().equals("")) {
+            failurereport = getfailurereport("补救措施");
+            failurereport.wonum = workOrder.wonum;
+            failurereport.assetnum = workOrder.assetnum;
+            failurereport.linenum = "3";
+            failurereport.type = "补救措施";
+            failurereport.failurecode = rememdy.getText().toString();
+            failurereports.add(failurereport);
+        } else {
+            return failurereports;
+        }
+        return failurereports;
     }
 
-    private Failurereport getfailurereport(String type){
+    private Failurereport getfailurereport(String type) {
         if (failurereportList.size() != 0) {
             for (int i = 0; i < failurereportList.size(); i++) {
                 if (failurereportList.get(i).type.equals(type)) {
@@ -251,11 +253,11 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
         @Override
         public void onClick(View view) {
             if (requestCode == Constants.FAILURE_QUESTION && type.equals("")) {
-                Toast.makeText(Work_FailurereportActivity.this, "请选择类型", Toast.LENGTH_SHORT).show();
+               MessageUtils.showMiddleToast(Work_FailurereportActivity.this, "请选择问题");
             } else if (requestCode == Constants.FAILURE_CAUSE && question.getText().toString().equals("")) {
-                Toast.makeText(Work_FailurereportActivity.this, "请选择问题", Toast.LENGTH_SHORT).show();
+                MessageUtils.showMiddleToast(Work_FailurereportActivity.this, "请选择原因");
             } else if (requestCode == Constants.FAILURE_REMEMDY && cause.getText().toString().equals("")) {
-                Toast.makeText(Work_FailurereportActivity.this, "请选择原因", Toast.LENGTH_SHORT).show();
+                MessageUtils.showMiddleToast(Work_FailurereportActivity.this, "请选择措施");
             } else {
                 Intent intent = new Intent(Work_FailurereportActivity.this, OptionActivity.class);
                 intent.putExtra("requestCode", requestCode);
@@ -273,15 +275,15 @@ public class Work_FailurereportActivity extends BaseActivity implements SwipeRef
 
     //当故障数据原本存在，只修改原因时得到failurelist
     private String getCauseList() {
-        String parent = new FailurelistDao(Work_FailurereportActivity.this).queryForParent(type,"");//第一层类型的parent
-        return new FailurelistDao(this).queryForParent(question.getText().toString(),parent);
+        String parent = new FailurelistDao(Work_FailurereportActivity.this).queryForParent(type, "");//第一层类型的parent
+        return new FailurelistDao(this).queryForParent(question.getText().toString(), parent);
     }
 
     //当故障数据原本存在，只修改措施时得到failurelist
     private String getRememdyList() {
-        String parent = new FailurelistDao(Work_FailurereportActivity.this).queryForParent(type,"");//第一层类型的parent
+        String parent = new FailurelistDao(Work_FailurereportActivity.this).queryForParent(type, "");//第一层类型的parent
         String parent2 = new FailurelistDao(this).queryForParent(question.getText().toString(), parent);//第二次原因的parent
-        return new FailurelistDao(this).queryForParent(cause.getText().toString(),parent2);
+        return new FailurelistDao(this).queryForParent(cause.getText().toString(), parent2);
     }
 
     @Override

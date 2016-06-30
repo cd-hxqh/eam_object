@@ -38,6 +38,7 @@ public class Invuse extends Entity implements Parcelable {
     public String sq_displayname; //申请人
     public String createdate; //申请日期
     public String pz_displayname; //批准人
+    public String pz_date; //日期
     public String changedate; //批准日期
     public String udapptype; //类型
     public String udreason; //原因
@@ -71,6 +72,7 @@ public class Invuse extends Entity implements Parcelable {
         sq_displayname = jsonObject.getString("sq_displayname");
         createdate = jsonObject.getString("createdate");
         pz_displayname = jsonObject.getString("pz_displayname");
+        pz_date = jsonObject.getString("pz_date");
         changedate = jsonObject.getString("changedate");
         udapptype = jsonObject.getString("udapptype");
         udreason = jsonObject.getString("udreason");
@@ -109,6 +111,7 @@ public class Invuse extends Entity implements Parcelable {
         sq_displayname = in.readString();
         createdate = in.readString();
         pz_displayname = in.readString();
+        pz_date = in.readString();
         changedate = in.readString();
         udapptype = in.readString();
         udreason = in.readString();
@@ -148,6 +151,7 @@ public class Invuse extends Entity implements Parcelable {
         dest.writeString(sq_displayname);
         dest.writeString(createdate);
         dest.writeString(pz_displayname);
+        dest.writeString(pz_date);
         dest.writeString(changedate);
         dest.writeString(udapptype);
         dest.writeString(udreason);

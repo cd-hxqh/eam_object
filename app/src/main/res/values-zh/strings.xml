@@ -440,6 +440,14 @@
     <string name="gzgd_num">故障工单:</string>
     <string name="gdms_text">工单描述:</string>
     <string name="qxgd_text">抢修工单:</string>
+    <string name="siteid_1_text">地点:</string>
+    <string name="jsjx_text">接收时检查:</string>
+    <string name="is_jj_text">是否退还旧件:</string>
+    <string name="avblbalance_text">可用量:</string>
 
+
+    <!--关于我们-->
+    <string name="about_us_desc_text">\u3000\u3000SCCT EAM资产管理系统是一套针对蛇口港（SCT）和赤湾港（CCT）两港资产管理需求的统一的企业资产管理平台及招商局国际未来全球港口业务资产板块集中管控平台。实现在招商局国际华南港口营运中心一个管理团队下三个港区、八个实体公司的所有资产集中管控功能。该平台总结了招商局国际深圳西部母港20多年的管控经验，结合业界领先的资产管理系统全新开发研制，为全国业内第一套可完整、全面、深化地实现资产全过程、全生命周期的管理系统平台。对于未来招商局国际全球港口业务扩张的管理需求，可以成系统地输出资产管理模式，快速复制与达至管理目标。</string>
+    <string name="about_us_desc_2_text">技术支持:北京恒信启华信息技术股份有限公司</string>
 
 </resources>

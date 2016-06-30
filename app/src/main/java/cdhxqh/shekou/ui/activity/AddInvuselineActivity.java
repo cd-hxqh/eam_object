@@ -38,7 +38,7 @@ import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
  * 物质清单
  */
 public class AddInvuselineActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
-    private static final String TAG = "InvuselineActivity";
+    private static final String TAG = "AddInvuselineActivity";
 
     /**
      * 返回按钮
@@ -165,6 +165,7 @@ public class AddInvuselineActivity extends BaseActivity implements SwipeRefreshL
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            setResult(1);
             finish();
         }
     };
@@ -174,7 +175,7 @@ public class AddInvuselineActivity extends BaseActivity implements SwipeRefreshL
         public void onClick(View v) {
             Intent intent = getIntent();
             intent.setClass(AddInvuselineActivity.this, AddInvuseDetailActivity.class);
-            startActivityForResult(intent, 0);
+            startActivityForResult(intent, 1);
         }
     };
     private View.OnClickListener addButtonOnClickListener = new View.OnClickListener() {
@@ -203,7 +204,7 @@ public class AddInvuselineActivity extends BaseActivity implements SwipeRefreshL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        Log.i(TAG, "resultCode=" + resultCode);
 
         switch (resultCode) {
             case 0:

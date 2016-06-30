@@ -32,8 +32,8 @@ public class OptionAdapter extends RecyclerView.Adapter<OptionAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.itemNumTitle.setText("名称");
-        holder.itemDescTitle.setText("描述");
+        holder.itemNumTitle.setText("名称:");
+        holder.itemDescTitle.setText("描述:");
         holder.itemNum.setText(list.get(position).getName());
         holder.itemDesc.setText(list.get(position).getDescription());
         holder.cardView.setOnClickListener(new View.OnClickListener() {

@@ -34,6 +34,7 @@ import cdhxqh.shekou.model.WorkResult;
 import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.DateTimePickDialogUtil;
 import cdhxqh.shekou.utils.GetDateAndTime;
+import cdhxqh.shekou.utils.MessageUtils;
 import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
@@ -266,7 +267,6 @@ public class AddinvuseActivity extends BaseActivity {
     private View.OnClickListener addButtonOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-//            isMust();
             showProgressDialog("数据提交中...");
             startAsyncTask();
         }
@@ -279,22 +279,53 @@ public class AddinvuseActivity extends BaseActivity {
     private View.OnClickListener lineButtonOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(AddinvuseActivity.this, AddInvuselineActivity.class);
-            intent.putExtra("invusenum", "");
-            startActivityForResult(intent, 0);
 
+            if (isCheck()) {
+                Intent intent = new Intent(AddinvuseActivity.this, AddInvuselineActivity.class);
+                intent.putExtra("invusenum", "");
+                startActivityForResult(intent, 0);
+            }
         }
     };
+
+
+    /**
+     * 判断描述，库房，工单是否为空*
+     */
+    private boolean isCheck() {
+
+        if (descriptionText.getText().toString().equals("")) {
+            MessageUtils.showErrorMessage(AddinvuseActivity.this, "描述不能为空");
+            return false;
+        }
+        if (fromstorelocText.getText().toString().equals("")) {
+            MessageUtils.showErrorMessage(AddinvuseActivity.this, "库房不能为空");
+            return false;
+        }
+        if (udapptype.equals("USE")) {
+            if (wonumText.getText().toString().equals("")) {
+                MessageUtils.showErrorMessage(AddinvuseActivity.this, "工单不能为空");
+                return false;
+
+            }
+        }
+
+        return true;
+    }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Option option;
+        Log.i(TAG, "resultCode=" + resultCode);
         switch (resultCode) {
             case Constants.LOCATIONCODE:
+                Log.i(TAG, "库房");
                 option = (Option) data.getSerializableExtra("option");
-                fromstoreloc = option.getName();
-                fromstorelocText.setText(option.getDescription());
+                if (option != null) {
+                    fromstoreloc = option.getName();
+                    fromstorelocText.setText(option.getDescription());
+                }
                 break;
             case Constants.WORKORDERCODE:
                 String wonum = data.getStringExtra("wonum");
@@ -313,6 +344,7 @@ public class AddinvuseActivity extends BaseActivity {
                 break;
             case 0:
                 list = data.getParcelableArrayListExtra("invuselines");
+                Log.i(TAG, "list=" + list);
                 break;
             default:
                 break;
@@ -329,10 +361,11 @@ public class AddinvuseActivity extends BaseActivity {
     private void startAsyncTask() {
 
         final String updataInfo = JsonUtils.InvuseToJson(encapsulationInvuse(), list);
+        Log.i(TAG, "updataInfo=" + updataInfo);
         new AsyncTask<String, String, InvuseResult>() {
             @Override
             protected InvuseResult doInBackground(String... strings) {
-                InvuseResult addresult = AndroidClientService.InsertInvuse(updataInfo, AccountUtils.getpersonId(AddinvuseActivity.this), AccountUtils.getIpAddress(AddinvuseActivity.this)+Constants.INVUSE_URL);
+                InvuseResult addresult = AndroidClientService.InsertInvuse(updataInfo, AccountUtils.getpersonId(AddinvuseActivity.this), AccountUtils.getIpAddress(AddinvuseActivity.this) + Constants.INVUSE_URL);
 
                 return addresult;
             }

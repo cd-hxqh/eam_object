@@ -322,7 +322,7 @@ public class InvuseDetailsActivity extends BaseActivity {
             sq_displaynameText.setText(invuse.sq_displayname == null ? "暂无数据" : invuse.sq_displayname);
             createdateText.setText(invuse.createdate == null ? "暂无数据" : invuse.createdate);
             pz_displaynameText.setText(invuse.pz_displayname == null ? "暂无数据" : invuse.pz_displayname);
-            changedateText.setText(invuse.changedate == null ? "暂无数据" : invuse.changedate);
+            changedateText.setText(invuse.pz_date == null ? "暂无数据" : invuse.pz_date);
             udreasonEditText.setText(invuse.udreason == null ? "暂无数据" : invuse.udreason);
 
 

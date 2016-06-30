@@ -103,9 +103,6 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
 
     private void getIntentData() {
         requestCode = getIntent().getIntExtra("requestCode", 0);
-//        if (requestCode == Constants.LABORCRAFTRATE) {
-//            CraftSearch = getIntent().getStringExtra("craft");
-//        }
     }
 
     @Override
@@ -126,6 +123,7 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
         backImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setResult(100000);
                 finish();
             }
         });
@@ -368,15 +366,18 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     list.add(option);
                 }
                 break;
-            case Constants.FAILURE_QUESTION:
+            case Constants.FAILURE_QUESTION: //问题
+                Log.i(TAG, "故障问题");
                 List<Failurelist> failurelists2;
                 if (getIntent().hasExtra("failurecode") && !getIntent().getStringExtra("failurecode").equals("")) {
                     String s = getIntent().getStringExtra("failurecode");
+                    Log.i(TAG, "s=" + s);
                     parent = new FailurelistDao(OptionActivity.this).queryForParent(getIntent().getStringExtra("failurecode"));
+                    Log.i(TAG, "parent=" + parent);
                 }
-                if (parent==null){
+                if (parent == null) {
                     failurelists2 = new ArrayList<>();
-                }else {
+                } else {
                     failurelists2 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText, parent);
                 }
                 for (int i = 0; i < failurelists2.size(); i++) {
@@ -387,11 +388,11 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     list.add(option);
                 }
                 break;
-            case Constants.FAILURE_CAUSE:
+            case Constants.FAILURE_CAUSE: //原因
                 List<Failurelist> failurelists3;
                 if (getIntent().hasExtra("failurecode") && !getIntent().getStringExtra("failurecode").equals("")) {
-//                    parent = new FailurelistDao(OptionActivity.this).queryForParent(getIntent().getStringExtra("failurecode"));
                     parent = getIntent().getStringExtra("failurecode");
+                    Log.i(TAG, "parent=" + parent);
                 }
                 failurelists3 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText, parent);
                 for (int i = 0; i < failurelists3.size(); i++) {
@@ -402,11 +403,11 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     list.add(option);
                 }
                 break;
-            case Constants.FAILURE_REMEMDY:
+            case Constants.FAILURE_REMEMDY: //措施
                 List<Failurelist> failurelists4;
                 if (getIntent().hasExtra("failurecode") && !getIntent().getStringExtra("failurecode").equals("")) {
-//                    parent = new FailurelistDao(OptionActivity.this).queryForParent(getIntent().getStringExtra("failurecode"));
                     parent = getIntent().getStringExtra("failurecode");
+                    Log.i(TAG, "parent1=" + parent);
                 }
                 failurelists4 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText, parent);
                 if (failurelists4.size() > 0) {

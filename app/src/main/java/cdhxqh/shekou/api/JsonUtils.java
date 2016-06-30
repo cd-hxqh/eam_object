@@ -230,7 +230,7 @@ public class JsonUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
                 workOrder = new WorkOrder();
                 jsonObject = jsonArray.getJSONObject(i);
-                workOrder.workorderid = jsonObject.getInt("WORKORDERID")+""; //唯一ID
+                workOrder.workorderid = jsonObject.getInt("WORKORDERID") + ""; //唯一ID
                 workOrder.wonum = jsonObject.getString("WONUM"); //工单号
                 workOrder.status = jsonObject.getString("STATUS");//状态
                 workOrder.statusdate = jsonObject.getString("STATUSDATE");//状态日期
@@ -800,7 +800,8 @@ public class JsonUtils {
                 invuse.sq_displayname = jsonObject.getString("SQ_DISPLAYNAME"); //申请人
                 invuse.createdate = jsonObject.getString("CREATEDATE"); //申请日期
                 invuse.pz_displayname = jsonObject.getString("PZ_DISPLAYNAME"); //批准人
-                invuse.changedate = jsonObject.getString("CHANGEDATE"); //批准日期
+                invuse.pz_date = jsonObject.getString("PZ_DATE"); //批准日期
+                invuse.changedate = jsonObject.getString("CHANGEDATE"); //修改时间
                 invuse.udapptype = jsonObject.getString("UDAPPTYPE"); //领料类型
                 invuse.udreason = jsonObject.getString("UDREASON"); //原因
 
@@ -1262,9 +1263,6 @@ public class JsonUtils {
                     woactivityObj.put("udisyq", woactivities.get(i).udisyq);
                     woactivityObj.put("udyqyy", woactivities.get(i).udyqyy);
                     woactivityObj.put("udremark", woactivities.get(i).udremark);
-//                    if(!workOrder.isnew){
-//                        woactivityObj.put("TYPE",woactivities.get(i).type);
-//                    }
                     woactivityArray.put(woactivityObj);
                 }
                 jsonObject.put("wotasks", woactivityArray);
@@ -1277,8 +1275,6 @@ public class JsonUtils {
                 for (int i = 0; i < labtranses.size(); i++) {
                     labtransObj = new JSONObject();
                     labtransObj.put("taskid", labtranses.get(i).actualstaskid);
-//                    labtransObj.put("craft", labtranses.get(i).craft);
-//                    labtransObj.put("skilllevel", labtranses.get(i).skilllevel);
                     labtransObj.put("laborcode", labtranses.get(i).laborcode);
                     labtransObj.put("startdate", labtranses.get(i).startdate);
                     labtransObj.put("starttime", labtranses.get(i).starttime);
@@ -1286,11 +1282,6 @@ public class JsonUtils {
                     labtransObj.put("regularhrs", labtranses.get(i).regularhrs);
                     labtransObj.put("payrate", labtranses.get(i).payrate);
                     labtransObj.put("linecost", labtranses.get(i).linecost);
-//                    labtransObj.put("assetnum", labtranses.get(i).assetnum);
-//                    labtransObj.put("transtype", labtranses.get(i).transtype);
-//                    if(!workOrder.isnew){
-//                        woactivityObj.put("TYPE",woactivities.get(i).type);
-//                    }
                     labtransArray.put(labtransObj);
                 }
                 jsonObject.put("labtrans", labtransArray);
@@ -1459,6 +1450,8 @@ public class JsonUtils {
      */
     public static String InvuseToJson(Invuse invuse, ArrayList<Invuseline> invuselines) {
 
+        Log.i(TAG, "invuselines=" + invuselines.size());
+
 
         JSONObject jsonObject = new JSONObject();
         try {
@@ -1482,10 +1475,10 @@ public class JsonUtils {
                 for (int i = 0; i < invuselines.size(); i++) {
                     invuselinesObj = new JSONObject();
                     invuselinesObj.put("invusenum", invuselines.get(i).invusenum);
-                    invuselinesObj.put("itemnum", "SP02271009AAFL");
+                    invuselinesObj.put("itemnum", "SP02261012AART");
                     invuselinesObj.put("usetype", "发放");
                     invuselinesObj.put("quantity", invuselines.get(i).quantity);
-                    invuselinesObj.put("frombin", "5#A-2-3");
+                    invuselinesObj.put("frombin", "6#B-4");
                     invuselinesObj.put("taskid", invuselines.get(i).taskid);
                     invuselinesObj.put("issueto", invuselines.get(i).issueto);
                     invuselinesObj.put("level5", invuselines.get(i).level5);

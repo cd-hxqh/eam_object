@@ -140,6 +140,7 @@ public class AddInvuseDetailActivity extends BaseActivity {
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            setResult(1);
             finish();
         }
     };
@@ -222,6 +223,7 @@ public class AddInvuseDetailActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Option option;
+
         switch (resultCode) {
             case Constants.ASSETCODE:
                 option = (Option) data.getSerializableExtra("option");

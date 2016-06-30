@@ -289,8 +289,6 @@ public class Work_detailsActivity extends BaseActivity {
         gdmsText = (TextView) findViewById(R.id.gdms_text_id);
 
 
-
-
         delete = (Button) findViewById(R.id.work_delete);
         revise = (Button) findViewById(R.id.work_revise);
         work_flow = (Button) findViewById(R.id.work_work_flow);
@@ -324,6 +322,7 @@ public class Work_detailsActivity extends BaseActivity {
             gdmsView.setVisibility(View.VISIBLE);
             gzgdText.setText(workOrder.gzgdwonum);
             gdmsText.setText(workOrder.gzgddescription);
+            udtjtime.setEnabled(false);
         }
 
 
@@ -579,6 +578,7 @@ public class Work_detailsActivity extends BaseActivity {
         realinfoLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_realinfo_id);
         reportLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_report_id);
         invuseLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_invuse_id);
+        invuseLinearLayout.setVisibility(View.VISIBLE);
         planLinearlayout.setOnClickListener(planOnClickListener);
 //        taskLinearLayout.setOnClickListener(taskOnClickListener);
         realinfoLinearLayout.setOnClickListener(realinfoOnClickListener);
@@ -632,7 +632,7 @@ public class Work_detailsActivity extends BaseActivity {
         public void onClick(View view) {
             if (failurecode.getText().toString().equals("")) {
                 popupWindow.dismiss();
-                Toast.makeText(Work_detailsActivity.this, "请选选择故障子机构", Toast.LENGTH_SHORT).show();
+                MessageUtils.showMiddleToast(Work_detailsActivity.this, "请选选择故障子机构");
             } else {
                 Intent intent = new Intent(Work_detailsActivity.this, Work_FailurereportActivity.class);
                 Bundle bundle = new Bundle();
@@ -717,7 +717,7 @@ public class Work_detailsActivity extends BaseActivity {
     private void startAsyncTask() {
         String updataInfo = null;
         updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
-
+        Log.i(TAG, "updataInfo=" + updataInfo);
         final String finalUpdataInfo = updataInfo;
         new AsyncTask<String, String, WorkResult>() {
             @Override
@@ -1074,7 +1074,7 @@ public class Work_detailsActivity extends BaseActivity {
             case 2000:
                 labtransList = (ArrayList<Labtrans>) data.getSerializableExtra("labtransList");
                 break;
-            case 3000:
+            case 3000:  //故障报告
                 failurereportList = (ArrayList<Failurereport>) data.getSerializableExtra("failurereportList");
                 break;
             default:

@@ -169,8 +169,8 @@ public class InvuselinrDetailsNewActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_invuseline_new_details);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_invuseline_new_details);
         initData();
         findViewById();
         initView();

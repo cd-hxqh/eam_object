@@ -89,11 +89,11 @@ public class AndroidClientService {
      */
     public static String approve(Context context, String processname, String mbo, String keyValue, String key, String zx, String desc) {
 
-        Log.i(TAG,"processname="+processname+",mbo="+mbo+",keyValue="+keyValue+",key="+key+",zx="+zx+",desc="+desc);
+        Log.i(TAG, "processname=" + processname + ",mbo=" + mbo + ",keyValue=" + keyValue + ",key=" + key + ",zx=" + zx + ",desc=" + desc);
 
         String url = AccountUtils.getIpAddress(context) + Constants.WORK_FLOW_URL;
 
-        Log.i(TAG,"url="+url);
+        Log.i(TAG, "url=" + url);
 
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
@@ -281,6 +281,7 @@ public class AndroidClientService {
      * 工单修改
      */
     public static WorkResult UpdateWO(String json, String userid, String url) {
+        Log.i(TAG, "json=" + json);
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
         soapEnvelope.dotNet = true;

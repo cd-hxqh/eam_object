@@ -71,21 +71,37 @@ public class FailurelistDao {
      *
      * @return
      */
-    public List<Failurelist> queryByCount(int count,String failurecode,String parent) {
+    public List<Failurelist> queryByCount(int count, String failurecode, String parent) {
         try {
             return FailurelistDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("failurecode", "%" + failurecode + "%")
-                    .and().eq("parent",parent).query();
+                    .and().eq("parent", parent).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-    public String queryForParent(String failurecode){
+
+    /**
+     * 分页查询
+     *
+     * @return
+     */
+    public List<Failurelist> queryByFailurelist(int count, String failurecode, String type) {
         try {
-            if (FailurelistDaoOpe.queryBuilder().where().eq("failurecode",failurecode).query().size()>0) {
+            return FailurelistDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("failurecode", "%" + failurecode + "%")
+                    .and().eq("type", type).query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String queryForParent(String failurecode) {
+        try {
+            if (FailurelistDaoOpe.queryBuilder().where().eq("failurecode", failurecode).query().size() > 0) {
                 return FailurelistDaoOpe.queryBuilder().where().eq("failurecode", failurecode).queryForFirst().failurelist;
-            }else {
+            } else {
                 return null;
             }
         } catch (SQLException e) {
@@ -94,9 +110,9 @@ public class FailurelistDao {
         return null;
     }
 
-    public String queryForParent(String failurecode,String parent){
+    public String queryForParent(String failurecode, String parent) {
         try {
-            return FailurelistDaoOpe.queryBuilder().where().eq("failurecode",failurecode).and().eq("parent",parent).queryForFirst().failurelist;
+            return FailurelistDaoOpe.queryBuilder().where().eq("failurecode", failurecode).and().eq("parent", parent).queryForFirst().failurelist;
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -162,15 +178,6 @@ public class FailurelistDao {
 
 
     }
-
-
-
-
-
-
-
-
-
 
 
 }
