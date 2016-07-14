@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +32,7 @@ import cdhxqh.shekou.bean.InvuseResult;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Matusetrans;
+import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.MessageUtils;
 import cdhxqh.shekou.webserviceclient.AndroidClientService;
@@ -146,7 +148,9 @@ public class InvuseDetailsActivity extends BaseActivity {
      */
     private TextView changedateText;
 
-    /**领料原因**/
+    /**
+     * 领料原因*
+     */
     private EditText udreasonEditText;
 
     /**
@@ -223,6 +227,21 @@ public class InvuseDetailsActivity extends BaseActivity {
     private ProgressDialog mProgressDialog;
     private BaseAnimatorSet mBasIn;
     private BaseAnimatorSet mBasOut;
+
+    /**
+     * 领料人*
+     */
+    private String llr_displayname;
+    /**
+     * 物料经办人*
+     */
+    private String udjbr_displayname;
+
+
+    /**
+     * 是否紧急*
+     */
+    private int udisjj;
 
 
     @Override
@@ -326,6 +345,10 @@ public class InvuseDetailsActivity extends BaseActivity {
             udreasonEditText.setText(invuse.udreason == null ? "暂无数据" : invuse.udreason);
 
 
+            llr_displayname = invuse.llr_displayname;
+            udjbr_displayname = invuse.udjbr_displayname;
+            udisjj = Integer.valueOf(invuse.udisjj);
+
         }
     }
 
@@ -341,6 +364,12 @@ public class InvuseDetailsActivity extends BaseActivity {
         worlflowBtn.setOnClickListener(worlflowBtnBtnOnClickListener);
         updateButton.setOnClickListener(updateButtonOnClickListener);
         deleteButton.setOnClickListener(deleteButtonOnClickListener);
+
+        wonumText.setOnClickListener(wonumTextOnClickListener);
+        llr_displaynameText.setOnClickListener(udissuetoTextOnClickListener);
+        udjbr_displaynameText.setOnClickListener(udjbrTextOnClickListener);
+        udisjjText.setOnCheckedChangeListener(udisjjTextOnCheckedChangeListener);
+
 
         mBasIn = new BounceTopEnter();
         mBasOut = new SlideBottomExit();
@@ -365,6 +394,8 @@ public class InvuseDetailsActivity extends BaseActivity {
             udreasonView.setVisibility(View.VISIBLE);
         }
 
+        setEditor(false);
+
     }
 
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
@@ -387,6 +418,59 @@ public class InvuseDetailsActivity extends BaseActivity {
 
         }
     };
+
+
+    /**
+     * 工单
+     */
+    private View.OnClickListener wonumTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(InvuseDetailsActivity.this, Work_Choose_Activity.class);
+            startActivityForResult(intent, Constants.WORKORDERCODE);
+        }
+    };
+
+
+    /**
+     * 领料人*
+     */
+    private View.OnClickListener udissuetoTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(InvuseDetailsActivity.this, OptionActivity.class);
+            intent.putExtra("requestCode", Constants.PERSONCODE);
+            startActivityForResult(intent, Constants.PERSONCODE);
+        }
+    };
+
+    /**
+     * 物管员经办人*
+     */
+    private View.OnClickListener udjbrTextOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(InvuseDetailsActivity.this, OptionActivity.class);
+            intent.putExtra("requestCode", Constants.PERSONCODE1);
+            startActivityForResult(intent, Constants.PERSONCODE1);
+        }
+    };
+
+
+    /**
+     * 是否紧急*
+     */
+    private CompoundButton.OnCheckedChangeListener udisjjTextOnCheckedChangeListener = new CompoundButton.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+            if (b) {
+                udisjj = 1;
+            } else {
+                udisjj = 0;
+            }
+        }
+    };
+
 
     /**
      * 启动工作流*
@@ -436,7 +520,6 @@ public class InvuseDetailsActivity extends BaseActivity {
      * @param id
      */
     private void startWork(final String id) {
-        Log.i(TAG, "id=" + id);
         mProgressDialog = ProgressDialog.show(InvuseDetailsActivity.this, null,
                 getString(R.string.inputing), true, true);
         mProgressDialog.setCanceledOnTouchOutside(false);
@@ -469,15 +552,15 @@ public class InvuseDetailsActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
 
-//            showProgressDialog("数据更新中...");
-//            startAsyncTask();
 
             if (boottomLinearLayout.isShown()) {
+                setEditor(true);
                 boottomLinearLayout.setVisibility(View.GONE);
                 editLinearLayout.setVisibility(View.VISIBLE);
                 Animation animation = AnimationUtils.loadAnimation(InvuseDetailsActivity.this, R.anim.slide_bottom_to_top);
                 editLinearLayout.startAnimation(animation);
             } else {
+                setEditor(false);
                 boottomLinearLayout.setVisibility(View.VISIBLE);
                 editLinearLayout.setVisibility(View.GONE);
                 Animation animation = AnimationUtils.loadAnimation(InvuseDetailsActivity.this, R.anim.slide_bottom_to_top);
@@ -523,14 +606,10 @@ public class InvuseDetailsActivity extends BaseActivity {
         String description = descriptionText.getText().toString(); //描述
         String fromstoreloc = fromstorelocText.getText().toString(); //库房
         String wonum = wonumText.getText().toString(); //工单
-        String udissueto = invuse.udissueto;//领料人
         String uddept = invuse.uddept;//部门
-        String udisjj = invuse.udisjj;//是否紧急
-        String udjbr = udjbr_displaynameText.getText().toString();//物管员经办人
         String status = invuse.status;//物管员经办人
         String udapptype = invuse.udapptype;//类型
-        Log.i(TAG, "udapptype=" + udapptype);
-        String udreason = invuse.udreason;//原因
+        String udreason = udreasonEditText.getText().toString();//原因
         String statusdate = invuse.statusdate;//状态日期
         String createdate = invuse.createdate;//创建日期
 
@@ -539,10 +618,10 @@ public class InvuseDetailsActivity extends BaseActivity {
         invuse.description = description;
         invuse.fromstoreloc = fromstoreloc;
         invuse.wonum = wonum;
-        invuse.udissueto = udissueto;
+        invuse.udissueto = llr_displayname;
         invuse.uddept = uddept;
-        invuse.udisjj = udisjj;
-        invuse.udjbr = udjbr;
+        invuse.udisjj = udisjj + "";
+        invuse.udjbr = udjbr_displayname;
         invuse.status = status;
         invuse.udapptype = udapptype;
         invuse.udreason = udreason;
@@ -623,6 +702,58 @@ public class InvuseDetailsActivity extends BaseActivity {
                 closeProgressDialog();
             }
         }.execute();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Option option;
+        Log.i(TAG, "resultCode=" + resultCode);
+        switch (resultCode) {
+
+            case Constants.WORKORDERCODE:
+                String wonum = data.getStringExtra("wonum");
+                String description = data.getStringExtra("description");
+                wonumText.setText(wonum);
+                workorder_descriptionText.setText(description);
+                break;
+
+            case Constants.PERSONCODE:
+                option = (Option) data.getSerializableExtra("option");
+                llr_displayname = option.getName();
+                llr_displaynameText.setText(option.getDescription());
+                break;
+
+            case Constants.PERSONCODE1:
+                option = (Option) data.getSerializableExtra("option");
+                udjbr_displayname = option.getName();
+                udjbr_displaynameText.setText(option.getDescription());
+                break;
+
+            default:
+                break;
+
+        }
+
+
+    }
+
+    /**
+     * 设置是否编辑*
+     */
+    private void setEditor(boolean isEnabled) {
+        //描述
+        descriptionText.setEnabled(isEnabled);
+        //工单
+        wonumText.setEnabled(isEnabled);
+        //领料人
+        llr_displaynameText.setEnabled(isEnabled);
+        //物管员经办人
+        udjbr_displaynameText.setEnabled(isEnabled);
+        //是否紧急
+        udisjjText.setEnabled(isEnabled);
+        //领料原因
+        udreasonEditText.setEnabled(isEnabled);
     }
 
 

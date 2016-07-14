@@ -205,6 +205,8 @@ public class Constants {
 
     public static final String GETDATASUCCESS = "GLOBAL-S-0";//获取数据成功
 
+    public static final String GETDATA_EXCEPTION = "GLOBAL-E-5";//获取数据异常
+
     /**
      * 工单跳转类型标识
      */

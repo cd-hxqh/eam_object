@@ -99,9 +99,7 @@ public class JsonUtils {
                 results.setTotalpage(totalpage);
                 results.setShowcount(Integer.valueOf(showcount));
             }
-
             return results;
-
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -1450,7 +1448,6 @@ public class JsonUtils {
      */
     public static String InvuseToJson(Invuse invuse, ArrayList<Invuseline> invuselines) {
 
-        Log.i(TAG, "invuselines=" + invuselines.size());
 
 
         JSONObject jsonObject = new JSONObject();

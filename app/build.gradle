@@ -12,7 +12,7 @@ android {
         versionName "1.0.7"
 
         ndk {
-            // ÉèÖÃÖ§³ÖµÄSO¿â¼Ü¹¹
+            // è®¾ç½®æ”¯æŒçš„SOåº“æ¶æ„
             abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
         }
     }
@@ -45,13 +45,12 @@ dependencies {
     compile project(':FlycoAnimation_Lib')
     compile project(':FlycoDialog_Lib')
     compile project(':bDIntegrationSDK_LibProject')
-    compile files('libs/umeng-update-v2.6.0.1.jar')
     compile files('libs/org.apache.http.legacy.jar')
     compile files('libs/ormlite-android-4.48.jar')
     compile files('libs/ormlite-core-4.48.jar')
     compile 'com.tencent.bugly:crashreport:latest.release'
-    //ÆäÖĞlatest.releaseÖ¸´ú×îĞÂ°æ±¾ºÅ£¬Ò²¿ÉÒÔÖ¸¶¨Ã÷È·µÄ°æ±¾ºÅ£¬ÀıÈç2.1.5
+    //å…¶ä¸­latest.releaseæŒ‡ä»£æœ€æ–°ç‰ˆæœ¬å·ï¼Œä¹Ÿå¯ä»¥æŒ‡å®šæ˜ç¡®çš„ç‰ˆæœ¬å·ï¼Œä¾‹å¦‚2.1.5
     compile 'com.tencent.bugly:nativecrashreport:latest.release'
-    //ÆäÖĞlatest.releaseÖ¸´ú×îĞÂ°æ±¾ºÅ£¬Ò²¿ÉÒÔÖ¸¶¨Ã÷È·µÄ°æ±¾ºÅ£¬ÀıÈç2.2.0
+    //å…¶ä¸­latest.releaseæŒ‡ä»£æœ€æ–°ç‰ˆæœ¬å·ï¼Œä¹Ÿå¯ä»¥æŒ‡å®šæ˜ç¡®çš„ç‰ˆæœ¬å·ï¼Œä¾‹å¦‚2.2.0
 
 }

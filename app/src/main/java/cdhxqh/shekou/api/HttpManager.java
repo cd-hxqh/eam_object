@@ -45,7 +45,7 @@ public class HttpManager {
     public static String getworkorderUrl(String type, String vlaue, String siteid, int curpage, int showcount) {
         if (vlaue.equals("")) {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid +  "','STATUS':'=工单建立,=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'=工单建立,=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}}";
         } else {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
                     "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'=工单建立,=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}" + ",'sinorsearch':{'WONUM':'" + vlaue + "','DESCRIPTION':'" + vlaue + "'}}";
@@ -192,14 +192,15 @@ public class HttpManager {
         }
         return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'UDAPPTYPE':'=" + udapptype + "'}" + ",'sinorsearch':{'INVUSENUM':'" + value + "','DESCRIPTION':'" + value + "'}}";
     }
+
     /**
      * 根据工单编号查询领料单的接口
      */
-    public static String getByWonumInvuseurl(String value,String wonum, String udapptype, int curpage, int showcount) {
+    public static String getByWonumInvuseurl(String value, String wonum, String udapptype, int curpage, int showcount) {
         if (value.equals("")) {
-            return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'UDAPPTYPE':'=" + udapptype +  "','WONUM':'=" + wonum + "'}}";
+            return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'UDAPPTYPE':'=" + udapptype + "','WONUM':'=" + wonum + "'}}";
         }
-        return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'UDAPPTYPE':'=" + udapptype +  "','WONUM':'=" +wonum+"'}" + ",'sinorsearch':{'INVUSENUM':'" + value + "','DESCRIPTION':'" + value + "'}}";
+        return "{'appid':'" + Constants.INVUSE_APPID + "','objectname':'" + Constants.INVUSE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'INVUSENUM DESC','condition':{'UDAPPTYPE':'=" + udapptype + "','WONUM':'=" + wonum + "'}" + ",'sinorsearch':{'INVUSENUM':'" + value + "','DESCRIPTION':'" + value + "'}}";
     }
 
     /**
@@ -371,9 +372,9 @@ public class HttpManager {
      * 不分页获取信息方法*
      */
     public static void getData(final Context cxt, String data, final HttpRequestHandler<Results> handler) {
-        Log.i(TAG,"data="+data);
+        Log.i(TAG, "data=" + data);
         String url = AccountUtils.getIpAddress(cxt) + Constants.BASE_URL;
-        Log.i(TAG,"url="+url);
+        Log.i(TAG, "url=" + url);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);
@@ -401,9 +402,7 @@ public class HttpManager {
      * 解析返回的结果--分页*
      */
     public static void getDataPagingInfo(final Context cxt, String data, final HttpRequestHandler<Results> handler) {
-        Log.i(TAG, "data=" + data);
         String url = AccountUtils.getIpAddress(cxt) + Constants.BASE_URL;
-        Log.i(TAG, "url=" + url);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);
@@ -418,8 +417,11 @@ public class HttpManager {
             public void onSuccess(int statusCode, Header[] headers, String responseString) {
                 Log.i(TAG, "statusCode" + "responseString=" + responseString);
                 Results result = JsonUtils.parsingResults(cxt, responseString);
-
-                SafeHandler.onSuccess(handler, result, result.getCurpage(), result.getShowcount());
+                if (result == null) {
+                    SafeHandler.onFailure(handler, cxt.getString(R.string.get_data_info_fail));
+                } else {
+                    SafeHandler.onSuccess(handler, result, result.getCurpage(), result.getShowcount());
+                }
             }
         });
     }
