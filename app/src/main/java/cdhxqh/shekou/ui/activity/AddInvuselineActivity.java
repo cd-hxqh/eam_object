@@ -174,6 +174,7 @@ public class AddInvuselineActivity extends BaseActivity implements SwipeRefreshL
         @Override
         public void onClick(View v) {
             Intent intent = getIntent();
+
             intent.setClass(AddInvuselineActivity.this, AddInvuseDetailActivity.class);
             startActivityForResult(intent, 1);
         }

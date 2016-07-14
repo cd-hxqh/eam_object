@@ -177,6 +177,7 @@ public class DownloadActivity extends BaseActivity {
 
         List<String> tempArray02 = new ArrayList<String>();
         tempArray02.add("库房");
+        tempArray02.add("备件");
         childArray.add(tempArray01);
         childArray.add(tempArray02);
         addisDown();
@@ -328,6 +329,8 @@ public class DownloadActivity extends BaseActivity {
                 downloaddata(HttpManager.getAlndomain2Url(), buttonText, button);
             } else if (buttonText.equals(childArray.get(1).get(0))) {//库房
                 downloaddata(HttpManager.getLocationUrl(), buttonText, button);
+            } else if (buttonText.equals(childArray.get(1).get(1))) {//备件
+                downloaddata(HttpManager.getItemUrl(), buttonText, button);
             }
             mProgressDialog = ProgressDialog.show(DownloadActivity.this, null,
                     getString(R.string.downloading), true, true);
@@ -376,6 +379,10 @@ public class DownloadActivity extends BaseActivity {
                         List<Alndomain2> alndomains = JsonUtils.parsingAlndomain2(data.getResultlist());
                         new Alndomain2Dao(DownloadActivity.this).create(alndomains);
                     } else if (buttonText.equals(childArray.get(1).get(0))) {//库房
+
+                        List<Locations> locationses = JsonUtils.parsingLocations(data.getResultlist());
+                        new LocationDao(DownloadActivity.this).create(locationses);
+                    }else if (buttonText.equals(childArray.get(1).get(1))) {//备件
 
                         List<Locations> locationses = JsonUtils.parsingLocations(data.getResultlist());
                         new LocationDao(DownloadActivity.this).create(locationses);
@@ -564,6 +571,7 @@ public class DownloadActivity extends BaseActivity {
     private void addUrl1() {
         urlList = new ArrayList<String>();
         urlList.add(HttpManager.getLocationUrl());//库房
+        urlList.add(HttpManager.getItemUrl());//备件
     }
 
 

@@ -1,6 +1,7 @@
 package cdhxqh.shekou.ui.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -43,6 +44,10 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
      * 标题
      */
     private TextView titleTextView;
+    /**
+     * 新建*
+     */
+    private ImageView addImageView;
 
     /**
      * 搜索按钮*
@@ -120,15 +125,17 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
         mSwipeLayout.setRefreshing(false);
 
         searchEditText = (EditText) findViewById(R.id.search_edit);
+        addImageView = (ImageView) findViewById(R.id.title_add);
     }
 
     @Override
     protected void initView() {
         backImageView.setOnClickListener(backImageViewOnClickListener);
         titleTextView.setText(getString(R.string.invuseline_title_text));
+        addImageView.setVisibility(View.VISIBLE);
 
         mSwipeLayout.setRefreshing(true);
-        getItemList(vlaue,page,invusenum);
+        getItemList(vlaue, page, invusenum);
 
 
         SpannableString msp = new SpannableString("XX搜索");
@@ -138,6 +145,7 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
         searchEditText.setHint(msp);
 
         searchEditText.setOnEditorActionListener(searchEditTextOnEditorActionListener);
+        addImageView.setOnClickListener(addImageViewOnClickListener);
     }
 
 
@@ -148,13 +156,26 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
         }
     };
 
+
+    /**
+     * 新增按钮*
+     */
+    private View.OnClickListener addImageViewOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = getIntent();
+            intent.setClass(InvuselineActivity.this, AddInvuseDetailActivity.class);
+            startActivityForResult(intent, 1);
+        }
+    };
+
     /**
      * 获取物质清单
      * --分页
      */
 
-    private void getItemList(String value,int page,String itemnum) {
-        HttpManager.getDataPagingInfo(InvuselineActivity.this, HttpManager.getInvuselineurl(value,page, 20, itemnum), new HttpRequestHandler<Results>() {
+    private void getItemList(String value, int page, String itemnum) {
+        HttpManager.getDataPagingInfo(InvuselineActivity.this, HttpManager.getInvuselineurl(value, page, 20, itemnum), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -191,7 +212,7 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
     @Override
     public void onLoad() {
         page++;
-        getItemList(vlaue,page,invusenum);
+        getItemList(vlaue, page, invusenum);
     }
 
     @Override
@@ -215,7 +236,7 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
                 notLinearLayout.setVisibility(View.GONE);
                 mSwipeLayout.setRefreshing(true);
                 page = 1;
-                getItemList(vlaue, page,invusenum);
+                getItemList(vlaue, page, invusenum);
                 return true;
             }
             return false;

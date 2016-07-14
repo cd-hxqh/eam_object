@@ -310,6 +310,13 @@ public class HttpManager {
         return "{'appid':'" + Constants.UDSTORELOC_APPID + "','objectname':'" + Constants.LOCATIONS_NAME + "','option':'read','condition':{'TYPE':'=库房'}}";
     }
 
+    /**
+     * 设置备件下载数据接口
+     */
+    public static String getItemUrl() {
+        return "{'appid':'" + Constants.UDITEM_APPID + "','objectname':'" + Constants.ITEM_APPID + "','option':'read'}";
+    }
+
 
     /**
      * 使用用户名密码登录
