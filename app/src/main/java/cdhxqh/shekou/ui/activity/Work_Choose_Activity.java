@@ -34,6 +34,7 @@ import cdhxqh.shekou.model.WorkOrderTem;
 import cdhxqh.shekou.ui.adapter.WorkListAdapter;
 import cdhxqh.shekou.ui.adapter.WorkTemAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
+import cdhxqh.shekou.utils.AccountUtils;
 
 /**
  * 工单选择界面
@@ -119,7 +120,7 @@ public class Work_Choose_Activity extends BaseActivity implements SwipeRefreshLa
 
 
     private void getData(String search) {
-        HttpManager.getDataPagingInfo(this, HttpManager.getChooseWorkOrderUrl(search, page, 20), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(this, HttpManager.getChooseWorkOrderUrl(search, AccountUtils.getinsertSite(Work_Choose_Activity.this), page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);

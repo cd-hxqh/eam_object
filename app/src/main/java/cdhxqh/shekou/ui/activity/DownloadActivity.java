@@ -24,6 +24,7 @@ import cdhxqh.shekou.Dao.Alndomain2Dao;
 import cdhxqh.shekou.Dao.AlndomainDao;
 import cdhxqh.shekou.Dao.AssetDao;
 import cdhxqh.shekou.Dao.FailurelistDao;
+import cdhxqh.shekou.Dao.ItemDao;
 import cdhxqh.shekou.Dao.JobPlanDao;
 import cdhxqh.shekou.Dao.LaborDao;
 import cdhxqh.shekou.Dao.LaborcraftrateDao;
@@ -42,6 +43,7 @@ import cdhxqh.shekou.model.Alndomain;
 import cdhxqh.shekou.model.Alndomain2;
 import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.Failurelist;
+import cdhxqh.shekou.model.Item;
 import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
 import cdhxqh.shekou.model.Laborcraftrate;
@@ -384,8 +386,8 @@ public class DownloadActivity extends BaseActivity {
                         new LocationDao(DownloadActivity.this).create(locationses);
                     }else if (buttonText.equals(childArray.get(1).get(1))) {//备件
 
-                        List<Locations> locationses = JsonUtils.parsingLocations(data.getResultlist());
-                        new LocationDao(DownloadActivity.this).create(locationses);
+                        List<Item> items = JsonUtils.parsingItem(data.getResultlist());
+                        new ItemDao(DownloadActivity.this).create(items);
                     }
                     mProgressDialog.dismiss();
                     button.setText(getResources().getString(R.string.downloaded));

@@ -56,13 +56,14 @@ public class HttpManager {
     /**
      * 设置选择工单接口*
      */
-    public static String getChooseWorkOrderUrl(String search, int curpage, int showcount) {
+    public static String getChooseWorkOrderUrl(String search, String siteid, int curpage, int showcount) {
         if (search.equals("")) {
             return "{'appid':'" + Constants.WOTRACK_APPID + "','objectname':'" + Constants.WORKORDER_APPID + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WORKTYPE':'!=OSPR'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'!=OSPR','SITEID':'" + siteid + "','STATUS':'=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}}";
         } else {
             return "{'appid':'" + Constants.WOTRACK_APPID + "','objectname':'" + Constants.WORKORDER_APPID + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'%" + search + "%','WORKTYPE':'!=OSPR'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'!=OSPR','SITEID':'" + siteid + "','STATUS':'=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}" + ",'sinorsearch':{'WONUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+
         }
     }
 

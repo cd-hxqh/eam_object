@@ -24,6 +24,7 @@ import cdhxqh.shekou.model.Invcost;
 import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Invuseline;
+import cdhxqh.shekou.model.Item;
 import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
 import cdhxqh.shekou.model.Laborcraftrate;
@@ -1384,6 +1385,54 @@ public class JsonUtils {
             return null;
         }
     }
+
+
+
+    /**
+     * 解析备件列表信息
+     */
+    public static ArrayList<Item> parsingItem(String data) {
+        Log.i(TAG, "item data=" + data);
+        ArrayList<Item> list = null;
+        Item item = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject = new JSONObject();
+            list = new ArrayList<Item>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                item = new Item();
+                jsonObject = jsonArray.getJSONObject(i);
+                item.itemnum = jsonObject.getString("ITEMNUM"); //编号
+                item.description = jsonObject.getString("DESCRIPTION");
+                item.orderunit = jsonObject.getString("ORDERUNIT");
+                item.status = jsonObject.getString("STATUS");
+                item.udsubject = jsonObject.getString("UDSUBJECT");
+                item.udbrand = jsonObject.getString("UDBRAND");//类型
+                item.udmanufacturer = jsonObject.getString("UDMANUFACTURER");
+                item.udmodel = jsonObject.getString("UDMODEL");
+                item.udstdname = jsonObject.getString("UDSTDNAME");
+                item.udchnname = jsonObject.getString("UDCHNNAME");
+                item.uduse = jsonObject.getString("UDUSE");
+                list.add(item);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     /**
