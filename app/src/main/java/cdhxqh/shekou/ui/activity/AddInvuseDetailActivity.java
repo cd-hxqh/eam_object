@@ -20,6 +20,7 @@ import cdhxqh.shekou.bean.InvuseResult;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Invuseline;
+import cdhxqh.shekou.model.Item;
 import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.GetDateAndTime;
@@ -81,6 +82,7 @@ public class AddInvuseDetailActivity extends BaseActivity {
      * 类型*
      */
     private String udapptype;
+
 
     /**
      * 货柜*
@@ -152,9 +154,10 @@ public class AddInvuseDetailActivity extends BaseActivity {
     private View.OnClickListener itemTextOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(AddInvuseDetailActivity.this, OptionActivity.class);
-            intent.putExtra("requestCode", Constants.ASSETCODE);
-            startActivityForResult(intent, Constants.ASSETCODE);
+            Intent intent = getIntent();
+            intent.setClass(AddInvuseDetailActivity.this, ItemChooseActivity.class);
+            intent.putExtra("requestCode", Constants.ITEMCODE);
+            startActivityForResult(intent, Constants.ITEMCODE);
         }
     };
 
@@ -225,10 +228,10 @@ public class AddInvuseDetailActivity extends BaseActivity {
         Option option;
 
         switch (resultCode) {
-            case Constants.ASSETCODE:
-                option = (Option) data.getSerializableExtra("option");
-                itemText.setText(option.getName());
-                itemdescriptionText.setText(option.getDescription());
+            case Constants.ITEMCODE:
+                Item item = (Item) data.getSerializableExtra("item");
+                itemText.setText(item.itemnum);
+                itemdescriptionText.setText(item.description);
                 break;
             case Constants.LOCATIONCODE:
                 option = (Option) data.getSerializableExtra("option");

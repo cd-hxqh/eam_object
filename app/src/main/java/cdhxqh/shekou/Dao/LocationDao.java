@@ -41,7 +41,6 @@ public class LocationDao {
      */
     public void create(final List<Locations> list) {
         try {
-            deleteall();
             locationsesDao.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {

@@ -121,7 +121,6 @@ public class JsonUtils {
             String jsonString = json.getString("errcode");
             if (jsonString.equals(Constants.GETDATASUCCESS)) {
                 result = json.getString("result");
-                Log.i(TAG, "result=" + result);
                 results = new Results();
                 results.setResultlist(result);
             }
@@ -662,9 +661,11 @@ public class JsonUtils {
                 jsonObject = jsonArray.getJSONObject(i);
                 invbalances.invbalancesid = jsonObject.getInt("INVBALANCESID"); //唯一ID
                 invbalances.itemnum = jsonObject.getString("ITEMNUM"); //项目编号
+                invbalances.itemdescription = jsonObject.getString("ITEMDESCRIPTION"); //项目描述
                 invbalances.binnum = jsonObject.getString("BINNUM"); //货柜编号
                 invbalances.curbal = jsonObject.getString("CURBAL"); //当前余量
                 invbalances.physcntdate = jsonObject.getString("PHYSCNTDATE"); //盘点日期
+                invbalances.location = jsonObject.getString("LOCATION"); //库房
 
                 list.add(invbalances);
             }
@@ -1387,21 +1388,25 @@ public class JsonUtils {
     }
 
 
-
     /**
      * 解析备件列表信息
      */
     public static ArrayList<Item> parsingItem(String data) {
         Log.i(TAG, "item data=" + data);
+
+
         ArrayList<Item> list = null;
         Item item = null;
         try {
+
             JSONArray jsonArray = new JSONArray(data);
+            Log.i(TAG, "jsonArray size=" + jsonArray.length());
             JSONObject jsonObject = new JSONObject();
             list = new ArrayList<Item>();
             for (int i = 0; i < jsonArray.length(); i++) {
                 item = new Item();
                 jsonObject = jsonArray.getJSONObject(i);
+                Log.i(TAG, "jsonObject=" + jsonObject.toString());
                 item.itemnum = jsonObject.getString("ITEMNUM"); //编号
                 item.description = jsonObject.getString("DESCRIPTION");
                 item.orderunit = jsonObject.getString("ORDERUNIT");
@@ -1413,26 +1418,16 @@ public class JsonUtils {
                 item.udstdname = jsonObject.getString("UDSTDNAME");
                 item.udchnname = jsonObject.getString("UDCHNNAME");
                 item.uduse = jsonObject.getString("UDUSE");
+                item.siteid = jsonObject.getString("SITEID");
                 list.add(item);
             }
             return list;
         } catch (JSONException e) {
             e.printStackTrace();
+            Log.i(TAG, "sssss");
             return null;
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     /**
@@ -1498,7 +1493,6 @@ public class JsonUtils {
     public static String InvuseToJson(Invuse invuse, ArrayList<Invuseline> invuselines) {
 
 
-
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("invusenum", null == invuse.invusenum ? "" : invuse.invusenum);
@@ -1521,10 +1515,10 @@ public class JsonUtils {
                 for (int i = 0; i < invuselines.size(); i++) {
                     invuselinesObj = new JSONObject();
                     invuselinesObj.put("invusenum", invuselines.get(i).invusenum);
-                    invuselinesObj.put("itemnum", "SP02261012AART");
+                    invuselinesObj.put("itemnum", invuselines.get(i).itemnum);
                     invuselinesObj.put("usetype", "发放");
                     invuselinesObj.put("quantity", invuselines.get(i).quantity);
-                    invuselinesObj.put("frombin", "6#B-4");
+                    invuselinesObj.put("frombin", invuselines.get(i).frombin);
                     invuselinesObj.put("taskid", invuselines.get(i).taskid);
                     invuselinesObj.put("issueto", invuselines.get(i).issueto);
                     invuselinesObj.put("level5", invuselines.get(i).level5);

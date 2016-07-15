@@ -304,4 +304,6 @@ public class Constants {
     public static final int LOCATIONCODE = 270;//库房
 
     public static final int WORKORDERCODE = 280;//工单
+
+    public static final int ITEMCODE = 290;//备件
 }

@@ -35,5 +35,7 @@ public class Item implements Serializable {
     public String udchnname;//
     @DatabaseField(columnName = "UDUSE")
     public String uduse;//用途
+    @DatabaseField(columnName = "SITEID")
+    public String siteid;//站点
 
 }

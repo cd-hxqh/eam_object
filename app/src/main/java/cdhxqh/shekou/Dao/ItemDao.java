@@ -27,7 +27,7 @@ public class ItemDao {
         this.context = context;
         try {
             helper = DatabaseHelper.getHelper(context);
-            itemDao = helper.getDao(Locations.class);
+            itemDao = helper.getDao(Item.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -40,7 +40,6 @@ public class ItemDao {
      */
     public void create(final List<Item> list) {
         try {
-            deleteall();
             itemDao.callBatchTasks(new Callable<Void>() {
                 @Override
                 public Void call() throws Exception {
@@ -138,8 +137,6 @@ public class ItemDao {
         }
         return false;
     }
-
-
 
 
     /**

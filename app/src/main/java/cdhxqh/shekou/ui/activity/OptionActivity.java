@@ -28,6 +28,7 @@ import cdhxqh.shekou.Dao.Alndomain2Dao;
 import cdhxqh.shekou.Dao.AlndomainDao;
 import cdhxqh.shekou.Dao.AssetDao;
 import cdhxqh.shekou.Dao.FailurelistDao;
+import cdhxqh.shekou.Dao.ItemDao;
 import cdhxqh.shekou.Dao.JobPlanDao;
 import cdhxqh.shekou.Dao.LaborDao;
 import cdhxqh.shekou.Dao.LaborcraftrateDao;
@@ -42,6 +43,7 @@ import cdhxqh.shekou.model.Alndomain;
 import cdhxqh.shekou.model.Alndomain2;
 import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.Failurelist;
+import cdhxqh.shekou.model.Item;
 import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
 import cdhxqh.shekou.model.Laborcraftrate;
@@ -440,6 +442,17 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     option = new Option();
                     option.setName(locationses.get(i).location);
                     option.setDescription(locationses.get(i).description);
+                    list.add(option);
+                }
+                break;
+
+            case Constants.ITEMCODE: //备件
+                List<Item> items;
+                items = new ItemDao(OptionActivity.this).queryByCount(page, searchText);
+                for (int i = 0; i < items.size(); i++) {
+                    option = new Option();
+                    option.setName(items.get(i).itemnum);
+                    option.setDescription(items.get(i).description);
                     list.add(option);
                 }
                 break;

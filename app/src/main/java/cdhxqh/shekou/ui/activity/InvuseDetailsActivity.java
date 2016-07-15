@@ -411,7 +411,7 @@ public class InvuseDetailsActivity extends BaseActivity {
     private View.OnClickListener materialBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent();
+            Intent intent = getIntent();
             intent.setClass(InvuseDetailsActivity.this, InvuselineActivity.class);
             intent.putExtra("invusenum", invuse.invusenum);
             startActivityForResult(intent, 0);

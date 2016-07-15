@@ -156,6 +156,19 @@ public class HttpManager {
         }
     }
 
+    /**
+     * 设置Invbalanceurl的接口
+     */
+    public static String getInvbalancesurl(String value, int curpage, int showcount, String location) {
+        if (value.equals("")) {
+            return "{'appid':'" + Constants.INVBALANCES_APPID + "','objectname':'" + Constants.INVBALANCES_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'LOCATION':'" + location + "'CURBAL':'>0'}}";
+
+        } else {
+            return "{'appid':'" + Constants.INVBALANCES_APPID + "','objectname':'" + Constants.INVBALANCES_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'LOCATION':'" + location + "'CURBAL':'>0'}" + ",'sinorsearch':{'ITEMNUM':'" + value + "','DESCRIPTION':'" + value + "'}}";
+
+        }
+    }
+
 
     /**
      * 设置入库的接口
@@ -316,7 +329,20 @@ public class HttpManager {
      * 设置备件下载数据接口
      */
     public static String getItemUrl() {
-        return "{'appid':'" + Constants.UDITEM_APPID + "','objectname':'" + Constants.ITEM_APPID + "','option':'read'}";
+        return "{'appid':'" + Constants.UDITEM_APPID + "','objectname':'" + Constants.ITEM_APPID + "','option':'read','curpage':1,'showcount':2000}";
+    }
+    /**
+     * 设置选择备件数据接口
+     */
+    /**
+     * 设置领料单行的接口
+     */
+    public static String getItemurl(String value, int curpage, int showcount) {
+        if (value.equals("")) {
+            return "{'appid':'" + Constants.UDITEM_APPID + "','objectname':'" + Constants.ITEM_APPID + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read'}";
+        } else {
+            return "{'appid':'" + Constants.UDITEM_APPID + "','objectname':'" + Constants.ITEM_APPID + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','sinorsearch':{'ITEMNUM':'" + value + "','DESCRIPTION':'" + value + "'}}";
+        }
     }
 
 
@@ -373,13 +399,11 @@ public class HttpManager {
      * 不分页获取信息方法*
      */
     public static void getData(final Context cxt, String data, final HttpRequestHandler<Results> handler) {
-        Log.i(TAG, "data=" + data);
         String url = AccountUtils.getIpAddress(cxt) + Constants.BASE_URL;
-        Log.i(TAG, "url=" + url);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("data", data);
-        client.setTimeout(20000);
+        client.setTimeout(60000);
         client.get(url, params, new TextHttpResponseHandler() {
 
             @Override
@@ -403,6 +427,7 @@ public class HttpManager {
      * 解析返回的结果--分页*
      */
     public static void getDataPagingInfo(final Context cxt, String data, final HttpRequestHandler<Results> handler) {
+        Log.i(TAG, "data=" + data);
         String url = AccountUtils.getIpAddress(cxt) + Constants.BASE_URL;
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();

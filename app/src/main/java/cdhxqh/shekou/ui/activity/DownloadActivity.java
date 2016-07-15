@@ -107,7 +107,7 @@ public class DownloadActivity extends BaseActivity {
                     DownloadAll.setText("已下载");
                     for (int i = 0; i < isDownList.get(0).size(); i++) {
                         isDownList.get(0).remove(i);
-                        isDownList.get(0).add(i,"已下载");
+                        isDownList.get(0).add(i, "已下载");
                     }
 
 
@@ -119,7 +119,7 @@ public class DownloadActivity extends BaseActivity {
                     DownloadAll.setText("已下载");
                     for (int i = 0; i < isDownList.get(1).size(); i++) {
                         isDownList.get(1).remove(i);
-                        isDownList.get(1).add(i,"已下载");
+                        isDownList.get(1).add(i, "已下载");
                     }
 
 
@@ -179,7 +179,7 @@ public class DownloadActivity extends BaseActivity {
 
         List<String> tempArray02 = new ArrayList<String>();
         tempArray02.add("库房");
-        tempArray02.add("备件");
+//        tempArray02.add("备件");
         childArray.add(tempArray01);
         childArray.add(tempArray02);
         addisDown();
@@ -331,9 +331,10 @@ public class DownloadActivity extends BaseActivity {
                 downloaddata(HttpManager.getAlndomain2Url(), buttonText, button);
             } else if (buttonText.equals(childArray.get(1).get(0))) {//库房
                 downloaddata(HttpManager.getLocationUrl(), buttonText, button);
-            } else if (buttonText.equals(childArray.get(1).get(1))) {//备件
-                downloaddata(HttpManager.getItemUrl(), buttonText, button);
             }
+//            else if (buttonText.equals(childArray.get(1).get(1))) {//备件
+//                downloaddata(HttpManager.getItemUrl(), buttonText, button);
+//            }
             mProgressDialog = ProgressDialog.show(DownloadActivity.this, null,
                     getString(R.string.downloading), true, true);
             mProgressDialog.setCanceledOnTouchOutside(false);
@@ -384,11 +385,14 @@ public class DownloadActivity extends BaseActivity {
 
                         List<Locations> locationses = JsonUtils.parsingLocations(data.getResultlist());
                         new LocationDao(DownloadActivity.this).create(locationses);
-                    }else if (buttonText.equals(childArray.get(1).get(1))) {//备件
-
-                        List<Item> items = JsonUtils.parsingItem(data.getResultlist());
-                        new ItemDao(DownloadActivity.this).create(items);
                     }
+
+//                    else if (buttonText.equals(childArray.get(1).get(1))) {//备件
+//
+//                        List<Item> items = JsonUtils.parsingItem(data.getResultlist());
+//                        Log.i(TAG, "items size=" + items.size());
+//                        new ItemDao(DownloadActivity.this).create(items);
+//                    }
                     mProgressDialog.dismiss();
                     button.setText(getResources().getString(R.string.downloaded));
                 } else {
@@ -447,7 +451,8 @@ public class DownloadActivity extends BaseActivity {
                     } else if (buttonText.equals(childArray.get(0).get(9))) {//故障代码
                         List<Failurelist> failurelists = JsonUtils.parsingFailurelist(data.getResultlist());
                         new FailurelistDao(DownloadActivity.this).create(failurelists);
-                    } else if (buttonText.equals(childArray.get(0).get(10))) {//故障类别
+                    }
+                    else if (buttonText.equals(childArray.get(0).get(10))) {//故障类别
                         List<Alndomain2> alndomains = JsonUtils.parsingAlndomain2(data.getResultlist());
                         new Alndomain2Dao(DownloadActivity.this).create(alndomains);
                     }
@@ -472,6 +477,7 @@ public class DownloadActivity extends BaseActivity {
 
         });
     }
+
     private void downloaddata2(String url, final String buttonText) {
         Log.i(TAG, "url=" + url);
         HttpManager.getData(DownloadActivity.this, url, new HttpRequestHandler<Results>() {
@@ -518,7 +524,7 @@ public class DownloadActivity extends BaseActivity {
 
         @Override
         public void onClick(View view) {
-            count=0;
+            count = 0;
             if (group == 0) {
 
                 addUrl();
@@ -567,16 +573,15 @@ public class DownloadActivity extends BaseActivity {
         urlList.add(HttpManager.getFailurelistUrl());//故障代码
         urlList.add(HttpManager.getAlndomain2Url());//故障类别
     }
+
     /**
      * 封装领料单需要下载的url*
      */
     private void addUrl1() {
         urlList = new ArrayList<String>();
         urlList.add(HttpManager.getLocationUrl());//库房
-        urlList.add(HttpManager.getItemUrl());//备件
+//        urlList.add(HttpManager.getItemUrl());//备件
     }
-
-
 
 
     /**

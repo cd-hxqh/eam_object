@@ -168,6 +168,9 @@
         <activity
             android:name=".ui.activity.About_us_Activity"
             android:label="@string/about_us_text"></activity>
+        <activity
+            android:name=".ui.activity.ItemChooseActivity"
+            android:label="@string/about_us_text"></activity>
 
 
         <!--Bugly 配置APP ID -->

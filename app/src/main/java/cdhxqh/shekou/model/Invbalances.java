@@ -16,20 +16,24 @@ public class Invbalances extends Entity implements Parcelable {
 
     public int invbalancesid; //唯一ID
     public String itemnum; //项目编号
+    public String itemdescription; //项目描述
     public String binnum; //货位
     public String udtype; //批号
     public String curbal; //当前余量
     public String physcntdate; //实际盘点日期
+    public String location; //库房
 
 
     @Override
     public void parse(JSONObject jsonObject) throws JSONException {
         invbalancesid = jsonObject.getInt("invbalancesid");
         itemnum = jsonObject.getString("itemnum");
+        itemdescription = jsonObject.getString("itemdescription");
         binnum = jsonObject.getString("binnum");
         udtype = jsonObject.getString("udtype");
         curbal = jsonObject.getString("curbal");
         physcntdate = jsonObject.getString("physcntdate");
+        location = jsonObject.getString("location");
     }
 
     public Invbalances() {
@@ -43,6 +47,8 @@ public class Invbalances extends Entity implements Parcelable {
         udtype = in.readString();
         curbal = in.readString();
         physcntdate = in.readString();
+        location = in.readString();
+        itemdescription = in.readString();
     }
 
     @Override
@@ -58,6 +64,8 @@ public class Invbalances extends Entity implements Parcelable {
         dest.writeString(udtype);
         dest.writeString(curbal);
         dest.writeString(physcntdate);
+        dest.writeString(location);
+        dest.writeString(itemdescription);
 
     }
 

@@ -16,6 +16,7 @@ import cdhxqh.shekou.model.Alndomain;
 import cdhxqh.shekou.model.Alndomain2;
 import cdhxqh.shekou.model.Assets;
 import cdhxqh.shekou.model.Failurelist;
+import cdhxqh.shekou.model.Item;
 import cdhxqh.shekou.model.JobPlan;
 import cdhxqh.shekou.model.Labor;
 import cdhxqh.shekou.model.Laborcraftrate;
@@ -54,6 +55,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.createTable(connectionSource, Failurelist.class);
             TableUtils.createTable(connectionSource, Alndomain2.class);
             TableUtils.createTable(connectionSource, Locations.class);
+            TableUtils.createTable(connectionSource, Item.class);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -77,6 +79,7 @@ public class DatabaseHelper extends OrmLiteSqliteOpenHelper {
             TableUtils.dropTable(connectionSource, Failurelist.class, true);
             TableUtils.dropTable(connectionSource, Alndomain2.class, true);
             TableUtils.dropTable(connectionSource, Locations.class, true);
+            TableUtils.dropTable(connectionSource, Item.class, true);
             onCreate(database, connectionSource);
         } catch (SQLException e) {
             e.printStackTrace();

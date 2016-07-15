@@ -3,7 +3,6 @@ package cdhxqh.shekou.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,12 +14,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,21 +25,21 @@ import cdhxqh.shekou.R;
 import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
-import cdhxqh.shekou.bean.InvuseResult;
 import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.model.Invbalances;
 import cdhxqh.shekou.model.Invuse;
-import cdhxqh.shekou.model.Invuseline;
-import cdhxqh.shekou.ui.adapter.InvuselineAdapter;
+import cdhxqh.shekou.model.Item;
+import cdhxqh.shekou.model.Option;
+import cdhxqh.shekou.ui.adapter.InvuseAdapter;
+import cdhxqh.shekou.ui.adapter.ItemAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
-import cdhxqh.shekou.utils.AccountUtils;
-import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
- * 物质清单
+ * 备件选择
  */
-public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
-    private static final String TAG = "InvuselineActivity";
+public class ItemChooseActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
+    private static final String TAG = "ItemChooseActivity";
 
     /**
      * 返回按钮
@@ -52,15 +49,16 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
      * 标题
      */
     private TextView titleTextView;
-    /**
-     * 新建*
-     */
-    private ImageView addImageView;
 
     /**
      * 搜索按钮*
      */
     private EditText searchEditText;
+
+    /**
+     * 添加功能*
+     */
+    private ImageView addImageView;
 
     /**
      * RecyclerView*
@@ -73,24 +71,19 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
 
 
     /**
-     * 确定按钮*
-     */
-    private LinearLayout addLinearLayout;
-    private Button addButton;
-
-
-    /**
      * 暂无数据*
      */
     LinearLayout notLinearLayout;
 
-    InvuselineAdapter invuselineAdapter;
+    ItemAdapter itemAdapter;
 
-    private String invusenum;
+    private String location;
+    private Invuse invuse;
+
 
     private int page = 1;
 
-    private ArrayList<Invuseline> items = new ArrayList<Invuseline>();
+    private ArrayList<Invbalances> items = new ArrayList<Invbalances>();
 
 
     /**
@@ -98,12 +91,6 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
      */
     private String vlaue = "";
 
-    private Invuse invuse;
-
-    /**
-     * 新增的领料单行*
-     */
-    private ArrayList<Invuseline> newInvuseline = new ArrayList<Invuseline>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -119,7 +106,6 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
      */
     private void getInitData() {
 
-        invusenum = getIntent().getExtras().getString("invusenum");
         invuse = (Invuse) getIntent().getParcelableExtra("invuse");
     }
 
@@ -128,13 +114,14 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
 
         backImageView = (ImageView) findViewById(R.id.title_back_id);
         titleTextView = (TextView) findViewById(R.id.title_name);
+        addImageView = (ImageView) findViewById(R.id.title_add);
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list_topics);
-        mLayoutManager = new LinearLayoutManager(InvuselineActivity.this);
+        mLayoutManager = new LinearLayoutManager(ItemChooseActivity.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        invuselineAdapter = new InvuselineAdapter(InvuselineActivity.this);
-        mRecyclerView.setAdapter(invuselineAdapter);
+        itemAdapter = new ItemAdapter(ItemChooseActivity.this);
+        mRecyclerView.setAdapter(itemAdapter);
         mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         mSwipeLayout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -149,20 +136,18 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
         mSwipeLayout.setRefreshing(false);
 
         searchEditText = (EditText) findViewById(R.id.search_edit);
-        addImageView = (ImageView) findViewById(R.id.title_add);
 
-        addLinearLayout = (LinearLayout) findViewById(R.id.boottom_id);
-        addButton = (Button) findViewById(R.id.add_button_id);
     }
 
     @Override
     protected void initView() {
+        titleTextView.setText(getString(R.string.bj_choose_text));
         backImageView.setOnClickListener(backImageViewOnClickListener);
-        titleTextView.setText(getString(R.string.invuseline_title_text));
         addImageView.setVisibility(View.VISIBLE);
+        addImageView.setOnClickListener(addImageViewOnClickListener);
 
         mSwipeLayout.setRefreshing(true);
-        getItemList(vlaue, page, invusenum);
+        getItemList(vlaue);
 
 
         SpannableString msp = new SpannableString("XX搜索");
@@ -172,8 +157,6 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
         searchEditText.setHint(msp);
 
         searchEditText.setOnEditorActionListener(searchEditTextOnEditorActionListener);
-        addImageView.setOnClickListener(addImageViewOnClickListener);
-        addButton.setOnClickListener(updateButtonOnClickListener);
     }
 
 
@@ -183,18 +166,12 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
             finish();
         }
     };
-
-
-    /**
-     * 新增按钮*
-     */
     private View.OnClickListener addImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             Intent intent = getIntent();
-            intent.setClass(InvuselineActivity.this, AddInvuseDetailActivity.class);
-
-            startActivityForResult(intent, 1);
+            intent.setClass(ItemChooseActivity.this, AddinvuseActivity.class);
+            startActivityForResult(intent, 0);
         }
     };
 
@@ -203,8 +180,9 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
      * --分页
      */
 
-    private void getItemList(String value, int page, String itemnum) {
-        HttpManager.getDataPagingInfo(InvuselineActivity.this, HttpManager.getInvuselineurl(value, page, 20, itemnum), new HttpRequestHandler<Results>() {
+    private void getItemList(String value) {
+
+        HttpManager.getDataPagingInfo(ItemChooseActivity.this, HttpManager.getInvbalancesurl(value, page, 20, invuse.fromstoreloc), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -212,7 +190,7 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<Invuseline> item = JsonUtils.parsingInvuseline(InvuselineActivity.this, results.getResultlist());
+                ArrayList<Invbalances> item = JsonUtils.parsingInvbalances(ItemChooseActivity.this, results.getResultlist());
 
                 if (item != null || item.size() != 0) {
                     for (int i = 0; i < item.size(); i++) {
@@ -225,7 +203,7 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
                 if (items == null || items.isEmpty()) {
                     notLinearLayout.setVisibility(View.VISIBLE);
                 } else {
-                    invuselineAdapter.update(items, true);
+                    itemAdapter.update(items, true);
                 }
             }
 
@@ -241,12 +219,17 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
     @Override
     public void onLoad() {
         page++;
-        getItemList(vlaue, page, invusenum);
+        getItemList(vlaue);
     }
 
     @Override
     public void onRefresh() {
-        mSwipeLayout.setRefreshing(false);
+        page = 1;
+        itemAdapter.removeAllData();
+        notLinearLayout.setVisibility(View.GONE);
+        mSwipeLayout.setRefreshing(true);
+        getItemList(vlaue);
+
     }
 
 
@@ -257,15 +240,15 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
                 // 先隐藏键盘
                 ((InputMethodManager) searchEditText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
                         .hideSoftInputFromWindow(
-                                InvuselineActivity.this.getCurrentFocus()
+                                ItemChooseActivity.this.getCurrentFocus()
                                         .getWindowToken(),
                                 InputMethodManager.HIDE_NOT_ALWAYS);
                 vlaue = searchEditText.getText().toString();
-                invuselineAdapter.removeAllData();
+                itemAdapter.removeAllData();
                 notLinearLayout.setVisibility(View.GONE);
                 mSwipeLayout.setRefreshing(true);
                 page = 1;
-                getItemList(vlaue, page, invusenum);
+                getItemList(vlaue);
                 return true;
             }
             return false;
@@ -275,82 +258,13 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
     };
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Log.i(TAG, "resultCode=" + resultCode);
-
-        switch (resultCode) {
-            case 0:
-                Invuseline invuseline = (Invuseline) data.getParcelableExtra("invuseline");
-                newInvuseline.add(invuseline);
-                items.add(invuseline);
-                if (items != null || items.size() != 0) {
-                    notLinearLayout.setVisibility(View.GONE);
-                    addLinearLayout.setVisibility(View.VISIBLE);
-                    invuselineAdapter.update(items, true);
-                } else {
-                    notLinearLayout.setVisibility(View.VISIBLE);
-                }
-
-                break;
-
-            default:
-                break;
-
-        }
-    }
-
-
-    /**
-     * 修改信息*
-     */
-    private View.OnClickListener updateButtonOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-
-            showProgressDialog("数据更新中...");
-            startAsyncTask();
-
-
-        }
-    };
-
-
-    /**
-     * 提交数据*
-     */
-    private void startAsyncTask() {
-
-        final String updataInfo = JsonUtils.InvuseToJson(invuse, items);
-
-        Log.i(TAG,"updataInfo="+updataInfo);
-        new AsyncTask<String, String, InvuseResult>() {
-            @Override
-            protected InvuseResult doInBackground(String... strings) {
-                InvuseResult addresult = AndroidClientService.UpdateInvuse(updataInfo, AccountUtils.getpersonId(InvuselineActivity.this), AccountUtils.getIpAddress(InvuselineActivity.this) + Constants.INVUSE_URL);
-
-                return addresult;
-            }
-
-            @Override
-            protected void onPostExecute(InvuseResult invuseResult) {
-                super.onPostExecute(invuseResult);
-
-
-                if (invuseResult == null) {
-                    Toast.makeText(InvuselineActivity.this, "更新失败", Toast.LENGTH_SHORT).show();
-                } else if (!invuseResult.errorMsg.equals("成功!")) {
-
-                    Toast.makeText(InvuselineActivity.this, invuseResult.errorMsg, Toast.LENGTH_SHORT).show();
-                    finish();
-                } else if (invuseResult.errorMsg.equals("成功!")) {
-                    Toast.makeText(InvuselineActivity.this, "领料单" + invuseResult.invusenum + "更新成功", Toast.LENGTH_SHORT).show();
-                    finish();
-                }
-                closeProgressDialog();
-            }
-        }.execute();
+    public void responseData(Invbalances item) {
+        Intent intent = getIntent();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("invbalances", item);
+        intent.putExtras(bundle);
+        this.setResult(Constants.ITEMCODE, intent);
+        finish();
     }
 
 
