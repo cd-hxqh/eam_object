@@ -18,6 +18,7 @@ import cdhxqh.shekou.R;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.InvuseResult;
 import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.model.Invbalances;
 import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Invuseline;
 import cdhxqh.shekou.model.Item;
@@ -229,9 +230,11 @@ public class AddInvuseDetailActivity extends BaseActivity {
 
         switch (resultCode) {
             case Constants.ITEMCODE:
-                Item item = (Item) data.getSerializableExtra("item");
-                itemText.setText(item.itemnum);
-                itemdescriptionText.setText(item.description);
+                Invbalances invbalances = (Invbalances) data.getSerializableExtra("invbalances");
+                itemText.setText(invbalances.itemnum);
+                itemdescriptionText.setText(invbalances.itemdescription);
+                frombin = invbalances.binnum;
+                frombinText.setText(invbalances.binnum);
                 break;
             case Constants.LOCATIONCODE:
                 option = (Option) data.getSerializableExtra("option");

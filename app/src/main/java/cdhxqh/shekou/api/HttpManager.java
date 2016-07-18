@@ -161,10 +161,10 @@ public class HttpManager {
      */
     public static String getInvbalancesurl(String value, int curpage, int showcount, String location) {
         if (value.equals("")) {
-            return "{'appid':'" + Constants.INVBALANCES_APPID + "','objectname':'" + Constants.INVBALANCES_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'LOCATION':'" + location + "'CURBAL':'>0'}}";
+            return "{'appid':'" + Constants.INVBALANCES_APPID + "','objectname':'" + Constants.INVBALANCES_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'LOCATION':'" + location + "','CURBAL':'>0'}}";
 
         } else {
-            return "{'appid':'" + Constants.INVBALANCES_APPID + "','objectname':'" + Constants.INVBALANCES_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'LOCATION':'" + location + "'CURBAL':'>0'}" + ",'sinorsearch':{'ITEMNUM':'" + value + "','DESCRIPTION':'" + value + "'}}";
+            return "{'appid':'" + Constants.INVBALANCES_APPID + "','objectname':'" + Constants.INVBALANCES_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'LOCATION':'" + location + "','CURBAL':'>0'}" + ",'sinorsearch':{'ITEMNUM':'" + value + "','DESCRIPTION':'" + value + "'}}";
 
         }
     }
