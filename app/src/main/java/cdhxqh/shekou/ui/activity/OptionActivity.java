@@ -214,15 +214,19 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                     option.setName(assets.get(i).assetnum);
                     option.setDescription(assets.get(i).description);
                     option.setValue(assets.get(i).ownersite);
+                    option.setValue2(assets.get(i).udassettype);
                     list.add(option);
                 }
                 break;
             case Constants.JOBPLANCODE:
                 List<JobPlan> jobPlans;
-                if (getIntent().hasExtra("AssetIsChoose") && getIntent().getBooleanExtra("AssetIsChoose", false)) {
-                    jobPlans = new JobPlanDao(OptionActivity.this).queryByCount1(page, searchText);
-                } else {
+                String udassettype = getIntent().getExtras().getString("udassettype");
+                Log.i(TAG, "udassettype=" + udassettype);
+                if (udassettype.equals("")) {
                     jobPlans = new JobPlanDao(OptionActivity.this).queryByCount(page, searchText);
+
+                } else {
+                    jobPlans = new JobPlanDao(OptionActivity.this).queryByCount1(page, searchText, udassettype);
                 }
                 for (int i = 0; i < jobPlans.size(); i++) {
                     option = new Option();

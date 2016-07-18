@@ -85,10 +85,10 @@ public class JobPlanDao {
      *
      * @return
      */
-    public List<JobPlan> queryByCount1(int count, String jpnum) {
+    public List<JobPlan> queryByCount1(int count, String jpnum,String udassettype) {
         try {
             return JobPlanDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).
-                    where().like("jpnum", "%" + jpnum + "%").and().eq("UDASSETTYPE", "AC").query();
+                    where().like("jpnum", "%" + jpnum + "%").and().eq("UDASSETTYPE", udassettype).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }

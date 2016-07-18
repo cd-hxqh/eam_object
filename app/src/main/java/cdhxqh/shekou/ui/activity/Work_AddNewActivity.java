@@ -140,6 +140,12 @@ public class Work_AddNewActivity extends BaseActivity {
     private Button insert;//新增
     private Button work_flow;//工作流
 
+
+    /**
+     * 设备类型*
+     */
+    private String udassettype="";
+
     private ArrayList<Woactivity> woactivityList = new ArrayList<>();
     private ArrayList<Labtrans> labtransList = new ArrayList<>();
     private ArrayList<Failurereport> failurereportList = new ArrayList<>();
@@ -553,7 +559,7 @@ public class Work_AddNewActivity extends BaseActivity {
             Intent intent = new Intent(Work_AddNewActivity.this, OptionActivity.class);
             intent.putExtra("requestCode", requestCode);
             if (requestCode == Constants.JOBPLANCODE) {
-                intent.putExtra("AssetIsChoose", assetnum.getText().toString().equals(""));
+                intent.putExtra("udassettype", udassettype);
             } else if ((requestCode == Constants.LABORCODE1 || requestCode == Constants.LABORCODE2
                     || requestCode == Constants.LABORCODE3) && !udqxbz.getText().toString().equals("")) {
                 intent.putExtra("udqxbz", udqxbz.getText().toString());
@@ -606,7 +612,7 @@ public class Work_AddNewActivity extends BaseActivity {
         public void onClick(View view) {
             if (failurecode.getText().toString().equals("")) {
                 popupWindow.dismiss();
-                Toast.makeText(Work_AddNewActivity.this, "请选选择故障子机构", Toast.LENGTH_SHORT).show();
+                MessageUtils.showMiddleToast(Work_AddNewActivity.this, "请选选择故障子机构");
             } else {
                 Intent intent = new Intent(Work_AddNewActivity.this, Work_FailurereportActivity.class);
                 Bundle bundle = new Bundle();
@@ -675,6 +681,7 @@ public class Work_AddNewActivity extends BaseActivity {
                 option = (Option) data.getSerializableExtra("option");
                 assetnum.setText(option.getName());
                 assetname.setText(option.getDescription());
+                udassettype = option.getValue2();
                 workOrder.udassetbz = option.getValue();
                 break;
             case Constants.JOBPLANCODE:
