@@ -55,6 +55,7 @@ import cdhxqh.shekou.model.Projappr;
 import cdhxqh.shekou.model.Udev;
 import cdhxqh.shekou.ui.adapter.OptionAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
+import cdhxqh.shekou.utils.AccountUtils;
 
 /**
  * Created by think on 2016/5/16.
@@ -354,7 +355,8 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 break;
             case Constants.LABORCRAFTRATECODE:
                 List<Laborcraftrate> laborcraftrates;
-                laborcraftrates = new LaborcraftrateDao(OptionActivity.this).queryByCount(page, searchText, "CCT");
+                String site = AccountUtils.getinsertSite(OptionActivity.this);
+                laborcraftrates = new LaborcraftrateDao(OptionActivity.this).queryByCount(page, searchText, site);
                 for (int i = 0; i < laborcraftrates.size(); i++) {
                     option = new Option();
                     option.setName(laborcraftrates.get(i).laborcode);

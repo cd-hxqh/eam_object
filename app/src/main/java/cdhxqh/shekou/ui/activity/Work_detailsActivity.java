@@ -161,8 +161,11 @@ public class Work_detailsActivity extends BaseActivity {
     private View gdmsView;
     private TextView gdmsText;
 
+    /**删除**/
     private Button delete;
+    /**修改**/
     private Button revise;
+    /**工作流**/
     private Button work_flow;
 
 

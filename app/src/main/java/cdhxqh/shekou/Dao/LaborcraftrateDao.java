@@ -85,8 +85,8 @@ public class LaborcraftrateDao {
      */
     public List<Laborcraftrate> queryByCount(int count,String laborcode,String locationsite) {
         try {
-            return LaborcraftrateDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("laborcode", "%" + laborcode + "%")
-                    .and().eq("LOCATIONSITE", locationsite).query();
+            return LaborcraftrateDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("laborcode", "%" + laborcode + "%").or().like("displayname", "%" + laborcode + "%")
+                    .and().eq("locationsite", locationsite).query();
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -2,6 +2,7 @@ package cdhxqh.shekou.ui.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -34,6 +35,7 @@ import cdhxqh.shekou.utils.DateTimeSelect;
  * 实际员工详情页面
  */
 public class LabtransDetailsActivity extends BaseActivity {
+    private String TAG = "LabtransDetailsActivity";
     /**
      * 返回按钮
      */
@@ -52,8 +54,6 @@ public class LabtransDetailsActivity extends BaseActivity {
     private EditText regularhrs;//常规时数
     private EditText payrate;//费率
     private TextView linecost;//行成本
-//    private TextView assetnum;//资产
-//    private TextView transtype;//类型
 
     private int position;
     private ArrayList<Woactivity> woactivityList = new ArrayList<>();
@@ -82,9 +82,10 @@ public class LabtransDetailsActivity extends BaseActivity {
     private void geiIntentData() {
         labtrans = (Labtrans) getIntent().getSerializableExtra("labtrans");
         woactivityList = (ArrayList<Woactivity>) getIntent().getSerializableExtra("woactivityList");
-        position = getIntent().getIntExtra("position",0);
+        position = getIntent().getIntExtra("position", 0);
         status = getIntent().getStringExtra("status");
     }
+
     @Override
     protected void findViewById() {
         backImageView = (ImageView) findViewById(R.id.title_back_id);
@@ -98,8 +99,6 @@ public class LabtransDetailsActivity extends BaseActivity {
         regularhrs = (EditText) findViewById(R.id.work_labtrans_regularhrs);
         payrate = (EditText) findViewById(R.id.work_labtrans_payrate);
         linecost = (TextView) findViewById(R.id.work_labtrans_linecost);
-//        assetnum = (TextView) findViewById(R.id.work_labtrans_assetnum);
-//        transtype = (TextView) findViewById(R.id.work_labtrans_transtype);
 
         buttonlayout = (LinearLayout) findViewById(R.id.button_layout);
         confirm = (Button) findViewById(R.id.confirm);
@@ -116,21 +115,20 @@ public class LabtransDetailsActivity extends BaseActivity {
         });
         titleTextView.setText(getResources().getString(R.string.title_activity_labtransdetails));
 
-        actualstaskid.setText(labtrans.actualstaskid);
+        actualstaskid.setText(null == labtrans.actualstaskid ? "暂无数据" : labtrans.actualstaskid);
         laborcode.setText(labtrans.laborcode);
         startdate.setText(labtrans.startdate);
-        starttime.setText(labtrans.starttime);
+        Log.i(TAG, "labtrans=" + labtrans.starttime);
+        starttime.setText(labtrans.starttime.equals("null") ? "暂无数据" : labtrans.starttime);
         finishtime.setText(labtrans.finishtime);
         regularhrs.setText(labtrans.regularhrs);
         payrate.setText(labtrans.payrate);
         linecost.setText(labtrans.linecost);
-//        assetnum.setText(labtrans.assetnum);
-//        transtype.setText(labtrans.transtype);
 
         if (status != null && (status.equals(Constants.STATUS7)
                 || status.equals(Constants.STATUS18) || status.equals(Constants.STATUS10))) {
             buttonlayout.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             buttonlayout.setVisibility(View.GONE);
         }
 
@@ -145,13 +143,13 @@ public class LabtransDetailsActivity extends BaseActivity {
         starttime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DateTimeSelect(LabtransDetailsActivity.this,starttime).showDialog();
+                new DateTimeSelect(LabtransDetailsActivity.this, starttime).showDialog();
             }
         });
         finishtime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new DateTimeSelect(LabtransDetailsActivity.this,finishtime).showDialog();
+                new DateTimeSelect(LabtransDetailsActivity.this, finishtime).showDialog();
             }
         });
 
@@ -213,7 +211,7 @@ public class LabtransDetailsActivity extends BaseActivity {
         }
     }
 
-    private Labtrans getLabtrans(){
+    private Labtrans getLabtrans() {
         Labtrans labtrans = this.labtrans;
         labtrans.actualstaskid = actualstaskid.getText().toString();
         labtrans.laborcode = laborcode.getText().toString();
@@ -232,21 +230,21 @@ public class LabtransDetailsActivity extends BaseActivity {
         @Override
         public void onClick(View view) {
             Intent intent = getIntent();
-            if(labtrans.actualstaskid.equals(actualstaskid.getText().toString())
-                    &&labtrans.laborcode.equals(laborcode.getText().toString())
-                    &&labtrans.startdate.equals(startdate.getText().toString())
-                    &&labtrans.starttime.equals(starttime.getText().toString())
-                    &&labtrans.finishtime.equals(finishtime.getText().toString())
-                    &&labtrans.regularhrs.equals(regularhrs.getText().toString())
-                    &&labtrans.payrate.equals(payrate.getText().toString())
-                    &&labtrans.linecost.equals(linecost.getText().toString())
+            if (labtrans.actualstaskid.equals(actualstaskid.getText().toString())
+                    && labtrans.laborcode.equals(laborcode.getText().toString())
+                    && labtrans.startdate.equals(startdate.getText().toString())
+                    && labtrans.starttime.equals(starttime.getText().toString())
+                    && labtrans.finishtime.equals(finishtime.getText().toString())
+                    && labtrans.regularhrs.equals(regularhrs.getText().toString())
+                    && labtrans.payrate.equals(payrate.getText().toString())
+                    && labtrans.linecost.equals(linecost.getText().toString())
 //                    &&labtrans.assetnum.equals(assetnum.getText().toString())
 //                    &&labtrans.transtype.equals(transtype.getText().toString())
                     ) {//如果内容没有修改
-                intent.putExtra("labtrans",labtrans);
-            }else {
+                intent.putExtra("labtrans", labtrans);
+            } else {
                 Labtrans labtrans = getLabtrans();
-                if(labtrans.optiontype==null||!labtrans.optiontype.equals("add")) {
+                if (labtrans.optiontype == null || !labtrans.optiontype.equals("add")) {
                     labtrans.optiontype = "update";
                 }
                 intent.putExtra("labtrans", labtrans);
@@ -263,9 +261,9 @@ public class LabtransDetailsActivity extends BaseActivity {
         public void onClick(View v) {
             Intent intent = getIntent();
             intent.putExtra("position", position);
-            if (labtrans.labtransid == null||labtrans.labtransid.equals("")){
+            if (labtrans.labtransid == null || labtrans.labtransid.equals("")) {
                 LabtransDetailsActivity.this.setResult(3, intent);
-            }else {
+            } else {
                 Labtrans labtrans = getLabtrans();
                 labtrans.optiontype = "delete";
                 intent.putExtra("labtrans", labtrans);

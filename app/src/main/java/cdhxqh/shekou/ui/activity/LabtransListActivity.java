@@ -1,6 +1,7 @@
 package cdhxqh.shekou.ui.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,14 +30,20 @@ import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
+import cdhxqh.shekou.model.WorkResult;
 import cdhxqh.shekou.ui.adapter.LabtransAdapter;
 import cdhxqh.shekou.ui.adapter.WoactivityAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
+import cdhxqh.shekou.utils.AccountUtils;
+import cdhxqh.shekou.utils.MessageUtils;
+import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
  * Created by think on 2016/5/10.
+ * 实际员工
  */
 public class LabtransListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
+    private String TAG="LabtransListActivity";
     private ImageView backImageView;
     private TextView titleTextView;
     private ImageView menuImageView;
@@ -47,14 +54,21 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
     private LabtransAdapter labtransAdapter;
     private SwipeRefreshLayout refresh_layout = null;
     private int page = 1;
+    /**
+     * 工单主表
+     **/
     public WorkOrder workOrder;
     private BaseAnimatorSet mBasIn;
     private BaseAnimatorSet mBasOut;
     private LinearLayout confirmlayout;
+    /**
+     * 确定按钮
+     **/
     private Button confirmBtn;
 
     public ArrayList<Woactivity> woactivityList = new ArrayList<>();
     public ArrayList<Labtrans> labtransList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,9 +127,9 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
         mBasOut = new SlideBottomExit();
 
         if (workOrder.status != null && (workOrder.status.equals(Constants.STATUS7)
-                || workOrder.status.equals(Constants.STATUS18) || workOrder.status.equals(Constants.STATUS10))) {
+                || workOrder.status.equals(Constants.STATUS18) || workOrder.status.equals(Constants.STATUS10)) || workOrder.status.equals(Constants.STATUS9)) {
             menuImageView.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             menuImageView.setVisibility(View.GONE);
         }
 
@@ -235,10 +249,14 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
     private View.OnClickListener confirmBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = getIntent();
-            intent.putExtra("labtransList", labtransAdapter.getList());
-            LabtransListActivity.this.setResult(2000, intent);
-            LabtransListActivity.this.finish();
+//            Intent intent = getIntent();
+//            intent.putExtra("labtransList", labtransAdapter.getList());
+//            LabtransListActivity.this.setResult(2000, intent);
+//            LabtransListActivity.this.finish();
+            showProgressDialog("数据提交中...");
+            startAsyncTask();
+
+
         }
     };
 
@@ -306,4 +324,38 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
             getdata();
         }
     }
+
+
+    /**
+     * 提交数据*
+     */
+    private void startAsyncTask() {
+        String updataInfo = null;
+        updataInfo = JsonUtils.WorkToJson(workOrder, null, labtransList, null);
+        Log.i(TAG, "updataInfo=" + updataInfo);
+        final String finalUpdataInfo = updataInfo;
+        new AsyncTask<String, String, WorkResult>() {
+            @Override
+            protected WorkResult doInBackground(String... strings) {
+                WorkResult reviseresult = AndroidClientService.UpdateWO(finalUpdataInfo, AccountUtils.getpersonId(LabtransListActivity.this), AccountUtils.getIpAddress(LabtransListActivity.this) + Constants.WORK_URL);
+                return reviseresult;
+            }
+
+            @Override
+            protected void onPostExecute(WorkResult workResult) {
+                super.onPostExecute(workResult);
+                if (workResult == null) {
+                    MessageUtils.showMiddleToast(LabtransListActivity.this, "保存失败");
+                } else if (workResult.errorMsg.equals("成功!")) {
+                    MessageUtils.showMiddleToast(LabtransListActivity.this, "保存成功");
+                } else {
+                    MessageUtils.showMiddleToast(LabtransListActivity.this, workResult.errorMsg);
+                }
+                closeProgressDialog();
+            }
+        }.execute();
+
+    }
+
+
 }

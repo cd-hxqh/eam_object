@@ -45,10 +45,10 @@ public class HttpManager {
     public static String getworkorderUrl(String type, String vlaue, String siteid, int curpage, int showcount) {
         if (vlaue.equals("")) {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'=工单建立,=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'LENGTH(WONUM) DESC,WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','WOCLASS':'=工单','STATUS':'=工单建立,=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}}";
         } else {
             return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','STATUS':'=工单建立,=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}" + ",'sinorsearch':{'WONUM':'" + vlaue + "','DESCRIPTION':'" + vlaue + "'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'LENGTH(WONUM) DESC,WONUM DESC','condition':{'WORKTYPE':'" + type + "','SITEID':'" + siteid + "','WOCLASS':'=工单','STATUS':'=工单建立,=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}" + ",'sinorsearch':{'WONUM':'" + vlaue + "','DESCRIPTION':'" + vlaue + "'}}";
 
         }
     }
@@ -59,10 +59,10 @@ public class HttpManager {
     public static String getChooseWorkOrderUrl(String search, String siteid, int curpage, int showcount) {
         if (search.equals("")) {
             return "{'appid':'" + Constants.WOTRACK_APPID + "','objectname':'" + Constants.WORKORDER_APPID + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'!=OSPR','SITEID':'" + siteid + "','STATUS':'=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'LENGTH(WONUM) DESC,WONUM DESC','condition':{'WORKTYPE':'!=OSPR','SITEID':'" + siteid + "','WOCLASS':'=工单','STATUS':'=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}}";
         } else {
             return "{'appid':'" + Constants.WOTRACK_APPID + "','objectname':'" + Constants.WORKORDER_APPID + "'," +
-                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'WONUM DESC','condition':{'WORKTYPE':'!=OSPR','SITEID':'" + siteid + "','STATUS':'=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}" + ",'sinorsearch':{'WONUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'LENGTH(WONUM) DESC,WONUM DESC','condition':{'WORKTYPE':'!=OSPR','SITEID':'" + siteid + "','WOCLASS':'=工单','STATUS':'=提交主任分配,=工单执行,=提交监督审核,=提交主任审核'}" + ",'sinorsearch':{'WONUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
 
         }
     }
@@ -101,7 +101,7 @@ public class HttpManager {
      * 设置实际员工接口
      */
     public static String getlabtransUrl(String type, String wonum, int curpage, int showcount) {
-        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.LABTRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'REFWO':'" + wonum + "'}}";
+        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.LABTRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','reporsearch':{'LABTRANS_WOANDTASK.WONUM':'=" + wonum + "','LABTRANS_WOANDTASK.PARENT':'=" + wonum + "'}}";
     }
 
     /**
@@ -399,6 +399,7 @@ public class HttpManager {
      * 不分页获取信息方法*
      */
     public static void getData(final Context cxt, String data, final HttpRequestHandler<Results> handler) {
+        Log.i(TAG, "data=" + data);
         String url = AccountUtils.getIpAddress(cxt) + Constants.BASE_URL;
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();

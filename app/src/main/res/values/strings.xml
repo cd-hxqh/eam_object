@@ -313,24 +313,24 @@
     <string name="work_failurereport_rememdy">补救措施</string>
 
     <!--实际员工页面-->
-    <string name="work_labtrans_actualstaskid">任务</string>
-    <string name="work_labtrans_craft">工种</string>
+    <string name="work_labtrans_actualstaskid">任务:</string>
+    <string name="work_labtrans_craft">工种:</string>
     <string name="work_labtrans_skilllevel">技能级别</string>
-    <string name="work_labtrans_laborcode">员工</string>
-    <string name="work_labtrans_startdate">工作日期</string>
-    <string name="work_labtrans_starttime">开始时间</string>
-    <string name="work_labtrans_finishdate">结束日期</string>
-    <string name="work_labtrans_finishtime">结束时间</string>
-    <string name="work_labtrans_regularhrs">常规时数</string>
-    <string name="work_labtrans_enterby">输入人</string>
-    <string name="work_labtrans_enterdate">输入日期</string>
-    <string name="work_labtrans_payrate">费率</string>
-    <string name="work_labtrans_linecost">行成本</string>
-    <string name="work_labtrans_assetnum">资产</string>
-    <string name="work_labtrans_transdate">交易日期</string>
-    <string name="work_labtrans_transtype">类型</string>
-    <string name="work_labtrans_orgid">组织</string>
-    <string name="work_labtrans_siteid">地点</string>
+    <string name="work_labtrans_laborcode">员工:</string>
+    <string name="work_labtrans_startdate">工作日期:</string>
+    <string name="work_labtrans_starttime">开始时间:</string>
+    <string name="work_labtrans_finishdate">结束日期:</string>
+    <string name="work_labtrans_finishtime">结束时间:</string>
+    <string name="work_labtrans_regularhrs">常规时数:</string>
+    <string name="work_labtrans_enterby">输入人:</string>
+    <string name="work_labtrans_enterdate">输入日期:</string>
+    <string name="work_labtrans_payrate">费率:</string>
+    <string name="work_labtrans_linecost">行成本:</string>
+    <string name="work_labtrans_assetnum">资产:</string>
+    <string name="work_labtrans_transdate">交易日期:</string>
+    <string name="work_labtrans_transtype">类型:</string>
+    <string name="work_labtrans_orgid">组织:</string>
+    <string name="work_labtrans_siteid">地点:</string>
 
     <!--领料单详情-->
     <string name="invuse_details_title">领料单详情</string>
