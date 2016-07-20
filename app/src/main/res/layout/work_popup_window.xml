@@ -20,7 +20,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_inventory_cost" />
+                android:src="@drawable/ic_workorder_task" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -54,13 +54,48 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_inventory_storage" />
+                android:src="@drawable/ic_yuangong" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dimen_5"
-                android:text="@string/work_labtrans"
+                android:text="@string/yungong_text"
+                android:textSize="@dimen/dimens_16dp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/line"></View>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/meterial_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_5">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_wuliao" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:text="@string/work_plan_meterial"
                 android:textSize="@dimen/dimens_16dp" />
 
         </LinearLayout>
@@ -88,7 +123,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_inventory_storage" />
+                android:src="@drawable/ic_guzhang" />
 
             <TextView
                 android:layout_width="wrap_content"

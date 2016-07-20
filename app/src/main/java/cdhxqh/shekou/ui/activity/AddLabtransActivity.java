@@ -189,14 +189,15 @@ public class AddLabtransActivity extends BaseActivity {
 
     private Labtrans getLabtrans() {
         Labtrans labtrans = this.labtrans;
-        String actualstask = actualstaskid.getText().toString();
-        String laborcod = laborcode.getText().toString();
-        String startdate1 = startdate.getText().toString();
-        String starttime1 = starttime.getText().toString();
-        String finishtime1 = finishtime.getText().toString();
-        String regularhrs1 = regularhrs.getText().toString();
-        String payrate1 = payrate.getText().toString();
-        String linecost1 = linecost.getText().toString();
+        String actualstask = actualstaskid.getText().toString().trim();
+        String laborcod = laborcode.getText().toString().trim();
+        String startdate1 = startdate.getText().toString().trim();
+        String starttime1 = starttime.getText().toString().trim();
+        String finishtime1 = finishtime.getText().toString().trim();
+        String regularhrs1 = regularhrs.getText().toString().trim();
+        String payrate1 = payrate.getText().toString().trim();
+        String linecost1 = linecost.getText().toString().trim();
+        labtrans.setLabtransid("");
         labtrans.setActualstaskid(actualstask);
         labtrans.setLaborcode(laborcod);
         labtrans.setStartdate(startdate1);

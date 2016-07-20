@@ -561,7 +561,7 @@ public class JsonUtils {
                 labtrans.transtype = jsonObject.getString("TRANSTYPE");//状态
 //                labtrans.orgid = jsonObject.getString("ORGID");//组织
 //                labtrans.siteid = jsonObject.getString("SITEID");//地点
-                labtrans.labtransid = jsonObject.getString("LABTRANSID");//
+                labtrans.labtransid = jsonObject.getString("LABTRANSID");//员工ID
                 labtrans.refwo = wonum;
                 list.add(labtrans);
             }
@@ -1274,8 +1274,9 @@ public class JsonUtils {
                 JSONObject labtransObj;
                 for (int i = 0; i < labtranses.size(); i++) {
                     labtransObj = new JSONObject();
+                    labtransObj.put("labtransid", labtranses.get(i).labtransid);
                     labtransObj.put("taskid", labtranses.get(i).actualstaskid);
-                    labtransObj.put("laborcode", labtranses.get(i).laborcode);
+                    labtransObj.put("laborcode",labtranses.get(i).laborcode);
                     labtransObj.put("startdate", labtranses.get(i).startdate);
                     labtransObj.put("starttime", labtranses.get(i).starttime);
                     labtransObj.put("finishtime", labtranses.get(i).finishtime);

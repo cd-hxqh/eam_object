@@ -31,9 +31,9 @@ import cdhxqh.shekou.ui.adapter.MatrectransAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 
 /**
- * 入库
+ * 入库/物料
  */
-public class MatrectransActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener{
+public class MatrectransActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     private static final String TAG = "MatrectransActivity";
 
     /**
@@ -62,7 +62,7 @@ public class MatrectransActivity extends BaseActivity implements SwipeRefreshLay
 
 
     /**
-     *暂无数据*
+     * 暂无数据*
      */
     LinearLayout notLinearLayout;
 
@@ -72,12 +72,16 @@ public class MatrectransActivity extends BaseActivity implements SwipeRefreshLay
 
     private int page = 1;
 
-    private ArrayList<Matrectrans> items=new ArrayList<Matrectrans>();
+    private ArrayList<Matrectrans> items = new ArrayList<Matrectrans>();
 
     /**
      * 搜索值*
      */
     private String vlaue = "";
+    /**
+     * 工单号
+     **/
+    private String wonum;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -88,9 +92,11 @@ public class MatrectransActivity extends BaseActivity implements SwipeRefreshLay
         initView();
     }
 
-    /**获取上个界面的数据**/
+    /**
+     * 获取上个界面的数据
+     **/
     private void getInitData() {
-        itemnum=getIntent().getExtras().getString("itemnum");
+        wonum = getIntent().getExtras().getString("wonum");
     }
 
     @Override
@@ -105,7 +111,7 @@ public class MatrectransActivity extends BaseActivity implements SwipeRefreshLay
         mRecyclerView.setLayoutManager(mLayoutManager);
         matrectransAdapter = new MatrectransAdapter(MatrectransActivity.this);
         mRecyclerView.setAdapter(matrectransAdapter);
-        mSwipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_container);
+        mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         mSwipeLayout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
@@ -129,7 +135,7 @@ public class MatrectransActivity extends BaseActivity implements SwipeRefreshLay
         titleTextView.setText(getString(R.string.matrectrans_title));
 
         mSwipeLayout.setRefreshing(true);
-        getItemList(vlaue,page,itemnum);
+        getItemList(vlaue, page, itemnum);
 
 
         SpannableString msp = new SpannableString("XX搜索");
@@ -142,7 +148,6 @@ public class MatrectransActivity extends BaseActivity implements SwipeRefreshLay
     }
 
 
-
     private View.OnClickListener backImageViewOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -153,11 +158,10 @@ public class MatrectransActivity extends BaseActivity implements SwipeRefreshLay
     /**
      * 获取库存成本
      * --分页
-     *
      */
 
-    private void getItemList(String value,int page,String itemnum) {
-        HttpManager.getDataPagingInfo(MatrectransActivity.this, HttpManager.getMatrectransurl(value,page, 20, itemnum), new HttpRequestHandler<Results>() {
+    private void getItemList(String value, int page, String itemnum) {
+        HttpManager.getDataPagingInfo(MatrectransActivity.this, HttpManager.getMatrectransurl1(value, page, 20, wonum), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -194,14 +198,13 @@ public class MatrectransActivity extends BaseActivity implements SwipeRefreshLay
     @Override
     public void onLoad() {
         page++;
-        getItemList(vlaue,page,itemnum);
+        getItemList(vlaue, page, itemnum);
     }
 
     @Override
     public void onRefresh() {
         mSwipeLayout.setRefreshing(false);
     }
-
 
 
     private TextView.OnEditorActionListener searchEditTextOnEditorActionListener = new TextView.OnEditorActionListener() {
@@ -219,7 +222,7 @@ public class MatrectransActivity extends BaseActivity implements SwipeRefreshLay
                 notLinearLayout.setVisibility(View.GONE);
                 mSwipeLayout.setRefreshing(true);
                 page = 1;
-                getItemList(vlaue, page,itemnum);
+                getItemList(vlaue, page, itemnum);
                 return true;
             }
             return false;

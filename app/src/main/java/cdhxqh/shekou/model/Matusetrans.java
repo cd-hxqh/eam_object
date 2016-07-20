@@ -9,6 +9,7 @@ import org.json.JSONObject;
 /**
  * Created by apple on 15/10/26.
  * 物资发放表
+ *
  */
 public class Matusetrans extends Entity implements Parcelable {
     private static final String TAG = "Matusetrans";

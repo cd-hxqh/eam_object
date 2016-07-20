@@ -60,17 +60,17 @@ public class Work_detailsActivity extends BaseActivity {
     private PopupWindow popupWindow;
 
     /**
-     * 工作计划*
+     * 工单任务*
      */
     private LinearLayout planLinearlayout;
-//    /**
-//     * 任务分配*
-//     */
-//    private LinearLayout taskLinearLayout;
     /**
      * 实际情况
      */
     private LinearLayout realinfoLinearLayout;
+    /**
+     * 物料
+     **/
+    private LinearLayout meterialLinearLayout;
     /**
      * 故障汇报*
      */
@@ -279,7 +279,6 @@ public class Work_detailsActivity extends BaseActivity {
         udgzlbdm = (TextView) findViewById(R.id.work_udgzlbdm);
         udworkmemo = (EditText) findViewById(R.id.work_udworkmemo);
         udisyq = (CheckBox) findViewById(R.id.work_udisyq);
-//        udisplayname = (TextView) findViewById(R.id.work_udisplayname);
         targstartdate = (TextView) findViewById(R.id.work_targstartdate);
         targcompdate = (TextView) findViewById(R.id.work_targcompdate);
         work_real_info_layout = (LinearLayout) findViewById(R.id.work_real_info);
@@ -351,7 +350,6 @@ public class Work_detailsActivity extends BaseActivity {
         jpnum.setText(workOrder.jpnum);
         udisjf.setChecked(ischeck(workOrder.udisjf));
         pmnum.setText(workOrder.pmnum);
-//        yfwh.setText(ischeck(workOrder.udyfwh));
         udcreateby.setText(workOrder.udcreatebyname);
         udcreatedate.setText(workOrder.udcreatedate);
         reportedby.setText(workOrder.reportedby);
@@ -372,8 +370,6 @@ public class Work_detailsActivity extends BaseActivity {
         failurecode.setText(workOrder.failurecode);
         udgzlbdm.setText(workOrder.udgzlbdm);
         udworkmemo.setText(workOrder.udworkmemo);
-//        udisyq.setChecked(ischeck(workOrder.udisyq));
-//        udisplayname.setText(workOrder.udisplayname);
         targstartdate.setText(workOrder.targstartdate.equals("null") ? "" : workOrder.targstartdate);
         targcompdate.setText(workOrder.targcompdate.equals("null") ? "" : workOrder.targcompdate);
         actstart.setText(workOrder.udactstart.equals("null") ? "" : workOrder.udactstart);
@@ -402,7 +398,6 @@ public class Work_detailsActivity extends BaseActivity {
         pmnum.setOnClickListener(new LayoutOnClickListener(Constants.PMCODE));
         failurecode.setOnClickListener(new LayoutOnClickListener(Constants.FAILURE_TYPE));
         udgzlbdm.setOnClickListener(new LayoutOnClickListener(Constants.ALNDOMAIN2CODE));
-//        udqxbz.setOnClickListener(new );
 
         delete.setOnClickListener(deleteOnClickListener);
         revise.setOnClickListener(reviseOnClickListener);
@@ -576,13 +571,25 @@ public class Work_detailsActivity extends BaseActivity {
         popupWindow.showAsDropDown(view);
 
         planLinearlayout = (LinearLayout) contentView.findViewById(R.id.work_plan_id);
+
         realinfoLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_realinfo_id);
+
+        meterialLinearLayout = (LinearLayout) contentView.findViewById(R.id.meterial_id);
+
         reportLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_report_id);
+
+
         invuseLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_invuse_id);
+
         invuseLinearLayout.setVisibility(View.VISIBLE);
         planLinearlayout.setOnClickListener(planOnClickListener);
+
         realinfoLinearLayout.setOnClickListener(realinfoOnClickListener);
+
+        meterialLinearLayout.setOnClickListener(meterialOnClickListener);
+
         reportLinearLayout.setOnClickListener(reportOnClickListener);
+
         invuseLinearLayout.setOnClickListener(invuseOnClickListener);
         decisionLayout();
 
@@ -601,17 +608,17 @@ public class Work_detailsActivity extends BaseActivity {
         }
     };
 
-//    private View.OnClickListener taskOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//            Intent intent = new Intent(Work_detailsActivity.this, AssignmentActivity.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("workOrder", workOrder);
-//            intent.putExtras(bundle);
-//            startActivity(intent);
-//            popupWindow.dismiss();
-//        }
-//    };
+    private View.OnClickListener meterialOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(Work_detailsActivity.this, AssignmentActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("workOrder", workOrder);
+            intent.putExtras(bundle);
+            startActivity(intent);
+            popupWindow.dismiss();
+        }
+    };
 
     private View.OnClickListener realinfoOnClickListener = new View.OnClickListener() {
         @Override
