@@ -32,96 +32,124 @@ public class Labtrans implements Serializable {
     public String refwo;//所属工单
     public String optiontype;
 
-//
-//
-//    @Override
-//    public void parse(JSONObject jsonObject) throws JSONException {
-//        actualstaskid = jsonObject.getString("actualstaskid");
-//        craft = jsonObject.getString("craft");
-//        skilllevel = jsonObject.getString("skilllevel");
-//        laborcode = jsonObject.getString("laborcode");
-//        startdate = jsonObject.getString("startdate");
-//        starttime = jsonObject.getString("starttime");
-//        finishdate = jsonObject.getString("finishdate");
-//        finishtime = jsonObject.getString("finishtime");
-//        regularhrs = jsonObject.getString("regularhrs");
-//        enterby = jsonObject.getString("enterby");
-//        enterdate = jsonObject.getString("enterdate");
-//        payrate = jsonObject.getString("payrate");
-//        linecost = jsonObject.getString("linecost");
-//        assetnum = jsonObject.getString("assetnum");
-//        transdate = jsonObject.getString("transdate");
-//        transtype = jsonObject.getString("transtype");
-//        orgid = jsonObject.getString("orgid");
-//        siteid = jsonObject.getString("siteid");
-//        labtransid = jsonObject.getString("labtransid");
-//    }
-//
-//    public Labtrans() {
-//    }
-//
-//
-//    private Labtrans(Parcel in) {
-//        actualstaskid = in.readString();
-//        craft = in.readString();
-//        skilllevel = in.readString();
-//        laborcode = in.readString();
-//        startdate = in.readString();
-//        starttime = in.readString();
-//        finishdate = in.readString();
-//        finishtime = in.readString();
-//        regularhrs = in.readString();
-//        enterby = in.readString();
-//        enterdate = in.readString();
-//        payrate = in.readString();
-//        linecost = in.readString();
-//        assetnum = in.readString();
-//        transdate = in.readString();
-//        transtype = in.readString();
-//        orgid = in.readString();
-//        siteid = in.readString();
-//        labtransid = in.readString();
-//    }
-//
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void writeToParcel(Parcel dest, int flags) {
-//        dest.writeString(actualstaskid);
-//        dest.writeString(craft);
-//        dest.writeString(skilllevel);
-//        dest.writeString(laborcode);
-//        dest.writeString(startdate);
-//        dest.writeString(starttime);
-//        dest.writeString(finishdate);
-//        dest.writeString(finishtime);
-//        dest.writeString(regularhrs);
-//        dest.writeString(enterby);
-//        dest.writeString(enterdate);
-//        dest.writeString(payrate);
-//        dest.writeString(linecost);
-//        dest.writeString(assetnum);
-//        dest.writeString(transdate);
-//        dest.writeString(transtype);
-//        dest.writeString(orgid);
-//        dest.writeString(siteid);
-//        dest.writeString(labtransid);
-//    }
-//
-//
-//    public static final Creator<Labtrans> CREATOR = new Creator<Labtrans>() {
-//        @Override
-//        public Labtrans createFromParcel(Parcel source) {
-//            return new Labtrans(source);
-//        }
-//
-//        @Override
-//        public Labtrans[] newArray(int size) {
-//            return new Labtrans[size];
-//        }
-//    };
 
+    public String getActualstaskid() {
+        return actualstaskid;
+    }
+
+    public void setActualstaskid(String actualstaskid) {
+        this.actualstaskid = actualstaskid;
+    }
+
+    public String getCraft() {
+        return craft;
+    }
+
+    public void setCraft(String craft) {
+        this.craft = craft;
+    }
+
+    public String getSkilllevel() {
+        return skilllevel;
+    }
+
+    public void setSkilllevel(String skilllevel) {
+        this.skilllevel = skilllevel;
+    }
+
+    public String getLaborcode() {
+        return laborcode;
+    }
+
+    public void setLaborcode(String laborcode) {
+        this.laborcode = laborcode;
+    }
+
+    public String getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
+    }
+
+    public String getStarttime() {
+        return starttime;
+    }
+
+    public void setStarttime(String starttime) {
+        this.starttime = starttime;
+    }
+
+    public String getFinishtime() {
+        return finishtime;
+    }
+
+    public void setFinishtime(String finishtime) {
+        this.finishtime = finishtime;
+    }
+
+    public String getRegularhrs() {
+        return regularhrs;
+    }
+
+    public void setRegularhrs(String regularhrs) {
+        this.regularhrs = regularhrs;
+    }
+
+    public String getPayrate() {
+        return payrate;
+    }
+
+    public void setPayrate(String payrate) {
+        this.payrate = payrate;
+    }
+
+    public String getLinecost() {
+        return linecost;
+    }
+
+    public void setLinecost(String linecost) {
+        this.linecost = linecost;
+    }
+
+    public String getAssetnum() {
+        return assetnum;
+    }
+
+    public void setAssetnum(String assetnum) {
+        this.assetnum = assetnum;
+    }
+
+    public String getTranstype() {
+        return transtype;
+    }
+
+    public void setTranstype(String transtype) {
+        this.transtype = transtype;
+    }
+
+    public String getLabtransid() {
+        return labtransid;
+    }
+
+    public void setLabtransid(String labtransid) {
+        this.labtransid = labtransid;
+    }
+
+    public String getRefwo() {
+        return refwo;
+    }
+
+    public void setRefwo(String refwo) {
+        this.refwo = refwo;
+    }
+
+    public String getOptiontype() {
+        return optiontype;
+    }
+
+    public void setOptiontype(String optiontype) {
+        this.optiontype = optiontype;
+    }
 }

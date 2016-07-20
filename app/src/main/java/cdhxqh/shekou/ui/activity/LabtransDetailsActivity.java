@@ -29,6 +29,7 @@ import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.Wplabor;
 import cdhxqh.shekou.utils.DateSelect;
 import cdhxqh.shekou.utils.DateTimeSelect;
+import cdhxqh.shekou.utils.MessageUtils;
 
 /**
  * Created by think on 2015/11/6.
@@ -221,8 +222,6 @@ public class LabtransDetailsActivity extends BaseActivity {
         labtrans.regularhrs = regularhrs.getText().toString();
         labtrans.payrate = payrate.getText().toString();
         labtrans.linecost = linecost.getText().toString();
-//        labtrans.assetnum = assetnum.getText().toString();
-//        labtrans.transtype = transtype.getText().toString();
         return labtrans;
     }
 
@@ -238,8 +237,6 @@ public class LabtransDetailsActivity extends BaseActivity {
                     && labtrans.regularhrs.equals(regularhrs.getText().toString())
                     && labtrans.payrate.equals(payrate.getText().toString())
                     && labtrans.linecost.equals(linecost.getText().toString())
-//                    &&labtrans.assetnum.equals(assetnum.getText().toString())
-//                    &&labtrans.transtype.equals(transtype.getText().toString())
                     ) {//如果内容没有修改
                 intent.putExtra("labtrans", labtrans);
             } else {
@@ -248,7 +245,7 @@ public class LabtransDetailsActivity extends BaseActivity {
                     labtrans.optiontype = "update";
                 }
                 intent.putExtra("labtrans", labtrans);
-                Toast.makeText(LabtransDetailsActivity.this, "实际员工本地修改成功", Toast.LENGTH_SHORT).show();
+                MessageUtils.showMiddleToast(LabtransDetailsActivity.this, "实际员工本地修改成功");
             }
             intent.putExtra("position", position);
             LabtransDetailsActivity.this.setResult(2, intent);

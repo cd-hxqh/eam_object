@@ -27,6 +27,7 @@ import cdhxqh.shekou.model.Option;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.utils.DateSelect;
 import cdhxqh.shekou.utils.DateTimeSelect;
+import cdhxqh.shekou.utils.MessageUtils;
 import cdhxqh.shekou.utils.TimeSelect;
 
 /**
@@ -52,7 +53,7 @@ public class AddLabtransActivity extends BaseActivity {
     private EditText regularhrs;//常规时数
     private EditText payrate;//费率
     private TextView linecost;//行成本
-//    private TextView assetnum;//资产
+    //    private TextView assetnum;//资产
 //    private TextView transtype;//类型
     private Button confirm;
     private Button delete;
@@ -92,8 +93,6 @@ public class AddLabtransActivity extends BaseActivity {
         regularhrs = (EditText) findViewById(R.id.work_labtrans_regularhrs);
         payrate = (EditText) findViewById(R.id.work_labtrans_payrate);
         linecost = (TextView) findViewById(R.id.work_labtrans_linecost);
-//        assetnum = (TextView) findViewById(R.id.work_labtrans_assetnum);
-//        transtype = (TextView) findViewById(R.id.work_labtrans_transtype);
         confirm = (Button) findViewById(R.id.confirm);
         delete = (Button) findViewById(R.id.work_delete);
     }
@@ -108,7 +107,6 @@ public class AddLabtransActivity extends BaseActivity {
         });
         titleTextView.setText(getResources().getString(R.string.title_activity_worklabtrans_add));
 
-//        transtype.setText("工作");
         actualstaskid.setOnClickListener(actualstaskidOnClickListener);
         laborcode.setOnClickListener(new LayoutOnClickListener(Constants.LABORCRAFTRATECODE));
         startdate.setOnClickListener(new View.OnClickListener() {
@@ -120,17 +118,18 @@ public class AddLabtransActivity extends BaseActivity {
         starttime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TimeSelect(AddLabtransActivity.this,starttime).showDialog();
+                new TimeSelect(AddLabtransActivity.this, starttime).showDialog();
             }
         });
         finishtime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TimeSelect(AddLabtransActivity.this,finishtime).showDialog();
+                new TimeSelect(AddLabtransActivity.this, finishtime).showDialog();
             }
         });
 
         confirm.setOnClickListener(confirmOnClickListener);
+        delete.setVisibility(View.GONE);
         delete.setOnClickListener(deleteOnClickListener);
     }
 
@@ -190,17 +189,25 @@ public class AddLabtransActivity extends BaseActivity {
 
     private Labtrans getLabtrans() {
         Labtrans labtrans = this.labtrans;
-        labtrans.actualstaskid = actualstaskid.getText().toString();
-        labtrans.laborcode = laborcode.getText().toString();
-        labtrans.startdate = startdate.getText().toString();
-        labtrans.starttime = starttime.getText().toString();
-        labtrans.finishtime = finishtime.getText().toString();
-        labtrans.regularhrs = regularhrs.getText().toString();
-        labtrans.payrate = payrate.getText().toString();
-        labtrans.linecost = linecost.getText().toString();
-//        labtrans.assetnum = assetnum.getText().toString();
-//        labtrans.transtype = transtype.getText().toString();
-        labtrans.optiontype = "add";
+        String actualstask = actualstaskid.getText().toString();
+        String laborcod = laborcode.getText().toString();
+        String startdate1 = startdate.getText().toString();
+        String starttime1 = starttime.getText().toString();
+        String finishtime1 = finishtime.getText().toString();
+        String regularhrs1 = regularhrs.getText().toString();
+        String payrate1 = payrate.getText().toString();
+        String linecost1 = linecost.getText().toString();
+        labtrans.setActualstaskid(actualstask);
+        labtrans.setLaborcode(laborcod);
+        labtrans.setStartdate(startdate1);
+        labtrans.setStarttime(starttime1);
+        labtrans.setFinishtime(finishtime1);
+        labtrans.setRegularhrs(regularhrs1);
+        labtrans.setPayrate(payrate1);
+        labtrans.setLinecost(linecost1);
+        labtrans.setOptiontype("add");
+
+
         return labtrans;
     }
 
@@ -210,7 +217,7 @@ public class AddLabtransActivity extends BaseActivity {
             Intent intent = getIntent();
             intent.putExtra("labtrans", getLabtrans());
             AddLabtransActivity.this.setResult(1, intent);
-            Toast.makeText(AddLabtransActivity.this, "实际员工本地新增成功", Toast.LENGTH_SHORT).show();
+            MessageUtils.showMiddleToast(AddLabtransActivity.this, "实际员工本地新增成功");
             finish();
         }
     };

@@ -144,7 +144,7 @@ public class Work_AddNewActivity extends BaseActivity {
     /**
      * 设备类型*
      */
-    private String udassettype="";
+    private String udassettype = "";
 
     private ArrayList<Woactivity> woactivityList = new ArrayList<>();
     private ArrayList<Labtrans> labtransList = new ArrayList<>();
@@ -452,30 +452,30 @@ public class Work_AddNewActivity extends BaseActivity {
         switch (workOrder.worktype) {
             case "CM"://故障工单
                 reportLinearLayout.setVisibility(View.GONE);
+                realinfoLinearLayout.setVisibility(View.GONE);
                 break;
             case "EM"://抢修工单
                 planLinearlayout.setVisibility(View.GONE);
+                realinfoLinearLayout.setVisibility(View.GONE);
                 break;
             case "EV"://事故工单
                 reportLinearLayout.setVisibility(View.GONE);
+                realinfoLinearLayout.setVisibility(View.GONE);
                 break;
             case "PJ"://项目工单
-//                planLinearlayout.setVisibility(View.GONE);
-//                taskLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
+                realinfoLinearLayout.setVisibility(View.GONE);
                 break;
             case "PM"://预防性维护工单
-//                pmnum_layout.setVisibility(View.VISIBLE);
-                planLinearlayout.setVisibility(View.GONE);
-//                taskLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
+                realinfoLinearLayout.setVisibility(View.GONE);
                 break;
             case "RS"://可维修备件工单
                 reportLinearLayout.setVisibility(View.GONE);
+                realinfoLinearLayout.setVisibility(View.GONE);
                 break;
             case "SR"://状态维修工单
-                planLinearlayout.setVisibility(View.GONE);
-//                taskLinearLayout.setVisibility(View.GONE);
+                realinfoLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
         }
@@ -537,11 +537,9 @@ public class Work_AddNewActivity extends BaseActivity {
         popupWindow.showAsDropDown(view);
 
         planLinearlayout = (LinearLayout) contentView.findViewById(R.id.work_plan_id);
-//        taskLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_task_id);
         realinfoLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_realinfo_id);
         reportLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_report_id);
         planLinearlayout.setOnClickListener(planOnClickListener);
-//        taskLinearLayout.setOnClickListener(taskOnClickListener);
         realinfoLinearLayout.setOnClickListener(realinfoOnClickListener);
         reportLinearLayout.setOnClickListener(reportOnClickListener);
         decisionLayout();
@@ -581,17 +579,6 @@ public class Work_AddNewActivity extends BaseActivity {
         }
     };
 
-//    private View.OnClickListener taskOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//            Intent intent = new Intent(Work_AddNewActivity.this, AssignmentActivity.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("workOrder", workOrder);
-//            intent.putExtras(bundle);
-//            startActivity(intent);
-//            popupWindow.dismiss();
-//        }
-//    };
 
     private View.OnClickListener realinfoOnClickListener = new View.OnClickListener() {
         @Override
@@ -629,7 +616,6 @@ public class Work_AddNewActivity extends BaseActivity {
         WorkOrder workOrder = this.workOrder;
         workOrder.wonum = "";
         workOrder.description = description.getText().toString().trim();
-//        workOrder.worktype = worktype.getText().toString().trim();
         workOrder.assetnum = assetnum.getText().toString().trim();
         workOrder.woeq1 = woeq1.getText().toString().trim();
         workOrder.woeq2 = woeq2.getText().toString().trim();
@@ -667,7 +653,6 @@ public class Work_AddNewActivity extends BaseActivity {
         workOrder.targcompdate = targcompdate.getText().toString().trim();
         workOrder.udactstart = actstart.getText().toString().trim();
         workOrder.udactfinish = actfinish.getText().toString().trim();
-//        workOrder.udtjsj = udtjsj.getText().toString().trim();
         workOrder.udtjtime = udtjtime.getText().toString().trim();
         workOrder.udremark = udremark.getText().toString().trim();
         return workOrder;

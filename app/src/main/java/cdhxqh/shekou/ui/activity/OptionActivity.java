@@ -366,7 +366,7 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 break;
             case Constants.FAILURE_TYPE:
                 List<Failurelist> failurelists1;
-                failurelists1 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText, "");
+                failurelists1 = new FailurelistDao(OptionActivity.this).queryByCount(page, searchText, "0");
                 for (int i = 0; i < failurelists1.size(); i++) {
                     option = new Option();
                     option.setName(failurelists1.get(i).failurecode);
@@ -375,7 +375,6 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
                 }
                 break;
             case Constants.FAILURE_QUESTION: //问题
-                Log.i(TAG, "故障问题");
                 List<Failurelist> failurelists2;
                 if (getIntent().hasExtra("failurecode") && !getIntent().getStringExtra("failurecode").equals("")) {
                     String s = getIntent().getStringExtra("failurecode");

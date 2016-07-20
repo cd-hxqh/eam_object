@@ -1281,7 +1281,8 @@ public class JsonUtils {
                     labtransObj.put("finishtime", labtranses.get(i).finishtime);
                     labtransObj.put("regularhrs", labtranses.get(i).regularhrs);
                     labtransObj.put("payrate", labtranses.get(i).payrate);
-                    labtransObj.put("linecost", labtranses.get(i).linecost);
+//                    labtransObj.put("linecost", labtranses.get(i).linecost);
+                    labtransObj.put("optiontype", labtranses.get(i).optiontype);
                     labtransArray.put(labtransObj);
                 }
                 jsonObject.put("labtrans", labtransArray);

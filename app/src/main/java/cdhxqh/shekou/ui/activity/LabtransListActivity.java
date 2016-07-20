@@ -43,7 +43,7 @@ import cdhxqh.shekou.webserviceclient.AndroidClientService;
  * 实际员工
  */
 public class LabtransListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
-    private String TAG="LabtransListActivity";
+    private String TAG = "LabtransListActivity";
     private ImageView backImageView;
     private TextView titleTextView;
     private ImageView menuImageView;
@@ -267,6 +267,7 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
                 if (data != null) {
                     Labtrans labtrans = (Labtrans) data.getSerializableExtra("labtrans");
                     labtransAdapter.adddate(labtrans);
+                    Log.i(TAG, "optiontype=" + labtrans.getOptiontype());
                     nodatalayout.setVisibility(View.GONE);
                 }
                 confirmlayout.setVisibility(View.VISIBLE);
@@ -331,7 +332,7 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
      */
     private void startAsyncTask() {
         String updataInfo = null;
-        updataInfo = JsonUtils.WorkToJson(workOrder, null, labtransList, null);
+        updataInfo = JsonUtils.WorkToJson(workOrder, null, labtransAdapter.getList(), null);
         Log.i(TAG, "updataInfo=" + updataInfo);
         final String finalUpdataInfo = updataInfo;
         new AsyncTask<String, String, WorkResult>() {

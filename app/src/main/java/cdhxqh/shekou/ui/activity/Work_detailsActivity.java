@@ -161,11 +161,17 @@ public class Work_detailsActivity extends BaseActivity {
     private View gdmsView;
     private TextView gdmsText;
 
-    /**删除**/
+    /**
+     * 删除
+     **/
     private Button delete;
-    /**修改**/
+    /**
+     * 修改
+     **/
     private Button revise;
-    /**工作流**/
+    /**
+     * 工作流
+     **/
     private Button work_flow;
 
 
@@ -501,22 +507,15 @@ public class Work_detailsActivity extends BaseActivity {
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "PJ"://项目工单
-//                planLinearlayout.setVisibility(View.GONE);
-//                taskLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "PM"://预防性维护工单
-//                pmnum_layout.setVisibility(View.VISIBLE);
-                planLinearlayout.setVisibility(View.GONE);
-//                taskLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "RS"://可维修备件工单
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
             case "SR"://状态维修工单
-                planLinearlayout.setVisibility(View.GONE);
-//                taskLinearLayout.setVisibility(View.GONE);
                 reportLinearLayout.setVisibility(View.GONE);
                 break;
         }
@@ -577,13 +576,11 @@ public class Work_detailsActivity extends BaseActivity {
         popupWindow.showAsDropDown(view);
 
         planLinearlayout = (LinearLayout) contentView.findViewById(R.id.work_plan_id);
-//        taskLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_task_id);
         realinfoLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_realinfo_id);
         reportLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_report_id);
         invuseLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_invuse_id);
         invuseLinearLayout.setVisibility(View.VISIBLE);
         planLinearlayout.setOnClickListener(planOnClickListener);
-//        taskLinearLayout.setOnClickListener(taskOnClickListener);
         realinfoLinearLayout.setOnClickListener(realinfoOnClickListener);
         reportLinearLayout.setOnClickListener(reportOnClickListener);
         invuseLinearLayout.setOnClickListener(invuseOnClickListener);
