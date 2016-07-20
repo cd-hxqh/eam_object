@@ -183,18 +183,6 @@ public class HttpManager {
         }
     }
 
-    /**
-     * 设置入库的接口
-     * 根据wonum
-     */
-    public static String getMatrectransurl1(String value, int curpage, int showcount, String wonum) {
-        if (value.equals("")) {
-            return "{'appid':'" + Constants.MATRECTRANS_APPID + "','objectname':'" + Constants.MATRECTRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'WONUM':'" + wonum + "'}}";
-
-        } else {
-            return "{'appid':'" + Constants.MATRECTRANS_APPID + "','objectname':'" + Constants.MATRECTRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'ITEMNUM':'" + wonum + "','ISSUETYPE':'" + wonum + "'}}";
-        }
-    }
 
     /**
      * 设置出库的接口
@@ -209,6 +197,22 @@ public class HttpManager {
 
         }
     }
+
+
+    /**
+     * 设置出库的接口
+     * 根据wonum
+     */
+    public static String getMatusetransurl1(String value, int curpage, int showcount, String refnum) {
+        if (value.equals("")) {
+            return "{'appid':'" + Constants.MATUSETRANS_APPID + "','objectname':'" + Constants.MATUSETRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'REFWO':'" + refnum + "'}}";
+
+        } else {
+            return "{'appid':'" + Constants.MATUSETRANS_APPID + "','objectname':'" + Constants.MATUSETRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'REFWO':'" + refnum + "','ISSUETYPE':'" + value + "'}}";
+
+        }
+    }
+
 
     /**
      * 设置领料单的接口

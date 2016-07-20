@@ -78,10 +78,6 @@ public class MatrectransActivity extends BaseActivity implements SwipeRefreshLay
      * 搜索值*
      */
     private String vlaue = "";
-    /**
-     * 工单号
-     **/
-    private String wonum;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,7 +92,7 @@ public class MatrectransActivity extends BaseActivity implements SwipeRefreshLay
      * 获取上个界面的数据
      **/
     private void getInitData() {
-        wonum = getIntent().getExtras().getString("wonum");
+        itemnum = getIntent().getExtras().getString("itemnum");
     }
 
     @Override
@@ -161,7 +157,7 @@ public class MatrectransActivity extends BaseActivity implements SwipeRefreshLay
      */
 
     private void getItemList(String value, int page, String itemnum) {
-        HttpManager.getDataPagingInfo(MatrectransActivity.this, HttpManager.getMatrectransurl1(value, page, 20, wonum), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(MatrectransActivity.this, HttpManager.getMatrectransurl(value, page, 20, itemnum), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);

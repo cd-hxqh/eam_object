@@ -33,6 +33,7 @@ public class Matusetrans extends Entity implements Parcelable {
     public String storeloc; //库房的位置
     public String transdate; //交易日期
     public String unitcost; //单位成本
+    public String description; //描述
 
 
 
@@ -56,6 +57,7 @@ public class Matusetrans extends Entity implements Parcelable {
         storeloc = jsonObject.getString("storeloc");
         transdate = jsonObject.getString("transdate");
         unitcost = jsonObject.getString("unitcost");
+        description = jsonObject.getString("description");
     }
 
     public Matusetrans() {
@@ -81,6 +83,7 @@ public class Matusetrans extends Entity implements Parcelable {
         storeloc = in.readString();
         transdate = in.readString();
         unitcost = in.readString();
+        description = in.readString();
     }
 
     @Override
@@ -108,6 +111,7 @@ public class Matusetrans extends Entity implements Parcelable {
         dest.writeString(storeloc);
         dest.writeString(transdate);
         dest.writeString(unitcost);
+        dest.writeString(description);
 
     }
 

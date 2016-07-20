@@ -452,5 +452,6 @@
     <string name="wuliao_text">物料:</string>
     <string name="bj_choose_text">选择备件</string>
     <string name="yungong_text">员工</string>
+    <string name="itemnum_text">项目编号:</string>
 
 </resources>

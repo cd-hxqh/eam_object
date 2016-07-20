@@ -62,14 +62,16 @@ public class Work_AddNewActivity extends BaseActivity {
      * 工作计划*
      */
     private LinearLayout planLinearlayout;
-//    /**
-//     * 任务分配*
-//     */
-//    private LinearLayout taskLinearLayout;
+
     /**
      * 实际情况
      */
     private LinearLayout realinfoLinearLayout;
+
+    /**
+     * 物料*
+     */
+    private LinearLayout matusetransLinearLayout;
     /**
      * 故障汇报*
      */
@@ -374,7 +376,6 @@ public class Work_AddNewActivity extends BaseActivity {
      */
     private void startAsyncTask() {
         final String updataInfo = JsonUtils.WorkToJson(getWorkOrder(), woactivityList, labtransList, failurereportList);
-        Log.i(TAG, "updataInfo=" + updataInfo);
         new AsyncTask<String, String, WorkResult>() {
             @Override
             protected WorkResult doInBackground(String... strings) {
@@ -538,7 +539,10 @@ public class Work_AddNewActivity extends BaseActivity {
 
         planLinearlayout = (LinearLayout) contentView.findViewById(R.id.work_plan_id);
         realinfoLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_realinfo_id);
+        matusetransLinearLayout = (LinearLayout) contentView.findViewById(R.id.meterial_id);
         reportLinearLayout = (LinearLayout) contentView.findViewById(R.id.work_report_id);
+
+        matusetransLinearLayout.setVisibility(View.GONE);
         planLinearlayout.setOnClickListener(planOnClickListener);
         realinfoLinearLayout.setOnClickListener(realinfoOnClickListener);
         reportLinearLayout.setOnClickListener(reportOnClickListener);

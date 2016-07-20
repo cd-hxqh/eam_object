@@ -679,7 +679,7 @@ public class JsonUtils {
     }
 
     /**
-     * 解析入库
+     * 解析出库/物料
      */
     public static ArrayList<Matusetrans> parsingMatusetrans(Context ctx, String data) {
         Log.i(TAG, "Matusetrans data=" + data);
@@ -710,6 +710,7 @@ public class JsonUtils {
                 matusetrans.storeloc = jsonObject.getString("STORELOC"); //位置
                 matusetrans.transdate = jsonObject.getString("TRANSDATE"); //交易日期
                 matusetrans.unitcost = jsonObject.getString("UNITCOST"); //单位成本
+                matusetrans.description = jsonObject.getString("DESCRIPTION"); //描述
 
                 list.add(matusetrans);
             }

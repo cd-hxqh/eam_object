@@ -611,9 +611,9 @@ public class Work_detailsActivity extends BaseActivity {
     private View.OnClickListener meterialOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(Work_detailsActivity.this, AssignmentActivity.class);
+            Intent intent = new Intent(Work_detailsActivity.this, MatusetransActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putSerializable("workOrder", workOrder);
+            bundle.putSerializable("refwo", workOrder.wonum);
             intent.putExtras(bundle);
             startActivity(intent);
             popupWindow.dismiss();

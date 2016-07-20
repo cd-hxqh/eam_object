@@ -119,7 +119,6 @@ public class LabtransDetailsActivity extends BaseActivity {
         actualstaskid.setText(null == labtrans.actualstaskid ? "暂无数据" : labtrans.actualstaskid);
         laborcode.setText(labtrans.laborcode);
         startdate.setText(labtrans.startdate);
-        Log.i(TAG, "labtrans=" + labtrans.starttime);
         starttime.setText(labtrans.starttime.equals("null") ? "暂无数据" : labtrans.starttime);
         finishtime.setText(labtrans.finishtime);
         regularhrs.setText(labtrans.regularhrs);
@@ -156,6 +155,8 @@ public class LabtransDetailsActivity extends BaseActivity {
 
         confirm.setOnClickListener(confirmOnClickListener);
         delete.setOnClickListener(deleteOnClickListener);
+
+        setEnabled(false);
     }
 
     private View.OnClickListener actualstaskidOnClickListener = new View.OnClickListener() {
@@ -280,4 +281,20 @@ public class LabtransDetailsActivity extends BaseActivity {
                 break;
         }
     }
+
+
+    /**
+     * 设置状态为不可编辑状态
+     **/
+    private void setEnabled(boolean enabled) {
+        actualstaskid.setEnabled(enabled);
+        laborcode.setEnabled(enabled);
+        startdate.setEnabled(enabled);
+        starttime.setEnabled(enabled);
+        finishtime.setEnabled(enabled);
+        regularhrs.setEnabled(enabled);
+        payrate.setEnabled(enabled);
+        linecost.setEnabled(enabled);
+    }
+
 }

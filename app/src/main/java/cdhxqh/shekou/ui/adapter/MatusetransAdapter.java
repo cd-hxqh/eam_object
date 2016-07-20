@@ -41,10 +41,10 @@ public class MatusetransAdapter extends RecyclerView.Adapter<MatusetransAdapter.
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         final Matusetrans item = mItems.get(i);
 
-        viewHolder.itemNumTitle.setText(mContext.getString(R.string.matrectrans_issuetype_text));
-        viewHolder.itemDescTitle.setText(mContext.getString(R.string.matrectrans_actualdate_text));
-        viewHolder.itemNum.setText(item.issuetype);
-        viewHolder.itemDesc.setText(item.actualdate);
+        viewHolder.itemNumTitle.setText(mContext.getString(R.string.itemnum_text));
+        viewHolder.itemDescTitle.setText(mContext.getString(R.string.item_desc_title));
+        viewHolder.itemNum.setText(item.itemnum);
+        viewHolder.itemDesc.setText(item.description);
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,14 +86,15 @@ public class MatusetransAdapter extends RecyclerView.Adapter<MatusetransAdapter.
         notifyDataSetChanged();
     }
 
-    public void adddate(ArrayList<Matusetrans> data){
-        if(data.size()>0){
-            for(int i = 0;i < data.size();i++){
+    public void adddate(ArrayList<Matusetrans> data) {
+        if (data.size() > 0) {
+            for (int i = 0; i < data.size(); i++) {
                 mItems.add(data.get(i));
             }
         }
         notifyDataSetChanged();
     }
+
     public void removeAllData() {
         if (mItems.size() > 0) {
             mItems.removeAll(mItems);
