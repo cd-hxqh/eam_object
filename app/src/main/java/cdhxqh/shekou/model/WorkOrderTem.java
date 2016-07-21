@@ -17,9 +17,9 @@ public class WorkOrderTem implements Serializable {
 
     public String siteid;//站点
 
-    public String udcreateby;//站点
+    public String udcreateby;//
 
-    public String worktype;//站点
+    public String worktype;//类型
 
 
 }

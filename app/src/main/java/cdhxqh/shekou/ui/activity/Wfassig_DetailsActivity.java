@@ -41,6 +41,8 @@ public class Wfassig_DetailsActivity extends BaseActivity {
 
     private TextView assigncodedescText;
 
+    private TextView udassign02;
+
     private TextView assignstatusText;
 
     private TextView startdateText;
@@ -82,6 +84,7 @@ public class Wfassig_DetailsActivity extends BaseActivity {
         descriptionText = (TextView) findViewById(R.id.wfassig_desc_text_id);
         processnameText = (TextView) findViewById(R.id.wfassig_processname_text_id);
         assigncodedescText = (TextView) findViewById(R.id.wfassig_assigncodedesc_text_id);
+        udassign02 = (TextView) findViewById(R.id.udassign02_text_id);
         assignstatusText = (TextView) findViewById(R.id.wfassig_assignstatus_text_id);
         startdateText = (TextView) findViewById(R.id.wfassig_startdate_text_id);
 
@@ -89,6 +92,7 @@ public class Wfassig_DetailsActivity extends BaseActivity {
             descriptionText.setText(wfassignment.description);
             processnameText.setText(wfassignment.udassign01);
             assigncodedescText.setText(wfassignment.assigncodedesc);
+            udassign02.setText(wfassignment.udassign02);
             assignstatusText.setText(wfassignment.assignstatus);
             startdateText.setText(wfassignment.startdate);
         }

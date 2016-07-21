@@ -453,5 +453,13 @@
     <string name="bj_choose_text">选择备件</string>
     <string name="yungong_text">员工</string>
     <string name="itemnum_text">项目编号:</string>
+    <string name="actualstaskid_text">任务:</string>
+    <string name="itemnum_text_1">物料:</string>
+    <string name="desction_text_1">描述:</string>
+    <string name="linetype_text_1">行类型:</string>
+    <string name="wuliao_detail_text">物料详情</string>
+    <string name="work_seach_text">工单查询</string>
+    <string name="work_search_text">工单查询</string>
+    <string name="udassign02_text">发起人:</string>
 
 </resources>

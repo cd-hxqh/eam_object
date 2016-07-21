@@ -25,6 +25,7 @@ public class Wfassignment extends Entity implements Parcelable {
     public String processname; //过程
     public String startdate; //开始日期
     public String udassign01; //应用程序名称
+    public String udassign02; //发起人
 
 
 
@@ -41,6 +42,7 @@ public class Wfassignment extends Entity implements Parcelable {
         processname = jsonObject.getString("processname");
         startdate = jsonObject.getString("startdate");
         udassign01 = jsonObject.getString("udassign01");
+        udassign02 = jsonObject.getString("udassign02");
     }
 
     public Wfassignment() {
@@ -59,6 +61,7 @@ public class Wfassignment extends Entity implements Parcelable {
         processname = in.readString();
         startdate = in.readString();
         udassign01 = in.readString();
+        udassign02 = in.readString();
     }
 
     @Override
@@ -79,6 +82,7 @@ public class Wfassignment extends Entity implements Parcelable {
         dest.writeString(processname);
         dest.writeString(startdate);
         dest.writeString(udassign01);
+        dest.writeString(udassign02);
 
     }
 

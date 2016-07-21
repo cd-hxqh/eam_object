@@ -53,6 +53,7 @@ public class HttpManager {
         }
     }
 
+
     /**
      * 设置选择工单接口*
      */
@@ -208,7 +209,7 @@ public class HttpManager {
             return "{'appid':'" + Constants.MATUSETRANS_APPID + "','objectname':'" + Constants.MATUSETRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'REFWO':'" + refnum + "'}}";
 
         } else {
-            return "{'appid':'" + Constants.MATUSETRANS_APPID + "','objectname':'" + Constants.MATUSETRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'REFWO':'" + refnum + "','ISSUETYPE':'" + value + "'}}";
+            return "{'appid':'" + Constants.MATUSETRANS_APPID + "','objectname':'" + Constants.MATUSETRANS_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'REFWO':'" + refnum + "'}" + ",'sinorsearch':{'ITEMNUM':'" + value + "','DESCRIPTION':'" + value + "'}}";
 
         }
     }

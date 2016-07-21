@@ -161,6 +161,7 @@ public class JsonUtils {
                 wfassignment.processname = jsonObject.getString("PROCESSNAME"); //过程
                 wfassignment.startdate = jsonObject.getString("STARTDATE"); //开始日期
                 wfassignment.udassign01 = jsonObject.getString("UDASSIGN01"); //应用
+                wfassignment.udassign02 = jsonObject.getString("UDASSIGN02"); //发起人
 
                 list.add(wfassignment);
             }
@@ -682,7 +683,6 @@ public class JsonUtils {
      * 解析出库/物料
      */
     public static ArrayList<Matusetrans> parsingMatusetrans(Context ctx, String data) {
-        Log.i(TAG, "Matusetrans data=" + data);
         ArrayList<Matusetrans> list = null;
         Matusetrans matusetrans = null;
         try {
@@ -692,6 +692,7 @@ public class JsonUtils {
             for (int i = 0; i < jsonArray.length(); i++) {
                 matusetrans = new Matusetrans();
                 jsonObject = jsonArray.getJSONObject(i);
+                matusetrans.actualstaskid = jsonObject.getString("ACTUALSTASKID"); //任务ID
                 matusetrans.actualcost = jsonObject.getString("ACTUALCOST"); //实际成本
                 matusetrans.actualdate = jsonObject.getString("ACTUALDATE"); //实际日期
                 matusetrans.assetnum = jsonObject.getString("ASSETNUM"); //资产编号
@@ -704,13 +705,14 @@ public class JsonUtils {
                 matusetrans.matusetransid = jsonObject.getString("MATUSETRANSID"); //唯一id
                 matusetrans.orgid = jsonObject.getString("ORGID"); //组织标识
                 matusetrans.physcnt = jsonObject.getString("PHYSCNT"); //实际盘点
-                matusetrans.quantity = jsonObject.getString("QUANTITY"); //数量
+                matusetrans.quantity = jsonObject.getString("QUANTITY").replace("-", ""); //数量
                 matusetrans.refwo = jsonObject.getString("REFWO"); //工单
                 matusetrans.siteid = jsonObject.getString("SITEID"); //站点
                 matusetrans.storeloc = jsonObject.getString("STORELOC"); //位置
                 matusetrans.transdate = jsonObject.getString("TRANSDATE"); //交易日期
                 matusetrans.unitcost = jsonObject.getString("UNITCOST"); //单位成本
                 matusetrans.description = jsonObject.getString("DESCRIPTION"); //描述
+                matusetrans.linetype = jsonObject.getString("LINETYPE"); //行类型
 
                 list.add(matusetrans);
             }
@@ -727,7 +729,6 @@ public class JsonUtils {
      * 解析出库
      */
     public static ArrayList<Matrectrans> parsingMatrectrans(Context ctx, String data) {
-        Log.i(TAG, "Matrectrans data=" + data);
         ArrayList<Matrectrans> list = null;
         Matrectrans matrectrans = null;
         try {
@@ -745,7 +746,7 @@ public class JsonUtils {
                 matrectrans.itemnum = jsonObject.getString("ITEMNUM"); //项目编号
                 matrectrans.linecost = jsonObject.getString("LINECOST"); //行成本
                 matrectrans.loadedcost = jsonObject.getString("LOADEDCOST"); //记入成本
-                matrectrans.quantity = jsonObject.getString("QUANTITY"); //数量
+                matrectrans.quantity = jsonObject.getString("QUANTITY").replace("-", ""); //数量
                 matrectrans.tostoreloc = jsonObject.getString("TOSTORELOC"); //目标位置
                 matrectrans.transdate = jsonObject.getString("TRANSDATE"); //交易日期
                 matrectrans.unitcost = jsonObject.getString("UNITCOST"); //单位成本
@@ -1277,7 +1278,7 @@ public class JsonUtils {
                     labtransObj = new JSONObject();
                     labtransObj.put("labtransid", labtranses.get(i).labtransid);
                     labtransObj.put("taskid", labtranses.get(i).actualstaskid);
-                    labtransObj.put("laborcode",labtranses.get(i).laborcode);
+                    labtransObj.put("laborcode", labtranses.get(i).laborcode);
                     labtransObj.put("startdate", labtranses.get(i).startdate);
                     labtransObj.put("starttime", labtranses.get(i).starttime);
                     labtransObj.put("finishtime", labtranses.get(i).finishtime);

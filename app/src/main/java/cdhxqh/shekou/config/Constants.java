@@ -217,6 +217,7 @@ public class Constants {
     public static final String SERVICE = "RS";//可维护备件工单
     public static final String ACCIDENT = "EV";//事故工单
     public static final String REPAIR = "EM";//抢修工单
+    public static final String WORKSEARCH = "WR";//工单查询
 
     //工单状态
     public static final String STATUS1 = "已批准";

@@ -15,6 +15,7 @@ public class Matusetrans extends Entity implements Parcelable {
     private static final String TAG = "Matusetrans";
     private static final long serialVersionUID = 2015050105L;
 
+    public String actualstaskid; //任务ID
     public String actualcost; //实际成本
     public String actualdate; //实际日期
     public String assetnum; //资产编号
@@ -34,11 +35,13 @@ public class Matusetrans extends Entity implements Parcelable {
     public String transdate; //交易日期
     public String unitcost; //单位成本
     public String description; //描述
+    public String linetype; //行类型
 
 
 
     @Override
     public void parse(JSONObject jsonObject) throws JSONException {
+        actualcost = jsonObject.getString("actualstaskid");
         actualcost = jsonObject.getString("actualcost");
         actualdate = jsonObject.getString("actualdate");
         assetnum = jsonObject.getString("assetnum");
@@ -58,6 +61,7 @@ public class Matusetrans extends Entity implements Parcelable {
         transdate = jsonObject.getString("transdate");
         unitcost = jsonObject.getString("unitcost");
         description = jsonObject.getString("description");
+        description = jsonObject.getString("linetype");
     }
 
     public Matusetrans() {
@@ -65,6 +69,7 @@ public class Matusetrans extends Entity implements Parcelable {
 
 
     private Matusetrans(Parcel in) {
+        actualstaskid = in.readString();
         actualcost = in.readString();
         actualdate = in.readString();
         assetnum = in.readString();
@@ -84,6 +89,7 @@ public class Matusetrans extends Entity implements Parcelable {
         transdate = in.readString();
         unitcost = in.readString();
         description = in.readString();
+        linetype = in.readString();
     }
 
     @Override
@@ -93,6 +99,7 @@ public class Matusetrans extends Entity implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(actualstaskid);
         dest.writeString(actualcost);
         dest.writeString(actualdate);
         dest.writeString(assetnum);
@@ -112,6 +119,7 @@ public class Matusetrans extends Entity implements Parcelable {
         dest.writeString(transdate);
         dest.writeString(unitcost);
         dest.writeString(description);
+        dest.writeString(linetype);
 
     }
 

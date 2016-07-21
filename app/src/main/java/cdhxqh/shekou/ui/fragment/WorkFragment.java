@@ -10,15 +10,18 @@ import android.widget.LinearLayout;
 
 import cdhxqh.shekou.R;
 import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.ui.activity.WorkSearch_ListActivity;
 import cdhxqh.shekou.ui.activity.Work_ListActivity;
+
+import static cdhxqh.shekou.R.id.work_search_linearlayout;
 
 /**
  * 工单的fragment1
  */
 public class WorkFragment extends Fragment {
 
-    private LinearLayout fault_layout,prevent_layout,status_layout,project_layout,
-            service_layout,accident_layout,repair_layout;
+    private LinearLayout fault_layout, prevent_layout, status_layout, project_layout,
+            service_layout, accident_layout, repair_layout, work_layout;
 
     public WorkFragment() {
     }
@@ -38,6 +41,7 @@ public class WorkFragment extends Fragment {
         setlistener();
         return view;
     }
+
     /**
      * 初始化界面组件*
      */
@@ -49,12 +53,13 @@ public class WorkFragment extends Fragment {
         service_layout = (LinearLayout) view.findViewById(R.id.work_linear_service_id);
         accident_layout = (LinearLayout) view.findViewById(R.id.work_linear_accident_id);
         repair_layout = (LinearLayout) view.findViewById(R.id.work_linear_repair_id);
+        work_layout = (LinearLayout) view.findViewById(work_search_linearlayout);
     }
 
     /**
      * 设置跳转监听
      */
-    private void setlistener(){
+    private void setlistener() {
         fault_layout.setOnClickListener(new intentOnclicklistener(Constants.FAULT));
         prevent_layout.setOnClickListener(new intentOnclicklistener(Constants.PREVENT));
         status_layout.setOnClickListener(new intentOnclicklistener(Constants.STATUS));
@@ -62,18 +67,31 @@ public class WorkFragment extends Fragment {
         service_layout.setOnClickListener(new intentOnclicklistener(Constants.SERVICE));
         accident_layout.setOnClickListener(new intentOnclicklistener(Constants.ACCIDENT));
         repair_layout.setOnClickListener(new intentOnclicklistener(Constants.REPAIR));
+        work_layout.setOnClickListener(new intentOnclicklistener(Constants.WORKSEARCH));
     }
 
-    private class intentOnclicklistener implements View.OnClickListener{
+    private class intentOnclicklistener implements View.OnClickListener {
         private String type;
-        private intentOnclicklistener(String type){
+
+        private intentOnclicklistener(String type) {
             this.type = type;
         }
+
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(getActivity(), Work_ListActivity.class);
-            intent.putExtra("worktype",type);
-            startActivity(intent);
+            switch (view.getId()) {
+                case R.id.work_search_linearlayout:
+                    Intent intent1 = new Intent(getActivity(), WorkSearch_ListActivity.class);
+                    startActivity(intent1);
+
+                    break;
+                default:
+                    Intent intent = new Intent(getActivity(), Work_ListActivity.class);
+                    intent.putExtra("worktype", type);
+                    startActivity(intent);
+                    break;
+            }
+
         }
     }
 }

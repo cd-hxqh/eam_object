@@ -66,6 +66,11 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden"></activity>
         <activity
+            android:name=".ui.activity.WorkSearch_ListActivity"
+            android:label="@string/work_search_text"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+        <activity
             android:name=".ui.activity.Work_PlanActivity"
             android:label="@string/title_activity_workplan"></activity>
         <activity
@@ -179,10 +184,10 @@
             android:value="900034889" />
         <meta-data
             android:name="BDAPPID"
-            android:value="8288046"/>
+            android:value="8288046" />
         <meta-data
             android:name="BDAPPKEY"
-            android:value="VG6lYLf7OpVWGMOCcg7RZEcyZgHrwQ0b"/>
+            android:value="VG6lYLf7OpVWGMOCcg7RZEcyZgHrwQ0b" />
 
 
         <activity

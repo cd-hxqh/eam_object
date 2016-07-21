@@ -109,10 +109,9 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
 
         mBasIn = new BounceTopEnter();
         mBasOut = new SlideBottomExit();
-
-        if ((workOrder.status != null && workOrder.status.equals(Constants.STATUS25))||workOrder.isnew) {
+        if ((workOrder.status != null && workOrder.status.equals(Constants.STATUS25)) || workOrder.isnew||workOrder.status.equals(Constants.STATUS9)) {
             menuImageView.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             menuImageView.setVisibility(View.GONE);
         }
 
@@ -122,7 +121,7 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
         } else {
             if (woactivityList != null && woactivityList.size() != 0) {
                 woactivityAdapter.update(woactivityList, true);
-            }else {
+            } else {
                 nodatalayout.setVisibility(View.VISIBLE);
             }
         }
@@ -140,7 +139,7 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
                 public void onSuccess(Results results, int currentPage, int showcount) {
                     ArrayList<Woactivity> woactivities = null;
                     if (currentPage == page) {
-                        woactivities = JsonUtils.parsingWoactivity(Woactivity_Activity.this, results.getResultlist(),workOrder.wonum);
+                        woactivities = JsonUtils.parsingWoactivity(Woactivity_Activity.this, results.getResultlist(), workOrder.wonum);
                     }
                     addListData(woactivities);
                     refresh_layout.setRefreshing(false);
@@ -229,7 +228,7 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
         @Override
         public void onClick(View v) {
             Intent intent = getIntent();
-            intent.putExtra("woactivityList",woactivityAdapter.getList());
+            intent.putExtra("woactivityList", woactivityAdapter.getList());
             Woactivity_Activity.this.setResult(1000, intent);
             Woactivity_Activity.this.finish();
         }
@@ -282,10 +281,10 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
 
     @Override
     public void onRefresh() {
-        if (!workOrder.isnew&& (woactivityList == null || woactivityList.size() == 0)) {
+        if (!workOrder.isnew && (woactivityList == null || woactivityList.size() == 0)) {
             page = 1;
             getdata();
-        }else {
+        } else {
             refresh_layout.setRefreshing(false);
         }
     }
