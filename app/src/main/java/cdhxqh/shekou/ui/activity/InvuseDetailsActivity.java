@@ -536,9 +536,9 @@ public class InvuseDetailsActivity extends BaseActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 if (s == null || s.equals("")) {
-                    Toast.makeText(InvuseDetailsActivity.this, "失败", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "失败");
                 } else {
-                    Toast.makeText(InvuseDetailsActivity.this, "成功", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "成功");
                 }
                 mProgressDialog.dismiss();
             }
@@ -651,13 +651,12 @@ public class InvuseDetailsActivity extends BaseActivity {
 
 
                 if (invuseResult == null) {
-                    Toast.makeText(InvuseDetailsActivity.this, "更新失败", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "更新失败");
                 } else if (!invuseResult.errorMsg.equals("成功!")) {
-
-                    Toast.makeText(InvuseDetailsActivity.this, invuseResult.errorMsg, Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(InvuseDetailsActivity.this, invuseResult.errorMsg);
                     finish();
                 } else if (invuseResult.errorMsg.equals("成功!")) {
-                    Toast.makeText(InvuseDetailsActivity.this, "领料单" + invuseResult.invusenum + "更新成功", Toast.LENGTH_SHORT).show();
+                    MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "领料单" + invuseResult.invusenum + "更新成功");
                     finish();
                 }
                 closeProgressDialog();
@@ -708,7 +707,6 @@ public class InvuseDetailsActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Option option;
-        Log.i(TAG, "resultCode=" + resultCode);
         switch (resultCode) {
 
             case Constants.WORKORDERCODE:

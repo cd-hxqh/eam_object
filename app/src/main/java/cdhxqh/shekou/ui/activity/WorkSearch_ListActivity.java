@@ -36,10 +36,12 @@ import cdhxqh.shekou.utils.AccountUtils;
 
 /**
  * Created by think on 2015/10/27.
- * 工单详情界面
+ * 工单查询界面
  */
 public class WorkSearch_ListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     private static String TAG = "Work_ListActivity";
+
+    private final static int entrn=1;
 
     private TextView titlename;
     private ImageView addimg;
@@ -84,7 +86,7 @@ public class WorkSearch_ListActivity extends BaseActivity implements SwipeRefres
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        workListAdapter = new WorkListAdapter(this);
+        workListAdapter = new WorkListAdapter(this,0);
         recyclerView.setAdapter(workListAdapter);
         refresh_layout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -123,7 +125,7 @@ public class WorkSearch_ListActivity extends BaseActivity implements SwipeRefres
                 } else {
                     nodatalayout.setVisibility(View.GONE);
                     if (page == 1) {
-                        workListAdapter = new WorkListAdapter(WorkSearch_ListActivity.this);
+                        workListAdapter = new WorkListAdapter(WorkSearch_ListActivity.this,entrn);
                         recyclerView.setAdapter(workListAdapter);
                     }
                     if (totalPages == page) {
@@ -158,7 +160,7 @@ public class WorkSearch_ListActivity extends BaseActivity implements SwipeRefres
                                             .getWindowToken(),
                                     InputMethodManager.HIDE_NOT_ALWAYS);
                     searchText = search.getText().toString().trim();
-                    workListAdapter = new WorkListAdapter(WorkSearch_ListActivity.this);
+                    workListAdapter = new WorkListAdapter(WorkSearch_ListActivity.this,entrn);
                     recyclerView.setAdapter(workListAdapter);
                     getData(searchText);
                     return true;

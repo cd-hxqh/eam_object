@@ -69,6 +69,8 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
     public ArrayList<Woactivity> woactivityList = new ArrayList<>();
     public ArrayList<Labtrans> labtransList = new ArrayList<>();
 
+    private int entrn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,7 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
         workOrder = (WorkOrder) getIntent().getSerializableExtra("workOrder");
         woactivityList = (ArrayList<Woactivity>) getIntent().getSerializableExtra("woactivityList");
         labtransList = (ArrayList<Labtrans>) getIntent().getSerializableExtra("labtransList");
+        entrn = getIntent().getExtras().getInt("entrn");
     }
 
     @Override
@@ -126,8 +129,8 @@ public class LabtransListActivity extends BaseActivity implements SwipeRefreshLa
         mBasIn = new BounceTopEnter();
         mBasOut = new SlideBottomExit();
 
-        if (workOrder.status != null && (workOrder.status.equals(Constants.STATUS7)
-                || workOrder.status.equals(Constants.STATUS18) || workOrder.status.equals(Constants.STATUS10)) || workOrder.status.equals(Constants.STATUS9)) {
+        if ((workOrder.status != null && (workOrder.status.equals(Constants.STATUS7)
+                || workOrder.status.equals(Constants.STATUS18) || workOrder.status.equals(Constants.STATUS10)) || workOrder.status.equals(Constants.STATUS9)) && entrn == 0) {
             menuImageView.setVisibility(View.VISIBLE);
         } else {
             menuImageView.setVisibility(View.GONE);

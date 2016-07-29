@@ -98,6 +98,8 @@ public class InvuseActivity extends BaseActivity implements SwipeRefreshLayout.O
      */
     private String wonum;
 
+    private int entrn;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,6 +119,8 @@ public class InvuseActivity extends BaseActivity implements SwipeRefreshLayout.O
 
         }
         udapptype = getIntent().getExtras().getString("udapptype");
+
+        entrn = getIntent().getExtras().getInt("entrn");
 
     }
 
@@ -158,7 +162,10 @@ public class InvuseActivity extends BaseActivity implements SwipeRefreshLayout.O
             titleTextView.setText(getString(R.string.not_work_invuse_title));
         }
         backImageView.setOnClickListener(backImageViewOnClickListener);
-        addImageView.setVisibility(View.VISIBLE);
+        if (entrn == 0) {
+
+            addImageView.setVisibility(View.VISIBLE);
+        }
         addImageView.setOnClickListener(addImageViewOnClickListener);
 
         mSwipeLayout.setRefreshing(true);

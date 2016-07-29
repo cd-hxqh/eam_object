@@ -37,6 +37,7 @@ import cdhxqh.shekou.utils.AccountUtils;
  * 工单任务列表
  */
 public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
+    private static final String TAG = "Woactivity_Activity";
     private ImageView backImageView;
     private TextView titleTextView;
     private ImageView menuImageView;
@@ -55,6 +56,8 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
     private LinearLayout confirmlayout;
     private Button confirmBtn;
 
+    private int entrn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,9 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
     private void getData() {
         workOrder = (WorkOrder) getIntent().getSerializableExtra("workOrder");
         woactivityList = (ArrayList<Woactivity>) getIntent().getSerializableExtra("woactivityList");
+
+        entrn = getIntent().getExtras().getInt("entrn");
+
     }
 
     @Override
@@ -109,7 +115,7 @@ public class Woactivity_Activity extends BaseActivity implements SwipeRefreshLay
 
         mBasIn = new BounceTopEnter();
         mBasOut = new SlideBottomExit();
-        if ((workOrder.status != null && workOrder.status.equals(Constants.STATUS25)) || workOrder.isnew||workOrder.status.equals(Constants.STATUS9)) {
+        if (((workOrder.status != null && workOrder.status.equals(Constants.STATUS25)) || workOrder.isnew || workOrder.status.equals(Constants.STATUS9)) && entrn == 0) {
             menuImageView.setVisibility(View.VISIBLE);
         } else {
             menuImageView.setVisibility(View.GONE);

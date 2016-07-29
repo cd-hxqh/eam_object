@@ -26,9 +26,15 @@ import cdhxqh.shekou.ui.activity.Work_detailsActivity;
  */
 public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHolder> {
     Context mContext;
-    List<WorkOrder>workOrderList = new ArrayList<>();
-    public WorkListAdapter(Context context) {
+    List<WorkOrder> workOrderList = new ArrayList<>();
+    /**
+     * 入口
+     **/
+    private int entrn;
+
+    public WorkListAdapter(Context context, int entrn) {
         this.mContext = context;
+        this.entrn = entrn;
     }
 
 
@@ -50,6 +56,7 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, Work_detailsActivity.class);
                 Bundle bundle = new Bundle();
+                bundle.putInt("entrn", entrn);
                 bundle.putSerializable("workOrder", workOrder);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
@@ -90,8 +97,8 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
             super(view);
             cardView = (CardView) view.findViewById(R.id.card_container);
 
-            itemNumTitle=(TextView) view.findViewById(R.id.item_num_title);
-            itemDescTitle=(TextView) view.findViewById(R.id.item_desc_title);
+            itemNumTitle = (TextView) view.findViewById(R.id.item_num_title);
+            itemDescTitle = (TextView) view.findViewById(R.id.item_desc_title);
 
 
             itemNum = (TextView) view.findViewById(R.id.item_num_text);
@@ -117,11 +124,12 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
         workOrderList = data;
         notifyDataSetChanged();
     }
-//
-    public void adddate(ArrayList<WorkOrder> data){
-        if(data.size()>0){
-            for(int i = 0;i < data.size();i++){
-                if(!workOrderList.contains(data.get(i))){
+
+    //
+    public void adddate(ArrayList<WorkOrder> data) {
+        if (data.size() > 0) {
+            for (int i = 0; i < data.size(); i++) {
+                if (!workOrderList.contains(data.get(i))) {
                     workOrderList.add(data.get(i));
                 }
             }

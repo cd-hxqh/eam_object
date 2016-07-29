@@ -45,6 +45,8 @@ import cdhxqh.shekou.webserviceclient.AndroidClientService;
 public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
     private static String TAG = "Work_ListActivity";
 
+    private final static int entrn = 0;
+
     private TextView titlename;
     private ImageView addimg;
     private RelativeLayout backlayout;
@@ -122,7 +124,7 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
         layoutManager.scrollToPosition(0);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        workListAdapter = new WorkListAdapter(this);
+        workListAdapter = new WorkListAdapter(this, entrn);
         recyclerView.setAdapter(workListAdapter);
         refresh_layout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -152,7 +154,7 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
                 } else {
                     nodatalayout.setVisibility(View.GONE);
                     if (page == 1) {
-                        workListAdapter = new WorkListAdapter(Work_ListActivity.this);
+                        workListAdapter = new WorkListAdapter(Work_ListActivity.this, entrn);
                         recyclerView.setAdapter(workListAdapter);
                     }
                     if (totalPages == page) {
@@ -187,7 +189,7 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
                                             .getWindowToken(),
                                     InputMethodManager.HIDE_NOT_ALWAYS);
                     searchText = search.getText().toString().trim();
-                    workListAdapter = new WorkListAdapter(Work_ListActivity.this);
+                    workListAdapter = new WorkListAdapter(Work_ListActivity.this, entrn);
                     recyclerView.setAdapter(workListAdapter);
                     getData(searchText);
                     return true;

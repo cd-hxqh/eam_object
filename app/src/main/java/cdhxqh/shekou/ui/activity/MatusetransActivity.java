@@ -17,6 +17,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -48,6 +49,10 @@ public class MatusetransActivity extends BaseActivity implements SwipeRefreshLay
     private TextView titleTextView;
 
     /**
+     * 搜索按钮布局
+     **/
+    private RelativeLayout relativeLayout;
+    /**
      * 搜索按钮*
      */
     private EditText searchEditText;
@@ -69,7 +74,6 @@ public class MatusetransActivity extends BaseActivity implements SwipeRefreshLay
     LinearLayout notLinearLayout;
 
     MatusetransAdapter matusetransAdapter;
-
 
 
     private int page = 1;
@@ -126,6 +130,7 @@ public class MatusetransActivity extends BaseActivity implements SwipeRefreshLay
         mSwipeLayout.setOnLoadListener(this);
         mSwipeLayout.setRefreshing(false);
 
+        relativeLayout = (RelativeLayout) findViewById(R.id.relativelayout_search_id);
         searchEditText = (EditText) findViewById(R.id.search_edit);
 
 
@@ -135,17 +140,19 @@ public class MatusetransActivity extends BaseActivity implements SwipeRefreshLay
     protected void initView() {
         backImageView.setOnClickListener(backImageViewOnClickListener);
         titleTextView.setText(getResources().getText(R.string.work_plan_meterial));
+        relativeLayout.setVisibility(View.GONE);
 
         mSwipeLayout.setRefreshing(true);
         getItemList(vlaue, page, refwo);
 
-        SpannableString msp = new SpannableString("XX搜索");
-        Drawable drawable = getResources().getDrawable(R.drawable.ic_search);
-        msp.setSpan(new ImageSpan(drawable), 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-        searchEditText.setHint(msp);
 
-        searchEditText.setOnEditorActionListener(searchEditTextOnEditorActionListener);
+//        SpannableString msp = new SpannableString("XX搜索");
+//        Drawable drawable = getResources().getDrawable(R.drawable.ic_search);
+//        msp.setSpan(new ImageSpan(drawable), 0, 2, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+//        searchEditText.setHint(msp);
+//
+//        searchEditText.setOnEditorActionListener(searchEditTextOnEditorActionListener);
 
     }
 

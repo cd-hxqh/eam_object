@@ -5,6 +5,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/relativelayout_search_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/gray"
@@ -20,8 +21,8 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="3dp"
             android:background="@color/white"
-            android:hint="搜索"
             android:gravity="center"
+            android:hint="搜索"
             android:imeOptions="actionSearch"
             android:maxLines="1"
             android:singleLine="true" />
@@ -33,34 +34,34 @@
         android:layout_height="match_parent">
 
 
-    <cdhxqh.shekou.ui.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        <cdhxqh.shekou.ui.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/list_topics"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/list_topics"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"></android.support.v7.widget.RecyclerView>
+
+        </cdhxqh.shekou.ui.widget.SwipeRefreshLayout>
+
+        <LinearLayout
+            android:id="@+id/have_not_data_id"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"></android.support.v7.widget.RecyclerView>
+            android:gravity="center"
+            android:visibility="gone">
 
-    </cdhxqh.shekou.ui.widget.SwipeRefreshLayout>
-
-    <LinearLayout
-        android:id="@+id/have_not_data_id"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="gone">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/have_not_data_txt"
-            android:textColor="@color/dark_gray"
-            android:textSize="@dimen/dimen_20" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/have_not_data_txt"
+                android:textColor="@color/dark_gray"
+                android:textSize="@dimen/dimen_20" />
+        </LinearLayout>
     </FrameLayout>
 </LinearLayout>
