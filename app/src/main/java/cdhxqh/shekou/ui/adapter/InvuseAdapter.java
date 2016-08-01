@@ -70,7 +70,6 @@ public class InvuseAdapter extends RecyclerView.Adapter<InvuseAdapter.ViewHolder
     public void update(ArrayList<Invuse> data, boolean merge) {
         if (merge && mItems.size() > 0) {
             for (int i = 0; i < mItems.size(); i++) {
-                Log.i(TAG, "mItems=" + mItems.get(i).invuseid);
                 Invuse obj = mItems.get(i);
                 boolean exist = false;
                 for (int j = 0; j < data.size(); j++) {

@@ -81,6 +81,8 @@ public class Invuseline extends Entity implements Parcelable {
     public String issueto; //领料人
     @DatabaseField(columnName = "issueto_displayname")
     public String issueto_displayname; //领料人名称
+    @DatabaseField(columnName = "optiontype")
+    public String optiontype; //操作
 
 
     @Override
@@ -116,6 +118,7 @@ public class Invuseline extends Entity implements Parcelable {
         enterby_displayname = jsonObject.getString("enterby_displayname");
         issueto = jsonObject.getString("issueto");
         issueto_displayname = jsonObject.getString("issueto_displayname");
+        optiontype = jsonObject.getString("optiontype");
     }
 
     public Invuseline() {
@@ -154,6 +157,7 @@ public class Invuseline extends Entity implements Parcelable {
         enterby_displayname = in.readString();
         issueto = in.readString();
         issueto_displayname = in.readString();
+        optiontype = in.readString();
 
     }
 
@@ -195,6 +199,7 @@ public class Invuseline extends Entity implements Parcelable {
         dest.writeString(enterby_displayname);
         dest.writeString(issueto);
         dest.writeString(issueto_displayname);
+        dest.writeString(optiontype);
 
 
     }

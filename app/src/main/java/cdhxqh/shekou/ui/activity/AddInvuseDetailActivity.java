@@ -162,22 +162,12 @@ public class AddInvuseDetailActivity extends BaseActivity {
         }
     };
 
-    /**
-     * 部位5级*
-     */
-    private View.OnClickListener level6TextOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        }
-    };
-    /**
-     * 部位6级*
-     */
-    private View.OnClickListener level5TextOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-        }
-    };
+    @Override
+    public void onBackPressed() {
+        setResult(1);
+        finish();
+    }
+
     /**
      * 货柜*
      */
@@ -283,6 +273,7 @@ public class AddInvuseDetailActivity extends BaseActivity {
         invuseline.taskid = "";
         invuseline.issueto = issueto;
         invuseline.remark = remark;
+        invuseline.optiontype = "add";
 
         return invuseline;
     }

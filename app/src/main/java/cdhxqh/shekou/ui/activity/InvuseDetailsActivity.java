@@ -21,7 +21,9 @@ import com.flyco.animation.BaseAnimatorSet;
 import com.flyco.animation.BounceEnter.BounceTopEnter;
 import com.flyco.animation.SlideExit.SlideBottomExit;
 import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.listener.OnBtnEditClickL;
 import com.flyco.dialog.widget.MaterialDialog;
+import com.flyco.dialog.widget.NormalEditTextDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -479,12 +481,16 @@ public class InvuseDetailsActivity extends BaseActivity {
     private View.OnClickListener worlflowBtnBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            MaterialDialogOneBtn1();
+            if (invuse.status.equals("申请建立")) {
+                MaterialDialogOneBtn();
+            } else {
+                MaterialDialogOneBtn1();
+            }
 
         }
     };
 
-    private void MaterialDialogOneBtn1() {//启动工作流
+    private void MaterialDialogOneBtn() {//启动工作流
         final MaterialDialog dialog = new MaterialDialog(InvuseDetailsActivity.this);
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
@@ -513,37 +519,6 @@ public class InvuseDetailsActivity extends BaseActivity {
         );
     }
 
-
-    /**
-     * 启动工作流工作流
-     *
-     * @param id
-     */
-    private void startWork(final String id) {
-        mProgressDialog = ProgressDialog.show(InvuseDetailsActivity.this, null,
-                getString(R.string.inputing), true, true);
-        mProgressDialog.setCanceledOnTouchOutside(false);
-        mProgressDialog.setCancelable(false);
-        new AsyncTask<String, String, String>() {
-            @Override
-            protected String doInBackground(String... strings) {
-                String result = AndroidClientService.startwf(InvuseDetailsActivity.this, "UDINVUSE", "INVUSE", id, "INVUSEID");
-
-                return result;
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-                super.onPostExecute(s);
-                if (s == null || s.equals("")) {
-                    MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "失败");
-                } else {
-                    MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "成功");
-                }
-                mProgressDialog.dismiss();
-            }
-        }.execute();
-    }
 
     /**
      * 编辑信息*
@@ -607,7 +582,7 @@ public class InvuseDetailsActivity extends BaseActivity {
         String fromstoreloc = fromstorelocText.getText().toString(); //库房
         String wonum = wonumText.getText().toString(); //工单
         String uddept = invuse.uddept;//部门
-        String status = invuse.status;//物管员经办人
+        String status = invuse.status;//状态
         String udapptype = invuse.udapptype;//类型
         String udreason = udreasonEditText.getText().toString();//原因
         String statusdate = invuse.statusdate;//状态日期
@@ -637,6 +612,7 @@ public class InvuseDetailsActivity extends BaseActivity {
     private void startAsyncTask() {
 
         final String updataInfo = JsonUtils.InvuseToJson(encapsulationInvuse(), null);
+        Log.i(TAG, "updataInfo=" + updataInfo);
         new AsyncTask<String, String, InvuseResult>() {
             @Override
             protected InvuseResult doInBackground(String... strings) {
@@ -649,7 +625,7 @@ public class InvuseDetailsActivity extends BaseActivity {
             protected void onPostExecute(InvuseResult invuseResult) {
                 super.onPostExecute(invuseResult);
 
-
+                Log.i(TAG, "errorMsg=" + invuseResult.errorMsg);
                 if (invuseResult == null) {
                     MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "更新失败");
                 } else if (!invuseResult.errorMsg.equals("成功!")) {
@@ -699,6 +675,137 @@ public class InvuseDetailsActivity extends BaseActivity {
 
 
                 closeProgressDialog();
+            }
+        }.execute();
+    }
+
+
+    private void MaterialDialogOneBtn1() {//审批工作流
+        final MaterialDialog dialog = new MaterialDialog(InvuseDetailsActivity.this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.isTitleShow(false)
+                .btnNum(2)
+                .content("是否填写输入意见")
+                .btnText("是", "否，直接提交")
+                .showAnim(mBasIn)
+                .dismissAnim(mBasOut)
+                .show();
+
+        dialog.setOnBtnClickL(
+                new OnBtnClickL() {//是
+                    @Override
+                    public void onBtnClick() {
+                        EditDialog(true);
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnClickL() {//否
+                    @Override
+                    public void onBtnClick() {
+                        wfgoon(invuse.invuseid, "1", "");
+                        dialog.dismiss();
+                    }
+                }
+        );
+    }
+
+
+    private void EditDialog(final boolean isok) {//输入审核意见
+        final NormalEditTextDialog dialog = new NormalEditTextDialog(InvuseDetailsActivity.this);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.isTitleShow(false)
+                .btnNum(2)
+                .content(isok ? "通过" : "不通过")
+                .btnText("提交", "取消")
+                .showAnim(mBasIn)
+                .dismissAnim(mBasOut)
+                .show();
+
+        dialog.setOnBtnClickL(
+                new OnBtnEditClickL() {
+                    @Override
+                    public void onBtnClick(String text) {
+                        wfgoon(invuse.invuseid, "1", text);
+
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnEditClickL() {
+                    @Override
+                    public void onBtnClick(String text) {
+
+                        dialog.dismiss();
+                    }
+                }
+        );
+    }
+
+
+    /**
+     * 启动工作流工作流
+     *
+     * @param id
+     */
+    private void startWork(final String id) {
+        mProgressDialog = ProgressDialog.show(InvuseDetailsActivity.this, null,
+                getString(R.string.inputing), true, true);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setCancelable(false);
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                String result = AndroidClientService.startwf(InvuseDetailsActivity.this, "UDINVUSE", "INVUSE", id, "INVUSEID");
+                Log.i(TAG, "result=" + result);
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                if (s == null || s.equals("")) {
+                    MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "失败");
+                } else {
+                    MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "成功");
+                }
+                mProgressDialog.dismiss();
+            }
+        }.execute();
+    }
+
+
+    /**
+     * 审批工作流
+     *
+     * @param id
+     * @param zx
+     */
+    private void wfgoon(final String id, final String zx, final String desc) {
+        mProgressDialog = ProgressDialog.show(InvuseDetailsActivity.this, null,
+                getString(R.string.inputing), true, true);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setCancelable(false);
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+
+
+                String result = AndroidClientService.approve(InvuseDetailsActivity.this, "UDINVUSE", "INVUSE", id, "INVUSEID", zx, desc);
+                Log.i(TAG, "result=" + result);
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                if (s == null || s.equals("")) {
+                    MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "审批失败");
+                } else {
+                    MessageUtils.showMiddleToast(InvuseDetailsActivity.this, "审批成功");
+                    finish();
+                }
+                mProgressDialog.dismiss();
             }
         }.execute();
     }

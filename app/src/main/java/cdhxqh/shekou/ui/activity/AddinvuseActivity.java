@@ -282,7 +282,9 @@ public class AddinvuseActivity extends BaseActivity {
 
             if (isCheck()) {
                 Intent intent = new Intent(AddinvuseActivity.this, AddInvuselineActivity.class);
-                intent.putExtra("invusenum", "");
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("invuse", encapsulationInvuse());
+                intent.putExtras(bundle);
                 startActivityForResult(intent, 0);
             }
         }
@@ -317,10 +319,8 @@ public class AddinvuseActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         Option option;
-        Log.i(TAG, "resultCode=" + resultCode);
         switch (resultCode) {
             case Constants.LOCATIONCODE:
-                Log.i(TAG, "库房");
                 option = (Option) data.getSerializableExtra("option");
                 if (option != null) {
                     fromstoreloc = option.getName();
@@ -344,7 +344,6 @@ public class AddinvuseActivity extends BaseActivity {
                 break;
             case 0:
                 list = data.getParcelableArrayListExtra("invuselines");
-                Log.i(TAG, "list=" + list);
                 break;
             default:
                 break;

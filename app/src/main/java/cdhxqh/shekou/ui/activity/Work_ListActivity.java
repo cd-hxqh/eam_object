@@ -40,10 +40,9 @@ import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
  * Created by think on 2015/10/27.
- * 工单详情界面
+ * 工单列表界面
  */
 public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
-    private static String TAG = "Work_ListActivity";
 
     private final static int entrn = 0;
 
@@ -141,7 +140,6 @@ public class Work_ListActivity extends BaseActivity implements SwipeRefreshLayou
         HttpManager.getDataPagingInfo(this, HttpManager.getworkorderUrl(worktype, search, AccountUtils.getinsertSite(Work_ListActivity.this), page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
-                Log.i(TAG, "data=" + results);
             }
 
             @Override

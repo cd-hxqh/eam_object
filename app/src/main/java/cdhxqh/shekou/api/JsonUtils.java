@@ -1528,6 +1528,7 @@ public class JsonUtils {
                     invuselinesObj.put("level5", invuselines.get(i).level5);
                     invuselinesObj.put("level6", invuselines.get(i).level6);
                     invuselinesObj.put("remark", invuselines.get(i).remark);
+                    invuselinesObj.put("optiontype", invuselines.get(i).optiontype);
                     invuselinesArray.put(invuselinesObj);
                 }
                 jsonObject.put("invuseline", invuselinesArray);
@@ -1545,6 +1546,7 @@ public class JsonUtils {
                 invuselines1Obj.put("level5", "");
                 invuselines1Obj.put("level6", "");
                 invuselines1Obj.put("remark", "");
+                invuselines1Obj.put("optiontype", "");
                 invuselines1Array.put(invuselines1Obj);
 
 

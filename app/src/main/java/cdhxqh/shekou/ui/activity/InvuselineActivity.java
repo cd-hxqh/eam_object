@@ -194,7 +194,7 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
             Intent intent = getIntent();
             intent.setClass(InvuselineActivity.this, AddInvuseDetailActivity.class);
 
-            startActivityForResult(intent, 1);
+            startActivityForResult(intent, 100);
         }
     };
 
@@ -278,7 +278,6 @@ public class InvuselineActivity extends BaseActivity implements SwipeRefreshLayo
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i(TAG, "resultCode=" + resultCode);
 
         switch (resultCode) {
             case 0:

@@ -52,7 +52,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private EditText mPassword;
     private Button mLogin;
     private ProgressDialog mProgressDialog;
-    //    private MemberModel mProfile;
     private CheckBox checkBox; //记住密码
 
     private boolean isRemember; //是否记住密码

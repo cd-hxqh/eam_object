@@ -128,7 +128,7 @@ public class Wfassig_DetailsActivity extends BaseActivity {
     private void MaterialDialogOneBtn1() {//审批工作流
         final MaterialDialog dialog = new MaterialDialog(Wfassig_DetailsActivity.this);
         dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCanceledOnTouchOutside(true);
         dialog.isTitleShow(false)//
                 .btnNum(2)
                 .content("是否填写输入意见")//

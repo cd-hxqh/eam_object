@@ -337,7 +337,7 @@
     <string name="invuse_material_button_text">备件明细行</string>
     <string name="invuse_workflow_button_text">审批工作流</string>
     <string name="invuseline_itemnum_text">备件编码:</string>
-    <string name="invuseline_title_text">物料清单</string>
+    <string name="invuseline_title_text">备件明细行</string>
     <string name="invuseline_item_num_text">备件:</string>
     <string name="invuseline_description_text">备件名称:</string>
     <string name="invuse_quantity_text">数量:</string>
