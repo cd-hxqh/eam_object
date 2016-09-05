@@ -76,6 +76,20 @@ public class AssetDao {
         return null;
     }
 
+
+    /**
+     * 根据EQ2查询
+     */
+    public List<Assets> queryByAssets(int count, String assetnum) {
+        try {
+            return AssetDaoOpe.queryBuilder().offset((count - 1) * 20).limit(20).where().like("eq2", "%03%").or().like("eq2", "%05%").and().like("assetnum", "%" + assetnum + "%").query();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     /**
      *
      */

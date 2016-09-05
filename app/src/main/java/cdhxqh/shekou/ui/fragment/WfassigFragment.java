@@ -201,7 +201,8 @@ public class WfassigFragment extends BaseFragment implements SwipeRefreshLayout.
 
     @Override
     public void onRefresh() {
-        mSwipeLayout.setRefreshing(false);
+        page = 1;
+        getItemList(vlaue,page);
     }
 
 

@@ -335,6 +335,7 @@
     <!--领料单详情-->
     <string name="invuse_details_title">领料单详情</string>
     <string name="invuse_material_button_text">备件明细行</string>
+    <string name="start">启动中…</string>
     <string name="invuse_workflow_button_text">审批工作流</string>
     <string name="invuseline_itemnum_text">备件编码:</string>
     <string name="invuseline_title_text">备件明细行</string>
@@ -385,6 +386,7 @@
     <string name="update">版本更新</string>
     <string name="sure">确定</string>
     <string name="canel">取消</string>
+    <string name="is_wf">正在验证...</string>
     <string name="inputing">正在提交数据</string>
     <string name="clearing">正在清除数据</string>
     <string name="downloading">正在下载数据</string>
@@ -407,8 +409,8 @@
     <string name="lastissuedate_text">上次发放日期:</string>
     <string name="udtype_text">批号:</string>
     <string name="level4_text">机构:</string>
-    <string name="level5_text">部位(五级):</string>
-    <string name="level6_text">部位(六级):</string>
+    <string name="level5_text">部位:</string>
+    <string name="level6_text">部位名称:</string>
     <string name="quantity_text">领料数量:</string>
     <string name="frombin_txt">货柜:</string>
     <string name="curbal_text">货柜可用数量:</string>

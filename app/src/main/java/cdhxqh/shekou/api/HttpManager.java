@@ -69,6 +69,20 @@ public class HttpManager {
     }
 
     /**
+     * 设置查询工单接口*
+     */
+    public static String getSearchWorkOrderUrl(String search, String siteid, int curpage, int showcount) {
+        if (search.equals("")) {
+            return "{'appid':'" + Constants.WOTRACK_APPID + "','objectname':'" + Constants.WORKORDER_APPID + "'," +
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'LENGTH(WONUM) DESC,WONUM DESC','condition':{'WORKTYPE':'!=OSPR','WOCLASS':'=工单','WONUM':'!=UNWO'}}";
+        } else {
+            return "{'appid':'" + Constants.WOTRACK_APPID + "','objectname':'" + Constants.WORKORDER_APPID + "'," +
+                    "'curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','orderby':'LENGTH(WONUM) DESC,WONUM DESC','condition':{'WORKTYPE':'!=OSPR','WOCLASS':'=工单','WONUM':'!=UNWO'}" + ",'sinorsearch':{'WONUM':'" + search + "','DESCRIPTION':'" + search + "'}}";
+
+        }
+    }
+
+    /**
      * 设置计划任务接口*
      */
     public static String getwoactivityUrl(String type, String wonum, String sitesite, int curpage, int showcount) {
@@ -377,7 +391,6 @@ public class HttpManager {
                                          final HttpRequestHandler<String> handler) {
 
         String ip_adress = AccountUtils.getIpAddress(cxt) + Constants.SIGN_IN_URL;
-        Log.i(TAG, "ip_adress=" + ip_adress);
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("loginid", username);

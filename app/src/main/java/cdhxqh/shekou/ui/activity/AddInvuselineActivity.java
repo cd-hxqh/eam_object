@@ -201,11 +201,15 @@ public class AddInvuselineActivity extends BaseActivity implements SwipeRefreshL
         mSwipeLayout.setRefreshing(false);
     }
 
+    @Override
+    public void onBackPressed() {
+        setResult(1);
+        finish();
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i(TAG, "resultCode=" + resultCode);
 
         switch (resultCode) {
             case 0:

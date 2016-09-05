@@ -840,8 +840,8 @@ public class JsonUtils {
                 invuseline.itemnum = jsonObject.getString("ITEMNUM"); //备件
                 invuseline.invusenum = jsonObject.getString("INVUSENUM"); //领料单号
                 invuseline.description = jsonObject.getString("DESCRIPTION"); //描述
-                invuseline.level4 = jsonObject.getString("LEVEL4"); //机构
-                invuseline.level5 = jsonObject.getString("LEVEL5"); //部位(五级)
+                invuseline.classstructureid = jsonObject.getString("CLASSSTRUCTUREID"); //部位
+                invuseline.classstructure_description = jsonObject.getString("CLASSSTRUCTURE_DESCRIPTION"); //部位名称
                 invuseline.level6 = jsonObject.getString("LEVEL6"); //部位(六级)
                 invuseline.quantity = jsonObject.getString("QUANTITY"); //领料数量
                 invuseline.frombin = jsonObject.getString("FROMBIN"); //货柜
@@ -1525,7 +1525,7 @@ public class JsonUtils {
                     invuselinesObj.put("frombin", invuselines.get(i).frombin);
                     invuselinesObj.put("taskid", invuselines.get(i).taskid);
                     invuselinesObj.put("issueto", invuselines.get(i).issueto);
-                    invuselinesObj.put("level5", invuselines.get(i).level5);
+                    invuselinesObj.put("level5", invuselines.get(i).classstructureid);
                     invuselinesObj.put("level6", invuselines.get(i).level6);
                     invuselinesObj.put("remark", invuselines.get(i).remark);
                     invuselinesObj.put("optiontype", invuselines.get(i).optiontype);

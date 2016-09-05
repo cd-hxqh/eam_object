@@ -109,7 +109,7 @@ public class WorkSearch_ListActivity extends BaseActivity implements SwipeRefres
 
 
     private void getData(String search) {
-        HttpManager.getDataPagingInfo(this, HttpManager.getChooseWorkOrderUrl(search, AccountUtils.getinsertSite(WorkSearch_ListActivity.this), page, 20), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(this, HttpManager.getSearchWorkOrderUrl(search, AccountUtils.getinsertSite(WorkSearch_ListActivity.this), page, 20), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);

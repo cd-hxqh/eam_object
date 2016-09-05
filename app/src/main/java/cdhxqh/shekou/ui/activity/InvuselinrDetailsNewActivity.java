@@ -59,17 +59,14 @@ public class InvuselinrDetailsNewActivity extends BaseActivity {
      */
     private TextView bjNmaeText;
     /**
-     * 机构*
+     * 部位*
      */
     private TextView level4Text;
     /**
-     * 部件（五级）*
+     * 部件 名称*
      */
     private TextView level5Text;
-    /**
-     * 部件（六级）*
-     */
-    private TextView level6Text;
+
     /**
      * 领料数量*
      */
@@ -378,9 +375,8 @@ public class InvuselinrDetailsNewActivity extends BaseActivity {
     private void inithx(View view) {
         itemnumText = (TextView) view.findViewById(R.id.invuseline_itemnum_text_id);
         bjNmaeText = (TextView) view.findViewById(R.id.invuseline_description_text_id);
-        level4Text = (TextView) view.findViewById(R.id.level4_text_id);
-        level5Text = (TextView) view.findViewById(R.id.level5_text_id);
-        level6Text = (TextView) view.findViewById(R.id.level6_text_id);
+        level4Text = (TextView) view.findViewById(R.id.level5_text_id);
+        level5Text = (TextView) view.findViewById(R.id.level6_text_id);
         quantityText = (TextView) view.findViewById(R.id.quantity_text_id);
         frombinText = (TextView) view.findViewById(R.id.frombin_txt_id);
         curbalText = (TextView) view.findViewById(R.id.curbal_text_id);
@@ -429,9 +425,8 @@ public class InvuselinrDetailsNewActivity extends BaseActivity {
     private void showhx() {
         itemnumText.setText(invuseline.itemnum);
         bjNmaeText.setText(invuseline.description);
-        level4Text.setText(invuseline.level4);
-        level5Text.setText(invuseline.level5);
-        level6Text.setText(invuseline.level6);
+        level4Text.setText(invuseline.classstructureid);
+        level5Text.setText(invuseline.classstructure_description);
         quantityText.setText(invuseline.quantity);
         frombinText.setText(invuseline.frombin);
         curbalText.setText(invuseline.invbalances_curbal);

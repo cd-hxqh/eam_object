@@ -29,10 +29,10 @@ public class Invuseline extends Entity implements Parcelable {
     public String invusenum; //领料单号
     @DatabaseField(columnName = "description")
     public String description; //描述
-    @DatabaseField(columnName = "level4")
-    public String level4; //机构
-    @DatabaseField(columnName = "level5")
-    public String level5; //部位(五级)
+    @DatabaseField(columnName = "classstructureid")
+    public String classstructureid; //部位
+    @DatabaseField(columnName = "CLASSSTRUCTURE_DESCRIPTION")
+    public String classstructure_description; //部位名称
     @DatabaseField(columnName = "level6")
     public String level6; //部位(六级)
     @DatabaseField(columnName = "quantity")
@@ -92,8 +92,8 @@ public class Invuseline extends Entity implements Parcelable {
         itemnum = jsonObject.getString("itemnum");
         invusenum = jsonObject.getString("invusenum");
         description = jsonObject.getString("description");
-        level4 = jsonObject.getString("level4");
-        level5 = jsonObject.getString("level5");
+        classstructureid = jsonObject.getString("classstructureid");
+        classstructure_description = jsonObject.getString("classstructure_description");
         level6 = jsonObject.getString("level6");
         quantity = jsonObject.getString("quantity");
         frombin = jsonObject.getString("frombin");
@@ -131,8 +131,8 @@ public class Invuseline extends Entity implements Parcelable {
         itemnum = in.readString();
         invusenum = in.readString();
         description = in.readString();
-        level4 = in.readString();
-        level5 = in.readString();
+        classstructureid = in.readString();
+        classstructure_description = in.readString();
         level6 = in.readString();
         quantity = in.readString();
         frombin = in.readString();
@@ -173,8 +173,8 @@ public class Invuseline extends Entity implements Parcelable {
         dest.writeString(itemnum);
         dest.writeString(invusenum);
         dest.writeString(description);
-        dest.writeString(level4);
-        dest.writeString(level5);
+        dest.writeString(classstructureid);
+        dest.writeString(classstructure_description);
         dest.writeString(level6);
         dest.writeString(quantity);
         dest.writeString(frombin);

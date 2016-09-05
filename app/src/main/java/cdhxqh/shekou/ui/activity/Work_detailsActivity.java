@@ -795,6 +795,8 @@ public class Work_detailsActivity extends BaseActivity {
             } else if ((requestCode == Constants.LABORCODE1 || requestCode == Constants.LABORCODE2
                     || requestCode == Constants.LABORCODE3) && !udqxbz.getText().toString().equals("")) {
                 intent.putExtra("udqxbz", udqxbz.getText().toString());
+            } else if (requestCode == Constants.ASSETCODE) {
+                intent.putExtra("type", workOrder.worktype);
             }
             startActivityForResult(intent, requestCode);
         }
@@ -858,9 +860,9 @@ public class Work_detailsActivity extends BaseActivity {
     private View.OnClickListener approvalBtnOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            if (workOrder.status.equals(Constants.STATUS25)) {
+            if (workOrder.status.equals(Constants.STATUS25)) { //开始工作流
                 MaterialDialogOneBtn();
-            } else {
+            } else { //审批工作流
                 MaterialDialogOneBtn1();
             }
 
@@ -869,61 +871,37 @@ public class Work_detailsActivity extends BaseActivity {
 
 
     private void MaterialDialogOneBtn1() {//审批工作流
-        final MaterialDialog dialog = new MaterialDialog(Work_detailsActivity.this);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.isTitleShow(false)
-                .btnNum(2)
-                .content("是否填写输入意见")
-                .btnText("是", "否，直接提交")
-                .showAnim(mBasIn)
+        final NormalEditTextDialog dialog = new NormalEditTextDialog(Work_detailsActivity.this);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.isTitleShow(true);//
+        dialog.title("审批工作流");
+        dialog.btnNum(3)
+                .content("通过")//
+                .btnText("取消", "通过", "不通过")//
+                .showAnim(mBasIn)//
                 .dismissAnim(mBasOut)
                 .show();
 
         dialog.setOnBtnClickL(
-                new OnBtnClickL() {//是
+                new OnBtnEditClickL() {//取消
                     @Override
-                    public void onBtnClick() {
-                        EditDialog(true);
+                    public void onBtnClick(String text) {
+
                         dialog.dismiss();
                     }
                 },
-                new OnBtnClickL() {//否
-                    @Override
-                    public void onBtnClick() {
-                        wfgoon(workOrder.workorderid, "1", "");
-                        dialog.dismiss();
-                    }
-                }
-        );
-    }
-
-
-    private void EditDialog(final boolean isok) {//输入审核意见
-        final NormalEditTextDialog dialog = new NormalEditTextDialog(Work_detailsActivity.this);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.isTitleShow(false)
-                .btnNum(2)
-                .content(isok ? "通过" : "不通过")
-                .btnText("提交", "取消")
-                .showAnim(mBasIn)
-                .dismissAnim(mBasOut)
-                .show();
-
-        dialog.setOnBtnClickL(
-                new OnBtnEditClickL() {
+                new OnBtnEditClickL() {//通过
                     @Override
                     public void onBtnClick(String text) {
                         wfgoon(workOrder.workorderid, "1", text);
-
                         dialog.dismiss();
                     }
                 },
-                new OnBtnEditClickL() {
+                new OnBtnEditClickL() {//不通过
                     @Override
                     public void onBtnClick(String text) {
-
+                        wfgoon(workOrder.workorderid, "0", text);
                         dialog.dismiss();
                     }
                 }
@@ -975,7 +953,7 @@ public class Work_detailsActivity extends BaseActivity {
         workOrder.jpnum = jpnum.getText().toString().trim();
         workOrder.udisjf = udisjf.isChecked() ? "1" : "0";
         workOrder.pmnum = pmnum.getText().toString().trim();
-        workOrder.udcreateby = udcreateby.getText().toString().trim();
+//        workOrder.udcreateby = workOrder.udcreateby;
         workOrder.reportedby = reportedby.getText().toString().trim();
         workOrder.reportdate = reportdate.getText().toString().trim();
         workOrder.udcreatedate = udcreatedate.getText().toString().trim();
@@ -1145,12 +1123,12 @@ public class Work_detailsActivity extends BaseActivity {
     private void MaterialDialogOneBtn() {//开始工作流
         final MaterialDialog dialog = new MaterialDialog(Work_detailsActivity.this);
         dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.isTitleShow(false)//
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.isTitleShow(false)
                 .btnNum(2)
-                .content("是否启动工作流")//
-                .btnText("是", "否")//
-                .showAnim(mBasIn)//
+                .content("是否启动工作流")
+                .btnText("是", "否")
+                .showAnim(mBasIn)
                 .dismissAnim(mBasOut)
                 .show();
 
@@ -1183,7 +1161,7 @@ public class Work_detailsActivity extends BaseActivity {
         new AsyncTask<String, String, String>() {
             @Override
             protected String doInBackground(String... strings) {
-                String result = AndroidClientService.startwf(Work_detailsActivity.this, getprocessname(workOrder.worktype), "WORKORDER", workOrder.wonum, "WONUM");
+                String result = AndroidClientService.startwf(Work_detailsActivity.this, "UDWO", "WORKORDER", workOrder.wonum, "WONUM", AccountUtils.getpersonId(Work_detailsActivity.this));
 
                 Log.i(TAG, "result=" + result);
                 return result;
@@ -1220,7 +1198,7 @@ public class Work_detailsActivity extends BaseActivity {
             protected String doInBackground(String... strings) {
 
 
-                String result = AndroidClientService.approve(Work_detailsActivity.this, getprocessname(workOrder.worktype), "WORKORDER", id, "WORKORDERID", zx, desc);
+                String result = AndroidClientService.approve(Work_detailsActivity.this, getprocessname(workOrder.worktype), "WORKORDER", id, "WORKORDERID",AccountUtils.getpersonId(Work_detailsActivity.this), zx, desc);
                 Log.i(TAG, "result=" + result);
                 return result;
             }

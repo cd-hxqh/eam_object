@@ -197,7 +197,9 @@ public class InventoryFragment extends Fragment implements SwipeRefreshLayout.On
 
     @Override
     public void onRefresh() {
-        mSwipeLayout.setRefreshing(false);
+
+        page++;
+        getItemList(vlaue, page);
     }
 
 

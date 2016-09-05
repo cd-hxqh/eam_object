@@ -169,7 +169,6 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
         super.onActivityResult(requestCode1, resultCode, data);
         switch (requestCode1) {
             case 1000:
-                Log.i(TAG, "requestCode=" + requestCode1);
                 getData(searchText);
                 break;
         }
@@ -205,11 +204,16 @@ public class OptionActivity extends BaseActivity implements SwipeRefreshLayout.O
     private void getData(String searchText) {
         list = new ArrayList<Option>();
         Option option;
-        Log.i(TAG, "requestCode=" + requestCode);
         switch (requestCode) {
             case Constants.ASSETCODE:
+                Log.i(TAG, "type=" + getIntent().getExtras().getString("type"));
+                String type = getIntent().getExtras().getString("type");
                 List<Assets> assets;
-                assets = new AssetDao(OptionActivity.this).queryByCount(page, searchText);
+                if (type.equals("EM")) {
+                    assets = new AssetDao(OptionActivity.this).queryByAssets(page, searchText);
+                } else {
+                    assets = new AssetDao(OptionActivity.this).queryByCount(page, searchText);
+                }
                 for (int i = 0; i < assets.size(); i++) {
                     option = new Option();
                     option.setName(assets.get(i).assetnum);

@@ -565,7 +565,10 @@ public class Work_AddNewActivity extends BaseActivity {
             } else if ((requestCode == Constants.LABORCODE1 || requestCode == Constants.LABORCODE2
                     || requestCode == Constants.LABORCODE3) && !udqxbz.getText().toString().equals("")) {
                 intent.putExtra("udqxbz", udqxbz.getText().toString());
+            } else if (requestCode == Constants.ASSETCODE) {
+                intent.putExtra("type", workOrder.worktype);
             }
+
             startActivityForResult(intent, requestCode);
         }
     }

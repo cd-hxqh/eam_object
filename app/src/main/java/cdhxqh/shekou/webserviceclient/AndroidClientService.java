@@ -14,10 +14,8 @@ import java.io.IOException;
 
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.InvuseResult;
-import cdhxqh.shekou.model.WorkResult;
-
-import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.config.Constants;
+import cdhxqh.shekou.model.WorkResult;
 import cdhxqh.shekou.utils.AccountUtils;
 
 /**
@@ -45,6 +43,41 @@ public class AndroidClientService {
     }
 
     /**
+     * 领料单是否满足工作流启动
+     *
+     * @return
+     */
+    public static String iswf(Context context, String invusenum, String userid) {
+        Log.i(TAG, "invusenum=" + invusenum + ",userId=" + userid);
+        String url = AccountUtils.getIpAddress(context) + Constants.INVUSE_URL;
+        SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+        soapEnvelope.implicitTypes = true;
+        soapEnvelope.dotNet = true;
+        SoapObject soapReq = new SoapObject(NAMESPACE, "invuseserviceINVUSE08ByisWF");
+        soapReq.addProperty("invusenum", invusenum);//领料单号
+        soapReq.addProperty("userid", userid);//用户ID
+        soapEnvelope.setOutputSoapObject(soapReq);
+        HttpTransportSE httpTransport = new HttpTransportSE(url, timeOut);
+        try {
+            httpTransport.call("urn:action", soapEnvelope);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (XmlPullParserException e) {
+            e.printStackTrace();
+        }
+        String obj = null;
+        String result = null;
+        try {
+            obj = soapEnvelope.getResponse().toString();
+            result = obj;
+        } catch (SoapFault soapFault) {
+            soapFault.printStackTrace();
+
+        }
+        return result;
+    }
+
+    /**
      * 开始工作流
      * context 上下文
      * processname 过程名
@@ -52,7 +85,8 @@ public class AndroidClientService {
      *
      * @return
      */
-    public static String startwf(Context context, String processname, String mbo, String keyValue, String key) {
+    public static String startwf(Context context, String processname, String mbo, String keyValue, String key, String userid) {
+        Log.i(TAG, "processname=" + processname + ",mbo=" + mbo + ",keyValue=" + keyValue + ",key=" + key + ",userId=" + userid);
         String url = AccountUtils.getIpAddress(context) + Constants.WORK_FLOW_URL;
         SoapSerializationEnvelope soapEnvelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
         soapEnvelope.implicitTypes = true;
@@ -62,6 +96,7 @@ public class AndroidClientService {
         soapReq.addProperty("mbo", mbo);//工单WORKORDER,采购申请pr
         soapReq.addProperty("keyValue", keyValue);//对应的表ID的值，如工单需要传送workorderid的值，采购申请prnum的值
         soapReq.addProperty("key", key);//对应的表ID，如工单：wonum，采购申请，prnum
+        soapReq.addProperty("userid", userid);//用户Id
         soapEnvelope.setOutputSoapObject(soapReq);
         HttpTransportSE httpTransport = new HttpTransportSE(url, timeOut);
         try {
@@ -87,9 +122,9 @@ public class AndroidClientService {
      *
      * @return
      */
-    public static String approve(Context context, String processname, String mbo, String keyValue, String key, String zx, String desc) {
+    public static String approve(Context context, String processname, String mbo, String keyValue, String key, String userid, String zx, String desc) {
 
-        Log.i(TAG, "processname=" + processname + ",mbo=" + mbo + ",keyValue=" + keyValue + ",key=" + key + ",zx=" + zx + ",desc=" + desc);
+        Log.i(TAG, "processname=" + processname + ",mbo=" + mbo + ",keyValue=" + keyValue + ",key=" + key + ",userid" + userid + ",zx=" + zx + ",desc=" + desc);
 
         String url = AccountUtils.getIpAddress(context) + Constants.WORK_FLOW_URL;
 
@@ -103,6 +138,7 @@ public class AndroidClientService {
         soapReq.addProperty("mboName", mbo);//工单WORKORDER,采购申请pr
         soapReq.addProperty("keyValue", keyValue);//对应的表ID的值，如工单需要传送wonum的值，采购申请prnum的值
         soapReq.addProperty("key", key);//对应的表ID，如工单：wonum，采购申请，prnum
+        soapReq.addProperty("userid", userid);//用户Id
         soapReq.addProperty("zx", zx);//审批的结果，1为审批通过，0为审批不通过
         if (!desc.equals("")) {
             soapReq.addProperty("desc", desc);//审批意见
@@ -118,8 +154,10 @@ public class AndroidClientService {
         }
         String obj = null;
         String result = null;
+
         try {
             obj = soapEnvelope.getResponse().toString();
+            Log.i(TAG, "obj=" + obj);
             result = JsonUtils.parsingwfserviceGoOnResult(obj);
         } catch (SoapFault soapFault) {
             return null;
