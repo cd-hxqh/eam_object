@@ -464,4 +464,67 @@
     <string name="work_search_text">工单查询</string>
     <string name="udassign02_text">发起人:</string>
 
+    <!--外协服务申请单-->
+    <string name="invoicenum_text">付款单号:</string>
+    <string name="udfincp_1_text">财务公司:</string>
+    <string name="udjsfs_text">付款方式:</string>
+    <string name="vendorinvoicenum_text">发票号:</string>
+    <string name="documenttype_text">类型:</string>
+    <string name="udhszj_text">含税总价:</string>
+    <string name="enterby_text">输入人:</string>
+    <string name="udremark_text">付款事由:</string>
+    <string name="ponum_text">订单号:</string>
+    <string name="cgxx_text">采购信息</string>
+    <string name="receipts_text">接收:</string>
+    <string name="totalcost_text">成本总计:</string>
+    <string name="pretaxtotalforui_text">税前总计:</string>
+    <string name="totaltax1forui_text">税款总计:</string>
+    <string name="currencycode_text">货币:</string>
+    <string name="invoicedate_text">发票日期:</string>
+    <string name="duedate_text">到期日:</string>
+    <string name="paiddate_text">付款日期:</string>
+    <string name="skf_text">收款方</string>
+    <string name="vendor_text">供应商:</string>
+    <string name="vendor_name_text">供应商名称:</string>
+    <string name="contact_text">联系人:</string>
+    <string name="phone_text">电话:</string>
+    <string name="paymentterms_text">支付条款:</string>
+    <string name="wxfufksq_text">外协服务付款申请</string>
+    <string name="data_load_ing">数据加载中...</string>
+    <string name="wxfwfksqh_text">付款申请行</string>
+
+    <!--非年度采购订单-->
+    <string name="ponum1_text">采购订单:</string>
+    <string name="udms_text">订单描述:</string>
+    <string name="udhszj1_text">含税总价:</string>
+    <string name="udtax_text">税率:</string>
+    <string name="jygys_text">公司:</string>
+    <string name="fyfs_text">发运方式:</string>
+    <string name="jgjz_text">价格基准:</string>
+    <string name="fkfs_text">付款方式:</string>
+    <string name="jbr_text">制单人:</string>
+    <string name="cbbm_text">呈报部门:</string>
+    <string name="cbrq_text">呈报日期:</string>
+    <string name="udremarks_text">备注:</string>
+    <string name="fndcgdd_text">非年度采购订单</string>
+    <string name="cgmxh_text">采购明细行</string>
+
+    <!--采购单行-->
+    <string name="poline_text">采购明细行</string>
+    <string name="polinenum_text">序号:</string>
+    <string name="udtaxunitcost_text">含税单价:</string>
+    <string name="udtotalcost_text">含税总价:</string>
+    <string name="tax1code_text">税代码:</string>
+    <string name="udghzq_text">货期(天):</string>
+    <string name="udbzq_text">质保期:</string>
+    <string name="sqr_text">请购人:</string>
+    <string name="qgbm_text">请购部门:</string>
+    <string name="prnum_text">请购单:</string>
+    <string name="sccgd_text">上次采购单:</string>
+    <string name="sccgdj_text">上次采购价:</string>
+    <string name="sqpzr_text">申请批准:</string>
+    <string name="description_text">采购项:</string>
+    <string name="orderunit_text">单位:</string>
+    <string name="poline_details_title">采购明细行详情</string>
+
 </resources>

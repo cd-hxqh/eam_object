@@ -7,14 +7,29 @@ android {
     defaultConfig {
         applicationId "cdhxqh.shekou"
         minSdkVersion 14
-        targetSdkVersion 21
-        versionCode 11
-        versionName "1.1.1"
+        targetSdkVersion 22
+        versionCode 12
+        versionName "1.1.2"
 
         ndk {
             // 设置支持的SO库架构
             abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+            abiFilters 'x86'
+            moduleName "app"
         }
+
+
+        splits {
+            abi {
+                enable true
+                reset()
+                include 'x86', 'armeabi-v7a', 'mips'
+                universalApk true
+            }
+        }
+
+
+
     }
     buildTypes {
         release {
@@ -46,9 +61,8 @@ dependencies {
     compile files('libs/org.apache.http.legacy.jar')
     compile files('libs/ormlite-android-4.48.jar')
     compile files('libs/ormlite-core-4.48.jar')
-//    compile 'com.tencent.bugly:crashreport:latest.release'
-//    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.1.5
-//    compile 'com.tencent.bugly:nativecrashreport:latest.release'
-//    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
-
+    //    compile 'com.tencent.bugly:crashreport:latest.release'
+    //    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.1.5
+    //    compile 'com.tencent.bugly:nativecrashreport:latest.release'
+    //    //其中latest.release指代最新版本号，也可以指定明确的版本号，例如2.2.0
 }

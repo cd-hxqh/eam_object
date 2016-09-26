@@ -106,6 +106,22 @@ public class Constants {
     public static final String MATUSETRANS_NAME = "MATUSETRANS";
 
 
+    //外协服务付款申请单appid
+    public static final String INVOICE_APPID = "OSINVOICE";
+    //外协服务付款申请单表面
+    public static final String INVOICE_NAME = "INVOICE";
+
+    //非年度采购单appid
+    public static final String PO_APPID = "UDPO";
+    //非年度采购单表名
+    public static final String PO_NAME = "PO";
+
+    //非年度采购单表名
+    public static final String POLINE_NAME = "POLINE";
+
+
+
+
     //领料单appid
     public static final String INVUSE_APPID = "UDUSE";
     //领料单表名

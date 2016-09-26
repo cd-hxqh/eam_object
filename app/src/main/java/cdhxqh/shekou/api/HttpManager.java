@@ -171,6 +171,44 @@ public class HttpManager {
         }
     }
 
+
+    /**
+     * 外协服务付款申请
+     */
+    public static String getInvoiceurl(String invoiceid) {
+
+        return "{'appid':'" + Constants.INVOICE_APPID + "','objectname':'" + Constants.INVOICE_NAME + "','curpage':" + 1 + ",'showcount':" + 20 + ",'option':'read','condition':{'INVOICEID':'" + invoiceid + "'}}";
+
+
+    }
+    /**
+     * 非年度采购单
+     */
+    public static String getPourl(String poid) {
+
+        return "{'appid':'" + Constants.PO_APPID + "','objectname':'" + Constants.PO_NAME + "','curpage':" + 1 + ",'showcount':" + 20 + ",'option':'read','condition':{'POID':'" + poid + "'}}";
+
+
+    }
+
+
+    /**
+     * 非年度采购单行
+     */
+    public static String getPoLineurl(String ponum) {
+
+        return "{'appid':'" + Constants.PO_APPID + "','objectname':'" + Constants.POLINE_NAME + "','curpage':" + 1 + ",'showcount':" + 20 + ",'option':'read','condition':{'PONUM':'" + ponum + "'}}";
+
+
+    }
+
+
+
+
+
+
+
+
     /**
      * 设置Invbalanceurl的接口
      */

@@ -165,6 +165,12 @@
             android:name=".ui.activity.Work_Choose_Activity"
             android:label="Work_Choose_Activity"></activity>
         <activity
+            android:name=".ui.activity.InvoiceDetailsActivity"
+            android:label="InvoiceDetailsActivity"></activity>
+        <activity
+            android:name=".ui.activity.PoDetailsActivity"
+            android:label="PoDetailsActivity"></activity>
+        <activity
             android:name=".ui.activity.DownloadActivity"
             android:label="@string/title_activity_download"></activity>
         <activity
@@ -175,7 +181,13 @@
             android:label="@string/about_us_text"></activity>
         <activity
             android:name=".ui.activity.ItemChooseActivity"
-            android:label="@string/about_us_text"></activity>
+            android:label="ItemChooseActivity"></activity>
+        <activity
+            android:name=".ui.activity.PolineActivity"
+            android:label="PolineActivity"></activity>
+        <activity
+            android:name=".ui.activity.PoLineDetailsActivity"
+            android:label="PoLineDetailsActivity"></activity>
 
 
         <!--Bugly 配置APP ID -->

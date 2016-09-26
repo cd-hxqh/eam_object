@@ -1,6 +1,5 @@
 package cdhxqh.shekou.ui.fragment;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -29,12 +28,11 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
-import cdhxqh.shekou.model.Inventory;
+import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Wfassignment;
-import cdhxqh.shekou.ui.activity.InventoryActivity;
-import cdhxqh.shekou.ui.activity.Wfassig_DetailsActivity;
+import cdhxqh.shekou.ui.activity.InvoiceDetailsActivity;
+import cdhxqh.shekou.ui.activity.PoDetailsActivity;
 import cdhxqh.shekou.ui.adapter.BaseQuickAdapter;
-import cdhxqh.shekou.ui.adapter.InventoryAdapter;
 import cdhxqh.shekou.ui.adapter.WfassigAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 import cdhxqh.shekou.utils.AccountUtils;
@@ -236,16 +234,44 @@ public class WfassigFragment extends BaseFragment implements SwipeRefreshLayout.
      * 获取数据*
      */
     private void initAdapter(final List<Wfassignment> list) {
-        wfassigAdapter = new WfassigAdapter(getActivity(), R.layout.list_item, list);
+        wfassigAdapter = new WfassigAdapter(getActivity(), R.layout.sp_list_item, list);
         mRecyclerView.setAdapter(wfassigAdapter);
         wfassigAdapter.setOnRecyclerViewItemClickListener(new BaseQuickAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(getActivity(), Wfassig_DetailsActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("wfassignment", list.get(position));
-                intent.putExtras(bundle);
-                getActivity().startActivity(intent);
+
+                Wfassignment wfassignment =list.get(position);
+                    String ownerid = wfassignment.ownerid;
+                    String  ownertable = wfassignment.ownertable;
+                    String  processname = wfassignment.processname;
+
+                  if(ownertable.equals(Constants.INVOICE_NAME)){
+                      Intent intent = new Intent(getActivity(), InvoiceDetailsActivity.class);
+                      Bundle bundle = new Bundle();
+                      bundle.putString("ownerid",ownerid);
+                      bundle.putString("ownertable",ownertable);
+                      bundle.putString("processname",processname);
+                      intent.putExtras(bundle);
+                      getActivity().startActivity(intent);
+                  }
+
+                if(ownertable.equals(Constants.PO_NAME)&&processname.equals("UDPO")){  //非年度采购订单
+                    Intent intent = new Intent(getActivity(), PoDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ownerid",ownerid);
+                    bundle.putString("ownertable",ownertable);
+                    bundle.putString("processname",processname);
+                    intent.putExtras(bundle);
+                    getActivity().startActivity(intent);
+                }
+
+
+
+//                Intent intent = new Intent(getActivity(), Wfassig_DetailsActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putParcelable("wfassignment", list.get(position));
+//                intent.putExtras(bundle);
+//                getActivity().startActivity(intent);
             }
         });
     }
