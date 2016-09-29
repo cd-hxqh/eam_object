@@ -33,12 +33,12 @@
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/polinenum_text"
+                    android:text="@string/ddh_text"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
 
                 <TextView
-                    android:id="@+id/polinenum_text_id"
+                    android:id="@+id/ddh_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
@@ -64,7 +64,7 @@
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/description_text"
+                    android:text="@string/item_desc_title"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
 
@@ -124,12 +124,12 @@
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/orderunit_text"
+                    android:text="@string/work_labtrans_transtype"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
 
                 <TextView
-                    android:id="@+id/orderunit_text_id"
+                    android:id="@+id/work_labtrans_transtype_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
@@ -153,12 +153,12 @@
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/udtaxunitcost_text"
+                    android:text="@string/transdate_text"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
 
                 <TextView
-                    android:id="@+id/udtaxunitcost_text_id"
+                    android:id="@+id/transdate_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
@@ -182,12 +182,68 @@
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/udtotalcost_text"
+                    android:text="@string/jsr_text"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
 
                 <TextView
-                    android:id="@+id/udtotalcost_text_id"
+                    android:id="@+id/jsr_text_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_5"
+                    android:hint="@string/have_not_data"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/dimens_16dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/line"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sq_wonum_text"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/dimens_16dp" />
+
+                <TextView
+                    android:id="@+id/sq_wonum_text_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_5"
+                    android:hint="@string/have_not_data"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/dimens_16dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/line"></View>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jc_status_text"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/dimens_16dp" />
+
+                <TextView
+                    android:id="@+id/jc_status_text_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
@@ -201,11 +257,7 @@
                 android:layout_height="1dp"
                 android:background="@drawable/line"></View>
 
-            <include
 
-                layout="@layout/activity_poline_item_details"></include>
-
-            <include layout="@layout/activity_waixiepoline_item_details"></include>
 
         </LinearLayout>
 

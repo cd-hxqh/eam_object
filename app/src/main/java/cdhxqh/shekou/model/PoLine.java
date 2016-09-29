@@ -30,7 +30,42 @@ public class PoLine extends Entity {
     public String SCCGDJ; //上次采购单价
     public String SQPZR; //请购批准人
 
+    public String QGD; //请购单
+    public String QGR; //请购人
+    public String SQPZ; //申请批准
+    public String QGYY; //请购原因
 
+    public String getQGD() {
+        return QGD;
+    }
+
+    public void setQGD(String QGD) {
+        this.QGD = QGD;
+    }
+
+    public String getQGR() {
+        return QGR;
+    }
+
+    public void setQGR(String QGR) {
+        this.QGR = QGR;
+    }
+
+    public String getSQPZ() {
+        return SQPZ;
+    }
+
+    public void setSQPZ(String SQPZ) {
+        this.SQPZ = SQPZ;
+    }
+
+    public String getQGYY() {
+        return QGYY;
+    }
+
+    public void setQGYY(String QGYY) {
+        this.QGYY = QGYY;
+    }
 
     @Override
     public void parse(JSONObject jsonObject) throws JSONException {

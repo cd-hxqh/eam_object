@@ -108,16 +108,30 @@ public class Constants {
 
     //外协服务付款申请单appid
     public static final String INVOICE_APPID = "OSINVOICE";
-    //外协服务付款申请单表面
+    //外协服务付款申请单表名
     public static final String INVOICE_NAME = "INVOICE";
+    //外协服务付款申请单行表名
+    public static final String INVOICELINE_NAME = "INVOICELINE";
 
     //非年度采购单appid
     public static final String PO_APPID = "UDPO";
+    //外协服务采购订单appid
+    public static final String WAIXIEPO_APPID = "UDOSPO";
     //非年度采购单表名
     public static final String PO_NAME = "PO";
 
-    //非年度采购单表名
+    //非年度采购单行表名
     public static final String POLINE_NAME = "POLINE";
+
+    //服务接收验收
+    public static final String SERVRECTRANS_NAME = "SERVRECTRANS";
+
+    //物资采购申请appid
+    public static final String PR_APPID = "UDMGPR";
+    //非年度采购单表名
+    public static final String PR_NAME = "PR";
+
+    public static final String PRLINE_NAME = "PRLINE";
 
 
 

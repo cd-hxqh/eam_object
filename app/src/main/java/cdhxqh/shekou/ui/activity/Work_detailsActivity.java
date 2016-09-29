@@ -35,7 +35,10 @@ import com.flyco.dialog.widget.NormalListDialog;
 import java.util.ArrayList;
 
 import cdhxqh.shekou.R;
+import cdhxqh.shekou.api.HttpManager;
+import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
+import cdhxqh.shekou.bean.Results;
 import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Failurereport;
 import cdhxqh.shekou.model.Labtrans;
@@ -211,6 +214,14 @@ public class Work_detailsActivity extends BaseActivity {
      **/
     private int entrn;
 
+    private int mark = 0;
+
+
+    private String ownerid; //ownerid
+    private String ownertable; //ownertable
+    private String workordertype;//worktype
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -228,9 +239,18 @@ public class Work_detailsActivity extends BaseActivity {
      * 获取数据*
      */
     private void geiIntentData() {
-        workOrder = (WorkOrder) getIntent().getSerializableExtra("workOrder");
+        mark = getIntent().getExtras().getInt("mark");
+        if (mark == 0) {
+            workOrder = (WorkOrder) getIntent().getSerializableExtra("workOrder");
 
-        entrn = getIntent().getExtras().getInt("entrn");
+            entrn = getIntent().getExtras().getInt("entrn");
+        } else if (mark == 1) {
+
+            ownerid = getIntent().getStringExtra("ownerid");
+            ownertable = getIntent().getStringExtra("ownertable");
+            workordertype = getIntent().getStringExtra("worktype");
+            Log.i(TAG, "ownerid=" + ownerid + "ownertable=" + ownertable + "workordertype=" + workordertype);
+        }
 
     }
 
@@ -326,7 +346,7 @@ public class Work_detailsActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        titlename.setText(WorkTitle.getTitle(workOrder.worktype));
+
         backlayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -337,6 +357,55 @@ public class Work_detailsActivity extends BaseActivity {
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
 
+
+        targstartdate.setOnClickListener(new TimeOnClickListener(targstartdate));
+        targcompdate.setOnClickListener(new TimeOnClickListener(targcompdate));
+        actstart.setOnClickListener(new TimeOnClickListener(actstart));
+        actfinish.setOnClickListener(new TimeOnClickListener(actfinish));
+        reportdate.setOnClickListener(new TimeOnClickListener(reportdate));
+        udyxj.setOnClickListener(udyxjOnClickListener);
+
+        assetnum.setOnClickListener(new LayoutOnClickListener(Constants.ASSETCODE));
+        jpnum.setOnClickListener(new LayoutOnClickListener(Constants.JOBPLANCODE));
+        reportedby.setOnClickListener(new LayoutOnClickListener(Constants.PERSONCODE));
+        lead.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE));
+        udqxbz.setOnClickListener(new LayoutOnClickListener(Constants.ALNDOMAINCODE));
+        lead1.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE1));
+        supervisor.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE2));
+        udsupervisor2.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE3));
+        udevnum.setOnClickListener(new LayoutOnClickListener(Constants.UDEVCODE));
+        udprojapprnum.setOnClickListener(new LayoutOnClickListener(Constants.PROJAPPR));
+        pmnum.setOnClickListener(new LayoutOnClickListener(Constants.PMCODE));
+        failurecode.setOnClickListener(new LayoutOnClickListener(Constants.FAILURE_TYPE));
+        udgzlbdm.setOnClickListener(new LayoutOnClickListener(Constants.ALNDOMAIN2CODE));
+
+        delete.setOnClickListener(deleteOnClickListener);
+        revise.setOnClickListener(reviseOnClickListener);
+        work_flow.setOnClickListener(approvalBtnOnClickListener);
+        if (mark == 0) {
+            titlename.setText(WorkTitle.getTitle(workOrder.worktype));
+            showData(workOrder);
+            setLayout(workOrder.worktype);
+        } else if (mark == 1) {
+            titlename.setText(WorkTitle.getTitle(workordertype));
+            getData(ownerid);
+            setLayout(workordertype);
+        }
+
+
+        if (entrn == 0) {
+            setEditor(true);
+            setSpace(200);
+
+        } else if (entrn == 1) {
+            setEditor(false);
+            setSpace(0);
+            operationLinearLayout.setVisibility(View.GONE);
+        }
+    }
+
+
+    private void showData(WorkOrder workOrder) {
         if (workOrder.worktype.equals("CM")) {//故障工单
             qxgdnumLinearLayout.setVisibility(View.VISIBLE);
             qxgdView.setVisibility(View.VISIBLE);
@@ -399,43 +468,8 @@ public class Work_detailsActivity extends BaseActivity {
         udtjsj.setText(workOrder.udtjsj);
         udtjtime.setText(workOrder.udtjtime);
         udremark.setText(workOrder.udremark);
-
-        targstartdate.setOnClickListener(new TimeOnClickListener(targstartdate));
-        targcompdate.setOnClickListener(new TimeOnClickListener(targcompdate));
-        actstart.setOnClickListener(new TimeOnClickListener(actstart));
-        actfinish.setOnClickListener(new TimeOnClickListener(actfinish));
-        reportdate.setOnClickListener(new TimeOnClickListener(reportdate));
-        udyxj.setOnClickListener(udyxjOnClickListener);
-
-        assetnum.setOnClickListener(new LayoutOnClickListener(Constants.ASSETCODE));
-        jpnum.setOnClickListener(new LayoutOnClickListener(Constants.JOBPLANCODE));
-        reportedby.setOnClickListener(new LayoutOnClickListener(Constants.PERSONCODE));
-        lead.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE));
-        udqxbz.setOnClickListener(new LayoutOnClickListener(Constants.ALNDOMAINCODE));
-        lead1.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE1));
-        supervisor.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE2));
-        udsupervisor2.setOnClickListener(new LayoutOnClickListener(Constants.LABORCODE3));
-        udevnum.setOnClickListener(new LayoutOnClickListener(Constants.UDEVCODE));
-        udprojapprnum.setOnClickListener(new LayoutOnClickListener(Constants.PROJAPPR));
-        pmnum.setOnClickListener(new LayoutOnClickListener(Constants.PMCODE));
-        failurecode.setOnClickListener(new LayoutOnClickListener(Constants.FAILURE_TYPE));
-        udgzlbdm.setOnClickListener(new LayoutOnClickListener(Constants.ALNDOMAIN2CODE));
-
-        delete.setOnClickListener(deleteOnClickListener);
-        revise.setOnClickListener(reviseOnClickListener);
-        work_flow.setOnClickListener(approvalBtnOnClickListener);
-
-        setLayout();
-        if (entrn == 0) {
-            setEditor(true);
-            setSpace(200);
-
-        } else if (entrn == 1) {
-            setEditor(false);
-            setSpace(0);
-            operationLinearLayout.setVisibility(View.GONE);
-        }
     }
+
 
     private View.OnClickListener udyxjOnClickListener = new View.OnClickListener() {
         @Override
@@ -488,8 +522,8 @@ public class Work_detailsActivity extends BaseActivity {
     }
 
     //按照工单类型修改布局
-    private void setLayout() {
-        switch (workOrder.worktype) {
+    private void setLayout(String worktype) {
+        switch (worktype) {
             case "CM"://故障工单
                 break;
             case "EM"://抢修工单
@@ -1198,7 +1232,7 @@ public class Work_detailsActivity extends BaseActivity {
             protected String doInBackground(String... strings) {
 
 
-                String result = AndroidClientService.approve(Work_detailsActivity.this, getprocessname(workOrder.worktype), "WORKORDER", id, "WORKORDERID",AccountUtils.getpersonId(Work_detailsActivity.this), zx, desc);
+                String result = AndroidClientService.approve(Work_detailsActivity.this, getprocessname(workOrder.worktype), "WORKORDER", id, "WORKORDERID", AccountUtils.getpersonId(Work_detailsActivity.this), zx, desc);
                 Log.i(TAG, "result=" + result);
                 return result;
             }
@@ -1215,6 +1249,42 @@ public class Work_detailsActivity extends BaseActivity {
                 mProgressDialog.dismiss();
             }
         }.execute();
+    }
+
+
+    //获取数据方法
+    private void getData(String ownerid) {
+        mProgressDialog = ProgressDialog.show(Work_detailsActivity.this, null,
+                getString(R.string.data_load_ing), true, true);
+
+        HttpManager.getDataPagingInfo(Work_detailsActivity.this, HttpManager.getWorkOrderByIdurl(workordertype, ownerid), new HttpRequestHandler<Results>() {
+            @Override
+            public void onSuccess(Results results) {
+                Log.i(TAG, "data=" + results);
+            }
+
+            @Override
+            public void onSuccess(Results results, int totalPages, int currentPage) {
+                mProgressDialog.dismiss();
+                ArrayList<WorkOrder> item = JsonUtils.parsingWorkOrder(Work_detailsActivity.this, results.getResultlist(), workordertype);
+                if (item != null || item.size() != 0) {
+                    workOrder = item.get(0);
+                    if (workOrder != null) {
+                        showData(workOrder);
+                    }
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(String error) {
+                mProgressDialog.dismiss();
+                MessageUtils.showMiddleToast(Work_detailsActivity.this, "数据加载失败");
+            }
+        });
+
+
     }
 
 

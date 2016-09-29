@@ -31,6 +31,7 @@ public class Po extends Entity {
     public String CBRQ; //呈报日期
     public String UDREMARKS; //备注
 
+
     public String getPOID() {
         return POID;
     }

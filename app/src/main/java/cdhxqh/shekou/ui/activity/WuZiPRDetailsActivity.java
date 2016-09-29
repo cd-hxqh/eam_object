@@ -27,16 +27,16 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
-import cdhxqh.shekou.model.Invoice;
+import cdhxqh.shekou.model.PR;
 import cdhxqh.shekou.utils.AccountUtils;
 import cdhxqh.shekou.utils.MessageUtils;
 import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 /**
- * 外协服务付款申请
+ * 物资采购申请
  */
-public class InvoiceDetailsActivity extends BaseActivity {
-    private static String TAG = "InvoiceDetailsActivity";
+public class WuZiPRDetailsActivity extends BaseActivity {
+    private static String TAG = "WuZiPRDetailsActivity";
 
     /**
      * 返回按钮
@@ -49,36 +49,29 @@ public class InvoiceDetailsActivity extends BaseActivity {
 
     private ImageView menuImageView; //菜单
 
-    private LinearLayout invoicelinelayout; //付款申请行
+    private LinearLayout qglinelayout; //请购明细行
+    private LinearLayout jhfplayout; //计划分配
     private LinearLayout splayout; //审批
 
     private PopupWindow popupWindow;
 
 
     /**界面信息**/
-    private TextView invoicenumText; //付款单号
+    private TextView prnumText; //申请单号
     private TextView udfincpText;//财务公司
-    private TextView udjsfsText;//付款方式
-    private TextView vendorinvoicenumText;//发票号
-    private TextView documenttypeText;//类型
-    private TextView udhszjText;//含税总价
+    private TextView descriptionText;//申购描述
+    private TextView requestedbyText;//申请人
+    private TextView sqrnameText;//申请人姓名
+    private TextView sqbmText;//申请部门
+    private TextView sqglsText;//申请管理室
+    private TextView requireddateText;//要求到货日期
+    private TextView issuedateText;//申请日期
+    private TextView pretaxtotalText;//金额总计
     private TextView statusText;//状态
-    private TextView enterbyText;//输入人
-    private TextView udremarkText;//申请理由
-    private TextView ponumText;//订单号
-    private TextView receiptsText;//接收
-    private TextView totalcostText;//成本总计
-    private TextView pretaxtotalforuiText;//税前总计
-    private TextView totaltax1foruiText;//税款总计
-    private TextView currencycodeText;//货币
-    private TextView invoicedateText;//发票日期
-    private TextView duedateText;//到期日
-    private TextView paiddateText;//付款日期
-    private TextView vendorText;//供应商
-    private TextView vendorNameText;//供应商名称
-    private TextView contactText;//联系人
-    private TextView phoneText;//电话
-    private TextView paymenttermsText;//支付条款
+    private TextView statusdateText;//状态日期
+    private TextView zdrText;//制单人
+    private TextView udcreatedateText;//制单日期
+    private TextView zdbmText;//制单部门
 
 
     private String ownerid; //ownerid
@@ -88,7 +81,7 @@ public class InvoiceDetailsActivity extends BaseActivity {
 
     private ProgressDialog mProgressDialog;
 
-    private Invoice invoice;
+    private PR pr;
 
 
     private BaseAnimatorSet mBasIn;
@@ -100,7 +93,7 @@ public class InvoiceDetailsActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_invoice_details);
+        setContentView(R.layout.activity_wuzipr_details);
         geiIntentData();
         findViewById();
         initView();
@@ -118,29 +111,21 @@ public class InvoiceDetailsActivity extends BaseActivity {
         titleTextView = (TextView) findViewById(R.id.title_name);
         menuImageView = (ImageView) findViewById(R.id.title_add);
 
-        invoicenumText = (TextView) findViewById(R.id.invoicenum_text_id);
+        prnumText = (TextView) findViewById(R.id.prnum_text_id);
         udfincpText = (TextView) findViewById(R.id.udfincp_text_id);
-        udjsfsText = (TextView) findViewById(R.id.udjsfs_text_id);
-        vendorinvoicenumText = (TextView) findViewById(R.id.vendorinvoicenum_text_id);
-        documenttypeText = (TextView) findViewById(R.id.documenttype_text_id);
-        udhszjText = (TextView) findViewById(R.id.udhszj_text_id);
+        descriptionText = (TextView) findViewById(R.id.description_text_id);
+        requestedbyText = (TextView) findViewById(R.id.invuse_displayname_text_id);
+        sqrnameText = (TextView) findViewById(R.id.sqrname_text_id);
+        sqbmText = (TextView) findViewById(R.id.sqbm_text_id);
+        sqglsText = (TextView) findViewById(R.id.sqgls_text_id);
+        requireddateText = (TextView) findViewById(R.id.requireddate_text_id);
+        issuedateText = (TextView) findViewById(R.id.createdate_text_id);
+        pretaxtotalText = (TextView) findViewById(R.id.pretaxtotal_text_id);
         statusText = (TextView) findViewById(R.id.status_text_id);
-        enterbyText = (TextView) findViewById(R.id.enterby_text_id);
-        udremarkText = (TextView) findViewById(R.id.udremark_text_id);
-        ponumText = (TextView) findViewById(R.id.ponum_text_id);
-        receiptsText = (TextView) findViewById(R.id.receipts_text_id);
-        totalcostText = (TextView) findViewById(R.id.totalcost_text_id);
-        pretaxtotalforuiText = (TextView) findViewById(R.id.pretaxtotalforui_text_id);
-        totaltax1foruiText = (TextView) findViewById(R.id.totaltax1forui_text_id);
-        currencycodeText = (TextView) findViewById(R.id.currencycode_text_id);
-        invoicedateText = (TextView) findViewById(R.id.invoicedate_text_id);
-        duedateText = (TextView) findViewById(R.id.duedate_text_id);
-        paiddateText = (TextView) findViewById(R.id.paiddate_text_id);
-        vendorText = (TextView) findViewById(R.id.vendor_text_id);
-        vendorNameText = (TextView) findViewById(R.id.vendor_name_text_id);
-        contactText = (TextView) findViewById(R.id.contact_text_id);
-        phoneText = (TextView) findViewById(R.id.phone_text_id);
-        paymenttermsText = (TextView) findViewById(R.id.paymentterms_text_id);
+        statusdateText = (TextView) findViewById(R.id.statusdate_id);
+        zdrText = (TextView) findViewById(R.id.jbr_text_id);
+        udcreatedateText = (TextView) findViewById(R.id.udcreatedate_text_id);
+        zdbmText = (TextView) findViewById(R.id.zdbm_text_id);
 
         mBasIn = new BounceTopEnter();
         mBasOut = new SlideBottomExit();
@@ -149,7 +134,7 @@ public class InvoiceDetailsActivity extends BaseActivity {
     @Override
     protected void initView() {
         backImageView.setOnClickListener(backImageViewOnClickListener);
-        titleTextView.setText(R.string.wxfufksq_text);
+        titleTextView.setText(R.string.wzcgsq_text);
         menuImageView.setImageResource(R.drawable.ic_drawer);
         menuImageView.setVisibility(View.VISIBLE);
         menuImageView.setOnClickListener(menuImageViewOnClickListener);
@@ -171,10 +156,10 @@ public class InvoiceDetailsActivity extends BaseActivity {
 
     //获取数据方法
     private void getData(String ownerid) {
-        mProgressDialog = ProgressDialog.show(InvoiceDetailsActivity.this, null,
+        mProgressDialog = ProgressDialog.show(WuZiPRDetailsActivity.this, null,
                 getString(R.string.data_load_ing), true, true);
 
-        HttpManager.getDataPagingInfo(InvoiceDetailsActivity.this, HttpManager.getInvoiceurl(ownerid), new HttpRequestHandler<Results>() {
+        HttpManager.getDataPagingInfo(WuZiPRDetailsActivity.this, HttpManager.getPr(ownerid), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -183,11 +168,11 @@ public class InvoiceDetailsActivity extends BaseActivity {
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
                 mProgressDialog.dismiss();
-                ArrayList<Invoice> item = JsonUtils.parsingInvoice(InvoiceDetailsActivity.this, results.getResultlist());
+                ArrayList<PR> item = JsonUtils.parsingPr(WuZiPRDetailsActivity.this, results.getResultlist());
                if(item!=null||item.size()!=0) {
-                   invoice = item.get(0);
-                   if(invoice!=null){
-                        showData(invoice);
+                   pr = item.get(0);
+                   if(pr!=null){
+                        showData(pr);
                    }
 
                }
@@ -197,7 +182,7 @@ public class InvoiceDetailsActivity extends BaseActivity {
             @Override
             public void onFailure(String error) {
                 mProgressDialog.dismiss();
-                MessageUtils.showMiddleToast(InvoiceDetailsActivity.this,"数据加载失败");
+                MessageUtils.showMiddleToast(WuZiPRDetailsActivity.this,"数据加载失败");
             }
         });
 
@@ -205,30 +190,23 @@ public class InvoiceDetailsActivity extends BaseActivity {
     }
 
     //显示信息
-    private void showData(Invoice invoice) {
-        invoicenumText.setText(invoice.getINVOICENUM());
-        udfincpText.setText(invoice.getUDFINCP());
-        udjsfsText.setText(invoice.getUDJSFS());
-        vendorinvoicenumText.setText(invoice.getVENDORINVOICENUM());
-        documenttypeText.setText(invoice.getDOCUMENTTYPE());
-        udhszjText.setText(invoice.getUDHSZJ());
-        statusText.setText(invoice.getSTATUS());
-        enterbyText.setText(invoice.getSRR());
-        udremarkText.setText(invoice.getUDREMARK());
-        ponumText.setText(invoice.getPONUM());
-        receiptsText.setText(invoice.getJS());
-        totalcostText.setText(invoice.getPOCOST());
-        pretaxtotalforuiText.setText(invoice.getPRETAXTOTALFORUI());
-        totaltax1foruiText.setText(invoice.getTOTALTAX1FORUI());
-        currencycodeText.setText(invoice.getCURRENCYCODE());
-        invoicedateText.setText(invoice.getINVOICEDATE());
-        duedateText.setText(invoice.getDUEDATE());
-        paiddateText.setText(invoice.getPAIDDATE());
-        vendorText.setText(invoice.getVENDOR());
-        vendorNameText.setText(invoice.getGYSMC());
-        contactText.setText(invoice.getCONTACT());
-        phoneText.setText(invoice.getPHONE());
-        paymenttermsText.setText(invoice.getPAYMENTTERMS());
+    private void showData(PR pr) {
+        prnumText.setText(pr.getPRNUM());
+        udfincpText.setText(pr.getUDFINCP());
+        descriptionText.setText(pr.getDESCRIPTION());
+        requestedbyText.setText(pr.getREQUESTEDBY());
+        sqrnameText.setText(pr.getSQRNAME());
+        sqbmText.setText(pr.getSQBM());
+        sqglsText.setText(pr.getSQGLS());
+        requireddateText.setText(pr.getREQUIREDDATE());
+        issuedateText.setText(pr.getISSUEDATE());
+        pretaxtotalText.setText(pr.getPRETAXTOTAL());
+        statusText.setText(pr.getSTATUS());
+        statusdateText.setText(pr.getSTATUSDATE());
+        zdrText.setText(pr.getZDR());
+        udcreatedateText.setText(pr.getUDCREATEDATE());
+        zdbmText.setText(pr.getZDBM());
+
 
     }
 
@@ -247,8 +225,8 @@ public class InvoiceDetailsActivity extends BaseActivity {
      */
     private void showPopupWindow(View view) {
 
-        View contentView = LayoutInflater.from(InvoiceDetailsActivity.this).inflate(
-                R.layout.invoice_popup_window, null);
+        View contentView = LayoutInflater.from(WuZiPRDetailsActivity.this).inflate(
+                R.layout.wuzipr_popup_window, null);
 
 
         popupWindow = new PopupWindow(contentView,
@@ -270,28 +248,38 @@ public class InvoiceDetailsActivity extends BaseActivity {
 
         popupWindow.showAsDropDown(view);
 
-        invoicelinelayout = (LinearLayout) contentView.findViewById(R.id.invoiceline_linearlayout_id);
+        qglinelayout = (LinearLayout) contentView.findViewById(R.id.prline_linearlayout_id);
+        jhfplayout = (LinearLayout) contentView.findViewById(R.id.jhfp_linearlayout_id);
 
         splayout = (LinearLayout) contentView.findViewById(R.id.sp_linearlayout_id);
 
-
-        invoicelinelayout.setOnClickListener(invoicelinelayoutOnClickListener);
+        qglinelayout.setOnClickListener(qglinelayoutOnClickListener);
+        jhfplayout.setOnClickListener(jhfplayoutOnClickListener);
         splayout.setOnClickListener(spOnClickListener);
 
     }
 
 
-    private View.OnClickListener invoicelinelayoutOnClickListener =new View.OnClickListener() {
+    private View.OnClickListener qglinelayoutOnClickListener =new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent =new Intent(InvoiceDetailsActivity.this,InvoiceLineActivity.class);
-            intent.putExtra("invoicenum",invoice.getINVOICENUM());
+            Intent intent =new Intent(WuZiPRDetailsActivity.this,PrlineActivity.class);
+            intent.putExtra("prnum",pr.getPRNUM());
+            intent.putExtra("mark",0);
             startActivityForResult(intent,0);
             popupWindow.dismiss();
         }
     };
-
-
+    private View.OnClickListener jhfplayoutOnClickListener =new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent =new Intent(WuZiPRDetailsActivity.this,PrlineActivity.class);
+            intent.putExtra("prnum",pr.getPRNUM());
+            intent.putExtra("mark",1);
+            startActivityForResult(intent,0);
+            popupWindow.dismiss();
+        }
+    };
     private View.OnClickListener spOnClickListener =new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -302,7 +290,7 @@ public class InvoiceDetailsActivity extends BaseActivity {
 
 
     private void MaterialDialogOneBtn1() {//审批工作流
-        final NormalEditTextDialog dialog = new NormalEditTextDialog(InvoiceDetailsActivity.this);
+        final NormalEditTextDialog dialog = new NormalEditTextDialog(WuZiPRDetailsActivity.this);
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         dialog.isTitleShow(true);//
@@ -347,14 +335,14 @@ public class InvoiceDetailsActivity extends BaseActivity {
      * @param zx
      */
     private void wfgoon(final String id, final String zx, final String desc) {
-        mProgressDialog = ProgressDialog.show(InvoiceDetailsActivity.this, null,
+        mProgressDialog = ProgressDialog.show(WuZiPRDetailsActivity.this, null,
                 getString(R.string.inputing), true, true);
         mProgressDialog.setCanceledOnTouchOutside(false);
         mProgressDialog.setCancelable(false);
         new AsyncTask<String, String, String>() {
             @Override
             protected String doInBackground(String... strings) {
-                String result = AndroidClientService.approve(InvoiceDetailsActivity.this, processname, ownertable, id, invoice.getINVOICEID(), AccountUtils.getpersonId(InvoiceDetailsActivity.this), zx, desc);
+                String result = AndroidClientService.approve(WuZiPRDetailsActivity.this, processname, ownertable, id, pr.getPRID(), AccountUtils.getpersonId(WuZiPRDetailsActivity.this), zx, desc);
 
                 Log.i(TAG, "result=" + result);
                 return result;
@@ -364,9 +352,9 @@ public class InvoiceDetailsActivity extends BaseActivity {
             protected void onPostExecute(String s) {
                 super.onPostExecute(s);
                 if (s == null || s.equals("")) {
-                    MessageUtils.showMiddleToast(InvoiceDetailsActivity.this, "审批失败");
+                    MessageUtils.showMiddleToast(WuZiPRDetailsActivity.this, "审批失败");
                 } else {
-                    MessageUtils.showMiddleToast(InvoiceDetailsActivity.this, "审批成功");
+                    MessageUtils.showMiddleToast(WuZiPRDetailsActivity.this, "审批成功");
 
                 }
                 mProgressDialog.dismiss();

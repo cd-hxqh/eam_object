@@ -2,23 +2,13 @@ package cdhxqh.shekou.ui.adapter;
 
 import android.animation.Animator;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cdhxqh.shekou.R;
-import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.model.Wfassignment;
-import cdhxqh.shekou.ui.activity.Wfassig_DetailsActivity;
 import cdhxqh.shekou.ui.widget.BaseViewHolder;
 
 /**
@@ -29,6 +19,15 @@ public class WfassigAdapter extends BaseQuickAdapter<Wfassignment> {
         super(context, layoutResId, data);
     }
 
+
+
+    /**
+     * 审批流程点击事件*
+     */
+    public OnClickListener onClickListener;
+
+
+
     @Override
     protected void startAnim(Animator anim, int index) {
         super.startAnim(anim, index);
@@ -37,11 +36,35 @@ public class WfassigAdapter extends BaseQuickAdapter<Wfassignment> {
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, Wfassignment item) {
+    protected void convert(BaseViewHolder helper, final Wfassignment item) {
         CardView cardView = helper.getView(R.id.card_container);
 //        helper.setText(R.id.item_num_title, mContext.getString(R.string.inventory_itemnum_text));
 //        helper.setText(R.id.item_desc_title, mContext.getString(R.string.inventory_location_text));
         helper.setText(R.id.item_num_text, item.wfassignmentid + "");
         helper.setText(R.id.item_desc_text, item.description);
+        helper.setOnClickListener(R.id.avatar, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickListener.cOnClickListener(item);
+            }
+        });
+
+    }
+
+
+    /**
+     * 点击*
+     */
+    public interface OnClickListener {
+        public void cOnClickListener(Wfassignment wfassignment);
+    }
+
+
+    public OnClickListener getOnClickListener() {
+        return onClickListener;
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 }

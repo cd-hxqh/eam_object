@@ -25,6 +25,7 @@ import cdhxqh.shekou.model.Invbalances;
 import cdhxqh.shekou.model.Invcost;
 import cdhxqh.shekou.model.Inventory;
 import cdhxqh.shekou.model.Invoice;
+import cdhxqh.shekou.model.InvoiceLine;
 import cdhxqh.shekou.model.Invuse;
 import cdhxqh.shekou.model.Invuseline;
 import cdhxqh.shekou.model.Item;
@@ -35,12 +36,16 @@ import cdhxqh.shekou.model.Labtrans;
 import cdhxqh.shekou.model.Locations;
 import cdhxqh.shekou.model.Matrectrans;
 import cdhxqh.shekou.model.Matusetrans;
+import cdhxqh.shekou.model.PR;
 import cdhxqh.shekou.model.Person;
 import cdhxqh.shekou.model.Pm;
 import cdhxqh.shekou.model.Po;
 import cdhxqh.shekou.model.PoLine;
+import cdhxqh.shekou.model.PrLine;
 import cdhxqh.shekou.model.Projappr;
+import cdhxqh.shekou.model.Servrectrans;
 import cdhxqh.shekou.model.Udev;
+import cdhxqh.shekou.model.WaiXiePo;
 import cdhxqh.shekou.model.Wfassignment;
 import cdhxqh.shekou.model.Woactivity;
 import cdhxqh.shekou.model.WorkOrder;
@@ -1014,7 +1019,6 @@ public class JsonUtils {
      * 解析抢修信息
      */
     public static ArrayList<Alndomain> parsingAlndomain(String data) {
-        Log.i(TAG, "Alndomain data=" + data);
         ArrayList<Alndomain> list = null;
         Alndomain alndomain = null;
         try {
@@ -1064,7 +1068,6 @@ public class JsonUtils {
      * 解析事故信息
      */
     public static ArrayList<Udev> parsingUdev(String data) {
-        Log.i(TAG, "Udev data=" + data);
         ArrayList<Udev> list = null;
         Udev alndomain = null;
         try {
@@ -1092,7 +1095,6 @@ public class JsonUtils {
      * 解析立项申报信息
      */
     public static ArrayList<Projappr> parsingProjappr(String data) {
-        Log.i(TAG, "Projappr data=" + data);
         ArrayList<Projappr> list = null;
         Projappr projappr = null;
         try {
@@ -1122,7 +1124,6 @@ public class JsonUtils {
      * 解析预防性维护信息
      */
     public static ArrayList<Pm> parsingPm(String data) {
-        Log.i(TAG, "Pm data=" + data);
         ArrayList<Pm> list = null;
         Pm pm = null;
         try {
@@ -1152,7 +1153,6 @@ public class JsonUtils {
      * 解析员工工种信息
      */
     public static ArrayList<Laborcraftrate> parsingLaborcraftrate(String data) {
-        Log.i(TAG, "Laborcraftrate data=" + data);
         ArrayList<Laborcraftrate> list = null;
         Laborcraftrate laborcraftrate = null;
         try {
@@ -1180,7 +1180,6 @@ public class JsonUtils {
      * 解析故障列表信息
      */
     public static ArrayList<Failurelist> parsingFailurelist(String data) {
-        Log.i(TAG, "Failurelist data=" + data);
         ArrayList<Failurelist> list = null;
         Failurelist failurelist = null;
         try {
@@ -1609,10 +1608,50 @@ public class JsonUtils {
             return null;
         }
     }
+    /**
+     * 外协服务付款申请行
+     */
+    public static ArrayList<InvoiceLine> parsingInvoiceLine(Context ctx, String data) {
+        ArrayList<InvoiceLine> list = null;
+        InvoiceLine invoiceLine = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<InvoiceLine>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                invoiceLine = new InvoiceLine();
+                jsonObject = jsonArray.getJSONObject(i);
+                Field[] field = invoiceLine.getClass().getDeclaredFields();        //获取实体类的所有属性，返回Field数组
+                for (int j = 0; j < field.length; j++) {     //遍历所有属性
+                    field[j].setAccessible(true);
+                    String name = field[j].getName();    //获取属性的名字
+                    if (jsonObject.has(name) && jsonObject.getString(name) != null && !jsonObject.getString(name).equals("")) {
+                        try {
+                            // 调用getter方法获取属性值
+                            Method getOrSet = invoiceLine.getClass().getMethod("get" + name);
+                            Object value = getOrSet.invoke(invoiceLine);
+                            if (value == null) {
+                                //调用setter方法设属性值
+                                Class[] parameterTypes = new Class[1];
+                                parameterTypes[0] = field[j].getType();
+                                getOrSet = invoiceLine.getClass().getDeclaredMethod("set" + name, parameterTypes);
+                                getOrSet.invoke(invoiceLine, jsonObject.getString(name));
+                            }
 
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
 
-
-
+                }
+                list.add(invoiceLine);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
 
     /**
@@ -1661,7 +1700,6 @@ public class JsonUtils {
     }
 
 
-
     /**
      * 非年度采购订单行
      */
@@ -1699,6 +1737,186 @@ public class JsonUtils {
 
                 }
                 list.add(poline);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 外协服务采购订单
+     */
+    public static ArrayList<WaiXiePo> parsingWaiXiePo(Context ctx, String data) {
+        ArrayList<WaiXiePo> list = null;
+        WaiXiePo waiXiePo = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<WaiXiePo>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                waiXiePo = new WaiXiePo();
+                jsonObject = jsonArray.getJSONObject(i);
+                Field[] field = waiXiePo.getClass().getDeclaredFields();        //获取实体类的所有属性，返回Field数组
+                for (int j = 0; j < field.length; j++) {     //遍历所有属性
+                    field[j].setAccessible(true);
+                    String name = field[j].getName();    //获取属性的名字
+                    if (jsonObject.has(name) && jsonObject.getString(name) != null && !jsonObject.getString(name).equals("")) {
+                        try {
+                            // 调用getter方法获取属性值
+                            Method getOrSet = waiXiePo.getClass().getMethod("get" + name);
+                            Object value = getOrSet.invoke(waiXiePo);
+                            if (value == null) {
+                                //调用setter方法设属性值
+                                Class[] parameterTypes = new Class[1];
+                                parameterTypes[0] = field[j].getType();
+                                getOrSet = waiXiePo.getClass().getDeclaredMethod("set" + name, parameterTypes);
+                                getOrSet.invoke(waiXiePo, jsonObject.getString(name));
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
+                list.add(waiXiePo);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 服务接收验收
+     */
+    public static ArrayList<Servrectrans> parsingServrectrans(Context ctx, String data) {
+        ArrayList<Servrectrans> list = null;
+        Servrectrans servrectrans = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<Servrectrans>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                servrectrans = new Servrectrans();
+                jsonObject = jsonArray.getJSONObject(i);
+                Field[] field = servrectrans.getClass().getDeclaredFields();        //获取实体类的所有属性，返回Field数组
+                for (int j = 0; j < field.length; j++) {     //遍历所有属性
+                    field[j].setAccessible(true);
+                    String name = field[j].getName();    //获取属性的名字
+                    if (jsonObject.has(name) && jsonObject.getString(name) != null && !jsonObject.getString(name).equals("")) {
+                        try {
+                            // 调用getter方法获取属性值
+                            Method getOrSet = servrectrans.getClass().getMethod("get" + name);
+                            Object value = getOrSet.invoke(servrectrans);
+                            if (value == null) {
+                                //调用setter方法设属性值
+                                Class[] parameterTypes = new Class[1];
+                                parameterTypes[0] = field[j].getType();
+                                getOrSet = servrectrans.getClass().getDeclaredMethod("set" + name, parameterTypes);
+                                getOrSet.invoke(servrectrans, jsonObject.getString(name));
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
+                list.add(servrectrans);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 物资采购申请
+     */
+    public static ArrayList<PR> parsingPr(Context ctx, String data) {
+        ArrayList<PR> list = null;
+        PR pr = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<PR>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                pr = new PR();
+                jsonObject = jsonArray.getJSONObject(i);
+                Field[] field = pr.getClass().getDeclaredFields();        //获取实体类的所有属性，返回Field数组
+                for (int j = 0; j < field.length; j++) {     //遍历所有属性
+                    field[j].setAccessible(true);
+                    String name = field[j].getName();    //获取属性的名字
+                    if (jsonObject.has(name) && jsonObject.getString(name) != null && !jsonObject.getString(name).equals("")) {
+                        try {
+                            // 调用getter方法获取属性值
+                            Method getOrSet = pr.getClass().getMethod("get" + name);
+                            Object value = getOrSet.invoke(pr);
+                            if (value == null) {
+                                //调用setter方法设属性值
+                                Class[] parameterTypes = new Class[1];
+                                parameterTypes[0] = field[j].getType();
+                                getOrSet = pr.getClass().getDeclaredMethod("set" + name, parameterTypes);
+                                getOrSet.invoke(pr, jsonObject.getString(name));
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
+                list.add(pr);
+            }
+            return list;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 物资采购申请行
+     */
+    public static ArrayList<PrLine> parsingPrline(Context ctx, String data) {
+        ArrayList<PrLine> list = null;
+        PrLine prline = null;
+        try {
+            JSONArray jsonArray = new JSONArray(data);
+            JSONObject jsonObject;
+            list = new ArrayList<PrLine>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                prline = new PrLine();
+                jsonObject = jsonArray.getJSONObject(i);
+                Field[] field = prline.getClass().getDeclaredFields();        //获取实体类的所有属性，返回Field数组
+                for (int j = 0; j < field.length; j++) {     //遍历所有属性
+                    field[j].setAccessible(true);
+                    String name = field[j].getName();    //获取属性的名字
+                    if (jsonObject.has(name) && jsonObject.getString(name) != null && !jsonObject.getString(name).equals("")) {
+                        try {
+                            // 调用getter方法获取属性值
+                            Method getOrSet = prline.getClass().getMethod("get" + name);
+                            Object value = getOrSet.invoke(prline);
+                            if (value == null) {
+                                //调用setter方法设属性值
+                                Class[] parameterTypes = new Class[1];
+                                parameterTypes[0] = field[j].getType();
+                                getOrSet = prline.getClass().getDeclaredMethod("set" + name, parameterTypes);
+                                getOrSet.invoke(prline, jsonObject.getString(name));
+                            }
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                }
+                list.add(prline);
             }
             return list;
         } catch (JSONException e) {

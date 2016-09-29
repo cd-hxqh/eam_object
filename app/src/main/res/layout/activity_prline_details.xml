@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -23,6 +23,7 @@
             android:layout_below="@+id/title_relativelayout_id"
             android:orientation="vertical">
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_40dp"
@@ -38,7 +39,7 @@
                     android:textSize="@dimen/dimens_16dp" />
 
                 <TextView
-                    android:id="@+id/polinenum_text_id"
+                    android:id="@+id/prlinenum_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
@@ -64,41 +65,41 @@
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/description_text"
+                    android:text="@string/itemnum_1_text"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/dimens_16dp" />
+
+                <TextView
+                    android:id="@+id/itemnum_text_id"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dimen_5"
+                    android:hint="@string/have_not_data"
+                    android:textColor="@color/light_black"
+                    android:textSize="@dimen/dimens_16dp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@drawable/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_40dp"
+                android:layout_marginLeft="@dimen/dimen_5"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/item_desc_title"
                     android:textColor="@color/light_black"
                     android:textSize="@dimen/dimens_16dp" />
 
                 <TextView
                     android:id="@+id/description_text_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:hint="@string/have_not_data"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line"></View>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/invuse_quantity_text"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-
-                <TextView
-                    android:id="@+id/invuse_quantity_text_id"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dimen_5"
@@ -114,102 +115,16 @@
                 android:background="@drawable/line"></View>
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/orderunit_text"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-
-                <TextView
-                    android:id="@+id/orderunit_text_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:hint="@string/have_not_data"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line"></View>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/udtaxunitcost_text"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-
-                <TextView
-                    android:id="@+id/udtaxunitcost_text_id"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:hint="@string/have_not_data"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line"></View>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_40dp"
-                android:layout_marginLeft="@dimen/dimen_5"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:text="@string/udtotalcost_text"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-
-                <TextView
-                    android:id="@+id/udtotalcost_text_id"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dimen_5"
-                    android:hint="@string/have_not_data"
-                    android:textColor="@color/light_black"
-                    android:textSize="@dimen/dimens_16dp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="fill_parent"
-                android:layout_height="1dp"
-                android:background="@drawable/line"></View>
 
             <include
 
-                layout="@layout/activity_poline_item_details"></include>
+                layout="@layout/activity_prline_item1_details"></include>
 
-            <include layout="@layout/activity_waixiepoline_item_details"></include>
+            <include
 
+                layout="@layout/activity_prline_item2_details"></include>
         </LinearLayout>
-
     </ScrollView>
 
 
-</RelativeLayout>
+</LinearLayout>

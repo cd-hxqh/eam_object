@@ -192,6 +192,8 @@ public class HttpManager {
     }
 
 
+
+
     /**
      * 非年度采购单行
      */
@@ -202,6 +204,80 @@ public class HttpManager {
 
     }
 
+
+
+    /**
+     * 非年度采购单
+     */
+    public static String getWorkOrderByIdurl(String type,String workorderid) {
+
+        return "{'appid':'" + "UDWO" + type + "','objectname':'" + Constants.WORKORDER_NAME + "','curpage':" + 1 + ",'showcount':" + 20 + ",'option':'read','condition':{'WORKORDERID':'" + workorderid + "'}}";
+
+
+    }
+
+
+
+    /**
+     * 外协服务采购订单
+     */
+    public static String getWaiXiePourl(String poid) {
+
+        return "{'appid':'" + Constants.WAIXIEPO_APPID + "','objectname':'" + Constants.PO_NAME + "','curpage':" + 1 + ",'showcount':" + 20 + ",'option':'read','condition':{'POID':'" + poid + "'}}";
+    }
+
+
+    /**
+     * 外协服务采购单行
+     */
+    public static String getWaixiePoLineurl(String ponum) {
+
+        return "{'appid':'" + Constants.WAIXIEPO_APPID + "','objectname':'" + Constants.POLINE_NAME + "','curpage':" + 1 + ",'showcount':" + 20 + ",'option':'read','condition':{'PONUM':'" + ponum + "'}}";
+
+
+    }
+
+    /**
+     * 服务接收验收
+     */
+    public static String getServrectransurl(String ponum) {
+
+        return "{'appid':'" + Constants.WAIXIEPO_APPID + "','objectname':'" + Constants.SERVRECTRANS_NAME + "','curpage':" + 1 + ",'showcount':" + 20 + ",'option':'read','condition':{'PONUM':'" + ponum + "'}}";
+
+
+    }
+
+
+    /**
+     * 物资采购申请
+     */
+    public static String getPr(String prid) {
+
+        return "{'appid':'" + Constants.PR_APPID + "','objectname':'" + Constants.PR_NAME + "','curpage':" + 1 + ",'showcount':" + 20 + ",'option':'read','condition':{'PRID':'" + prid + "'}}";
+
+
+    }
+
+
+    /**
+     * 外协服务采购单行
+     */
+    public static String getWuZiPrLineurl(String prnum) {
+
+        return "{'appid':'" + Constants.PR_APPID + "','objectname':'" + Constants.PRLINE_NAME + "','curpage':" + 1 + ",'showcount':" + 20 + ",'option':'read','condition':{'PRNUM':'" + prnum + "'}}";
+
+
+    }
+
+    /**
+     * 付款申请行
+     */
+    public static String getInVoiceLineurl(int curpage, int showcount,String invoicenum) {
+
+        return "{'appid':'" + Constants.INVOICE_APPID + "','objectname':'" + Constants.INVOICELINE_NAME + "','curpage':" + curpage + ",'showcount':" + showcount + ",'option':'read','condition':{'INVOICENUM':'" + invoicenum + "'}}";
+
+
+    }
 
 
 

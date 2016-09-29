@@ -1,7 +1,6 @@
 package cdhxqh.shekou.ui.activity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,16 +25,15 @@ import cdhxqh.shekou.api.HttpManager;
 import cdhxqh.shekou.api.HttpRequestHandler;
 import cdhxqh.shekou.api.JsonUtils;
 import cdhxqh.shekou.bean.Results;
-import cdhxqh.shekou.model.InvoiceLine;
-import cdhxqh.shekou.model.Invuse;
-import cdhxqh.shekou.ui.adapter.InvoicelineAdapter;
+import cdhxqh.shekou.model.Servrectrans;
+import cdhxqh.shekou.ui.adapter.ServrectransAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 
 /**
- *  外协服务付款申请行
+ * 服务接收验收
  */
-public class InvoiceLineActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
-    private static final String TAG = "InvoiceLineActivity";
+public class ServrectransActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener, SwipeRefreshLayout.OnLoadListener {
+    private static final String TAG = "ServrectransActivity";
 
     /**
      * 返回按钮
@@ -45,7 +43,6 @@ public class InvoiceLineActivity extends BaseActivity implements SwipeRefreshLay
      * 标题
      */
     private TextView titleTextView;
-
 
     /**
      * 搜索按钮*
@@ -62,33 +59,28 @@ public class InvoiceLineActivity extends BaseActivity implements SwipeRefreshLay
     SwipeRefreshLayout mSwipeLayout;
 
 
-
-
-
     /**
      * 暂无数据*
      */
     LinearLayout notLinearLayout;
 
-    InvoicelineAdapter invoicelineAdapter;
+    ServrectransAdapter servrectransAdapter;
+    /**
+     * 采购编号*
+     */
+    private String ponum;
 
+    private int mark; //标志
 
-
-    private String invoicenum; //外协服务付款申请编号
 
     private int page = 1;
 
-    private ArrayList<InvoiceLine> items = new ArrayList<InvoiceLine>();
-
+    private ArrayList<Servrectrans> items = new ArrayList<Servrectrans>();
 
     /**
      * 搜索值*
      */
     private String vlaue = "";
-
-    private Invuse invuse;
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -103,9 +95,7 @@ public class InvoiceLineActivity extends BaseActivity implements SwipeRefreshLay
      * 获取上个界面的数据*
      */
     private void getInitData() {
-
-        invoicenum = getIntent().getExtras().getString("invoicenum");
-
+        ponum = getIntent().getExtras().getString("ponum");
     }
 
     @Override
@@ -116,10 +106,10 @@ public class InvoiceLineActivity extends BaseActivity implements SwipeRefreshLay
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.list_topics);
-        mLayoutManager = new LinearLayoutManager(InvoiceLineActivity.this);
+        mLayoutManager = new LinearLayoutManager(ServrectransActivity.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        invoicelineAdapter = new InvoicelineAdapter(InvoiceLineActivity.this);
-        mRecyclerView.setAdapter(invoicelineAdapter);
+        servrectransAdapter = new ServrectransAdapter(ServrectransActivity.this);
+        mRecyclerView.setAdapter(servrectransAdapter);
         mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         mSwipeLayout.setColor(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -134,17 +124,15 @@ public class InvoiceLineActivity extends BaseActivity implements SwipeRefreshLay
         mSwipeLayout.setRefreshing(false);
 
         searchEditText = (EditText) findViewById(R.id.search_edit);
-
     }
 
     @Override
     protected void initView() {
         backImageView.setOnClickListener(backImageViewOnClickListener);
-        titleTextView.setText(R.string.fksqh_text);
+        titleTextView.setText(R.string.fwjsys_text);
         searchEditText.setVisibility(View.GONE);
         mSwipeLayout.setRefreshing(true);
-        getItemList(invoicenum);
-
+        getItemList(ponum);
 
         SpannableString msp = new SpannableString("XX搜索");
         Drawable drawable = getResources().getDrawable(R.drawable.ic_search);
@@ -163,27 +151,15 @@ public class InvoiceLineActivity extends BaseActivity implements SwipeRefreshLay
         }
     };
 
-
     /**
-     * 新增按钮*
-     */
-    private View.OnClickListener addImageViewOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = getIntent();
-            intent.setClass(InvoiceLineActivity.this, AddInvuseDetailActivity.class);
-
-            startActivityForResult(intent, 100);
-        }
-    };
-
-    /**
-     * 获取物质清单
+     * 获取库存成本
      * --分页
      */
 
-    private void getItemList(String itemnum) {
-        HttpManager.getDataPagingInfo(InvoiceLineActivity.this, HttpManager.getInVoiceLineurl(page,20,itemnum), new HttpRequestHandler<Results>() {
+    private void getItemList(String ponum) {
+
+
+        HttpManager.getDataPagingInfo(ServrectransActivity.this, HttpManager.getServrectransurl(ponum), new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);
@@ -191,7 +167,7 @@ public class InvoiceLineActivity extends BaseActivity implements SwipeRefreshLay
 
             @Override
             public void onSuccess(Results results, int totalPages, int currentPage) {
-                ArrayList<InvoiceLine> item = JsonUtils.parsingInvoiceLine(InvoiceLineActivity.this, results.getResultlist());
+                ArrayList<Servrectrans> item = JsonUtils.parsingServrectrans(ServrectransActivity.this, results.getResultlist());
 
                 if (item != null || item.size() != 0) {
                     for (int i = 0; i < item.size(); i++) {
@@ -204,7 +180,7 @@ public class InvoiceLineActivity extends BaseActivity implements SwipeRefreshLay
                 if (items == null || items.isEmpty()) {
                     notLinearLayout.setVisibility(View.VISIBLE);
                 } else {
-                    invoicelineAdapter.update(items, true);
+                    servrectransAdapter.update(items, true);
                 }
             }
 
@@ -220,7 +196,7 @@ public class InvoiceLineActivity extends BaseActivity implements SwipeRefreshLay
     @Override
     public void onLoad() {
         page++;
-        getItemList(invoicenum);
+        getItemList(ponum);
     }
 
     @Override
@@ -236,15 +212,15 @@ public class InvoiceLineActivity extends BaseActivity implements SwipeRefreshLay
                 // 先隐藏键盘
                 ((InputMethodManager) searchEditText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE))
                         .hideSoftInputFromWindow(
-                                InvoiceLineActivity.this.getCurrentFocus()
+                                ServrectransActivity.this.getCurrentFocus()
                                         .getWindowToken(),
                                 InputMethodManager.HIDE_NOT_ALWAYS);
                 vlaue = searchEditText.getText().toString();
-                invoicelineAdapter.removeAllData();
+                servrectransAdapter.removeAllData();
                 notLinearLayout.setVisibility(View.GONE);
                 mSwipeLayout.setRefreshing(true);
                 page = 1;
-                getItemList(invoicenum);
+                getItemList(ponum);
                 return true;
             }
             return false;
@@ -252,13 +228,6 @@ public class InvoiceLineActivity extends BaseActivity implements SwipeRefreshLay
 
 
     };
-
-
-
-
-
-
-
 
 
 }

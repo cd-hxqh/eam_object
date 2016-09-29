@@ -66,9 +66,11 @@ public class PolineActivity extends BaseActivity implements cdhxqh.shekou.ui.wid
 
     PolineAdapter polineAdapter;
     /**
-     *采购编号*
+     * 采购编号*
      */
     private String ponum;
+
+    private int mark; //标志
 
 
     private int page = 1;
@@ -94,6 +96,8 @@ public class PolineActivity extends BaseActivity implements cdhxqh.shekou.ui.wid
      */
     private void getInitData() {
         ponum = getIntent().getExtras().getString("ponum");
+        mark = getIntent().getExtras().getInt("mark");
+        Log.i(TAG, "mark=" + mark);
     }
 
     @Override
@@ -106,7 +110,7 @@ public class PolineActivity extends BaseActivity implements cdhxqh.shekou.ui.wid
         mRecyclerView = (RecyclerView) findViewById(R.id.list_topics);
         mLayoutManager = new LinearLayoutManager(PolineActivity.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        polineAdapter = new PolineAdapter(PolineActivity.this);
+        polineAdapter = new PolineAdapter(PolineActivity.this, mark);
         mRecyclerView.setAdapter(polineAdapter);
         mSwipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_container);
         mSwipeLayout.setColor(android.R.color.holo_blue_bright,
@@ -155,7 +159,14 @@ public class PolineActivity extends BaseActivity implements cdhxqh.shekou.ui.wid
      */
 
     private void getItemList(String ponum) {
-        HttpManager.getDataPagingInfo(PolineActivity.this, HttpManager.getPoLineurl(ponum), new HttpRequestHandler<Results>() {
+
+        String httpUrl = null;
+        if (mark == 0) {
+            httpUrl = HttpManager.getPoLineurl(ponum);
+        } else if (mark == 1) {
+            httpUrl = HttpManager.getWaixiePoLineurl(ponum);
+        }
+        HttpManager.getDataPagingInfo(PolineActivity.this, httpUrl, new HttpRequestHandler<Results>() {
             @Override
             public void onSuccess(Results results) {
                 Log.i(TAG, "data=" + results);

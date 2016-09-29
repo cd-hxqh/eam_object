@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,24 +13,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cdhxqh.shekou.R;
-import cdhxqh.shekou.model.PoLine;
-import cdhxqh.shekou.ui.activity.PoLineDetailsActivity;
+import cdhxqh.shekou.model.InvoiceLine;
+import cdhxqh.shekou.ui.activity.InvoiceLineDetailsActivity;
 
 /**
  * Created by apple on 15/10/26
- * 采购单行
+ * 付款申请行
  */
-public class PolineAdapter extends RecyclerView.Adapter<PolineAdapter.ViewHolder> {
+public class InvoicelineAdapter extends RecyclerView.Adapter<InvoicelineAdapter.ViewHolder> {
 
-    private static final String TAG = "PolineAdapter";
+    private static final String TAG = "InvoicelineAdapter";
     Context mContext;
-    ArrayList<PoLine> mItems = new ArrayList<PoLine>();
+    ArrayList<InvoiceLine> mItems = new ArrayList<InvoiceLine>();
 
-    private int mark;
-
-    public PolineAdapter(Context context, int mark) {
+    public InvoicelineAdapter(Context context) {
         mContext = context;
-        this.mark = mark;
     }
 
     @Override
@@ -42,27 +38,19 @@ public class PolineAdapter extends RecyclerView.Adapter<PolineAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        final PoLine item = mItems.get(i);
+        final InvoiceLine item = mItems.get(i);
 
-        viewHolder.itemNumTitle.setText(mContext.getString(R.string.polinenum_text));
-        viewHolder.itemNum.setText(item.getPOLINENUM());
-        Log.i(TAG, "mark=" + mark);
-        if (mark == 0) {
-            viewHolder.itemDescTitle.setText(mContext.getString(R.string.inventory_desc_name_text));
-            viewHolder.itemDesc.setText(item.getDESCRIPTION());
-        } else {
-            viewHolder.itemDescTitle.setText(mContext.getString(R.string.description_text));
-            viewHolder.itemDesc.setText(item.getDESCRIPTION());
-        }
-
+        viewHolder.itemNumTitle.setText(R.string.line_text);
+        viewHolder.itemDescTitle.setText(mContext.getString(R.string.udms_text));
+        viewHolder.itemNum.setText(item.getINVOICELINENUM());
+        viewHolder.itemDesc.setText(item.getPODES());
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, PoLineDetailsActivity.class);
+                Intent intent = new Intent(mContext, InvoiceLineDetailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("poline", item);
-                bundle.putInt("mark", mark);
+                bundle.putSerializable("invoiceLine", item);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
@@ -76,14 +64,13 @@ public class PolineAdapter extends RecyclerView.Adapter<PolineAdapter.ViewHolder
         return mItems.size();
     }
 
-    public void update(ArrayList<PoLine> data, boolean merge) {
+    public void update(ArrayList<InvoiceLine> data, boolean merge) {
         if (merge && mItems.size() > 0) {
             for (int i = 0; i < mItems.size(); i++) {
-                Log.i(TAG, "mItems=" + mItems.get(i).getPOLINENUM());
-                PoLine obj = mItems.get(i);
+                InvoiceLine obj = mItems.get(i);
                 boolean exist = false;
                 for (int j = 0; j < data.size(); j++) {
-                    if (data.get(j).getPOLINENUM() == obj.getPOLINENUM()) {
+                    if (data.get(j).getINVOICELINENUM() == obj.getINVOICELINENUM()) {
                         exist = true;
                         break;
                     }
@@ -111,11 +98,11 @@ public class PolineAdapter extends RecyclerView.Adapter<PolineAdapter.ViewHolder
          */
         public CardView cardView;
         /**
-         * 货柜标题
+         * 交易类型
          */
         public TextView itemNumTitle;
         /**
-         * 当前余量
+         * 实际日期
          */
         public TextView itemDescTitle;
         /**

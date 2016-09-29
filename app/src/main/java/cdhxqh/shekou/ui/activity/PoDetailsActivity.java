@@ -230,7 +230,7 @@ public class PoDetailsActivity extends BaseActivity {
     private void showPopupWindow(View view) {
 
         View contentView = LayoutInflater.from(PoDetailsActivity.this).inflate(
-                R.layout.po_popup_window, null);
+                R.layout.waixiepo_popup_window, null);
 
 
         popupWindow = new PopupWindow(contentView,
@@ -267,6 +267,7 @@ public class PoDetailsActivity extends BaseActivity {
         public void onClick(View v) {
             Intent intent =new Intent(PoDetailsActivity.this,PolineActivity.class);
             intent.putExtra("ponum",po.getPONUM());
+            intent.putExtra("mark",0);
             startActivityForResult(intent,0);
             popupWindow.dismiss();
         }

@@ -188,6 +188,30 @@
         <activity
             android:name=".ui.activity.PoLineDetailsActivity"
             android:label="PoLineDetailsActivity"></activity>
+        <activity
+            android:name=".ui.activity.WaiXiePoDetailsActivity"
+            android:label="WaiXiePoDetailsActivity"></activity>
+        <activity
+            android:name=".ui.activity.ServrectransActivity"
+            android:label="ServrectransActivity"></activity>
+        <activity
+            android:name=".ui.activity.ServrectransDetailsActivity"
+            android:label="ServrectransDetailsActivity"></activity>
+        <activity
+            android:name=".ui.activity.WuZiPRDetailsActivity"
+            android:label="WuZiPRDetailsActivity"></activity>
+        <activity
+            android:name=".ui.activity.PrlineActivity"
+            android:label="PrlineActivity"></activity>
+        <activity
+            android:name=".ui.activity.PrLineDetailsActivity"
+            android:label="PrLineDetailsActivity"></activity>
+        <activity
+            android:name=".ui.activity.InvoiceLineActivity"
+            android:label="InvoiceLineActivity"></activity>
+        <activity
+            android:name=".ui.activity.InvoiceLineDetailsActivity"
+            android:label="InvoiceLineDetailsActivity"></activity>
 
 
         <!--Bugly 配置APP ID -->

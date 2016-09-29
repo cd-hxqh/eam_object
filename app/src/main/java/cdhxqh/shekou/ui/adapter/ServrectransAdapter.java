@@ -14,24 +14,22 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import cdhxqh.shekou.R;
-import cdhxqh.shekou.model.PoLine;
-import cdhxqh.shekou.ui.activity.PoLineDetailsActivity;
+import cdhxqh.shekou.model.Servrectrans;
+import cdhxqh.shekou.ui.activity.ServrectransDetailsActivity;
 
 /**
  * Created by apple on 15/10/26
- * 采购单行
+ * 服务接收验收
  */
-public class PolineAdapter extends RecyclerView.Adapter<PolineAdapter.ViewHolder> {
+public class ServrectransAdapter extends RecyclerView.Adapter<ServrectransAdapter.ViewHolder> {
 
-    private static final String TAG = "PolineAdapter";
+    private static final String TAG = "ServrectransAdapter";
     Context mContext;
-    ArrayList<PoLine> mItems = new ArrayList<PoLine>();
+    ArrayList<Servrectrans> mItems = new ArrayList<Servrectrans>();
 
-    private int mark;
 
-    public PolineAdapter(Context context, int mark) {
+    public ServrectransAdapter(Context context) {
         mContext = context;
-        this.mark = mark;
     }
 
     @Override
@@ -42,27 +40,20 @@ public class PolineAdapter extends RecyclerView.Adapter<PolineAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        final PoLine item = mItems.get(i);
+        final Servrectrans item = mItems.get(i);
 
-        viewHolder.itemNumTitle.setText(mContext.getString(R.string.polinenum_text));
+        viewHolder.itemNumTitle.setText(mContext.getString(R.string.ddh_text));
+        viewHolder.itemDescTitle.setText(mContext.getString(R.string.item_desc_title));
         viewHolder.itemNum.setText(item.getPOLINENUM());
-        Log.i(TAG, "mark=" + mark);
-        if (mark == 0) {
-            viewHolder.itemDescTitle.setText(mContext.getString(R.string.inventory_desc_name_text));
-            viewHolder.itemDesc.setText(item.getDESCRIPTION());
-        } else {
-            viewHolder.itemDescTitle.setText(mContext.getString(R.string.description_text));
-            viewHolder.itemDesc.setText(item.getDESCRIPTION());
-        }
+        viewHolder.itemDesc.setText(item.getDESCRIPTION());
 
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, PoLineDetailsActivity.class);
+                Intent intent = new Intent(mContext, ServrectransDetailsActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("poline", item);
-                bundle.putInt("mark", mark);
+                bundle.putSerializable("servrectrans", item);
                 intent.putExtras(bundle);
                 mContext.startActivity(intent);
             }
@@ -76,11 +67,11 @@ public class PolineAdapter extends RecyclerView.Adapter<PolineAdapter.ViewHolder
         return mItems.size();
     }
 
-    public void update(ArrayList<PoLine> data, boolean merge) {
+    public void update(ArrayList<Servrectrans> data, boolean merge) {
         if (merge && mItems.size() > 0) {
             for (int i = 0; i < mItems.size(); i++) {
                 Log.i(TAG, "mItems=" + mItems.get(i).getPOLINENUM());
-                PoLine obj = mItems.get(i);
+                Servrectrans obj = mItems.get(i);
                 boolean exist = false;
                 for (int j = 0; j < data.size(); j++) {
                     if (data.get(j).getPOLINENUM() == obj.getPOLINENUM()) {

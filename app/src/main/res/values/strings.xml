@@ -527,4 +527,65 @@
     <string name="orderunit_text">单位:</string>
     <string name="poline_details_title">采购明细行详情</string>
 
+    <!--外协服务采购订单-->
+    <string name="wxfwcgdd_text">外协服务采购订单</string>
+    <string name="adescription_text">设备名称:</string>
+    <string name="contractrefnum_text">合同编号:</string>
+    <string name="cdescription_text">合同描述:</string>
+    <string name="jbr1_text">经办人:</string>
+    <string name="udcreatedate_text">制单日期:</string>
+    <string name="pgyi_text">评估意见:</string>
+    <string name="rfqvendor_text">询价单</string>
+    <string name="servrectrans_text">服务接收验收</string>
+    <string name="qgyy_text">请购原因:</string>
+
+
+    <!--服务接收验收-->
+    <string name="fwjsys_text">服务接收验收</string>
+    <string name="ddh_text">订单行:</string>
+    <string name="transdate_text">接收日期:</string>
+    <string name="jsr_text">接收人:</string>
+    <string name="sq_wonum_text">申请单号:</string>
+    <string name="jc_status_text">检查状态:</string>
+    <string name="fwjsysxq_text">服务接收验收详情</string>
+
+
+    <!--物资采购申请-->
+    <string name="wzcgsq_text">物资采购申请</string>
+    <string name="description1_text">申购描述:</string>
+    <string name="sqrname_text">申请人姓名:</string>
+    <string name="sqbm_text">申请部门:</string>
+    <string name="sqgls_text">申请管理室:</string>
+    <string name="requireddate_text">要求到货日期:</string>
+    <string name="pretaxtotal_text">金额总计:</string>
+    <string name="zdbm_text">制单部门:</string>
+    <string name="qg_line_text">请购明细行</string>
+    <string name="jhfp_text">计划分配</string>
+    <string name="qgmxh_text">请购明细行</string>
+    <string name="itemnum_1_text">设备编码:</string>
+    <string name="unitcost_text">单价:</string>
+    <string name="udjedx_text">大写金额:</string>
+    <string name="udyy_text">采购原因:</string>
+    <string name="reqdeliverydate_text">要求的日期:</string>
+    <string name="udisxy_text">协议采购:</string>
+    <string name="iscsx_text">超限?</string>
+    <string name="udcancle_text">取消?</string>
+    <string name="udmanufacturer_text">品牌/制造商:</string>
+    <string name="ppms_text">品牌描述:</string>
+    <string name="channum_text">渠道编码:</string>
+    <string name="qdms_text">渠道描述:</string>
+    <string name="fpcgy_text">分配采购员:</string>
+    <string name="udisfp_text">是否已分配?</string>
+    <string name="udcontractnum_text">年度合同编号:</string>
+    <string name="udissc_text">是否首次采购?</string>
+
+
+    <string name="rfqnum_text">询价单号:</string>
+    <string name="cgdh_text">采购单号:</string>
+    <string name="line_text">行号:</string>
+    <string name="fksqh_text">付款申请行</string>
+    <string name="poms_text">申请单描述:</string>
+    <string name="description2_text">付款明细描述:</string>
+
+
 </resources>

@@ -1,8 +1,10 @@
 package cdhxqh.shekou.ui.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +22,12 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.flyco.animation.BaseAnimatorSet;
+import com.flyco.animation.BounceEnter.BounceTopEnter;
+import com.flyco.animation.SlideExit.SlideBottomExit;
+import com.flyco.dialog.listener.OnBtnEditClickL;
+import com.flyco.dialog.widget.NormalEditTextDialog;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +40,15 @@ import cdhxqh.shekou.config.Constants;
 import cdhxqh.shekou.model.Wfassignment;
 import cdhxqh.shekou.ui.activity.InvoiceDetailsActivity;
 import cdhxqh.shekou.ui.activity.PoDetailsActivity;
+import cdhxqh.shekou.ui.activity.WaiXiePoDetailsActivity;
+import cdhxqh.shekou.ui.activity.Work_detailsActivity;
+import cdhxqh.shekou.ui.activity.WuZiPRDetailsActivity;
 import cdhxqh.shekou.ui.adapter.BaseQuickAdapter;
 import cdhxqh.shekou.ui.adapter.WfassigAdapter;
 import cdhxqh.shekou.ui.widget.SwipeRefreshLayout;
 import cdhxqh.shekou.utils.AccountUtils;
+import cdhxqh.shekou.utils.MessageUtils;
+import cdhxqh.shekou.webserviceclient.AndroidClientService;
 
 
 /**
@@ -77,6 +90,13 @@ public class WfassigFragment extends BaseFragment implements SwipeRefreshLayout.
      * 搜索值*
      */
     private String vlaue = "";
+
+
+    private BaseAnimatorSet mBasIn;
+    private BaseAnimatorSet mBasOut;
+
+    private ProgressDialog mProgressDialog;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -148,6 +168,9 @@ public class WfassigFragment extends BaseFragment implements SwipeRefreshLayout.
         searchEditText.setHint(msp);
 
         searchEditText.setOnEditorActionListener(searchEditTextOnEditorActionListener);
+
+        mBasIn = new BounceTopEnter();
+        mBasOut = new SlideBottomExit();
     }
 
 
@@ -245,7 +268,7 @@ public class WfassigFragment extends BaseFragment implements SwipeRefreshLayout.
                     String  ownertable = wfassignment.ownertable;
                     String  processname = wfassignment.processname;
 
-                  if(ownertable.equals(Constants.INVOICE_NAME)){
+                  if(ownertable.equals(Constants.INVOICE_NAME)){ //外协付款申请
                       Intent intent = new Intent(getActivity(), InvoiceDetailsActivity.class);
                       Bundle bundle = new Bundle();
                       bundle.putString("ownerid",ownerid);
@@ -255,7 +278,7 @@ public class WfassigFragment extends BaseFragment implements SwipeRefreshLayout.
                       getActivity().startActivity(intent);
                   }
 
-                if(ownertable.equals(Constants.PO_NAME)&&processname.equals("UDPO")){  //非年度采购订单
+               else if(ownertable.equals(Constants.PO_NAME)&&processname.equals("UDPO")){  //非年度采购订单
                     Intent intent = new Intent(getActivity(), PoDetailsActivity.class);
                     Bundle bundle = new Bundle();
                     bundle.putString("ownerid",ownerid);
@@ -264,6 +287,63 @@ public class WfassigFragment extends BaseFragment implements SwipeRefreshLayout.
                     intent.putExtras(bundle);
                     getActivity().startActivity(intent);
                 }
+               else if(ownertable.equals(Constants.PO_NAME)&&processname.equals("UDOSPO")){  //外协服务采购订单
+                    Intent intent = new Intent(getActivity(), WaiXiePoDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ownerid",ownerid);
+                    bundle.putString("ownertable",ownertable);
+                    bundle.putString("processname",processname);
+                    intent.putExtras(bundle);
+                    getActivity().startActivity(intent);
+                }
+               else if(ownertable.equals(Constants.PR_NAME)&&processname.equals("UDEGPR")){  //物资采购申请
+                    Intent intent = new Intent(getActivity(), WuZiPRDetailsActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("ownerid",ownerid);
+                    bundle.putString("ownertable",ownertable);
+                    bundle.putString("processname",processname);
+                    intent.putExtras(bundle);
+                    getActivity().startActivity(intent);
+                }
+               else if(ownertable.equals(Constants.WORKORDER_NAME)){  //工单管理
+                      Intent intent = new Intent(getActivity(), Work_detailsActivity.class);
+                      Bundle bundle = new Bundle();
+                      if(processname.equals("UDWO03")){ //预防性维护工单
+                          bundle.putString("worktype","PM");
+                      }else if (processname.equals("UDWO02")){ //故障工单
+                          bundle.putString("worktype","CM");
+                      }else if (processname.equals("UDWO04")){ //状态维修工单
+                          bundle.putString("worktype","SR");
+                      }else if (processname.equals("UDWO05")){ //项目工单
+                          bundle.putString("worktype","PJ");
+                      }else if (processname.equals("UDWO06")){ //可维护备件工单
+                          bundle.putString("worktype","RS");
+                      }else if (processname.equals("UDWO07")){ //事故工单
+                          bundle.putString("worktype","EV");
+                      }else if (processname.equals("UDWO08")){ //抢修工单
+                          bundle.putString("worktype","EM");
+                      }
+
+                    bundle.putString("ownerid",ownerid);
+                    bundle.putString("ownertable",ownertable);
+                    bundle.putString("processname",processname);
+                    bundle.putInt("mark",1);
+
+
+                    intent.putExtras(bundle);
+                    getActivity().startActivity(intent);
+                }else{
+                      MessageUtils.showMiddleToast(getActivity(),"该类型任务尚在开发中...");
+                  }
+
+
+                wfassigAdapter.setOnClickListener(new WfassigAdapter.OnClickListener() {
+                    @Override
+                    public void cOnClickListener(Wfassignment wfassignment) {
+                        Log.i(TAG,"点击一下"+wfassignment.wfassignmentid);
+                        MaterialDialogOneBtn1(wfassignment);
+                    }
+                });
 
 
 
@@ -275,5 +355,91 @@ public class WfassigFragment extends BaseFragment implements SwipeRefreshLayout.
             }
         });
     }
+
+
+
+    private void MaterialDialogOneBtn1(final Wfassignment wfassignment) {//审批工作流
+        final NormalEditTextDialog dialog = new NormalEditTextDialog(getActivity());
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.isTitleShow(true);//
+        dialog.title("审批工作流");
+        dialog.btnNum(3)
+                .content("通过")//
+                .btnText("取消", "通过", "不通过")//
+                .showAnim(mBasIn)//
+                .dismissAnim(mBasOut)
+                .show();
+
+        dialog.setOnBtnClickL(
+                new OnBtnEditClickL() {//取消
+                    @Override
+                    public void onBtnClick(String text) {
+
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnEditClickL() {//通过
+                    @Override
+                    public void onBtnClick(String text) {
+                        wfgoon(wfassignment, "1", text);
+                        dialog.dismiss();
+                    }
+                },
+                new OnBtnEditClickL() {//不通过
+                    @Override
+                    public void onBtnClick(String text) {
+                        wfgoon(wfassignment, "0", text);
+                        dialog.dismiss();
+                    }
+                }
+        );
+    }
+
+
+    /**
+     * 审批工作流
+     *
+     * @param zx
+     */
+    private void wfgoon(final Wfassignment wfassignment, final String zx, final String desc) {
+        mProgressDialog = ProgressDialog.show(getActivity(), null,
+                getString(R.string.inputing), true, true);
+        mProgressDialog.setCanceledOnTouchOutside(false);
+        mProgressDialog.setCancelable(false);
+        new AsyncTask<String, String, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                String result = AndroidClientService.approve(getActivity(), wfassignment.processname, wfassignment.ownertable, wfassignment.ownerid, wfassignment.ownertable + "ID", AccountUtils.getpersonId(getActivity()), zx, desc);
+
+                Log.i(TAG, "result=" + result);
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                if (s == null || s.equals("")) {
+                    MessageUtils.showMiddleToast(getActivity(), "审批失败");
+                } else {
+                    MessageUtils.showMiddleToast(getActivity(), "审批成功");
+
+                }
+                mProgressDialog.dismiss();
+            }
+        }.execute();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
