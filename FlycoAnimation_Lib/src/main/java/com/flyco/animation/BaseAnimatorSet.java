@@ -8,6 +8,7 @@ import com.nineoldandroids.animation.AnimatorSet;
 import com.nineoldandroids.view.ViewHelper;
 
 public abstract class BaseAnimatorSet {
+
 	/** 动画时长,系统默认250 */
 	protected long duration = 500;
 	protected AnimatorSet animatorSet = new AnimatorSet();
