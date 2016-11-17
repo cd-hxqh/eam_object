@@ -3,6 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">新增</string>
+    <string name="action_fresh">刷新</string>
     <string name="log">EAM-资产管理系统</string>
     <string name="please_userid">请输入用户名</string>
     <string name="please_password">请输入密码</string>

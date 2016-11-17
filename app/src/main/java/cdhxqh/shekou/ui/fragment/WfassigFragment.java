@@ -323,6 +323,9 @@ public class WfassigFragment extends BaseFragment implements SwipeRefreshLayout.
                       }else if (processname.equals("UDWO08")){ //抢修工单
                           bundle.putString("worktype","EM");
                       }
+//                      else if (processname.equals("UDOSPR")){ //外协服务申请单
+//                          MessageUtils.showMiddleToast(getActivity(), "该类型任务尚在开发中...");
+//                      }
 
                     bundle.putString("ownerid",ownerid);
                     bundle.putString("ownertable",ownertable);

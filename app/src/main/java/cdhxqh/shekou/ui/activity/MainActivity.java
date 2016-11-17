@@ -7,6 +7,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -159,6 +160,12 @@ public class MainActivity extends BaseActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        mTitle = mMainTitles[mSelectPos];
+        if (mTitle.equals(mMainTitles[0])){
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_fresh, menu);
+        }
+
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
 
             restoreActionBar();
@@ -170,9 +177,16 @@ public class MainActivity extends BaseActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_fresh:
+//                Toast.makeText(this, "你点击了“用户”按键！", Toast.LENGTH_SHORT).show();
+                mNewWfassigFragment.onRefresh();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
 
-
-        return super.onOptionsItemSelected(item);
+//        return super.onOptionsItemSelected(item);
     }
 
 
